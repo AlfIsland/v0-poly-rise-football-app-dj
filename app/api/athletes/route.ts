@@ -6,68 +6,99 @@ import Redis from "ioredis"
 // GET  /api/athletes?code=PR-VJMW-0027  — fetch athlete by seal code
 // ─────────────────────────────────────────────────────────────────────────────
 
-const devStore = new Map<string, unknown>()
+// Singleton Redis client — reused across serverless invocations
+let redis: Redis | null = null
 
 function getRedis(): Redis | null {
   if (!process.env.REDIS_URL) return null
-  return new Redis(process.env.REDIS_URL, { tls: { rejectUnauthorized: false } })
+  if (!redis || redis.status === "end") {
+    redis = new Redis(process.env.REDIS_URL, {
+      maxRetriesPerRequest: 3,
+      connectTimeout: 5000,
+      lazyConnect: false,
+    })
+    redis.on("error", (err) => console.error("[Redis]", err))
+  }
+  return redis
 }
 
-async function kvSet(key: string, value: unknown) {
-  const redis = getRedis()
-  if (redis) {
-    await redis.set(key, JSON.stringify(value))
-    redis.disconnect()
+// In-memory fallback for local dev without Redis
+const devStore = new Map<string, string>()
+
+async function kvSet(key: string, value: unknown): Promise<void> {
+  const r = getRedis()
+  if (r) {
+    await r.set(key, JSON.stringify(value))
   } else {
-    devStore.set(key, value)
+    devStore.set(key, JSON.stringify(value))
   }
 }
 
 async function kvGet(key: string): Promise<unknown> {
-  const redis = getRedis()
-  if (redis) {
-    const raw = await redis.get(key)
-    redis.disconnect()
+  const r = getRedis()
+  if (r) {
+    const raw = await r.get(key)
     return raw ? JSON.parse(raw) : null
   }
-  return devStore.get(key) ?? null
+  const raw = devStore.get(key)
+  return raw ? JSON.parse(raw) : null
 }
+
+// ─── POST /api/athletes — save athlete ────────────────────────────────────────
 
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json()
     const { code } = body
 
-    if (!code || !/^PR-V[A-Z]+-\d{4}$/.test(code)) {
-      return NextResponse.json({ success: false, error: "Invalid seal code format" }, { status: 400 })
+    if (!code || !/^PR-V[A-Z]+-\d{4}$/i.test(code)) {
+      return NextResponse.json(
+        { success: false, error: "Invalid seal code format" },
+        { status: 400 }
+      )
     }
 
-    await kvSet(`athlete:${code}`, body)
+    const upperCode = code.toUpperCase()
+    await kvSet(`athlete:${upperCode}`, { ...body, code: upperCode })
 
-    return NextResponse.json({ success: true, code })
+    return NextResponse.json({ success: true, code: upperCode })
   } catch (err) {
     console.error("[athletes POST]", err)
-    return NextResponse.json({ success: false, error: "Failed to save" }, { status: 500 })
+    return NextResponse.json(
+      { success: false, error: "Failed to save athlete" },
+      { status: 500 }
+    )
   }
 }
+
+// ─── GET /api/athletes?code=PR-VCM-0003 — fetch athlete ──────────────────────
 
 export async function GET(req: NextRequest) {
   const code = req.nextUrl.searchParams.get("code")
 
   if (!code) {
-    return NextResponse.json({ success: false, error: "Missing code" }, { status: 400 })
+    return NextResponse.json(
+      { success: false, error: "Missing code parameter" },
+      { status: 400 }
+    )
   }
 
   try {
     const data = await kvGet(`athlete:${code.toUpperCase()}`)
 
     if (!data) {
-      return NextResponse.json({ success: false, error: "Athlete not found" }, { status: 404 })
+      return NextResponse.json(
+        { success: false, error: "Athlete not found" },
+        { status: 404 }
+      )
     }
 
     return NextResponse.json({ success: true, athlete: data })
   } catch (err) {
     console.error("[athletes GET]", err)
-    return NextResponse.json({ success: false, error: "Failed to retrieve" }, { status: 500 })
+    return NextResponse.json(
+      { success: false, error: "Failed to retrieve athlete" },
+      { status: 500 }
+    )
   }
 }

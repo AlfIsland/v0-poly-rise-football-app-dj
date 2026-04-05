@@ -74,7 +74,7 @@ export default async function VerifyPage({ params }: { params: { code: string } 
   const athlete = valid ? await getAthlete(raw) : null
 
   const ratings = athlete?.metrics && Object.keys(athlete.metrics).length > 0
-    ? calculateRatings(athlete.metrics)
+    ? calculateRatings(athlete.metrics, athlete.position ?? "")
     : null
 
   return (
@@ -207,7 +207,7 @@ export default async function VerifyPage({ params }: { params: { code: string } 
                   <div className="flex items-center justify-between">
                     <div>
                       <p className="text-white font-bold text-lg">{ratings.label}</p>
-                      <p className="text-gray-400 text-xs mt-0.5">{ratings.overallPercentile}th percentile nationally</p>
+                      <p className="text-gray-400 text-xs mt-0.5">{ratings.overallPercentile}th percentile vs {ratings.positionGroup}</p>
                     </div>
                     <StarDisplay stars={ratings.stars} />
                   </div>

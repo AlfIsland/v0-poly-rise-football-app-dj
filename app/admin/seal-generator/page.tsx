@@ -75,7 +75,7 @@ export default function SealGeneratorPage() {
   }
 
   const hasMetrics = Object.keys(metrics).length > 0
-  const ratings = hasMetrics ? calculateRatings(metrics) : null
+  const ratings = hasMetrics ? calculateRatings(metrics, position) : null
 
   // Load seal base image
   useEffect(() => {
@@ -263,7 +263,7 @@ export default function SealGeneratorPage() {
                   <span className="text-yellow-400 text-lg">{"★".repeat(ratings.stars)}{"☆".repeat(5 - ratings.stars)}</span>
                 </div>
                 <p className="text-white font-bold">{ratings.label}</p>
-                <p className="text-xs text-gray-400">Overall: <span className="text-white">{ratings.overallPercentile}th percentile</span> nationally</p>
+                <p className="text-xs text-gray-400">Overall: <span className="text-white">{ratings.overallPercentile}th percentile</span> vs {ratings.positionGroup}</p>
 
                 <div className="space-y-2 pt-1">
                   {ratings.metrics.map((m) => (

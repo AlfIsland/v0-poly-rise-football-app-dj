@@ -1,29 +1,34 @@
 import { NextRequest, NextResponse } from "next/server"
+import Redis from "ioredis"
 
 // ─────────────────────────────────────────────────────────────────────────────
 // POST /api/athletes  — save athlete record
 // GET  /api/athletes?code=PR-VJMW-0027  — fetch athlete by seal code
-//
-// Uses Vercel KV if KV_REST_API_URL is set, otherwise falls back to
-// in-memory store (dev only — resets on each server restart).
 // ─────────────────────────────────────────────────────────────────────────────
 
-// In-memory fallback for local dev without KV
 const devStore = new Map<string, unknown>()
 
+function getRedis(): Redis | null {
+  if (!process.env.REDIS_URL) return null
+  return new Redis(process.env.REDIS_URL, { tls: { rejectUnauthorized: false } })
+}
+
 async function kvSet(key: string, value: unknown) {
-  if (process.env.KV_REST_API_URL && process.env.KV_REST_API_TOKEN) {
-    const { kv } = await import("@vercel/kv")
-    await kv.set(key, value)
+  const redis = getRedis()
+  if (redis) {
+    await redis.set(key, JSON.stringify(value))
+    redis.disconnect()
   } else {
     devStore.set(key, value)
   }
 }
 
 async function kvGet(key: string): Promise<unknown> {
-  if (process.env.KV_REST_API_URL && process.env.KV_REST_API_TOKEN) {
-    const { kv } = await import("@vercel/kv")
-    return await kv.get(key)
+  const redis = getRedis()
+  if (redis) {
+    const raw = await redis.get(key)
+    redis.disconnect()
+    return raw ? JSON.parse(raw) : null
   }
   return devStore.get(key) ?? null
 }

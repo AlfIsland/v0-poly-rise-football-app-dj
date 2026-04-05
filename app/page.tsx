@@ -468,9 +468,9 @@ export default function HomePage() {
                 <div className="text-center">
                   <h2 className="text-4xl lg:text-5xl font-display font-bold mb-6">Recruiting</h2>
                   <h3 className="text-xl font-display font-bold mb-2 text-white">Kevin Garrett</h3>
-                  <p className="text-xs text-white font-semibold mb-2">Former NFL | COO / Director of PolyRise Football Recruiting</p>
+                  <p className="text-xs text-white font-semibold mb-2">Former NFL | COO / Director of PolyRISE Football Recruiting</p>
                   <p className="text-white text-sm leading-relaxed">
-                    With extensive experience in football recruiting, Kevin leads all operations at PolyRise Football Recruiting. He personally oversees player profiles, college outreach strategies, and ensures every athlete receives high-quality exposure to the right college programs. Kevin is passionate about helping student-athletes navigate the recruiting process and has helped dozens of players earn opportunities at the collegiate level.
+                    With extensive experience in football recruiting, Kevin leads all operations at PolyRISE Football Recruiting. He personally oversees player profiles, college outreach strategies, and ensures every athlete receives high-quality exposure to the right college programs. Kevin is passionate about helping student-athletes navigate the recruiting process and has helped dozens of players earn opportunities at the collegiate level.
                   </p>
                   <p className="text-sm text-white mt-3">
                     Contact Kevin directly: <a href="mailto:KG@polyrisefootball.com" className="text-red-500 underline hover:text-red-400">KG@polyrisefootball.com</a>

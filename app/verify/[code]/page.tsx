@@ -1,6 +1,7 @@
 import { Metadata } from "next"
 import Image from "next/image"
 import { calculateRatings } from "@/lib/athlete-ratings"
+import Redis from "ioredis"
 
 export const metadata: Metadata = {
   title: "PR-VERIFIED Athlete Profile | PolyRISE Football",
@@ -13,17 +14,16 @@ function isValidCode(code: string) {
 
 async function getAthlete(code: string) {
   try {
-    const base = process.env.VERCEL_URL
-      ? `https://${process.env.VERCEL_URL}`
-      : "http://localhost:3000"
-
-    const res = await fetch(`${base}/api/athletes?code=${code.toUpperCase()}`, {
-      cache: "no-store",
+    if (!process.env.REDIS_URL) return null
+    const redis = new Redis(process.env.REDIS_URL, {
+      maxRetriesPerRequest: 3,
+      connectTimeout: 5000,
     })
-    if (!res.ok) return null
-    const json = await res.json()
-    return json.success ? json.athlete : null
-  } catch {
+    const raw = await redis.get(`athlete:${code.toUpperCase()}`)
+    await redis.quit()
+    return raw ? JSON.parse(raw) : null
+  } catch (err) {
+    console.error("[verify getAthlete]", err)
     return null
   }
 }

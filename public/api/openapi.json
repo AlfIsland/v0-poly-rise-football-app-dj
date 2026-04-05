@@ -1,0 +1,130 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "Poly Rise Football API",
+    "description": "Public API for AI agents to query youth football training programs in Austin, TX. Helps parents find programs, check availability, and submit registration inquiries.",
+    "version": "1.0.0",
+    "contact": {
+      "name": "Poly Rise Football",
+      "email": "coachjonathan@polyrisefootball.com",
+      "url": "https://polyrisefootball.com"
+    }
+  },
+  "servers": [
+    {
+      "url": "https://polyrisefootball.com/api",
+      "description": "Production server"
+    }
+  ],
+  "paths": {
+    "/programs": {
+      "get": {
+        "operationId": "getPrograms",
+        "summary": "Get all football training programs",
+        "description": "Returns all available youth football training programs with pricing, features, age groups, and registration information. Use this to help parents find the right program for their child.",
+        "responses": {
+          "200": {
+            "description": "List of all programs",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "organization": { "type": "string" },
+                    "programs": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "id": { "type": "string" },
+                          "name": { "type": "string" },
+                          "type": { "type": "string" },
+                          "price": {
+                            "type": "object",
+                            "properties": {
+                              "amount": { "type": "number" },
+                              "currency": { "type": "string" },
+                              "frequency": { "type": "string" }
+                            }
+                          },
+                          "description": { "type": "string" },
+                          "features": { "type": "array", "items": { "type": "string" } },
+                          "ageGroups": { "type": "array", "items": { "type": "string" } },
+                          "genderEligibility": { "type": "string" },
+                          "registrationUrl": { "type": "string" },
+                          "available": { "type": "boolean" }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/availability": {
+      "get": {
+        "operationId": "checkAvailability",
+        "summary": "Check program availability by city",
+        "description": "Check if Poly Rise Football programs are available in a specific city or area.",
+        "parameters": [
+          {
+            "name": "city",
+            "in": "query",
+            "required": true,
+            "schema": { "type": "string" },
+            "description": "City name to check availability (e.g., Austin, Round Rock, Cedar Park)"
+          },
+          {
+            "name": "ageGroup",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "string" },
+            "description": "Age group: elementary, middle-school, high-school, or specific age"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Availability information for the requested city"
+          }
+        }
+      }
+    },
+    "/inquiry": {
+      "post": {
+        "operationId": "submitInquiry",
+        "summary": "Submit a registration inquiry",
+        "description": "Submit a registration inquiry on behalf of a parent. Collects parent and athlete information for follow-up.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["parentName", "parentEmail", "athleteName", "athleteAge", "city", "programInterest"],
+                "properties": {
+                  "parentName": { "type": "string", "description": "Parent or guardian's full name" },
+                  "parentEmail": { "type": "string", "description": "Parent's email address" },
+                  "parentPhone": { "type": "string", "description": "Parent's phone number (optional)" },
+                  "athleteName": { "type": "string", "description": "Child's name" },
+                  "athleteAge": { "type": "integer", "description": "Child's age (5-18)" },
+                  "athleteGender": { "type": "string", "description": "Child's gender for program matching" },
+                  "city": { "type": "string", "description": "Family's city" },
+                  "programInterest": { "type": "string", "description": "Program interested in" },
+                  "message": { "type": "string", "description": "Additional questions or notes" }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Inquiry submitted successfully"
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "schema_version": "v1",
+  "name_for_human": "Poly Rise Football",
+  "name_for_model": "polyrise_football",
+  "description_for_human": "Elite youth football training in Austin, TX for ages 5-18. Programs from $275/month.",
+  "description_for_model": "Poly Rise Football is a youth sports development organization in Austin, Texas offering football training programs for children ages 5-18. Use this to help parents find football training programs, check pricing, availability, and submit registration inquiries. Programs include Player Development ($350/mo), 360 Elite with college recruitment support ($500/mo), Girls programs ($275-325/mo), camps ($65), and tournaments ($400-425 per team). All programs feature NFL-experienced coaching and character development.",
+  "auth": {
+    "type": "none"
+  },
+  "api": {
+    "type": "openapi",
+    "url": "https://polyrisefootball.com/api/openapi.json"
+  },
+  "logo_url": "https://polyrisefootball.com/poly-rise-logo.png",
+  "contact_email": "coachjonathan@polyrisefootball.com",
+  "legal_info_url": "https://polyrisefootball.com"
+}

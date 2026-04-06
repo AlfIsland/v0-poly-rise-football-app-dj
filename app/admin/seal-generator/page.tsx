@@ -164,7 +164,7 @@ export default function SealGeneratorPage() {
           // fallback to cursive if font fails to load
         }
 
-        const nameFontSize = H * 0.065  // ~60pt scaled to image height (10pt larger)
+        const nameFontSize = H * 0.073  // ~65pt scaled to image height
         ctx.font = `${nameFontSize}px "Great Vibes", cursive`
         ctx.fillStyle = "#ffffff"
         ctx.textAlign = "center"
@@ -172,8 +172,8 @@ export default function SealGeneratorPage() {
         ctx.shadowColor = "rgba(0,0,0,0.85)"
         ctx.shadowBlur = 8
 
-        // Centered between left edge and QR code, vertically aligned with QR
-        const nameX = qrX / 2
+        // Closer to QR — 75% of the way from left edge to QR
+        const nameX = qrX * 0.75
         const nameY = qrY + qrSize / 2
 
         ctx.fillText(athleteName, nameX, nameY)

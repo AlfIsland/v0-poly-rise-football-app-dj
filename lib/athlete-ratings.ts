@@ -365,12 +365,15 @@ function buildTexasFromNational(
 }
 
 // Texas athletes need to be ~0.05s faster on speed drills, ~2" higher on jumps
-const FORTY_TEXAS    = buildTexasFromNational(FORTY_NATIONAL,    0.05, 0, true)
-const SHUTTLE_TEXAS  = buildTexasFromNational(SHUTTLE_NATIONAL,  0.04, 0, true)
-const THREE_CONE_TEXAS = buildTexasFromNational(THREE_CONE_NATIONAL, 0.05, 0, true)
-const VERTICAL_TEXAS = buildTexasFromNational(VERTICAL_NATIONAL, 0, 2, false)
-const BROAD_TEXAS    = buildTexasFromNational(BROAD_NATIONAL,    0, 3, false)
-const BENCH_TEXAS    = buildTexasFromNational(BENCH_NATIONAL,    0, 1, false)
+// Texas is a top-3 football state. To earn the same percentile in Texas,
+// athletes need to be meaningfully faster/stronger than the national average.
+// 40-yd: ~0.12s faster | Shuttle/Cone: ~0.10s | Vertical: ~4" | Broad: ~6" | Bench: ~3 reps
+const FORTY_TEXAS      = buildTexasFromNational(FORTY_NATIONAL,      0.12, 0,  true)
+const SHUTTLE_TEXAS    = buildTexasFromNational(SHUTTLE_NATIONAL,    0.10, 0,  true)
+const THREE_CONE_TEXAS = buildTexasFromNational(THREE_CONE_NATIONAL, 0.12, 0,  true)
+const VERTICAL_TEXAS   = buildTexasFromNational(VERTICAL_NATIONAL,   0,    4,  false)
+const BROAD_TEXAS      = buildTexasFromNational(BROAD_NATIONAL,      0,    6,  false)
+const BENCH_TEXAS      = buildTexasFromNational(BENCH_NATIONAL,      0,    3,  false)
 
 // ─── Interpolation ────────────────────────────────────────────────────────────
 

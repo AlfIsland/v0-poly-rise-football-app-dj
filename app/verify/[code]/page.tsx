@@ -183,6 +183,13 @@ export default async function VerifyPage({ params }: { params: { code: string } 
                   )}
                 </div>
 
+                {athlete.coachNotes && (
+                  <div className="border-t border-gray-800 pt-4">
+                    <p className="text-xs text-gray-500 uppercase tracking-wider mb-1.5">PolyRISE Coach Notes</p>
+                    <p className="text-gray-300 text-sm leading-relaxed">{athlete.coachNotes}</p>
+                  </div>
+                )}
+
                 <div className="border-t border-gray-800 pt-3 flex justify-between text-xs text-gray-500">
                   <span>Code: <span className="font-mono text-red-400">{athlete.code}</span></span>
                   {athlete.issuedAt && (

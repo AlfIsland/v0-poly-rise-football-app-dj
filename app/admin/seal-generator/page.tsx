@@ -43,6 +43,7 @@ export default function SealGeneratorPage() {
   const [heightIn, setHeightIn] = useState("")
   const [weight, setWeight] = useState("")
   const [gpa, setGpa] = useState("")
+  const [coachNotes, setCoachNotes] = useState("")
 
   // ── Combine metrics ──
   const [fortyYard, setFortyYard] = useState("")
@@ -187,6 +188,7 @@ export default function SealGeneratorPage() {
           weight,
           gpa,
           metrics,
+          coachNotes,
           issuedAt: new Date().toISOString(),
         }),
       })
@@ -241,6 +243,19 @@ export default function SealGeneratorPage() {
 
             <Input label="Weight (lbs)" value={weight} onChange={setWeight} placeholder="e.g. 185" type="number" />
             <Input label="GPA" value={gpa} onChange={setGpa} placeholder="e.g. 3.8" type="number" step="0.1" />
+
+            <div>
+              <label className="block text-sm text-gray-300 mb-1.5">PolyRISE Coach Notes</label>
+              <textarea
+                value={coachNotes}
+                onChange={e => setCoachNotes(e.target.value)}
+                placeholder="e.g. Strong route runner with elite body control. Needs to improve press coverage release. High football IQ, great teammate and coachable attitude..."
+                rows={4}
+                maxLength={1000}
+                className="w-full bg-gray-800 text-white rounded-lg px-4 py-2.5 border border-gray-700 focus:border-red-500 focus:outline-none placeholder-gray-600 text-sm resize-none"
+              />
+              <p className="text-xs text-gray-600 mt-1">{coachNotes.length}/1000 characters</p>
+            </div>
           </div>
 
           {/* ── COL 2: Combine Metrics ── */}

@@ -138,7 +138,7 @@ export default function SealGeneratorPage() {
     })
 
     const qrImg = new Image()
-    qrImg.onload = () => {
+    qrImg.onload = async () => {
       const qrSize = W * 0.13
       const qrX = W * 0.84
       const qrY = H * 0.84
@@ -151,10 +151,39 @@ export default function SealGeneratorPage() {
       ctx.textBaseline = "middle"
       ctx.fillText("SCAN TO VERIFY", qrX + qrSize / 2, qrY - labelSize)
 
+      // ── Player name to the left of QR in script font ──
+      if (athleteName) {
+        try {
+          const scriptFont = new FontFace(
+            "Great Vibes",
+            "url(https://fonts.gstatic.com/s/greatvibes/v19/RWmMoKWR9v4ksMfaWd_JN9XFiaQ.woff2)"
+          )
+          await scriptFont.load()
+          document.fonts.add(scriptFont)
+        } catch {
+          // fallback to cursive if font fails to load
+        }
+
+        const nameFontSize = H * 0.052  // ~50pt scaled to image height
+        ctx.font = `${nameFontSize}px "Great Vibes", cursive`
+        ctx.fillStyle = "#ffffff"
+        ctx.textAlign = "left"
+        ctx.textBaseline = "middle"
+        ctx.shadowColor = "rgba(0,0,0,0.85)"
+        ctx.shadowBlur = 8
+
+        // Left side, vertically centered with QR
+        const nameX = W * 0.04
+        const nameY = qrY + qrSize / 2
+
+        ctx.fillText(athleteName, nameX, nameY)
+        ctx.shadowBlur = 0
+      }
+
       setRendered(true)
     }
     qrImg.src = qrDataUrl
-  }, [sealCode, ratings])
+  }, [sealCode, ratings, athleteName])
 
   useEffect(() => {
     if (imageLoaded && sealCode) { setRendered(false); drawSeal() }

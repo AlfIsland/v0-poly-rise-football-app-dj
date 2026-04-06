@@ -75,7 +75,7 @@ export default function SealGeneratorPage() {
   }
 
   const hasMetrics = Object.keys(metrics).length > 0
-  const ratings = hasMetrics ? calculateRatings(metrics, position) : null
+  const ratings = hasMetrics ? calculateRatings(metrics, position, gradYear) : null
 
   // Load seal base image
   useEffect(() => {
@@ -258,32 +258,50 @@ export default function SealGeneratorPage() {
             {/* Live Ratings Preview */}
             {ratings && (
               <div className="bg-gray-800 rounded-xl p-4 mt-2 space-y-3">
-                <div className="flex items-center justify-between">
-                  <span className="text-xs text-gray-400 uppercase tracking-wider">PolyRISE Rating</span>
-                  <span className="text-yellow-400 text-lg">{"★".repeat(ratings.stars)}{"☆".repeat(5 - ratings.stars)}</span>
-                </div>
-                <p className="text-white font-bold">{ratings.label}</p>
-                <p className="text-xs text-gray-400">Overall: <span className="text-white">{ratings.overallPercentile}th percentile</span> vs {ratings.positionGroup}</p>
+                <p className="text-xs text-gray-500 uppercase tracking-wider">Compared against: <span className="text-gray-300">{ratings.comparedAgainst}</span></p>
 
-                <div className="space-y-2 pt-1">
+                {/* National Rating */}
+                <div className="flex items-center justify-between">
+                  <div>
+                    <p className="text-xs text-gray-400">🇺🇸 National</p>
+                    <p className="text-white font-bold text-sm">{ratings.label}</p>
+                    <p className="text-xs text-gray-500">{ratings.overallPercentile}th percentile</p>
+                  </div>
+                  <span className="text-yellow-400 text-xl">{"★".repeat(ratings.stars)}{"☆".repeat(5 - ratings.stars)}</span>
+                </div>
+
+                {/* Texas Rating */}
+                <div className="flex items-center justify-between border-t border-gray-700 pt-3">
+                  <div>
+                    <p className="text-xs text-orange-400">⭐ Texas</p>
+                    <p className="text-white font-bold text-sm">{ratings.texasLabel}</p>
+                    <p className="text-xs text-gray-500">{ratings.texasPercentile}th percentile in TX</p>
+                  </div>
+                  <span className="text-orange-400 text-xl">{"★".repeat(ratings.texasStars)}{"☆".repeat(5 - ratings.texasStars)}</span>
+                </div>
+
+                {/* Per-metric bars */}
+                <div className="space-y-2 pt-1 border-t border-gray-700">
                   {ratings.metrics.map((m) => (
                     <div key={m.label}>
                       <div className="flex justify-between text-xs mb-1">
                         <span className="text-gray-400">{m.label}</span>
-                        <span className={
-                          m.percentile >= 90 ? "text-green-400" :
-                          m.percentile >= 75 ? "text-blue-400" :
-                          m.percentile >= 50 ? "text-yellow-400" : "text-gray-400"
-                        }>{m.percentile}th · {m.rank}</span>
+                        <span className="text-gray-400">
+                          <span className={m.nationalPercentile >= 90 ? "text-green-400" : m.nationalPercentile >= 75 ? "text-blue-400" : m.nationalPercentile >= 50 ? "text-yellow-400" : "text-red-400"}>
+                            {m.nationalPercentile}%
+                          </span>
+                          <span className="text-gray-600"> / </span>
+                          <span className="text-orange-400">{m.texasPercentile}% TX</span>
+                        </span>
                       </div>
                       <div className="h-1.5 bg-gray-700 rounded-full overflow-hidden">
                         <div
                           className={`h-full rounded-full transition-all ${
-                            m.percentile >= 90 ? "bg-green-400" :
-                            m.percentile >= 75 ? "bg-blue-400" :
-                            m.percentile >= 50 ? "bg-yellow-400" : "bg-red-400"
+                            m.nationalPercentile >= 90 ? "bg-green-400" :
+                            m.nationalPercentile >= 75 ? "bg-blue-400" :
+                            m.nationalPercentile >= 50 ? "bg-yellow-400" : "bg-red-400"
                           }`}
-                          style={{ width: `${m.percentile}%` }}
+                          style={{ width: `${m.nationalPercentile}%` }}
                         />
                       </div>
                     </div>

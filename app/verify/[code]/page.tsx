@@ -28,18 +28,19 @@ async function getAthlete(code: string) {
   }
 }
 
-function PercentileBar({ label, value, unit, percentile, rank }: {
-  label: string; value: number; unit: string; percentile: number; rank: string
+function PercentileBar({ label, value, unit, nationalPercentile, texasPercentile, rank }: {
+  label: string; value: number; unit: string
+  nationalPercentile: number; texasPercentile: number; rank: string
 }) {
-  const color =
-    percentile >= 90 ? "bg-green-400" :
-    percentile >= 75 ? "bg-blue-400" :
-    percentile >= 50 ? "bg-yellow-400" : "bg-red-400"
+  const barColor =
+    nationalPercentile >= 90 ? "bg-green-400" :
+    nationalPercentile >= 75 ? "bg-blue-400" :
+    nationalPercentile >= 50 ? "bg-yellow-400" : "bg-red-400"
 
   const textColor =
-    percentile >= 90 ? "text-green-400" :
-    percentile >= 75 ? "text-blue-400" :
-    percentile >= 50 ? "text-yellow-400" : "text-red-400"
+    nationalPercentile >= 90 ? "text-green-400" :
+    nationalPercentile >= 75 ? "text-blue-400" :
+    nationalPercentile >= 50 ? "text-yellow-400" : "text-red-400"
 
   return (
     <div className="space-y-1">
@@ -47,11 +48,12 @@ function PercentileBar({ label, value, unit, percentile, rank }: {
         <span className="text-sm text-gray-300 font-medium">{label}</span>
         <div className="text-right">
           <span className="text-white font-bold text-sm">{value}{unit === "in" ? '"' : ` ${unit}`}</span>
-          <span className={`ml-2 text-xs font-semibold ${textColor}`}>{percentile}th %ile</span>
+          <span className={`ml-2 text-xs font-semibold ${textColor}`}>{nationalPercentile}th %ile</span>
+          <span className="ml-1 text-xs text-orange-400">· TX {texasPercentile}th</span>
         </div>
       </div>
       <div className="h-2 bg-gray-700 rounded-full overflow-hidden">
-        <div className={`h-full rounded-full ${color}`} style={{ width: `${percentile}%` }} />
+        <div className={`h-full rounded-full ${barColor}`} style={{ width: `${nationalPercentile}%` }} />
       </div>
       <p className={`text-xs ${textColor} text-right`}>{rank}</p>
     </div>
@@ -74,7 +76,7 @@ export default async function VerifyPage({ params }: { params: { code: string } 
   const athlete = valid ? await getAthlete(raw) : null
 
   const ratings = athlete?.metrics && Object.keys(athlete.metrics).length > 0
-    ? calculateRatings(athlete.metrics, athlete.position ?? "")
+    ? calculateRatings(athlete.metrics, athlete.position ?? "", athlete.gradYear ?? "")
     : null
 
   return (
@@ -202,14 +204,32 @@ export default async function VerifyPage({ params }: { params: { code: string } 
             {/* PolyRISE Football Ratings */}
             {ratings && (
               <div className="bg-gray-900 rounded-2xl border border-gray-800 overflow-hidden">
-                <div className="bg-gray-800 px-6 py-4">
-                  <p className="text-xs text-gray-400 uppercase tracking-widest mb-1">PolyRISE Football Ratings</p>
+                <div className="bg-gray-800 px-6 py-4 space-y-3">
+                  <p className="text-xs text-gray-400 uppercase tracking-widest">PolyRISE Football Ratings</p>
+                  <p className="text-xs text-gray-500">Compared: <span className="text-gray-300">{ratings.comparedAgainst}</span></p>
+
+                  {/* National */}
                   <div className="flex items-center justify-between">
                     <div>
+                      <p className="text-xs text-gray-400">🇺🇸 National Ranking</p>
                       <p className="text-white font-bold text-lg">{ratings.label}</p>
-                      <p className="text-gray-400 text-xs mt-0.5">{ratings.overallPercentile}th percentile vs {ratings.positionGroup}</p>
+                      <p className="text-gray-400 text-xs">{ratings.overallPercentile}th percentile nationally</p>
                     </div>
                     <StarDisplay stars={ratings.stars} />
+                  </div>
+
+                  {/* Texas */}
+                  <div className="flex items-center justify-between border-t border-gray-700 pt-3">
+                    <div>
+                      <p className="text-xs text-orange-400">⭐ Texas Ranking</p>
+                      <p className="text-white font-bold text-lg">{ratings.texasLabel}</p>
+                      <p className="text-orange-300 text-xs">{ratings.texasPercentile}th percentile in Texas</p>
+                    </div>
+                    <div className="flex gap-1">
+                      {Array.from({ length: 5 }).map((_, i) => (
+                        <span key={i} className={`text-2xl ${i < ratings.texasStars ? "text-orange-400" : "text-gray-700"}`}>★</span>
+                      ))}
+                    </div>
                   </div>
                 </div>
 
@@ -223,7 +243,8 @@ export default async function VerifyPage({ params }: { params: { code: string } 
                         label={m.label}
                         value={m.value}
                         unit={m.unit}
-                        percentile={m.percentile}
+                        nationalPercentile={m.nationalPercentile}
+                        texasPercentile={m.texasPercentile}
                         rank={m.rank}
                       />
                     ))}

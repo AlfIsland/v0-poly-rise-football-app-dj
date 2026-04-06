@@ -157,11 +157,13 @@ export default function SealGeneratorPage() {
         ctx.shadowColor = "rgba(0,0,0,0.85)"
         ctx.shadowBlur = 8
 
-        // Closer to QR — 75% of the way from left edge to QR
-        const nameX = qrX * 0.75
+        // Centered between left edge and QR, with right edge capped before QR starts
+        const nameX = qrX * 0.55
         const nameY = qrY + qrSize / 2
 
-        ctx.fillText(athleteName, nameX, nameY)
+        // maxWidth prevents long names from overlapping the QR
+        const maxNameWidth = qrX * 0.85
+        ctx.fillText(athleteName, nameX, nameY, maxNameWidth)
 
         ctx.shadowBlur = 0
       }

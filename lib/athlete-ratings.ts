@@ -423,10 +423,11 @@ function getRank(p: number): string {
 // ─── Star Rating ──────────────────────────────────────────────────────────────
 
 function calcStars(avg: number): { stars: number; label: string } {
-  if (avg >= 85) return { stars: 5, label: "5-Star Prospect" }
-  if (avg >= 70) return { stars: 4, label: "4-Star Prospect" }
-  if (avg >= 50) return { stars: 3, label: "3-Star Prospect" }
-  if (avg >= 30) return { stars: 2, label: "2-Star Prospect" }
+  // Raw stars capped at 4 max (one less than earned — PolyRISE standard)
+  if (avg >= 85) return { stars: 4, label: "4-Star Prospect" }
+  if (avg >= 70) return { stars: 3, label: "3-Star Prospect" }
+  if (avg >= 50) return { stars: 2, label: "2-Star Prospect" }
+  if (avg >= 30) return { stars: 1, label: "1-Star Prospect" }
   return { stars: 1, label: "1-Star Prospect" }
 }
 

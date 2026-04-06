@@ -113,22 +113,7 @@ export default function SealGeneratorPage() {
     ctx.fillText(sealCode, cx, cy)
     ctx.shadowBlur = 0
 
-    // Texas star rating only on seal
-    if (ratings) {
-      const starY = cy + fontSize * 1.6
-      const starFontSize = fontSize * 0.7
-      ctx.font = `${starFontSize}px Arial, sans-serif`
-      ctx.fillStyle = "#FF8C00"
-      ctx.shadowColor = "rgba(0,0,0,0.9)"
-      ctx.shadowBlur = 6
-      ctx.fillText("★".repeat(ratings.texasStars) + "☆".repeat(5 - ratings.texasStars), cx, starY)
-      ctx.shadowBlur = 0
-
-      const labelFontSize = fontSize * 0.45
-      ctx.font = `bold ${labelFontSize}px Arial, sans-serif`
-      ctx.fillStyle = "rgba(255,255,255,0.85)"
-      ctx.fillText("POLYRISE FOOTBALL RATINGS · TEXAS", cx, starY + starFontSize)
-    }
+    // Ratings label removed from seal per design update
 
     // QR code bottom-right
     const verifyUrl = `https://polyrisefootball.com/verify/${sealCode}`

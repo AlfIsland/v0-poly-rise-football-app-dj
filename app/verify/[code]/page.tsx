@@ -60,15 +60,6 @@ function PercentileBar({ label, value, unit, nationalPercentile, texasPercentile
   )
 }
 
-function StarDisplay({ stars }: { stars: number }) {
-  return (
-    <div className="flex gap-1">
-      {Array.from({ length: 5 }).map((_, i) => (
-        <span key={i} className={`text-2xl ${i < stars ? "text-yellow-400" : "text-gray-700"}`}>★</span>
-      ))}
-    </div>
-  )
-}
 
 export default async function VerifyPage({ params }: { params: { code: string } }) {
   const raw = decodeURIComponent(params.code).toUpperCase()
@@ -208,14 +199,11 @@ export default async function VerifyPage({ params }: { params: { code: string } 
                   <p className="text-xs text-gray-400 uppercase tracking-widest">PolyRISE Football Ratings</p>
                   <p className="text-xs text-gray-500">Compared: <span className="text-gray-300">{ratings.comparedAgainst}</span></p>
 
-                  {/* National */}
-                  <div className="flex items-center justify-between">
-                    <div>
-                      <p className="text-xs text-gray-400">🇺🇸 National Ranking</p>
-                      <p className="text-white font-bold text-lg">{ratings.label}</p>
-                      <p className="text-gray-400 text-xs">{ratings.overallPercentile}th percentile nationally</p>
-                    </div>
-                    <StarDisplay stars={ratings.stars} />
+                  {/* National — percentile only, no stars */}
+                  <div>
+                    <p className="text-xs text-gray-400">🇺🇸 National Percentile</p>
+                    <p className="text-white font-bold text-lg">{ratings.overallPercentile}th percentile</p>
+                    <p className="text-gray-400 text-xs">vs {ratings.positionGroup} nationally</p>
                   </div>
 
                   {/* Texas */}

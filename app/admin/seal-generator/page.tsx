@@ -112,21 +112,21 @@ export default function SealGeneratorPage() {
     ctx.fillText(sealCode, cx, cy)
     ctx.shadowBlur = 0
 
-    // Star rating on seal (if metrics entered)
+    // Texas star rating only on seal
     if (ratings) {
       const starY = cy + fontSize * 1.6
       const starFontSize = fontSize * 0.7
       ctx.font = `${starFontSize}px Arial, sans-serif`
-      ctx.fillStyle = "#FFD700"
+      ctx.fillStyle = "#FF8C00"
       ctx.shadowColor = "rgba(0,0,0,0.9)"
       ctx.shadowBlur = 6
-      ctx.fillText("★".repeat(ratings.stars) + "☆".repeat(5 - ratings.stars), cx, starY)
+      ctx.fillText("★".repeat(ratings.texasStars) + "☆".repeat(5 - ratings.texasStars), cx, starY)
       ctx.shadowBlur = 0
 
       const labelFontSize = fontSize * 0.45
       ctx.font = `bold ${labelFontSize}px Arial, sans-serif`
       ctx.fillStyle = "rgba(255,255,255,0.85)"
-      ctx.fillText("POLYRISE FOOTBALL RATINGS", cx, starY + starFontSize)
+      ctx.fillText("POLYRISE FOOTBALL RATINGS · TEXAS", cx, starY + starFontSize)
     }
 
     // QR code bottom-right
@@ -260,14 +260,11 @@ export default function SealGeneratorPage() {
               <div className="bg-gray-800 rounded-xl p-4 mt-2 space-y-3">
                 <p className="text-xs text-gray-500 uppercase tracking-wider">Compared against: <span className="text-gray-300">{ratings.comparedAgainst}</span></p>
 
-                {/* National Rating */}
-                <div className="flex items-center justify-between">
-                  <div>
-                    <p className="text-xs text-gray-400">🇺🇸 National</p>
-                    <p className="text-white font-bold text-sm">{ratings.label}</p>
-                    <p className="text-xs text-gray-500">{ratings.overallPercentile}th percentile</p>
-                  </div>
-                  <span className="text-yellow-400 text-xl">{"★".repeat(ratings.stars)}{"☆".repeat(5 - ratings.stars)}</span>
+                {/* National Percentile — no stars */}
+                <div>
+                  <p className="text-xs text-gray-400">🇺🇸 National</p>
+                  <p className="text-white font-bold text-sm">{ratings.overallPercentile}th percentile</p>
+                  <p className="text-xs text-gray-500">vs {ratings.positionGroup}</p>
                 </div>
 
                 {/* Texas Rating */}

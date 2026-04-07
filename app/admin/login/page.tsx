@@ -30,7 +30,7 @@ function LoginForm() {
         router.push(from)
         router.refresh()
       } else {
-        setError("Incorrect password. Contact PolyRISE staff for access.")
+        setError(data.error || "Incorrect password. Contact PolyRISE staff for access.")
       }
     } catch {
       setError("Something went wrong. Try again.")

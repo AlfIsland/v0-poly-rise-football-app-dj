@@ -2,6 +2,7 @@ import { Metadata } from "next"
 import Image from "next/image"
 import { calculateRatings } from "@/lib/athlete-ratings"
 import Redis from "ioredis"
+import RecruitingCardDownload from "@/components/recruiting-card-download"
 
 export const metadata: Metadata = {
   title: "PR-VERIFIED Athlete Profile | PolyRISE Football",
@@ -254,6 +255,10 @@ export default async function VerifyPage({ params }: { params: { code: string } 
             )}
 
           </>
+        )}
+
+        {athlete && (
+          <RecruitingCardDownload athlete={athlete} ratings={ratings} />
         )}
 
         <p className="text-center text-gray-700 text-xs pb-4">

@@ -62,6 +62,16 @@ function PercentileBar({ label, value, unit, nationalPercentile, texasPercentile
 }
 
 
+function getSealStatus(athlete: { expiresAt?: string; issuedAt?: string }) {
+  if (!athlete.expiresAt) return { status: "active" as const }
+  const now = new Date()
+  const expires = new Date(athlete.expiresAt)
+  const daysLeft = Math.ceil((expires.getTime() - now.getTime()) / (1000 * 60 * 60 * 24))
+  if (daysLeft <= 0) return { status: "expired" as const, daysLeft: 0 }
+  if (daysLeft <= 30) return { status: "expiring" as const, daysLeft }
+  return { status: "active" as const, daysLeft }
+}
+
 export default async function VerifyPage({ params }: { params: { code: string } }) {
   const raw = decodeURIComponent(params.code).toUpperCase()
   const valid = isValidCode(raw)
@@ -70,6 +80,8 @@ export default async function VerifyPage({ params }: { params: { code: string } 
   const ratings = athlete?.metrics && Object.keys(athlete.metrics).length > 0
     ? calculateRatings(athlete.metrics, athlete.position ?? "", athlete.gradYear ?? "")
     : null
+
+  const sealStatus = athlete ? getSealStatus(athlete) : null
 
   return (
     <div className="min-h-screen bg-gray-950 py-10 px-4">
@@ -122,14 +134,48 @@ export default async function VerifyPage({ params }: { params: { code: string } 
         ) : (
           // ── Full verified profile ──
           <>
+            {/* Expiration banners */}
+            {sealStatus?.status === "expired" && (
+              <div className="bg-red-900 border border-red-700 rounded-2xl px-6 py-4 flex items-center gap-3">
+                <span className="text-2xl">⛔</span>
+                <div>
+                  <p className="text-white font-bold">Seal Expired</p>
+                  <p className="text-red-200 text-xs">This PR-VERIFIED seal has expired. Contact PolyRISE Football to renew.</p>
+                  {athlete.expiresAt && (
+                    <p className="text-red-300 text-xs mt-0.5">Expired: {new Date(athlete.expiresAt).toLocaleDateString()}</p>
+                  )}
+                </div>
+              </div>
+            )}
+            {sealStatus?.status === "expiring" && (
+              <div className="bg-yellow-800 border border-yellow-600 rounded-2xl px-6 py-4 flex items-center gap-3">
+                <span className="text-2xl">⚠️</span>
+                <div>
+                  <p className="text-white font-bold">Seal Expiring Soon</p>
+                  <p className="text-yellow-100 text-xs">
+                    This seal expires in {sealStatus.daysLeft} day{sealStatus.daysLeft !== 1 ? "s" : ""}.
+                    Contact PolyRISE Football to renew.
+                  </p>
+                  {athlete.expiresAt && (
+                    <p className="text-yellow-200 text-xs mt-0.5">Expires: {new Date(athlete.expiresAt).toLocaleDateString()}</p>
+                  )}
+                </div>
+              </div>
+            )}
+
             {/* Verified banner */}
-            <div className="bg-green-700 rounded-2xl px-6 py-4 flex items-center gap-3">
+            <div className={`rounded-2xl px-6 py-4 flex items-center gap-3 ${sealStatus?.status === "expired" ? "bg-gray-700" : "bg-green-700"}`}>
               <svg className="w-8 h-8 text-white flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
                 <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
               </svg>
               <div>
-                <p className="text-white font-bold text-lg">PR-VERIFIED</p>
-                <p className="text-green-100 text-xs">Officially verified by PolyRISE Football</p>
+                <p className="text-white font-bold text-lg">{sealStatus?.status === "expired" ? "SEAL EXPIRED" : "PR-VERIFIED"}</p>
+                <p className={`text-xs ${sealStatus?.status === "expired" ? "text-gray-300" : "text-green-100"}`}>
+                  {sealStatus?.status === "expired" ? "This seal is no longer active" : "Officially verified by PolyRISE Football"}
+                </p>
+                {athlete.expiresAt && sealStatus?.status === "active" && (
+                  <p className="text-green-200 text-xs mt-0.5">Valid through {new Date(athlete.expiresAt).toLocaleDateString()}</p>
+                )}
               </div>
             </div>
 

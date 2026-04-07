@@ -21,6 +21,7 @@ interface Athlete {
   gpa?: string
   code: string
   issuedAt?: string
+  expiresAt?: string
   coachNotes?: string
   videoLink?: string
 }
@@ -228,7 +229,13 @@ export default function RecruitingCardDownload({
       doc.text(`Seal Code: ${athlete.code}`, margin, footerY + 20)
 
       if (athlete.issuedAt) {
-        doc.text(`Issued: ${new Date(athlete.issuedAt).toLocaleDateString()}`, W - margin, footerY + 20, { align: "right" })
+        doc.text(`Issued: ${new Date(athlete.issuedAt).toLocaleDateString()}`, W - margin, footerY + 16, { align: "right" })
+      }
+      if (athlete.expiresAt) {
+        const expired = new Date(athlete.expiresAt) < new Date()
+        doc.setTextColor(expired ? 220 : 100, expired ? 60 : 100, expired ? 60 : 100)
+        doc.text(`${expired ? "EXPIRED" : "Valid through"}: ${new Date(athlete.expiresAt).toLocaleDateString()}`, W - margin, footerY + 22, { align: "right" })
+        doc.setTextColor(100, 100, 100)
       }
 
       doc.setTextColor(140, 140, 140)

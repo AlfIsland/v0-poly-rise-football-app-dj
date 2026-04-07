@@ -70,6 +70,7 @@ export default async function AthletesRosterPage() {
                     <th className="text-left px-6 py-4">School</th>
                     <th className="text-left px-6 py-4">Class</th>
                     <th className="text-left px-6 py-4">Issued</th>
+                    <th className="text-left px-6 py-4">Expires</th>
                     <th className="text-left px-6 py-4">Verify</th>
                   </tr>
                 </thead>
@@ -84,6 +85,17 @@ export default async function AthletesRosterPage() {
                       <td className="px-6 py-4 text-gray-300">{a.gradYear || "—"}</td>
                       <td className="px-6 py-4 text-gray-500">
                         {a.issuedAt ? new Date(a.issuedAt).toLocaleDateString() : "—"}
+                      </td>
+                      <td className="px-6 py-4">
+                        {(() => {
+                          if (!a.expiresAt) return <span className="text-gray-600">—</span>
+                          const now = new Date()
+                          const exp = new Date(a.expiresAt)
+                          const days = Math.ceil((exp.getTime() - now.getTime()) / 86400000)
+                          if (days <= 0) return <span className="text-red-400 font-semibold text-xs">EXPIRED</span>
+                          if (days <= 30) return <span className="text-yellow-400 text-xs font-semibold">{exp.toLocaleDateString()} <span className="text-yellow-600">({days}d)</span></span>
+                          return <span className="text-gray-400 text-xs">{exp.toLocaleDateString()}</span>
+                        })()}
                       </td>
                       <td className="px-6 py-4">
                         <Link
@@ -116,6 +128,15 @@ export default async function AthletesRosterPage() {
                     <p>Class: <span className="text-gray-300">{a.gradYear || "—"}</span></p>
                     <p className="col-span-2">School: <span className="text-gray-300">{a.school || "—"}</span></p>
                     <p>Issued: <span className="text-gray-300">{a.issuedAt ? new Date(a.issuedAt).toLocaleDateString() : "—"}</span></p>
+                    <p>Expires: {(() => {
+                      if (!a.expiresAt) return <span className="text-gray-600">—</span>
+                      const now = new Date()
+                      const exp = new Date(a.expiresAt)
+                      const days = Math.ceil((exp.getTime() - now.getTime()) / 86400000)
+                      if (days <= 0) return <span className="text-red-400 font-semibold">EXPIRED</span>
+                      if (days <= 30) return <span className="text-yellow-400">{exp.toLocaleDateString()} ({days}d left)</span>
+                      return <span className="text-gray-300">{exp.toLocaleDateString()}</span>
+                    })()}</p>
                   </div>
                   <Link
                     href={`/verify/${a.code}`}

@@ -68,7 +68,11 @@ export async function POST(req: NextRequest) {
     const padded = String(sealNumber).padStart(4, "0")
     const upperCode = `PR-V${initials.toUpperCase()}-${padded}`
 
-    await kvSet(`athlete:${upperCode}`, { ...body, code: upperCode, sealNumber })
+    const issuedAt = body.issuedAt || new Date().toISOString()
+    const expiresAt = new Date(issuedAt)
+    expiresAt.setMonth(expiresAt.getMonth() + 4)
+
+    await kvSet(`athlete:${upperCode}`, { ...body, code: upperCode, sealNumber, issuedAt, expiresAt: expiresAt.toISOString() })
 
     // Track in roster list
     if (r) {

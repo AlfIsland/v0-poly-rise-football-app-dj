@@ -61,6 +61,12 @@ export async function POST(req: NextRequest) {
     const upperCode = code.toUpperCase()
     await kvSet(`athlete:${upperCode}`, { ...body, code: upperCode })
 
+    // Track in roster list
+    const r = getRedis()
+    if (r) {
+      await r.sadd("athlete:roster", upperCode)
+    }
+
     return NextResponse.json({ success: true, code: upperCode })
   } catch (err) {
     console.error("[athletes POST]", err)

@@ -2,6 +2,7 @@
 
 import { useState, useRef, useEffect, useCallback } from "react"
 import QRCode from "qrcode"
+import Link from "next/link"
 import { calculateRatings, type AthleteMetrics } from "@/lib/athlete-ratings"
 
 function getInitials(name: string): string {
@@ -234,6 +235,7 @@ export default function SealGeneratorPage() {
           <div>
             <h1 className="text-2xl font-bold text-white">PR-VERIFIED Seal Generator</h1>
             <p className="text-gray-400 text-sm">Admin · PolyRISE Football Ratings System</p>
+          <Link href="/admin/athletes" className="text-xs text-red-400 hover:text-red-300 underline mt-0.5 block">View Athlete Roster →</Link>
           </div>
         </div>
 

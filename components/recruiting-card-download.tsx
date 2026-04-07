@@ -121,18 +121,16 @@ export default function RecruitingCardDownload({
         doc.setFontSize(11)
         doc.setFont("helvetica", "normal")
         doc.setTextColor(255, 255, 255)
-        doc.text(`🇺🇸  National: ${ratings.overallPercentile}th percentile`, margin, y)
+        doc.text(`NATIONAL: ${ratings.overallPercentile}th percentile`, margin, y)
 
         // Texas stars
         y += 6
         doc.setTextColor(255, 140, 0)
-        const txStarsFilled = "★".repeat(ratings.texasStars)
-        const txStarsEmpty = "☆".repeat(5 - ratings.texasStars)
-        doc.setFontSize(14)
-        doc.text(`${txStarsFilled}${txStarsEmpty}`, margin, y)
-        doc.setFontSize(10)
-        doc.setTextColor(200, 200, 200)
-        doc.text(`  ${ratings.texasLabel}  ·  ${ratings.texasPercentile}th percentile in Texas`, margin + 22, y)
+        doc.setFontSize(11)
+        doc.setFont("helvetica", "bold")
+        const txStars = `TEXAS: ${ratings.texasStars} of 5 Stars  (${ratings.texasPercentile}th percentile)`
+        doc.text(txStars, margin, y)
+        doc.setFont("helvetica", "normal")
 
         y += 5
         doc.setFontSize(8)

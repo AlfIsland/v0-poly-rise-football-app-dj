@@ -51,6 +51,7 @@ export default function SealGeneratorPage() {
   const [weight, setWeight] = useState("")
   const [gpa, setGpa] = useState("")
   const [coachNotes, setCoachNotes] = useState("")
+  const [videoLink, setVideoLink] = useState("")
 
   // ── Combine metrics ──
   const [fortyYard, setFortyYard] = useState("")
@@ -212,6 +213,7 @@ export default function SealGeneratorPage() {
           gpa,
           metrics,
           coachNotes,
+          videoLink,
           issuedAt: new Date().toISOString(),
         }),
       })
@@ -291,6 +293,8 @@ export default function SealGeneratorPage() {
               />
               <p className="text-xs text-gray-600 mt-1">{coachNotes.length}/1000 characters</p>
             </div>
+
+            <Input label="Hudl / Film Link" value={videoLink} onChange={setVideoLink} placeholder="https://hudl.com/v/..." />
           </div>
 
           {/* ── COL 2: Combine Metrics ── */}

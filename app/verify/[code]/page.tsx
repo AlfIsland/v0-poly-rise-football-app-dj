@@ -191,6 +191,23 @@ export default async function VerifyPage({ params }: { params: { code: string } 
                   </div>
                 )}
 
+                {athlete.videoLink && (
+                  <div className="border-t border-gray-800 pt-4">
+                    <p className="text-xs text-gray-500 uppercase tracking-wider mb-2">Film / Highlights</p>
+                    <a
+                      href={athlete.videoLink}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-2 bg-red-600 hover:bg-red-700 text-white text-sm font-semibold px-4 py-2 rounded-xl transition-colors"
+                    >
+                      <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M8 5v14l11-7z"/>
+                      </svg>
+                      Watch Film
+                    </a>
+                  </div>
+                )}
+
                 <div className="border-t border-gray-800 pt-3 flex justify-between text-xs text-gray-500">
                   <span>Code: <span className="font-mono text-red-400">{athlete.code}</span></span>
                   {athlete.issuedAt && (

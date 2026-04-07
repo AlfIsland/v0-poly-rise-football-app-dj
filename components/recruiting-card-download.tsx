@@ -22,6 +22,7 @@ interface Athlete {
   code: string
   issuedAt?: string
   coachNotes?: string
+  videoLink?: string
 }
 
 interface Ratings {
@@ -233,6 +234,12 @@ export default function RecruitingCardDownload({
       doc.setTextColor(140, 140, 140)
       doc.setFontSize(8)
       doc.text("PolyRISE Football · Austin, Texas · polyrisefootball.com", W / 2, footerY + 14, { align: "center" })
+
+      if (athlete.videoLink) {
+        doc.setFontSize(8)
+        doc.setTextColor(220, 80, 80)
+        doc.text(`Film: ${athlete.videoLink}`, margin, footerY + 26)
+      }
 
       doc.save(`${athlete.code}-recruiting-card.pdf`)
     } catch (err) {

@@ -7,6 +7,7 @@ import { calculateRatings, type AthleteMetrics } from "@/lib/athlete-ratings"
 function getInitials(name: string): string {
   return name
     .trim()
+    .replace(/\./g, "") // remove periods (e.g. middle initial "E.")
     .split(/\s+/)
     .map((n) => n[0]?.toUpperCase() || "")
     .join("")

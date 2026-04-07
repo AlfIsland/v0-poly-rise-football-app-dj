@@ -58,19 +58,41 @@ export default function RecruitingCardDownload({
       const margin = 14
       const contentW = W - margin * 2
 
+      // ── Load logo as base64 ──
+      const logoBase64 = await new Promise<string | null>((resolve) => {
+        const img = new Image()
+        img.crossOrigin = "anonymous"
+        img.onload = () => {
+          const canvas = document.createElement("canvas")
+          canvas.width = img.naturalWidth
+          canvas.height = img.naturalHeight
+          const ctx = canvas.getContext("2d")
+          if (!ctx) { resolve(null); return }
+          ctx.drawImage(img, 0, 0)
+          resolve(canvas.toDataURL("image/png"))
+        }
+        img.onerror = () => resolve(null)
+        img.src = "/poly-rise-logo.png"
+      })
+
       // ── Background ──
       doc.setFillColor(10, 10, 15)
       doc.rect(0, 0, W, pageH, "F")
 
       // ── Header bar ──
       doc.setFillColor(180, 10, 10)
-      doc.rect(0, 0, W, 22, "F")
+      doc.rect(0, 0, W, 26, "F")
+
+      // ── Logo in header ──
+      if (logoBase64) {
+        doc.addImage(logoBase64, "PNG", margin, 2, 22, 22)
+      }
 
       // ── PolyRISE Football title ──
       doc.setTextColor(255, 255, 255)
       doc.setFontSize(13)
       doc.setFont("helvetica", "bold")
-      doc.text("PolyRISE Football", margin, 14)
+      doc.text("PolyRISE Football", margin + 25, 12)
 
       // ── PR-VERIFIED badge text ──
       doc.setFontSize(10)
@@ -79,7 +101,7 @@ export default function RecruitingCardDownload({
       doc.text("PR-VERIFIED RECRUITING PROFILE", W - margin, 14, { align: "right" })
 
       // ── Athlete Name ──
-      let y = 36
+      let y = 40
       doc.setTextColor(255, 255, 255)
       doc.setFontSize(26)
       doc.setFont("helvetica", "bold")

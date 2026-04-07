@@ -66,17 +66,40 @@ export default function ProgressReportDownload({ athlete }: { athlete: Athlete }
       const sessionCount = athlete.sessions.length
       const isFirstSession = sessionCount === 1
 
+      // ── Load logo as base64 ──
+      const logoBase64 = await new Promise<string | null>((resolve) => {
+        const img = new Image()
+        img.crossOrigin = "anonymous"
+        img.onload = () => {
+          const canvas = document.createElement("canvas")
+          canvas.width = img.naturalWidth
+          canvas.height = img.naturalHeight
+          const ctx = canvas.getContext("2d")
+          if (!ctx) { resolve(null); return }
+          ctx.drawImage(img, 0, 0)
+          resolve(canvas.toDataURL("image/png"))
+        }
+        img.onerror = () => resolve(null)
+        img.src = "/poly-rise-logo.png"
+      })
+
       // ── Background ──
       doc.setFillColor(10, 10, 15)
       doc.rect(0, 0, W, pageH, "F")
 
       // ── Header bar ──
       doc.setFillColor(180, 10, 10)
-      doc.rect(0, 0, W, 24, "F")
+      doc.rect(0, 0, W, 28, "F")
+
+      // ── Logo in header ──
+      if (logoBase64) {
+        doc.addImage(logoBase64, "PNG", margin, 2, 24, 24)
+      }
+
       doc.setTextColor(255, 255, 255)
       doc.setFontSize(14)
       doc.setFont("helvetica", "bold")
-      doc.text("PolyRISE Football", margin, 11)
+      doc.text("PolyRISE Football", margin + 27, 13)
       doc.setFontSize(9)
       doc.setFont("helvetica", "normal")
       doc.setTextColor(255, 200, 200)
@@ -86,7 +109,7 @@ export default function ProgressReportDownload({ athlete }: { athlete: Athlete }
       doc.text(`Generated: ${new Date().toLocaleDateString()}`, W - margin, 18, { align: "right" })
 
       // ── Athlete name ──
-      let y = 36
+      let y = 42
       doc.setTextColor(255, 255, 255)
       doc.setFontSize(24)
       doc.setFont("helvetica", "bold")

@@ -5,7 +5,12 @@ import QRCode from "qrcode"
 import { calculateRatings, type AthleteMetrics } from "@/lib/athlete-ratings"
 
 function getInitials(name: string): string {
-  return name.trim().split(/\s+/).map((n) => n[0]?.toUpperCase() || "").join("")
+  return name
+    .trim()
+    .split(/\s+/)
+    .map((n) => n[0]?.toUpperCase() || "")
+    .join("")
+    .replace(/[^A-Z]/g, "") // strip anything that's not a letter
 }
 
 function formatCode(initials: string, num: string): string {

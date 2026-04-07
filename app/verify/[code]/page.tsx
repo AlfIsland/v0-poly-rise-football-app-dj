@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 }
 
 function isValidCode(code: string) {
-  return /^PR-V[A-Z]{1,6}-\d{4}$/i.test(code)
+  return /^PR-V[A-Z]+-\d{4}$/i.test(code)
 }
 
 async function getAthlete(code: string) {

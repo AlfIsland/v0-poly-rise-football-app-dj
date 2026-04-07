@@ -53,6 +53,8 @@ export default function SealGeneratorPage() {
   const [gpa, setGpa] = useState("")
   const [coachNotes, setCoachNotes] = useState("")
   const [videoLink, setVideoLink] = useState("")
+  const [phone, setPhone] = useState("")
+  const [email, setEmail] = useState("")
 
   // ── Combine metrics ──
   const [fortyYard, setFortyYard] = useState("")
@@ -215,6 +217,8 @@ export default function SealGeneratorPage() {
           metrics,
           coachNotes,
           videoLink,
+          phone,
+          email,
           issuedAt: new Date().toISOString(),
         }),
       })
@@ -299,6 +303,8 @@ export default function SealGeneratorPage() {
             </div>
 
             <Input label="Hudl / Film Link" value={videoLink} onChange={setVideoLink} placeholder="https://hudl.com/v/..." />
+            <Input label="Phone Number" value={phone} onChange={setPhone} placeholder="e.g. 512-555-1234" type="tel" />
+            <Input label="Email Address" value={email} onChange={setEmail} placeholder="e.g. athlete@email.com" type="email" />
           </div>
 
           {/* ── COL 2: Combine Metrics ── */}

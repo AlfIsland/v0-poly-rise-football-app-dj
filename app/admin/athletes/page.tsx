@@ -2,6 +2,7 @@ import Redis from "ioredis"
 import Image from "next/image"
 import Link from "next/link"
 import LogoutButton from "@/components/logout-button"
+import SendContactButtons from "@/components/send-contact-buttons"
 
 async function getAllAthletes() {
   try {
@@ -112,6 +113,7 @@ export default async function AthletesRosterPage() {
                           >
                             View
                           </Link>
+                          <SendContactButtons athlete={a} />
                         </div>
                       </td>
                     </tr>

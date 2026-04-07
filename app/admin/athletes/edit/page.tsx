@@ -1,9 +1,10 @@
 "use client"
 
 import { useState, useEffect, FormEvent, Suspense } from "react"
-import { useRouter, useSearchParams } from "next/navigation"
+import { useSearchParams } from "next/navigation"
 import Link from "next/link"
 import LogoutButton from "@/components/logout-button"
+import SendContactButtons from "@/components/send-contact-buttons"
 
 function Input({ label, value, onChange, placeholder, type = "text", step, required }: {
   label: string; value: string; onChange: (v: string) => void
@@ -26,7 +27,6 @@ function Input({ label, value, onChange, placeholder, type = "text", step, requi
 
 function EditForm() {
   const searchParams = useSearchParams()
-  const router = useRouter()
   const code = searchParams.get("code")?.toUpperCase() ?? ""
 
   const [loading, setLoading] = useState(true)
@@ -45,6 +45,8 @@ function EditForm() {
   const [gpa, setGpa] = useState("")
   const [coachNotes, setCoachNotes] = useState("")
   const [videoLink, setVideoLink] = useState("")
+  const [phone, setPhone] = useState("")
+  const [email, setEmail] = useState("")
 
   // Combine metrics
   const [fortyYard, setFortyYard] = useState("")
@@ -78,6 +80,8 @@ function EditForm() {
         setGpa(a.gpa ?? "")
         setCoachNotes(a.coachNotes ?? "")
         setVideoLink(a.videoLink ?? "")
+        setPhone(a.phone ?? "")
+        setEmail(a.email ?? "")
         setFortyYard(a.metrics?.fortyYard?.toString() ?? "")
         setShuttle(a.metrics?.shuttle?.toString() ?? "")
         setThreeCone(a.metrics?.threeCone?.toString() ?? "")
@@ -119,6 +123,8 @@ function EditForm() {
           gpa,
           coachNotes,
           videoLink,
+          phone,
+          email,
           metrics,
         }),
       })
@@ -209,6 +215,8 @@ function EditForm() {
               <p className="text-xs text-gray-600 mt-1">{coachNotes.length}/1000</p>
             </div>
             <Input label="Hudl / Film Link" value={videoLink} onChange={setVideoLink} placeholder="https://hudl.com/v/..." />
+            <Input label="Phone Number" value={phone} onChange={setPhone} placeholder="e.g. 512-555-1234" type="tel" />
+            <Input label="Email Address" value={email} onChange={setEmail} placeholder="e.g. athlete@email.com" type="email" />
           </div>
 
           <div className="bg-gray-900 rounded-2xl p-6 space-y-4 border border-gray-800">
@@ -236,6 +244,16 @@ function EditForm() {
             </p>
           )}
         </form>
+
+        {/* Send profile link */}
+        <div className="bg-gray-900 rounded-2xl p-6 border border-gray-800 mt-6 space-y-3">
+          <h2 className="text-xs font-bold text-red-400 uppercase tracking-widest">Send Profile Link</h2>
+          <p className="text-xs text-gray-500">Send the athlete their PR-VERIFIED profile link via text or email.</p>
+          {!phone && !email && (
+            <p className="text-xs text-yellow-500">Add a phone number or email above and save first.</p>
+          )}
+          <SendContactButtons athlete={{ code, athleteName, phone, email, position, school, gradYear, expiresAt }} />
+        </div>
 
       </div>
     </div>

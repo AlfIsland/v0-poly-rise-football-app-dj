@@ -1,6 +1,7 @@
 import Redis from "ioredis"
 import Image from "next/image"
 import Link from "next/link"
+import LogoutButton from "@/components/logout-button"
 
 async function getAllAthletes() {
   try {
@@ -39,12 +40,15 @@ export default async function AthletesRosterPage() {
               <p className="text-gray-400 text-sm">{athletes.length} athlete{athletes.length !== 1 ? "s" : ""} registered</p>
             </div>
           </div>
-          <Link
-            href="/admin/seal-generator"
-            className="bg-red-600 hover:bg-red-700 text-white font-semibold px-4 py-2 rounded-xl text-sm transition-colors"
-          >
-            + New Seal
-          </Link>
+          <div className="flex items-center gap-3">
+            <Link
+              href="/admin/seal-generator"
+              className="bg-red-600 hover:bg-red-700 text-white font-semibold px-4 py-2 rounded-xl text-sm transition-colors"
+            >
+              + New Seal
+            </Link>
+            <LogoutButton />
+          </div>
         </div>
 
         {athletes.length === 0 ? (

@@ -3,6 +3,7 @@
 import { useState, useRef, useEffect, useCallback } from "react"
 import QRCode from "qrcode"
 import Link from "next/link"
+import LogoutButton from "@/components/logout-button"
 import { calculateRatings, type AthleteMetrics } from "@/lib/athlete-ratings"
 
 function getInitials(name: string): string {
@@ -235,14 +236,17 @@ export default function SealGeneratorPage() {
       <div className="max-w-6xl mx-auto">
 
         {/* Header */}
-        <div className="mb-8 border-b border-gray-800 pb-6 flex items-center gap-4">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/poly-rise-logo.png" alt="PolyRISE" className="h-10 w-auto" />
-          <div>
-            <h1 className="text-2xl font-bold text-white">PR-VERIFIED Seal Generator</h1>
-            <p className="text-gray-400 text-sm">Admin · PolyRISE Football Ratings System</p>
-          <Link href="/admin/athletes" className="text-xs text-red-400 hover:text-red-300 underline mt-0.5 block">View Athlete Roster →</Link>
+        <div className="mb-8 border-b border-gray-800 pb-6 flex items-center justify-between gap-4">
+          <div className="flex items-center gap-4">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src="/poly-rise-logo.png" alt="PolyRISE" className="h-10 w-auto" />
+            <div>
+              <h1 className="text-2xl font-bold text-white">PR-VERIFIED Seal Generator</h1>
+              <p className="text-gray-400 text-sm">Admin · PolyRISE Football Ratings System</p>
+              <Link href="/admin/athletes" className="text-xs text-red-400 hover:text-red-300 underline mt-0.5 block">View Athlete Roster →</Link>
+            </div>
           </div>
+          <LogoutButton />
         </div>
 
         <div className="grid grid-cols-1 xl:grid-cols-3 gap-8">

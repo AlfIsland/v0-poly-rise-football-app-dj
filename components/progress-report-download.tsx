@@ -341,7 +341,7 @@ export default function ProgressReportDownload({ athlete }: { athlete: Athlete }
       doc.setFontSize(8)
       doc.setFont("helvetica", "normal")
       doc.setTextColor(140, 140, 140)
-      doc.text("PolyRISE Football · Austin, Texas · polyrisefootball.com · 512-593-3933", W / 2, footerY + 8, { align: "center" })
+      doc.text("PolyRISE Football · Austin, Texas · polyrisefootball.com · (817) 658-3300", W / 2, footerY + 8, { align: "center" })
       doc.setTextColor(100, 100, 100)
       doc.text(`Athlete ID: ${athlete.id}`, margin, footerY + 14)
       doc.text(`coachjonathan@polyrisefootball.com`, W - margin, footerY + 14, { align: "right" })

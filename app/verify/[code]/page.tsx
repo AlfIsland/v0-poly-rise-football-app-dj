@@ -107,7 +107,7 @@ export default async function VerifyPage({ params }: { params: { code: string } 
                 Valid codes look like <span className="font-mono text-red-400">PR-VJMW-0027</span>.
                 Contact PolyRISE Football if you believe this is an error.
               </p>
-              <p className="text-gray-400 text-sm">📞 512-593-3933 · coachjonathan@polyrisefootball.com</p>
+              <p className="text-gray-400 text-sm">📞 (817) 658-3300 · coachjonathan@polyrisefootball.com</p>
             </div>
           </div>
 
@@ -127,7 +127,7 @@ export default async function VerifyPage({ params }: { params: { code: string } 
                 This seal code is properly formatted but the athlete&apos;s profile hasn&apos;t been saved yet.
                 Contact PolyRISE Football to verify.
               </p>
-              <p className="text-gray-400 text-sm">📞 512-593-3933 · coachjonathan@polyrisefootball.com</p>
+              <p className="text-gray-400 text-sm">📞 (817) 658-3300 · coachjonathan@polyrisefootball.com</p>
             </div>
           </div>
 

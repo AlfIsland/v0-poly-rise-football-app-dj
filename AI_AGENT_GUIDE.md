@@ -184,9 +184,9 @@ In addition to APIs, the website includes rich JSON-LD structured data that AI a
 
 ## Contact Information
 
-- **Phone:** 512-593-3933
+- **Phone:** (817) 658-3300
 - **Email:** coachjonathan@polyrisefootball.com
-- **WhatsApp:** 512-593-3933
+- **WhatsApp:** (817) 658-3300
 - **Website:** https://polyrisefootball.com
 - **Instagram:** @polyrisefootball
 - **Facebook:** /polyrisefootball

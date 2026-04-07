@@ -1,34 +1,118 @@
+"use client"
+
+import { useState, useEffect, useCallback } from "react"
 import Link from "next/link"
 import Image from "next/image"
-import Redis from "ioredis"
 import LogoutButton from "@/components/logout-button"
 
-async function getAllTrainingAthletes() {
-  try {
-    if (!process.env.REDIS_URL) return []
-    const redis = new Redis(process.env.REDIS_URL, { maxRetriesPerRequest: 3, connectTimeout: 5000 })
-    const ids = await redis.smembers("training:roster")
-    if (!ids.length) { await redis.quit(); return [] }
-    const values = await redis.mget(...ids.map(i => `training:athlete:${i}`))
-    await redis.quit()
-    return values.filter(Boolean).map(v => JSON.parse(v!))
-      .sort((a: { joinedAt: string }, b: { joinedAt: string }) =>
-        new Date(b.joinedAt).getTime() - new Date(a.joinedAt).getTime())
-  } catch (err) {
-    console.error("[training roster]", err)
-    return []
-  }
+const GRADES = [
+  "3rd Grade","4th Grade","5th Grade","6th Grade","7th Grade","8th Grade",
+  "9th Grade","10th Grade","11th Grade","12th Grade",
+]
+
+interface Athlete {
+  id: string; name: string; age: number; grade: string
+  school: string; position?: string; sessions: { date: string }[]
 }
 
-export default async function TrainingRosterPage() {
-  const athletes = await getAllTrainingAthletes()
+function MetricInput({ label, value, onChange, placeholder, step = "0.01" }: {
+  label: string; value: string; onChange: (v: string) => void; placeholder: string; step?: string
+}) {
+  return (
+    <div>
+      <label className="block text-xs text-gray-400 mb-1">{label}</label>
+      <input type="number" step={step} value={value} onChange={e => onChange(e.target.value)}
+        placeholder={placeholder}
+        className="w-full bg-gray-800 text-white rounded-lg px-3 py-2 border border-gray-700 focus:border-red-500 focus:outline-none placeholder-gray-600 text-sm" />
+    </div>
+  )
+}
+
+export default function TrainingRosterPage() {
+  const [athletes, setAthletes] = useState<Athlete[]>([])
+  const [loadingAthletes, setLoadingAthletes] = useState(true)
+  const [showQuickEntry, setShowQuickEntry] = useState(false)
+
+  // Quick entry fields
+  const [name, setName] = useState("")
+  const [age, setAge] = useState("")
+  const [grade, setGrade] = useState("")
+  const [position, setPosition] = useState("")
+  const [school, setSchool] = useState("")
+  const [fortyYard, setFortyYard] = useState("")
+  const [shuttle, setShuttle] = useState("")
+  const [threeCone, setThreeCone] = useState("")
+  const [verticalJump, setVerticalJump] = useState("")
+  const [broadJump, setBroadJump] = useState("")
+  const [benchPress, setBenchPress] = useState("")
+  const [weight, setWeight] = useState("")
+  const [saving, setSaving] = useState(false)
+  const [saveMsg, setSaveMsg] = useState("")
+
+  const fetchAthletes = useCallback(async () => {
+    try {
+      const res = await fetch("/api/training")
+      const data = await res.json()
+      if (data.success) setAthletes(data.athletes)
+    } catch { /* ignore */ }
+    setLoadingAthletes(false)
+  }, [])
+
+  useEffect(() => { fetchAthletes() }, [fetchAthletes])
+
+  const resetForm = () => {
+    setName(""); setAge(""); setGrade(""); setPosition(""); setSchool("")
+    setFortyYard(""); setShuttle(""); setThreeCone("")
+    setVerticalJump(""); setBroadJump(""); setBenchPress(""); setWeight("")
+  }
+
+  const handleQuickSave = async () => {
+    if (!name || !age || !grade) return
+    setSaving(true)
+    setSaveMsg("")
+
+    try {
+      // 1. Create athlete
+      const createRes = await fetch("/api/training", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name, age, grade, school, position }),
+      })
+      const createData = await createRes.json()
+      if (!createData.success) { setSaveMsg("Error creating athlete."); setSaving(false); return }
+
+      const id = createData.id
+
+      // 2. Log session if any metric was entered
+      const hasMetrics = fortyYard || shuttle || threeCone || verticalJump || broadJump || benchPress || weight
+      if (hasMetrics) {
+        await fetch("/api/training", {
+          method: "PUT",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            id, action: "add-session",
+            date: new Date().toISOString().split("T")[0],
+            fortyYard, shuttle, threeCone, verticalJump, broadJump, benchPress, weight,
+          }),
+        })
+      }
+
+      setSaveMsg(`✓ ${name} added${hasMetrics ? " with baseline metrics" : ""}`)
+      resetForm()
+      await fetchAthletes()
+      setTimeout(() => setSaveMsg(""), 4000)
+    } catch {
+      setSaveMsg("Something went wrong.")
+    }
+    setSaving(false)
+  }
 
   return (
     <div className="min-h-screen bg-gray-950 text-white p-6 md:p-10">
       <div className="max-w-6xl mx-auto">
 
         {/* Header */}
-        <div className="mb-8 border-b border-gray-800 pb-6 flex items-center justify-between">
+        <div className="mb-6 border-b border-gray-800 pb-6 flex items-center justify-between">
           <div className="flex items-center gap-4">
             <Image src="/poly-rise-logo.png" alt="PolyRISE" width={40} height={40} className="object-contain" />
             <div>
@@ -38,17 +122,98 @@ export default async function TrainingRosterPage() {
             </div>
           </div>
           <div className="flex items-center gap-3">
-            <Link href="/training/new" className="bg-red-600 hover:bg-red-700 text-white font-semibold px-4 py-2 rounded-xl text-sm transition-colors">
-              + Add Athlete
-            </Link>
+            <button
+              onClick={() => setShowQuickEntry(v => !v)}
+              className={`font-semibold px-4 py-2 rounded-xl text-sm transition-colors ${showQuickEntry ? "bg-gray-700 text-white" : "bg-red-600 hover:bg-red-700 text-white"}`}
+            >
+              {showQuickEntry ? "✕ Close" : "+ Quick Entry"}
+            </button>
             <LogoutButton />
           </div>
         </div>
 
-        {athletes.length === 0 ? (
+        {/* ── Quick Entry Panel ── */}
+        {showQuickEntry && (
+          <div className="bg-gray-900 rounded-2xl border border-red-900 p-6 mb-8 space-y-5">
+            <div className="flex items-center justify-between">
+              <h2 className="text-sm font-bold text-red-400 uppercase tracking-widest">Quick Entry — Add Athlete + Metrics</h2>
+              <p className="text-xs text-gray-500">Fill name + grade at minimum. Metrics are optional.</p>
+            </div>
+
+            {/* Row 1: Athlete info */}
+            <div className="grid grid-cols-2 md:grid-cols-5 gap-3">
+              <div className="md:col-span-2">
+                <label className="block text-xs text-gray-400 mb-1">Full Name <span className="text-red-500">*</span></label>
+                <input value={name} onChange={e => setName(e.target.value)} placeholder="e.g. Marcus Johnson"
+                  className="w-full bg-gray-800 text-white rounded-lg px-3 py-2 border border-gray-700 focus:border-red-500 focus:outline-none placeholder-gray-600 text-sm" />
+              </div>
+              <div>
+                <label className="block text-xs text-gray-400 mb-1">Age <span className="text-red-500">*</span></label>
+                <input type="number" value={age} onChange={e => setAge(e.target.value)} placeholder="e.g. 13" min="8" max="19"
+                  className="w-full bg-gray-800 text-white rounded-lg px-3 py-2 border border-gray-700 focus:border-red-500 focus:outline-none placeholder-gray-600 text-sm" />
+              </div>
+              <div>
+                <label className="block text-xs text-gray-400 mb-1">Grade <span className="text-red-500">*</span></label>
+                <select value={grade} onChange={e => setGrade(e.target.value)}
+                  className="w-full bg-gray-800 text-white rounded-lg px-3 py-2 border border-gray-700 focus:border-red-500 focus:outline-none text-sm">
+                  <option value="">Select</option>
+                  {GRADES.map(g => <option key={g} value={g}>{g}</option>)}
+                </select>
+              </div>
+              <div>
+                <label className="block text-xs text-gray-400 mb-1">Position</label>
+                <input value={position} onChange={e => setPosition(e.target.value)} placeholder="e.g. WR"
+                  className="w-full bg-gray-800 text-white rounded-lg px-3 py-2 border border-gray-700 focus:border-red-500 focus:outline-none placeholder-gray-600 text-sm" />
+              </div>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+              <div className="md:col-span-1">
+                <label className="block text-xs text-gray-400 mb-1">School</label>
+                <input value={school} onChange={e => setSchool(e.target.value)} placeholder="e.g. Austin Middle School"
+                  className="w-full bg-gray-800 text-white rounded-lg px-3 py-2 border border-gray-700 focus:border-red-500 focus:outline-none placeholder-gray-600 text-sm" />
+              </div>
+              <div>
+                <label className="block text-xs text-gray-400 mb-1">Body Weight (lbs)</label>
+                <input type="number" value={weight} onChange={e => setWeight(e.target.value)} placeholder="e.g. 145"
+                  className="w-full bg-gray-800 text-white rounded-lg px-3 py-2 border border-gray-700 focus:border-red-500 focus:outline-none placeholder-gray-600 text-sm" />
+              </div>
+            </div>
+
+            {/* Divider */}
+            <div className="border-t border-gray-800 pt-4">
+              <p className="text-xs text-gray-500 mb-3 uppercase tracking-wider">Metrics — leave blank if not tested today</p>
+              <div className="grid grid-cols-2 md:grid-cols-6 gap-3">
+                <MetricInput label="40-Yd Dash (s)" value={fortyYard} onChange={setFortyYard} placeholder="4.52" />
+                <MetricInput label="Shuttle (s)" value={shuttle} onChange={setShuttle} placeholder="4.21" />
+                <MetricInput label="3-Cone (s)" value={threeCone} onChange={setThreeCone} placeholder="6.89" />
+                <MetricInput label="Vertical (in)" value={verticalJump} onChange={setVerticalJump} placeholder="34" step="0.5" />
+                <MetricInput label="Broad (in)" value={broadJump} onChange={setBroadJump} placeholder="108" step="0.5" />
+                <MetricInput label="Bench (reps)" value={benchPress} onChange={setBenchPress} placeholder="12" step="1" />
+              </div>
+            </div>
+
+            <div className="flex items-center gap-4 pt-1">
+              <button
+                onClick={handleQuickSave}
+                disabled={!name || !age || !grade || saving}
+                className="bg-red-600 hover:bg-red-700 disabled:bg-gray-700 disabled:cursor-not-allowed text-white font-bold rounded-xl px-8 py-2.5 transition-colors text-sm tracking-wide"
+              >
+                {saving ? "Saving..." : "Save Athlete"}
+              </button>
+              <button onClick={resetForm} className="text-xs text-gray-500 hover:text-gray-300 underline">Clear</button>
+              {saveMsg && <p className="text-green-400 text-sm font-semibold">{saveMsg}</p>}
+            </div>
+          </div>
+        )}
+
+        {/* Roster */}
+        {loadingAthletes ? (
+          <div className="flex items-center justify-center py-24 text-gray-600">Loading...</div>
+        ) : athletes.length === 0 ? (
           <div className="flex flex-col items-center justify-center py-24 text-gray-600 gap-3">
             <p className="text-lg">No training athletes yet.</p>
-            <Link href="/training/new" className="text-red-400 underline text-sm">Add your first athlete</Link>
+            <button onClick={() => setShowQuickEntry(true)} className="text-red-400 underline text-sm">Add your first athlete</button>
           </div>
         ) : (
           <>
@@ -67,10 +232,7 @@ export default async function TrainingRosterPage() {
                   </tr>
                 </thead>
                 <tbody>
-                  {athletes.map((a: {
-                    id: string; name: string; age: number; grade: string
-                    school: string; position?: string; sessions: { date: string }[]
-                  }) => {
+                  {athletes.map((a) => {
                     const lastSession = a.sessions?.length ? a.sessions[a.sessions.length - 1] : null
                     return (
                       <tr key={a.id} className="border-b border-gray-800 hover:bg-gray-800 transition-colors">
@@ -110,10 +272,7 @@ export default async function TrainingRosterPage() {
 
             {/* Mobile cards */}
             <div className="md:hidden space-y-3">
-              {athletes.map((a: {
-                id: string; name: string; age: number; grade: string
-                school: string; position?: string; sessions: { date: string }[]
-              }) => {
+              {athletes.map((a) => {
                 const lastSession = a.sessions?.length ? a.sessions[a.sessions.length - 1] : null
                 return (
                   <div key={a.id} className="bg-gray-900 rounded-2xl p-4 border border-gray-800">

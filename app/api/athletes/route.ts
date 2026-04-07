@@ -89,6 +89,41 @@ export async function POST(req: NextRequest) {
   }
 }
 
+// ─── PUT /api/athletes — update existing athlete ─────────────────────────────
+
+export async function PUT(req: NextRequest) {
+  try {
+    const body = await req.json()
+    const { code } = body
+
+    if (!code) {
+      return NextResponse.json({ success: false, error: "Missing code" }, { status: 400 })
+    }
+
+    const upperCode = code.toUpperCase()
+    const existing = await kvGet(`athlete:${upperCode}`) as Record<string, unknown> | null
+
+    if (!existing) {
+      return NextResponse.json({ success: false, error: "Athlete not found" }, { status: 404 })
+    }
+
+    // Preserve original issuedAt, sealNumber, expiresAt unless explicitly renewed
+    await kvSet(`athlete:${upperCode}`, {
+      ...existing,
+      ...body,
+      code: upperCode,
+      issuedAt: existing.issuedAt,
+      expiresAt: existing.expiresAt,
+      sealNumber: existing.sealNumber,
+    })
+
+    return NextResponse.json({ success: true, code: upperCode })
+  } catch (err) {
+    console.error("[athletes PUT]", err)
+    return NextResponse.json({ success: false, error: "Failed to update athlete" }, { status: 500 })
+  }
+}
+
 // ─── GET /api/athletes?code=PR-VCM-0003 — fetch athlete ──────────────────────
 
 export async function GET(req: NextRequest) {

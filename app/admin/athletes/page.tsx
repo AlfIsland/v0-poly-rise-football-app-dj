@@ -71,7 +71,7 @@ export default async function AthletesRosterPage() {
                     <th className="text-left px-6 py-4">Class</th>
                     <th className="text-left px-6 py-4">Issued</th>
                     <th className="text-left px-6 py-4">Expires</th>
-                    <th className="text-left px-6 py-4">Verify</th>
+                    <th className="text-left px-6 py-4">Actions</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -98,13 +98,21 @@ export default async function AthletesRosterPage() {
                         })()}
                       </td>
                       <td className="px-6 py-4">
-                        <Link
-                          href={`/verify/${a.code}`}
-                          className="text-xs bg-gray-700 hover:bg-gray-600 px-3 py-1.5 rounded-lg transition-colors"
-                          target="_blank"
-                        >
-                          View Profile
-                        </Link>
+                        <div className="flex items-center gap-2">
+                          <Link
+                            href={`/admin/athletes/edit?code=${a.code}`}
+                            className="text-xs bg-red-700 hover:bg-red-600 px-3 py-1.5 rounded-lg transition-colors text-white"
+                          >
+                            Edit
+                          </Link>
+                          <Link
+                            href={`/verify/${a.code}`}
+                            className="text-xs bg-gray-700 hover:bg-gray-600 px-3 py-1.5 rounded-lg transition-colors"
+                            target="_blank"
+                          >
+                            View
+                          </Link>
+                        </div>
                       </td>
                     </tr>
                   ))}
@@ -138,13 +146,21 @@ export default async function AthletesRosterPage() {
                       return <span className="text-gray-300">{exp.toLocaleDateString()}</span>
                     })()}</p>
                   </div>
-                  <Link
-                    href={`/verify/${a.code}`}
-                    className="block text-center text-xs bg-gray-700 hover:bg-gray-600 px-3 py-2 rounded-lg transition-colors"
-                    target="_blank"
-                  >
-                    View Profile →
-                  </Link>
+                  <div className="flex gap-2">
+                    <Link
+                      href={`/admin/athletes/edit?code=${a.code}`}
+                      className="flex-1 text-center text-xs bg-red-700 hover:bg-red-600 text-white px-3 py-2 rounded-lg transition-colors"
+                    >
+                      Edit
+                    </Link>
+                    <Link
+                      href={`/verify/${a.code}`}
+                      className="flex-1 text-center text-xs bg-gray-700 hover:bg-gray-600 px-3 py-2 rounded-lg transition-colors"
+                      target="_blank"
+                    >
+                      View Profile →
+                    </Link>
+                  </div>
                 </div>
               ))}
             </div>

@@ -42,7 +42,7 @@ function Input({ label, required, value, onChange, placeholder, type = "text", s
 export default function SealGeneratorPage() {
   // ── Athlete info ──
   const [athleteName, setAthleteName] = useState("")
-  const [sealNumber, setSealNumber] = useState("")
+  const [sealNumber, setSealNumber] = useState("")   // assigned by server after save
   const [position, setPosition] = useState("")
   const [school, setSchool] = useState("")
   const [gradYear, setGradYear] = useState("")
@@ -195,14 +195,13 @@ export default function SealGeneratorPage() {
   }
 
   const handleSave = async () => {
-    if (!sealCode) return
+    if (!athleteName || !initials) return
     setSaving(true)
     try {
-      await fetch("/api/athletes", {
+      const res = await fetch("/api/athletes", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          code: sealCode,
           athleteName,
           initials,
           position,
@@ -216,8 +215,13 @@ export default function SealGeneratorPage() {
           issuedAt: new Date().toISOString(),
         }),
       })
-      setSaved(true)
-      setTimeout(() => setSaved(false), 3000)
+      const data = await res.json()
+      if (data.success) {
+        // Server assigned the seal number — update state so canvas re-renders
+        setSealNumber(String(data.sealNumber))
+        setSaved(true)
+        setTimeout(() => setSaved(false), 4000)
+      }
     } catch (e) {
       console.error(e)
     }
@@ -251,7 +255,13 @@ export default function SealGeneratorPage() {
                 Initials: <span className="text-red-400 font-mono font-semibold">{initials}</span>
               </p>
             )}
-            <Input label="Seal Number" required value={sealNumber} onChange={setSealNumber} placeholder="e.g. 27" type="number" />
+            {/* Seal number is auto-assigned by server on save */}
+            <div className="bg-gray-800 rounded-xl px-4 py-3">
+              <p className="text-xs text-gray-500 uppercase tracking-wider mb-0.5">Seal Number</p>
+              <p className="text-sm font-mono text-gray-300">
+                {sealNumber ? `#${sealNumber.padStart(4, "0")} — auto-assigned` : "Auto-assigned when you save"}
+              </p>
+            </div>
             <Input label="Position" value={position} onChange={setPosition} placeholder="e.g. Wide Receiver" />
             <Input label="School" value={school} onChange={setSchool} placeholder="e.g. Austin High School" />
             <Input label="Class Year" value={gradYear} onChange={setGradYear} placeholder="e.g. 2026" />
@@ -374,7 +384,7 @@ export default function SealGeneratorPage() {
             {/* Save to Database */}
             <button
               onClick={handleSave}
-              disabled={!sealCode || saving}
+              disabled={!athleteName || saving}
               className="w-full bg-gray-700 hover:bg-gray-600 disabled:bg-gray-800 disabled:cursor-not-allowed text-white font-semibold rounded-xl py-2.5 transition-colors text-sm"
             >
               {saving ? "Saving..." : saved ? "✓ Saved to Database" : "Save Athlete to Database"}

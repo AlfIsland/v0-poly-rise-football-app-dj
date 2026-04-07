@@ -49,25 +49,33 @@ async function kvGet(key: string): Promise<unknown> {
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json()
-    const { code } = body
+    const { athleteName, initials } = body
 
-    if (!code || !/^PR-V[A-Z]+-\d{4}$/i.test(code)) {
+    if (!athleteName || !initials) {
       return NextResponse.json(
-        { success: false, error: "Invalid seal code format" },
+        { success: false, error: "Missing athleteName or initials" },
         { status: 400 }
       )
     }
 
-    const upperCode = code.toUpperCase()
-    await kvSet(`athlete:${upperCode}`, { ...body, code: upperCode })
+    // Auto-assign next seal number
+    const r = getRedis()
+    let sealNumber = 1
+    if (r) {
+      sealNumber = await r.incr("athlete:counter")
+    }
+
+    const padded = String(sealNumber).padStart(4, "0")
+    const upperCode = `PR-V${initials.toUpperCase()}-${padded}`
+
+    await kvSet(`athlete:${upperCode}`, { ...body, code: upperCode, sealNumber })
 
     // Track in roster list
-    const r = getRedis()
     if (r) {
       await r.sadd("athlete:roster", upperCode)
     }
 
-    return NextResponse.json({ success: true, code: upperCode })
+    return NextResponse.json({ success: true, code: upperCode, sealNumber })
   } catch (err) {
     console.error("[athletes POST]", err)
     return NextResponse.json(

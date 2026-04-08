@@ -34,6 +34,38 @@ export async function POST(req: NextRequest) {
             reg.status = "paid"
             reg.paidAt = new Date().toISOString()
             await saveRegistration(reg)
+
+            // Notify PolyRISE of new registration
+            const resendKey = process.env.RESEND_API_KEY
+            if (resendKey) {
+              await fetch("https://api.resend.com/emails", {
+                method: "POST",
+                headers: { Authorization: `Bearer ${resendKey}`, "Content-Type": "application/json" },
+                body: JSON.stringify({
+                  from: "PolyRISE Registrations <onboarding@resend.dev>",
+                  to: ["PolyRISE7v7@gmail.com"],
+                  subject: `New Registration: ${reg.playerName} — ${reg.programName}`,
+                  html: `
+                    <div style="font-family:sans-serif;max-width:520px;margin:0 auto;padding:24px">
+                      <h2 style="color:#dc2626;margin-bottom:4px">New Program Registration</h2>
+                      <p style="color:#666;font-size:13px;margin-top:0">Paid via Stripe · ${new Date().toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" })}</p>
+                      <table style="width:100%;border-collapse:collapse;font-size:14px;margin-top:16px">
+                        <tr style="background:#f9fafb"><td style="padding:10px 12px;color:#555;width:140px">Program</td><td style="padding:10px 12px;font-weight:bold">${reg.programName}</td></tr>
+                        <tr><td style="padding:10px 12px;color:#555">Amount</td><td style="padding:10px 12px;font-weight:bold;color:#16a34a">$${reg.amount}${reg.billing === "monthly" ? "/mo" : ""}</td></tr>
+                        <tr style="background:#f9fafb"><td style="padding:10px 12px;color:#555">Player</td><td style="padding:10px 12px">${reg.playerName}${reg.playerAge ? ` · Age ${reg.playerAge}` : ""}${reg.playerGrade ? ` · ${reg.playerGrade}` : ""}${reg.playerPosition ? ` · ${reg.playerPosition}` : ""}</td></tr>
+                        <tr><td style="padding:10px 12px;color:#555">School</td><td style="padding:10px 12px">${reg.playerSchool || "—"}</td></tr>
+                        <tr style="background:#f9fafb"><td style="padding:10px 12px;color:#555">Parent</td><td style="padding:10px 12px">${reg.parentName}</td></tr>
+                        <tr><td style="padding:10px 12px;color:#555">Email</td><td style="padding:10px 12px">${reg.email}</td></tr>
+                        <tr style="background:#f9fafb"><td style="padding:10px 12px;color:#555">Phone</td><td style="padding:10px 12px">${reg.phone}</td></tr>
+                        ${reg.discountCode ? `<tr><td style="padding:10px 12px;color:#555">Discount</td><td style="padding:10px 12px;color:#d97706">${reg.discountCode}</td></tr>` : ""}
+                      </table>
+                      <p style="margin-top:20px"><a href="https://polyrisefootball.com/admin/registrations" style="background:#dc2626;color:#fff;padding:10px 20px;border-radius:8px;text-decoration:none;font-weight:bold;font-size:13px">View All Registrations →</a></p>
+                      <p style="color:#999;font-size:12px;margin-top:16px">PolyRISE Football · polyrisefootball.com</p>
+                    </div>
+                  `,
+                }),
+              }).catch(err => console.error("[webhook] notify email failed", err))
+            }
           }
           break
         }

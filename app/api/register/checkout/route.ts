@@ -26,9 +26,7 @@ export async function POST(req: NextRequest) {
     const body = await req.json()
     const { programIds, playerName, playerAge, playerGrade, playerSchool, playerPosition, parentName, email, phone } = body
 
-    // Support both single programId (legacy) and array programIds (cart)
     const ids: string[] = programIds ?? (body.programId ? [body.programId] : [])
-
     if (!ids.length || !playerName || !parentName || !email || !phone)
       return NextResponse.json({ success: false, error: "Missing required fields" }, { status: 400 })
 
@@ -40,47 +38,87 @@ export async function POST(req: NextRequest) {
 
     const stripe = new Stripe(secretKey)
     const origin = req.nextUrl.origin
-    const id = crypto.randomUUID()
+    const regId = crypto.randomUUID()
     const totalAmount = programs.reduce((sum, p) => sum + p.price, 0)
-    const hasMonthly = programs.some(p => p.billing === "monthly")
 
-    // Save one registration record covering all items
+    const monthlyItems = programs.filter(p => p.billing === "monthly")
+    const oneTimeItems = programs.filter(p => p.billing === "one_time")
+    const isMixed = monthlyItems.length > 0 && oneTimeItems.length > 0
+
+    // Save one registration record for all items
     const reg: Registration = {
-      id,
+      id: regId,
       program: ids.join(","),
       programName: programs.map(p => p.name).join(", "),
       playerName, playerAge, playerGrade, playerSchool, playerPosition,
       parentName, email, phone,
       amount: totalAmount,
-      billing: hasMonthly ? "monthly" : "one_time",
+      billing: monthlyItems.length > 0 ? "monthly" : "one_time",
       status: "pending",
       createdAt: new Date().toISOString(),
     }
     await saveRegistration(reg)
 
-    // Stripe requires separate sessions for subscription vs one-time
-    // If cart has both, bundle one-time items into the subscription as an invoice item
-    // Simplest approach: all items as one-time in payment mode if no monthly,
-    // otherwise use subscription mode and add one-time items as flat fee line items
-    const lineItems = programs.map(p => ({
-      price_data: {
-        currency: "usd",
-        product_data: { name: p.name },
-        unit_amount: p.price * 100,
-        ...(hasMonthly ? { recurring: { interval: "month" as const } } : {}),
-      },
-      quantity: 1,
-    }))
+    let session: Stripe.Checkout.Session
 
-    const session = await stripe.checkout.sessions.create({
-      payment_method_types: ["card"],
-      line_items: lineItems,
-      mode: hasMonthly ? "subscription" : "payment",
-      success_url: `${origin}/register/success?id=${id}`,
-      cancel_url: `${origin}/register?canceled=1`,
-      customer_email: email,
-      metadata: { registrationId: id },
-    })
+    if (isMixed) {
+      // Mixed cart: charge monthly items first, then redirect to one-time payment
+      // success_url takes them to an intermediate page that triggers the one-time checkout
+      session = await stripe.checkout.sessions.create({
+        payment_method_types: ["card"],
+        line_items: monthlyItems.map(p => ({
+          price_data: {
+            currency: "usd",
+            product_data: { name: p.name },
+            unit_amount: p.price * 100,
+            recurring: { interval: "month" },
+          },
+          quantity: 1,
+        })),
+        mode: "subscription",
+        success_url: `${origin}/register/pay-remaining?id=${regId}`,
+        cancel_url: `${origin}/register?canceled=1`,
+        customer_email: email,
+        metadata: { registrationId: regId },
+      })
+    } else if (monthlyItems.length > 0) {
+      // Only monthly items
+      session = await stripe.checkout.sessions.create({
+        payment_method_types: ["card"],
+        line_items: monthlyItems.map(p => ({
+          price_data: {
+            currency: "usd",
+            product_data: { name: p.name },
+            unit_amount: p.price * 100,
+            recurring: { interval: "month" },
+          },
+          quantity: 1,
+        })),
+        mode: "subscription",
+        success_url: `${origin}/register/success?id=${regId}`,
+        cancel_url: `${origin}/register?canceled=1`,
+        customer_email: email,
+        metadata: { registrationId: regId },
+      })
+    } else {
+      // Only one-time items
+      session = await stripe.checkout.sessions.create({
+        payment_method_types: ["card"],
+        line_items: oneTimeItems.map(p => ({
+          price_data: {
+            currency: "usd",
+            product_data: { name: p.name },
+            unit_amount: p.price * 100,
+          },
+          quantity: 1,
+        })),
+        mode: "payment",
+        success_url: `${origin}/register/success?id=${regId}`,
+        cancel_url: `${origin}/register?canceled=1`,
+        customer_email: email,
+        metadata: { registrationId: regId },
+      })
+    }
 
     reg.stripeSessionId = session.id
     await saveRegistration(reg)

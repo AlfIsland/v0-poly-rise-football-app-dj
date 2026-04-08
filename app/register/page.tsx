@@ -217,7 +217,9 @@ function RegisterPage() {
                   <div key={id} className="flex items-center justify-between bg-gray-800 rounded-xl px-4 py-3">
                     <div>
                       <p className="text-white text-sm font-semibold">{prog?.name}</p>
-                      <p className="text-gray-500 text-xs">{prog?.billing === "monthly" ? "Monthly recurring" : "One-time payment"}</p>
+                      <span className={`text-xs font-semibold px-2 py-0.5 rounded-full ${prog?.billing === "monthly" ? "bg-blue-900 text-blue-300" : "bg-gray-700 text-gray-400"}`}>
+                        {prog?.billing === "monthly" ? "Monthly recurring" : "One-time payment"}
+                      </span>
                     </div>
                     <div className="flex items-center gap-3">
                       <p className="text-white font-bold text-sm">{prog?.priceLabel}</p>
@@ -227,9 +229,14 @@ function RegisterPage() {
                 )
               })}
               <div className="flex justify-between px-4 py-2 border-t border-gray-700 mt-2">
-                <p className="text-gray-400 text-sm">Total today</p>
-                <p className="text-white font-bold">${cartTotal}{hasMonthly ? " + monthly recurring" : ""}</p>
+                <p className="text-gray-400 text-sm">Total</p>
+                <p className="text-white font-bold">${cartTotal}{hasMonthly ? "/mo" : ""}</p>
               </div>
+              {hasMonthly && cart.some(id => PROGRAMS_DATA[id]?.billing === "one_time") && (
+                <div className="bg-blue-950 border border-blue-800 rounded-xl px-4 py-3 text-blue-300 text-xs">
+                  Your cart has both monthly and one-time items. You will complete <strong>2 payments</strong> — first your monthly subscription, then your one-time charges.
+                </div>
+              )}
             </div>
 
             {/* Player info */}

@@ -140,6 +140,7 @@ export default function TrainingRosterPage() {
   const [weight, setWeight] = useState("")
   const [saving, setSaving] = useState(false)
   const [saveMsg, setSaveMsg] = useState("")
+  const [duplicate, setDuplicate] = useState<{ id: string; name: string } | null>(null)
 
   const fetchAthletes = useCallback(async () => {
     try {
@@ -156,7 +157,15 @@ export default function TrainingRosterPage() {
     setName(""); setAge(""); setGrade(""); setPosition(""); setSchool("")
     setFortyYard(""); setShuttle(""); setThreeCone("")
     setVerticalJump(""); setBroadJump(""); setBenchPress(""); setWeight("")
-    setPasteText(""); setParsed(false)
+    setPasteText(""); setParsed(false); setDuplicate(null)
+  }
+
+  const checkDuplicate = (val: string) => {
+    if (!val.trim()) { setDuplicate(null); return }
+    const match = athletes.find(a =>
+      a.name.trim().toLowerCase() === val.trim().toLowerCase()
+    )
+    setDuplicate(match ? { id: match.id, name: match.name } : null)
   }
 
   const handleParse = () => {
@@ -167,6 +176,7 @@ export default function TrainingRosterPage() {
     setThreeCone(r.threeCone); setVerticalJump(r.verticalJump)
     setBroadJump(r.broadJump); setBenchPress(r.benchPress); setWeight(r.weight)
     setParsed(true)
+    checkDuplicate(r.name)
   }
 
   const handleQuickSave = async () => {
@@ -219,8 +229,8 @@ export default function TrainingRosterPage() {
       <div className="grid grid-cols-2 md:grid-cols-5 gap-3">
         <div className="md:col-span-2">
           <label className="block text-xs text-gray-400 mb-1">Full Name <span className="text-red-500">*</span></label>
-          <input value={name} onChange={e => setName(e.target.value)} placeholder="e.g. Marcus Johnson"
-            className="w-full bg-gray-800 text-white rounded-lg px-3 py-2 border border-gray-700 focus:border-red-500 focus:outline-none placeholder-gray-600 text-sm" />
+          <input value={name} onChange={e => { setName(e.target.value); checkDuplicate(e.target.value) }} placeholder="e.g. Marcus Johnson"
+            className={`w-full bg-gray-800 text-white rounded-lg px-3 py-2 border focus:outline-none placeholder-gray-600 text-sm ${duplicate ? "border-yellow-500 focus:border-yellow-400" : "border-gray-700 focus:border-red-500"}`} />
         </div>
         <div>
           <label className="block text-xs text-gray-400 mb-1">Age <span className="text-red-500">*</span></label>
@@ -267,10 +277,24 @@ export default function TrainingRosterPage() {
         </div>
       </div>
 
+      {duplicate && (
+        <div className="bg-yellow-950 border border-yellow-700 rounded-xl px-4 py-3 flex items-start gap-3">
+          <span className="text-yellow-400 text-lg mt-0.5">⚠️</span>
+          <div>
+            <p className="text-yellow-300 font-semibold text-sm">Duplicate name detected</p>
+            <p className="text-yellow-500 text-xs mt-0.5">
+              <span className="font-mono text-yellow-400">{duplicate.name}</span> already exists in the system ({duplicate.id}).{" "}
+              <a href={`/training/${duplicate.id}`} target="_blank" className="underline hover:text-yellow-300">View their profile →</a>
+            </p>
+            <p className="text-yellow-600 text-xs mt-1">Save anyway if this is a different athlete with the same name.</p>
+          </div>
+        </div>
+      )}
+
       <div className="flex items-center gap-4 pt-1">
         <button onClick={handleQuickSave} disabled={!name || !age || !grade || saving}
-          className="bg-red-600 hover:bg-red-700 disabled:bg-gray-700 disabled:cursor-not-allowed text-white font-bold rounded-xl px-8 py-2.5 transition-colors text-sm tracking-wide">
-          {saving ? "Saving..." : "Save Athlete"}
+          className={`font-bold rounded-xl px-8 py-2.5 transition-colors text-sm tracking-wide text-white ${duplicate ? "bg-yellow-700 hover:bg-yellow-600 disabled:bg-gray-700" : "bg-red-600 hover:bg-red-700 disabled:bg-gray-700"} disabled:cursor-not-allowed`}>
+          {saving ? "Saving..." : duplicate ? "Save Anyway" : "Save Athlete"}
         </button>
         <button onClick={resetForm} className="text-xs text-gray-500 hover:text-gray-300 underline">Clear</button>
         {saveMsg && <p className="text-green-400 text-sm font-semibold">{saveMsg}</p>}

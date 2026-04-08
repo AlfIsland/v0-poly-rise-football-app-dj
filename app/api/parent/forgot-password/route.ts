@@ -27,7 +27,6 @@ export async function POST(req: NextRequest) {
           from: "PolyRISE Football <onboarding@resend.dev>",
           to: [parent.email],
           subject: "Reset Your PolyRISE Password",
-          headers: { "X-Entity-Ref-ID": crypto.randomUUID() },
           html: `
             <div style="font-family:sans-serif;max-width:480px;margin:0 auto;padding:24px">
               <h2 style="color:#dc2626">PolyRISE Football</h2>

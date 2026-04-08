@@ -90,7 +90,7 @@ export async function POST(req: NextRequest) {
           price_data: {
             currency: "usd",
             product_data: { name: p.name },
-            unit_amount: p.price * 100,
+            unit_amount: applyPrice(p.price) * 100,
             recurring: { interval: "month" },
           },
           quantity: 1,
@@ -109,7 +109,7 @@ export async function POST(req: NextRequest) {
           price_data: {
             currency: "usd",
             product_data: { name: p.name },
-            unit_amount: p.price * 100,
+            unit_amount: applyPrice(p.price) * 100,
             recurring: { interval: "month" },
           },
           quantity: 1,
@@ -128,7 +128,7 @@ export async function POST(req: NextRequest) {
           price_data: {
             currency: "usd",
             product_data: { name: p.name },
-            unit_amount: p.price * 100,
+            unit_amount: applyPrice(p.price) * 100,
           },
           quantity: 1,
         })),

@@ -76,6 +76,9 @@ function RegisterPage() {
   const [parentName, setParentName] = useState("")
   const [email, setEmail] = useState("")
   const [phone, setPhone] = useState("")
+  const [discountCode, setDiscountCode] = useState("")
+  const [discountResult, setDiscountResult] = useState<{ valid: boolean; label?: string; savings?: number; code?: string } | null>(null)
+  const [validatingCode, setValidatingCode] = useState(false)
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState("")
   const searchParams = useSearchParams()
@@ -94,6 +97,19 @@ function RegisterPage() {
   const cartTotal = cart.reduce((sum, id) => sum + (PROGRAMS_DATA[id]?.price ?? 0), 0)
   const hasMonthly = cart.some(id => PROGRAMS_DATA[id]?.billing === "monthly")
 
+  const validateCode = async () => {
+    if (!discountCode.trim()) return
+    setValidatingCode(true)
+    const res = await fetch("/api/register/validate-code", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ code: discountCode.trim(), amount: cartTotal }),
+    })
+    const data = await res.json()
+    setDiscountResult(data)
+    setValidatingCode(false)
+  }
+
   const handleCheckout = async () => {
     if (!cart.length || !playerName || !parentName || !email || !phone) return
     setLoading(true); setError("")
@@ -101,7 +117,7 @@ function RegisterPage() {
       const res = await fetch("/api/register/checkout", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ programIds: cart, playerName, playerAge, playerGrade, playerSchool, playerPosition, parentName, email, phone }),
+        body: JSON.stringify({ programIds: cart, playerName, playerAge, playerGrade, playerSchool, playerPosition, parentName, email, phone, discountCode: discountResult?.valid ? discountResult.code : undefined }),
       })
       const data = await res.json()
       if (data.success && data.url) {
@@ -299,12 +315,31 @@ function RegisterPage() {
               </div>
             </div>
 
+            {/* Discount code */}
+            <div className="space-y-1">
+              <p className="text-xs font-bold text-red-400 uppercase tracking-widest">Discount Code</p>
+              <div className="flex gap-2 pt-1">
+                <input value={discountCode} onChange={e => { setDiscountCode(e.target.value.toUpperCase()); setDiscountResult(null) }}
+                  placeholder="Enter code (optional)"
+                  className="flex-1 bg-gray-800 text-white rounded-lg px-3 py-2 border border-gray-700 focus:border-red-500 focus:outline-none text-sm font-mono uppercase" />
+                <button onClick={validateCode} disabled={!discountCode.trim() || validatingCode}
+                  className="bg-gray-700 hover:bg-gray-600 disabled:bg-gray-800 text-white text-xs font-bold px-4 rounded-lg transition-colors">
+                  {validatingCode ? "..." : "Apply"}
+                </button>
+              </div>
+              {discountResult && (
+                discountResult.valid
+                  ? <p className="text-green-400 text-xs">✓ {discountResult.label} applied — saves ${discountResult.savings}</p>
+                  : <p className="text-red-400 text-xs">✗ {(discountResult as { error?: string }).error ?? "Invalid code"}</p>
+              )}
+            </div>
+
             {error && <p className="text-red-400 text-sm bg-red-950 border border-red-900 rounded-lg px-3 py-2">{error}</p>}
 
             <button onClick={handleCheckout}
               disabled={!cart.length || !playerName || !parentName || !email || !phone || loading}
               className="w-full bg-red-600 hover:bg-red-700 disabled:bg-gray-700 disabled:cursor-not-allowed text-white font-bold rounded-xl py-3 transition-colors text-sm">
-              {loading ? "Setting up..." : `Pay $${cartTotal}${hasMonthly ? " + monthly" : ""} →`}
+              {loading ? "Setting up..." : `Pay $${discountResult?.valid ? cartTotal - (discountResult.savings ?? 0) : cartTotal}${hasMonthly ? "/mo" : ""} →`}
             </button>
             <p className="text-xs text-gray-600 text-center">Secure payment powered by Stripe.</p>
           </div>

@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server"
 import Stripe from "stripe"
 import { saveRegistration, Registration } from "@/lib/registration-store"
+import { getDiscount, validateDiscount, incrementUsage } from "@/lib/discount-store"
 
 export const PROGRAMS: Record<string, { name: string; price: number; billing: "one_time" | "monthly" }> = {
   "player-dev":           { name: "Player Development",                      price: 350, billing: "monthly" },
@@ -24,7 +25,7 @@ export const PROGRAMS: Record<string, { name: string; price: number; billing: "o
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json()
-    const { programIds, playerName, playerAge, playerGrade, playerSchool, playerPosition, parentName, email, phone } = body
+    const { programIds, playerName, playerAge, playerGrade, playerSchool, playerPosition, parentName, email, phone, discountCode } = body
 
     const ids: string[] = programIds ?? (body.programId ? [body.programId] : [])
     if (!ids.length || !playerName || !parentName || !email || !phone)
@@ -36,10 +37,28 @@ export async function POST(req: NextRequest) {
     const secretKey = process.env.STRIPE_SECRET_KEY
     if (!secretKey) return NextResponse.json({ success: false, error: "Stripe not configured" }, { status: 500 })
 
+    // Validate and apply discount
+    let discountMultiplier = 1
+    let discountFixed = 0
+    let appliedCode: string | undefined
+    if (discountCode) {
+      const discount = await getDiscount(discountCode)
+      if (discount) {
+        const { valid } = validateDiscount(discount)
+        if (valid) {
+          appliedCode = discount.code
+          if (discount.type === "percent") discountMultiplier = 1 - discount.value / 100
+          else discountFixed = discount.value
+        }
+      }
+    }
+
+    const applyPrice = (price: number) => Math.max(1, Math.round((price * discountMultiplier) - discountFixed / programs.length))
+
     const stripe = new Stripe(secretKey)
     const origin = req.nextUrl.origin
     const regId = crypto.randomUUID()
-    const totalAmount = programs.reduce((sum, p) => sum + p.price, 0)
+    const totalAmount = programs.reduce((sum, p) => sum + applyPrice(p.price), 0)
 
     const monthlyItems = programs.filter(p => p.billing === "monthly")
     const oneTimeItems = programs.filter(p => p.billing === "one_time")
@@ -53,6 +72,7 @@ export async function POST(req: NextRequest) {
       playerName, playerAge, playerGrade, playerSchool, playerPosition,
       parentName, email, phone,
       amount: totalAmount,
+      discountCode: appliedCode,
       billing: monthlyItems.length > 0 ? "monthly" : "one_time",
       status: "pending",
       createdAt: new Date().toISOString(),
@@ -121,6 +141,7 @@ export async function POST(req: NextRequest) {
     }
 
     reg.stripeSessionId = session.id
+    if (appliedCode) await incrementUsage(appliedCode)
     await saveRegistration(reg)
 
     return NextResponse.json({ success: true, url: session.url })

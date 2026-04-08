@@ -23,6 +23,7 @@ export interface Registration {
   email: string
   phone: string
   amount: number
+  discountCode?: string
   billing: "one_time" | "monthly"
   stripeSessionId?: string
   status: "pending" | "paid" | "canceled"

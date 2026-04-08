@@ -9,6 +9,7 @@ function SubscribePage() {
   const [step, setStep] = useState<"pricing" | "register">("pricing")
   const [selectedPlan, setSelectedPlan] = useState<"monthly" | "quarterly">("monthly")
   const [name, setName] = useState("")
+  const [athleteName, setAthleteName] = useState("")
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
   const [phone, setPhone] = useState("")
@@ -26,7 +27,7 @@ function SubscribePage() {
       const regRes = await fetch("/api/parent/register", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ name, email, password, phone }),
+        body: JSON.stringify({ name, email, password, phone, athleteName }),
       })
       const regData = await regRes.json()
       if (!regData.success) {
@@ -143,6 +144,11 @@ function SubscribePage() {
             <div>
               <label className="block text-sm text-gray-300 mb-1.5">Full Name</label>
               <input value={name} onChange={e => setName(e.target.value)} placeholder="Parent / Guardian name"
+                className="w-full bg-gray-800 text-white rounded-lg px-4 py-2.5 border border-gray-700 focus:border-red-500 focus:outline-none placeholder-gray-600 text-sm" />
+            </div>
+            <div>
+              <label className="block text-sm text-gray-300 mb-1.5">Athlete&apos;s Name</label>
+              <input value={athleteName} onChange={e => setAthleteName(e.target.value)} placeholder="Your athlete's full name"
                 className="w-full bg-gray-800 text-white rounded-lg px-4 py-2.5 border border-gray-700 focus:border-red-500 focus:outline-none placeholder-gray-600 text-sm" />
             </div>
             <div>

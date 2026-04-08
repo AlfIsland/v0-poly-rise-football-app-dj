@@ -15,6 +15,7 @@ export interface ParentAccount {
   passwordHash: string
   name: string
   phone?: string
+  athleteName?: string           // athlete name provided at signup
   athleteIds: string[]           // training athlete IDs linked to this parent
   tier: "program" | "monthly" | "quarterly" | "none"
   stripeCustomerId?: string

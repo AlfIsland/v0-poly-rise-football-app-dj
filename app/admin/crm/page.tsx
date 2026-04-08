@@ -238,6 +238,7 @@ export default function CRMPage() {
                         <p className="font-semibold text-white">{p.name}</p>
                         <p className="text-xs text-gray-500">{p.email}</p>
                         {p.phone && <p className="text-xs text-gray-600">{p.phone}</p>}
+                        {(p as any).athleteName && <p className="text-xs text-blue-400">Athlete: {(p as any).athleteName}</p>}
                       </td>
                       <td className="px-6 py-4">
                         <select value={p.tier}

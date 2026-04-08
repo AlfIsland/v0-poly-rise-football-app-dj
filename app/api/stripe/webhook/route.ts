@@ -35,6 +35,37 @@ export async function POST(req: NextRequest) {
             reg.paidAt = new Date().toISOString()
             await saveRegistration(reg)
 
+            // Send confirmation email to parent
+            const resendKeyParent = process.env.RESEND_API_KEY
+            if (resendKeyParent) {
+              await fetch("https://api.resend.com/emails", {
+                method: "POST",
+                headers: { Authorization: `Bearer ${resendKeyParent}`, "Content-Type": "application/json" },
+                body: JSON.stringify({
+                  from: "PolyRISE Football <onboarding@resend.dev>",
+                  to: [reg.email],
+                  subject: `Registration Confirmed — ${reg.programName}`,
+                  html: `
+                    <div style="font-family:sans-serif;max-width:520px;margin:0 auto;padding:24px">
+                      <h2 style="color:#dc2626;margin-bottom:4px">You're Registered!</h2>
+                      <p style="color:#444;margin-top:0">Hi ${reg.parentName}, thank you for registering with PolyRISE Football. Here's a summary of your registration.</p>
+                      <table style="width:100%;border-collapse:collapse;font-size:14px;margin-top:16px">
+                        <tr style="background:#f9fafb"><td style="padding:10px 12px;color:#555;width:140px">Program</td><td style="padding:10px 12px;font-weight:bold">${reg.programName}</td></tr>
+                        <tr><td style="padding:10px 12px;color:#555">Amount Paid</td><td style="padding:10px 12px;font-weight:bold;color:#16a34a">$${reg.amount}${reg.billing === "monthly" ? "/month" : ""}</td></tr>
+                        <tr style="background:#f9fafb"><td style="padding:10px 12px;color:#555">Athlete</td><td style="padding:10px 12px">${reg.playerName}${reg.playerPosition ? ` · ${reg.playerPosition}` : ""}${reg.playerGrade ? ` · Grade ${reg.playerGrade}` : ""}</td></tr>
+                        <tr><td style="padding:10px 12px;color:#555">School</td><td style="padding:10px 12px">${reg.playerSchool || "—"}</td></tr>
+                      </table>
+                      <div style="background:#fef2f2;border:1px solid #fecaca;border-radius:8px;padding:16px;margin-top:20px">
+                        <p style="margin:0;color:#444;font-size:13px">A PolyRISE staff member will follow up with program details, schedule, and next steps. If you have any questions in the meantime:</p>
+                        <p style="margin:8px 0 0;color:#444;font-size:13px"><strong>(817) 658-3300</strong> · <strong>polyrise@polyrisefootball.com</strong></p>
+                      </div>
+                      <p style="color:#999;font-size:12px;margin-top:20px">PolyRISE Football · Dripping Springs, TX · polyrisefootball.com</p>
+                    </div>
+                  `,
+                }),
+              }).catch(err => console.error("[webhook] parent confirmation email failed", err))
+            }
+
             // Notify PolyRISE of new registration
             const resendKey = process.env.RESEND_API_KEY
             if (resendKey) {

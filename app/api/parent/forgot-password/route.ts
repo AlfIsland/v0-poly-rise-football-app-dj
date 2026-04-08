@@ -27,12 +27,13 @@ export async function POST(req: NextRequest) {
           from: "PolyRISE Football <onboarding@resend.dev>",
           to: [parent.email],
           subject: "Reset Your PolyRISE Password",
+          headers: { "X-Entity-Ref-ID": crypto.randomUUID() },
           html: `
             <div style="font-family:sans-serif;max-width:480px;margin:0 auto;padding:24px">
               <h2 style="color:#dc2626">PolyRISE Football</h2>
               <p>Hi ${parent.name},</p>
-              <p>We received a request to reset your password. Click the button below to set a new password. This link expires in 1 hour.</p>
-              <a href="${resetLink}" style="display:inline-block;background:#dc2626;color:#fff;font-weight:bold;padding:12px 24px;border-radius:8px;text-decoration:none;margin:16px 0">Reset Password</a>
+              <p>We received a request to reset your password. Copy and paste the link below into your browser to set a new password. This link expires in 1 hour.</p>
+              <p style="background:#f3f4f6;padding:12px;border-radius:8px;word-break:break-all;font-size:13px">${resetLink}</p>
               <p style="color:#666;font-size:13px">If you didn't request this, you can ignore this email.</p>
               <p style="color:#999;font-size:12px">PolyRISE Football · (817) 658-3300 · polyrise@polyrisefootball.com</p>
             </div>

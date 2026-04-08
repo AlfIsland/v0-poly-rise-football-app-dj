@@ -314,6 +314,7 @@ export default function TrainingRosterPage() {
               <h1 className="text-2xl font-bold text-white">PolyRISE Training Tracker</h1>
               <p className="text-gray-400 text-sm">{athletes.length} athlete{athletes.length !== 1 ? "s" : ""} enrolled</p>
               <Link href="/admin/athletes" className="text-xs text-gray-600 hover:text-gray-400 underline mt-0.5 block">← PR-VERIFIED Roster</Link>
+              <Link href="/training/dedup" className="text-xs text-yellow-600 hover:text-yellow-400 underline mt-0.5 block">🧹 Clean Duplicates</Link>
             </div>
           </div>
           <div className="flex items-center gap-3">

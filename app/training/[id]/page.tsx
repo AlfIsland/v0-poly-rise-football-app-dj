@@ -4,6 +4,7 @@ import Image from "next/image"
 import Redis from "ioredis"
 import LogoutButton from "@/components/logout-button"
 import ProgressReportDownload from "@/components/progress-report-download"
+import SendTrainingReport from "@/components/send-training-report"
 
 async function getAthlete(id: string) {
   try {
@@ -206,6 +207,9 @@ export default async function TrainingAthletePage({ params }: { params: { id: st
                 <p className="text-gray-300 text-sm leading-relaxed">{athlete.coachNotes}</p>
               </div>
             )}
+
+            {/* Send report */}
+            <SendTrainingReport athlete={athlete} />
 
             {/* Download report */}
             <ProgressReportDownload athlete={athlete} />

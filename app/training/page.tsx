@@ -30,42 +30,89 @@ function MetricInput({ label, value, onChange, placeholder, step = "0.01" }: {
 
 function parseAthleteText(raw: string) {
   const t = raw
-  const grab = (patterns: RegExp[]) => {
+
+  // Grab first match only (so duplicate entries use the first value)
+  const grab = (patterns: RegExp[]): string => {
     for (const p of patterns) {
       const m = t.match(p)
-      if (m) return m[1]?.trim() ?? ""
+      if (m) return (m[1] ?? m[2] ?? "").trim()
     }
     return ""
   }
 
+  // ── Name ──
   const nameLine = grab([/name[:\s]+([A-Za-z ,.'-]+)/i])
-    || t.split(/[\n,]/)[0].replace(/\b(age|grade|school|position|pos)\b.*/i, "").trim()
+    || t.split(/\n/)[0].replace(/\b(best|age|grade|school|position|pos)\b.*/i, "").trim()
 
+  // ── Age / Grade ──
   const age = grab([/age[:\s]+(\d+)/i, /(\d+)\s*(?:yrs?|years?\s*old)/i])
-
   const gradeNum = grab([/(\d+)(?:st|nd|rd|th)\s*grade/i, /grade[:\s]+(\d+)/i])
   const gradeSuffix = gradeNum ? (["1","2","3"].includes(gradeNum) ? ["st","nd","rd"][+gradeNum-1] : "th") : ""
   const gradeLabel = gradeNum ? `${gradeNum}${gradeSuffix} Grade` : ""
 
+  // ── Position / School ──
   const position = grab([
-    /pos(?:ition)?[:\s]+([A-Za-z/ ]+?)(?:[,\n]|$)/i,
+    /pos(?:ition)?[:\s]+([A-Za-z/ ]+?)(?:[,\n|]|$)/i,
     /\b(QB|WR|RB|TE|OL|DL|LB|CB|DB|DE|FS|SS)\b/i,
   ])
-  const school = grab([/school[:\s]+([A-Za-z0-9 .'-]+?)(?:[,\n]|$)/i])
-  const fortyYard = grab([/40[\s-]*(?:yard|yd)?[\s-]*(?:dash)?[:\s]+(\d+\.?\d*)/i])
+  const school = grab([/school[:\s]+([A-Za-z0-9 .'-]+?)(?:[,\n|]|$)/i])
+
+  // ── 40-Yard Dash ──
+  // Handles: "4.8s 40-Yd", "40-yard: 4.8", "40: 4.8"
+  const fortyYard = grab([
+    /(\d+\.?\d*)\s*s\s*40[\s-]*(?:yd|yard|yard dash)?(?:\b|$)/i,
+    /40[\s-]*(?:yard|yd)?[\s-]*(?:dash)?[:\s]+(\d+\.?\d*)/i,
+  ])
+
+  // ── Shuttle / 5-10-5 (take first match, ignore 5-10-50 typo as second entry) ──
   const shuttle = grab([
-    /shuttle[:\s]+(\d+\.?\d*)/i,
-    /5[\s-]*10[\s-]*5[:\s]+(\d+\.?\d*)/i,      // 5-10-5 = shuttle
+    /(\d+\.?\d*)\s*s\s*5[\s-]*10[\s-]*5(?!\d)/i,   // "4.73s 5-10-5" (NOT 5-10-50)
+    /5[\s-]*10[\s-]*5(?!\d)[:\s]+(\d+\.?\d*)/i,
+    /(\d+\.?\d*)\s*s\s*short[\s-]*shuttle/i,
     /short[\s-]*shuttle[:\s]+(\d+\.?\d*)/i,
+    /(\d+\.?\d*)\s*s\s*shuttle(?!\s*run)/i,
+    /shuttle[:\s]+(\d+\.?\d*)/i,
   ])
+
+  // ── 3-Cone / L-Drill ──
   const threeCone = grab([
+    /(\d+\.?\d*)\s*s\s*l[\s-]*drill/i,             // "4.91s L-Drill"
+    /l[\s-]*drill[:\s]+(\d+\.?\d*)/i,
+    /(\d+\.?\d*)\s*s\s*3[\s-]*cone/i,
     /3[\s-]*cone[:\s]+(\d+\.?\d*)/i,
+    /(\d+\.?\d*)\s*s\s*three[\s-]*cone/i,
     /three[\s-]*cone[:\s]+(\d+\.?\d*)/i,
-    /l[\s-]*drill[:\s]+(\d+\.?\d*)/i,           // L-Drill = 3 cone
   ])
-  const verticalJump = grab([/vert(?:ical)?(?:\s*jump)?[:\s]+(\d+\.?\d*)/i])
-  const broadJump = grab([/broad(?:\s*jump)?[:\s]+(\d+\.?\d*)/i])
+
+  // ── Vertical Jump ──
+  const verticalJump = grab([
+    /(\d+\.?\d*)\s*(?:"|in|inches?)\s*vert(?:ical)?/i,
+    /vert(?:ical)?(?:\s*jump)?[:\s]+(\d+\.?\d*)/i,
+  ])
+
+  // ── Broad Jump — handles feet (ft) and inches (in/") ──
+  const broadRaw = grab([
+    /(\d+\.?\d*)\s*ft\s*(?:bj|broad)/i,            // "8.3 ft BJ" — feet
+    /(\d+\.?\d*)\s*(?:ft|feet)\s*broad/i,
+    /bj[:\s]+(\d+\.?\d*)\s*ft/i,
+    /broad(?:\s*jump)?[:\s]+(\d+\.?\d*)\s*ft/i,
+    /(\d+\.?\d*)\s*(?:"|in)\s*(?:bj|broad)/i,      // inches
+    /bj[:\s]+(\d+\.?\d*)/i,
+    /broad(?:\s*jump)?[:\s]+(\d+\.?\d*)/i,
+  ])
+  // Detect if value was in feet and convert to inches
+  const broadInFeet = /(\d+\.?\d*)\s*ft\s*(?:bj|broad)/i.test(t)
+    || /bj[:\s]+(\d+\.?\d*)\s*ft/i.test(t)
+    || /broad(?:\s*jump)?[:\s]+(\d+\.?\d*)\s*ft/i.test(t)
+    || /(\d+\.?\d*)\s*(?:ft|feet)\s*broad/i.test(t)
+  const broadJump = broadRaw
+    ? broadInFeet ? String((parseFloat(broadRaw) * 12).toFixed(1)) : broadRaw
+    : ""
+
+  // ── Bench Press ──
   const benchPress = grab([/bench(?:\s*press)?[:\s]+(\d+)/i])
+
+  // ── Weight ──
   const weight = grab([/(?:body\s*)?weight[:\s]+(\d+\.?\d*)/i, /(\d+\.?\d*)\s*lbs/i])
 
   return { name: nameLine, age, grade: gradeLabel, position, school, fortyYard, shuttle, threeCone, verticalJump, broadJump, benchPress, weight }

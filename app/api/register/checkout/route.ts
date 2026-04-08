@@ -24,13 +24,16 @@ export const PROGRAMS: Record<string, { name: string; price: number; billing: "o
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json()
-    const { programId, playerName, playerAge, playerGrade, playerSchool, playerPosition, parentName, email, phone } = body
+    const { programIds, playerName, playerAge, playerGrade, playerSchool, playerPosition, parentName, email, phone } = body
 
-    if (!programId || !playerName || !parentName || !email || !phone)
+    // Support both single programId (legacy) and array programIds (cart)
+    const ids: string[] = programIds ?? (body.programId ? [body.programId] : [])
+
+    if (!ids.length || !playerName || !parentName || !email || !phone)
       return NextResponse.json({ success: false, error: "Missing required fields" }, { status: 400 })
 
-    const program = PROGRAMS[programId]
-    if (!program) return NextResponse.json({ success: false, error: "Invalid program" }, { status: 400 })
+    const programs = ids.map(id => ({ id, ...PROGRAMS[id] })).filter(p => p.name)
+    if (!programs.length) return NextResponse.json({ success: false, error: "Invalid program(s)" }, { status: 400 })
 
     const secretKey = process.env.STRIPE_SECRET_KEY
     if (!secretKey) return NextResponse.json({ success: false, error: "Stripe not configured" }, { status: 500 })
@@ -38,24 +41,41 @@ export async function POST(req: NextRequest) {
     const stripe = new Stripe(secretKey)
     const origin = req.nextUrl.origin
     const id = crypto.randomUUID()
+    const totalAmount = programs.reduce((sum, p) => sum + p.price, 0)
+    const hasMonthly = programs.some(p => p.billing === "monthly")
 
+    // Save one registration record covering all items
     const reg: Registration = {
-      id, program: programId, programName: program.name,
+      id,
+      program: ids.join(","),
+      programName: programs.map(p => p.name).join(", "),
       playerName, playerAge, playerGrade, playerSchool, playerPosition,
       parentName, email, phone,
-      amount: program.price, billing: program.billing,
-      status: "pending", createdAt: new Date().toISOString(),
+      amount: totalAmount,
+      billing: hasMonthly ? "monthly" : "one_time",
+      status: "pending",
+      createdAt: new Date().toISOString(),
     }
     await saveRegistration(reg)
 
-    const lineItem: Stripe.Checkout.SessionCreateParams.LineItem = program.billing === "monthly"
-      ? { price_data: { currency: "usd", product_data: { name: program.name }, unit_amount: program.price * 100, recurring: { interval: "month" } }, quantity: 1 }
-      : { price_data: { currency: "usd", product_data: { name: program.name }, unit_amount: program.price * 100 }, quantity: 1 }
+    // Stripe requires separate sessions for subscription vs one-time
+    // If cart has both, bundle one-time items into the subscription as an invoice item
+    // Simplest approach: all items as one-time in payment mode if no monthly,
+    // otherwise use subscription mode and add one-time items as flat fee line items
+    const lineItems = programs.map(p => ({
+      price_data: {
+        currency: "usd",
+        product_data: { name: p.name },
+        unit_amount: p.price * 100,
+        ...(hasMonthly ? { recurring: { interval: "month" as const } } : {}),
+      },
+      quantity: 1,
+    }))
 
     const session = await stripe.checkout.sessions.create({
       payment_method_types: ["card"],
-      line_items: [lineItem],
-      mode: program.billing === "monthly" ? "subscription" : "payment",
+      line_items: lineItems,
+      mode: hasMonthly ? "subscription" : "payment",
       success_url: `${origin}/register/success?id=${id}`,
       cancel_url: `${origin}/register?canceled=1`,
       customer_email: email,

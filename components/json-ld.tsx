@@ -11,7 +11,7 @@ export const organizationSchema = {
   logo: "https://polyrisefootball.com/poly-rise-logo.png",
   image: "https://polyrisefootball.com/poly-rise-logo.png",
   telephone: "+1-(817) 658-3300",
-  email: "coachjonathan@polyrisefootball.com",
+  email: "polyrise@polyrisefootball.com",
   address: {
     "@type": "PostalAddress",
     addressLocality: "Austin",
@@ -40,7 +40,7 @@ export const localBusinessSchema = {
     "Elite youth football training for kids ages 5-18 in Austin, Texas. Professional NFL-experienced coaches offering SAQ training, strength conditioning, 7v7 tournaments, and college recruitment support.",
   url: "https://polyrisefootball.com",
   telephone: "+1-(817) 658-3300",
-  email: "coachjonathan@polyrisefootball.com",
+  email: "polyrise@polyrisefootball.com",
   image: "https://polyrisefootball.com/poly-rise-logo.png",
   logo: "https://polyrisefootball.com/poly-rise-logo.png",
   priceRange: "$275-$500/month",

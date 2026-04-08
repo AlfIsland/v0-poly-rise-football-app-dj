@@ -64,7 +64,7 @@ export async function POST(req: NextRequest) {
 
             <hr style="border:none;border-top:1px solid #222;margin:0 0 24px;">
             <p style="color:#666;font-size:12px;margin:0;">Share your profile link with college coaches, recruiters, and scouts.</p>
-            <p style="color:#666;font-size:12px;margin:8px 0 0;">Questions? Contact us at coachjonathan@polyrisefootball.com · (817) 658-3300</p>
+            <p style="color:#666;font-size:12px;margin:8px 0 0;">Questions? Contact us at polyrise@polyrisefootball.com · (817) 658-3300</p>
           </td>
         </tr>
 

@@ -56,7 +56,7 @@ export async function POST(req: NextRequest) {
 
           <hr style="border:none;border-top:1px solid #222;margin:0 0 20px;">
           <p style="color:#666;font-size:12px;margin:0;">Questions? Contact Coach Jonathan</p>
-          <p style="color:#666;font-size:12px;margin:6px 0 0;">(817) 658-3300 · coachjonathan@polyrisefootball.com</p>
+          <p style="color:#666;font-size:12px;margin:6px 0 0;">(817) 658-3300 · polyrise@polyrisefootball.com</p>
         </td>
       </tr>
       <tr><td style="padding:20px 0;text-align:center;">

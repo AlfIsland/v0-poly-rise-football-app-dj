@@ -59,10 +59,10 @@ function LoginForm() {
               className="w-full bg-red-600 hover:bg-red-700 disabled:bg-gray-700 disabled:cursor-not-allowed text-white font-bold rounded-xl py-3 transition-colors text-sm">
               {loading ? "Signing in..." : "Sign In"}
             </button>
-            <p className="text-center text-gray-500 text-xs">
-              Don&apos;t have an account?{" "}
+            <div className="flex justify-between text-xs">
+              <Link href="/parent/forgot-password" className="text-gray-500 hover:text-gray-300 underline">Forgot password?</Link>
               <Link href="/parent/subscribe" className="text-red-400 hover:text-red-300 underline">Subscribe here</Link>
-            </p>
+            </div>
           </form>
         </div>
         <p className="text-center text-gray-700 text-xs">PolyRISE Football · Austin, TX</p>

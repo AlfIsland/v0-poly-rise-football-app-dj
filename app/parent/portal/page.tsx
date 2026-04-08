@@ -120,7 +120,7 @@ function Portal() {
           <div className="bg-gray-900 rounded-2xl border border-gray-800 p-8 text-center space-y-3">
             <p className="text-gray-400 font-semibold">No athletes linked yet</p>
             <p className="text-gray-600 text-sm">Contact PolyRISE Football to link your athlete to this account.</p>
-            <p className="text-gray-600 text-sm">(817) 658-3300 · coachjonathan@polyrisefootball.com</p>
+            <p className="text-gray-600 text-sm">(817) 658-3300 · polyrise@polyrisefootball.com</p>
           </div>
         )}
 
@@ -206,7 +206,7 @@ function Portal() {
         })}
 
         <p className="text-center text-gray-700 text-xs pb-4">
-          PolyRISE Football · (817) 658-3300 · coachjonathan@polyrisefootball.com
+          PolyRISE Football · (817) 658-3300 · polyrise@polyrisefootball.com
         </p>
       </div>
     </div>

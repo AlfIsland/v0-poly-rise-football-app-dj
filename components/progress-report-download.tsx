@@ -367,7 +367,7 @@ export default function ProgressReportDownload({ athlete }: { athlete: Athlete }
       doc.text("PolyRISE Football · Austin, Texas · polyrisefootball.com · (817) 658-3300", W / 2, footerY + 8, { align: "center" })
       doc.setTextColor(100, 100, 100)
       doc.text(`Athlete ID: ${athlete.id}`, margin, footerY + 14)
-      doc.text(`coachjonathan@polyrisefootball.com`, W - margin, footerY + 14, { align: "right" })
+      doc.text(`polyrise@polyrisefootball.com`, W - margin, footerY + 14, { align: "right" })
 
       const safeName = athlete.name.replace(/\s+/g, "-")
       doc.save(`${safeName}-progress-report.pdf`)

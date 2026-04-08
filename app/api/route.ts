@@ -14,7 +14,7 @@ export async function GET() {
       expanding: true,
       contact: {
         phone: "(817) 658-3300",
-        email: "coachjonathan@polyrisefootball.com",
+        email: "polyrise@polyrisefootball.com",
         whatsapp: "(817) 658-3300",
       },
       social: {

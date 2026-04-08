@@ -53,8 +53,16 @@ function parseAthleteText(raw: string) {
   ])
   const school = grab([/school[:\s]+([A-Za-z0-9 .'-]+?)(?:[,\n]|$)/i])
   const fortyYard = grab([/40[\s-]*(?:yard|yd)?[\s-]*(?:dash)?[:\s]+(\d+\.?\d*)/i])
-  const shuttle = grab([/shuttle[:\s]+(\d+\.?\d*)/i])
-  const threeCone = grab([/3[\s-]*cone[:\s]+(\d+\.?\d*)/i, /three[\s-]*cone[:\s]+(\d+\.?\d*)/i])
+  const shuttle = grab([
+    /shuttle[:\s]+(\d+\.?\d*)/i,
+    /5[\s-]*10[\s-]*5[:\s]+(\d+\.?\d*)/i,      // 5-10-5 = shuttle
+    /short[\s-]*shuttle[:\s]+(\d+\.?\d*)/i,
+  ])
+  const threeCone = grab([
+    /3[\s-]*cone[:\s]+(\d+\.?\d*)/i,
+    /three[\s-]*cone[:\s]+(\d+\.?\d*)/i,
+    /l[\s-]*drill[:\s]+(\d+\.?\d*)/i,           // L-Drill = 3 cone
+  ])
   const verticalJump = grab([/vert(?:ical)?(?:\s*jump)?[:\s]+(\d+\.?\d*)/i])
   const broadJump = grab([/broad(?:\s*jump)?[:\s]+(\d+\.?\d*)/i])
   const benchPress = grab([/bench(?:\s*press)?[:\s]+(\d+)/i])

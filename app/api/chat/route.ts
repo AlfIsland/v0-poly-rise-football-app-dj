@@ -1,4 +1,4 @@
-import { streamText } from "ai"
+import { streamText, convertToModelMessages } from "ai"
 
 const SYSTEM_PROMPT = `You are the official PolyRISE Football support assistant. Your role is to help parents, athletes, and coaches learn about PolyRISE Football programs, answer questions, and guide them toward registration.
 
@@ -85,10 +85,10 @@ export async function POST(request: Request) {
     const result = streamText({
       model: "anthropic/claude-sonnet-4-20250514",
       system: SYSTEM_PROMPT,
-      messages,
+      messages: await convertToModelMessages(messages),
     })
 
-    return result.toDataStreamResponse()
+    return result.toUIMessageStreamResponse()
   } catch (error) {
     console.error("[v0] Chat API error:", error)
     return new Response(

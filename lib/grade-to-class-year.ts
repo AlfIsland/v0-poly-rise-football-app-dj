@@ -17,7 +17,7 @@ export function gradeToClassYear(grade: string): string {
     "11th": 1, "11": 1,
     "12th": 0, "12": 0,
   }
-  const key = grade.toLowerCase().trim()
+  const key = grade.toLowerCase().trim().replace(/\s*grade\b.*$/, "").trim()
   const yearsLeft = gradeMap[key]
   if (yearsLeft == null) return String(currentYear + 2) // default
   return String(currentYear + yearsLeft)

@@ -184,7 +184,7 @@ export default async function TrainingAthletePage({ params }: { params: { id: st
                 <div className="bg-gray-800 px-6 py-4 flex items-center justify-between">
                   <div>
                     <p className="text-xs text-gray-400 uppercase tracking-widest">Prospect Rankings</p>
-                    <p className="text-xs text-gray-500 mt-0.5">{ratings.comparedAgainst}</p>
+                    <p className="text-xs text-gray-500 mt-0.5">{ratings.positionGroup} · {ratings.comparedAgainst.split("·").pop()?.trim()}</p>
                   </div>
                   <div className="text-right">
                     <div className="flex items-center gap-1 justify-end">

@@ -882,8 +882,11 @@ export default function HomePage() {
                   </div>
                   <div>
                     <div className="font-medium mb-1 text-white">Email</div>
-                    <a href="mailto:polyrise7v7@gmail.com" className="text-white hover:underline">
-                      polyrise7v7@gmail.com
+                    <a href="mailto:polyrise@polyrisefootball.com" className="text-white hover:underline block">
+                      polyrise@polyrisefootball.com
+                    </a>
+                    <a href="mailto:kg@polyrisefootball.com" className="text-white hover:underline block">
+                      kg@polyrisefootball.com
                     </a>
                   </div>
                 </div>

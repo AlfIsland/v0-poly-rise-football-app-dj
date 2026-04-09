@@ -70,8 +70,10 @@ export async function GET(req: NextRequest) {
           <h2 style="color:#d97706">PR-VERIFIED Seal Expiring in 30 Days</h2>
           <p>Hi, this is a reminder that <strong>${athlete.athleteName}</strong>'s PR-VERIFIED seal expires on <strong>${expiresFormatted}</strong>.</p>
           <p>To keep your recruiting profile active, sign up for the next PR-VERIFIED Combine Camp before your seal expires.</p>
-          <p style="margin-top:20px"><a href="${registerUrl}" style="background:#dc2626;color:#fff;padding:12px 24px;border-radius:8px;text-decoration:none;font-weight:bold">Sign Up for Next PR-VERIFIED Event →</a></p>
-          <p style="margin-top:16px"><a href="${verifyUrl}" style="color:#dc2626">View current profile</a></p>
+          <p style="color:#555;font-size:13px">Sign up here (copy and paste):</p>
+          <p style="background:#f3f4f6;padding:12px;border-radius:8px;word-break:break-all;font-size:13px">${registerUrl}</p>
+          <p style="color:#555;font-size:13px;margin-top:12px">View your current profile (copy and paste):</p>
+          <p style="background:#f3f4f6;padding:12px;border-radius:8px;word-break:break-all;font-size:13px">${verifyUrl}</p>
           <p style="color:#999;font-size:12px;margin-top:16px">PolyRISE Football · (817) 658-3300 · polyrise@polyrisefootball.com</p>
         </div>
       `
@@ -96,7 +98,8 @@ export async function GET(req: NextRequest) {
           <h2 style="color:#dc2626">PR-VERIFIED Seal Has Expired</h2>
           <p><strong>${athlete.athleteName}</strong>'s PR-VERIFIED seal expired today.</p>
           <p>Sign up for the next PR-VERIFIED Combine Camp to renew your seal and keep your recruiting profile active.</p>
-          <p style="margin-top:20px"><a href="${registerUrl}" style="background:#dc2626;color:#fff;padding:12px 24px;border-radius:8px;text-decoration:none;font-weight:bold">Sign Up to Re-Verify →</a></p>
+          <p style="color:#555;font-size:13px">Sign up here (copy and paste):</p>
+          <p style="background:#f3f4f6;padding:12px;border-radius:8px;word-break:break-all;font-size:13px">${registerUrl}</p>
           <p style="color:#999;font-size:12px;margin-top:16px">PolyRISE Football · (817) 658-3300 · polyrise@polyrisefootball.com</p>
         </div>
       `

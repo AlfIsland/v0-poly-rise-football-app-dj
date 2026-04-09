@@ -94,8 +94,9 @@ export async function POST(req: NextRequest) {
           <tr style="background:#f9fafb"><td style="padding:10px 12px;color:#555">School</td><td style="padding:10px 12px">${body.school || "—"}</td></tr>
           <tr><td style="padding:10px 12px;color:#555">Valid Until</td><td style="padding:10px 12px;color:#dc2626;font-weight:bold">${expiresFormatted}</td></tr>
         </table>
-        <p style="margin-top:20px"><a href="${verifyUrl}" style="background:#dc2626;color:#fff;padding:12px 24px;border-radius:8px;text-decoration:none;font-weight:bold;font-size:14px">View PR-VERIFIED Profile →</a></p>
-        <p style="color:#666;font-size:13px;margin-top:16px">Share this link with college coaches and recruiters. Your seal expires on <strong>${expiresFormatted}</strong> — you will receive a reminder to re-verify before then.</p>
+        <p style="color:#666;font-size:13px;margin-top:16px">Copy and paste the link below to view your PR-VERIFIED profile. Share it with college coaches and recruiters.</p>
+        <p style="background:#f3f4f6;padding:12px;border-radius:8px;word-break:break-all;font-size:13px;margin:8px 0">${verifyUrl}</p>
+        <p style="color:#666;font-size:13px;">Your seal expires on <strong>${expiresFormatted}</strong> — you will receive a reminder to re-verify before then.</p>
         <p style="color:#999;font-size:12px;margin-top:16px">PolyRISE Football · (817) 658-3300 · polyrise@polyrisefootball.com</p>
       </div>
     `

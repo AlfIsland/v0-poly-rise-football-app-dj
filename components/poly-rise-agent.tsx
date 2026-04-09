@@ -2,49 +2,6 @@
 
 import { useState, useRef, useEffect } from "react";
 
-const SYSTEM_PROMPT = `You are the official customer support agent for PolyRISE Football — elite youth football training in Dripping Springs, Texas (Austin area), founded by NFL veteran Coach Kevin Garrett.
-
-PERSONALITY: Warm, enthusiastic, and conversational. Speak like a knowledgeable coach who genuinely cares about young athletes. Never robotic or scripted.
-
-RESPONSE RULES:
-- Keep each reply to 2-4 sentences. Answer only what was asked.
-- Ask ONE natural follow-up question to keep the conversation going.
-- Never dump all information at once — respond to what the person actually asked.
-- Guide interested families toward registering or calling.
-
-PROGRAMS & PRICING:
-- Player Development: $350/mo — Tue & Thu 6:30–7:45pm, 16 sessions/month, SAQ, S&C, football drills, film study, quarterly military character events, tournament entries
-- 360 Elite: $500/mo — Everything in Player Dev PLUS 1-on-1 NFL coaching, recruiting profile, 7 college email blasts/month, weekly film study, unlimited free camps, college visits, NIL & financial literacy classes
-- Girls Player Development: $250/mo — Mon & Fri 5–6:30pm (May); Mon & Fri 1–2:30pm (June & July)
-- Summer Camp: $265/mo — K-5 / Middle / High School tracks, Mon–Thu, June & July, LIMITED to 20 spots per group
-- PR-VERIFIED Combine Camp: $50/athlete
-- Leadership Hike: $25 at Barton Springs Rd, Austin
-- Rise of Warriors Tournament: MS May 29 $400/team | HS May 30 $425/team (min 3 games, single elim)
-
-RECRUITING (Coach Kevin Garrett — KG@polyrisefootball.com):
-- Basic: profile + 5 college emails/mo → 3mo $165 | 6mo $330 | 12mo $660
-- Enhanced: profile + 10 college emails/mo → 3mo $225 | 6mo $450 | 12mo $900
-
-COACHES:
-- Head Coach Garrett (DB): 7 yrs NFL (Rams, Texans), drafted 2003 from SMU
-- Coach Jordan (WR/TE): XFL Draft 2022, 2x Omaha Beef Champion, HCU Asst WR Coach
-- Coach Traves (RB/S): Former Navy Safety & LB, Citadel Football
-- Coach John (QB): Former Navy QB, Naval Academy Graduate & Officer
-- Coach Brayden (LB/DL): Baylor 2018–21, NFL Draft 2023, IFL All-Pro & Champion 2025
-
-PR-VERIFIED SEAL: Pro-style combine testing (40yd dash, vertical, broad jump, 3-cone, 5-10-5 shuttle, position drills). All metrics verified on-site by NFL/college-experienced staff. Athletes get official documentation + digital badge for recruiting profiles. No self-reported numbers.
-
-WHO WE SERVE: K-12 athletes, Austin & Central Texas. Expanding nationwide.
-
-CONTACT:
-- Phone/WhatsApp: (817) 658-3300
-- Email: polyrise7v7@gmail.com
-- Website: polyrisefootball.com
-- Register: polyrisefootball.com/#register
-- Recruiting: KG@polyrisefootball.com
-
-ESCALATION: Recruiting questions → KG@polyrisefootball.com. Anything complex → (817) 658-3300.`;
-
 const SUGGESTIONS = [
   "What programs do you offer?",
   "How much does it cost?",
@@ -61,33 +18,20 @@ const GREETING =
   "Hey! Welcome to PolyRISE Football! I'm here to help with any questions about our programs, coaches, camps, tournaments, or recruiting. What can I help you with today?";
 
 export default function PolyRiseAgent() {
-  const [apiKey, setApiKey] = useState("");
-  const [savedKey, setSavedKey] = useState("");
-  const [keyInput, setKeyInput] = useState("");
-  const [messages, setMessages] = useState([
+  const [messages, setMessages] = useState<{ role: string; content: string }[]>([
     { role: "assistant", content: GREETING },
   ]);
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
-  const bottomRef = useRef(null);
+  const bottomRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     bottomRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages, loading]);
 
-  function saveKey() {
-    if (!keyInput.trim()) return;
-    setSavedKey(keyInput.trim());
-    setError("");
-  }
-
-  async function sendMessage(text) {
+  async function sendMessage(text: string) {
     if (!text.trim() || loading) return;
-    if (!savedKey) {
-      setError("Please enter your Anthropic API key above first.");
-      return;
-    }
 
     const userMsg = { role: "user", content: text.trim() };
     const newHistory = [...messages, userMsg];
@@ -97,37 +41,25 @@ export default function PolyRiseAgent() {
     setError("");
 
     try {
-      const response = await fetch("https://api.anthropic.com/v1/messages", {
+      const response = await fetch("/api/chat", {
         method: "POST",
         headers: {
           "content-type": "application/json",
-          "x-api-key": savedKey,
-          "anthropic-version": "2023-06-01",
-          "anthropic-dangerous-direct-browser-access": "true",
         },
         body: JSON.stringify({
-          model: "claude-3-5-haiku-20241022",
-          max_tokens: 400,
-          system: SYSTEM_PROMPT,
-          messages: newHistory,
+          messages: newHistory.filter(m => m.role !== "assistant" || m.content !== GREETING),
         }),
       });
 
       const data = await response.json();
 
       if (!response.ok) {
-        throw new Error(data?.error?.message || `Error ${response.status}`);
+        throw new Error(data?.error || `Error ${response.status}`);
       }
 
-      const reply = data.content
-        .filter((b) => b.type === "text")
-        .map((b) => b.text)
-        .join("")
-        .trim();
-
-      setMessages([...newHistory, { role: "assistant", content: reply }]);
+      setMessages([...newHistory, { role: "assistant", content: data.message }]);
     } catch (err) {
-      setError(err.message || "Something went wrong. Please try again.");
+      setError(err instanceof Error ? err.message : "Something went wrong. Please try again.");
     } finally {
       setLoading(false);
     }
@@ -141,27 +73,6 @@ export default function PolyRiseAgent() {
   return (
     <div className="bg-gray-50">
       <div className="w-full bg-white flex flex-col overflow-hidden" style={{ height: "500px" }}>
-
-        {/* API Key Banner */}
-        {!savedKey && (
-          <div className="bg-yellow-50 border-b border-yellow-200 px-4 py-2 flex items-center gap-2">
-            <span className="text-xs text-yellow-800 font-medium whitespace-nowrap">API Key:</span>
-            <input
-              type="password"
-              value={keyInput}
-              onChange={(e) => setKeyInput(e.target.value)}
-              onKeyDown={(e) => e.key === "Enter" && saveKey()}
-              placeholder="sk-ant-..."
-              className="flex-1 text-xs px-2 py-1 rounded border border-yellow-300 bg-white font-mono focus:outline-none focus:border-yellow-500"
-            />
-            <button
-              onClick={saveKey}
-              className="text-xs px-3 py-1 rounded bg-green-700 text-white font-medium hover:bg-green-800"
-            >
-              Save
-            </button>
-          </div>
-        )}
 
         {/* Header */}
         <div className="px-4 py-3 border-b border-gray-100 flex items-center gap-3">

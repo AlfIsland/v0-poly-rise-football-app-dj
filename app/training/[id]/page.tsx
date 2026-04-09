@@ -5,6 +5,9 @@ import Redis from "ioredis"
 import LogoutButton from "@/components/logout-button"
 import ProgressReportDownload from "@/components/progress-report-download"
 import SendTrainingReport from "@/components/send-training-report"
+import FeaturedToggle from "@/components/featured-toggle"
+import { calculateRatings } from "@/lib/athlete-ratings"
+import { gradeToClassYear } from "@/lib/grade-to-class-year"
 
 async function getAthlete(id: string) {
   try {
@@ -52,6 +55,18 @@ export default async function TrainingAthletePage({ params }: { params: { id: st
   const current = sessions[sessions.length - 1]
   const hasProgress = sessions.length >= 2
 
+  // Calculate rankings using most recent session metrics
+  const latestSession = sessions[sessions.length - 1]
+  const classYear = gradeToClassYear(athlete.grade ?? "")
+  const ratings = latestSession ? calculateRatings({
+    fortyYard: latestSession.fortyYard,
+    shuttle: latestSession.shuttle,
+    threeCone: latestSession.threeCone,
+    verticalJump: latestSession.verticalJump,
+    broadJump: latestSession.broadJump,
+    benchPress: latestSession.benchPress,
+  }, athlete.position ?? "", classYear) : null
+
   return (
     <div className="min-h-screen bg-gray-950 text-white p-6 md:p-10">
       <div className="max-w-4xl mx-auto space-y-6">
@@ -67,6 +82,11 @@ export default async function TrainingAthletePage({ params }: { params: { id: st
             </div>
           </div>
           <div className="flex items-center gap-3">
+            <FeaturedToggle id={athlete.id} initialFeatured={athlete.featured ?? false} />
+            <Link href={`/training/${athlete.id}/edit`}
+              className="bg-gray-700 hover:bg-gray-600 text-white font-semibold px-4 py-2 rounded-xl text-sm transition-colors">
+              Edit Info
+            </Link>
             <Link href={`/training/${athlete.id}/session`}
               className="bg-red-600 hover:bg-red-700 text-white font-semibold px-4 py-2 rounded-xl text-sm transition-colors">
               + Add Test
@@ -157,6 +177,90 @@ export default async function TrainingAthletePage({ params }: { params: { id: st
                 })}
               </div>
             </div>
+
+            {/* Prospect Rankings */}
+            {ratings && ratings.metrics.length > 0 && (
+              <div className="bg-gray-900 rounded-2xl border border-gray-800 overflow-hidden">
+                <div className="bg-gray-800 px-6 py-4 flex items-center justify-between">
+                  <div>
+                    <p className="text-xs text-gray-400 uppercase tracking-widest">Prospect Rankings</p>
+                    <p className="text-xs text-gray-500 mt-0.5">{ratings.comparedAgainst}</p>
+                  </div>
+                  <div className="text-right">
+                    <div className="flex items-center gap-1 justify-end">
+                      {Array.from({ length: 4 }).map((_, i) => (
+                        <svg key={i} className={`w-5 h-5 ${i < ratings.stars ? "text-yellow-400" : "text-gray-700"}`} fill="currentColor" viewBox="0 0 20 20">
+                          <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                        </svg>
+                      ))}
+                    </div>
+                    <p className="text-xs text-yellow-400 font-semibold mt-0.5">{ratings.label}</p>
+                  </div>
+                </div>
+
+                {/* Overall percentile */}
+                <div className="px-6 pt-5 pb-2 grid grid-cols-2 gap-4">
+                  <div className="bg-gray-800 rounded-xl px-4 py-3 border border-gray-700 text-center">
+                    <p className="text-xs text-gray-500 uppercase tracking-wider mb-1">National Percentile</p>
+                    <p className="text-3xl font-black text-white">{ratings.overallPercentile}<span className="text-lg text-gray-400">th</span></p>
+                    <div className="mt-2 h-1.5 rounded-full bg-gray-700 overflow-hidden">
+                      <div className="h-full rounded-full bg-red-500" style={{ width: `${ratings.overallPercentile}%` }} />
+                    </div>
+                  </div>
+                  <div className="bg-gray-800 rounded-xl px-4 py-3 border border-gray-700 text-center">
+                    <p className="text-xs text-gray-500 uppercase tracking-wider mb-1">Texas Percentile</p>
+                    <p className="text-3xl font-black text-white">{ratings.texasPercentile}<span className="text-lg text-gray-400">th</span></p>
+                    <div className="mt-2 h-1.5 rounded-full bg-gray-700 overflow-hidden">
+                      <div className="h-full rounded-full bg-orange-500" style={{ width: `${ratings.texasPercentile}%` }} />
+                    </div>
+                  </div>
+                </div>
+
+                {/* Per-metric breakdown */}
+                <div className="px-6 pb-5 space-y-3 mt-3">
+                  {ratings.metrics.map(m => (
+                    <div key={m.label}>
+                      <div className="flex items-center justify-between mb-1">
+                        <div className="flex items-center gap-2">
+                          <span className="text-xs text-gray-300">{m.label}</span>
+                          <span className="text-xs text-gray-600">
+                            {m.unit === "sec" ? `${m.value}s` : m.unit === "in" ? `${m.value}"` : `${m.value} reps`}
+                          </span>
+                        </div>
+                        <div className="flex items-center gap-3 text-xs">
+                          <span className={`font-semibold ${m.nationalPercentile >= 75 ? "text-green-400" : m.nationalPercentile >= 50 ? "text-yellow-400" : "text-gray-400"}`}>
+                            {m.nationalPercentile}th <span className="text-gray-600 font-normal">Nat.</span>
+                          </span>
+                          <span className={`font-semibold ${m.texasPercentile >= 75 ? "text-green-400" : m.texasPercentile >= 50 ? "text-yellow-400" : "text-gray-400"}`}>
+                            {m.texasPercentile}th <span className="text-gray-600 font-normal">TX</span>
+                          </span>
+                          <span className={`px-2 py-0.5 rounded-full text-xs font-semibold ${
+                            m.rank === "Elite" ? "bg-yellow-900/50 text-yellow-300" :
+                            m.rank === "Excellent" ? "bg-green-900/50 text-green-300" :
+                            m.rank === "Above Average" ? "bg-blue-900/40 text-blue-300" :
+                            "bg-gray-800 text-gray-400"
+                          }`}>{m.rank}</span>
+                        </div>
+                      </div>
+                      <div className="h-1.5 rounded-full bg-gray-800 overflow-hidden">
+                        <div
+                          className={`h-full rounded-full transition-all ${
+                            m.nationalPercentile >= 75 ? "bg-green-500" :
+                            m.nationalPercentile >= 50 ? "bg-yellow-500" :
+                            "bg-gray-600"
+                          }`}
+                          style={{ width: `${m.nationalPercentile}%` }}
+                        />
+                      </div>
+                    </div>
+                  ))}
+                </div>
+
+                <div className="border-t border-gray-800 px-6 py-3">
+                  <p className="text-xs text-gray-600 italic">{ratings.description}</p>
+                </div>
+              </div>
+            )}
 
             {/* Session history table */}
             {sessions.length > 1 && (

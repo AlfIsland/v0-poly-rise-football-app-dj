@@ -47,6 +47,7 @@ export interface TrainingAthlete {
   email?: string
   joinedAt: string
   sessions: TrainingSession[]
+  featured?: boolean
 }
 
 // ─── POST /api/training — create athlete ──────────────────────────────────────
@@ -136,6 +137,13 @@ export async function PUT(req: NextRequest) {
       existing.sessions.sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime())
       await kvSet(`training:athlete:${id.toUpperCase()}`, existing)
       return NextResponse.json({ success: true })
+    }
+
+    // Toggle featured
+    if (action === "toggle-featured") {
+      existing.featured = !existing.featured
+      await kvSet(`training:athlete:${id.toUpperCase()}`, existing)
+      return NextResponse.json({ success: true, featured: existing.featured })
     }
 
     // Update athlete info

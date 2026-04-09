@@ -55,6 +55,9 @@ export default function SealGeneratorPage() {
   const [videoLink, setVideoLink] = useState("")
   const [phone, setPhone] = useState("")
   const [email, setEmail] = useState("")
+  const [parentName, setParentName] = useState("")
+  const [parentPhone, setParentPhone] = useState("")
+  const [parentEmail, setParentEmail] = useState("")
 
   // ── Combine metrics ──
   const [fortyYard, setFortyYard] = useState("")
@@ -219,6 +222,9 @@ export default function SealGeneratorPage() {
           videoLink,
           phone,
           email,
+          parentName,
+          parentPhone,
+          parentEmail,
           issuedAt: new Date().toISOString(),
         }),
       })
@@ -303,8 +309,15 @@ export default function SealGeneratorPage() {
             </div>
 
             <Input label="Hudl / Film Link" value={videoLink} onChange={setVideoLink} placeholder="https://hudl.com/v/..." />
-            <Input label="Phone Number" value={phone} onChange={setPhone} placeholder="e.g. 512-555-1234" type="tel" />
-            <Input label="Email Address" value={email} onChange={setEmail} placeholder="e.g. athlete@email.com" type="email" />
+            <Input label="Athlete Phone" value={phone} onChange={setPhone} placeholder="e.g. (817) 555-1234" type="tel" />
+            <Input label="Athlete Email" value={email} onChange={setEmail} placeholder="e.g. athlete@email.com" type="email" />
+
+            <div className="border-t border-gray-700 pt-4 space-y-4">
+              <h3 className="text-xs font-bold text-blue-400 uppercase tracking-widest">Parent / Guardian</h3>
+              <Input label="Parent Name" value={parentName} onChange={setParentName} placeholder="e.g. Maria Johnson" />
+              <Input label="Parent Phone" value={parentPhone} onChange={setParentPhone} placeholder="e.g. (817) 555-5678" type="tel" />
+              <Input label="Parent Email" value={parentEmail} onChange={setParentEmail} placeholder="e.g. parent@email.com" type="email" />
+            </div>
           </div>
 
           {/* ── COL 2: Combine Metrics ── */}

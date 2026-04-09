@@ -72,11 +72,71 @@ export async function POST(req: NextRequest) {
     const expiresAt = new Date(issuedAt)
     expiresAt.setMonth(expiresAt.getMonth() + 4)
 
-    await kvSet(`athlete:${upperCode}`, { ...body, code: upperCode, sealNumber, issuedAt, expiresAt: expiresAt.toISOString() })
+    const athleteData = { ...body, code: upperCode, sealNumber, issuedAt, expiresAt: expiresAt.toISOString() }
+    await kvSet(`athlete:${upperCode}`, athleteData)
 
     // Track in roster list
     if (r) {
       await r.sadd("athlete:roster", upperCode)
+    }
+
+    // Send notifications to athlete and parent
+    const resendKey = process.env.RESEND_API_KEY
+    const verifyUrl = `https://polyrisefootball.com/verify/${upperCode}`
+    const expiresFormatted = expiresAt.toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" })
+    const emailHtml = `
+      <div style="font-family:sans-serif;max-width:520px;margin:0 auto;padding:24px">
+        <h2 style="color:#dc2626;margin-bottom:4px">PR-VERIFIED Seal Issued</h2>
+        <p style="color:#444;margin-top:0"><strong>${body.athleteName}</strong> has been PR-VERIFIED by PolyRISE Football.</p>
+        <table style="width:100%;border-collapse:collapse;font-size:14px;margin-top:16px">
+          <tr style="background:#f9fafb"><td style="padding:10px 12px;color:#555;width:140px">Seal Code</td><td style="padding:10px 12px;font-weight:bold;font-family:monospace">${upperCode}</td></tr>
+          <tr><td style="padding:10px 12px;color:#555">Position</td><td style="padding:10px 12px">${body.position || "—"}</td></tr>
+          <tr style="background:#f9fafb"><td style="padding:10px 12px;color:#555">School</td><td style="padding:10px 12px">${body.school || "—"}</td></tr>
+          <tr><td style="padding:10px 12px;color:#555">Valid Until</td><td style="padding:10px 12px;color:#dc2626;font-weight:bold">${expiresFormatted}</td></tr>
+        </table>
+        <p style="margin-top:20px"><a href="${verifyUrl}" style="background:#dc2626;color:#fff;padding:12px 24px;border-radius:8px;text-decoration:none;font-weight:bold;font-size:14px">View PR-VERIFIED Profile →</a></p>
+        <p style="color:#666;font-size:13px;margin-top:16px">Share this link with college coaches and recruiters. Your seal expires on <strong>${expiresFormatted}</strong> — you will receive a reminder to re-verify before then.</p>
+        <p style="color:#999;font-size:12px;margin-top:16px">PolyRISE Football · (817) 658-3300 · polyrise@polyrisefootball.com</p>
+      </div>
+    `
+
+    if (resendKey) {
+      const recipients = [
+        body.email && { to: body.email, name: body.athleteName },
+        body.parentEmail && { to: body.parentEmail, name: body.parentName || "Parent/Guardian" },
+      ].filter(Boolean) as { to: string; name: string }[]
+
+      for (const rec of recipients) {
+        await fetch("https://api.resend.com/emails", {
+          method: "POST",
+          headers: { Authorization: `Bearer ${resendKey}`, "Content-Type": "application/json" },
+          body: JSON.stringify({
+            from: "PolyRISE Football <onboarding@resend.dev>",
+            to: [rec.to],
+            subject: `PR-VERIFIED Seal Issued — ${body.athleteName} (${upperCode})`,
+            html: emailHtml,
+          }),
+        }).catch(err => console.error("[athletes] email failed", err))
+      }
+    }
+
+    // SMS via Twilio
+    const twilioSid = process.env.TWILIO_ACCOUNT_SID
+    const twilioToken = process.env.TWILIO_AUTH_TOKEN
+    const twilioFrom = process.env.TWILIO_PHONE_NUMBER
+    if (twilioSid && twilioToken && twilioFrom) {
+      const smsText = `PolyRISE Football: ${body.athleteName} has been PR-VERIFIED! View profile: ${verifyUrl} | Expires ${expiresFormatted}. Re-verify at https://polyrisefootball.com/register`
+      const numbers = [body.phone, body.parentPhone].filter(Boolean)
+      for (const num of numbers) {
+        await fetch(`https://api.twilio.com/2010-04-01/Accounts/${twilioSid}/Messages.json`, {
+          method: "POST",
+          headers: {
+            Authorization: `Basic ${Buffer.from(`${twilioSid}:${twilioToken}`).toString("base64")}`,
+            "Content-Type": "application/x-www-form-urlencoded",
+          },
+          body: new URLSearchParams({ To: num, From: twilioFrom, Body: smsText }).toString(),
+        }).catch(err => console.error("[athletes] sms failed", err))
+      }
     }
 
     return NextResponse.json({ success: true, code: upperCode, sealNumber })

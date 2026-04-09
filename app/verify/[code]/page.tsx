@@ -136,30 +136,42 @@ export default async function VerifyPage({ params }: { params: { code: string } 
           <>
             {/* Expiration banners */}
             {sealStatus?.status === "expired" && (
-              <div className="bg-red-900 border border-red-700 rounded-2xl px-6 py-4 flex items-center gap-3">
-                <span className="text-2xl">⛔</span>
-                <div>
-                  <p className="text-white font-bold">Seal Expired</p>
-                  <p className="text-red-200 text-xs">This PR-VERIFIED seal has expired. Contact PolyRISE Football to renew.</p>
-                  {athlete.expiresAt && (
-                    <p className="text-red-300 text-xs mt-0.5">Expired: {new Date(athlete.expiresAt).toLocaleDateString()}</p>
-                  )}
+              <div className="bg-red-900 border border-red-700 rounded-2xl px-6 py-4 space-y-3">
+                <div className="flex items-center gap-3">
+                  <span className="text-2xl">⛔</span>
+                  <div>
+                    <p className="text-white font-bold">Seal Expired</p>
+                    <p className="text-red-200 text-xs">This PR-VERIFIED seal is no longer active.</p>
+                    {athlete.expiresAt && (
+                      <p className="text-red-300 text-xs mt-0.5">Expired: {new Date(athlete.expiresAt).toLocaleDateString()}</p>
+                    )}
+                  </div>
                 </div>
+                <a href="https://polyrisefootball.com/register"
+                  className="block w-full text-center bg-red-600 hover:bg-red-700 text-white font-bold py-2.5 rounded-xl text-sm transition-colors">
+                  Sign Up for Next PR-VERIFIED Event →
+                </a>
+                <p className="text-red-300 text-xs text-center">Questions? Call (817) 658-3300</p>
               </div>
             )}
             {sealStatus?.status === "expiring" && (
-              <div className="bg-yellow-800 border border-yellow-600 rounded-2xl px-6 py-4 flex items-center gap-3">
-                <span className="text-2xl">⚠️</span>
-                <div>
-                  <p className="text-white font-bold">Seal Expiring Soon</p>
-                  <p className="text-yellow-100 text-xs">
-                    This seal expires in {sealStatus.daysLeft} day{sealStatus.daysLeft !== 1 ? "s" : ""}.
-                    Contact PolyRISE Football to renew.
-                  </p>
-                  {athlete.expiresAt && (
-                    <p className="text-yellow-200 text-xs mt-0.5">Expires: {new Date(athlete.expiresAt).toLocaleDateString()}</p>
-                  )}
+              <div className="bg-yellow-800 border border-yellow-600 rounded-2xl px-6 py-4 space-y-3">
+                <div className="flex items-center gap-3">
+                  <span className="text-2xl">⚠️</span>
+                  <div>
+                    <p className="text-white font-bold">Seal Expiring Soon</p>
+                    <p className="text-yellow-100 text-xs">
+                      This seal expires in {sealStatus.daysLeft} day{sealStatus.daysLeft !== 1 ? "s" : ""}.
+                    </p>
+                    {athlete.expiresAt && (
+                      <p className="text-yellow-200 text-xs mt-0.5">Expires: {new Date(athlete.expiresAt).toLocaleDateString()}</p>
+                    )}
+                  </div>
                 </div>
+                <a href="https://polyrisefootball.com/register"
+                  className="block w-full text-center bg-yellow-600 hover:bg-yellow-700 text-white font-bold py-2.5 rounded-xl text-sm transition-colors">
+                  Sign Up to Re-Verify Before It Expires →
+                </a>
               </div>
             )}
 

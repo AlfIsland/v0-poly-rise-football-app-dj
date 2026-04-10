@@ -6,6 +6,7 @@ import LogoutButton from "@/components/logout-button"
 import ProgressReportDownload from "@/components/progress-report-download"
 import SendTrainingReport from "@/components/send-training-report"
 import FeaturedToggle from "@/components/featured-toggle"
+import ProgressChart from "@/components/progress-chart"
 import { calculateRatings } from "@/lib/athlete-ratings"
 import { gradeToClassYear } from "@/lib/grade-to-class-year"
 
@@ -251,6 +252,9 @@ export default async function TrainingAthletePage({ params }: { params: { id: st
                 </div>
               </div>
             )}
+
+            {/* Progress Chart */}
+            <ProgressChart sessions={sessions} />
 
             {/* Session history table */}
             {sessions.length > 1 && (

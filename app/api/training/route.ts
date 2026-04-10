@@ -1,6 +1,11 @@
 import { NextRequest, NextResponse } from "next/server"
 import Redis from "ioredis"
 
+function isAdmin(req: NextRequest): boolean {
+  const session = req.cookies.get("pr_admin_session")?.value
+  return !!session && !!process.env.ADMIN_SESSION_TOKEN && session === process.env.ADMIN_SESSION_TOKEN
+}
+
 let redis: Redis | null = null
 function getRedis(): Redis | null {
   if (!process.env.REDIS_URL) return null
@@ -54,6 +59,7 @@ export interface TrainingAthlete {
 
 // ─── POST /api/training — create athlete ──────────────────────────────────────
 export async function POST(req: NextRequest) {
+  if (!isAdmin(req)) return NextResponse.json({ success: false, error: "Unauthorized" }, { status: 401 })
   try {
     const body = await req.json()
     const { name, age, grade, school } = body
@@ -114,6 +120,7 @@ export async function GET(req: NextRequest) {
 
 // ─── PUT /api/training — update athlete info OR add session ───────────────────
 export async function PUT(req: NextRequest) {
+  if (!isAdmin(req)) return NextResponse.json({ success: false, error: "Unauthorized" }, { status: 401 })
   try {
     const body = await req.json()
     const { id, action } = body

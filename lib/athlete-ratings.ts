@@ -145,11 +145,13 @@ function buildForty(senior: Benchmark, shifts: number[]): GradeBenchmarks {
   }
 }
 
+// Middle school shifts are large — a 7th grader's 50th percentile 40yd is ~5.40s
+// not ~4.96s. Verified against real middle school combine data.
 const FORTY_NATIONAL: PositionBenchmarks = {
-  SPEED:   buildForty(FORTY_SENIOR_SPEED,   [0.06, 0.12, 0.18, 0.28]),
-  SKILL:   buildForty(FORTY_SENIOR_SKILL,   [0.06, 0.12, 0.18, 0.28]),
-  BIG:     buildForty(FORTY_SENIOR_BIG,     [0.06, 0.12, 0.18, 0.28]),
-  GENERAL: buildForty(FORTY_SENIOR_SPEED,   [0.06, 0.12, 0.18, 0.28]),
+  SPEED:   buildForty(FORTY_SENIOR_SPEED,   [0.06, 0.12, 0.18, 0.72]),
+  SKILL:   buildForty(FORTY_SENIOR_SKILL,   [0.06, 0.12, 0.18, 0.75]),
+  BIG:     buildForty(FORTY_SENIOR_BIG,     [0.06, 0.12, 0.18, 0.62]),
+  GENERAL: buildForty(FORTY_SENIOR_SPEED,   [0.06, 0.12, 0.18, 0.72]),
 }
 
 // ── 20-YD SHUTTLE / 5-10-5 (lower = better) ──────────────────────────────────
@@ -182,11 +184,12 @@ function buildShuttle(senior: Benchmark, shifts: number[]): GradeBenchmarks {
   }
 }
 
+// Middle school 50th pct shuttle ~4.85s vs senior 4.40s
 const SHUTTLE_NATIONAL: PositionBenchmarks = {
-  SPEED:   buildShuttle(SHUTTLE_SENIOR_SPEED,  [0.05, 0.10, 0.16, 0.25]),
-  SKILL:   buildShuttle(SHUTTLE_SENIOR_SKILL,  [0.05, 0.10, 0.16, 0.25]),
-  BIG:     buildShuttle(SHUTTLE_SENIOR_BIG,    [0.05, 0.10, 0.16, 0.25]),
-  GENERAL: buildShuttle(SHUTTLE_SENIOR_SPEED,  [0.05, 0.10, 0.16, 0.25]),
+  SPEED:   buildShuttle(SHUTTLE_SENIOR_SPEED,  [0.05, 0.10, 0.16, 0.45]),
+  SKILL:   buildShuttle(SHUTTLE_SENIOR_SKILL,  [0.05, 0.10, 0.16, 0.48]),
+  BIG:     buildShuttle(SHUTTLE_SENIOR_BIG,    [0.05, 0.10, 0.16, 0.40]),
+  GENERAL: buildShuttle(SHUTTLE_SENIOR_SPEED,  [0.05, 0.10, 0.16, 0.45]),
 }
 
 // ── 3-CONE / L-DRILL (lower = better) ────────────────────────────────────────
@@ -219,11 +222,12 @@ function buildCone(senior: Benchmark, shifts: number[]): GradeBenchmarks {
   }
 }
 
+// Middle school 50th pct 3-cone ~7.80s vs senior 6.98s
 const THREE_CONE_NATIONAL: PositionBenchmarks = {
-  SPEED:   buildCone(THREE_CONE_SENIOR_SPEED,  [0.08, 0.16, 0.24, 0.38]),
-  SKILL:   buildCone(THREE_CONE_SENIOR_SKILL,  [0.08, 0.16, 0.24, 0.38]),
-  BIG:     buildCone(THREE_CONE_SENIOR_BIG,    [0.08, 0.16, 0.24, 0.38]),
-  GENERAL: buildCone(THREE_CONE_SENIOR_SPEED,  [0.08, 0.16, 0.24, 0.38]),
+  SPEED:   buildCone(THREE_CONE_SENIOR_SPEED,  [0.08, 0.16, 0.24, 0.82]),
+  SKILL:   buildCone(THREE_CONE_SENIOR_SKILL,  [0.08, 0.16, 0.24, 0.85]),
+  BIG:     buildCone(THREE_CONE_SENIOR_BIG,    [0.08, 0.16, 0.24, 0.75]),
+  GENERAL: buildCone(THREE_CONE_SENIOR_SPEED,  [0.08, 0.16, 0.24, 0.82]),
 }
 
 // ── VERTICAL JUMP (higher = better) ──────────────────────────────────────────
@@ -256,11 +260,12 @@ function buildVert(senior: Benchmark, shifts: number[]): GradeBenchmarks {
   }
 }
 
+// Middle school 50th pct vertical ~20" vs senior 32"
 const VERTICAL_NATIONAL: PositionBenchmarks = {
-  SPEED:   buildVert(VERT_SENIOR_SPEED,  [1.5, 3, 5, 8]),
-  SKILL:   buildVert(VERT_SENIOR_SKILL,  [1.5, 3, 5, 8]),
-  BIG:     buildVert(VERT_SENIOR_BIG,    [1.5, 3, 5, 8]),
-  GENERAL: buildVert(VERT_SENIOR_SPEED,  [1.5, 3, 5, 8]),
+  SPEED:   buildVert(VERT_SENIOR_SPEED,  [1.5, 3, 5, 12]),
+  SKILL:   buildVert(VERT_SENIOR_SKILL,  [1.5, 3, 5, 12]),
+  BIG:     buildVert(VERT_SENIOR_BIG,    [1.5, 3, 5, 12]),
+  GENERAL: buildVert(VERT_SENIOR_SPEED,  [1.5, 3, 5, 12]),
 }
 
 // ── BROAD JUMP (higher = better) ─────────────────────────────────────────────
@@ -293,11 +298,12 @@ function buildBroad(senior: Benchmark, shifts: number[]): GradeBenchmarks {
   }
 }
 
+// Middle school 50th pct broad ~84" vs senior 103"
 const BROAD_NATIONAL: PositionBenchmarks = {
-  SPEED:   buildBroad(BROAD_SENIOR_SPEED,  [2, 4, 7, 11]),
-  SKILL:   buildBroad(BROAD_SENIOR_SKILL,  [2, 4, 7, 11]),
-  BIG:     buildBroad(BROAD_SENIOR_BIG,    [2, 4, 7, 11]),
-  GENERAL: buildBroad(BROAD_SENIOR_SPEED,  [2, 4, 7, 11]),
+  SPEED:   buildBroad(BROAD_SENIOR_SPEED,  [2, 4, 7, 19]),
+  SKILL:   buildBroad(BROAD_SENIOR_SKILL,  [2, 4, 7, 19]),
+  BIG:     buildBroad(BROAD_SENIOR_BIG,    [2, 4, 7, 17]),
+  GENERAL: buildBroad(BROAD_SENIOR_SPEED,  [2, 4, 7, 19]),
 }
 
 // ── BENCH PRESS (higher = better) ────────────────────────────────────────────
@@ -330,11 +336,12 @@ function buildBench(senior: Benchmark, shifts: number[]): GradeBenchmarks {
   }
 }
 
+// Middle school bench — very few 7th graders bench 225, expectations very low
 const BENCH_NATIONAL: PositionBenchmarks = {
-  SPEED:   buildBench(BENCH_SENIOR_SPEED,  [1, 2, 3, 5]),
-  SKILL:   buildBench(BENCH_SENIOR_SKILL,  [1, 2, 3, 5]),
-  BIG:     buildBench(BENCH_SENIOR_BIG,    [1, 2, 3, 5]),
-  GENERAL: buildBench(BENCH_SENIOR_SPEED,  [1, 2, 3, 5]),
+  SPEED:   buildBench(BENCH_SENIOR_SPEED,  [1, 2, 3, 6]),
+  SKILL:   buildBench(BENCH_SENIOR_SKILL,  [1, 2, 3, 7]),
+  BIG:     buildBench(BENCH_SENIOR_BIG,    [1, 2, 3, 9]),
+  GENERAL: buildBench(BENCH_SENIOR_SPEED,  [1, 2, 3, 6]),
 }
 
 // ─────────────────────────────────────────────────────────────────────────────

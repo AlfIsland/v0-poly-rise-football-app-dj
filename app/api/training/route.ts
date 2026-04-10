@@ -139,6 +139,31 @@ export async function PUT(req: NextRequest) {
       return NextResponse.json({ success: true })
     }
 
+    // Edit existing session by index
+    if (action === "edit-session") {
+      const { sessionIndex } = body
+      if (sessionIndex == null || !existing.sessions[sessionIndex]) {
+        return NextResponse.json({ success: false, error: "Session not found" }, { status: 404 })
+      }
+      const s = existing.sessions[sessionIndex]
+      existing.sessions[sessionIndex] = {
+        ...s,
+        date: body.date ?? s.date,
+        ...(body.fortyYard !== "" && body.fortyYard != null ? { fortyYard: parseFloat(body.fortyYard) } : { fortyYard: undefined }),
+        ...(body.shuttle !== "" && body.shuttle != null ? { shuttle: parseFloat(body.shuttle) } : { shuttle: undefined }),
+        ...(body.threeCone !== "" && body.threeCone != null ? { threeCone: parseFloat(body.threeCone) } : { threeCone: undefined }),
+        ...(body.verticalJump !== "" && body.verticalJump != null ? { verticalJump: parseFloat(body.verticalJump) } : { verticalJump: undefined }),
+        ...(body.broadJump !== "" && body.broadJump != null ? { broadJump: parseFloat(body.broadJump) } : { broadJump: undefined }),
+        ...(body.benchPress !== "" && body.benchPress != null ? { benchPress: parseInt(body.benchPress) } : { benchPress: undefined }),
+        ...(body.weight !== "" && body.weight != null ? { weight: parseFloat(body.weight) } : { weight: undefined }),
+        notes: body.notes ?? s.notes,
+      }
+      // Re-sort by date
+      existing.sessions.sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime())
+      await kvSet(`training:athlete:${id.toUpperCase()}`, existing)
+      return NextResponse.json({ success: true })
+    }
+
     // Toggle featured
     if (action === "toggle-featured") {
       existing.featured = !existing.featured

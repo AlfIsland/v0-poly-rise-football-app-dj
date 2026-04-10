@@ -274,10 +274,13 @@ export default async function TrainingAthletePage({ params }: { params: { id: st
                         <th className="text-left px-4 py-3">Broad</th>
                         <th className="text-left px-4 py-3">Bench</th>
                         <th className="text-left px-4 py-3">Weight</th>
+                        <th className="px-4 py-3"></th>
                       </tr>
                     </thead>
                     <tbody>
-                      {[...sessions].reverse().map((s: typeof sessions[0], i: number) => (
+                      {[...sessions].reverse().map((s: typeof sessions[0], i: number) => {
+                        const realIndex = sessions.length - 1 - i
+                        return (
                         <tr key={i} className={`border-b border-gray-800 ${i === 0 ? "bg-gray-800/50" : ""}`}>
                           <td className="px-4 py-3 font-semibold text-white">
                             {new Date(s.date).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "2-digit" })}
@@ -290,8 +293,15 @@ export default async function TrainingAthletePage({ params }: { params: { id: st
                           <td className="px-4 py-3 text-gray-300">{s.broadJump != null ? `${s.broadJump}"` : "—"}</td>
                           <td className="px-4 py-3 text-gray-300">{s.benchPress != null ? `${s.benchPress}` : "—"}</td>
                           <td className="px-4 py-3 text-gray-300">{s.weight != null ? `${s.weight} lbs` : "—"}</td>
+                          <td className="px-4 py-3">
+                            <Link href={`/training/${athlete.id}/session/edit?i=${realIndex}`}
+                              className="text-xs bg-gray-700 hover:bg-gray-600 px-2.5 py-1 rounded-lg transition-colors text-gray-300">
+                              Edit
+                            </Link>
+                          </td>
                         </tr>
-                      ))}
+                        )
+                      })}
                     </tbody>
                   </table>
                 </div>

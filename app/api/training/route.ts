@@ -27,6 +27,8 @@ export interface TrainingSession {
   date: string
   fortyYard?: number
   shuttle?: number
+  shuttleLeft?: number
+  shuttleRight?: number
   threeCone?: number
   verticalJump?: number
   broadJump?: number
@@ -125,6 +127,8 @@ export async function PUT(req: NextRequest) {
         date: body.date || new Date().toISOString().split("T")[0],
         ...(body.fortyYard !== "" && body.fortyYard != null ? { fortyYard: parseFloat(body.fortyYard) } : {}),
         ...(body.shuttle !== "" && body.shuttle != null ? { shuttle: parseFloat(body.shuttle) } : {}),
+        ...(body.shuttleLeft !== "" && body.shuttleLeft != null ? { shuttleLeft: parseFloat(body.shuttleLeft) } : {}),
+        ...(body.shuttleRight !== "" && body.shuttleRight != null ? { shuttleRight: parseFloat(body.shuttleRight) } : {}),
         ...(body.threeCone !== "" && body.threeCone != null ? { threeCone: parseFloat(body.threeCone) } : {}),
         ...(body.verticalJump !== "" && body.verticalJump != null ? { verticalJump: parseFloat(body.verticalJump) } : {}),
         ...(body.broadJump !== "" && body.broadJump != null ? { broadJump: parseFloat(body.broadJump) } : {}),
@@ -162,6 +166,8 @@ export async function PUT(req: NextRequest) {
         date: body.date ?? s.date,
         ...(body.fortyYard !== "" && body.fortyYard != null ? { fortyYard: parseFloat(body.fortyYard) } : { fortyYard: undefined }),
         ...(body.shuttle !== "" && body.shuttle != null ? { shuttle: parseFloat(body.shuttle) } : { shuttle: undefined }),
+        ...(body.shuttleLeft !== "" && body.shuttleLeft != null ? { shuttleLeft: parseFloat(body.shuttleLeft) } : { shuttleLeft: undefined }),
+        ...(body.shuttleRight !== "" && body.shuttleRight != null ? { shuttleRight: parseFloat(body.shuttleRight) } : { shuttleRight: undefined }),
         ...(body.threeCone !== "" && body.threeCone != null ? { threeCone: parseFloat(body.threeCone) } : { threeCone: undefined }),
         ...(body.verticalJump !== "" && body.verticalJump != null ? { verticalJump: parseFloat(body.verticalJump) } : { verticalJump: undefined }),
         ...(body.broadJump !== "" && body.broadJump != null ? { broadJump: parseFloat(body.broadJump) } : { broadJump: undefined }),

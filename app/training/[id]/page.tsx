@@ -254,6 +254,81 @@ export default async function TrainingAthletePage({ params }: { params: { id: st
               </div>
             )}
 
+            {/* Shuttle L vs R Analysis */}
+            {(() => {
+              const latest = sessions.filter(s => s.shuttleLeft != null || s.shuttleRight != null).slice(-1)[0]
+              if (!latest) return null
+              const L = latest.shuttleLeft
+              const R = latest.shuttleRight
+              if (L == null || R == null) return null
+              const diff = Math.abs(L - R).toFixed(2)
+              const weaker = L > R ? "Left" : R > L ? "Right" : null
+              const stronger = L < R ? "Left" : R < L ? "Right" : null
+              const pct = ((Math.abs(L - R) / Math.min(L, R)) * 100).toFixed(1)
+              return (
+                <div className="bg-gray-900 rounded-2xl border border-gray-800 overflow-hidden">
+                  <div className="bg-gray-800 px-6 py-4">
+                    <p className="text-xs text-gray-400 uppercase tracking-widest">5-10-5 Shuttle — Left vs Right Analysis</p>
+                    <p className="text-xs text-gray-500 mt-0.5">Identifies lateral dominance and movement imbalance</p>
+                  </div>
+                  <div className="px-6 py-5">
+                    {/* L vs R bars */}
+                    <div className="grid grid-cols-2 gap-4 mb-5">
+                      <div className={`rounded-xl px-4 py-4 border text-center ${L > R ? "bg-red-950/30 border-red-900/50" : "bg-green-900/20 border-green-800/50"}`}>
+                        <p className="text-xs text-gray-400 uppercase tracking-wider mb-1">Left Start</p>
+                        <p className="text-3xl font-black text-white">{L}<span className="text-lg text-gray-400">s</span></p>
+                        {weaker === "Left" && <p className="text-xs text-red-400 font-semibold mt-1">Weaker side</p>}
+                        {stronger === "Left" && <p className="text-xs text-green-400 font-semibold mt-1">Stronger side</p>}
+                      </div>
+                      <div className={`rounded-xl px-4 py-4 border text-center ${R > L ? "bg-red-950/30 border-red-900/50" : "bg-green-900/20 border-green-800/50"}`}>
+                        <p className="text-xs text-gray-400 uppercase tracking-wider mb-1">Right Start</p>
+                        <p className="text-3xl font-black text-white">{R}<span className="text-lg text-gray-400">s</span></p>
+                        {weaker === "Right" && <p className="text-xs text-red-400 font-semibold mt-1">Weaker side</p>}
+                        {stronger === "Right" && <p className="text-xs text-green-400 font-semibold mt-1">Stronger side</p>}
+                      </div>
+                    </div>
+
+                    {/* Visual bar comparison */}
+                    <div className="space-y-2 mb-5">
+                      <div className="flex items-center gap-3">
+                        <span className="text-xs text-gray-500 w-6">L</span>
+                        <div className="flex-1 h-3 bg-gray-800 rounded-full overflow-hidden">
+                          <div className={`h-full rounded-full ${L > R ? "bg-red-500" : "bg-green-500"}`}
+                            style={{ width: `${Math.min((L / Math.max(L, R)) * 100, 100)}%` }} />
+                        </div>
+                        <span className="text-xs text-white font-mono w-10 text-right">{L}s</span>
+                      </div>
+                      <div className="flex items-center gap-3">
+                        <span className="text-xs text-gray-500 w-6">R</span>
+                        <div className="flex-1 h-3 bg-gray-800 rounded-full overflow-hidden">
+                          <div className={`h-full rounded-full ${R > L ? "bg-red-500" : "bg-green-500"}`}
+                            style={{ width: `${Math.min((R / Math.max(L, R)) * 100, 100)}%` }} />
+                        </div>
+                        <span className="text-xs text-white font-mono w-10 text-right">{R}s</span>
+                      </div>
+                    </div>
+
+                    {/* Imbalance callout */}
+                    {weaker ? (
+                      <div className="bg-yellow-950/40 border border-yellow-800/50 rounded-xl px-4 py-3">
+                        <p className="text-yellow-300 font-semibold text-sm">
+                          {pct}% imbalance detected — {diff}s difference
+                        </p>
+                        <p className="text-yellow-500 text-xs mt-1">
+                          {weaker}-side start is slower. Focus training on {weaker.toLowerCase()} lateral drive, first-step explosion, and hip rotation to close the gap.
+                        </p>
+                      </div>
+                    ) : (
+                      <div className="bg-green-950/30 border border-green-800/50 rounded-xl px-4 py-3">
+                        <p className="text-green-300 font-semibold text-sm">Balanced — no significant side difference</p>
+                        <p className="text-green-600 text-xs mt-1">Equal lateral quickness from both sides. Excellent symmetry.</p>
+                      </div>
+                    )}
+                  </div>
+                </div>
+              )
+            })()}
+
             {/* Progress Chart */}
             <ProgressChart sessions={sessions} />
 
@@ -269,7 +344,7 @@ export default async function TrainingAthletePage({ params }: { params: { id: st
                       <tr className="border-b border-gray-800 text-gray-500 uppercase tracking-wider">
                         <th className="text-left px-4 py-3">Date</th>
                         <th className="text-left px-4 py-3">40-Yd</th>
-                        <th className="text-left px-4 py-3">Shuttle</th>
+                        <th className="text-left px-4 py-3">Shuttle (L / R)</th>
                         <th className="text-left px-4 py-3">3-Cone</th>
                         <th className="text-left px-4 py-3">Vertical</th>
                         <th className="text-left px-4 py-3">Broad</th>
@@ -288,7 +363,14 @@ export default async function TrainingAthletePage({ params }: { params: { id: st
                             {i === 0 && <span className="ml-1 text-xs text-green-400">(latest)</span>}
                           </td>
                           <td className="px-4 py-3 text-gray-300">{s.fortyYard != null ? `${s.fortyYard}s` : "—"}</td>
-                          <td className="px-4 py-3 text-gray-300">{s.shuttle != null ? `${s.shuttle}s` : "—"}</td>
+                          <td className="px-4 py-3 text-gray-300">
+                            {s.shuttle != null ? `${s.shuttle}s` : "—"}
+                            {(s.shuttleLeft != null || s.shuttleRight != null) && (
+                              <span className="block text-xs text-gray-500 mt-0.5">
+                                L: {s.shuttleLeft != null ? `${s.shuttleLeft}s` : "—"} · R: {s.shuttleRight != null ? `${s.shuttleRight}s` : "—"}
+                              </span>
+                            )}
+                          </td>
                           <td className="px-4 py-3 text-gray-300">{s.threeCone != null ? `${s.threeCone}s` : "—"}</td>
                           <td className="px-4 py-3 text-gray-300">{s.verticalJump != null ? `${s.verticalJump}"` : "—"}</td>
                           <td className="px-4 py-3 text-gray-300">{s.broadJump != null ? `${s.broadJump}"` : "—"}</td>

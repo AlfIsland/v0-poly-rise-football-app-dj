@@ -112,6 +112,38 @@ export async function POST(req: NextRequest) {
           parent.stripeSubscriptionId = session.subscription as string
           parent.subscriptionStatus = "active"
           await saveParent(parent)
+
+          // Notify admin of new parent subscription
+          const resendKey = process.env.RESEND_API_KEY
+          if (resendKey) {
+            fetch("https://api.resend.com/emails", {
+              method: "POST",
+              headers: { Authorization: `Bearer ${resendKey}`, "Content-Type": "application/json" },
+              body: JSON.stringify({
+                from: "PolyRISE Football <onboarding@resend.dev>",
+                to: ["PolyRISE7v7@gmail.com"],
+                subject: `Parent Subscribed — ${parent.name}`,
+                html: `
+                  <div style="font-family:sans-serif;max-width:520px;margin:0 auto;padding:24px;background:#0a0a0f;color:#fff">
+                    <h2 style="color:#16a34a">New Parent Subscription</h2>
+                    <p><strong>Name:</strong> ${parent.name}</p>
+                    <p><strong>Email:</strong> ${parent.email}</p>
+                    <p><strong>Phone:</strong> ${parent.phone || "—"}</p>
+                    <p><strong>Athlete Name:</strong> ${parent.athleteName || "—"}</p>
+                    <p><strong>Plan:</strong> ${plan === "quarterly" ? "Quarterly" : "Monthly"}</p>
+                    <p><strong>Subscribed:</strong> ${new Date().toLocaleString()}</p>
+                    <p style="margin-top:16px">
+                      <strong>Action needed:</strong> Go to your admin panel to link their athlete.
+                    </p>
+                    <p style="margin-top:12px">
+                      <a href="https://polyrisefootball.com/admin/parents" style="background:#dc2626;color:#fff;padding:10px 20px;border-radius:8px;text-decoration:none;font-weight:bold;font-size:13px">Manage Parents →</a>
+                    </p>
+                    <p style="color:#999;font-size:12px;margin-top:16px">PolyRISE Football · polyrisefootball.com/admin/parents</p>
+                  </div>
+                `,
+              }),
+            }).catch(err => console.error("[webhook] subscription notify failed", err))
+          }
         }
         break
       }

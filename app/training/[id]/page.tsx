@@ -7,6 +7,7 @@ import ProgressReportDownload from "@/components/progress-report-download"
 import SendTrainingReport from "@/components/send-training-report"
 import FeaturedToggle from "@/components/featured-toggle"
 import ProgressChart from "@/components/progress-chart"
+import DeleteSessionButton from "@/components/delete-session-button"
 import { calculateRatings } from "@/lib/athlete-ratings"
 import { gradeToClassYear } from "@/lib/grade-to-class-year"
 
@@ -294,10 +295,13 @@ export default async function TrainingAthletePage({ params }: { params: { id: st
                           <td className="px-4 py-3 text-gray-300">{s.benchPress != null ? `${s.benchPress}` : "—"}</td>
                           <td className="px-4 py-3 text-gray-300">{s.weight != null ? `${s.weight} lbs` : "—"}</td>
                           <td className="px-4 py-3">
-                            <Link href={`/training/${athlete.id}/session/edit?i=${realIndex}`}
-                              className="text-xs bg-gray-700 hover:bg-gray-600 px-2.5 py-1 rounded-lg transition-colors text-gray-300">
-                              Edit
-                            </Link>
+                            <div className="flex items-center gap-1.5">
+                              <Link href={`/training/${athlete.id}/session/edit?i=${realIndex}`}
+                                className="text-xs bg-gray-700 hover:bg-gray-600 px-2.5 py-1 rounded-lg transition-colors text-gray-300">
+                                Edit
+                              </Link>
+                              <DeleteSessionButton athleteId={athlete.id} sessionIndex={realIndex} sessionDate={s.date} />
+                            </div>
                           </td>
                         </tr>
                         )

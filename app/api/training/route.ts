@@ -139,6 +139,17 @@ export async function PUT(req: NextRequest) {
       return NextResponse.json({ success: true })
     }
 
+    // Delete session by index
+    if (action === "delete-session") {
+      const { sessionIndex } = body
+      if (sessionIndex == null || !existing.sessions[sessionIndex]) {
+        return NextResponse.json({ success: false, error: "Session not found" }, { status: 404 })
+      }
+      existing.sessions.splice(sessionIndex, 1)
+      await kvSet(`training:athlete:${id.toUpperCase()}`, existing)
+      return NextResponse.json({ success: true })
+    }
+
     // Edit existing session by index
     if (action === "edit-session") {
       const { sessionIndex } = body

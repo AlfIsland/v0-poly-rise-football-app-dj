@@ -17,7 +17,7 @@ export async function GET() {
       url: "https://polyrisefootball.com/api",
     },
     logo_url: "https://polyrisefootball.com/poly-rise-logo.png",
-    contact_email: "coachjonathan@polyrisefootball.com",
+    contact_email: "polyrise@polyrisefootball.com",
     legal_info_url: "https://polyrisefootball.com",
   }
 

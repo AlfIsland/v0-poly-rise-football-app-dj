@@ -4,7 +4,6 @@ import type React from "react"
 import type { Metadata } from "next"
 import { Inter, Geist_Mono } from "next/font/google"
 import { Analytics } from "@vercel/analytics/next"
-import ChatWidget from "@/components/chat-widget"
 import "./globals.css"
 
 const _inter = Inter({ subsets: ["latin"], variable: "--font-sans" })
@@ -109,8 +108,7 @@ export default function RootLayout({
       </head>
       <body className={`font-sans antialiased`}>
         {children}
-        <ChatWidget />
-        <Analytics />
+<Analytics />
       {/* v0 – built-with badge */}
   <div dangerouslySetInnerHTML={{ __html: `<div id="v0-built-with-button-53655db8-e3ba-46d8-b99f-50b8a4630d68" style="
 border: 1px solid hsl(0deg 0% 100% / 12%);

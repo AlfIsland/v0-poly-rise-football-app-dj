@@ -15,7 +15,7 @@ async function sendEmail(resendKey: string, to: string, subject: string, html: s
   await fetch("https://api.resend.com/emails", {
     method: "POST",
     headers: { Authorization: `Bearer ${resendKey}`, "Content-Type": "application/json" },
-    body: JSON.stringify({ from: "PolyRISE Football <onboarding@resend.dev>", to: [to], subject, html }),
+    body: JSON.stringify({ from: "PolyRISE Football <noreply@polyrisefootball.com>", to: [to], subject, html }),
   }).catch(err => console.error("[cron] email failed", err))
 }
 

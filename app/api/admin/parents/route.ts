@@ -62,7 +62,7 @@ export async function PATCH(req: NextRequest) {
           method: "POST",
           headers: { Authorization: `Bearer ${resendKey}`, "Content-Type": "application/json" },
           body: JSON.stringify({
-            from: "PolyRISE Football <onboarding@resend.dev>",
+            from: "PolyRISE Football <noreply@polyrisefootball.com>",
             to: [parent.email],
             subject: `Your athlete profile is ready — ${athleteName}`,
             html: `

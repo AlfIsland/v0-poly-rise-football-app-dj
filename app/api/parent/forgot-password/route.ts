@@ -24,7 +24,7 @@ export async function POST(req: NextRequest) {
         method: "POST",
         headers: { Authorization: `Bearer ${resendKey}`, "Content-Type": "application/json" },
         body: JSON.stringify({
-          from: "PolyRISE Football <onboarding@resend.dev>",
+          from: "PolyRISE Football <noreply@polyrisefootball.com>",
           to: [parent.email],
           subject: "Reset Your PolyRISE Password",
           html: `

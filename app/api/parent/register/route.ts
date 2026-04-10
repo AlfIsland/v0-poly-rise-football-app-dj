@@ -31,7 +31,7 @@ export async function POST(req: NextRequest) {
         method: "POST",
         headers: { Authorization: `Bearer ${resendKey}`, "Content-Type": "application/json" },
         body: JSON.stringify({
-          from: "PolyRISE Football <onboarding@resend.dev>",
+          from: "PolyRISE Football <noreply@polyrisefootball.com>",
           to: ["PolyRISE7v7@gmail.com"],
           subject: `New Parent Account — ${name}`,
           html: `

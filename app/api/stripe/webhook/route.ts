@@ -42,7 +42,7 @@ export async function POST(req: NextRequest) {
                 method: "POST",
                 headers: { Authorization: `Bearer ${resendKeyParent}`, "Content-Type": "application/json" },
                 body: JSON.stringify({
-                  from: "PolyRISE Football <onboarding@resend.dev>",
+                  from: "PolyRISE Football <noreply@polyrisefootball.com>",
                   to: [reg.email],
                   subject: `Registration Confirmed — ${reg.programName}`,
                   html: `
@@ -73,7 +73,7 @@ export async function POST(req: NextRequest) {
                 method: "POST",
                 headers: { Authorization: `Bearer ${resendKey}`, "Content-Type": "application/json" },
                 body: JSON.stringify({
-                  from: "PolyRISE Registrations <onboarding@resend.dev>",
+                  from: "PolyRISE Registrations <noreply@polyrisefootball.com>",
                   to: ["PolyRISE7v7@gmail.com"],
                   subject: `New Registration: ${reg.playerName} — ${reg.programName}`,
                   html: `
@@ -120,7 +120,7 @@ export async function POST(req: NextRequest) {
               method: "POST",
               headers: { Authorization: `Bearer ${resendKey}`, "Content-Type": "application/json" },
               body: JSON.stringify({
-                from: "PolyRISE Football <onboarding@resend.dev>",
+                from: "PolyRISE Football <noreply@polyrisefootball.com>",
                 to: ["PolyRISE7v7@gmail.com"],
                 subject: `Parent Subscribed — ${parent.name}`,
                 html: `

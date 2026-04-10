@@ -17,7 +17,7 @@ export async function GET(req: NextRequest) {
     method: "POST",
     headers: { Authorization: `Bearer ${resendKey}`, "Content-Type": "application/json" },
     body: JSON.stringify({
-      from: "PolyRISE Football <onboarding@resend.dev>",
+      from: "PolyRISE Football <noreply@polyrisefootball.com>",
       to: [to],
       subject: "PolyRISE Email Test",
       html: "<p>This is a test email from PolyRISE. If you see this, email sending is working.</p>",

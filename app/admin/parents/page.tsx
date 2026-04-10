@@ -46,6 +46,7 @@ export default function AdminParentsPage() {
   const [linkingEmail, setLinkingEmail] = useState<string | null>(null)
   const [linkSelect, setLinkSelect] = useState("")
   const [saving, setSaving] = useState(false)
+  const [sentEmail, setSentEmail] = useState<string | null>(null)
 
   useEffect(() => {
     Promise.all([
@@ -82,6 +83,18 @@ export default function AdminParentsPage() {
     }
     setLinkingEmail(null)
     setLinkSelect("")
+    setSaving(false)
+  }
+
+  async function handleResendEmail(email: string) {
+    setSaving(true)
+    await fetch("/api/admin/parents", {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email, action: "resend-email" }),
+    })
+    setSentEmail(email)
+    setTimeout(() => setSentEmail(null), 3000)
     setSaving(false)
   }
 
@@ -256,12 +269,27 @@ export default function AdminParentsPage() {
                           </button>
                         </div>
                       ) : (
-                        <button
-                          onClick={() => setLinkingEmail(parent.email)}
-                          className="text-xs text-blue-400 hover:text-blue-300 border border-blue-400/30 hover:border-blue-400/60 rounded-lg px-3 py-1.5 transition-colors"
-                        >
-                          + Link Athlete
-                        </button>
+                        <div className="flex gap-2 flex-wrap">
+                          <button
+                            onClick={() => setLinkingEmail(parent.email)}
+                            className="text-xs text-blue-400 hover:text-blue-300 border border-blue-400/30 hover:border-blue-400/60 rounded-lg px-3 py-1.5 transition-colors"
+                          >
+                            + Link Athlete
+                          </button>
+                          {parent.athleteIds.length > 0 && (
+                            <button
+                              onClick={() => handleResendEmail(parent.email)}
+                              disabled={saving}
+                              className={`text-xs border rounded-lg px-3 py-1.5 transition-colors ${
+                                sentEmail === parent.email
+                                  ? "text-green-400 border-green-400/40"
+                                  : "text-yellow-400 hover:text-yellow-300 border-yellow-400/30 hover:border-yellow-400/60"
+                              }`}
+                            >
+                              {sentEmail === parent.email ? "✓ Email Sent" : "Resend Email"}
+                            </button>
+                          )}
+                        </div>
                       )}
                     </div>
                   </div>

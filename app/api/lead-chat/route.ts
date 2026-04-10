@@ -65,7 +65,7 @@ export async function POST(req: NextRequest) {
   try {
     const { messages } = await req.json()
     const apiKey = process.env.ANTHROPIC_API_KEY
-    if (!apiKey) return NextResponse.json({ error: "Not configured" }, { status: 500 })
+    if (!apiKey) return NextResponse.json({ error: "ANTHROPIC_API_KEY not set in Vercel environment variables" }, { status: 500 })
 
     const response = await fetch("https://api.anthropic.com/v1/messages", {
       method: "POST",
@@ -83,7 +83,10 @@ export async function POST(req: NextRequest) {
     })
 
     const data = await response.json()
-    if (!response.ok) return NextResponse.json({ error: "Failed" }, { status: 500 })
+    if (!response.ok) {
+      console.error("[lead-chat] Anthropic error:", JSON.stringify(data))
+      return NextResponse.json({ error: data?.error?.message || "Anthropic API error", detail: data }, { status: 500 })
+    }
 
     const reply = data.content
       .filter((b: { type: string }) => b.type === "text")

@@ -78,7 +78,13 @@ export default async function TrainingAthletePage({ params }: { params: { id: st
           <div className="flex items-center gap-4">
             <Image src="/poly-rise-logo.png" alt="PolyRISE" width={36} height={36} className="object-contain" />
             <div>
-              <h1 className="text-2xl font-bold text-white">{athlete.name}</h1>
+              <div className="flex items-center gap-2">
+                <h1 className="text-2xl font-bold text-white">{athlete.name}</h1>
+                {athlete.sport === "soccer"
+                  ? <span className="text-xs bg-green-800 text-green-300 px-2 py-0.5 rounded-full font-semibold">⚽ Soccer</span>
+                  : <span className="text-xs bg-red-900 text-red-300 px-2 py-0.5 rounded-full font-semibold">🏈 Football</span>
+                }
+              </div>
               <p className="text-gray-400 text-sm">{athlete.age} yrs · {athlete.grade} · {athlete.school || "—"}</p>
               <Link href="/training" className="text-xs text-gray-600 hover:text-gray-400 underline mt-0.5 block">← Training Roster</Link>
             </div>

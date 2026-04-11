@@ -12,7 +12,7 @@ const GRADES = [
 
 interface Athlete {
   id: string; name: string; age: number; grade: string
-  school: string; position?: string; sessions: { date: string }[]; featured?: boolean
+  school: string; position?: string; sport?: string; sessions: { date: string }[]; featured?: boolean
 }
 
 function MetricInput({ label, value, onChange, placeholder, step = "0.01" }: {
@@ -131,6 +131,7 @@ export default function TrainingRosterPage() {
   const [grade, setGrade] = useState("")
   const [position, setPosition] = useState("")
   const [school, setSchool] = useState("")
+  const [sport, setSport] = useState<"football" | "soccer">("football")
   const [fortyYard, setFortyYard] = useState("")
   const [shuttle, setShuttle] = useState("")
   const [threeCone, setThreeCone] = useState("")
@@ -154,7 +155,7 @@ export default function TrainingRosterPage() {
   useEffect(() => { fetchAthletes() }, [fetchAthletes])
 
   const resetForm = () => {
-    setName(""); setAge(""); setGrade(""); setPosition(""); setSchool("")
+    setName(""); setAge(""); setGrade(""); setPosition(""); setSchool(""); setSport("football")
     setFortyYard(""); setShuttle(""); setThreeCone("")
     setVerticalJump(""); setBroadJump(""); setBenchPress(""); setWeight("")
     setPasteText(""); setParsed(false); setDuplicate(null)
@@ -186,7 +187,7 @@ export default function TrainingRosterPage() {
       const createRes = await fetch("/api/training", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ name, age, grade, school, position }),
+        body: JSON.stringify({ name, age, grade, school, position, sport }),
       })
       const createData = await createRes.json()
       if (!createData.success) { setSaveMsg("Error creating athlete."); setSaving(false); return }
@@ -225,6 +226,18 @@ export default function TrainingRosterPage() {
           </button>
         </div>
       )}
+
+      {/* Sport toggle */}
+      <div className="flex gap-2 mb-1">
+        <button onClick={() => setSport("football")}
+          className={`flex-1 py-2 rounded-lg text-sm font-bold transition-colors ${sport === "football" ? "bg-red-600 text-white" : "bg-gray-800 text-gray-400 hover:text-white border border-gray-700"}`}>
+          🏈 Football
+        </button>
+        <button onClick={() => setSport("soccer")}
+          className={`flex-1 py-2 rounded-lg text-sm font-bold transition-colors ${sport === "soccer" ? "bg-green-600 text-white" : "bg-gray-800 text-gray-400 hover:text-white border border-gray-700"}`}>
+          ⚽ Soccer
+        </button>
+      </div>
 
       <div className="grid grid-cols-2 md:grid-cols-5 gap-3">
         <div className="md:col-span-2">
@@ -412,8 +425,15 @@ export default function TrainingRosterPage() {
                   <tbody>
                     {sorted.map((a) => {
                       const lastSession = a.sessions?.length ? a.sessions[a.sessions.length - 1] : null
+                      const isSoccer = a.sport === "soccer"
                       return (
-                        <tr key={a.id} className={`border-b transition-colors ${a.featured ? "bg-yellow-950/30 border-yellow-900/40 hover:bg-yellow-950/50" : "border-gray-800 hover:bg-gray-800"}`}>
+                        <tr key={a.id} className={`border-b transition-colors ${
+                          a.featured
+                            ? "bg-yellow-950/30 border-yellow-900/40 hover:bg-yellow-950/50"
+                            : isSoccer
+                              ? "bg-green-950/20 border-green-900/30 hover:bg-green-950/40"
+                              : "border-gray-800 hover:bg-gray-800"
+                        }`}>
                           <td className="px-6 py-4">
                             <div className="flex items-center gap-2">
                               {a.featured && (
@@ -422,7 +442,10 @@ export default function TrainingRosterPage() {
                                 </svg>
                               )}
                               <div>
-                                <p className={`font-semibold ${a.featured ? "text-yellow-100" : "text-white"}`}>{a.name}</p>
+                                <div className="flex items-center gap-2">
+                                  <p className={`font-semibold ${a.featured ? "text-yellow-100" : "text-white"}`}>{a.name}</p>
+                                  {isSoccer && <span className="text-xs bg-green-800 text-green-300 px-1.5 py-0.5 rounded font-medium">⚽ Soccer</span>}
+                                </div>
                                 <p className="text-xs text-gray-600 font-mono">{a.id}</p>
                               </div>
                             </div>
@@ -461,8 +484,13 @@ export default function TrainingRosterPage() {
               <div className="md:hidden space-y-3">
                 {sorted.map((a) => {
                   const lastSession = a.sessions?.length ? a.sessions[a.sessions.length - 1] : null
+                  const isSoccer = a.sport === "soccer"
                   return (
-                    <div key={a.id} className={`rounded-2xl p-4 border ${a.featured ? "bg-yellow-950/30 border-yellow-700/40" : "bg-gray-900 border-gray-800"}`}>
+                    <div key={a.id} className={`rounded-2xl p-4 border ${
+                      a.featured ? "bg-yellow-950/30 border-yellow-700/40"
+                      : isSoccer ? "bg-green-950/20 border-green-800/40"
+                      : "bg-gray-900 border-gray-800"
+                    }`}>
                       <div className="flex justify-between items-start mb-2">
                         <div className="flex items-center gap-2">
                           {a.featured && (
@@ -471,7 +499,10 @@ export default function TrainingRosterPage() {
                             </svg>
                           )}
                           <div>
-                            <p className={`font-bold ${a.featured ? "text-yellow-100" : "text-white"}`}>{a.name}</p>
+                            <div className="flex items-center gap-2">
+                              <p className={`font-bold ${a.featured ? "text-yellow-100" : "text-white"}`}>{a.name}</p>
+                              {isSoccer && <span className="text-xs bg-green-800 text-green-300 px-1.5 py-0.5 rounded font-medium">⚽ Soccer</span>}
+                            </div>
                             <p className="text-xs text-gray-600 font-mono">{a.id}</p>
                           </div>
                         </div>

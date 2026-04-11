@@ -1,10 +1,6 @@
-import Image from "next/image"
-import { Metadata } from "next"
+"use client"
 
-export const metadata: Metadata = {
-  title: "Athlete Training Tracking Passport | PolyRISE Football",
-  description: "Track your athlete's performance, progress, and development with PolyRISE Football's Athlete Training Tracking Passport.",
-}
+import Image from "next/image"
 
 export default function TrainingPassportPage() {
   return (

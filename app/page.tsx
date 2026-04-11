@@ -366,6 +366,25 @@ export default function HomePage() {
               </div>
             </div>
 
+            {/* Multi-Sport Program */}
+            <div className="bg-card border-primary/50 border-2 overflow-hidden group hover:border-primary transition-colors">
+              <div className="pt-6 space-y-4">
+                <div>
+                  <h3 className="text-xl font-display font-bold mb-2">Multi-Sport Program</h3>
+                  <div className="text-lg font-bold text-white mb-3">$175/mo</div>
+                  <p className="text-muted-foreground text-sm leading-relaxed">
+                    Cross-training program designed to develop well-rounded athletes through multiple sports disciplines.
+                  </p>
+                </div>
+                <Link
+                  href="#register"
+                  className="w-full bg-[#FF6600] text-white px-4 py-2 rounded hover:bg-[#FF6600]/80 transition-colors"
+                >
+                  Register
+                </Link>
+              </div>
+            </div>
+
             {/* Camp PR-VERIFIED & Leadership Hike */}
             <div className="bg-card border-primary/50 border-2 overflow-hidden group hover:border-primary transition-colors">
               <div className="pt-6 space-y-4">

@@ -13,9 +13,9 @@ export async function GET() {
       location: "Austin, Texas",
       expanding: true,
       contact: {
-        phone: "(817) 658-3300",
+        phone: "817-658-3300",
         email: "polyrise@polyrisefootball.com",
-        whatsapp: "(817) 658-3300",
+        whatsapp: "817-658-3300",
       },
       social: {
         instagram: "https://instagram.com/polyrisefootball",

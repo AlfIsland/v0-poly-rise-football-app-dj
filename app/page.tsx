@@ -1,7 +1,8 @@
-import { ArrowRight, Trophy, Users, Target, Star, Calendar, MapPin, CheckCircle2 } from "lucide-react"
+import { ArrowRight, Trophy, Users, Target, Calendar, MapPin, CheckCircle2 } from "lucide-react"
 import Link from "next/link"
 import Image from "next/image"
 import { ProtectedImage } from "@/components/protected-image"
+import { MindBodyWidget } from "@/components/mindbody-widget"
 
 
 export default function HomePage() {
@@ -71,9 +72,7 @@ export default function HomePage() {
 
               <div className="flex flex-col sm:flex-row gap-4">
                 <Link
-                  href="https://app.teamlinkt.com/register/find/polyrisefootball"
-                  target="_blank"
-                  rel="noopener noreferrer"
+                  href="#register"
                   className="text-base font-semibold bg-[#FF6600] text-white px-6 py-3 rounded hover:bg-[#FF6600]/80 transition-colors text-center"
                 >
                   Register Now
@@ -269,9 +268,7 @@ export default function HomePage() {
                   </p>
                 </div>
                 <Link
-                  href="https://app.teamlinkt.com/register/find/polyrisefootball"
-                  target="_blank"
-                  rel="noopener noreferrer"
+                  href="#register"
                   className="w-full bg-[#FF6600] text-white px-4 py-2 rounded hover:bg-[#FF6600]/80 transition-colors"
                 >
                   Register
@@ -300,9 +297,7 @@ export default function HomePage() {
                   </p>
                 </div>
                 <Link
-                  href="https://app.teamlinkt.com/register/find/polyrisefootball"
-                  target="_blank"
-                  rel="noopener noreferrer"
+                  href="#register"
                   className="w-full bg-[#FF6600] text-white px-4 py-2 rounded hover:bg-[#FF6600]/80 transition-colors"
                 >
                   Register
@@ -336,9 +331,7 @@ export default function HomePage() {
                   </div>
                 </div>
                 <Link
-                  href="https://app.teamlinkt.com/register/find/polyrisefootball"
-                  target="_blank"
-                  rel="noopener noreferrer"
+                  href="#register"
                   className="w-full bg-[#FF6600] text-white px-4 py-2 rounded hover:bg-[#FF6600]/80 transition-colors"
                 >
                   Register Team
@@ -365,9 +358,26 @@ export default function HomePage() {
                   </div>
                 </div>
                 <Link
-                  href="https://app.teamlinkt.com/register/find/polyrisefootball"
-                  target="_blank"
-                  rel="noopener noreferrer"
+                  href="#register"
+                  className="w-full bg-[#FF6600] text-white px-4 py-2 rounded hover:bg-[#FF6600]/80 transition-colors"
+                >
+                  Register
+                </Link>
+              </div>
+            </div>
+
+            {/* Multi-Sport Program */}
+            <div className="bg-card border-primary/50 border-2 overflow-hidden group hover:border-primary transition-colors">
+              <div className="pt-6 space-y-4">
+                <div>
+                  <h3 className="text-xl font-display font-bold mb-2">Multi-Sport Program</h3>
+                  <div className="text-lg font-bold text-white mb-3">$175/mo</div>
+                  <p className="text-muted-foreground text-sm leading-relaxed">
+                    Cross-training program designed to develop well-rounded athletes through multiple sports disciplines.
+                  </p>
+                </div>
+                <Link
+                  href="#register"
                   className="w-full bg-[#FF6600] text-white px-4 py-2 rounded hover:bg-[#FF6600]/80 transition-colors"
                 >
                   Register
@@ -406,9 +416,7 @@ export default function HomePage() {
                   </div>
                 </div>
                 <Link
-                  href="https://app.teamlinkt.com/register/find/polyrisefootball"
-                  target="_blank"
-                  rel="noopener noreferrer"
+                  href="#register"
                   className="w-full bg-[#FF6600] text-white px-4 py-2 rounded hover:bg-[#FF6600]/80 transition-colors"
                 >
                   Register
@@ -452,9 +460,7 @@ export default function HomePage() {
                   </div>
                 </div>
                 <Link
-                  href="https://app.teamlinkt.com/register/find/polyrisefootball"
-                  target="_blank"
-                  rel="noopener noreferrer"
+                  href="#register"
                   className="w-full bg-[#FF6600] text-white px-4 py-2 rounded hover:bg-[#FF6600]/80 transition-colors"
                 >
                   Register Now
@@ -530,9 +536,7 @@ export default function HomePage() {
                   </div>
                 </div>
                 <Link
-                  href="https://app.teamlinkt.com/register/find/polyrisefootball"
-                  target="_blank"
-                  rel="noopener noreferrer"
+                  href="#register"
                   className="w-full bg-[#FF6600] text-white px-4 py-2 rounded hover:bg-[#FF6600]/80 transition-colors"
                 >
                   Register Now
@@ -828,6 +832,21 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* Registration Section */}
+      <section id="register" className="py-12 lg:py-20 bg-primary/5">
+        <div className="container mx-auto px-4 lg:px-8">
+          <div className="max-w-3xl mx-auto text-center">
+            <h2 className="text-4xl lg:text-5xl font-display font-bold mb-4">Register Now</h2>
+            <p className="text-lg text-muted-foreground mb-8">
+              Join PolyRISE Football and start your journey to becoming an elite athlete. Select your program below to get started.
+            </p>
+            <div className="bg-card border border-border rounded-lg p-6">
+              <MindBodyWidget />
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Contact Section */}
       <section id="contact" className="py-12 lg:py-20 bg-muted/30">
         <div className="container mx-auto px-4 lg:px-8">
@@ -882,8 +901,11 @@ export default function HomePage() {
                   </div>
                   <div>
                     <div className="font-medium mb-1 text-white">Email</div>
-                    <a href="mailto:polyrise7v7@gmail.com" className="text-white hover:underline">
-                      polyrise7v7@gmail.com
+                    <a href="mailto:polyrise@polyrisefootball.com" className="text-white hover:underline block">
+                      polyrise@polyrisefootball.com
+                    </a>
+                    <a href="mailto:kg@polyrisefootball.com" className="text-white hover:underline block">
+                      kg@polyrisefootball.com
                     </a>
                   </div>
                 </div>
@@ -975,9 +997,7 @@ export default function HomePage() {
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link
-                href="https://app.teamlinkt.com/register/find/polyrisefootball"
-                target="_blank"
-                rel="noopener noreferrer"
+                href="#register"
                 className="text-base bg-[#FF6600] text-white px-4 py-2 rounded hover:bg-[#FF6600]/80 transition-colors inline-flex items-center"
               >
                 Register for Training
@@ -1050,14 +1070,12 @@ export default function HomePage() {
                   </Link>
                 </li>
                 <li>
-                  <a
-                    href="https://app.teamlinkt.com/register/find/polyrisefootball"
-                    target="_blank"
-                    rel="noopener noreferrer"
+                  <Link
+                    href="#register"
                     className="hover:text-foreground transition-colors"
                   >
                     Register
-                  </a>
+                  </Link>
                 </li>
               </ul>
             </div>

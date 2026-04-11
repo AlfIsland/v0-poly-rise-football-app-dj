@@ -201,7 +201,7 @@ export async function GET() {
       },
       programs: programs,
       contact: {
-        phone: "(512) 593-3933",
+        phone: "(817) 658-3300",
         email: "polyrise@polyrisefootball.com",
         website: "https://polyrisefootball.com",
       },

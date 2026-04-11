@@ -14,7 +14,7 @@ export const organizationSchema = {
   email: "polyrise@polyrisefootball.com",
   address: {
     "@type": "PostalAddress",
-    addressLocality: "Austin",
+    addressLocality: "Dripping Springs",
     addressRegion: "TX",
     addressCountry: "US",
   },
@@ -46,7 +46,7 @@ export const localBusinessSchema = {
   priceRange: "$275-$500/month",
   address: {
     "@type": "PostalAddress",
-    addressLocality: "Austin",
+    addressLocality: "Dripping Springs",
     addressRegion: "TX",
     addressCountry: "US",
   },

@@ -384,7 +384,7 @@ export default function HomePage() {
               </div>
             </div>
 
-            {/* Camp PR-VERIFIED & Leadership Hike */}
+            {/* Camp PR-VERIFIED */}
             <div className="bg-card border-primary/50 border-2 overflow-hidden group hover:border-primary transition-colors">
               <div className="pt-6 space-y-4">
                 <div>
@@ -400,18 +400,6 @@ export default function HomePage() {
                   <div className="flex items-center justify-between">
                     <span className="font-medium">Camp Registration</span>
                     <span className="text-lg font-bold text-white">$50</span>
-                  </div>
-                </div>
-                
-                {/* Leadership Hike */}
-                <div className="border-t border-dashed border-border pt-4">
-                  <h4 className="text-lg font-display font-bold mb-2">Leadership Hike</h4>
-                  <p className="text-muted-foreground text-sm leading-relaxed mb-3">
-                    2201 Barton Springs Rd, Austin
-                  </p>
-                  <div className="flex items-center justify-between">
-                    <span className="font-medium">Hike Registration</span>
-                    <span className="text-lg font-bold text-white">$25</span>
                   </div>
                 </div>
                 <Link

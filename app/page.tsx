@@ -118,9 +118,18 @@ export default function HomePage() {
         <div className="container mx-auto px-4 lg:px-8">
           <div className="flex flex-col md:flex-row items-center justify-center gap-8 md:gap-12">
             <div className="text-center md:text-left max-w-3xl">
-              <h2 className="text-3xl lg:text-4xl font-display font-bold mb-4 text-balance">
+              <h2 className="text-3xl lg:text-4xl font-display font-bold mb-2 text-balance">
                 PR-VERIFIED <span className="text-xl lg:text-2xl font-normal text-gray-300">(Seal of Authenticity)</span>
               </h2>
+              <div className="mb-4">
+                <h3 className="text-xl lg:text-2xl font-display font-semibold text-primary">
+                  PolyRISE Athlete Passport
+                </h3>
+                <p className="text-base text-gray-400 italic">Your Athlete&apos;s Performance Journey</p>
+                <span className="inline-block mt-2 px-3 py-1 bg-primary/20 text-primary text-sm font-medium rounded-full">
+                  Coming Soon
+                </span>
+              </div>
               <p className="text-base lg:text-lg text-gray-300 mb-4 leading-relaxed">
                 The PR-VERIFIED seal is awarded exclusively to athletes who complete PolyRISE Football programs, camps, or tryouts. Overseen by a board of coaches with NFL and collegiate playing/coaching experience conducts standardized, pro-style combine testing using consistent protocols and multiple trials for maximum reliability. This seal certifies that the athlete&apos;s metrics were directly measured and verified by our team on-site. No self-reported times or inflated numbers. The data is accurate, unbiased, and built to stand up under recruiter scrutiny.
               </p>

@@ -31,6 +31,7 @@ export async function GET(req: NextRequest) {
         email: parent.email,
         name: parent.name,
         tier: parent.tier,
+        approvalStatus: parent.approvalStatus,
         subscriptionStatus: parent.subscriptionStatus,
         subscriptionEnd: parent.subscriptionEnd,
         athleteIds: parent.athleteIds,

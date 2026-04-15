@@ -31,6 +31,7 @@ interface Athlete {
 }
 interface Parent {
   email: string; name: string; tier: string
+  approvalStatus?: string
   subscriptionStatus?: string; subscriptionEnd?: string; athleteIds: string[]
 }
 
@@ -117,21 +118,35 @@ function Portal() {
         )}
 
         {/* Subscription status */}
-        <div className={`rounded-xl px-4 py-3 border text-sm ${
-          parent?.tier === "program" ? "bg-blue-950 border-blue-800 text-blue-300" :
-          hasAccess ? "bg-green-950 border-green-800 text-green-300" :
-          "bg-red-950 border-red-900 text-red-300"
-        }`}>
-          {parent?.tier === "program" ? (
-            <p><span className="font-bold">PolyRISE Program Member</span> — Full access included</p>
-          ) : hasAccess ? (
-            <p><span className="font-bold capitalize">{parent?.tier} Subscriber</span>
-              {parent?.subscriptionEnd && ` · Renews ${new Date(parent.subscriptionEnd).toLocaleDateString()}`}
-            </p>
-          ) : (
-            <p>No active subscription. <Link href="/parent/subscribe" className="underline font-bold">Subscribe to view reports →</Link></p>
-          )}
-        </div>
+        {parent?.approvalStatus === "pending" ? (
+          <div className="bg-yellow-950 border border-yellow-800 rounded-xl px-4 py-3 text-sm text-yellow-300">
+            <p className="font-bold">⏳ Approval Pending</p>
+            <p className="text-yellow-500 text-xs mt-1">Your PolyRISE Program Member request is being reviewed. You will receive an email once your athlete&apos;s profile is ready to view.</p>
+            <p className="text-yellow-600 text-xs mt-1">Questions? Call (817) 658-3300</p>
+          </div>
+        ) : parent?.approvalStatus === "denied" ? (
+          <div className="bg-red-950 border border-red-900 rounded-xl px-4 py-3 text-sm text-red-300">
+            <p className="font-bold">Access Not Confirmed</p>
+            <p className="text-red-400 text-xs mt-1">We could not verify your program enrollment. Subscribe below to access your athlete&apos;s profile.</p>
+            <Link href="/parent/register" className="inline-block mt-2 text-xs bg-red-600 hover:bg-red-700 text-white font-bold px-4 py-1.5 rounded-lg">Subscribe Now →</Link>
+          </div>
+        ) : (
+          <div className={`rounded-xl px-4 py-3 border text-sm ${
+            parent?.tier === "program" ? "bg-blue-950 border-blue-800 text-blue-300" :
+            hasAccess ? "bg-green-950 border-green-800 text-green-300" :
+            "bg-red-950 border-red-900 text-red-300"
+          }`}>
+            {parent?.tier === "program" ? (
+              <p><span className="font-bold">PolyRISE Program Member</span> — Full access included</p>
+            ) : hasAccess ? (
+              <p><span className="font-bold capitalize">{parent?.tier} Subscriber</span>
+                {parent?.subscriptionEnd && ` · Renews ${new Date(parent.subscriptionEnd).toLocaleDateString()}`}
+              </p>
+            ) : (
+              <p>No active subscription. <Link href="/parent/register" className="underline font-bold">Subscribe to view reports →</Link></p>
+            )}
+          </div>
+        )}
 
         {/* No athletes linked */}
         {athletes.length === 0 && hasAccess && (

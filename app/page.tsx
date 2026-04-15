@@ -70,12 +70,15 @@ export default function HomePage() {
               </p>
 
               <div className="flex flex-col sm:flex-row gap-4">
-                <Link
-                  href="https://app.teamlinkt.com/register/find/polyrisefootball" target="_blank" rel="noopener noreferrer"
-                  className="text-base font-semibold bg-[#FF6600] text-white px-6 py-3 rounded hover:bg-[#FF6600]/80 transition-colors text-center"
-                >
-                  Register Now
-                </Link>
+                <div className="flex flex-col items-center sm:items-start">
+                  <Link
+                    href="https://polyrisefootball.com/parent/register" target="_blank" rel="noopener noreferrer"
+                    className="text-base font-semibold bg-[#FF6600] text-white px-6 py-3 rounded hover:bg-[#FF6600]/80 transition-colors text-center"
+                  >
+                    Athlete Tracking Passport
+                  </Link>
+                  <span className="text-sm text-gray-400 italic mt-1">Athlete&apos;s Performance Journey</span>
+                </div>
                 <Link
                   href="#programs"
                   className="text-base font-semibold bg-transparent border-2 border-white text-white px-6 py-3 rounded hover:bg-white/10 transition-colors text-center"

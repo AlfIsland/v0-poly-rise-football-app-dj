@@ -70,18 +70,9 @@ export default function HomePage() {
               </p>
 
               <div className="flex flex-col sm:flex-row gap-4">
-                <div className="flex flex-col items-center sm:items-start">
-                  <Link
-                    href="https://polyrisefootball.com/parent/register" target="_blank" rel="noopener noreferrer"
-                    className="text-base font-semibold bg-[#FF6600] text-white px-6 py-3 rounded hover:bg-[#FF6600]/80 transition-colors text-center"
-                  >
-                    Athlete Tracking Passport
-                  </Link>
-                  <span className="text-sm text-gray-400 italic mt-1">Athlete&apos;s Performance Journey</span>
-                </div>
                 <Link
                   href="#programs"
-                  className="text-base font-semibold bg-transparent border-2 border-white text-white px-6 py-3 rounded hover:bg-white/10 transition-colors text-center"
+                  className="text-base font-semibold bg-[#FF6600] text-white px-6 py-3 rounded hover:bg-[#FF6600]/80 transition-colors text-center"
                 >
                   View Programs
                 </Link>
@@ -142,12 +133,23 @@ export default function HomePage() {
                 Athletes earning the PR-VERIFIED seal receive official documentation and a digital badge they can display on recruiting profiles. This gives coaches and scouts immediate confidence that the numbers are real and PolyRISE-vetted.
               </p>
             </div>
-            <ProtectedImage
-              src="/pr-verified-badge.png"
-              alt="PolyRISE PR-VERIFIED Badge - Copyright 2026 PolyRISE Football All Rights Reserved"
-              className="w-full h-full object-contain"
-              containerClassName="w-48 h-48 md:w-64 md:h-64 flex-shrink-0"
-            />
+            <div className="flex flex-col items-center">
+              <div className="flex flex-col items-center mb-4">
+                <Link
+                  href="https://polyrisefootball.com/parent/register" target="_blank" rel="noopener noreferrer"
+                  className="text-base font-semibold bg-[#FF6600] text-white px-6 py-3 rounded hover:bg-[#FF6600]/80 transition-colors text-center"
+                >
+                  Athlete Tracking Passport
+                </Link>
+                <span className="text-sm text-gray-400 italic mt-2">Athlete&apos;s Performance Journey</span>
+              </div>
+              <ProtectedImage
+                src="/pr-verified-badge.png"
+                alt="PolyRISE PR-VERIFIED Badge - Copyright 2026 PolyRISE Football All Rights Reserved"
+                className="w-full h-full object-contain"
+                containerClassName="w-48 h-48 md:w-64 md:h-64 flex-shrink-0"
+              />
+            </div>
           </div>
         </div>
       </section>

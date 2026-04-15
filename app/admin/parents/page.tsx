@@ -284,6 +284,15 @@ export default function AdminParentsPage() {
                             {parent.subscriptionStatus}
                           </span>
                         )}
+                        {parent.approvalStatus === "pending" && (
+                          <span className="text-xs px-2 py-0.5 rounded-full font-medium bg-yellow-900 text-yellow-300">⏳ Pending</span>
+                        )}
+                        {parent.approvalStatus === "approved" && (
+                          <span className="text-xs px-2 py-0.5 rounded-full font-medium bg-green-900 text-green-300">✓ Approved</span>
+                        )}
+                        {parent.approvalStatus === "denied" && (
+                          <span className="text-xs px-2 py-0.5 rounded-full font-medium bg-red-900 text-red-400">✕ Denied</span>
+                        )}
                       </div>
                       <div className="text-sm text-gray-400">{parent.email}</div>
                       {parent.phone && <div className="text-sm text-gray-500">{parent.phone}</div>}
@@ -370,6 +379,25 @@ export default function AdminParentsPage() {
                               }`}
                             >
                               {sentEmail === parent.email ? "✓ Email Sent" : "Resend Email"}
+                            </button>
+                          )}
+                          {/* Manual approve/deny for any parent */}
+                          {parent.approvalStatus !== "approved" && (
+                            <button
+                              onClick={() => handleApprove(parent.email, "")}
+                              disabled={saving}
+                              className="text-xs text-green-400 hover:text-green-300 border border-green-400/30 hover:border-green-400/60 rounded-lg px-3 py-1.5 transition-colors"
+                            >
+                              ✓ Approve
+                            </button>
+                          )}
+                          {parent.approvalStatus !== "denied" && (
+                            <button
+                              onClick={() => handleDeny(parent.email)}
+                              disabled={saving}
+                              className="text-xs text-red-400 hover:text-red-300 border border-red-400/30 hover:border-red-400/60 rounded-lg px-3 py-1.5 transition-colors"
+                            >
+                              ✕ Deny
                             </button>
                           )}
                         </div>

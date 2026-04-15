@@ -68,15 +68,6 @@ export default function HomePage() {
               <p className="text-lg lg:text-xl text-muted-foreground leading-relaxed text-pretty">
                 PolyRISE Football develops K-12 athletes in Austin and Central Texas with pro-level training, recruiting support, and the PR-VERIFIED seal that college scouts trust.
               </p>
-
-              <div className="flex flex-col sm:flex-row gap-4">
-                <Link
-                  href="#programs"
-                  className="text-base font-semibold bg-[#FF6600] text-white px-6 py-3 rounded hover:bg-[#FF6600]/80 transition-colors text-center"
-                >
-                  View Programs
-                </Link>
-              </div>
             </div>
 
             <div className="relative">

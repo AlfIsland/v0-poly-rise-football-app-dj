@@ -1,8 +1,19 @@
 "use client"
 
 import Image from "next/image"
+import { useEffect, useState } from "react"
+import QRCode from "qrcode"
 
 export default function TrainingPassportPage() {
+  const [qrSrc, setQrSrc] = useState("")
+
+  useEffect(() => {
+    QRCode.toDataURL("https://polyrisefootball.com/parent/register", {
+      width: 200,
+      margin: 1,
+      color: { dark: "#111111", light: "#ffffff" },
+    }).then(setQrSrc).catch(console.error)
+  }, [])
   return (
     <div className="min-h-screen bg-white">
 
@@ -140,13 +151,11 @@ export default function TrainingPassportPage() {
             <p className="text-gray-500 text-sm">polyrise@polyrisefootball.com</p>
           </div>
           <div className="text-right shrink-0">
-            <div className="w-24 h-24 bg-gray-900 rounded-xl flex items-center justify-center">
-              {/* QR code placeholder — scan goes to register page */}
-              <div className="text-center">
-                <p className="text-white text-xs font-bold leading-tight">SCAN</p>
-                <p className="text-white text-xs font-bold leading-tight">TO</p>
-                <p className="text-red-400 text-xs font-bold leading-tight">REGISTER</p>
-              </div>
+            <div className="w-24 h-24 rounded-xl overflow-hidden border-2 border-gray-200 flex items-center justify-center bg-white">
+              {qrSrc
+                ? <img src={qrSrc} alt="Scan to register" width={96} height={96} />
+                : <div className="w-full h-full bg-gray-100 animate-pulse rounded-xl" />
+              }
             </div>
             <p className="text-xs text-gray-400 mt-1">polyrisefootball.com</p>
           </div>

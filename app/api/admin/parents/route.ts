@@ -34,7 +34,7 @@ async function sendAthleteLinkedEmail(parentEmail: string, parentName: string, a
           <p>Hi ${parentName},</p>
           <p>Your PolyRISE account has been linked to <strong>${athleteName}</strong>'s training profile. You can now log in to view their stats, test results, progress charts, and more.</p>
           <p style="margin-top:20px">
-            <a href="https://polyrisefootball.com/parent/portal" style="background:#dc2626;color:#fff;padding:12px 24px;border-radius:8px;text-decoration:none;font-weight:bold;font-size:14px">View Athlete Profile →</a>
+            <a href="https://polyrisefootball.com/parent/login" style="background:#dc2626;color:#fff;padding:12px 24px;border-radius:8px;text-decoration:none;font-weight:bold;font-size:14px">Log In to View Athlete Profile →</a>
           </p>
           <p style="color:#999;font-size:13px;margin-top:24px">Questions? Call us at <strong>(817) 658-3300</strong> or email <strong>polyrise@polyrisefootball.com</strong></p>
           <p style="color:#555;font-size:12px;margin-top:8px">PolyRISE Football · Dripping Springs, TX · polyrisefootball.com</p>
@@ -179,7 +179,7 @@ export async function PATCH(req: NextRequest) {
                 <p>Hi ${parent.name},</p>
                 <p>Your PolyRISE account is linked to <strong>${athleteList}</strong>. Log in anytime to view stats, test results, progress charts, and more.</p>
                 <p style="margin-top:20px">
-                  <a href="https://polyrisefootball.com/parent/portal" style="background:#dc2626;color:#fff;padding:12px 24px;border-radius:8px;text-decoration:none;font-weight:bold;font-size:14px">View Athlete Profile →</a>
+                  <a href="https://polyrisefootball.com/parent/login" style="background:#dc2626;color:#fff;padding:12px 24px;border-radius:8px;text-decoration:none;font-weight:bold;font-size:14px">Log In to View Athlete Profile →</a>
                 </p>
                 <p style="color:#999;font-size:13px;margin-top:24px">Questions? Call us at <strong>(817) 658-3300</strong> or email <strong>polyrise@polyrisefootball.com</strong></p>
                 <p style="color:#555;font-size:12px;margin-top:8px">PolyRISE Football · Dripping Springs, TX · polyrisefootball.com</p>

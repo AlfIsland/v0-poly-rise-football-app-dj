@@ -75,6 +75,8 @@ export default function AdminParentsPage() {
   const [approveSelect, setApproveSelect] = useState("")
   const [saving, setSaving] = useState(false)
   const [sentEmail, setSentEmail] = useState<string | null>(null)
+  const [selectedEmails, setSelectedEmails] = useState<string[]>([])
+  const [bulkResult, setBulkResult] = useState<{ approved: number; skipped: number } | null>(null)
 
   useEffect(() => {
     Promise.all([
@@ -131,6 +133,34 @@ export default function AdminParentsPage() {
     setLinkSelect("")
     setApprovingEmail(null)
     setApproveSelect("")
+    setSaving(false)
+  }
+
+  async function handleBulkApprove() {
+    if (!selectedEmails.length) return
+    setSaving(true)
+    setBulkResult(null)
+    const pending = parents.filter(p => selectedEmails.includes(p.email) && p.approvalStatus === "pending")
+    const results = await Promise.all(pending.map(async p => {
+      const match = p.athleteName ? findBestMatch(p.athleteName, athletes.filter(a => !p.athleteIds.includes(a.id))) : null
+      const athleteId = match?.athlete.id ?? ""
+      const res = await fetch("/api/admin/parents", {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email: p.email, action: "approve", athleteId }),
+      }).then(r => r.json())
+      return { email: p.email, success: res.success, athleteIds: res.athleteIds }
+    }))
+    const approved = results.filter(r => r.success).length
+    const skipped = results.length - approved
+    setParents(prev => prev.map(p => {
+      const r = results.find(x => x.email === p.email)
+      if (!r?.success) return p
+      return { ...p, tier: "program", approvalStatus: "approved", athleteIds: r.athleteIds ?? p.athleteIds }
+    }))
+    setSelectedEmails([])
+    setBulkResult({ approved, skipped })
+    setTimeout(() => setBulkResult(null), 5000)
     setSaving(false)
   }
 
@@ -235,6 +265,53 @@ export default function AdminParentsPage() {
           </div>
         </div>
 
+        {/* Bulk action bar — visible when pending parents exist */}
+        {stats.pending > 0 && !loading && (() => {
+          const pendingInView = filtered.filter(p => p.approvalStatus === "pending")
+          const allSelected = pendingInView.length > 0 && pendingInView.every(p => selectedEmails.includes(p.email))
+          return (
+            <div className="flex flex-wrap items-center gap-3 bg-yellow-950/30 border border-yellow-700/40 rounded-xl px-4 py-3 mb-4">
+              <label className="flex items-center gap-2 cursor-pointer select-none">
+                <input
+                  type="checkbox"
+                  checked={allSelected}
+                  onChange={() => {
+                    if (allSelected) setSelectedEmails([])
+                    else setSelectedEmails(pendingInView.map(p => p.email))
+                  }}
+                  className="w-4 h-4 accent-yellow-500"
+                />
+                <span className="text-yellow-300 text-sm font-medium">
+                  Select all pending ({pendingInView.length})
+                </span>
+              </label>
+              {selectedEmails.length > 0 && (
+                <>
+                  <span className="text-yellow-600 text-xs">{selectedEmails.length} selected</span>
+                  <button
+                    onClick={handleBulkApprove}
+                    disabled={saving}
+                    className="px-4 py-1.5 bg-green-600 hover:bg-green-500 disabled:opacity-40 text-white text-sm font-bold rounded-lg"
+                  >
+                    ✓ Bulk Approve ({selectedEmails.length})
+                  </button>
+                  <button
+                    onClick={() => setSelectedEmails([])}
+                    className="text-xs text-gray-500 hover:text-gray-300"
+                  >
+                    Clear
+                  </button>
+                </>
+              )}
+              {bulkResult && (
+                <span className="text-green-400 text-xs font-medium ml-auto">
+                  ✓ Approved {bulkResult.approved}{bulkResult.skipped > 0 ? ` · ${bulkResult.skipped} skipped` : ""}
+                </span>
+              )}
+            </div>
+          )
+        })()}
+
         {/* Table */}
         {loading ? (
           <div className="text-center text-gray-500 py-16">Loading...</div>
@@ -257,6 +334,23 @@ export default function AdminParentsPage() {
                   isDenied ? "bg-gray-900 border-gray-700/40 opacity-60" :
                   "bg-white/5 border-white/10"
                 }`}>
+
+                  {/* Pending checkbox */}
+                  {isPending && (
+                    <label className="flex items-center gap-2 cursor-pointer select-none mb-3">
+                      <input
+                        type="checkbox"
+                        checked={selectedEmails.includes(parent.email)}
+                        onChange={() => setSelectedEmails(prev =>
+                          prev.includes(parent.email)
+                            ? prev.filter(e => e !== parent.email)
+                            : [...prev, parent.email]
+                        )}
+                        className="w-4 h-4 accent-yellow-500"
+                      />
+                      <span className="text-yellow-600 text-xs">Select for bulk approve</span>
+                    </label>
+                  )}
 
                   {/* Pending approval banner */}
                   {isPending && (() => {

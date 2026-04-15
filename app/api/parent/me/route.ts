@@ -18,7 +18,7 @@ export async function GET(req: NextRequest) {
     if (parent.athleteIds.length) {
       const r = getRedis()
       if (r) {
-        const values = await r.mget(...parent.athleteIds.map(id => `training:athlete:${id}`))
+        const values = await r.mget(...parent.athleteIds.map(id => `training:athlete:${id.toUpperCase()}`))
         for (const v of values) {
           if (v) athletes.push(JSON.parse(v))
         }

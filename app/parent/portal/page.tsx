@@ -78,7 +78,9 @@ function Portal() {
     <div className="min-h-screen bg-gray-950 flex items-center justify-center text-gray-500">Loading your portal...</div>
   )
 
-  const hasAccess = parent?.tier !== "none" && parent?.subscriptionStatus !== "canceled"
+  // Program members always have access regardless of subscriptionStatus
+  const hasAccess = parent?.tier === "program" ||
+    (parent?.tier !== "none" && parent?.subscriptionStatus !== "canceled")
 
   return (
     <div className="min-h-screen bg-gray-950 text-white px-4 py-8">

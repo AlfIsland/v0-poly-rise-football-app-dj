@@ -11,6 +11,7 @@ interface ParentAccount {
   athleteName?: string
   athleteIds: string[]
   tier: string
+  approvalStatus?: "pending" | "approved" | "denied"
   subscriptionStatus?: string
   subscriptionEnd?: string
   createdAt: string
@@ -59,6 +60,7 @@ export default function AdminParentsPage() {
   }, [])
 
   const filtered = parents.filter(p => {
+    if (filter === "pending" && p.approvalStatus !== "pending") return false
     if (filter === "active" && p.subscriptionStatus !== "active") return false
     if (filter === "no-sub" && p.tier !== "none") return false
     if (search) {
@@ -83,6 +85,34 @@ export default function AdminParentsPage() {
     }
     setLinkingEmail(null)
     setLinkSelect("")
+    setSaving(false)
+  }
+
+  async function handleApprove(email: string, athleteId: string) {
+    setSaving(true)
+    const res = await fetch("/api/admin/parents", {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email, action: "approve", athleteId }),
+    }).then(r => r.json())
+    if (res.success) {
+      setParents(prev => prev.map(p => p.email === email
+        ? { ...p, tier: "program", approvalStatus: "approved", athleteIds: res.athleteIds ?? p.athleteIds }
+        : p))
+    }
+    setLinkingEmail(null)
+    setLinkSelect("")
+    setSaving(false)
+  }
+
+  async function handleDeny(email: string) {
+    setSaving(true)
+    await fetch("/api/admin/parents", {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email, action: "deny" }),
+    })
+    setParents(prev => prev.map(p => p.email === email ? { ...p, approvalStatus: "denied" } : p))
     setSaving(false)
   }
 
@@ -115,7 +145,7 @@ export default function AdminParentsPage() {
     total: parents.length,
     active: parents.filter(p => p.subscriptionStatus === "active").length,
     linked: parents.filter(p => p.athleteIds.length > 0).length,
-    noSub: parents.filter(p => p.tier === "none").length,
+    pending: parents.filter(p => p.approvalStatus === "pending").length,
   }
 
   return (
@@ -136,7 +166,7 @@ export default function AdminParentsPage() {
             { label: "Total Parents", value: stats.total, color: "text-white" },
             { label: "Active Subs", value: stats.active, color: "text-green-400" },
             { label: "Athletes Linked", value: stats.linked, color: "text-blue-400" },
-            { label: "No Subscription", value: stats.noSub, color: "text-gray-400" },
+            { label: "Pending Approval", value: stats.pending, color: "text-yellow-400" },
           ].map(s => (
             <div key={s.label} className="bg-white/5 border border-white/10 rounded-xl p-4 text-center">
               <div className={`text-3xl font-bold ${s.color}`}>{s.value}</div>
@@ -157,6 +187,7 @@ export default function AdminParentsPage() {
           <div className="flex gap-2">
             {[
               { key: "all", label: "All" },
+              { key: "pending", label: `Pending${stats.pending > 0 ? ` (${stats.pending})` : ""}` },
               { key: "active", label: "Active" },
               { key: "no-sub", label: "No Sub" },
             ].map(f => (
@@ -188,8 +219,60 @@ export default function AdminParentsPage() {
               const linkedAthletes = athletes.filter(a => parent.athleteIds.includes(a.id))
               const isLinking = linkingEmail === parent.email
 
+              const isPending = parent.approvalStatus === "pending"
+              const isDenied = parent.approvalStatus === "denied"
+
               return (
-                <div key={parent.email} className="bg-white/5 border border-white/10 rounded-xl p-5">
+                <div key={parent.email} className={`rounded-xl p-5 border ${
+                  isPending ? "bg-yellow-950/20 border-yellow-700/40" :
+                  isDenied ? "bg-gray-900 border-gray-700/40 opacity-60" :
+                  "bg-white/5 border-white/10"
+                }`}>
+
+                  {/* Pending approval banner */}
+                  {isPending && (
+                    <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 bg-yellow-900/30 border border-yellow-700/50 rounded-lg px-4 py-3 mb-4">
+                      <div>
+                        <p className="text-yellow-300 font-bold text-sm">⏳ Program Member — Approval Needed</p>
+                        <p className="text-yellow-500 text-xs mt-0.5">This parent signed up as a PolyRISE program member. Verify their enrollment then approve or deny.</p>
+                      </div>
+                      <div className="flex gap-2 shrink-0">
+                        <div className="flex gap-2 items-center">
+                          <select
+                            value={linkingEmail === parent.email ? linkSelect : ""}
+                            onChange={e => { setLinkingEmail(parent.email); setLinkSelect(e.target.value) }}
+                            className="bg-[#0a0a0f] border border-white/20 rounded-lg px-2 py-1.5 text-xs text-white outline-none"
+                          >
+                            <option value="">Select athlete…</option>
+                            {athletes.map(a => (
+                              <option key={a.id} value={a.id}>{a.name} ({a.id})</option>
+                            ))}
+                          </select>
+                          <button
+                            onClick={() => handleApprove(parent.email, linkSelect)}
+                            disabled={saving}
+                            className="px-3 py-1.5 bg-green-600 hover:bg-green-500 disabled:opacity-40 text-white text-xs rounded-lg font-bold"
+                          >
+                            ✓ Approve
+                          </button>
+                          <button
+                            onClick={() => handleDeny(parent.email)}
+                            disabled={saving}
+                            className="px-3 py-1.5 bg-red-700 hover:bg-red-600 disabled:opacity-40 text-white text-xs rounded-lg font-bold"
+                          >
+                            ✕ Deny
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  )}
+
+                  {isDenied && (
+                    <div className="text-xs text-red-400 bg-red-950/30 border border-red-900/40 rounded-lg px-3 py-2 mb-3">
+                      ✕ Denied — subscribe email sent
+                    </div>
+                  )}
+
                   <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-4">
                     {/* Parent Info */}
                     <div className="flex-1 min-w-0">

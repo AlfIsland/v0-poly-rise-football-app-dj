@@ -32,7 +32,7 @@ export default function ParentRegisterPage() {
       const regRes = await fetch("/api/parent/register", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ name, email, password, phone, athleteName }),
+        body: JSON.stringify({ name, email, password, phone, athleteName, plan }),
       })
       const regData = await regRes.json()
 

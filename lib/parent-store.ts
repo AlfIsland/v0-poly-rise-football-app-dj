@@ -18,6 +18,7 @@ export interface ParentAccount {
   athleteName?: string           // athlete name provided at signup
   athleteIds: string[]           // training athlete IDs linked to this parent
   tier: "program" | "monthly" | "quarterly" | "none"
+  approvalStatus?: "pending" | "approved" | "denied"  // for program members
   stripeCustomerId?: string
   stripeSubscriptionId?: string
   subscriptionStatus?: string    // active, past_due, canceled, etc.

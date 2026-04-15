@@ -82,6 +82,77 @@ export async function PATCH(req: NextRequest) {
       parent.athleteIds = parent.athleteIds.filter(id => id !== athleteId)
       await saveParent(parent)
 
+    } else if (action === "approve") {
+      // Approve program member — set tier, mark approved, link athlete if provided
+      parent.tier = "program"
+      parent.approvalStatus = "approved"
+      if (athleteId && !parent.athleteIds.includes(athleteId)) parent.athleteIds.push(athleteId)
+      await saveParent(parent)
+      // Send access email
+      const linkedId = athleteId || parent.athleteIds[0]
+      if (linkedId) await sendAthleteLinkedEmail(parent.email, parent.name, linkedId)
+      else {
+        // No athlete linked yet — send generic approval email
+        const resendKey = process.env.RESEND_API_KEY
+        if (resendKey) {
+          fetch("https://api.resend.com/emails", {
+            method: "POST",
+            headers: { Authorization: `Bearer ${resendKey}`, "Content-Type": "application/json" },
+            body: JSON.stringify({
+              from: "PolyRISE Football <noreply@polyrisefootball.com>",
+              to: [parent.email],
+              subject: "Your PolyRISE Program Access is Approved",
+              html: `
+                <div style="font-family:sans-serif;max-width:520px;margin:0 auto;padding:24px;background:#0a0a0f;color:#fff">
+                  <h2 style="color:#16a34a">You're Approved!</h2>
+                  <p>Hi ${parent.name},</p>
+                  <p>Your PolyRISE Program Member access has been approved. Your athlete's profile will be linked shortly — you'll receive another email once it's ready.</p>
+                  <p style="color:#999;font-size:13px;margin-top:24px">Questions? Call <strong>(817) 658-3300</strong></p>
+                  <p style="color:#555;font-size:12px;margin-top:8px">PolyRISE Football · polyrisefootball.com</p>
+                </div>
+              `,
+            }),
+          }).catch(err => console.error("[admin parents] approve email failed", err))
+        }
+      }
+
+    } else if (action === "deny") {
+      // Deny program member — keep account but mark denied, send subscribe email
+      parent.approvalStatus = "denied"
+      await saveParent(parent)
+      const resendKey = process.env.RESEND_API_KEY
+      if (resendKey) {
+        await fetch("https://api.resend.com/emails", {
+          method: "POST",
+          headers: { Authorization: `Bearer ${resendKey}`, "Content-Type": "application/json" },
+          body: JSON.stringify({
+            from: "PolyRISE Football <noreply@polyrisefootball.com>",
+            to: [parent.email],
+            subject: "Your PolyRISE Portal Access",
+            html: `
+              <div style="font-family:sans-serif;max-width:520px;margin:0 auto;padding:24px;background:#0a0a0f;color:#fff">
+                <h2 style="color:#dc2626">Action Required — Subscription Needed</h2>
+                <p>Hi ${parent.name},</p>
+                <p>We were unable to verify your athlete's enrollment in a PolyRISE program. To access your athlete's training metrics and progress reports, a subscription is required.</p>
+                <p style="margin-top:16px"><strong>Subscribe starting at $9.99/month</strong> to unlock:</p>
+                <ul style="color:#ccc;font-size:14px;margin-top:8px;padding-left:20px">
+                  <li>Monthly progress reports</li>
+                  <li>Full session history & charts</li>
+                  <li>Baseline vs. current comparisons</li>
+                  <li>Downloadable PDF reports</li>
+                </ul>
+                <p style="margin-top:24px">
+                  <a href="https://polyrisefootball.com/parent/register" style="background:#dc2626;color:#fff;padding:12px 24px;border-radius:8px;text-decoration:none;font-weight:bold;font-size:14px">Subscribe Now →</a>
+                </p>
+                <p style="color:#999;font-size:13px;margin-top:24px">Questions? Call <strong>(817) 658-3300</strong> or email <strong>polyrise@polyrisefootball.com</strong></p>
+                <p style="color:#555;font-size:12px;margin-top:8px">PolyRISE Football · Dripping Springs, TX · polyrisefootball.com</p>
+              </div>
+            `,
+          }),
+        }).catch(err => console.error("[admin parents] deny email failed", err))
+      }
+      return NextResponse.json({ success: true, denied: true })
+
     } else if (action === "resend-email") {
       // Resend the portal access email for all linked athletes
       const r = getRedis()

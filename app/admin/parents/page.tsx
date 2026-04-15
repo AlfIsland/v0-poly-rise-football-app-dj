@@ -46,6 +46,8 @@ export default function AdminParentsPage() {
   const [filter, setFilter] = useState("all")
   const [linkingEmail, setLinkingEmail] = useState<string | null>(null)
   const [linkSelect, setLinkSelect] = useState("")
+  const [approvingEmail, setApprovingEmail] = useState<string | null>(null)
+  const [approveSelect, setApproveSelect] = useState("")
   const [saving, setSaving] = useState(false)
   const [sentEmail, setSentEmail] = useState<string | null>(null)
 
@@ -102,6 +104,8 @@ export default function AdminParentsPage() {
     }
     setLinkingEmail(null)
     setLinkSelect("")
+    setApprovingEmail(null)
+    setApproveSelect("")
     setSaving(false)
   }
 
@@ -236,33 +240,31 @@ export default function AdminParentsPage() {
                         <p className="text-yellow-300 font-bold text-sm">⏳ Program Member — Approval Needed</p>
                         <p className="text-yellow-500 text-xs mt-0.5">This parent signed up as a PolyRISE program member. Verify their enrollment then approve or deny.</p>
                       </div>
-                      <div className="flex gap-2 shrink-0">
-                        <div className="flex gap-2 items-center">
-                          <select
-                            value={linkingEmail === parent.email ? linkSelect : ""}
-                            onChange={e => { setLinkingEmail(parent.email); setLinkSelect(e.target.value) }}
-                            className="bg-[#0a0a0f] border border-white/20 rounded-lg px-2 py-1.5 text-xs text-white outline-none"
-                          >
-                            <option value="">Select athlete…</option>
-                            {athletes.map(a => (
-                              <option key={a.id} value={a.id}>{a.name} ({a.id})</option>
-                            ))}
-                          </select>
-                          <button
-                            onClick={() => handleApprove(parent.email, linkSelect)}
-                            disabled={saving}
-                            className="px-3 py-1.5 bg-green-600 hover:bg-green-500 disabled:opacity-40 text-white text-xs rounded-lg font-bold"
-                          >
-                            ✓ Approve
-                          </button>
-                          <button
-                            onClick={() => handleDeny(parent.email)}
-                            disabled={saving}
-                            className="px-3 py-1.5 bg-red-700 hover:bg-red-600 disabled:opacity-40 text-white text-xs rounded-lg font-bold"
-                          >
-                            ✕ Deny
-                          </button>
-                        </div>
+                      <div className="flex gap-2 shrink-0 flex-wrap">
+                        <select
+                          value={approvingEmail === parent.email ? approveSelect : ""}
+                          onChange={e => { setApprovingEmail(parent.email); setApproveSelect(e.target.value) }}
+                          className="bg-[#0a0a0f] border border-white/20 rounded-lg px-2 py-1.5 text-xs text-white outline-none"
+                        >
+                          <option value="">Select athlete…</option>
+                          {athletes.map(a => (
+                            <option key={a.id} value={a.id}>{a.name} ({a.id})</option>
+                          ))}
+                        </select>
+                        <button
+                          onClick={() => handleApprove(parent.email, approvingEmail === parent.email ? approveSelect : "")}
+                          disabled={saving || !(approvingEmail === parent.email && approveSelect)}
+                          className="px-3 py-1.5 bg-green-600 hover:bg-green-500 disabled:opacity-40 disabled:cursor-not-allowed text-white text-xs rounded-lg font-bold"
+                        >
+                          ✓ Approve
+                        </button>
+                        <button
+                          onClick={() => handleDeny(parent.email)}
+                          disabled={saving}
+                          className="px-3 py-1.5 bg-red-700 hover:bg-red-600 disabled:opacity-40 text-white text-xs rounded-lg font-bold"
+                        >
+                          ✕ Deny
+                        </button>
                       </div>
                     </div>
                   )}
@@ -381,17 +383,45 @@ export default function AdminParentsPage() {
                               {sentEmail === parent.email ? "✓ Email Sent" : "Resend Email"}
                             </button>
                           )}
-                          {/* Manual approve/deny for any parent */}
-                          {parent.approvalStatus !== "approved" && (
-                            <button
-                              onClick={() => handleApprove(parent.email, "")}
-                              disabled={saving}
-                              className="text-xs text-green-400 hover:text-green-300 border border-green-400/30 hover:border-green-400/60 rounded-lg px-3 py-1.5 transition-colors"
-                            >
-                              ✓ Approve
-                            </button>
+                          {/* Manual approve — shows inline athlete picker */}
+                          {parent.approvalStatus !== "approved" && !isPending && (
+                            approvingEmail === parent.email ? (
+                              <>
+                                <select
+                                  value={approveSelect}
+                                  onChange={e => setApproveSelect(e.target.value)}
+                                  className="text-xs bg-gray-800 border border-white/20 rounded-lg px-2 py-1.5 text-white outline-none"
+                                >
+                                  <option value="">Select athlete…</option>
+                                  {athletes.map(a => (
+                                    <option key={a.id} value={a.id}>{a.name} ({a.id})</option>
+                                  ))}
+                                </select>
+                                <button
+                                  onClick={() => handleApprove(parent.email, approveSelect)}
+                                  disabled={!approveSelect || saving}
+                                  className="text-xs bg-green-600 hover:bg-green-500 disabled:opacity-40 disabled:cursor-not-allowed text-white rounded-lg px-3 py-1.5 font-bold"
+                                >
+                                  ✓ Confirm
+                                </button>
+                                <button
+                                  onClick={() => { setApprovingEmail(null); setApproveSelect("") }}
+                                  className="text-xs text-gray-400 hover:text-white border border-white/10 rounded-lg px-2 py-1.5"
+                                >
+                                  ✕
+                                </button>
+                              </>
+                            ) : (
+                              <button
+                                onClick={() => { setApprovingEmail(parent.email); setApproveSelect("") }}
+                                disabled={saving}
+                                className="text-xs text-green-400 hover:text-green-300 border border-green-400/30 hover:border-green-400/60 rounded-lg px-3 py-1.5 transition-colors"
+                              >
+                                ✓ Approve
+                              </button>
+                            )
                           )}
-                          {parent.approvalStatus !== "denied" && (
+                          {parent.approvalStatus !== "denied" && !isPending && (
                             <button
                               onClick={() => handleDeny(parent.email)}
                               disabled={saving}

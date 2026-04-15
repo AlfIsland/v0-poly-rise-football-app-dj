@@ -38,6 +38,31 @@ const STATUS_COLORS: Record<string, string> = {
   canceled: "bg-gray-800 text-gray-500",
 }
 
+// Fuzzy name match — returns best matching athlete id (score > 0) or null
+function findBestMatch(athleteName: string, athletes: TrainingAthlete[]): { athlete: TrainingAthlete; score: number } | null {
+  if (!athleteName || !athletes.length) return null
+  const normalize = (s: string) => s.toLowerCase().replace(/[^a-z0-9 ]/g, "").trim()
+  const tokens = (s: string) => normalize(s).split(/\s+/).filter(Boolean)
+  const query = tokens(athleteName)
+  if (!query.length) return null
+
+  let best: { athlete: TrainingAthlete; score: number } | null = null
+  for (const a of athletes) {
+    const aTokens = tokens(a.name)
+    // Exact match
+    if (normalize(a.name) === normalize(athleteName)) {
+      return { athlete: a, score: 100 }
+    }
+    // Token overlap score
+    const matches = query.filter(q => aTokens.some(t => t.startsWith(q) || q.startsWith(t)))
+    const score = (matches.length / Math.max(query.length, aTokens.length)) * 100
+    if (score > 40 && (!best || score > best.score)) {
+      best = { athlete: a, score }
+    }
+  }
+  return best
+}
+
 export default function AdminParentsPage() {
   const [parents, setParents] = useState<ParentAccount[]>([])
   const [athletes, setAthletes] = useState<TrainingAthlete[]>([])
@@ -234,40 +259,52 @@ export default function AdminParentsPage() {
                 }`}>
 
                   {/* Pending approval banner */}
-                  {isPending && (
-                    <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 bg-yellow-900/30 border border-yellow-700/50 rounded-lg px-4 py-3 mb-4">
-                      <div>
-                        <p className="text-yellow-300 font-bold text-sm">⏳ Program Member — Approval Needed</p>
-                        <p className="text-yellow-500 text-xs mt-0.5">This parent signed up as a PolyRISE program member. Verify their enrollment then approve or deny.</p>
+                  {isPending && (() => {
+                    const suggestion = parent.athleteName ? findBestMatch(parent.athleteName, athletes.filter(a => !parent.athleteIds.includes(a.id))) : null
+                    const currentSelect = approvingEmail === parent.email ? approveSelect : (suggestion?.athlete.id ?? "")
+                    return (
+                      <div className="flex flex-col gap-3 bg-yellow-900/30 border border-yellow-700/50 rounded-lg px-4 py-3 mb-4">
+                        <div>
+                          <p className="text-yellow-300 font-bold text-sm">⏳ Program Member — Approval Needed</p>
+                          <p className="text-yellow-500 text-xs mt-0.5">Verify enrollment then approve or deny.</p>
+                        </div>
+                        {suggestion && (
+                          <div className="flex items-center gap-2 bg-green-950/40 border border-green-700/40 rounded-lg px-3 py-2">
+                            <span className="text-green-400 text-xs font-bold">Suggested match:</span>
+                            <span className="text-green-300 text-xs">{suggestion.athlete.name}</span>
+                            <span className="text-green-600 text-xs">({suggestion.athlete.id})</span>
+                            <span className="text-green-700 text-xs ml-auto">{Math.round(suggestion.score)}% match</span>
+                          </div>
+                        )}
+                        <div className="flex gap-2 flex-wrap">
+                          <select
+                            value={currentSelect}
+                            onChange={e => { setApprovingEmail(parent.email); setApproveSelect(e.target.value) }}
+                            className={`bg-[#0a0a0f] border rounded-lg px-2 py-1.5 text-xs text-white outline-none ${suggestion && currentSelect === suggestion.athlete.id ? "border-green-600" : "border-white/20"}`}
+                          >
+                            <option value="">Select athlete…</option>
+                            {athletes.map(a => (
+                              <option key={a.id} value={a.id}>{a.name} ({a.id})</option>
+                            ))}
+                          </select>
+                          <button
+                            onClick={() => handleApprove(parent.email, currentSelect)}
+                            disabled={saving || !currentSelect}
+                            className="px-3 py-1.5 bg-green-600 hover:bg-green-500 disabled:opacity-40 disabled:cursor-not-allowed text-white text-xs rounded-lg font-bold"
+                          >
+                            ✓ Approve
+                          </button>
+                          <button
+                            onClick={() => handleDeny(parent.email)}
+                            disabled={saving}
+                            className="px-3 py-1.5 bg-red-700 hover:bg-red-600 disabled:opacity-40 text-white text-xs rounded-lg font-bold"
+                          >
+                            ✕ Deny
+                          </button>
+                        </div>
                       </div>
-                      <div className="flex gap-2 shrink-0 flex-wrap">
-                        <select
-                          value={approvingEmail === parent.email ? approveSelect : ""}
-                          onChange={e => { setApprovingEmail(parent.email); setApproveSelect(e.target.value) }}
-                          className="bg-[#0a0a0f] border border-white/20 rounded-lg px-2 py-1.5 text-xs text-white outline-none"
-                        >
-                          <option value="">Select athlete…</option>
-                          {athletes.map(a => (
-                            <option key={a.id} value={a.id}>{a.name} ({a.id})</option>
-                          ))}
-                        </select>
-                        <button
-                          onClick={() => handleApprove(parent.email, approvingEmail === parent.email ? approveSelect : "")}
-                          disabled={saving || !(approvingEmail === parent.email && approveSelect)}
-                          className="px-3 py-1.5 bg-green-600 hover:bg-green-500 disabled:opacity-40 disabled:cursor-not-allowed text-white text-xs rounded-lg font-bold"
-                        >
-                          ✓ Approve
-                        </button>
-                        <button
-                          onClick={() => handleDeny(parent.email)}
-                          disabled={saving}
-                          className="px-3 py-1.5 bg-red-700 hover:bg-red-600 disabled:opacity-40 text-white text-xs rounded-lg font-bold"
-                        >
-                          ✕ Deny
-                        </button>
-                      </div>
-                    </div>
-                  )}
+                    )
+                  })()}
 
                   {isDenied && (
                     <div className="text-xs text-red-400 bg-red-950/30 border border-red-900/40 rounded-lg px-3 py-2 mb-3">

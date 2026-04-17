@@ -380,14 +380,14 @@ export default function HomePage() {
               </div>
             </div>
 
-            {/* Camp PR-VERIFIED */}
+            {/* PR-VERIFIED Combine Camp */}
             <div className="bg-card border-primary/50 border-2 overflow-hidden group hover:border-primary transition-colors">
               <div className="pt-6 space-y-4">
                 <div>
                   <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 mb-3">
                     <span className="text-sm font-medium text-primary">Camp</span>
                   </div>
-                  <h3 className="text-xl font-display font-bold mb-2">Camp PR-VERIFIED</h3>
+                  <h3 className="text-xl font-display font-bold mb-2">PR-VERIFIED Combine Camp</h3>
                   <p className="text-muted-foreground text-sm leading-relaxed mb-2">
                     Professional Combine Events. H.S Athletes record official metrics.
                   </p>
@@ -395,7 +395,7 @@ export default function HomePage() {
                 <div className="border-t border-dashed border-border pt-4 space-y-3">
                   <div className="flex items-center justify-between">
                     <span className="font-medium">Camp Registration</span>
-                    <span className="text-lg font-bold text-white">$50</span>
+                    <span className="text-lg font-bold text-white">$30</span>
                   </div>
                 </div>
                 <Link

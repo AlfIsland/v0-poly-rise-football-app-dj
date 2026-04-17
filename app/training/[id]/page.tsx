@@ -89,8 +89,12 @@ export default async function TrainingAthletePage({ params }: { params: { id: st
               <Link href="/training" className="text-xs text-gray-600 hover:text-gray-400 underline mt-0.5 block">← Training Roster</Link>
             </div>
           </div>
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-2 flex-wrap justify-end">
             <FeaturedToggle id={athlete.id} initialFeatured={athlete.featured ?? false} />
+            <Link href={`/admin/athletes/new?mode=prv&name=${encodeURIComponent(athlete.name)}&position=${encodeURIComponent(athlete.position ?? "")}&school=${encodeURIComponent(athlete.school ?? "")}&gradYear=${encodeURIComponent(classYear ?? "")}`}
+              className="bg-yellow-700 hover:bg-yellow-600 text-white font-semibold px-3 py-2 rounded-xl text-xs transition-colors">
+              🔴 Add PR-V Seal
+            </Link>
             <Link href={`/training/${athlete.id}/edit`}
               className="bg-gray-700 hover:bg-gray-600 text-white font-semibold px-4 py-2 rounded-xl text-sm transition-colors">
               Edit Info
@@ -262,7 +266,7 @@ export default async function TrainingAthletePage({ params }: { params: { id: st
 
             {/* Shuttle L vs R Analysis */}
             {(() => {
-              const latest = sessions.filter(s => s.shuttleLeft != null || s.shuttleRight != null).slice(-1)[0]
+              const latest = sessions.filter((s: { shuttleLeft?: number; shuttleRight?: number }) => s.shuttleLeft != null || s.shuttleRight != null).slice(-1)[0]
               if (!latest) return null
               const L = latest.shuttleLeft
               const R = latest.shuttleRight

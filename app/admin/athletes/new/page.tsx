@@ -1,6 +1,7 @@
 "use client"
 
-import { useState, useRef, useEffect, useCallback } from "react"
+import { useState, useRef, useEffect, useCallback, Suspense } from "react"
+import { useSearchParams } from "next/navigation"
 import QRCode from "qrcode"
 import Link from "next/link"
 import LogoutButton from "@/components/logout-button"
@@ -29,14 +30,15 @@ function Field({ label, required, children }: { label: string; required?: boolea
 
 const inputCls = "w-full bg-gray-800 text-white rounded-lg px-3 py-2.5 border border-gray-700 focus:border-red-500 focus:outline-none placeholder-gray-600 text-sm"
 
-export default function NewAthletePage() {
-  const [mode, setMode] = useState<Mode>("both")
+function NewAthleteForm() {
+  const searchParams = useSearchParams()
+  const [mode, setMode] = useState<Mode>((searchParams.get("mode") as Mode) || "both")
 
   // ── Shared fields ──
-  const [name, setName] = useState("")
-  const [position, setPosition] = useState("")
-  const [school, setSchool] = useState("")
-  const [gradYear, setGradYear] = useState("")
+  const [name, setName] = useState(searchParams.get("name") || "")
+  const [position, setPosition] = useState(searchParams.get("position") || "")
+  const [school, setSchool] = useState(searchParams.get("school") || "")
+  const [gradYear, setGradYear] = useState(searchParams.get("gradYear") || "")
   const [heightFt, setHeightFt] = useState("")
   const [heightIn, setHeightIn] = useState("")
   const [weight, setWeight] = useState("")
@@ -510,4 +512,8 @@ export default function NewAthletePage() {
       </div>
     </div>
   )
+}
+
+export default function NewAthletePage() {
+  return <Suspense><NewAthleteForm /></Suspense>
 }

@@ -164,7 +164,17 @@ function EditForm() {
               <Link href="/admin/athletes" className="text-xs text-gray-500 hover:text-gray-300 underline mt-0.5 block">← Back to Roster</Link>
             </div>
           </div>
-          <LogoutButton />
+          <div className="flex items-center gap-2">
+            {athleteName && (
+              <Link
+                href={`/admin/athletes/new?mode=atp&name=${encodeURIComponent(athleteName)}&position=${encodeURIComponent(position)}&school=${encodeURIComponent(school)}&gradYear=${encodeURIComponent(gradYear)}`}
+                className="bg-blue-700 hover:bg-blue-600 text-white font-semibold px-3 py-2 rounded-xl text-xs transition-colors"
+              >
+                🔵 Add ATP Profile
+              </Link>
+            )}
+            <LogoutButton />
+          </div>
         </div>
 
         {error && (

@@ -117,8 +117,9 @@ export async function PATCH(req: NextRequest) {
       }
 
     } else if (action === "deny") {
-      // Deny program member — keep account but mark denied, send subscribe email
+      // Deny/revoke — reset tier to none so portal blocks access
       parent.approvalStatus = "denied"
+      parent.tier = "none"
       await saveParent(parent)
       const resendKey = process.env.RESEND_API_KEY
       if (resendKey) {

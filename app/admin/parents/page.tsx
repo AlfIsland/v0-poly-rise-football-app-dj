@@ -172,7 +172,7 @@ export default function AdminParentsPage() {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ email, action: "deny" }),
     })
-    setParents(prev => prev.map(p => p.email === email ? { ...p, approvalStatus: "denied" } : p))
+    setParents(prev => prev.map(p => p.email === email ? { ...p, approvalStatus: "denied", tier: "none" } : p))
     setSaving(false)
   }
 
@@ -566,7 +566,7 @@ export default function AdminParentsPage() {
                               disabled={saving}
                               className="text-xs text-red-400 hover:text-red-300 border border-red-400/30 hover:border-red-400/60 rounded-lg px-3 py-1.5 transition-colors"
                             >
-                              ✕ Deny
+                              {parent.approvalStatus === "approved" ? "✕ Revoke Access" : "✕ Deny"}
                             </button>
                           )}
                         </div>

@@ -95,8 +95,9 @@ function Portal() {
   )
 
   // Program members always have access regardless of subscriptionStatus
-  const hasAccess = parent?.tier === "program" ||
-    (parent?.tier !== "none" && parent?.subscriptionStatus !== "canceled")
+  const hasAccess =
+    (parent?.tier === "program" && parent?.approvalStatus === "approved") ||
+    (parent?.tier !== "none" && parent?.tier !== "program" && parent?.subscriptionStatus !== "canceled")
 
   return (
     <div className="min-h-screen bg-gray-950 text-white px-4 py-8">

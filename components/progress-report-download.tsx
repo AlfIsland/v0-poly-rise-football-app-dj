@@ -5,6 +5,7 @@ import { useState } from "react"
 interface Session {
   date: string
   fortyYard?: number
+  twentyYard?: number
   shuttle?: number
   shuttleLeft?: number
   shuttleRight?: number
@@ -30,6 +31,7 @@ interface Athlete {
 
 const METRICS = [
   { key: "fortyYard",    label: "40-Yard Dash",  unit: "sec",  lower: true  },
+  { key: "twentyYard",   label: "20-Yard Dash",  unit: "sec",  lower: true  },
   { key: "shuttle",      label: "5-10-5 Shuttle", unit: "sec",  lower: true  },
   { key: "threeCone",    label: "3-Cone Drill",   unit: "sec",  lower: true  },
   { key: "verticalJump", label: "Vertical Jump",  unit: "in",   lower: false },

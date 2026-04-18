@@ -11,6 +11,7 @@ const ProgressChart = dynamic(() => import("@/components/progress-chart"), { ssr
 
 const METRICS = [
   { key: "fortyYard",    label: "40-Yard Dash",    unit: "s",     lower: true  },
+  { key: "twentyYard",   label: "20-Yard Dash",    unit: "s",     lower: true  },
   { key: "shuttle",      label: "Shuttle",          unit: "s",     lower: true  },
   { key: "threeCone",    label: "3-Cone / L-Drill", unit: "s",     lower: true  },
   { key: "verticalJump", label: "Vertical Jump",    unit: '"',     lower: false },
@@ -21,7 +22,7 @@ const METRICS = [
 
 interface Session {
   date: string
-  fortyYard?: number; shuttle?: number; shuttleLeft?: number; shuttleRight?: number
+  fortyYard?: number; twentyYard?: number; shuttle?: number; shuttleLeft?: number; shuttleRight?: number
   threeCone?: number; verticalJump?: number; broadJump?: number
   benchPress?: number; weight?: number; notes?: string
 }
@@ -325,6 +326,7 @@ function Portal() {
                           <tr className="text-xs text-gray-500 border-b border-gray-800">
                             <th className="text-left py-2 px-2">Date</th>
                             <th className="text-right py-2 px-2">40-Yd</th>
+                            <th className="text-right py-2 px-2">20-Yd</th>
                             <th className="text-right py-2 px-2">Shuttle</th>
                             <th className="text-right py-2 px-2">L / R</th>
                             <th className="text-right py-2 px-2">3-Cone</th>
@@ -343,6 +345,7 @@ function Portal() {
                                   {i === 0 && <span className="ml-1 text-xs text-blue-500">(baseline)</span>}
                                 </td>
                                 <td className="text-right py-2 px-2">{fmt(s.fortyYard, "s")}</td>
+                                <td className="text-right py-2 px-2">{fmt(s.twentyYard, "s")}</td>
                                 <td className="text-right py-2 px-2">{fmt(s.shuttle, "s")}</td>
                                 <td className="text-right py-2 px-2 text-xs">
                                   {s.shuttleLeft != null && s.shuttleRight != null

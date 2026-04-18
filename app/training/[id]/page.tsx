@@ -25,6 +25,7 @@ async function getAthlete(id: string) {
 
 const METRICS = [
   { key: "fortyYard", label: "40-Yard Dash", unit: "sec", lower: true },
+  { key: "twentyYard", label: "20-Yard Dash", unit: "sec", lower: true },
   { key: "shuttle", label: "20-Yd Shuttle", unit: "sec", lower: true },
   { key: "threeCone", label: "3-Cone Drill", unit: "sec", lower: true },
   { key: "verticalJump", label: "Vertical Jump", unit: "in", lower: false },
@@ -68,6 +69,7 @@ export default async function TrainingAthletePage({ params }: { params: { id: st
   const classYear = gradeToClassYear(athlete.grade ?? "")
   const ratings = latestSession ? calculateRatings({
     fortyYard: latestSession.fortyYard,
+    twentyYard: latestSession.twentyYard,
     shuttle: latestSession.shuttle,
     threeCone: latestSession.threeCone,
     verticalJump: latestSession.verticalJump,
@@ -368,6 +370,7 @@ export default async function TrainingAthletePage({ params }: { params: { id: st
                       <tr className="border-b border-gray-800 text-gray-500 uppercase tracking-wider">
                         <th className="text-left px-4 py-3">Date</th>
                         <th className="text-left px-4 py-3">40-Yd</th>
+                        <th className="text-left px-4 py-3">20-Yd</th>
                         <th className="text-left px-4 py-3">Shuttle (L / R)</th>
                         <th className="text-left px-4 py-3">3-Cone</th>
                         <th className="text-left px-4 py-3">Vertical</th>
@@ -387,6 +390,7 @@ export default async function TrainingAthletePage({ params }: { params: { id: st
                             {i === 0 && <span className="ml-1 text-xs text-green-400">(latest)</span>}
                           </td>
                           <td className="px-4 py-3 text-gray-300">{s.fortyYard != null ? `${s.fortyYard}s` : "—"}</td>
+                          <td className="px-4 py-3 text-gray-300">{s.twentyYard != null ? `${s.twentyYard}s` : "—"}</td>
                           <td className="px-4 py-3 text-gray-300">
                             {s.shuttle != null ? `${s.shuttle}s` : "—"}
                             {(s.shuttleLeft != null || s.shuttleRight != null) && (

@@ -50,6 +50,7 @@ function EditForm() {
 
   // Combine metrics
   const [fortyYard, setFortyYard] = useState("")
+  const [twentyYard, setTwentyYard] = useState("")
   const [shuttle, setShuttle] = useState("")
   const [threeCone, setThreeCone] = useState("")
   const [verticalJump, setVerticalJump] = useState("")
@@ -83,6 +84,7 @@ function EditForm() {
         setPhone(a.phone ?? "")
         setEmail(a.email ?? "")
         setFortyYard(a.metrics?.fortyYard?.toString() ?? "")
+        setTwentyYard(a.metrics?.twentyYard?.toString() ?? "")
         setShuttle(a.metrics?.shuttle?.toString() ?? "")
         setThreeCone(a.metrics?.threeCone?.toString() ?? "")
         setVerticalJump(a.metrics?.verticalJump?.toString() ?? "")
@@ -102,6 +104,7 @@ function EditForm() {
 
     const metrics: Record<string, number> = {}
     if (fortyYard) metrics.fortyYard = parseFloat(fortyYard)
+    if (twentyYard) metrics.twentyYard = parseFloat(twentyYard)
     if (shuttle) metrics.shuttle = parseFloat(shuttle)
     if (threeCone) metrics.threeCone = parseFloat(threeCone)
     if (verticalJump) metrics.verticalJump = parseFloat(verticalJump)
@@ -231,7 +234,10 @@ function EditForm() {
 
           <div className="bg-gray-900 rounded-2xl p-6 space-y-4 border border-gray-800">
             <h2 className="text-xs font-bold text-red-400 uppercase tracking-widest">NFL Combine Metrics</h2>
-            <Input label="40-Yard Dash (sec)" value={fortyYard} onChange={setFortyYard} placeholder="e.g. 4.52" type="number" step="0.01" />
+            <div className="grid grid-cols-2 gap-3">
+              <Input label="40-Yard Dash (sec)" value={fortyYard} onChange={setFortyYard} placeholder="e.g. 4.52" type="number" step="0.01" />
+              <Input label="20-Yard Dash (sec)" value={twentyYard} onChange={setTwentyYard} placeholder="e.g. 2.75" type="number" step="0.01" />
+            </div>
             <Input label="20-Yard Shuttle (sec)" value={shuttle} onChange={setShuttle} placeholder="e.g. 4.21" type="number" step="0.01" />
             <Input label="3-Cone Drill (sec)" value={threeCone} onChange={setThreeCone} placeholder="e.g. 6.89" type="number" step="0.01" />
             <Input label="Vertical Jump (inches)" value={verticalJump} onChange={setVerticalJump} placeholder="e.g. 34" type="number" step="0.5" />

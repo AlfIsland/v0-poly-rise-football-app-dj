@@ -9,6 +9,7 @@ import {
 interface Session {
   date: string
   fortyYard?: number
+  twentyYard?: number
   shuttle?: number
   threeCone?: number
   verticalJump?: number
@@ -19,6 +20,7 @@ interface Session {
 
 const METRICS = [
   { key: "fortyYard",    label: "40-Yard",  unit: "s",    lower: true,  color: "#ef4444" },
+  { key: "twentyYard",   label: "20-Yard",  unit: "s",    lower: true,  color: "#f43f5e" },
   { key: "shuttle",      label: "Shuttle",  unit: "s",    lower: true,  color: "#f97316" },
   { key: "threeCone",    label: "3-Cone",   unit: "s",    lower: true,  color: "#eab308" },
   { key: "verticalJump", label: "Vertical", unit: "\"",   lower: false, color: "#22c55e" },

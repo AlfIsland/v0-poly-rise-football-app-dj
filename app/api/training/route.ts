@@ -31,6 +31,7 @@ async function kvGet(key: string): Promise<unknown> {
 export interface TrainingSession {
   date: string
   fortyYard?: number
+  twentyYard?: number
   shuttle?: number
   shuttleLeft?: number
   shuttleRight?: number
@@ -135,6 +136,7 @@ export async function PUT(req: NextRequest) {
       const session: TrainingSession = {
         date: body.date || new Date().toISOString().split("T")[0],
         ...(body.fortyYard !== "" && body.fortyYard != null ? { fortyYard: parseFloat(body.fortyYard) } : {}),
+        ...(body.twentyYard !== "" && body.twentyYard != null ? { twentyYard: parseFloat(body.twentyYard) } : {}),
         ...(body.shuttle !== "" && body.shuttle != null ? { shuttle: parseFloat(body.shuttle) } : {}),
         ...(body.shuttleLeft !== "" && body.shuttleLeft != null ? { shuttleLeft: parseFloat(body.shuttleLeft) } : {}),
         ...(body.shuttleRight !== "" && body.shuttleRight != null ? { shuttleRight: parseFloat(body.shuttleRight) } : {}),
@@ -174,6 +176,7 @@ export async function PUT(req: NextRequest) {
         ...s,
         date: body.date ?? s.date,
         ...(body.fortyYard !== "" && body.fortyYard != null ? { fortyYard: parseFloat(body.fortyYard) } : { fortyYard: undefined }),
+        ...(body.twentyYard !== "" && body.twentyYard != null ? { twentyYard: parseFloat(body.twentyYard) } : { twentyYard: undefined }),
         ...(body.shuttle !== "" && body.shuttle != null ? { shuttle: parseFloat(body.shuttle) } : { shuttle: undefined }),
         ...(body.shuttleLeft !== "" && body.shuttleLeft != null ? { shuttleLeft: parseFloat(body.shuttleLeft) } : { shuttleLeft: undefined }),
         ...(body.shuttleRight !== "" && body.shuttleRight != null ? { shuttleRight: parseFloat(body.shuttleRight) } : { shuttleRight: undefined }),

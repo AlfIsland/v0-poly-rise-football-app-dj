@@ -133,6 +133,7 @@ export default function TrainingRosterPage() {
   const [school, setSchool] = useState("")
   const [sport, setSport] = useState<"football" | "soccer">("football")
   const [fortyYard, setFortyYard] = useState("")
+  const [twentyYard, setTwentyYard] = useState("")
   const [shuttle, setShuttle] = useState("")
   const [threeCone, setThreeCone] = useState("")
   const [verticalJump, setVerticalJump] = useState("")
@@ -156,7 +157,7 @@ export default function TrainingRosterPage() {
 
   const resetForm = () => {
     setName(""); setAge(""); setGrade(""); setPosition(""); setSchool(""); setSport("football")
-    setFortyYard(""); setShuttle(""); setThreeCone("")
+    setFortyYard(""); setTwentyYard(""); setShuttle(""); setThreeCone("")
     setVerticalJump(""); setBroadJump(""); setBenchPress(""); setWeight("")
     setPasteText(""); setParsed(false); setDuplicate(null)
   }
@@ -173,7 +174,7 @@ export default function TrainingRosterPage() {
     if (!pasteText.trim()) return
     const r = parseAthleteText(pasteText)
     setName(r.name); setAge(r.age); setGrade(r.grade); setPosition(r.position)
-    setSchool(r.school); setFortyYard(r.fortyYard); setShuttle(r.shuttle)
+    setSchool(r.school); setFortyYard(r.fortyYard); setTwentyYard(""); setShuttle(r.shuttle)
     setThreeCone(r.threeCone); setVerticalJump(r.verticalJump)
     setBroadJump(r.broadJump); setBenchPress(r.benchPress); setWeight(r.weight)
     setParsed(true)
@@ -193,7 +194,7 @@ export default function TrainingRosterPage() {
       if (!createData.success) { setSaveMsg("Error creating athlete."); setSaving(false); return }
 
       const id = createData.id
-      const hasMetrics = fortyYard || shuttle || threeCone || verticalJump || broadJump || benchPress || weight
+      const hasMetrics = fortyYard || twentyYard || shuttle || threeCone || verticalJump || broadJump || benchPress || weight
       if (hasMetrics) {
         await fetch("/api/training", {
           method: "PUT",
@@ -201,7 +202,7 @@ export default function TrainingRosterPage() {
           body: JSON.stringify({
             id, action: "add-session",
             date: new Date().toISOString().split("T")[0],
-            fortyYard, shuttle, threeCone, verticalJump, broadJump, benchPress, weight,
+            fortyYard, twentyYard, shuttle, threeCone, verticalJump, broadJump, benchPress, weight,
           }),
         })
       }
@@ -282,6 +283,7 @@ export default function TrainingRosterPage() {
         <p className="text-xs text-gray-500 mb-3 uppercase tracking-wider">Metrics — leave blank if not tested</p>
         <div className="grid grid-cols-2 md:grid-cols-6 gap-3">
           <MetricInput label="40-Yd Dash (s)" value={fortyYard} onChange={setFortyYard} placeholder="4.52" />
+          <MetricInput label="20-Yd Dash (s)" value={twentyYard} onChange={setTwentyYard} placeholder="2.75" />
           <MetricInput label="Shuttle (s)" value={shuttle} onChange={setShuttle} placeholder="4.21" />
           <MetricInput label="3-Cone (s)" value={threeCone} onChange={setThreeCone} placeholder="6.89" />
           <MetricInput label="Vertical (in)" value={verticalJump} onChange={setVerticalJump} placeholder="34" step="0.5" />

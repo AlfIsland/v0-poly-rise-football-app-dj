@@ -34,6 +34,7 @@ function EditSessionForm() {
   const [date, setDate] = useState("")
   const [weight, setWeight] = useState("")
   const [fortyYard, setFortyYard] = useState("")
+  const [twentyYard, setTwentyYard] = useState("")
   const [shuttle, setShuttle] = useState("")
   const [shuttleLeft, setShuttleLeft] = useState("")
   const [shuttleRight, setShuttleRight] = useState("")
@@ -55,6 +56,7 @@ function EditSessionForm() {
             setDate(s.date ?? "")
             setWeight(s.weight != null ? String(s.weight) : "")
             setFortyYard(s.fortyYard != null ? String(s.fortyYard) : "")
+            setTwentyYard(s.twentyYard != null ? String(s.twentyYard) : "")
             setShuttle(s.shuttle != null ? String(s.shuttle) : "")
             setShuttleLeft(s.shuttleLeft != null ? String(s.shuttleLeft) : "")
             setShuttleRight(s.shuttleRight != null ? String(s.shuttleRight) : "")
@@ -82,7 +84,7 @@ function EditSessionForm() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           id, action: "edit-session", sessionIndex,
-          date, weight, fortyYard, shuttle, shuttleLeft, shuttleRight, threeCone,
+          date, weight, fortyYard, twentyYard, shuttle, shuttleLeft, shuttleRight, threeCone,
           verticalJump, broadJump, benchPress, notes,
         }),
       })
@@ -135,7 +137,10 @@ function EditSessionForm() {
 
           <div className="bg-gray-900 rounded-2xl p-6 space-y-4 border border-gray-800">
             <h2 className="text-xs font-bold text-red-400 uppercase tracking-widest">Speed & Agility</h2>
-            <Input label="40-Yard Dash (sec)" value={fortyYard} onChange={setFortyYard} placeholder="e.g. 5.12" type="number" step="0.01" />
+            <div className="grid grid-cols-2 gap-3">
+              <Input label="40-Yard Dash (sec)" value={fortyYard} onChange={setFortyYard} placeholder="e.g. 5.12" type="number" step="0.01" />
+              <Input label="20-Yard Dash (sec)" value={twentyYard} onChange={setTwentyYard} placeholder="e.g. 2.75" type="number" step="0.01" />
+            </div>
             <Input label="5-10-5 Shuttle — Overall (sec)" value={shuttle} onChange={setShuttle} placeholder="e.g. 4.60" type="number" step="0.01" />
             <div className="grid grid-cols-2 gap-3">
               <Input label="Shuttle Left (sec)" value={shuttleLeft} onChange={setShuttleLeft} placeholder="e.g. 4.55" type="number" step="0.01" hint="Starting left" />

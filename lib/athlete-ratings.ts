@@ -5,6 +5,7 @@
 
 export interface AthleteMetrics {
   fortyYard?: number       // seconds (lower = better)
+  twentyYard?: number      // seconds (lower = better)
   shuttle?: number         // 20-yard shuttle / 5-10-5, seconds (lower = better)
   threeCone?: number       // L-drill / 3-cone, seconds (lower = better)
   verticalJump?: number    // inches (higher = better)
@@ -152,6 +153,43 @@ const FORTY_NATIONAL: PositionBenchmarks = {
   SKILL:   buildForty(FORTY_SENIOR_SKILL,   [0.06, 0.12, 0.18, 0.75]),
   BIG:     buildForty(FORTY_SENIOR_BIG,     [0.06, 0.12, 0.18, 0.62]),
   GENERAL: buildForty(FORTY_SENIOR_SPEED,   [0.06, 0.12, 0.18, 0.72]),
+}
+
+// ── 20-YARD DASH (lower = better) ────────────────────────────────────────────
+
+const TWENTY_SENIOR_SPEED: Benchmark = [
+  [3.00,5],[2.90,15],[2.82,30],[2.75,50],
+  [2.68,65],[2.62,80],[2.56,88],[2.51,93],
+  [2.46,96],[2.42,98],[2.37,99],
+]
+const TWENTY_SENIOR_SKILL: Benchmark = [
+  [3.15,5],[3.05,15],[2.97,30],[2.90,50],
+  [2.83,65],[2.76,80],[2.70,88],[2.65,93],
+  [2.60,96],[2.55,98],[2.49,99],
+]
+const TWENTY_SENIOR_BIG: Benchmark = [
+  [3.50,5],[3.38,15],[3.27,30],[3.16,50],
+  [3.06,65],[2.97,80],[2.90,88],[2.84,93],
+  [2.78,96],[2.72,98],[2.65,99],
+]
+
+function buildTwenty(senior: Benchmark, shifts: number[]): GradeBenchmarks {
+  const [jr, so, fr, ms] = shifts
+  return {
+    SENIOR:    senior,
+    JUNIOR:    shiftBenchmark(senior, jr, true),
+    SOPHOMORE: shiftBenchmark(senior, so, true),
+    FRESHMAN:  shiftBenchmark(senior, fr, true),
+    MIDDLE:    shiftBenchmark(senior, ms, true),
+    UNKNOWN:   senior,
+  }
+}
+
+const TWENTY_NATIONAL: PositionBenchmarks = {
+  SPEED:   buildTwenty(TWENTY_SENIOR_SPEED,  [0.04, 0.08, 0.12, 0.45]),
+  SKILL:   buildTwenty(TWENTY_SENIOR_SKILL,  [0.04, 0.08, 0.12, 0.48]),
+  BIG:     buildTwenty(TWENTY_SENIOR_BIG,    [0.04, 0.08, 0.12, 0.40]),
+  GENERAL: buildTwenty(TWENTY_SENIOR_SPEED,  [0.04, 0.08, 0.12, 0.45]),
 }
 
 // ── 20-YD SHUTTLE / 5-10-5 (lower = better) ──────────────────────────────────
@@ -376,6 +414,7 @@ function buildTexasFromNational(
 // athletes need to be meaningfully faster/stronger than the national average.
 // 40-yd: ~0.12s faster | Shuttle/Cone: ~0.10s | Vertical: ~4" | Broad: ~6" | Bench: ~3 reps
 const FORTY_TEXAS      = buildTexasFromNational(FORTY_NATIONAL,      0.12, 0,  true)
+const TWENTY_TEXAS     = buildTexasFromNational(TWENTY_NATIONAL,     0.08, 0,  true)
 const SHUTTLE_TEXAS    = buildTexasFromNational(SHUTTLE_NATIONAL,    0.10, 0,  true)
 const THREE_CONE_TEXAS = buildTexasFromNational(THREE_CONE_NATIONAL, 0.12, 0,  true)
 const VERTICAL_TEXAS   = buildTexasFromNational(VERTICAL_NATIONAL,   0,    4,  false)
@@ -479,6 +518,7 @@ export function calculateRatings(
   }
 
   addMetric("40-Yard Dash",   metrics.fortyYard,   "sec",  FORTY_NATIONAL,     FORTY_TEXAS,     true)
+  addMetric("20-Yard Dash",   metrics.twentyYard,  "sec",  TWENTY_NATIONAL,    TWENTY_TEXAS,    true)
   addMetric("20-Yd Shuttle",  metrics.shuttle,     "sec",  SHUTTLE_NATIONAL,   SHUTTLE_TEXAS,   true)
   addMetric("3-Cone / L-Drill", metrics.threeCone, "sec",  THREE_CONE_NATIONAL, THREE_CONE_TEXAS, true)
   addMetric("Vertical Jump",  metrics.verticalJump, "in",  VERTICAL_NATIONAL,  VERTICAL_TEXAS,  false)

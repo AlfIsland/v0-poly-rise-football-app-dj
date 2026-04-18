@@ -189,6 +189,29 @@ export async function PUT(req: NextRequest) {
 
 export async function GET(req: NextRequest) {
   const code = req.nextUrl.searchParams.get("code")
+  const name = req.nextUrl.searchParams.get("name")
+
+  // Name search — returns first matching PR-V record
+  if (name && !code) {
+    try {
+      const r = getRedis()
+      if (!r) return NextResponse.json({ success: false, error: "No Redis" }, { status: 500 })
+      const codes = await r.smembers("athlete:roster")
+      const normalize = (s: string) => s.toLowerCase().replace(/[^a-z0-9]/g, "")
+      for (const c of codes) {
+        const raw = await r.get(`athlete:${c}`)
+        if (!raw) continue
+        const a = JSON.parse(raw)
+        if (normalize(a.athleteName ?? "") === normalize(name)) {
+          return NextResponse.json({ success: true, athlete: a })
+        }
+      }
+      return NextResponse.json({ success: false, error: "Not found" }, { status: 404 })
+    } catch (err) {
+      console.error("[athletes GET by name]", err)
+      return NextResponse.json({ success: false, error: "Failed" }, { status: 500 })
+    }
+  }
 
   if (!code) {
     return NextResponse.json(

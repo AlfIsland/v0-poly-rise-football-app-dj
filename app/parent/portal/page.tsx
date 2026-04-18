@@ -43,6 +43,7 @@ function fmt(val: number | undefined, unit: string) {
 function Portal() {
   const [parent, setParent] = useState<Parent | null>(null)
   const [athletes, setAthletes] = useState<Athlete[]>([])
+  const [prvRecords, setPrvRecords] = useState<Record<string, { code: string; verifyUrl: string } | null>>({})
   const [loading, setLoading] = useState(true)
   const [managingBilling, setManagingBilling] = useState(false)
   const [activeTab, setActiveTab] = useState<Record<string, "overview" | "history" | "chart">>({})
@@ -58,6 +59,20 @@ function Portal() {
         setParent(data.parent)
         setAthletes(data.athletes)
         setLoading(false)
+        // Fetch PR-V records for each athlete by name
+        data.athletes.forEach((a: Athlete) => {
+          fetch(`/api/athletes?name=${encodeURIComponent(a.name)}`)
+            .then(r => r.json())
+            .then(prv => {
+              if (prv.success && prv.athlete?.code) {
+                setPrvRecords(prev => ({ ...prev, [a.id]: {
+                  code: prv.athlete.code,
+                  verifyUrl: `https://polyrisefootball.com/verify/${prv.athlete.code}`,
+                }}))
+              }
+            })
+            .catch(() => {})
+        })
       })
       .catch(() => router.push("/parent/login"))
   }, [router])
@@ -175,14 +190,26 @@ function Portal() {
 
               {/* Athlete header */}
               <div className="bg-gray-800 px-6 py-4">
-                <p className="text-white font-bold text-xl">{athlete.name}</p>
-                <p className="text-gray-400 text-sm mt-0.5">
-                  {athlete.age} yrs · {athlete.grade} · {athlete.school || "—"}
-                  {athlete.position ? ` · ${athlete.position}` : ""}
-                </p>
-                <p className="text-gray-600 text-xs mt-1">
-                  {sessions.length} session{sessions.length !== 1 ? "s" : ""} recorded · Member since {new Date(athlete.joinedAt).toLocaleDateString("en-US", { month: "long", year: "numeric" })}
-                </p>
+                <div className="flex items-start justify-between gap-3">
+                  <div>
+                    <p className="text-white font-bold text-xl">{athlete.name}</p>
+                    <p className="text-gray-400 text-sm mt-0.5">
+                      {athlete.age} yrs · {athlete.grade} · {athlete.school || "—"}
+                      {athlete.position ? ` · ${athlete.position}` : ""}
+                    </p>
+                    <p className="text-gray-600 text-xs mt-1">
+                      {sessions.length} session{sessions.length !== 1 ? "s" : ""} recorded · Member since {new Date(athlete.joinedAt).toLocaleDateString("en-US", { month: "long", year: "numeric" })}
+                    </p>
+                  </div>
+                  {prvRecords[athlete.id] && (
+                    <a href={prvRecords[athlete.id]!.verifyUrl} target="_blank" rel="noopener noreferrer"
+                      className="shrink-0 flex flex-col items-center bg-red-950/60 border border-red-800/50 rounded-xl px-3 py-2 hover:bg-red-900/60 transition-colors">
+                      <span className="text-red-400 text-xs font-bold uppercase tracking-widest">PR-VERIFIED</span>
+                      <span className="font-mono text-white text-xs font-bold mt-0.5">{prvRecords[athlete.id]!.code}</span>
+                      <span className="text-red-600 text-xs mt-0.5">View Seal →</span>
+                    </a>
+                  )}
+                </div>
               </div>
 
               {sessions.length === 0 ? (

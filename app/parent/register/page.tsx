@@ -14,6 +14,7 @@ export default function ParentRegisterPage() {
 
   const [name, setName] = useState("")
   const [athleteName, setAthleteName] = useState("")
+  const [athleteId, setAthleteId] = useState("")
   const [email, setEmail] = useState("")
   const [phone, setPhone] = useState("")
   const [password, setPassword] = useState("")
@@ -32,7 +33,7 @@ export default function ParentRegisterPage() {
       const regRes = await fetch("/api/parent/register", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ name, email, password, phone, athleteName, plan }),
+        body: JSON.stringify({ name, email, password, phone, athleteName, athleteId, plan }),
       })
       const regData = await regRes.json()
 
@@ -211,6 +212,13 @@ export default function ParentRegisterPage() {
                 <label className="block text-sm text-gray-300 mb-1.5">Athlete&apos;s Name</label>
                 <input value={athleteName} onChange={e => setAthleteName(e.target.value)} placeholder="Your athlete's full name"
                   className="w-full bg-gray-800 text-white rounded-lg px-4 py-2.5 border border-gray-700 focus:border-red-500 focus:outline-none placeholder-gray-600 text-sm" />
+              </div>
+
+              <div>
+                <label className="block text-sm text-gray-300 mb-1.5">Athlete ID <span className="text-gray-500 text-xs">(optional — e.g. TRN-0042)</span></label>
+                <input value={athleteId} onChange={e => setAthleteId(e.target.value.toUpperCase())} placeholder="TRN-XXXX"
+                  className="w-full bg-gray-800 text-white rounded-lg px-4 py-2.5 border border-gray-700 focus:border-red-500 focus:outline-none placeholder-gray-600 text-sm font-mono" />
+                <p className="text-xs text-gray-600 mt-1">Find this on your athlete&apos;s training profile or ask your coach</p>
               </div>
 
               <div>

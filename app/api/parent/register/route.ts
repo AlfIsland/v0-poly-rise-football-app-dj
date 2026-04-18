@@ -4,7 +4,7 @@ import { getParent, saveParent, createSession, PARENT_COOKIE, SESSION_MAX_AGE } 
 
 export async function POST(req: NextRequest) {
   try {
-    const { email, password, name, phone, athleteName, plan } = await req.json()
+    const { email, password, name, phone, athleteName, athleteId, plan } = await req.json()
     if (!email || !password || !name)
       return NextResponse.json({ success: false, error: "Missing required fields" }, { status: 400 })
 
@@ -20,6 +20,7 @@ export async function POST(req: NextRequest) {
       name,
       phone: phone || "",
       athleteName: athleteName || "",
+      requestedAthleteId: athleteId ? athleteId.toUpperCase() : undefined,
       athleteIds: [],
       tier: "none",
       approvalStatus: isProgramMember ? "pending" : undefined,

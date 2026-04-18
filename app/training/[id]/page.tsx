@@ -8,8 +8,10 @@ import SendTrainingReport from "@/components/send-training-report"
 import FeaturedToggle from "@/components/featured-toggle"
 import ProgressChart from "@/components/progress-chart"
 import DeleteSessionButton from "@/components/delete-session-button"
+import InviteParentButton from "@/components/invite-parent-button"
 import { calculateRatings } from "@/lib/athlete-ratings"
 import { gradeToClassYear } from "@/lib/grade-to-class-year"
+import { getAllParents } from "@/lib/parent-store"
 
 async function getAthlete(id: string) {
   try {
@@ -49,8 +51,12 @@ function impBg(imp: number) {
 }
 
 export default async function TrainingAthletePage({ params }: { params: { id: string } }) {
-  const athlete = await getAthlete(params.id)
+  const [athlete, allParents] = await Promise.all([
+    getAthlete(params.id),
+    getAllParents().catch(() => []),
+  ])
   if (!athlete) notFound()
+  const linkedParent = allParents.find(p => p.athleteIds.includes(params.id.toUpperCase()))
 
   const sessions = athlete.sessions ?? []
   const baseline = sessions[0]
@@ -91,6 +97,14 @@ export default async function TrainingAthletePage({ params }: { params: { id: st
           </div>
           <div className="flex items-center gap-2 flex-wrap justify-end">
             <FeaturedToggle id={athlete.id} initialFeatured={athlete.featured ?? false} />
+            {/* Parent linked indicator */}
+            {linkedParent ? (
+              <span className="text-xs bg-green-900/50 border border-green-700/50 text-green-300 px-3 py-2 rounded-xl font-semibold">
+                ✓ Parent: {linkedParent.name}
+              </span>
+            ) : (
+              <InviteParentButton athleteId={athlete.id} athleteName={athlete.name} />
+            )}
             <Link href={`/admin/athletes/new?mode=prv&name=${encodeURIComponent(athlete.name)}&position=${encodeURIComponent(athlete.position ?? "")}&school=${encodeURIComponent(athlete.school ?? "")}&gradYear=${encodeURIComponent(classYear ?? "")}`}
               className="bg-yellow-700 hover:bg-yellow-600 text-white font-semibold px-3 py-2 rounded-xl text-xs transition-colors">
               🔴 Add PR-V Seal

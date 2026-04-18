@@ -9,6 +9,7 @@ interface ParentAccount {
   name: string
   phone?: string
   athleteName?: string
+  requestedAthleteId?: string
   athleteIds: string[]
   tier: string
   approvalStatus?: "pending" | "approved" | "denied"
@@ -354,7 +355,11 @@ export default function AdminParentsPage() {
 
                   {/* Pending approval banner */}
                   {isPending && (() => {
-                    const suggestion = parent.athleteName ? findBestMatch(parent.athleteName, athletes.filter(a => !parent.athleteIds.includes(a.id))) : null
+                    const unlinked = athletes.filter(a => !parent.athleteIds.includes(a.id))
+                    const exactMatch = parent.requestedAthleteId ? unlinked.find(a => a.id === parent.requestedAthleteId) : null
+                    const suggestion = exactMatch
+                      ? { athlete: exactMatch, score: 100 }
+                      : parent.athleteName ? findBestMatch(parent.athleteName, unlinked) : null
                     const currentSelect = approvingEmail === parent.email ? approveSelect : (suggestion?.athlete.id ?? "")
                     return (
                       <div className="flex flex-col gap-3 bg-yellow-900/30 border border-yellow-700/50 rounded-lg px-4 py-3 mb-4">
@@ -430,7 +435,10 @@ export default function AdminParentsPage() {
                       <div className="text-sm text-gray-400">{parent.email}</div>
                       {parent.phone && <div className="text-sm text-gray-500">{parent.phone}</div>}
                       {parent.athleteName && (
-                        <div className="text-xs text-gray-500 mt-1">Athlete name given: <span className="text-gray-300">{parent.athleteName}</span></div>
+                        <div className="text-xs text-gray-500 mt-1">Athlete name: <span className="text-gray-300">{parent.athleteName}</span></div>
+                      )}
+                      {parent.requestedAthleteId && (
+                        <div className="text-xs text-gray-500 mt-0.5">Athlete ID provided: <span className="font-mono text-blue-400 font-bold">{parent.requestedAthleteId}</span></div>
                       )}
                       <div className="text-xs text-gray-600 mt-1">
                         Joined {new Date(parent.createdAt).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" })}

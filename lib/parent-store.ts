@@ -16,6 +16,7 @@ export interface ParentAccount {
   name: string
   phone?: string
   athleteName?: string           // athlete name provided at signup
+  requestedAthleteId?: string    // TRN ID entered at signup for faster matching
   athleteIds: string[]           // training athlete IDs linked to this parent
   tier: "program" | "monthly" | "quarterly" | "none"
   approvalStatus?: "pending" | "approved" | "denied"  // for program members

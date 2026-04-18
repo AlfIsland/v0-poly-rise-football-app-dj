@@ -75,14 +75,14 @@ const AGE_BENCHMARKS: Record<string, Thresholds[]> = {
   ],
   // Age 14+ = reps at 135 lbs. Under 14 = reps at lighter bar (rated generously).
   benchPress: [
-    { elite: 8,  aboveAvg: 5,  average: 2,  lower: false }, // ≤11 (lighter bar)
-    { elite: 8,  aboveAvg: 5,  average: 2,  lower: false }, // 12  (lighter bar)
-    { elite: 8,  aboveAvg: 5,  average: 2,  lower: false }, // 13  (lighter bar)
-    { elite: 8,  aboveAvg: 5,  average: 2,  lower: false }, // 14 — reps at 135 lbs
-    { elite: 12, aboveAvg: 8,  average: 4,  lower: false }, // 15
-    { elite: 15, aboveAvg: 10, average: 6,  lower: false }, // 16
-    { elite: 18, aboveAvg: 13, average: 8,  lower: false }, // 17
-    { elite: 22, aboveAvg: 16, average: 10, lower: false }, // 18+
+    { elite: 11, aboveAvg: 8,  average: 5,  lower: false }, // ≤11 (lighter bar)
+    { elite: 11, aboveAvg: 8,  average: 5,  lower: false }, // 12  (lighter bar)
+    { elite: 10, aboveAvg: 7,  average: 4,  lower: false }, // 13  (lighter bar, +2)
+    { elite: 11, aboveAvg: 8,  average: 5,  lower: false }, // 14 — reps at 135 lbs
+    { elite: 15, aboveAvg: 11, average: 7,  lower: false }, // 15
+    { elite: 18, aboveAvg: 13, average: 9,  lower: false }, // 16
+    { elite: 21, aboveAvg: 16, average: 11, lower: false }, // 17
+    { elite: 25, aboveAvg: 19, average: 13, lower: false }, // 18+
   ],
 }
 

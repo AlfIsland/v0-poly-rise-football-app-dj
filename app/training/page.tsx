@@ -140,6 +140,8 @@ export default function TrainingRosterPage() {
   const [broadJump, setBroadJump] = useState("")
   const [benchPress, setBenchPress] = useState("")
   const [weight, setWeight] = useState("")
+  const [heightFt, setHeightFt] = useState("")
+  const [heightIn, setHeightIn] = useState("")
   const [saving, setSaving] = useState(false)
   const [saveMsg, setSaveMsg] = useState("")
   const [duplicate, setDuplicate] = useState<{ id: string; name: string } | null>(null)
@@ -159,6 +161,7 @@ export default function TrainingRosterPage() {
     setName(""); setAge(""); setGrade(""); setPosition(""); setSchool(""); setSport("football")
     setFortyYard(""); setTwentyYard(""); setShuttle(""); setThreeCone("")
     setVerticalJump(""); setBroadJump(""); setBenchPress(""); setWeight("")
+    setHeightFt(""); setHeightIn("")
     setPasteText(""); setParsed(false); setDuplicate(null)
   }
 
@@ -194,7 +197,8 @@ export default function TrainingRosterPage() {
       if (!createData.success) { setSaveMsg("Error creating athlete."); setSaving(false); return }
 
       const id = createData.id
-      const hasMetrics = fortyYard || twentyYard || shuttle || threeCone || verticalJump || broadJump || benchPress || weight
+      const height = heightFt && heightIn ? `${heightFt}'${heightIn}"` : heightFt ? `${heightFt}'0"` : ""
+      const hasMetrics = fortyYard || twentyYard || shuttle || threeCone || verticalJump || broadJump || benchPress || weight || height
       if (hasMetrics) {
         await fetch("/api/training", {
           method: "PUT",
@@ -202,7 +206,7 @@ export default function TrainingRosterPage() {
           body: JSON.stringify({
             id, action: "add-session",
             date: new Date().toISOString().split("T")[0],
-            fortyYard, twentyYard, shuttle, threeCone, verticalJump, broadJump, benchPress, weight,
+            height, fortyYard, twentyYard, shuttle, threeCone, verticalJump, broadJump, benchPress, weight,
           }),
         })
       }
@@ -276,6 +280,16 @@ export default function TrainingRosterPage() {
           <label className="block text-xs text-gray-400 mb-1">Body Weight (lbs)</label>
           <input type="number" value={weight} onChange={e => setWeight(e.target.value)} placeholder="e.g. 145"
             className="w-full bg-gray-800 text-white rounded-lg px-3 py-2 border border-gray-700 focus:border-red-500 focus:outline-none placeholder-gray-600 text-sm" />
+        </div>
+      </div>
+
+      <div>
+        <label className="block text-xs text-gray-400 mb-1">Height</label>
+        <div className="flex gap-2">
+          <input type="number" value={heightFt} onChange={e => setHeightFt(e.target.value)} placeholder="ft" min="4" max="7"
+            className="w-24 bg-gray-800 text-white rounded-lg px-3 py-2 border border-gray-700 focus:border-red-500 focus:outline-none placeholder-gray-600 text-sm" />
+          <input type="number" value={heightIn} onChange={e => setHeightIn(e.target.value)} placeholder="in" min="0" max="11"
+            className="w-24 bg-gray-800 text-white rounded-lg px-3 py-2 border border-gray-700 focus:border-red-500 focus:outline-none placeholder-gray-600 text-sm" />
         </div>
       </div>
 

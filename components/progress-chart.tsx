@@ -25,7 +25,7 @@ const METRICS = [
   { key: "threeCone",    label: "3-Cone",   unit: "s",    lower: true,  color: "#eab308" },
   { key: "verticalJump", label: "Vertical", unit: "\"",   lower: false, color: "#22c55e" },
   { key: "broadJump",    label: "Broad",    unit: "\"",   lower: false, color: "#3b82f6" },
-  { key: "benchPress",   label: "Bench",    unit: " lbs", lower: false, color: "#a855f7" },
+  { key: "benchPress",   label: "Bench 135", unit: " reps", lower: false, color: "#a855f7" },
 ] as const
 
 type MetricKey = typeof METRICS[number]["key"]

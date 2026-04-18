@@ -31,7 +31,7 @@ const METRICS = [
   { key: "threeCone", label: "3-Cone Drill", unit: "sec", lower: true },
   { key: "verticalJump", label: "Vertical Jump", unit: "in", lower: false },
   { key: "broadJump", label: "Broad Jump", unit: "in", lower: false },
-  { key: "benchPress", label: "Max Bench", unit: "lbs", lower: false },
+  { key: "benchPress", label: "Bench Press 135", unit: "reps", lower: false },
 ] as const
 
 function fmt(val: number, unit: string) {

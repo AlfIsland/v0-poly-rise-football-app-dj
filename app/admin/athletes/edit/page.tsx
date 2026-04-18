@@ -242,7 +242,7 @@ function EditForm() {
             <Input label="3-Cone Drill (sec)" value={threeCone} onChange={setThreeCone} placeholder="e.g. 6.89" type="number" step="0.01" />
             <Input label="Vertical Jump (inches)" value={verticalJump} onChange={setVerticalJump} placeholder="e.g. 34" type="number" step="0.5" />
             <Input label="Broad Jump (inches)" value={broadJump} onChange={setBroadJump} placeholder="e.g. 108" type="number" step="0.5" />
-            <Input label="Max Bench — 135 Bar (lbs)" value={benchPress} onChange={setBenchPress} placeholder="e.g. 185" type="number" />
+            <Input label="Bench Press — 135 lbs (reps)" value={benchPress} onChange={setBenchPress} placeholder="e.g. 10" type="number" />
           </div>
 
           <button

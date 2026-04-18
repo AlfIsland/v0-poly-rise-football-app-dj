@@ -10,6 +10,7 @@ interface ParentAccount {
   phone?: string
   athleteName?: string
   requestedAthleteId?: string
+  accessExpiry?: string
   athleteIds: string[]
   tier: string
   approvalStatus?: "pending" | "approved" | "denied"
@@ -39,6 +40,25 @@ const STATUS_COLORS: Record<string, string> = {
   canceled: "bg-gray-800 text-gray-500",
 }
 
+// Default expiry = end of current month
+function defaultExpiry(): string {
+  const d = new Date()
+  d.setMonth(d.getMonth() + 1)
+  d.setDate(0)
+  return d.toISOString().split("T")[0]
+}
+
+// Returns expiry status for a program member
+function expiryStatus(parent: ParentAccount): "expired" | "soon" | "ok" | null {
+  if (parent.tier !== "program" || parent.approvalStatus !== "approved" || !parent.accessExpiry) return null
+  const now = new Date()
+  const exp = new Date(parent.accessExpiry + "T00:00:00")
+  const diffDays = Math.ceil((exp.getTime() - now.getTime()) / (1000 * 60 * 60 * 24))
+  if (diffDays < 0) return "expired"
+  if (diffDays <= 3) return "soon"
+  return "ok"
+}
+
 // Fuzzy name match — returns best matching athlete id (score > 0) or null
 function findBestMatch(athleteName: string, athletes: TrainingAthlete[]): { athlete: TrainingAthlete; score: number } | null {
   if (!athleteName || !athletes.length) return null
@@ -50,11 +70,9 @@ function findBestMatch(athleteName: string, athletes: TrainingAthlete[]): { athl
   let best: { athlete: TrainingAthlete; score: number } | null = null
   for (const a of athletes) {
     const aTokens = tokens(a.name)
-    // Exact match
     if (normalize(a.name) === normalize(athleteName)) {
       return { athlete: a, score: 100 }
     }
-    // Token overlap score
     const matches = query.filter(q => aTokens.some(t => t.startsWith(q) || q.startsWith(t)))
     const score = (matches.length / Math.max(query.length, aTokens.length)) * 100
     if (score > 40 && (!best || score > best.score)) {
@@ -74,6 +92,9 @@ export default function AdminParentsPage() {
   const [linkSelect, setLinkSelect] = useState("")
   const [approvingEmail, setApprovingEmail] = useState<string | null>(null)
   const [approveSelect, setApproveSelect] = useState("")
+  const [approveExpiry, setApproveExpiry] = useState(defaultExpiry())
+  const [extendingEmail, setExtendingEmail] = useState<string | null>(null)
+  const [extendExpiry, setExtendExpiry] = useState("")
   const [saving, setSaving] = useState(false)
   const [sentEmail, setSentEmail] = useState<string | null>(null)
   const [selectedEmails, setSelectedEmails] = useState<string[]>([])
@@ -89,10 +110,19 @@ export default function AdminParentsPage() {
     }).finally(() => setLoading(false))
   }, [])
 
+  const expiringSoon = parents.filter(p => {
+    const s = expiryStatus(p)
+    return s === "soon" || s === "expired"
+  }).length
+
   const filtered = parents.filter(p => {
     if (filter === "pending" && p.approvalStatus !== "pending") return false
     if (filter === "active" && p.subscriptionStatus !== "active") return false
     if (filter === "no-sub" && p.tier !== "none") return false
+    if (filter === "expiring") {
+      const s = expiryStatus(p)
+      if (s !== "soon" && s !== "expired") return false
+    }
     if (search) {
       const q = search.toLowerCase()
       return p.name.toLowerCase().includes(q)
@@ -118,22 +148,38 @@ export default function AdminParentsPage() {
     setSaving(false)
   }
 
-  async function handleApprove(email: string, athleteId: string) {
+  async function handleApprove(email: string, athleteId: string, expiry?: string) {
     setSaving(true)
     const res = await fetch("/api/admin/parents", {
       method: "PATCH",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ email, action: "approve", athleteId }),
+      body: JSON.stringify({ email, action: "approve", athleteId, accessExpiry: expiry || approveExpiry }),
     }).then(r => r.json())
     if (res.success) {
       setParents(prev => prev.map(p => p.email === email
-        ? { ...p, tier: "program", approvalStatus: "approved", athleteIds: res.athleteIds ?? p.athleteIds }
+        ? { ...p, tier: "program", approvalStatus: "approved", athleteIds: res.athleteIds ?? p.athleteIds, accessExpiry: expiry || approveExpiry }
         : p))
     }
     setLinkingEmail(null)
     setLinkSelect("")
     setApprovingEmail(null)
     setApproveSelect("")
+    setApproveExpiry(defaultExpiry())
+    setSaving(false)
+  }
+
+  async function handleExtend(email: string, expiry: string) {
+    setSaving(true)
+    const res = await fetch("/api/admin/parents", {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email, action: "extend", accessExpiry: expiry }),
+    }).then(r => r.json())
+    if (res.success) {
+      setParents(prev => prev.map(p => p.email === email ? { ...p, accessExpiry: expiry } : p))
+    }
+    setExtendingEmail(null)
+    setExtendExpiry("")
     setSaving(false)
   }
 
@@ -142,13 +188,14 @@ export default function AdminParentsPage() {
     setSaving(true)
     setBulkResult(null)
     const pending = parents.filter(p => selectedEmails.includes(p.email) && p.approvalStatus === "pending")
+    const expiry = defaultExpiry()
     const results = await Promise.all(pending.map(async p => {
       const match = p.athleteName ? findBestMatch(p.athleteName, athletes.filter(a => !p.athleteIds.includes(a.id))) : null
       const athleteId = match?.athlete.id ?? ""
       const res = await fetch("/api/admin/parents", {
         method: "PATCH",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email: p.email, action: "approve", athleteId }),
+        body: JSON.stringify({ email: p.email, action: "approve", athleteId, accessExpiry: expiry }),
       }).then(r => r.json())
       return { email: p.email, success: res.success, athleteIds: res.athleteIds }
     }))
@@ -157,7 +204,7 @@ export default function AdminParentsPage() {
     setParents(prev => prev.map(p => {
       const r = results.find(x => x.email === p.email)
       if (!r?.success) return p
-      return { ...p, tier: "program", approvalStatus: "approved", athleteIds: r.athleteIds ?? p.athleteIds }
+      return { ...p, tier: "program", approvalStatus: "approved", athleteIds: r.athleteIds ?? p.athleteIds, accessExpiry: expiry }
     }))
     setSelectedEmails([])
     setBulkResult({ approved, skipped })
@@ -244,10 +291,11 @@ export default function AdminParentsPage() {
             onChange={e => setSearch(e.target.value)}
             className="flex-1 bg-white/5 border border-white/10 rounded-lg px-4 py-2 text-sm text-white placeholder-gray-500 outline-none focus:border-red-500"
           />
-          <div className="flex gap-2">
+          <div className="flex gap-2 flex-wrap">
             {[
               { key: "all", label: "All" },
               { key: "pending", label: `Pending${stats.pending > 0 ? ` (${stats.pending})` : ""}` },
+              { key: "expiring", label: `Expiring${expiringSoon > 0 ? ` (${expiringSoon})` : ""}` },
               { key: "active", label: "Active" },
               { key: "no-sub", label: "No Sub" },
             ].map(f => (
@@ -256,8 +304,10 @@ export default function AdminParentsPage() {
                 onClick={() => setFilter(f.key)}
                 className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
                   filter === f.key
-                    ? "bg-red-600 text-white"
-                    : "bg-white/5 border border-white/10 text-gray-400 hover:text-white"
+                    ? f.key === "expiring" ? "bg-orange-600 text-white" : "bg-red-600 text-white"
+                    : f.key === "expiring" && expiringSoon > 0
+                      ? "bg-orange-950/40 border border-orange-700/50 text-orange-300 hover:text-white"
+                      : "bg-white/5 border border-white/10 text-gray-400 hover:text-white"
                 }`}
               >
                 {f.label}
@@ -325,13 +375,17 @@ export default function AdminParentsPage() {
               const statusCls = parent.subscriptionStatus ? (STATUS_COLORS[parent.subscriptionStatus] ?? "bg-gray-800 text-gray-500") : ""
               const linkedAthletes = athletes.filter(a => parent.athleteIds.includes(a.id))
               const isLinking = linkingEmail === parent.email
+              const expStatus = expiryStatus(parent)
 
               const isPending = parent.approvalStatus === "pending"
               const isDenied = parent.approvalStatus === "denied"
+              const isExtending = extendingEmail === parent.email
 
               return (
                 <div key={parent.email} className={`rounded-xl p-5 border ${
                   isPending ? "bg-yellow-950/20 border-yellow-700/40" :
+                  expStatus === "expired" ? "bg-red-950/20 border-red-700/40" :
+                  expStatus === "soon" ? "bg-orange-950/20 border-orange-700/40" :
                   isDenied ? "bg-gray-900 border-gray-700/40 opacity-60" :
                   "bg-white/5 border-white/10"
                 }`}>
@@ -375,7 +429,7 @@ export default function AdminParentsPage() {
                             <span className="text-green-700 text-xs ml-auto">{Math.round(suggestion.score)}% match</span>
                           </div>
                         )}
-                        <div className="flex gap-2 flex-wrap">
+                        <div className="flex gap-2 flex-wrap items-center">
                           <select
                             value={currentSelect}
                             onChange={e => { setApprovingEmail(parent.email); setApproveSelect(e.target.value) }}
@@ -386,8 +440,17 @@ export default function AdminParentsPage() {
                               <option key={a.id} value={a.id}>{a.name} ({a.id})</option>
                             ))}
                           </select>
+                          <div className="flex flex-col gap-0.5">
+                            <label className="text-xs text-gray-500">Access until</label>
+                            <input
+                              type="date"
+                              value={approvingEmail === parent.email ? approveExpiry : defaultExpiry()}
+                              onChange={e => { setApprovingEmail(parent.email); setApproveExpiry(e.target.value) }}
+                              className="bg-[#0a0a0f] border border-white/20 rounded-lg px-2 py-1.5 text-xs text-white outline-none focus:border-green-600"
+                            />
+                          </div>
                           <button
-                            onClick={() => handleApprove(parent.email, currentSelect)}
+                            onClick={() => handleApprove(parent.email, currentSelect, approvingEmail === parent.email ? approveExpiry : defaultExpiry())}
                             disabled={saving || !currentSelect}
                             className="px-3 py-1.5 bg-green-600 hover:bg-green-500 disabled:opacity-40 disabled:cursor-not-allowed text-white text-xs rounded-lg font-bold"
                           >
@@ -404,6 +467,55 @@ export default function AdminParentsPage() {
                       </div>
                     )
                   })()}
+
+                  {/* Expiry warning banner */}
+                  {(expStatus === "expired" || expStatus === "soon") && !isPending && (
+                    <div className={`flex items-center justify-between rounded-lg px-3 py-2 mb-3 text-xs font-medium ${
+                      expStatus === "expired"
+                        ? "bg-red-950/60 border border-red-700/50 text-red-300"
+                        : "bg-orange-950/50 border border-orange-700/40 text-orange-300"
+                    }`}>
+                      <span>
+                        {expStatus === "expired"
+                          ? `⚠ Access EXPIRED — ${new Date(parent.accessExpiry! + "T00:00:00").toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" })}`
+                          : `⏰ Expiring soon — ${new Date(parent.accessExpiry! + "T00:00:00").toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" })}`}
+                      </span>
+                      {!isExtending && (
+                        <button
+                          onClick={() => { setExtendingEmail(parent.email); setExtendExpiry(defaultExpiry()) }}
+                          className="ml-3 px-2 py-1 bg-white/10 hover:bg-white/20 rounded text-white text-xs font-bold"
+                        >
+                          Extend →
+                        </button>
+                      )}
+                    </div>
+                  )}
+
+                  {/* Extend expiry inline */}
+                  {isExtending && (
+                    <div className="flex items-center gap-2 bg-white/5 border border-white/10 rounded-lg px-3 py-2 mb-3">
+                      <span className="text-xs text-gray-400">New expiry:</span>
+                      <input
+                        type="date"
+                        value={extendExpiry}
+                        onChange={e => setExtendExpiry(e.target.value)}
+                        className="bg-[#0a0a0f] border border-white/20 rounded-lg px-2 py-1.5 text-xs text-white outline-none focus:border-green-600"
+                      />
+                      <button
+                        onClick={() => handleExtend(parent.email, extendExpiry)}
+                        disabled={!extendExpiry || saving}
+                        className="px-3 py-1.5 bg-green-600 hover:bg-green-500 disabled:opacity-40 text-white text-xs rounded-lg font-bold"
+                      >
+                        ✓ Save
+                      </button>
+                      <button
+                        onClick={() => { setExtendingEmail(null); setExtendExpiry("") }}
+                        className="text-xs text-gray-500 hover:text-gray-300"
+                      >
+                        Cancel
+                      </button>
+                    </div>
+                  )}
 
                   {isDenied && (
                     <div className="text-xs text-red-400 bg-red-950/30 border border-red-900/40 rounded-lg px-3 py-2 mb-3">
@@ -430,6 +542,20 @@ export default function AdminParentsPage() {
                         )}
                         {parent.approvalStatus === "denied" && (
                           <span className="text-xs px-2 py-0.5 rounded-full font-medium bg-red-900 text-red-400">✕ Denied</span>
+                        )}
+                        {/* Expiry badge */}
+                        {expStatus === "expired" && (
+                          <span className="text-xs px-2 py-0.5 rounded-full font-medium bg-red-900 text-red-300">EXPIRED</span>
+                        )}
+                        {expStatus === "soon" && (
+                          <span className="text-xs px-2 py-0.5 rounded-full font-medium bg-orange-900 text-orange-300">
+                            Expires {new Date(parent.accessExpiry! + "T00:00:00").toLocaleDateString("en-US", { month: "short", day: "numeric" })}
+                          </span>
+                        )}
+                        {expStatus === "ok" && parent.accessExpiry && (
+                          <span className="text-xs px-2 py-0.5 rounded-full font-medium bg-gray-800 text-gray-400">
+                            Until {new Date(parent.accessExpiry + "T00:00:00").toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" })}
+                          </span>
                         )}
                       </div>
                       <div className="text-sm text-gray-400">{parent.email}</div>
@@ -520,6 +646,15 @@ export default function AdminParentsPage() {
                               }`}
                             >
                               {sentEmail === parent.email ? "✓ Email Sent" : "Resend Email"}
+                            </button>
+                          )}
+                          {/* Extend button for approved program members without expiry warning shown */}
+                          {parent.approvalStatus === "approved" && parent.tier === "program" && expStatus === "ok" && !isExtending && (
+                            <button
+                              onClick={() => { setExtendingEmail(parent.email); setExtendExpiry(defaultExpiry()) }}
+                              className="text-xs text-gray-400 hover:text-white border border-white/10 hover:border-white/30 rounded-lg px-3 py-1.5 transition-colors"
+                            >
+                              Extend
                             </button>
                           )}
                           {/* Manual approve — shows inline athlete picker */}

@@ -65,7 +65,7 @@ export async function GET(req: NextRequest) {
 export async function PATCH(req: NextRequest) {
   if (!isAdmin(req)) return NextResponse.json({ success: false, error: "Unauthorized" }, { status: 401 })
   try {
-    const { email, action, athleteId } = await req.json()
+    const { email, action, athleteId, accessExpiry } = await req.json()
     if (!email || !action) return NextResponse.json({ success: false, error: "Missing fields" }, { status: 400 })
 
     const parent = await getParent(email)
@@ -86,6 +86,11 @@ export async function PATCH(req: NextRequest) {
       // Approve program member — set tier, mark approved, link athlete if provided
       parent.tier = "program"
       parent.approvalStatus = "approved"
+      parent.accessExpiry = accessExpiry || (() => {
+        // Default to end of current month
+        const d = new Date(); d.setMonth(d.getMonth() + 1); d.setDate(0)
+        return d.toISOString().split("T")[0]
+      })()
       if (athleteId && !parent.athleteIds.includes(athleteId)) parent.athleteIds.push(athleteId)
       await saveParent(parent)
       // Send access email
@@ -190,6 +195,14 @@ export async function PATCH(req: NextRequest) {
         }).catch(err => console.error("[admin parents] resend email failed", err))
       }
       return NextResponse.json({ success: true, sent: true })
+
+    } else if (action === "extend") {
+      // Extend program member access expiry
+      if (!accessExpiry) return NextResponse.json({ success: false, error: "Missing accessExpiry" }, { status: 400 })
+      parent.accessExpiry = accessExpiry
+      parent.approvalStatus = "approved"
+      parent.tier = "program"
+      await saveParent(parent)
 
     } else {
       return NextResponse.json({ success: false, error: "Invalid action" }, { status: 400 })

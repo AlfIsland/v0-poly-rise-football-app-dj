@@ -17,6 +17,7 @@ export interface ParentAccount {
   phone?: string
   athleteName?: string           // athlete name provided at signup
   requestedAthleteId?: string    // TRN ID entered at signup for faster matching
+  accessExpiry?: string          // ISO date — when program member access expires
   athleteIds: string[]           // training athlete IDs linked to this parent
   tier: "program" | "monthly" | "quarterly" | "none"
   approvalStatus?: "pending" | "approved" | "denied"  // for program members

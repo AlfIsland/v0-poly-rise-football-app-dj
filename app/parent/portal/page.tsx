@@ -12,7 +12,7 @@ const ProgressChart = dynamic(() => import("@/components/progress-chart"), { ssr
 const METRICS = [
   { key: "fortyYard",    label: "40-Yard Dash",    unit: "s",     lower: true  },
   { key: "twentyYard",   label: "20-Yard Dash",    unit: "s",     lower: true  },
-  { key: "shuttle",      label: "Shuttle",          unit: "s",     lower: true  },
+  { key: "shuttle",      label: "5-10-5 Shuttle",   unit: "s",     lower: true  },
   { key: "threeCone",    label: "3-Cone / L-Drill", unit: "s",     lower: true  },
   { key: "verticalJump", label: "Vertical Jump",    unit: '"',     lower: false },
   { key: "broadJump",    label: "Broad Jump",       unit: '"',     lower: false },
@@ -326,8 +326,8 @@ function Portal() {
                           <tr className="text-xs text-gray-500 border-b border-gray-800">
                             <th className="text-left py-2 px-2">Date</th>
                             <th className="text-right py-2 px-2">40-Yd</th>
-                            <th className="text-right py-2 px-2">20-Yd</th>
-                            <th className="text-right py-2 px-2">Shuttle</th>
+                            <th className="text-right py-2 px-2">20-Yd Sprint</th>
+                            <th className="text-right py-2 px-2">5-10-5</th>
                             <th className="text-right py-2 px-2">L / R</th>
                             <th className="text-right py-2 px-2">3-Cone</th>
                             <th className="text-right py-2 px-2">Vert</th>

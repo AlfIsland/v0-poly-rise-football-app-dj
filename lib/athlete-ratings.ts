@@ -519,7 +519,7 @@ export function calculateRatings(
 
   addMetric("40-Yard Dash",   metrics.fortyYard,   "sec",  FORTY_NATIONAL,     FORTY_TEXAS,     true)
   addMetric("20-Yard Dash",   metrics.twentyYard,  "sec",  TWENTY_NATIONAL,    TWENTY_TEXAS,    true)
-  addMetric("20-Yd Shuttle",  metrics.shuttle,     "sec",  SHUTTLE_NATIONAL,   SHUTTLE_TEXAS,   true)
+  addMetric("5-10-5 Shuttle", metrics.shuttle,     "sec",  SHUTTLE_NATIONAL,   SHUTTLE_TEXAS,   true)
   addMetric("3-Cone / L-Drill", metrics.threeCone, "sec",  THREE_CONE_NATIONAL, THREE_CONE_TEXAS, true)
   addMetric("Vertical Jump",  metrics.verticalJump, "in",  VERTICAL_NATIONAL,  VERTICAL_TEXAS,  false)
   addMetric("Broad Jump",     metrics.broadJump,   "in",   BROAD_NATIONAL,     BROAD_TEXAS,     false)

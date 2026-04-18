@@ -21,7 +21,7 @@ interface Session {
 const METRICS = [
   { key: "fortyYard",    label: "40-Yard",  unit: "s",    lower: true,  color: "#ef4444" },
   { key: "twentyYard",   label: "20-Yard",  unit: "s",    lower: true,  color: "#f43f5e" },
-  { key: "shuttle",      label: "Shuttle",  unit: "s",    lower: true,  color: "#f97316" },
+  { key: "shuttle",      label: "5-10-5",   unit: "s",    lower: true,  color: "#f97316" },
   { key: "threeCone",    label: "3-Cone",   unit: "s",    lower: true,  color: "#eab308" },
   { key: "verticalJump", label: "Vertical", unit: "\"",   lower: false, color: "#22c55e" },
   { key: "broadJump",    label: "Broad",    unit: "\"",   lower: false, color: "#3b82f6" },

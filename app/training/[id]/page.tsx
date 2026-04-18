@@ -26,7 +26,7 @@ async function getAthlete(id: string) {
 const METRICS = [
   { key: "fortyYard", label: "40-Yard Dash", unit: "sec", lower: true },
   { key: "twentyYard", label: "20-Yard Dash", unit: "sec", lower: true },
-  { key: "shuttle", label: "20-Yd Shuttle", unit: "sec", lower: true },
+  { key: "shuttle", label: "5-10-5 Shuttle", unit: "sec", lower: true },
   { key: "threeCone", label: "3-Cone Drill", unit: "sec", lower: true },
   { key: "verticalJump", label: "Vertical Jump", unit: "in", lower: false },
   { key: "broadJump", label: "Broad Jump", unit: "in", lower: false },
@@ -370,8 +370,8 @@ export default async function TrainingAthletePage({ params }: { params: { id: st
                       <tr className="border-b border-gray-800 text-gray-500 uppercase tracking-wider">
                         <th className="text-left px-4 py-3">Date</th>
                         <th className="text-left px-4 py-3">40-Yd</th>
-                        <th className="text-left px-4 py-3">20-Yd</th>
-                        <th className="text-left px-4 py-3">Shuttle (L / R)</th>
+                        <th className="text-left px-4 py-3">20-Yd Sprint</th>
+                        <th className="text-left px-4 py-3">5-10-5 (L / R)</th>
                         <th className="text-left px-4 py-3">3-Cone</th>
                         <th className="text-left px-4 py-3">Vertical</th>
                         <th className="text-left px-4 py-3">Broad</th>

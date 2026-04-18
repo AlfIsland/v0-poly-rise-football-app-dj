@@ -402,7 +402,7 @@ function NewAthleteForm() {
             {[
               { label: "40-Yard Dash (sec)", val: fortyYard, set: setFortyYard, ph: "e.g. 4.52" },
               { label: "20-Yard Dash (sec)", val: twentyYard, set: setTwentyYard, ph: "e.g. 2.75" },
-              { label: "20-Yard Shuttle (sec)", val: shuttle, set: setShuttle, ph: "e.g. 4.21" },
+              { label: "5-10-5 Shuttle (sec)", val: shuttle, set: setShuttle, ph: "e.g. 4.21" },
               { label: "3-Cone Drill (sec)", val: threeCone, set: setThreeCone, ph: "e.g. 6.89" },
               { label: "Vertical Jump (in)", val: verticalJump, set: setVerticalJump, ph: "e.g. 34" },
               { label: "Broad Jump (in)", val: broadJump, set: setBroadJump, ph: "e.g. 108" },

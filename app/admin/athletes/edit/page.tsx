@@ -238,7 +238,7 @@ function EditForm() {
               <Input label="40-Yard Dash (sec)" value={fortyYard} onChange={setFortyYard} placeholder="e.g. 4.52" type="number" step="0.01" />
               <Input label="20-Yard Dash (sec)" value={twentyYard} onChange={setTwentyYard} placeholder="e.g. 2.75" type="number" step="0.01" />
             </div>
-            <Input label="20-Yard Shuttle (sec)" value={shuttle} onChange={setShuttle} placeholder="e.g. 4.21" type="number" step="0.01" />
+            <Input label="5-10-5 Shuttle (sec)" value={shuttle} onChange={setShuttle} placeholder="e.g. 4.21" type="number" step="0.01" />
             <Input label="3-Cone Drill (sec)" value={threeCone} onChange={setThreeCone} placeholder="e.g. 6.89" type="number" step="0.01" />
             <Input label="Vertical Jump (inches)" value={verticalJump} onChange={setVerticalJump} placeholder="e.g. 34" type="number" step="0.5" />
             <Input label="Broad Jump (inches)" value={broadJump} onChange={setBroadJump} placeholder="e.g. 108" type="number" step="0.5" />

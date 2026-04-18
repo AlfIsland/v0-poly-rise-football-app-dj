@@ -12,6 +12,7 @@ import InviteParentButton from "@/components/invite-parent-button"
 import { calculateRatings } from "@/lib/athlete-ratings"
 import { gradeToClassYear } from "@/lib/grade-to-class-year"
 import { getAllParents } from "@/lib/parent-store"
+import { getAgeTier, tierStyle } from "@/lib/age-tiers"
 
 async function getAthlete(id: string) {
   try {
@@ -168,45 +169,48 @@ export default async function TrainingAthletePage({ params }: { params: { id: st
                 {METRICS.map(m => {
                   const bVal = baseline[m.key as keyof typeof baseline] as number | undefined
                   const cVal = hasProgress ? current[m.key as keyof typeof current] as number | undefined : undefined
-                  // Find first session with this metric (baseline may predate when the metric was added)
-                  const firstVal = bVal != null ? bVal : sessions.find(s => s[m.key as keyof typeof s] != null)?.[m.key as keyof typeof s] as number | undefined
+                  const allSessions = sessions as Array<Record<string, unknown>>
+                  const firstVal = bVal != null ? bVal : (allSessions.find(s => s[m.key] != null)?.[m.key] as number | undefined)
                   if (firstVal == null && cVal == null) return null
                   const refVal = firstVal ?? cVal!
+                  const displayVal = cVal ?? refVal
                   const imp = (firstVal != null && cVal != null) ? (m.lower ? firstVal - cVal : cVal - firstVal) : 0
                   const pct = (firstVal != null && cVal != null) ? ((Math.abs(imp) / firstVal) * 100).toFixed(1) : null
                   const hasComparison = firstVal != null && cVal != null
+                  const tier = getAgeTier(m.key, displayVal, athlete.age)
 
                   return (
                     <div key={m.key} className={`rounded-xl px-4 py-3 border ${hasComparison ? impBg(imp) : "bg-gray-800 border-gray-700"}`}>
-                      <p className="text-xs text-gray-400 mb-1">{m.label}</p>
-                      <div className="flex items-end justify-between">
-                        <div className="flex items-center gap-3">
+                      <p className="text-xs text-gray-400 mb-2">{m.label}</p>
+                      <div className="flex items-center justify-between gap-2">
+                        {/* Left: baseline → current */}
+                        <div className="flex items-center gap-2 min-w-0">
                           <div>
                             <p className="text-xs text-gray-500">{bVal != null ? "Baseline" : "First"}</p>
                             <p className="text-white font-bold">{fmt(refVal, m.unit)}</p>
                           </div>
-                          {hasComparison && (
+                          {(hasComparison || (cVal != null && firstVal == null)) && (
                             <>
-                              <span className="text-gray-600 text-lg">→</span>
+                              <span className="text-gray-600">→</span>
                               <div>
                                 <p className="text-xs text-gray-400">Current</p>
-                                <p className="text-white font-bold">{fmt(cVal!, m.unit)}</p>
-                              </div>
-                            </>
-                          )}
-                          {!hasComparison && cVal != null && firstVal == null && (
-                            <>
-                              <span className="text-gray-600 text-lg">→</span>
-                              <div>
-                                <p className="text-xs text-gray-400">Current</p>
-                                <p className="text-white font-bold">{fmt(cVal, m.unit)}</p>
+                                <p className="text-white font-bold">{fmt(displayVal, m.unit)}</p>
                               </div>
                             </>
                           )}
                         </div>
+
+                        {/* Middle: age tier badge */}
+                        {tier && (
+                          <span className={`shrink-0 text-xs font-bold px-2 py-1 rounded-lg whitespace-nowrap ${tierStyle(tier)}`}>
+                            {tier === "Above Average" ? "Above Avg" : tier}
+                          </span>
+                        )}
+
+                        {/* Right: delta + pct */}
                         {hasComparison && pct && (
-                          <div className="text-right">
-                            <p className={`text-lg font-bold ${impColor(imp)}`}>
+                          <div className="text-right shrink-0">
+                            <p className={`text-base font-bold ${impColor(imp)}`}>
                               {m.lower ? (imp >= 0 ? `-${imp.toFixed(2)}s` : `+${Math.abs(imp).toFixed(2)}s`) : (imp >= 0 ? `+${imp.toFixed(1)}"` : `-${Math.abs(imp).toFixed(1)}"`)}
                             </p>
                             <p className={`text-xs ${impColor(imp)}`}>{imp > 0 ? "+" : imp < 0 ? "-" : ""}{pct}%</p>

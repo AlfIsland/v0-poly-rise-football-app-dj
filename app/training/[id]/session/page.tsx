@@ -29,6 +29,8 @@ function SessionForm() {
   const [loading, setLoading] = useState(true)
 
   const [date, setDate] = useState(new Date().toISOString().split("T")[0])
+  const [heightFt, setHeightFt] = useState("")
+  const [heightIn, setHeightIn] = useState("")
   const [weight, setWeight] = useState("")
   const [fortyYard, setFortyYard] = useState("")
   const [twentyYard, setTwentyYard] = useState("")
@@ -77,7 +79,9 @@ function SessionForm() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           id, action: "add-session",
-          date, weight, fortyYard, twentyYard, shuttle, shuttleLeft, shuttleRight, threeCone,
+          date,
+          height: heightFt && heightIn ? `${heightFt}'${heightIn}"` : heightFt ? `${heightFt}'0"` : "",
+          weight, fortyYard, twentyYard, shuttle, shuttleLeft, shuttleRight, threeCone,
           verticalJump, broadJump, benchPress, notes,
         }),
       })
@@ -127,7 +131,18 @@ function SessionForm() {
               <input type="date" value={date} onChange={e => setDate(e.target.value)}
                 className="w-full bg-gray-800 text-white rounded-lg px-4 py-2.5 border border-gray-700 focus:border-red-500 focus:outline-none text-sm" />
             </div>
-            <Input label="Body Weight (lbs)" value={weight} onChange={setWeight} placeholder="e.g. 145" type="number" hint="Optional — tracks body composition over time" />
+            <div className="grid grid-cols-2 gap-3">
+              <div>
+                <label className="block text-sm text-gray-300 mb-1">Height</label>
+                <div className="flex gap-2">
+                  <input type="number" value={heightFt} onChange={e => setHeightFt(e.target.value)} placeholder="ft" min="4" max="7"
+                    className="w-1/2 bg-gray-800 text-white rounded-lg px-3 py-2.5 border border-gray-700 focus:border-red-500 focus:outline-none text-sm" />
+                  <input type="number" value={heightIn} onChange={e => setHeightIn(e.target.value)} placeholder="in" min="0" max="11"
+                    className="w-1/2 bg-gray-800 text-white rounded-lg px-3 py-2.5 border border-gray-700 focus:border-red-500 focus:outline-none text-sm" />
+                </div>
+              </div>
+              <Input label="Body Weight (lbs)" value={weight} onChange={setWeight} placeholder="e.g. 145" type="number" />
+            </div>
           </div>
 
           <div className="bg-gray-900 rounded-2xl p-6 space-y-4 border border-gray-800">

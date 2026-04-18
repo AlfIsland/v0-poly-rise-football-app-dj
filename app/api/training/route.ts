@@ -30,6 +30,7 @@ async function kvGet(key: string): Promise<unknown> {
 
 export interface TrainingSession {
   date: string
+  height?: string
   fortyYard?: number
   twentyYard?: number
   shuttle?: number
@@ -135,6 +136,7 @@ export async function PUT(req: NextRequest) {
     if (action === "add-session") {
       const session: TrainingSession = {
         date: body.date || new Date().toISOString().split("T")[0],
+        ...(body.height ? { height: body.height } : {}),
         ...(body.fortyYard !== "" && body.fortyYard != null ? { fortyYard: parseFloat(body.fortyYard) } : {}),
         ...(body.twentyYard !== "" && body.twentyYard != null ? { twentyYard: parseFloat(body.twentyYard) } : {}),
         ...(body.shuttle !== "" && body.shuttle != null ? { shuttle: parseFloat(body.shuttle) } : {}),
@@ -175,6 +177,7 @@ export async function PUT(req: NextRequest) {
       existing.sessions[sessionIndex] = {
         ...s,
         date: body.date ?? s.date,
+        height: body.height || undefined,
         ...(body.fortyYard !== "" && body.fortyYard != null ? { fortyYard: parseFloat(body.fortyYard) } : { fortyYard: undefined }),
         ...(body.twentyYard !== "" && body.twentyYard != null ? { twentyYard: parseFloat(body.twentyYard) } : { twentyYard: undefined }),
         ...(body.shuttle !== "" && body.shuttle != null ? { shuttle: parseFloat(body.shuttle) } : { shuttle: undefined }),

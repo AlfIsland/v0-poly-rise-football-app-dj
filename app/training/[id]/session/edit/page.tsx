@@ -32,6 +32,8 @@ function EditSessionForm() {
   const [error, setError] = useState("")
 
   const [date, setDate] = useState("")
+  const [heightFt, setHeightFt] = useState("")
+  const [heightIn, setHeightIn] = useState("")
   const [weight, setWeight] = useState("")
   const [fortyYard, setFortyYard] = useState("")
   const [twentyYard, setTwentyYard] = useState("")
@@ -54,6 +56,10 @@ function EditSessionForm() {
           const s = a.sessions?.[sessionIndex]
           if (s) {
             setDate(s.date ?? "")
+            if (s.height) {
+              const parts = s.height.match(/(\d+)'(\d+)"/)
+              if (parts) { setHeightFt(parts[1]); setHeightIn(parts[2]) }
+            }
             setWeight(s.weight != null ? String(s.weight) : "")
             setFortyYard(s.fortyYard != null ? String(s.fortyYard) : "")
             setTwentyYard(s.twentyYard != null ? String(s.twentyYard) : "")
@@ -84,7 +90,9 @@ function EditSessionForm() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           id, action: "edit-session", sessionIndex,
-          date, weight, fortyYard, twentyYard, shuttle, shuttleLeft, shuttleRight, threeCone,
+          date,
+          height: heightFt && heightIn ? `${heightFt}'${heightIn}"` : heightFt ? `${heightFt}'0"` : "",
+          weight, fortyYard, twentyYard, shuttle, shuttleLeft, shuttleRight, threeCone,
           verticalJump, broadJump, benchPress, notes,
         }),
       })
@@ -143,7 +151,18 @@ function EditSessionForm() {
               <input type="date" value={date} onChange={e => setDate(e.target.value)}
                 className="w-full bg-gray-800 text-white rounded-lg px-4 py-2.5 border border-gray-700 focus:border-red-500 focus:outline-none text-sm" />
             </div>
-            <Input label="Body Weight (lbs)" value={weight} onChange={setWeight} placeholder="e.g. 145" type="number" hint="Leave blank to clear" />
+            <div className="grid grid-cols-2 gap-3">
+              <div>
+                <label className="block text-sm text-gray-300 mb-1">Height</label>
+                <div className="flex gap-2">
+                  <input type="number" value={heightFt} onChange={e => setHeightFt(e.target.value)} placeholder="ft" min="4" max="7"
+                    className="w-1/2 bg-gray-800 text-white rounded-lg px-3 py-2.5 border border-gray-700 focus:border-red-500 focus:outline-none text-sm" />
+                  <input type="number" value={heightIn} onChange={e => setHeightIn(e.target.value)} placeholder="in" min="0" max="11"
+                    className="w-1/2 bg-gray-800 text-white rounded-lg px-3 py-2.5 border border-gray-700 focus:border-red-500 focus:outline-none text-sm" />
+                </div>
+              </div>
+              <Input label="Body Weight (lbs)" value={weight} onChange={setWeight} placeholder="e.g. 145" type="number" hint="Leave blank to clear" />
+            </div>
           </div>
 
           <div className="bg-gray-900 rounded-2xl p-6 space-y-4 border border-gray-800">

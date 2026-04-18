@@ -389,6 +389,7 @@ export default async function TrainingAthletePage({ params }: { params: { id: st
                         <th className="text-left px-4 py-3">Vertical</th>
                         <th className="text-left px-4 py-3">Broad</th>
                         <th className="text-left px-4 py-3">Bench</th>
+                        <th className="text-left px-4 py-3">Height</th>
                         <th className="text-left px-4 py-3">Weight</th>
                         <th className="px-4 py-3"></th>
                       </tr>
@@ -416,6 +417,7 @@ export default async function TrainingAthletePage({ params }: { params: { id: st
                           <td className="px-4 py-3 text-gray-300">{s.verticalJump != null ? `${s.verticalJump}"` : "—"}</td>
                           <td className="px-4 py-3 text-gray-300">{s.broadJump != null ? `${s.broadJump}"` : "—"}</td>
                           <td className="px-4 py-3 text-gray-300">{s.benchPress != null ? `${s.benchPress}` : "—"}</td>
+                          <td className="px-4 py-3 text-gray-300">{s.height ?? "—"}</td>
                           <td className="px-4 py-3 text-gray-300">{s.weight != null ? `${s.weight} lbs` : "—"}</td>
                           <td className="px-4 py-3">
                             <div className="flex items-center gap-1.5">

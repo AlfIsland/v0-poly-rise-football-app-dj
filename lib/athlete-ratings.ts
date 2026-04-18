@@ -10,7 +10,7 @@ export interface AthleteMetrics {
   threeCone?: number       // L-drill / 3-cone, seconds (lower = better)
   verticalJump?: number    // inches (higher = better)
   broadJump?: number       // inches (higher = better)
-  benchPress?: number      // reps (higher = better)
+  benchPress?: number      // lbs — 135 bar max (higher = better)
   height?: number
   weight?: number
   gpa?: number
@@ -374,7 +374,7 @@ function buildBench(senior: Benchmark, shifts: number[]): GradeBenchmarks {
   }
 }
 
-// Middle school bench — very few 7th graders bench 225, expectations very low
+// Middle school bench — 135 bar max bench, expectations very low for younger athletes
 const BENCH_NATIONAL: PositionBenchmarks = {
   SPEED:   buildBench(BENCH_SENIOR_SPEED,  [1, 2, 3, 6]),
   SKILL:   buildBench(BENCH_SENIOR_SKILL,  [1, 2, 3, 7]),

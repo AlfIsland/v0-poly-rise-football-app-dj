@@ -33,7 +33,7 @@ const METRICS = [
   { key: "threeCone", label: "3-Cone / L-Drill", unit: "s", lower: true },
   { key: "verticalJump", label: "Vertical Jump", unit: '"', lower: false },
   { key: "broadJump", label: "Broad Jump", unit: '"', lower: false },
-  { key: "benchPress", label: "Bench Press", unit: " reps", lower: false },
+  { key: "benchPress", label: "Max Bench", unit: " lbs", lower: false },
 ] as const
 
 export default function SendTrainingReport({ athlete }: { athlete: Athlete }) {

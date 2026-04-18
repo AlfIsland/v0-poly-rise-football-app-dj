@@ -138,7 +138,7 @@ function SessionForm() {
             <h2 className="text-xs font-bold text-red-400 uppercase tracking-widest">Power & Strength</h2>
             <Input label="Vertical Jump (inches)" value={verticalJump} onChange={setVerticalJump} placeholder="e.g. 24" type="number" step="0.5" />
             <Input label="Broad Jump (inches)" value={broadJump} onChange={setBroadJump} placeholder="e.g. 84" type="number" step="0.5" />
-            <Input label="Bench Press 225 (reps)" value={benchPress} onChange={setBenchPress} placeholder="e.g. 8" type="number" />
+            <Input label="Max Bench — 135 Bar (lbs)" value={benchPress} onChange={setBenchPress} placeholder="e.g. 185" type="number" />
           </div>
 
           <div className="bg-gray-900 rounded-2xl p-6 border border-gray-800">

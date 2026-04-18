@@ -288,7 +288,7 @@ export default function TrainingRosterPage() {
           <MetricInput label="3-Cone (s)" value={threeCone} onChange={setThreeCone} placeholder="6.89" />
           <MetricInput label="Vertical (in)" value={verticalJump} onChange={setVerticalJump} placeholder="34" step="0.5" />
           <MetricInput label="Broad (in)" value={broadJump} onChange={setBroadJump} placeholder="108" step="0.5" />
-          <MetricInput label="Bench (reps)" value={benchPress} onChange={setBenchPress} placeholder="12" step="1" />
+          <MetricInput label="Max Bench (lbs)" value={benchPress} onChange={setBenchPress} placeholder="185" step="1" />
         </div>
       </div>
 

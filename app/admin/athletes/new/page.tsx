@@ -406,7 +406,7 @@ function NewAthleteForm() {
               { label: "3-Cone Drill (sec)", val: threeCone, set: setThreeCone, ph: "e.g. 6.89" },
               { label: "Vertical Jump (in)", val: verticalJump, set: setVerticalJump, ph: "e.g. 34" },
               { label: "Broad Jump (in)", val: broadJump, set: setBroadJump, ph: "e.g. 108" },
-              { label: "Bench Press 225 (reps)", val: benchPress, set: setBenchPress, ph: "e.g. 12" },
+              { label: "Max Bench — 135 Bar (lbs)", val: benchPress, set: setBenchPress, ph: "e.g. 185" },
             ].map(m => (
               <Field key={m.label} label={m.label}>
                 <input type="number" step="0.01" value={m.val} onChange={e => m.set(e.target.value)} placeholder={m.ph} className={inputCls} />

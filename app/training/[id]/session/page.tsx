@@ -56,6 +56,17 @@ function SessionForm() {
       .catch(() => setLoading(false))
   }, [id])
 
+  const handleShuttleLeft = (v: string) => {
+    setShuttleLeft(v)
+    const l = parseFloat(v), r = parseFloat(shuttleRight)
+    if (!isNaN(l) && !isNaN(r)) setShuttle(((l + r) / 2).toFixed(2))
+  }
+  const handleShuttleRight = (v: string) => {
+    setShuttleRight(v)
+    const l = parseFloat(shuttleLeft), r = parseFloat(v)
+    if (!isNaN(l) && !isNaN(r)) setShuttle(((l + r) / 2).toFixed(2))
+  }
+
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault()
     setSaving(true)
@@ -126,10 +137,10 @@ function SessionForm() {
               <Input label="40-Yard Dash (sec)" value={fortyYard} onChange={setFortyYard} placeholder="e.g. 5.12" type="number" step="0.01" />
               <Input label="20-Yard Dash (sec)" value={twentyYard} onChange={setTwentyYard} placeholder="e.g. 2.75" type="number" step="0.01" />
             </div>
-            <Input label="5-10-5 Shuttle — Overall (sec)" value={shuttle} onChange={setShuttle} placeholder="e.g. 4.60" type="number" step="0.01" />
+            <Input label="5-10-5 Shuttle — Overall (sec)" value={shuttle} onChange={setShuttle} placeholder="e.g. 4.60" type="number" step="0.01" hint="Auto-fills from avg of Left + Right below" />
             <div className="grid grid-cols-2 gap-3">
-              <Input label="Shuttle Left (sec)" value={shuttleLeft} onChange={setShuttleLeft} placeholder="e.g. 4.55" type="number" step="0.01" hint="Starting left" />
-              <Input label="Shuttle Right (sec)" value={shuttleRight} onChange={setShuttleRight} placeholder="e.g. 4.68" type="number" step="0.01" hint="Starting right" />
+              <Input label="Shuttle Left (sec)" value={shuttleLeft} onChange={handleShuttleLeft} placeholder="e.g. 4.55" type="number" step="0.01" hint="Starting left" />
+              <Input label="Shuttle Right (sec)" value={shuttleRight} onChange={handleShuttleRight} placeholder="e.g. 4.68" type="number" step="0.01" hint="Starting right" />
             </div>
             <Input label="3-Cone Drill (sec)" value={threeCone} onChange={setThreeCone} placeholder="e.g. 7.20" type="number" step="0.01" />
           </div>

@@ -437,7 +437,7 @@ export default function AdminParentsPage() {
     )
   }
 
-  // ── Render ───────────────────────────────────────────────────────────────────
+  // ── Render ──────────────────────────────────────────────────────────────────
 
   const regCount = registered.length
   const notRegCount = notRegistered.length

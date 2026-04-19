@@ -87,17 +87,18 @@ export async function PATCH(req: NextRequest) {
       parent.tier = "program"
       parent.approvalStatus = "approved"
       parent.accessExpiry = accessExpiry || (() => {
-        // Default to end of current month
         const d = new Date(); d.setMonth(d.getMonth() + 1); d.setDate(0)
         return d.toISOString().split("T")[0]
       })()
-      if (athleteId && !parent.athleteIds.includes(athleteId)) parent.athleteIds.push(athleteId)
+      // Only push if this is genuinely a new link
+      const isNewLink = !!athleteId && !parent.athleteIds.includes(athleteId)
+      if (isNewLink) parent.athleteIds.push(athleteId)
       await saveParent(parent)
-      // Send access email
-      const linkedId = athleteId || parent.athleteIds[0]
-      if (linkedId) await sendAthleteLinkedEmail(parent.email, parent.name, linkedId)
-      else {
-        // No athlete linked yet — send generic approval email
+      // Only send the "athlete linked" email for the athlete being added RIGHT NOW
+      if (isNewLink) {
+        await sendAthleteLinkedEmail(parent.email, parent.name, athleteId)
+      } else if (parent.athleteIds.length === 0) {
+        // No athlete linked at all — send generic approval email
         const resendKey = process.env.RESEND_API_KEY
         if (resendKey) {
           fetch("https://api.resend.com/emails", {
@@ -120,6 +121,8 @@ export async function PATCH(req: NextRequest) {
           }).catch(err => console.error("[admin parents] approve email failed", err))
         }
       }
+      // If re-approving a parent who already has athletes linked, no email is sent
+      // (they already received their link email; use "Send Password Reset" if they need access help)
 
     } else if (action === "deny") {
       // Deny/revoke — reset tier to none so portal blocks access

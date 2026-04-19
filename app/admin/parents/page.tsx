@@ -204,18 +204,16 @@ export default function AdminParentsPage() {
     const tier = TIER_LABELS[parent.tier] ?? TIER_LABELS.none
     const expStatus = expiryStatus(parent)
     const isPending = parent.approvalStatus === "pending"
+    const isApproved = parent.approvalStatus === "approved"
     const isDenied = parent.approvalStatus === "denied"
-    // Pending cards are expanded by default
-    const isExpanded = expandedEmail === parent.email || (isPending && expandedEmail !== `close-${parent.email}`)
+    const isExpanded = expandedEmail === parent.email
     const isSaving = saving === parent.email
 
-    // Suggested athlete match for pending parents
     const unlinked = athletes.filter(a => !parent.athleteIds.includes(a.id))
     const exact = parent.requestedAthleteId ? unlinked.find(a => a.id === parent.requestedAthleteId) : null
     const suggestion = exact ? { athlete: exact, score: 100 } : parent.athleteName ? findBestMatch(parent.athleteName, unlinked) : null
     const approveAthlete = approvingEmail === parent.email ? approveSelect : (suggestion?.athlete.id ?? "")
 
-    // Expiry display
     let expiryLabel = ""
     if (parent.accessExpiry) {
       const days = Math.ceil((new Date(parent.accessExpiry + "T00:00:00").getTime() - Date.now()) / 86400000)
@@ -223,46 +221,42 @@ export default function AdminParentsPage() {
     }
 
     const cardBorder =
-      isPending ? "border-yellow-700/50 bg-yellow-950/10" :
+      isPending ? "border-yellow-700/60 bg-yellow-950/10" :
       expStatus === "expired" ? "border-red-700/50 bg-red-950/10" :
       expStatus === "soon" ? "border-orange-700/50 bg-orange-950/10" :
       isDenied ? "border-gray-700/30 bg-gray-900/40 opacity-60" :
       "border-white/10 bg-white/5"
 
     return (
-      <div className={`rounded-2xl border ${cardBorder} overflow-hidden transition-all`}>
+      <div className={`rounded-2xl border ${cardBorder} overflow-hidden`}>
 
-        {/* Card header — always visible */}
-        <div className="px-5 py-4 flex items-start justify-between gap-3">
-          <div className="min-w-0">
-            {/* Name + badges */}
+        {/* ── Main info row ── */}
+        <div className="px-5 py-4 flex flex-wrap items-start gap-4">
+
+          {/* Left: identity */}
+          <div className="flex-1 min-w-0">
             <div className="flex items-center gap-2 flex-wrap mb-1">
-              <p className="font-bold text-white text-sm">{parent.name}</p>
+              <p className="font-bold text-white">{parent.name}</p>
               <span className={`text-xs px-2 py-0.5 rounded-full font-semibold ${tier.cls}`}>{tier.label}</span>
-              {isPending && <span className="text-xs px-2 py-0.5 rounded-full font-semibold bg-yellow-900/60 text-yellow-300 border border-yellow-700/50">Pending</span>}
-              {isDenied && <span className="text-xs px-2 py-0.5 rounded-full font-semibold bg-gray-800 text-gray-500 border border-gray-700">Denied</span>}
+              {isPending  && <span className="text-xs px-2 py-0.5 rounded-full font-semibold bg-yellow-900/60 text-yellow-300 border border-yellow-700/50">⏳ Pending</span>}
+              {isApproved && <span className="text-xs px-2 py-0.5 rounded-full font-semibold bg-green-900/50 text-green-300 border border-green-700/40">✓ Approved</span>}
+              {isDenied   && <span className="text-xs px-2 py-0.5 rounded-full font-semibold bg-gray-800 text-gray-500 border border-gray-700">Denied</span>}
               {expStatus === "expired" && <span className="text-xs px-2 py-0.5 rounded-full font-semibold bg-red-900/60 text-red-300 border border-red-700/50">Expired</span>}
-              {expStatus === "soon" && <span className="text-xs px-2 py-0.5 rounded-full font-semibold bg-orange-900/60 text-orange-300 border border-orange-700/50">Expiring Soon</span>}
+              {expStatus === "soon"    && <span className="text-xs px-2 py-0.5 rounded-full font-semibold bg-orange-900/60 text-orange-300 border border-orange-700/50">Expiring Soon</span>}
             </div>
-
-            {/* Email */}
-            <p className="text-xs text-gray-400">{parent.email}</p>
+            <p className="text-sm text-gray-400">{parent.email}</p>
             {parent.phone && <p className="text-xs text-gray-600 mt-0.5">{parent.phone}</p>}
-
-            {/* Linked athletes */}
             {linkedAthletes.length > 0 ? (
               <div className="flex flex-wrap gap-1.5 mt-2">
                 {linkedAthletes.map(a => (
-                  <span key={a.id} className="text-xs bg-gray-800 text-gray-300 border border-gray-700 px-2 py-0.5 rounded-lg font-mono">
-                    {a.name} · {a.id}
+                  <span key={a.id} className="text-xs bg-gray-800 text-gray-300 border border-gray-700 px-2 py-0.5 rounded-lg">
+                    {a.name} · <span className="font-mono">{a.id}</span>
                   </span>
                 ))}
               </div>
             ) : (
               <p className="text-xs text-gray-600 mt-1.5">No athlete linked</p>
             )}
-
-            {/* Expiry */}
             {expiryLabel && (
               <p className={`text-xs mt-1.5 font-semibold ${expStatus === "expired" ? "text-red-400" : expStatus === "soon" ? "text-orange-400" : "text-gray-500"}`}>
                 Access: {new Date(parent.accessExpiry! + "T00:00:00").toLocaleDateString()} · {expiryLabel}
@@ -270,99 +264,89 @@ export default function AdminParentsPage() {
             )}
           </div>
 
-          {/* Expand toggle */}
-          <button
-            onClick={() => {
-              if (isPending) {
-                setExpandedEmail(isExpanded ? `close-${parent.email}` : parent.email)
-              } else {
-                setExpandedEmail(isExpanded ? null : parent.email)
-              }
-            }}
-            className="shrink-0 text-gray-500 hover:text-white text-xs px-3 py-1.5 bg-white/5 border border-white/10 rounded-lg transition-colors"
-          >
-            {isExpanded ? "▲ Less" : "▼ Actions"}
-          </button>
+          {/* Right: primary action buttons — always visible */}
+          <div className="flex flex-wrap gap-2 items-start">
+            {isPending && (
+              <>
+                <button onClick={() => handleApprove(parent.email, approveAthlete, approvingEmail === parent.email ? approveExpiry : defaultExpiry())}
+                  disabled={isSaving}
+                  className="px-4 py-2 bg-green-600 hover:bg-green-500 disabled:opacity-40 text-white text-xs font-bold rounded-xl transition-colors">
+                  {isSaving ? "Approving…" : "✓ Approve"}
+                </button>
+                <button onClick={() => handleDeny(parent.email)} disabled={isSaving}
+                  className="px-4 py-2 bg-red-900 hover:bg-red-800 disabled:opacity-40 text-red-300 text-xs font-bold rounded-xl border border-red-800/50 transition-colors">
+                  ✕ Deny
+                </button>
+              </>
+            )}
+            {isApproved && (
+              <button onClick={() => handleDeny(parent.email)} disabled={isSaving}
+                className="px-4 py-2 bg-red-900/60 hover:bg-red-800 disabled:opacity-40 text-red-300 text-xs font-bold rounded-xl border border-red-800/50 transition-colors">
+                Revoke
+              </button>
+            )}
+            {isDenied && (
+              <button onClick={() => { setApprovingEmail(parent.email); setExpandedEmail(parent.email) }}
+                className="px-4 py-2 bg-green-900/40 hover:bg-green-900/60 text-green-300 text-xs font-bold rounded-xl border border-green-700/50 transition-colors">
+                Re-Approve
+              </button>
+            )}
+            <button onClick={() => setExpandedEmail(isExpanded ? null : parent.email)}
+              className="px-4 py-2 bg-white/5 hover:bg-white/10 text-gray-400 hover:text-white text-xs font-bold rounded-xl border border-white/10 transition-colors">
+              {isExpanded ? "▲ Less" : "⚙ Manage"}
+            </button>
+          </div>
         </div>
 
-        {/* Expanded actions */}
+        {/* ── Expanded manage panel ── */}
         {isExpanded && (
           <div className="border-t border-white/10 px-5 py-4 space-y-4 bg-black/20">
 
-            {/* Pending approval */}
+            {/* Pending: athlete select + expiry for approve */}
             {isPending && (
-              <div className="bg-yellow-950/30 border border-yellow-700/40 rounded-xl p-4 space-y-3">
-                <p className="text-yellow-300 font-bold text-sm">⏳ Approve Program Access</p>
+              <div className="bg-yellow-950/20 border border-yellow-700/30 rounded-xl p-4 space-y-3">
+                <p className="text-yellow-300 font-bold text-xs uppercase tracking-widest">Approve Settings</p>
                 {suggestion && (
                   <div className="flex items-center gap-2 bg-green-950/40 border border-green-700/40 rounded-lg px-3 py-2">
-                    <span className="text-green-400 text-xs font-bold">Suggested:</span>
+                    <span className="text-green-400 text-xs font-bold">Suggested match:</span>
                     <span className="text-green-300 text-xs">{suggestion.athlete.name} ({suggestion.athlete.id})</span>
-                    <span className="text-green-600 text-xs ml-auto">{Math.round(suggestion.score)}% match</span>
+                    <span className="text-green-600 text-xs ml-auto">{Math.round(suggestion.score)}%</span>
                   </div>
                 )}
-                <div className="flex flex-wrap gap-2 items-end">
+                <div className="flex flex-wrap gap-3 items-end">
                   <div>
                     <p className="text-xs text-gray-500 mb-1">Athlete</p>
-                    <select
-                      value={approveAthlete}
+                    <select value={approveAthlete}
                       onChange={e => { setApprovingEmail(parent.email); setApproveSelect(e.target.value) }}
-                      className="bg-[#0a0a0f] border border-white/20 rounded-lg px-3 py-2 text-xs text-white outline-none focus:border-green-500"
-                    >
+                      className="bg-[#0a0a0f] border border-white/20 rounded-lg px-3 py-2 text-xs text-white outline-none focus:border-green-500">
                       <option value="">Select athlete…</option>
                       {athletes.map(a => <option key={a.id} value={a.id}>{a.name} ({a.id})</option>)}
                     </select>
                   </div>
                   <div>
                     <p className="text-xs text-gray-500 mb-1">Access until</p>
-                    <input
-                      type="date"
+                    <input type="date"
                       value={approvingEmail === parent.email ? approveExpiry : defaultExpiry()}
                       onChange={e => { setApprovingEmail(parent.email); setApproveExpiry(e.target.value) }}
-                      className="bg-[#0a0a0f] border border-white/20 rounded-lg px-3 py-2 text-xs text-white outline-none focus:border-green-500"
-                    />
+                      className="bg-[#0a0a0f] border border-white/20 rounded-lg px-3 py-2 text-xs text-white outline-none focus:border-green-500" />
                   </div>
-                  <button
-                    onClick={() => handleApprove(parent.email, approveAthlete, approvingEmail === parent.email ? approveExpiry : defaultExpiry())}
-                    disabled={isSaving}
-                    className="px-4 py-2 bg-green-600 hover:bg-green-500 disabled:opacity-40 text-white text-xs font-bold rounded-lg transition-colors"
-                  >
-                    {isSaving ? "Approving…" : "✓ Approve"}
-                  </button>
-                  <button
-                    onClick={() => handleDeny(parent.email)}
-                    disabled={isSaving}
-                    className="px-4 py-2 bg-red-900 hover:bg-red-800 disabled:opacity-40 text-red-300 text-xs font-bold rounded-lg transition-colors"
-                  >
-                    ✕ Deny
-                  </button>
                 </div>
               </div>
             )}
 
-            {/* Extend access (program members) */}
-            {parent.tier === "program" && parent.approvalStatus === "approved" && (
+            {/* Extend access */}
+            {isApproved && parent.tier === "program" && (
               <div className="bg-white/5 border border-white/10 rounded-xl p-4">
-                <p className="text-xs text-gray-400 font-bold uppercase tracking-wider mb-3">Extend Access</p>
+                <p className="text-xs text-gray-400 font-bold uppercase tracking-widest mb-3">Extend Access</p>
                 <div className="flex flex-wrap gap-2 items-center">
-                  <input
-                    type="date"
+                  <input type="date"
                     value={extendingEmail === parent.email ? extendExpiry : defaultExpiry()}
                     onChange={e => { setExtendingEmail(parent.email); setExtendExpiry(e.target.value) }}
-                    className="bg-[#0a0a0f] border border-white/20 rounded-lg px-3 py-2 text-xs text-white outline-none focus:border-blue-500"
-                  />
-                  <button
-                    onClick={() => handleExtend(parent.email, extendingEmail === parent.email ? extendExpiry : defaultExpiry())}
+                    className="bg-[#0a0a0f] border border-white/20 rounded-lg px-3 py-2 text-xs text-white outline-none focus:border-blue-500" />
+                  <button onClick={() => handleExtend(parent.email, extendingEmail === parent.email ? extendExpiry : defaultExpiry())}
                     disabled={isSaving}
-                    className="px-4 py-2 bg-blue-700 hover:bg-blue-600 disabled:opacity-40 text-white text-xs font-bold rounded-lg transition-colors"
-                  >
+                    className="px-4 py-2 bg-blue-700 hover:bg-blue-600 disabled:opacity-40 text-white text-xs font-bold rounded-lg transition-colors">
                     {isSaving ? "Saving…" : "Extend"}
-                  </button>
-                  <button
-                    onClick={() => handleDeny(parent.email)}
-                    disabled={isSaving}
-                    className="px-4 py-2 bg-red-900/60 hover:bg-red-800 text-red-300 text-xs font-bold rounded-lg border border-red-800/50 transition-colors"
-                  >
-                    Revoke Access
                   </button>
                 </div>
               </div>
@@ -370,71 +354,46 @@ export default function AdminParentsPage() {
 
             {/* Link / Unlink athletes */}
             <div className="bg-white/5 border border-white/10 rounded-xl p-4">
-              <p className="text-xs text-gray-400 font-bold uppercase tracking-wider mb-3">Linked Athletes</p>
+              <p className="text-xs text-gray-400 font-bold uppercase tracking-widest mb-3">Linked Athletes</p>
               {linkedAthletes.length > 0 && (
                 <div className="flex flex-wrap gap-2 mb-3">
                   {linkedAthletes.map(a => (
                     <div key={a.id} className="flex items-center gap-2 bg-gray-800 border border-gray-700 rounded-lg px-3 py-1.5">
                       <span className="text-xs text-white font-mono">{a.name} · {a.id}</span>
-                      <button
-                        onClick={() => handleUnlink(parent.email, a.id)}
-                        disabled={isSaving}
-                        className="text-red-500 hover:text-red-300 text-xs font-bold disabled:opacity-40"
-                      >
-                        ✕
-                      </button>
+                      <button onClick={() => handleUnlink(parent.email, a.id)} disabled={isSaving}
+                        className="text-red-500 hover:text-red-300 text-xs font-bold disabled:opacity-40">✕</button>
                     </div>
                   ))}
                 </div>
               )}
               <div className="flex gap-2 items-center">
-                <select
-                  value={linkingEmail === parent.email ? linkSelect : ""}
+                <select value={linkingEmail === parent.email ? linkSelect : ""}
                   onChange={e => { setLinkingEmail(parent.email); setLinkSelect(e.target.value) }}
-                  className="bg-[#0a0a0f] border border-white/20 rounded-lg px-3 py-2 text-xs text-white outline-none focus:border-blue-500"
-                >
+                  className="bg-[#0a0a0f] border border-white/20 rounded-lg px-3 py-2 text-xs text-white outline-none focus:border-blue-500">
                   <option value="">Link an athlete…</option>
                   {athletes.filter(a => !parent.athleteIds.includes(a.id)).map(a => (
                     <option key={a.id} value={a.id}>{a.name} ({a.id})</option>
                   ))}
                 </select>
                 {linkingEmail === parent.email && linkSelect && (
-                  <button
-                    onClick={() => handleLink(parent.email, linkSelect)}
-                    disabled={isSaving}
-                    className="px-4 py-2 bg-blue-700 hover:bg-blue-600 disabled:opacity-40 text-white text-xs font-bold rounded-lg transition-colors"
-                  >
+                  <button onClick={() => handleLink(parent.email, linkSelect)} disabled={isSaving}
+                    className="px-4 py-2 bg-blue-700 hover:bg-blue-600 disabled:opacity-40 text-white text-xs font-bold rounded-lg transition-colors">
                     {isSaving ? "Linking…" : "Link"}
                   </button>
                 )}
               </div>
             </div>
 
-            {/* Bottom actions row */}
-            <div className="flex flex-wrap gap-2">
-              {/* Send reset link */}
-              <button
-                onClick={() => handleSendReset(parent.email)}
-                disabled={isSaving || resetSent === parent.email}
-                className={`px-4 py-2 text-xs font-bold rounded-lg border transition-colors ${
-                  resetSent === parent.email
-                    ? "bg-green-900/40 text-green-300 border-green-700/50"
-                    : "bg-white/5 border-white/10 text-gray-300 hover:text-white hover:border-white/30"
-                }`}
-              >
-                {resetSent === parent.email ? "✓ Reset Link Sent" : "📧 Send Password Reset"}
-              </button>
-
-              {/* Re-approve denied */}
-              {isDenied && (
-                <button
-                  onClick={() => { setApprovingEmail(parent.email); setExpandedEmail(parent.email) }}
-                  className="px-4 py-2 text-xs font-bold rounded-lg border border-green-700/50 bg-green-900/20 text-green-300 hover:bg-green-900/40 transition-colors"
-                >
-                  Re-Approve
-                </button>
-              )}
-            </div>
+            {/* Password reset */}
+            <button onClick={() => handleSendReset(parent.email)}
+              disabled={isSaving || resetSent === parent.email}
+              className={`px-4 py-2 text-xs font-bold rounded-lg border transition-colors ${
+                resetSent === parent.email
+                  ? "bg-green-900/40 text-green-300 border-green-700/50"
+                  : "bg-white/5 border-white/10 text-gray-300 hover:text-white hover:border-white/30"
+              }`}>
+              {resetSent === parent.email ? "✓ Reset Link Sent" : "📧 Send Password Reset"}
+            </button>
 
           </div>
         )}

@@ -17,7 +17,7 @@ export async function POST(req: NextRequest) {
     const client = twilio(accountSid, authToken)
     const improvementLine = improvement ? `\n\nTop improvement this month: ${improvement}` : ""
     await client.messages.create({
-      body: `Hey ${athleteName}! Your PolyRISE Football monthly progress report is ready.\n\nYou now have ${sessionCount} test session${sessionCount !== 1 ? "s" : ""} on record.${improvementLine}\n\nKeep up the great work! 💪\n\n- Coach Jonathan | PolyRISE Football\n(817) 658-3300`,
+      body: `Hey ${athleteName}! Your PolyRISE Football monthly progress report is ready.\n\nYou now have ${sessionCount} test session${sessionCount !== 1 ? "s" : ""} on record.${improvementLine}\n\nKeep up the great work! 💪\n\n- PolyRISE Football\n(817) 658-3300`,
       from: fromNumber,
       to: phone,
     })

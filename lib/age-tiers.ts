@@ -4,16 +4,13 @@ interface Thresholds {
   elite: number
   aboveAvg: number
   average: number
-  lower: boolean // true = lower value is better (speed); false = higher is better (jumps)
+  lower: boolean
 }
 
-// Age groups: index 0 = ≤11, 1 = 12, 2 = 13, 3 = 14, 4 = 15, 5 = 16, 6 = 17, 7 = 18+
-// For "lower" metrics: elite < aboveAvg < average (faster is better)
-// For "higher" metrics: elite > aboveAvg > average (bigger is better)
+// Age index: 0=≤11, 1=12, 2=13, 3=14, 4=15, 5=16, 6=17, 7=18+
 
-const AGE_BENCHMARKS: Record<string, Thresholds[]> = {
+const MALE: Record<string, Thresholds[]> = {
   fortyYard: [
-    // ≤11   12     13     14     15     16     17     18+
     { elite: 5.40, aboveAvg: 5.70, average: 6.10, lower: true },
     { elite: 5.20, aboveAvg: 5.50, average: 5.90, lower: true },
     { elite: 5.10, aboveAvg: 5.40, average: 5.80, lower: true },
@@ -73,16 +70,90 @@ const AGE_BENCHMARKS: Record<string, Thresholds[]> = {
     { elite: 114, aboveAvg: 102, average: 90,  lower: false },
     { elite: 116, aboveAvg: 104, average: 92,  lower: false },
   ],
-  // Age 14+ = reps at 135 lbs. Under 14 = reps at lighter bar (rated generously).
+  // Reps at 135 lbs (age 14+); lighter bar for under-14
   benchPress: [
-    { elite: 11, aboveAvg: 8,  average: 5,  lower: false }, // ≤11 (lighter bar)
-    { elite: 11, aboveAvg: 8,  average: 5,  lower: false }, // 12  (lighter bar)
-    { elite: 10, aboveAvg: 7,  average: 4,  lower: false }, // 13  (lighter bar, +2)
-    { elite: 11, aboveAvg: 8,  average: 5,  lower: false }, // 14 — reps at 135 lbs
-    { elite: 15, aboveAvg: 11, average: 7,  lower: false }, // 15
-    { elite: 18, aboveAvg: 13, average: 9,  lower: false }, // 16
-    { elite: 21, aboveAvg: 16, average: 11, lower: false }, // 17
-    { elite: 25, aboveAvg: 19, average: 13, lower: false }, // 18+
+    { elite: 11, aboveAvg: 8,  average: 5,  lower: false },
+    { elite: 11, aboveAvg: 8,  average: 5,  lower: false },
+    { elite: 10, aboveAvg: 7,  average: 4,  lower: false },
+    { elite: 11, aboveAvg: 8,  average: 5,  lower: false },
+    { elite: 15, aboveAvg: 11, average: 7,  lower: false },
+    { elite: 18, aboveAvg: 13, average: 9,  lower: false },
+    { elite: 21, aboveAvg: 16, average: 11, lower: false },
+    { elite: 25, aboveAvg: 19, average: 13, lower: false },
+  ],
+}
+
+const FEMALE: Record<string, Thresholds[]> = {
+  fortyYard: [
+    { elite: 5.90, aboveAvg: 6.20, average: 6.60, lower: true },
+    { elite: 5.70, aboveAvg: 6.00, average: 6.40, lower: true },
+    { elite: 5.60, aboveAvg: 5.90, average: 6.30, lower: true },
+    { elite: 5.40, aboveAvg: 5.70, average: 6.10, lower: true },
+    { elite: 5.30, aboveAvg: 5.60, average: 6.00, lower: true },
+    { elite: 5.20, aboveAvg: 5.50, average: 5.90, lower: true },
+    { elite: 5.10, aboveAvg: 5.40, average: 5.80, lower: true },
+    { elite: 5.00, aboveAvg: 5.30, average: 5.70, lower: true },
+  ],
+  twentyYard: [
+    { elite: 3.10, aboveAvg: 3.30, average: 3.50, lower: true },
+    { elite: 3.00, aboveAvg: 3.20, average: 3.40, lower: true },
+    { elite: 2.90, aboveAvg: 3.10, average: 3.30, lower: true },
+    { elite: 2.85, aboveAvg: 3.05, average: 3.25, lower: true },
+    { elite: 2.80, aboveAvg: 3.00, average: 3.20, lower: true },
+    { elite: 2.75, aboveAvg: 2.95, average: 3.15, lower: true },
+    { elite: 2.70, aboveAvg: 2.90, average: 3.10, lower: true },
+    { elite: 2.65, aboveAvg: 2.85, average: 3.05, lower: true },
+  ],
+  shuttle: [
+    { elite: 5.00, aboveAvg: 5.30, average: 5.60, lower: true },
+    { elite: 4.85, aboveAvg: 5.15, average: 5.45, lower: true },
+    { elite: 4.70, aboveAvg: 5.00, average: 5.30, lower: true },
+    { elite: 4.60, aboveAvg: 4.90, average: 5.20, lower: true },
+    { elite: 4.50, aboveAvg: 4.80, average: 5.10, lower: true },
+    { elite: 4.40, aboveAvg: 4.70, average: 5.00, lower: true },
+    { elite: 4.35, aboveAvg: 4.65, average: 4.95, lower: true },
+    { elite: 4.30, aboveAvg: 4.60, average: 4.90, lower: true },
+  ],
+  threeCone: [
+    { elite: 7.80, aboveAvg: 8.30, average: 8.80, lower: true },
+    { elite: 7.60, aboveAvg: 8.10, average: 8.60, lower: true },
+    { elite: 7.40, aboveAvg: 7.90, average: 8.40, lower: true },
+    { elite: 7.20, aboveAvg: 7.70, average: 8.20, lower: true },
+    { elite: 7.00, aboveAvg: 7.50, average: 8.00, lower: true },
+    { elite: 6.80, aboveAvg: 7.30, average: 7.80, lower: true },
+    { elite: 6.70, aboveAvg: 7.20, average: 7.70, lower: true },
+    { elite: 6.60, aboveAvg: 7.10, average: 7.60, lower: true },
+  ],
+  verticalJump: [
+    { elite: 18, aboveAvg: 14, average: 10, lower: false },
+    { elite: 20, aboveAvg: 16, average: 12, lower: false },
+    { elite: 22, aboveAvg: 18, average: 14, lower: false },
+    { elite: 23, aboveAvg: 19, average: 15, lower: false },
+    { elite: 24, aboveAvg: 20, average: 16, lower: false },
+    { elite: 25, aboveAvg: 21, average: 17, lower: false },
+    { elite: 26, aboveAvg: 22, average: 18, lower: false },
+    { elite: 26, aboveAvg: 22, average: 18, lower: false },
+  ],
+  broadJump: [
+    { elite: 72,  aboveAvg: 60,  average: 48,  lower: false },
+    { elite: 78,  aboveAvg: 66,  average: 54,  lower: false },
+    { elite: 82,  aboveAvg: 70,  average: 58,  lower: false },
+    { elite: 86,  aboveAvg: 74,  average: 62,  lower: false },
+    { elite: 90,  aboveAvg: 78,  average: 66,  lower: false },
+    { elite: 92,  aboveAvg: 80,  average: 68,  lower: false },
+    { elite: 94,  aboveAvg: 82,  average: 70,  lower: false },
+    { elite: 96,  aboveAvg: 84,  average: 72,  lower: false },
+  ],
+  // 135 lbs is heavy for females — standards scaled down significantly
+  benchPress: [
+    { elite: 2,  aboveAvg: 1,  average: 0,  lower: false },
+    { elite: 2,  aboveAvg: 1,  average: 0,  lower: false },
+    { elite: 2,  aboveAvg: 1,  average: 0,  lower: false },
+    { elite: 3,  aboveAvg: 2,  average: 1,  lower: false },
+    { elite: 5,  aboveAvg: 3,  average: 1,  lower: false },
+    { elite: 7,  aboveAvg: 4,  average: 2,  lower: false },
+    { elite: 9,  aboveAvg: 6,  average: 3,  lower: false },
+    { elite: 12, aboveAvg: 8,  average: 4,  lower: false },
   ],
 }
 
@@ -92,18 +163,18 @@ function getAgeIndex(age: number): number {
   return age - 11 // 12→1, 13→2, 14→3, 15→4, 16→5, 17→6
 }
 
-export function getAgeTier(metricKey: string, value: number, age: number): Tier | null {
-  const benchmarkRows = AGE_BENCHMARKS[metricKey]
-  if (!benchmarkRows) return null
-  const idx = getAgeIndex(age)
-  const b = benchmarkRows[idx]
+export function getAgeTier(metricKey: string, value: number, age: number, gender: "M" | "F" = "M"): Tier | null {
+  const table = gender === "F" ? FEMALE : MALE
+  const rows = table[metricKey]
+  if (!rows) return null
+  const b = rows[getAgeIndex(age)]
   if (b.lower) {
-    if (value <= b.elite)   return "Elite"
+    if (value <= b.elite)    return "Elite"
     if (value <= b.aboveAvg) return "Above Average"
     if (value <= b.average)  return "Average"
     return "Below Average"
   } else {
-    if (value >= b.elite)   return "Elite"
+    if (value >= b.elite)    return "Elite"
     if (value >= b.aboveAvg) return "Above Average"
     if (value >= b.average)  return "Average"
     return "Below Average"

@@ -93,6 +93,10 @@ export default async function TrainingAthletePage({ params }: { params: { id: st
                   ? <span className="text-xs bg-green-800 text-green-300 px-2 py-0.5 rounded-full font-semibold">⚽ Soccer</span>
                   : <span className="text-xs bg-red-900 text-red-300 px-2 py-0.5 rounded-full font-semibold">🏈 Football</span>
                 }
+                {athlete.gender === "F"
+                  ? <span className="text-xs bg-pink-900 text-pink-300 px-2 py-0.5 rounded-full font-semibold">F Female</span>
+                  : <span className="text-xs bg-blue-900 text-blue-300 px-2 py-0.5 rounded-full font-semibold">M Male</span>
+                }
               </div>
               <p className="text-gray-400 text-sm">{athlete.age} yrs · {athlete.grade} · {athlete.school || "—"}</p>
               <Link href="/training" className="text-xs text-gray-600 hover:text-gray-400 underline mt-0.5 block">← Training Roster</Link>
@@ -177,7 +181,7 @@ export default async function TrainingAthletePage({ params }: { params: { id: st
                   const imp = (firstVal != null && cVal != null) ? (m.lower ? firstVal - cVal : cVal - firstVal) : 0
                   const pct = (firstVal != null && cVal != null) ? ((Math.abs(imp) / firstVal) * 100).toFixed(1) : null
                   const hasComparison = firstVal != null && cVal != null
-                  const tier = getAgeTier(m.key, displayVal, athlete.age)
+                  const tier = getAgeTier(m.key, displayVal, athlete.age, athlete.gender ?? "M")
 
                   return (
                     <div key={m.key} className={`rounded-xl px-4 py-3 border ${hasComparison ? impBg(imp) : "bg-gray-800 border-gray-700"}`}>

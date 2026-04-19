@@ -132,6 +132,7 @@ export default function TrainingRosterPage() {
   const [position, setPosition] = useState("")
   const [school, setSchool] = useState("")
   const [sport, setSport] = useState<"football" | "soccer">("football")
+  const [gender, setGender] = useState<"M" | "F">("M")
   const [fortyYard, setFortyYard] = useState("")
   const [twentyYard, setTwentyYard] = useState("")
   const [shuttle, setShuttle] = useState("")
@@ -158,7 +159,7 @@ export default function TrainingRosterPage() {
   useEffect(() => { fetchAthletes() }, [fetchAthletes])
 
   const resetForm = () => {
-    setName(""); setAge(""); setGrade(""); setPosition(""); setSchool(""); setSport("football")
+    setName(""); setAge(""); setGrade(""); setPosition(""); setSchool(""); setSport("football"); setGender("M")
     setFortyYard(""); setTwentyYard(""); setShuttle(""); setThreeCone("")
     setVerticalJump(""); setBroadJump(""); setBenchPress(""); setWeight("")
     setHeightFt(""); setHeightIn("")
@@ -191,7 +192,7 @@ export default function TrainingRosterPage() {
       const createRes = await fetch("/api/training", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ name, age, grade, school, position, sport }),
+        body: JSON.stringify({ name, age, grade, school, position, sport, gender }),
       })
       const createData = await createRes.json()
       if (!createData.success) { setSaveMsg("Error creating athlete."); setSaving(false); return }
@@ -232,16 +233,34 @@ export default function TrainingRosterPage() {
         </div>
       )}
 
-      {/* Sport toggle */}
-      <div className="flex gap-2 mb-1">
-        <button onClick={() => setSport("football")}
-          className={`flex-1 py-2 rounded-lg text-sm font-bold transition-colors ${sport === "football" ? "bg-red-600 text-white" : "bg-gray-800 text-gray-400 hover:text-white border border-gray-700"}`}>
-          🏈 Football
-        </button>
-        <button onClick={() => setSport("soccer")}
-          className={`flex-1 py-2 rounded-lg text-sm font-bold transition-colors ${sport === "soccer" ? "bg-green-600 text-white" : "bg-gray-800 text-gray-400 hover:text-white border border-gray-700"}`}>
-          ⚽ Soccer
-        </button>
+      {/* Sport + Gender toggles */}
+      <div className="grid grid-cols-2 gap-3 mb-1">
+        <div>
+          <p className="text-xs text-gray-500 mb-1.5 uppercase tracking-wider">Sport</p>
+          <div className="flex gap-2">
+            <button onClick={() => setSport("football")}
+              className={`flex-1 py-2 rounded-lg text-sm font-bold transition-colors ${sport === "football" ? "bg-red-600 text-white" : "bg-gray-800 text-gray-400 hover:text-white border border-gray-700"}`}>
+              🏈 Football
+            </button>
+            <button onClick={() => setSport("soccer")}
+              className={`flex-1 py-2 rounded-lg text-sm font-bold transition-colors ${sport === "soccer" ? "bg-green-600 text-white" : "bg-gray-800 text-gray-400 hover:text-white border border-gray-700"}`}>
+              ⚽ Soccer
+            </button>
+          </div>
+        </div>
+        <div>
+          <p className="text-xs text-gray-500 mb-1.5 uppercase tracking-wider">Gender</p>
+          <div className="flex gap-2">
+            <button onClick={() => setGender("M")}
+              className={`flex-1 py-2 rounded-lg text-sm font-bold transition-colors ${gender === "M" ? "bg-blue-600 text-white" : "bg-gray-800 text-gray-400 hover:text-white border border-gray-700"}`}>
+              M Male
+            </button>
+            <button onClick={() => setGender("F")}
+              className={`flex-1 py-2 rounded-lg text-sm font-bold transition-colors ${gender === "F" ? "bg-pink-600 text-white" : "bg-gray-800 text-gray-400 hover:text-white border border-gray-700"}`}>
+              F Female
+            </button>
+          </div>
+        </div>
       </div>
 
       <div className="grid grid-cols-2 md:grid-cols-5 gap-3">

@@ -41,6 +41,7 @@ export default function EditTrainingAthletePage() {
   const [email, setEmail] = useState("")
   const [coachNotes, setCoachNotes] = useState("")
   const [sport, setSport] = useState<"football" | "soccer">("football")
+  const [gender, setGender] = useState<"M" | "F">("M")
 
   useEffect(() => {
     fetch(`/api/training?id=${id}`)
@@ -57,6 +58,7 @@ export default function EditTrainingAthletePage() {
           setEmail(a.email ?? "")
           setCoachNotes(a.coachNotes ?? "")
           setSport(a.sport === "soccer" ? "soccer" : "football")
+          setGender(a.gender === "F" ? "F" : "M")
         } else {
           setError("Athlete not found.")
         }
@@ -74,7 +76,7 @@ export default function EditTrainingAthletePage() {
       const res = await fetch("/api/training", {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ id, name, age, grade, school, position, phone, email, coachNotes, sport }),
+        body: JSON.stringify({ id, name, age, grade, school, position, phone, email, coachNotes, sport, gender }),
       })
       const data = await res.json()
       if (data.success) {
@@ -117,17 +119,32 @@ export default function EditTrainingAthletePage() {
             <form onSubmit={handleSubmit} className="bg-gray-900 rounded-2xl p-6 space-y-4 border border-gray-800">
               <h2 className="text-xs font-bold text-red-400 uppercase tracking-widest">Athlete Info</h2>
 
-              <div>
-                <label className="block text-sm text-gray-300 mb-1.5">Sport</label>
-                <div className="flex gap-2">
-                  <button type="button" onClick={() => setSport("football")}
-                    className={`flex-1 py-2 rounded-lg text-sm font-bold transition-colors ${sport === "football" ? "bg-red-600 text-white" : "bg-gray-800 text-gray-400 hover:text-white border border-gray-700"}`}>
-                    🏈 Football
-                  </button>
-                  <button type="button" onClick={() => setSport("soccer")}
-                    className={`flex-1 py-2 rounded-lg text-sm font-bold transition-colors ${sport === "soccer" ? "bg-green-600 text-white" : "bg-gray-800 text-gray-400 hover:text-white border border-gray-700"}`}>
-                    ⚽ Soccer
-                  </button>
+              <div className="grid grid-cols-2 gap-4">
+                <div>
+                  <label className="block text-sm text-gray-300 mb-1.5">Sport</label>
+                  <div className="flex gap-2">
+                    <button type="button" onClick={() => setSport("football")}
+                      className={`flex-1 py-2 rounded-lg text-sm font-bold transition-colors ${sport === "football" ? "bg-red-600 text-white" : "bg-gray-800 text-gray-400 hover:text-white border border-gray-700"}`}>
+                      🏈 Football
+                    </button>
+                    <button type="button" onClick={() => setSport("soccer")}
+                      className={`flex-1 py-2 rounded-lg text-sm font-bold transition-colors ${sport === "soccer" ? "bg-green-600 text-white" : "bg-gray-800 text-gray-400 hover:text-white border border-gray-700"}`}>
+                      ⚽ Soccer
+                    </button>
+                  </div>
+                </div>
+                <div>
+                  <label className="block text-sm text-gray-300 mb-1.5">Gender</label>
+                  <div className="flex gap-2">
+                    <button type="button" onClick={() => setGender("M")}
+                      className={`flex-1 py-2 rounded-lg text-sm font-bold transition-colors ${gender === "M" ? "bg-blue-600 text-white" : "bg-gray-800 text-gray-400 hover:text-white border border-gray-700"}`}>
+                      M Male
+                    </button>
+                    <button type="button" onClick={() => setGender("F")}
+                      className={`flex-1 py-2 rounded-lg text-sm font-bold transition-colors ${gender === "F" ? "bg-pink-600 text-white" : "bg-gray-800 text-gray-400 hover:text-white border border-gray-700"}`}>
+                      F Female
+                    </button>
+                  </div>
                 </div>
               </div>
 

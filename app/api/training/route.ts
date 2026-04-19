@@ -51,6 +51,7 @@ export interface TrainingAthlete {
   grade: string
   school: string
   position?: string
+  gender?: "M" | "F"
   coachNotes?: string
   phone?: string
   email?: string
@@ -82,6 +83,7 @@ export async function POST(req: NextRequest) {
       phone: body.phone || "",
       email: body.email || "",
       sport: body.sport === "soccer" ? "soccer" : "football",
+      gender: body.gender === "F" ? "F" as const : "M" as const,
       joinedAt: new Date().toISOString(),
       sessions: [],
     }
@@ -215,6 +217,7 @@ export async function PUT(req: NextRequest) {
       phone: body.phone ?? existing.phone,
       email: body.email ?? existing.email,
       sport: body.sport === "soccer" ? "soccer" : body.sport === "football" ? "football" : existing.sport,
+      gender: body.gender === "F" ? "F" : body.gender === "M" ? "M" : existing.gender,
     }
     await kvSet(`training:athlete:${id.toUpperCase()}`, updated)
     return NextResponse.json({ success: true })

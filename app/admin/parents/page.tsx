@@ -205,7 +205,8 @@ export default function AdminParentsPage() {
     const expStatus = expiryStatus(parent)
     const isPending = parent.approvalStatus === "pending"
     const isDenied = parent.approvalStatus === "denied"
-    const isExpanded = expandedEmail === parent.email
+    // Pending cards are expanded by default
+    const isExpanded = expandedEmail === parent.email || (isPending && expandedEmail !== `close-${parent.email}`)
     const isSaving = saving === parent.email
 
     // Suggested athlete match for pending parents
@@ -271,7 +272,13 @@ export default function AdminParentsPage() {
 
           {/* Expand toggle */}
           <button
-            onClick={() => setExpandedEmail(isExpanded ? null : parent.email)}
+            onClick={() => {
+              if (isPending) {
+                setExpandedEmail(isExpanded ? `close-${parent.email}` : parent.email)
+              } else {
+                setExpandedEmail(isExpanded ? null : parent.email)
+              }
+            }}
             className="shrink-0 text-gray-500 hover:text-white text-xs px-3 py-1.5 bg-white/5 border border-white/10 rounded-lg transition-colors"
           >
             {isExpanded ? "▲ Less" : "▼ Actions"}
@@ -350,15 +357,13 @@ export default function AdminParentsPage() {
                   >
                     {isSaving ? "Saving…" : "Extend"}
                   </button>
-                  {(expStatus === "expired" || expStatus === "soon") && (
-                    <button
-                      onClick={() => handleDeny(parent.email)}
-                      disabled={isSaving}
-                      className="px-4 py-2 bg-red-900/60 hover:bg-red-800 text-red-300 text-xs font-bold rounded-lg border border-red-800/50 transition-colors"
-                    >
-                      Revoke Access
-                    </button>
-                  )}
+                  <button
+                    onClick={() => handleDeny(parent.email)}
+                    disabled={isSaving}
+                    className="px-4 py-2 bg-red-900/60 hover:bg-red-800 text-red-300 text-xs font-bold rounded-lg border border-red-800/50 transition-colors"
+                  >
+                    Revoke Access
+                  </button>
                 </div>
               </div>
             )}

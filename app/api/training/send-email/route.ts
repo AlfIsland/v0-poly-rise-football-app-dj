@@ -54,6 +54,18 @@ export async function POST(req: NextRequest) {
             ${metricsRows}
           </table>
 
+          <!-- Registration CTA -->
+          <table width="100%" cellpadding="0" cellspacing="0" style="background:#1a0a0a;border:1px solid #3d1515;border-radius:10px;margin-bottom:24px;">
+            <tr>
+              <td style="padding:20px 24px;">
+                <p style="color:#ff6b6b;font-size:13px;font-weight:bold;margin:0 0 6px;text-transform:uppercase;letter-spacing:1px;">Want Full Online Access?</p>
+                <p style="color:#ccc;font-size:13px;margin:0 0 14px;">View ${athleteName}&apos;s complete progress charts, full session history, and downloadable reports anytime from your phone or computer.</p>
+                <a href="https://polyrisefootball.com/parent/register" style="display:inline-block;background:#dc2626;color:#fff;font-size:13px;font-weight:bold;padding:10px 22px;border-radius:8px;text-decoration:none;">Create Your Parent Account →</a>
+                <p style="color:#555;font-size:11px;margin:10px 0 0;">Already have an account? <a href="https://polyrisefootball.com/parent/login" style="color:#888;text-decoration:underline;">Log in here</a></p>
+              </td>
+            </tr>
+          </table>
+
           <hr style="border:none;border-top:1px solid #222;margin:0 0 20px;">
           <p style="color:#666;font-size:12px;margin:0;">Questions? Contact Coach Jonathan</p>
           <p style="color:#666;font-size:12px;margin:6px 0 0;">(817) 658-3300 · polyrise@polyrisefootball.com</p>

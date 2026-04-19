@@ -79,16 +79,16 @@ export default async function TrainingAthletePage({ params }: { params: { id: st
   }, athlete.position ?? "", classYear) : null
 
   return (
-    <div className="min-h-screen bg-gray-950 text-white p-6 md:p-10">
+    <div className="min-h-screen bg-gray-950 text-white p-4 sm:p-6 md:p-10">
       <div className="max-w-4xl mx-auto space-y-6">
 
         {/* Header */}
-        <div className="border-b border-gray-800 pb-6 flex items-center justify-between">
-          <div className="flex items-center gap-4">
-            <Image src="/poly-rise-logo.png" alt="PolyRISE" width={36} height={36} className="object-contain" />
-            <div>
-              <div className="flex items-center gap-2">
-                <h1 className="text-2xl font-bold text-white">{athlete.name}</h1>
+        <div className="border-b border-gray-800 pb-6 flex flex-col sm:flex-row sm:items-start gap-4">
+          <div className="flex items-center gap-3 flex-1 min-w-0">
+            <Image src="/poly-rise-logo.png" alt="PolyRISE" width={36} height={36} className="object-contain shrink-0" />
+            <div className="min-w-0">
+              <div className="flex items-center gap-2 flex-wrap">
+                <h1 className="text-xl sm:text-2xl font-bold text-white">{athlete.name}</h1>
                 {athlete.sport === "soccer"
                   ? <span className="text-xs bg-green-800 text-green-300 px-2 py-0.5 rounded-full font-semibold">⚽ Soccer</span>
                   : <span className="text-xs bg-red-900 text-red-300 px-2 py-0.5 rounded-full font-semibold">🏈 Football</span>
@@ -102,9 +102,8 @@ export default async function TrainingAthletePage({ params }: { params: { id: st
               <Link href="/training" className="text-xs text-gray-600 hover:text-gray-400 underline mt-0.5 block">← Training Roster</Link>
             </div>
           </div>
-          <div className="flex items-center gap-2 flex-wrap justify-end">
+          <div className="flex items-center gap-2 flex-wrap">
             <FeaturedToggle id={athlete.id} initialFeatured={athlete.featured ?? false} />
-            {/* Parent linked indicator */}
             {linkedParent ? (
               <span className="text-xs bg-green-900/50 border border-green-700/50 text-green-300 px-3 py-2 rounded-xl font-semibold">
                 ✓ Parent: {linkedParent.name}
@@ -114,14 +113,14 @@ export default async function TrainingAthletePage({ params }: { params: { id: st
             )}
             <Link href={`/admin/athletes/new?mode=prv&name=${encodeURIComponent(athlete.name)}&position=${encodeURIComponent(athlete.position ?? "")}&school=${encodeURIComponent(athlete.school ?? "")}&gradYear=${encodeURIComponent(classYear ?? "")}`}
               className="bg-yellow-700 hover:bg-yellow-600 text-white font-semibold px-3 py-2 rounded-xl text-xs transition-colors">
-              🔴 Add PR-V Seal
+              🔴 PR-V Seal
             </Link>
             <Link href={`/training/${athlete.id}/edit`}
-              className="bg-gray-700 hover:bg-gray-600 text-white font-semibold px-4 py-2 rounded-xl text-sm transition-colors">
-              Edit Info
+              className="bg-gray-700 hover:bg-gray-600 text-white font-semibold px-3 py-2 rounded-xl text-sm transition-colors">
+              Edit
             </Link>
             <Link href={`/training/${athlete.id}/session`}
-              className="bg-red-600 hover:bg-red-700 text-white font-semibold px-4 py-2 rounded-xl text-sm transition-colors">
+              className="bg-red-600 hover:bg-red-700 text-white font-semibold px-3 py-2 rounded-xl text-sm transition-colors">
               + Add Test
             </Link>
             <LogoutButton />
@@ -129,7 +128,7 @@ export default async function TrainingAthletePage({ params }: { params: { id: st
         </div>
 
         {/* Athlete info cards */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
           {[
             { label: "Position", value: athlete.position || "—" },
             { label: "Sessions", value: sessions.length },
@@ -185,10 +184,19 @@ export default async function TrainingAthletePage({ params }: { params: { id: st
 
                   return (
                     <div key={m.key} className={`rounded-xl px-4 py-3 border ${hasComparison ? impBg(imp) : "bg-gray-800 border-gray-700"}`}>
-                      <p className="text-xs text-gray-400 mb-2">{m.label}</p>
-                      <div className="flex items-center justify-between gap-2">
+                      {/* Label row + tier badge */}
+                      <div className="flex items-center justify-between gap-2 mb-2">
+                        <p className="text-xs text-gray-400">{m.label}</p>
+                        {tier && (
+                          <span className={`shrink-0 text-xs font-bold px-2 py-0.5 rounded-lg whitespace-nowrap ${tierStyle(tier)}`}>
+                            {tier === "Above Average" ? "Above Avg" : tier}
+                          </span>
+                        )}
+                      </div>
+                      {/* Values row */}
+                      <div className="flex items-end justify-between gap-2">
                         {/* Left: baseline → current */}
-                        <div className="flex items-center gap-2 min-w-0">
+                        <div className="flex items-center gap-2 min-w-0 flex-wrap">
                           <div>
                             <p className="text-xs text-gray-500">{bVal != null ? "Baseline" : "First"}</p>
                             <p className="text-white font-bold">{fmt(refVal, m.unit)}</p>
@@ -203,14 +211,6 @@ export default async function TrainingAthletePage({ params }: { params: { id: st
                             </>
                           )}
                         </div>
-
-                        {/* Middle: age tier badge */}
-                        {tier && (
-                          <span className={`shrink-0 text-xs font-bold px-2 py-1 rounded-lg whitespace-nowrap ${tierStyle(tier)}`}>
-                            {tier === "Above Average" ? "Above Avg" : tier}
-                          </span>
-                        )}
-
                         {/* Right: delta + pct */}
                         {hasComparison && pct && (
                           <div className="text-right shrink-0">
@@ -259,21 +259,21 @@ export default async function TrainingAthletePage({ params }: { params: { id: st
                 <div className="px-6 pb-5 space-y-3 mt-3">
                   {ratings.metrics.map(m => (
                     <div key={m.label}>
-                      <div className="flex items-center justify-between mb-1">
-                        <div className="flex items-center gap-2">
+                      <div className="flex items-start justify-between gap-2 mb-1">
+                        <div>
                           <span className="text-xs text-gray-300">{m.label}</span>
-                          <span className="text-xs text-gray-600">
+                          <span className="text-xs text-gray-600 ml-2">
                             {m.unit === "sec" ? `${m.value}s` : m.unit === "in" ? `${m.value}"` : `${m.value} reps`}
                           </span>
                         </div>
-                        <div className="flex items-center gap-3 text-xs">
-                          <span className={`font-semibold ${m.nationalPercentile >= 75 ? "text-green-400" : m.nationalPercentile >= 50 ? "text-yellow-400" : "text-gray-400"}`}>
+                        <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-xs justify-end">
+                          <span className={`font-semibold whitespace-nowrap ${m.nationalPercentile >= 75 ? "text-green-400" : m.nationalPercentile >= 50 ? "text-yellow-400" : "text-gray-400"}`}>
                             {m.nationalPercentile}th <span className="text-gray-600 font-normal">Nat.</span>
                           </span>
-                          <span className={`font-semibold ${m.texasPercentile >= 75 ? "text-green-400" : m.texasPercentile >= 50 ? "text-yellow-400" : "text-gray-400"}`}>
+                          <span className={`font-semibold whitespace-nowrap ${m.texasPercentile >= 75 ? "text-green-400" : m.texasPercentile >= 50 ? "text-yellow-400" : "text-gray-400"}`}>
                             {m.texasPercentile}th <span className="text-gray-600 font-normal">TX</span>
                           </span>
-                          <span className={`px-2 py-0.5 rounded-full text-xs font-semibold ${
+                          <span className={`px-2 py-0.5 rounded-full text-xs font-semibold whitespace-nowrap ${
                             m.rank === "Elite" ? "bg-yellow-900/50 text-yellow-300" :
                             m.rank === "Excellent" ? "bg-green-900/50 text-green-300" :
                             m.rank === "Above Average" ? "bg-blue-900/40 text-blue-300" :

@@ -96,7 +96,12 @@ export default function AdminParentsPage() {
       fetch("/api/admin/parents").then(r => r.json()),
       fetch("/api/training").then(r => r.json()),
     ]).then(([pd, td]) => {
-      if (pd.success) setParents(pd.parents)
+      if (pd.success) {
+        setParents(pd.parents)
+        // Auto-switch to Not Registered if there are pending parents waiting
+        const hasPending = pd.parents.some((p: ParentAccount) => p.approvalStatus === "pending")
+        if (hasPending) setTab("not-registered")
+      }
       if (td.success) setAthletes(td.athletes)
     }).finally(() => setLoading(false))
   }, [])
@@ -190,10 +195,17 @@ export default function AdminParentsPage() {
     !q || p.name.toLowerCase().includes(q) || p.email.toLowerCase().includes(q) ||
     athletes.filter(a => p.athleteIds.includes(a.id)).some(a => a.name.toLowerCase().includes(q))
   )
-  const visibleNotRegistered = notRegistered.filter(p =>
-    !q || p.name.toLowerCase().includes(q) || p.email.toLowerCase().includes(q) ||
-    (p.athleteName || "").toLowerCase().includes(q)
-  )
+  const visibleNotRegistered = notRegistered
+    .filter(p =>
+      !q || p.name.toLowerCase().includes(q) || p.email.toLowerCase().includes(q) ||
+      (p.athleteName || "").toLowerCase().includes(q)
+    )
+    .sort((a, b) => {
+      // Pending first, then denied
+      if (a.approvalStatus === "pending" && b.approvalStatus !== "pending") return -1
+      if (b.approvalStatus === "pending" && a.approvalStatus !== "pending") return 1
+      return 0
+    })
 
   const current = tab === "registered" ? visibleRegistered : visibleNotRegistered
 
@@ -454,6 +466,29 @@ export default function AdminParentsPage() {
       </header>
 
       <main className="max-w-4xl mx-auto px-4 py-8">
+
+        {/* Action-required banner */}
+        {!loading && pendingCount > 0 && (
+          <div className="mb-6 bg-yellow-950/40 border border-yellow-700/60 rounded-2xl px-5 py-4 flex items-center justify-between gap-4">
+            <div className="flex items-center gap-3">
+              <span className="text-2xl">⚠️</span>
+              <div>
+                <p className="text-yellow-300 font-bold text-sm">
+                  {pendingCount} parent{pendingCount > 1 ? "s" : ""} waiting for approval
+                </p>
+                <p className="text-yellow-600 text-xs mt-0.5">
+                  Review and approve access below — they can&apos;t see their athlete&apos;s profile until approved.
+                </p>
+              </div>
+            </div>
+            <button
+              onClick={() => setTab("not-registered")}
+              className="shrink-0 bg-yellow-600 hover:bg-yellow-500 text-white text-xs font-bold px-4 py-2 rounded-xl transition-colors"
+            >
+              Review Now →
+            </button>
+          </div>
+        )}
 
         {/* Stats */}
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-8">

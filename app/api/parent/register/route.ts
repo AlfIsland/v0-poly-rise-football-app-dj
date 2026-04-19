@@ -30,7 +30,7 @@ export async function POST(req: NextRequest) {
     // Notify admin
     const resendKey = process.env.RESEND_API_KEY
     if (resendKey) {
-      fetch("https://api.resend.com/emails", {
+      await fetch("https://api.resend.com/emails", {
         method: "POST",
         headers: { Authorization: `Bearer ${resendKey}`, "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -67,6 +67,7 @@ export async function POST(req: NextRequest) {
           `,
         }),
       }).catch(err => console.error("[register notify]", err))
+
     }
 
     const token = await createSession(email)

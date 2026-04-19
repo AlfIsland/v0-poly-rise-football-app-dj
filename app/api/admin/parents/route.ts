@@ -14,25 +14,31 @@ function getRedis(): Redis | null {
 
 async function sendAthleteLinkedEmail(parentEmail: string, parentName: string, athleteId: string) {
   const r = getRedis()
-  let athleteName = athleteId
+  // Resolve the athlete name synchronously before building the email
+  let athleteName: string = athleteId
   if (r) {
-    const raw = await r.get(`training:athlete:${athleteId.toUpperCase()}`)
-    if (raw) athleteName = JSON.parse(raw).name
+    try {
+      const raw = await r.get(`training:athlete:${athleteId.toUpperCase()}`)
+      if (raw) athleteName = JSON.parse(raw).name as string
+    } catch { /* fall back to ID */ }
   }
   const resendKey = process.env.RESEND_API_KEY
   if (!resendKey) return
-  fetch("https://api.resend.com/emails", {
+  // Capture resolved values as constants so the email body is built from the right data
+  const resolvedName = athleteName
+  const resolvedId = athleteId.toUpperCase()
+  await fetch("https://api.resend.com/emails", {
     method: "POST",
     headers: { Authorization: `Bearer ${resendKey}`, "Content-Type": "application/json" },
     body: JSON.stringify({
       from: "PolyRISE Football <noreply@polyrisefootball.com>",
       to: [parentEmail],
-      subject: `Your athlete profile is ready — ${athleteName}`,
+      subject: `Athlete linked: ${resolvedName} — PolyRISE`,
       html: `
         <div style="font-family:sans-serif;max-width:520px;margin:0 auto;padding:24px;background:#0a0a0f;color:#fff">
-          <h2 style="color:#dc2626">Your Athlete Profile Is Live</h2>
+          <h2 style="color:#dc2626">Athlete Profile Linked</h2>
           <p>Hi ${parentName},</p>
-          <p>Your PolyRISE account has been linked to <strong>${athleteName}</strong>'s training profile. You can now log in to view their stats, test results, progress charts, and more.</p>
+          <p>Your PolyRISE account has been linked to <strong>${resolvedName}</strong>'s training profile (ID: ${resolvedId}). You can now log in to view their stats, test results, progress charts, and more.</p>
           <p style="margin-top:20px">
             <a href="https://polyrisefootball.com/parent/login" style="background:#dc2626;color:#fff;padding:12px 24px;border-radius:8px;text-decoration:none;font-weight:bold;font-size:14px">Log In to View Athlete Profile →</a>
           </p>

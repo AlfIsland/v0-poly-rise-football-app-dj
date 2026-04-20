@@ -258,8 +258,7 @@ export default function HomePage() {
                   <h3 className="text-xl font-display font-bold mb-2">Player Development</h3>
                   <div className="text-lg font-bold text-white mb-3">$350/mo</div>
                   <p className="text-muted-foreground text-sm leading-relaxed">
-                    16 sessions a month including SAQ, S&C, football drills, tournament entries, film study, and
-                    quarterly military character building events.
+                    8 sessions a month including SAQ, S&C, football drills, tournament entries, military character building events, PR-Verified Camp and Free Athletic Training Passport (Tracker).
                   </p>
                 </div>
                 <Link

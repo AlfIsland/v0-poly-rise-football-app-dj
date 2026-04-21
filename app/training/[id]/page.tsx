@@ -9,6 +9,7 @@ import FeaturedToggle from "@/components/featured-toggle"
 import ProgressChart from "@/components/progress-chart"
 import DeleteSessionButton from "@/components/delete-session-button"
 import InviteParentButton from "@/components/invite-parent-button"
+import PostToXButton from "@/components/post-to-x-button"
 import { calculateRatings } from "@/lib/athlete-ratings"
 import { gradeToClassYear } from "@/lib/grade-to-class-year"
 import { getAllParents } from "@/lib/parent-store"
@@ -115,6 +116,7 @@ export default async function TrainingAthletePage({ params }: { params: { id: st
               className="bg-yellow-700 hover:bg-yellow-600 text-white font-semibold px-3 py-2 rounded-xl text-xs transition-colors">
               🔴 PR-V Seal
             </Link>
+            <PostToXButton atpId={athlete.id} athleteName={athlete.name} />
             <Link href={`/training/${athlete.id}/edit`}
               className="bg-gray-700 hover:bg-gray-600 text-white font-semibold px-3 py-2 rounded-xl text-sm transition-colors">
               Edit

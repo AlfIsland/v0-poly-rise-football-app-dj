@@ -29,9 +29,10 @@ export async function POST(req: NextRequest) {
     if (!raw) return NextResponse.json({ success: false, error: "Athlete not found" }, { status: 404 })
     const athlete = JSON.parse(raw)
 
-    // Try to find matching PR-V athlete by name for videoLink + seal code
+    // Try to find matching PR-V athlete by name for seal code
+    // Also use videoLink directly from training athlete record if available
     const codes = await r.smembers("athlete:roster")
-    let videoLink = ""
+    let videoLink: string = athlete.videoLink ?? ""
     let sealCode = ""
     if (codes.length) {
       const values = await r.mget(...codes.map((c: string) => `athlete:${c}`))
@@ -40,7 +41,7 @@ export async function POST(req: NextRequest) {
         if (!v) continue
         const prv = JSON.parse(v)
         if (normName(prv.athleteName) === normName(athlete.name)) {
-          videoLink = prv.videoLink ?? ""
+          if (!videoLink) videoLink = prv.videoLink ?? ""
           sealCode = prv.code ?? ""
           break
         }
@@ -54,7 +55,7 @@ export async function POST(req: NextRequest) {
     const latest = sessions[sessions.length - 1]
 
     const lines: string[] = []
-    lines.push(`🏈 Athlete Spotlight`)
+    lines.push(`🏈 Athlete Spotlight — PolyRISE Football`)
     lines.push(`${athlete.name} | ${athlete.position || "ATH"} | ${athlete.grade || ""} | ${athlete.school || ""}`)
     lines.push("")
 
@@ -66,10 +67,11 @@ export async function POST(req: NextRequest) {
     if (metrics.length) lines.push(metrics.join(" · "))
 
     lines.push("")
-    if (videoLink) lines.push(`🎬 Film: ${videoLink}`)
+    if (videoLink) lines.push(`🎬 Hudl Film: ${videoLink}`)
     if (sealCode)  lines.push(`📋 Profile: https://polyrisefootball.com/verify/${sealCode}`)
     lines.push("")
-    lines.push(`Recruiting inquiries: kg@polyrisefootball.com`)
+    lines.push(`📩 Recruiting: kg@polyrisefootball.com`)
+    lines.push(`Kevin Garrett (Former NFL) | Director of Player Development`)
     lines.push(`#PolyRISE #FootballRecruiting`)
 
     const text = lines.join("\n")

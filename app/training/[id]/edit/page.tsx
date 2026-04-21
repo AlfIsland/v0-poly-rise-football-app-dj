@@ -40,6 +40,7 @@ export default function EditTrainingAthletePage() {
   const [phone, setPhone] = useState("")
   const [email, setEmail] = useState("")
   const [coachNotes, setCoachNotes] = useState("")
+  const [videoLink, setVideoLink] = useState("")
   const [sport, setSport] = useState<"football" | "soccer">("football")
   const [gender, setGender] = useState<"M" | "F">("M")
 
@@ -57,6 +58,7 @@ export default function EditTrainingAthletePage() {
           setPhone(a.phone ?? "")
           setEmail(a.email ?? "")
           setCoachNotes(a.coachNotes ?? "")
+          setVideoLink(a.videoLink ?? "")
           setSport(a.sport === "soccer" ? "soccer" : "football")
           setGender(a.gender === "F" ? "F" : "M")
         } else {
@@ -76,7 +78,7 @@ export default function EditTrainingAthletePage() {
       const res = await fetch("/api/training", {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ id, name, age, grade, school, position, phone, email, coachNotes, sport, gender }),
+        body: JSON.stringify({ id, name, age, grade, school, position, phone, email, coachNotes, videoLink, sport, gender }),
       })
       const data = await res.json()
       if (data.success) {
@@ -166,6 +168,7 @@ export default function EditTrainingAthletePage() {
               <Input label="Position" value={position} onChange={setPosition} placeholder="e.g. Running Back" />
               <Input label="Phone" value={phone} onChange={setPhone} placeholder="e.g. 512-555-1234" type="tel" />
               <Input label="Email" value={email} onChange={setEmail} placeholder="e.g. parent@email.com" type="email" />
+              <Input label="Hudl / Film Link" value={videoLink} onChange={setVideoLink} placeholder="https://hudl.com/v/..." />
 
               <div>
                 <label className="block text-sm text-gray-300 mb-1.5">Coach Notes</label>

@@ -175,7 +175,7 @@ export default function ProgramOverviewPage() {
                 tagColor: "bg-yellow-500 text-black",
                 color: "border-yellow-500",
                 tcolor: "text-yellow-300",
-                features: "Full metrics + PR-V seal + recruiting profile + X spotlight + Kevin Garrett quarterly report + college fit list + priority camp access",
+                features: "Full metrics + PR-V seal + recruiting profile + X spotlight + Kevin Garrett quarterly report + college fit list + 1 free combine camp/month",
               },
               {
                 label: "Recruit",
@@ -185,7 +185,7 @@ export default function ProgramOverviewPage() {
                 tagColor: "",
                 color: "border-red-500",
                 tcolor: "text-red-300",
-                features: "Full metrics + PR-V seal + recruiting profile + Hudl on profile + monthly X spotlight + priority camp access",
+                features: "Full metrics + PR-V seal + recruiting profile + Hudl on profile + monthly X spotlight + 1 free combine camp/month",
               },
               {
                 label: "Passport",

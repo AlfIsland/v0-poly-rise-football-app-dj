@@ -69,7 +69,7 @@ const PLANS: PlanOption[] = [
       "Shareable recruiting profile page",
       "Hudl film linked to profile",
       "Monthly X spotlight to college recruiters",
-      "Priority combine camp access",
+      "1 Free Combine Camp/Month",
     ],
   },
   {

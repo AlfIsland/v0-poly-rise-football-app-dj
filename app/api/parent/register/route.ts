@@ -13,6 +13,13 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ success: false, error: "An account with this email already exists" }, { status: 409 })
 
     const isProgramMember = plan === "free"
+    const planLabel =
+      plan === "elite-recruit" ? "Elite Recruit — $49.99/mo" :
+      plan === "recruit"       ? "Recruit — $29.99/mo" :
+      plan === "passport"      ? "Passport — $9.99/mo" :
+      plan === "monthly"       ? "Passport — $9.99/mo" :
+      plan === "quarterly"     ? "Passport Quarterly — $24.99/quarter" :
+      plan === "free"          ? "Program Member (Free)" : plan
     const passwordHash = await bcrypt.hash(password, 10)
     await saveParent({
       email: email.toLowerCase(),
@@ -38,7 +45,7 @@ export async function POST(req: NextRequest) {
           to: ["PolyRISE7v7@gmail.com"],
           subject: isProgramMember
             ? `⏳ Program Member Approval Needed — ${name}`
-            : `New Parent Account — ${name}`,
+            : `🆕 New Signup: ${planLabel} — ${name}`,
           html: isProgramMember ? `
             <div style="font-family:sans-serif;max-width:520px;margin:0 auto;padding:24px;background:#0a0a0f;color:#fff">
               <h2 style="color:#f59e0b">Program Member Approval Needed</h2>
@@ -47,6 +54,7 @@ export async function POST(req: NextRequest) {
               <p><strong>Email:</strong> ${email}</p>
               <p><strong>Phone:</strong> ${phone || "—"}</p>
               <p><strong>Athlete Name:</strong> ${athleteName || "—"}</p>
+              <p><strong>Plan:</strong> ${planLabel}</p>
               <p><strong>Signed up:</strong> ${new Date().toLocaleString()}</p>
               <p style="margin-top:20px">
                 <a href="https://polyrisefootball.com/admin/parents" style="background:#dc2626;color:#fff;padding:10px 20px;border-radius:8px;text-decoration:none;font-weight:bold;font-size:13px">Approve or Deny →</a>
@@ -55,13 +63,17 @@ export async function POST(req: NextRequest) {
             </div>
           ` : `
             <div style="font-family:sans-serif;max-width:520px;margin:0 auto;padding:24px;background:#0a0a0f;color:#fff">
-              <h2 style="color:#dc2626">New Parent Account Created</h2>
+              <h2 style="color:#dc2626">New Parent Signup</h2>
               <p><strong>Name:</strong> ${name}</p>
               <p><strong>Email:</strong> ${email}</p>
               <p><strong>Phone:</strong> ${phone || "—"}</p>
               <p><strong>Athlete Name:</strong> ${athleteName || "—"}</p>
+              <p><strong>Plan:</strong> ${planLabel}</p>
               <p><strong>Signed up:</strong> ${new Date().toLocaleString()}</p>
-              <p style="margin-top:16px"><strong>Action needed:</strong> Link their athlete once they subscribe.</p>
+              <p style="margin-top:16px"><strong>Action needed:</strong> Link their athlete once payment is confirmed.</p>
+              <p style="margin-top:12px">
+                <a href="https://polyrisefootball.com/admin/parents" style="background:#dc2626;color:#fff;padding:10px 20px;border-radius:8px;text-decoration:none;font-weight:bold;font-size:13px">Manage Parents →</a>
+              </p>
               <p style="color:#999;font-size:12px;margin-top:16px">PolyRISE Football · polyrisefootball.com/admin/parents</p>
             </div>
           `,

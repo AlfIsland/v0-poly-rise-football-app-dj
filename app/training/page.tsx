@@ -370,6 +370,10 @@ export default function TrainingRosterPage() {
               className={`font-semibold px-4 py-2 rounded-xl text-sm transition-colors ${showQuickEntry ? "bg-gray-700 text-white" : "bg-red-600 hover:bg-red-700 text-white"}`}>
               {showQuickEntry ? "✕ Close" : "+ Quick Entry"}
             </button>
+            <Link href="/admin/roster"
+              className="bg-white/10 hover:bg-white/20 text-gray-300 hover:text-white font-semibold px-4 py-2 rounded-xl text-sm border border-white/10 transition-colors">
+              👥 Subscriber Roster
+            </Link>
             <LogoutButton />
           </div>
         </div>

@@ -15,12 +15,10 @@ function getRedis(): Redis | null {
 export async function POST(req: NextRequest) {
   if (!isAdmin(req)) return NextResponse.json({ success: false, error: "Unauthorized" }, { status: 401 })
 
-  const { atpId } = await req.json()
+  const { atpId, preview } = await req.json()
   if (!atpId) return NextResponse.json({ success: false, error: "Missing atpId" }, { status: 400 })
 
   const { TWITTER_API_KEY, TWITTER_API_SECRET, TWITTER_ACCESS_TOKEN, TWITTER_ACCESS_SECRET } = process.env
-  if (!TWITTER_API_KEY || !TWITTER_API_SECRET || !TWITTER_ACCESS_TOKEN || !TWITTER_ACCESS_SECRET)
-    return NextResponse.json({ success: false, error: "X API not configured" }, { status: 500 })
 
   const r = getRedis()
   if (!r) return NextResponse.json({ success: false, error: "No Redis" }, { status: 500 })
@@ -51,7 +49,7 @@ export async function POST(req: NextRequest) {
 
     await r.quit()
 
-    // Get best metrics from latest session
+    // Build tweet text
     const sessions = athlete.sessions ?? []
     const latest = sessions[sessions.length - 1]
 
@@ -60,7 +58,6 @@ export async function POST(req: NextRequest) {
     lines.push(`${athlete.name} | ${athlete.position || "ATH"} | ${athlete.grade || ""} | ${athlete.school || ""}`)
     lines.push("")
 
-    // Add top metrics if available
     const metrics: string[] = []
     if (latest?.fortyYard)    metrics.push(`40-YD: ${latest.fortyYard}s`)
     if (latest?.verticalJump) metrics.push(`Vertical: ${latest.verticalJump}"`)
@@ -76,6 +73,12 @@ export async function POST(req: NextRequest) {
     lines.push(`#PolyRISE #FootballRecruiting`)
 
     const text = lines.join("\n")
+
+    // Preview mode — return text without posting
+    if (preview) return NextResponse.json({ success: true, preview: true, text })
+
+    if (!TWITTER_API_KEY || !TWITTER_API_SECRET || !TWITTER_ACCESS_TOKEN || !TWITTER_ACCESS_SECRET)
+      return NextResponse.json({ success: false, error: "X API not configured" }, { status: 500 })
 
     const client = new TwitterApi({
       appKey: TWITTER_API_KEY,

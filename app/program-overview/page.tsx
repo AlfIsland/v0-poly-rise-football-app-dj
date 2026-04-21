@@ -35,7 +35,7 @@ export default function ProgramOverviewPage() {
           <div className="flex items-center gap-4">
             <Image src="/poly-rise-logo.png" alt="PolyRISE Football" width={88} height={88} className="object-contain" />
             <div className="w-px h-12 bg-gray-700 shrink-0" />
-            <Image src="/sponsor-swift-sessions.png" alt="Swift Sessions" width={80} height={40} className="object-contain brightness-0 invert opacity-90" />
+            <Image src="/sponsor-swift-sessions.png" alt="Swift Sessions" width={80} height={40} className="object-contain" />
             <div>
               <p className="text-xs font-bold text-red-500 uppercase tracking-widest">PolyRISE Football</p>
               <h1 className="text-3xl font-black text-white leading-tight">Get Recruited. Get Verified. Get Noticed.</h1>

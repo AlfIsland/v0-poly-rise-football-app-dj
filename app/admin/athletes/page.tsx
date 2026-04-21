@@ -37,12 +37,21 @@ interface UnifiedAthlete {
   sport?: string
 }
 
+interface ParentAccount {
+  name: string
+  email: string
+  tier: string
+  approvalStatus?: string
+  athleteIds: string[]
+}
+
 function normName(s: string) {
   return s.toLowerCase().replace(/[^a-z0-9]/g, "")
 }
 
 export default function AthletesRosterPage() {
   const [athletes, setAthletes] = useState<UnifiedAthlete[]>([])
+  const [parentMap, setParentMap] = useState<Record<string, ParentAccount>>({})
   const [loading, setLoading] = useState(true)
   const [search, setSearch] = useState("")
   const [filterType, setFilterType] = useState("all")
@@ -53,9 +62,23 @@ export default function AthletesRosterPage() {
     Promise.all([
       fetch("/api/admin/athletes").then(r => r.json()),
       fetch("/api/training").then(r => r.json()),
-    ]).then(([prvData, atpData]) => {
+      fetch("/api/admin/parents").then(r => r.json()),
+    ]).then(([prvData, atpData, parentData]) => {
       const prv: PRVAthlete[] = prvData.success ? (prvData.athletes ?? []) : []
       const atp: ATPAthlete[] = atpData.success ? (atpData.athletes ?? []) : []
+
+      // Build athleteId → parent map for approved parents
+      const pMap: Record<string, ParentAccount> = {}
+      if (parentData.success) {
+        for (const p of parentData.parents as ParentAccount[]) {
+          if (p.approvalStatus === "approved" || p.tier === "monthly" || p.tier === "quarterly") {
+            for (const id of p.athleteIds) {
+              pMap[id.toUpperCase()] = p
+            }
+          }
+        }
+      }
+      setParentMap(pMap)
 
       const unified: UnifiedAthlete[] = []
       const matchedATPIds = new Set<string>()
@@ -255,8 +278,14 @@ export default function AthletesRosterPage() {
                   {filtered.map(a => (
                     <tr key={a.key} className="border-b border-gray-800/50 hover:bg-white/5 transition-colors">
                       <td className="px-5 py-3 font-semibold text-white">
-                        {a.name}
-                        {a.sport === "soccer" && <span className="ml-2 text-xs text-green-400">⚽</span>}
+                        <div className="flex flex-col gap-1">
+                          <span>{a.name} {a.sport === "soccer" && <span className="text-xs text-green-400">⚽</span>}</span>
+                          {a.atpId && parentMap[a.atpId.toUpperCase()] && (
+                            <span className="text-xs px-2 py-0.5 rounded-full bg-green-900/60 text-green-300 border border-green-700/50 font-semibold w-fit">
+                              👪 {parentMap[a.atpId.toUpperCase()].name} · {parentMap[a.atpId.toUpperCase()].tier === "monthly" ? "Monthly" : parentMap[a.atpId.toUpperCase()].tier === "quarterly" ? "Quarterly" : "Program"}
+                            </span>
+                          )}
+                        </div>
                       </td>
                       <td className="px-5 py-3"><TypeBadge type={a.type} /></td>
                       <td className="px-5 py-3 space-y-0.5">
@@ -300,6 +329,11 @@ export default function AthletesRosterPage() {
                         <TypeBadge type={a.type} />
                         {a.prvCode && <span className="font-mono text-red-400 text-xs font-bold">{a.prvCode}</span>}
                         {a.atpId && <span className="font-mono text-blue-400 text-xs font-bold">{a.atpId}</span>}
+                        {a.atpId && parentMap[a.atpId.toUpperCase()] && (
+                          <span className="text-xs px-2 py-0.5 rounded-full bg-green-900/60 text-green-300 border border-green-700/50 font-semibold">
+                            👪 {parentMap[a.atpId.toUpperCase()].name} · {parentMap[a.atpId.toUpperCase()].tier === "monthly" ? "Monthly" : parentMap[a.atpId.toUpperCase()].tier === "quarterly" ? "Quarterly" : "Program"}
+                          </span>
+                        )}
                       </div>
                     </div>
                     <span className="text-xs text-gray-600">{a.issuedAt ? new Date(a.issuedAt).toLocaleDateString() : ""}</span>

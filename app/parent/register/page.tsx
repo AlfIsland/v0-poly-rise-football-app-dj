@@ -173,9 +173,13 @@ export default function ParentRegisterPage() {
           <Image src="/poly-rise-logo.png" alt="PolyRISE Football" width={160} height={60} className="object-contain" />
         </div>
 
-        <div className="text-center">
+        <div className="text-center space-y-2">
           <h1 className="text-2xl font-black text-white">Get Recruited. Get Verified. Get Noticed.</h1>
-          <p className="text-gray-400 text-sm mt-2">PolyRISE Football · Player Development & Recruiting</p>
+          <p className="text-gray-400 text-sm">PolyRISE Football · Player Development & Recruiting</p>
+          <div className="pt-1">
+            <p className="text-white font-bold text-sm">Built for Every Athlete. Trusted by Coaches.</p>
+            <p className="text-gray-500 text-xs mt-1">Football · Soccer · Track & Field · Basketball · Baseball · and more</p>
+          </div>
         </div>
 
         {/* Step indicator */}

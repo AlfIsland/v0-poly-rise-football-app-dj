@@ -116,7 +116,7 @@ export async function POST(req: NextRequest) {
           // Notify admin of new parent subscription
           const resendKey = process.env.RESEND_API_KEY
           if (resendKey) {
-            fetch("https://api.resend.com/emails", {
+            await fetch("https://api.resend.com/emails", {
               method: "POST",
               headers: { Authorization: `Bearer ${resendKey}`, "Content-Type": "application/json" },
               body: JSON.stringify({

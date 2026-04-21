@@ -70,20 +70,6 @@ const PLANS = [
       "Downloadable PDF reports",
     ],
   },
-  {
-    id: "free" as Plan,
-    name: "Program Member",
-    price: "Free",
-    period: "",
-    badge: null,
-    badgeColor: "",
-    borderSelected: "border-blue-500",
-    borderUnselected: "border-gray-700",
-    radioSelected: "border-blue-500",
-    dot: "bg-blue-500",
-    tagline: "Access included with PolyRISE program enrollment",
-    features: [],
-  },
 ]
 
 function planLabel(plan: Plan) {

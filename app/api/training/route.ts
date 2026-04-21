@@ -54,6 +54,7 @@ export interface TrainingAthlete {
   gender?: "M" | "F"
   coachNotes?: string
   videoLink?: string
+  twitterHandle?: string
   phone?: string
   email?: string
   sport?: "football" | "soccer"
@@ -216,6 +217,7 @@ export async function PUT(req: NextRequest) {
       position: body.position ?? existing.position,
       coachNotes: body.coachNotes ?? existing.coachNotes,
       videoLink: body.videoLink ?? existing.videoLink ?? "",
+      twitterHandle: body.twitterHandle ?? existing.twitterHandle ?? "",
       phone: body.phone ?? existing.phone,
       email: body.email ?? existing.email,
       sport: body.sport === "soccer" ? "soccer" : body.sport === "football" ? "football" : existing.sport,

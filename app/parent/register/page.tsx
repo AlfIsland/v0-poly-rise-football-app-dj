@@ -8,7 +8,24 @@ import Link from "next/link"
 type Step = "plan" | "account"
 type Plan = "passport" | "recruit" | "elite-recruit" | "free"
 
-const PLANS = [
+interface PlanOption {
+  id: Plan
+  name: string
+  price: string
+  period: string
+  badge: string | null
+  badgeColor: string
+  borderSelected: string
+  borderUnselected: string
+  radioSelected: string
+  dot: string
+  group: string
+  groupColor: string
+  tagline: string
+  features: string[]
+}
+
+const PLANS: PlanOption[] = [
   {
     id: "elite-recruit" as Plan,
     name: "Elite Recruit",
@@ -20,6 +37,8 @@ const PLANS = [
     borderUnselected: "border-gray-700",
     radioSelected: "border-yellow-500",
     dot: "bg-yellow-500",
+    group: "High School Athletes",
+    groupColor: "bg-yellow-900/60 text-yellow-300 border-yellow-700/50",
     tagline: "Full recruiting exposure + player development",
     features: [
       "Everything in Recruit",
@@ -41,6 +60,8 @@ const PLANS = [
     borderUnselected: "border-gray-700",
     radioSelected: "border-red-500",
     dot: "bg-red-500",
+    group: "High School Athletes",
+    groupColor: "bg-red-900/60 text-red-300 border-red-700/50",
     tagline: "Verified metrics + recruiting profile + visibility",
     features: [
       "Full athlete metrics tracking",
@@ -62,6 +83,8 @@ const PLANS = [
     borderUnselected: "border-gray-700",
     radioSelected: "border-gray-400",
     dot: "bg-gray-400",
+    group: "Middle School & Younger",
+    groupColor: "bg-blue-900/60 text-blue-300 border-blue-700/50",
     tagline: "Track your athlete's progress",
     features: [
       "Monthly progress reports & charts",
@@ -193,11 +216,16 @@ export default function ParentRegisterPage() {
                 )}
                 <div className="flex justify-between items-start">
                   <div className="flex-1 pr-4">
-                    <div className="flex items-center gap-2 mb-1">
+                    <div className="flex items-center gap-2 mb-1 flex-wrap">
                       <div className={`w-4 h-4 rounded-full border-2 flex items-center justify-center shrink-0 ${plan === p.id ? p.radioSelected : "border-gray-600"}`}>
                         {plan === p.id && <div className={`w-2 h-2 rounded-full ${p.dot}`} />}
                       </div>
                       <p className="text-white font-bold">{p.name}</p>
+                      {p.group && (
+                        <span className={`text-xs px-2 py-0.5 rounded-full border font-semibold ${p.groupColor}`}>
+                          {p.group}
+                        </span>
+                      )}
                     </div>
                     <p className="text-gray-400 text-xs ml-6 mb-2">{p.tagline}</p>
                     {p.features.length > 0 && (

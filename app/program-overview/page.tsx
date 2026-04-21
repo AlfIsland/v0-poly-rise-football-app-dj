@@ -40,7 +40,7 @@ export default function ProgramOverviewPage() {
               <p className="text-gray-400 text-sm mt-1">Player Development & Recruiting · Powered by PolyRISE</p>
             </div>
           </div>
-          <div className="text-center shrink-0">
+          <div className="text-center shrink-0 bg-white rounded-xl px-4 py-3">
             <Image src="/sponsor-swift-sessions.png" alt="Swift Sessions" width={100} height={48} className="object-contain" />
           </div>
         </div>

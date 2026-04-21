@@ -54,24 +54,19 @@ export async function POST(req: NextRequest) {
     const sessions = athlete.sessions ?? []
     const latest = sessions[sessions.length - 1]
 
-    const lines: string[] = []
-    lines.push(`🏈 Athlete Spotlight — PolyRISE Football`)
-    lines.push(`${athlete.name} | ${athlete.position || "ATH"} | ${athlete.grade || ""} | ${athlete.school || ""}`)
-    lines.push("")
-
     const metrics: string[] = []
     if (latest?.fortyYard)    metrics.push(`40-YD: ${latest.fortyYard}s`)
-    if (latest?.verticalJump) metrics.push(`Vertical: ${latest.verticalJump}"`)
+    if (latest?.verticalJump) metrics.push(`Vert: ${latest.verticalJump}"`)
     if (latest?.broadJump)    metrics.push(`Broad: ${latest.broadJump}"`)
     if (latest?.shuttle)      metrics.push(`Shuttle: ${latest.shuttle}s`)
-    if (metrics.length) lines.push(metrics.join(" · "))
 
-    lines.push("")
-    if (videoLink) lines.push(`🎬 Hudl Film: ${videoLink}`)
-    if (sealCode)  lines.push(`📋 Profile: https://polyrisefootball.com/verify/${sealCode}`)
-    lines.push("")
-    lines.push(`📩 Recruiting: kg@polyrisefootball.com`)
-    lines.push(`Kevin Garrett (Former NFL) | Director of Player Development`)
+    const lines: string[] = []
+    lines.push(`🏈 ${athlete.name} | ${athlete.position || "ATH"} | ${athlete.grade || ""} | ${athlete.school || ""}`)
+    if (metrics.length) lines.push(metrics.join(" · "))
+    if (videoLink) lines.push(`🎬 ${videoLink}`)
+    if (sealCode)  lines.push(`📋 polyrisefootball.com/verify/${sealCode}`)
+    lines.push(`📩 kg@polyrisefootball.com`)
+    lines.push(`Kevin Garrett (Former NFL) | Dir. of Player Dev`)
     lines.push(`#PolyRISE #FootballRecruiting`)
 
     const text = lines.join("\n")

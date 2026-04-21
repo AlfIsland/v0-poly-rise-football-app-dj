@@ -31,18 +31,18 @@ export default function ProgramOverviewPage() {
       <div className="max-w-2xl mx-auto px-8 py-10 print:max-w-full print:px-12 print:py-8">
 
         {/* Header */}
-        <div className="flex items-center justify-between mb-2 border-b-4 border-red-600 pb-6">
+        <div className="flex items-center justify-between mb-6 -mx-8 px-8 py-6 bg-gray-950 print:-mx-12 print:px-12 border-b-4 border-red-600">
           <div className="flex items-center gap-4">
             <Image src="/poly-rise-logo.png" alt="PolyRISE Football" width={64} height={64} className="object-contain" />
             <div>
-              <p className="text-xs font-bold text-red-600 uppercase tracking-widest">PolyRISE Football</p>
-              <h1 className="text-3xl font-black text-gray-900 leading-tight">Get Recruited. Get Verified. Get Noticed.</h1>
-              <p className="text-gray-500 text-sm mt-1">Player Development & Recruiting · Powered by PolyRISE</p>
+              <p className="text-xs font-bold text-red-500 uppercase tracking-widest">PolyRISE Football</p>
+              <h1 className="text-3xl font-black text-white leading-tight">Get Recruited. Get Verified. Get Noticed.</h1>
+              <p className="text-gray-400 text-sm mt-1">Player Development & Recruiting · Powered by PolyRISE</p>
             </div>
           </div>
           {qrRegister && (
             <div className="text-center shrink-0">
-              <img src={qrRegister} alt="Scan to register" width={72} height={72} className="rounded-lg border border-gray-200" />
+              <img src={qrRegister} alt="Scan to register" width={72} height={72} className="rounded-lg border border-gray-700" />
               <p className="text-xs text-gray-400 mt-1">Scan to register</p>
             </div>
           )}

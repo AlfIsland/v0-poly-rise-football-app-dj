@@ -18,9 +18,11 @@ export async function POST(req: NextRequest) {
     if (!secretKey) return NextResponse.json({ success: false, error: "Stripe not configured" }, { status: 500 })
 
     const stripe = new Stripe(secretKey)
-    const priceId = plan === "quarterly"
-      ? process.env.STRIPE_QUARTERLY_PRICE_ID
-      : process.env.STRIPE_MONTHLY_PRICE_ID
+    const priceId =
+      plan === "quarterly"     ? process.env.STRIPE_QUARTERLY_PRICE_ID :
+      plan === "recruit"       ? process.env.STRIPE_RECRUIT_PRICE_ID :
+      plan === "elite-recruit" ? process.env.STRIPE_ELITE_RECRUIT_PRICE_ID :
+      process.env.STRIPE_MONTHLY_PRICE_ID
 
     if (!priceId) return NextResponse.json({ success: false, error: "Price not configured" }, { status: 500 })
 

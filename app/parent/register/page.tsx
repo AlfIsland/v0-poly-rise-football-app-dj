@@ -45,6 +45,7 @@ const PLANS: PlanOption[] = [
       "Quarterly Kevin Garrett development report",
       "College program fit suggestions",
       "Prospect ranking by position & grade",
+      "1 Free Combine Camp/Month",
       "Early access to all PolyRISE camps & events",
       "Kevin Garrett (Former NFL) — Dir. of Player Dev",
     ],

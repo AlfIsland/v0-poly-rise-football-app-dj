@@ -175,7 +175,7 @@ export default function ProgramOverviewPage() {
                 tagColor: "bg-yellow-500 text-black",
                 color: "border-yellow-500",
                 tcolor: "text-yellow-300",
-                features: "Full metrics + PR-V seal + recruiting profile + X spotlight + Kevin Garrett quarterly report + college fit list + 1 free combine camp/month",
+                features: "Full metrics + PR-V seal + recruiting profile + X spotlight + Kevin Garrett quarterly report + college fit list + 1 free combine camp/month + early access to all PolyRISE camps",
               },
               {
                 label: "Recruit",

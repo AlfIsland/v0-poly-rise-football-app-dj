@@ -40,12 +40,9 @@ export default function ProgramOverviewPage() {
               <p className="text-gray-400 text-sm mt-1">Player Development & Recruiting · Powered by PolyRISE</p>
             </div>
           </div>
-          {qrRegister && (
-            <div className="text-center shrink-0">
-              <img src={qrRegister} alt="Scan to register" width={72} height={72} className="rounded-lg border border-gray-700" />
-              <p className="text-xs text-gray-400 mt-1">Scan to register</p>
-            </div>
-          )}
+          <div className="text-center shrink-0">
+            <Image src="/sponsor-swift-sessions.png" alt="Swift Sessions" width={100} height={48} className="object-contain" />
+          </div>
         </div>
 
         {/* Multi-sport + Kevin Garrett banner */}

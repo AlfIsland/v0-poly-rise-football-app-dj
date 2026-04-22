@@ -124,20 +124,8 @@ export default function HomePage() {
                 Athletes earning the PR-VERIFIED seal receive official documentation and a digital badge they can display on recruiting profiles. This gives coaches and scouts immediate confidence that the numbers are real and PolyRISE-vetted.
               </p>
             </div>
-            <div className="flex flex-col md:flex-row items-center gap-8">
-              {/* Programs Link */}
-              <div className="flex flex-col items-center">
-                <Link
-                  href="https://polyrisefootball.com/parent/register" target="_blank" rel="noopener noreferrer"
-                  className="text-base font-semibold bg-primary text-white px-6 py-3 rounded hover:bg-primary/80 transition-colors text-center"
-                >
-                  Website Programs
-                </Link>
-                <span className="text-sm text-gray-400 italic mt-2">View All Programs</span>
-              </div>
-              
-              {/* Athlete Tracking Passport */}
-              <div className="flex flex-col items-center">
+            <div className="flex flex-col items-center">
+              <div className="flex flex-col items-center mb-4">
                 <Link
                   href="https://polyrisefootball.com/parent/register" target="_blank" rel="noopener noreferrer"
                   className="text-base font-semibold bg-[#FF6600] text-white px-6 py-3 rounded hover:bg-[#FF6600]/80 transition-colors text-center"
@@ -146,8 +134,6 @@ export default function HomePage() {
                 </Link>
                 <span className="text-sm text-gray-400 italic mt-2">Athlete&apos;s Performance Journey</span>
               </div>
-              
-              {/* PR-VERIFIED Seal */}
               <ProtectedImage
                 src="/pr-verified-badge.png"
                 alt="PolyRISE PR-VERIFIED Badge - Copyright 2026 PolyRISE Football All Rights Reserved"

@@ -89,13 +89,29 @@ export default function AthleteProfilePage() {
 
   useEffect(() => {
     if (!id) return
-    fetch(`/api/athlete/${id}`)
-      .then(r => r.json())
-      .then(data => {
-        if (data.success) setAthlete(data.athlete)
-        else setNotFound(true)
+    Promise.all([
+      fetch(`/api/training?id=${id}`).then(r => r.json()),
+      fetch(`/api/athlete/${id}`).then(r => r.json()).catch(() => ({ success: false })),
+    ]).then(([trainingData, extra]) => {
+      if (!trainingData.success || !trainingData.athlete) { setNotFound(true); return }
+      const a = trainingData.athlete
+      const sessions = a.sessions ?? []
+      setAthlete({
+        id: a.id,
+        name: a.name,
+        position: a.position ?? null,
+        grade: a.grade ?? null,
+        school: a.school ?? null,
+        sport: a.sport ?? null,
+        videoLink: a.videoLink ?? null,
+        twitterHandle: a.twitterHandle ?? null,
+        joinedAt: a.joinedAt ?? null,
+        sessionCount: sessions.length,
+        baseline: sessions[0] ?? null,
+        current: sessions[sessions.length - 1] ?? null,
+        prvCode: extra?.athlete?.prvCode ?? null,
       })
-      .catch(() => setNotFound(true))
+    }).catch(() => setNotFound(true))
       .finally(() => setLoading(false))
   }, [id])
 

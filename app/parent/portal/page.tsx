@@ -7,6 +7,7 @@ import Link from "next/link"
 import dynamic from "next/dynamic"
 import SchoolFitFinder from "@/components/school-fit-finder"
 import AthletePhotoUpload from "@/components/athlete-photo-upload"
+import CoachOutreach from "@/components/coach-outreach"
 import { Fragment } from "react"
 
 const ProgressChart = dynamic(() => import("@/components/progress-chart"), { ssr: false })
@@ -405,6 +406,15 @@ function Portal() {
 
         {/* School Fit Finder */}
         {hasAccess && <SchoolFitFinder />}
+
+        {/* Coach Outreach Templates */}
+        {hasAccess && athletes.length > 0 && (
+          <CoachOutreach
+            athlete={athletes[0]}
+            parentName={parent?.name ?? ""}
+            parentEmail={parent?.email ?? ""}
+          />
+        )}
 
         {/* Recruiting Roadmap — all subscribers */}
         {hasAccess && (() => {

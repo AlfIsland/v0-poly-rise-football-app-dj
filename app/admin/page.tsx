@@ -60,6 +60,7 @@ export default async function AdminHomePage() {
       icon: "💼",
       links: [
         { label: "Registrations", desc: "Program sign-up payments", href: "/admin/registrations" },
+        { label: "Camp Manager", desc: "Add & manage camp suggestions", href: "/admin/camps", highlight: true },
         { label: "Discounts", desc: "Manage discount codes", href: "/admin/discounts" },
         { label: "CRM", desc: "Contacts & leads", href: "/admin/crm" },
       ],

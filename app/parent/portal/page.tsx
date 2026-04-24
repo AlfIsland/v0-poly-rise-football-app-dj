@@ -8,6 +8,7 @@ import dynamic from "next/dynamic"
 import SchoolFitFinder from "@/components/school-fit-finder"
 import AthletePhotoUpload from "@/components/athlete-photo-upload"
 import CoachOutreach from "@/components/coach-outreach"
+import CampSuggestions from "@/components/camp-suggestions"
 import { Fragment } from "react"
 
 const ProgressChart = dynamic(() => import("@/components/progress-chart"), { ssr: false })
@@ -406,6 +407,14 @@ function Portal() {
 
         {/* School Fit Finder */}
         {hasAccess && <SchoolFitFinder />}
+
+        {/* Camp Suggestions */}
+        {hasAccess && (
+          <CampSuggestions
+            sport={athletes[0]?.sessions ? "football" : undefined}
+            grade={athletes[0]?.grade}
+          />
+        )}
 
         {/* Coach Outreach Templates */}
         {hasAccess && athletes.length > 0 && (

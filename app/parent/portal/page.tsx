@@ -406,7 +406,17 @@ function Portal() {
         })}
 
         {/* School Fit Finder */}
-        {hasAccess && <SchoolFitFinder />}
+        {hasAccess && (() => {
+          const a0 = athletes[0]
+          const latestSession = a0?.sessions?.[a0.sessions.length - 1]
+          return (
+            <SchoolFitFinder
+              sport={a0?.sport}
+              position={a0?.position}
+              fortyYard={latestSession?.fortyYard}
+            />
+          )
+        })()}
 
         {/* Camp Suggestions */}
         {hasAccess && (

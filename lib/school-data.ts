@@ -1,5 +1,42 @@
 export type Division = "D1" | "D2" | "D3" | "NAIA" | "JuCo"
 export type Sport = "football" | "soccer" | "basketball" | "baseball" | "track" | "softball"
+export type PositionGroup = "speed" | "athletic" | "lineman"
+
+// ─── Position group classification ────────────────────────────────────────────
+export function getPositionGroup(position?: string): PositionGroup {
+  if (!position) return "speed"
+  const p = position.toLowerCase()
+  if (["ol","og","ot","oc","c","g","t","dl","de","dt","nt","tackle","guard","center","lineman","end"].some(x => p.includes(x))) return "lineman"
+  if (["qb","lb","te","quarterback","linebacker","tight end","fb","fullback"].some(x => p.includes(x))) return "athletic"
+  return "speed" // WR, CB, DB, S, RB, KR, etc.
+}
+
+// ─── 40-yard dash benchmarks by position group and division ───────────────────
+// Lower = faster = better. These are the target times to COMPETE at each level.
+export const FORTY_BENCHMARKS: Record<PositionGroup, Record<Division, number>> = {
+  speed:    { D1: 4.50, D2: 4.65, D3: 4.80, NAIA: 4.85, JuCo: 4.90 },
+  athletic: { D1: 4.75, D2: 4.90, D3: 5.00, NAIA: 5.10, JuCo: 5.15 },
+  lineman:  { D1: 5.30, D2: 5.40, D3: 5.55, NAIA: 5.60, JuCo: 5.65 },
+}
+
+export type MatchQuality = "elite" | "strong" | "possible" | "reach"
+
+export function getMatchQuality(fortyYard: number, posGroup: PositionGroup, division: Division): MatchQuality | null {
+  const bench = FORTY_BENCHMARKS[posGroup][division]
+  const diff = fortyYard - bench  // positive = slower than benchmark
+  if (diff <= -0.10) return "elite"
+  if (diff <=  0.00) return "strong"
+  if (diff <=  0.10) return "possible"
+  if (diff <=  0.20) return "reach"
+  return null
+}
+
+export const MATCH_META: Record<MatchQuality, { label: string; color: string; order: number }> = {
+  elite:    { label: "Elite Fit",   color: "bg-green-900/60 text-green-300 border-green-700/50",   order: 1 },
+  strong:   { label: "Strong Fit",  color: "bg-blue-900/60 text-blue-300 border-blue-700/50",      order: 2 },
+  possible: { label: "Possible Fit",color: "bg-yellow-900/60 text-yellow-300 border-yellow-700/50",order: 3 },
+  reach:    { label: "Reach",       color: "bg-orange-900/60 text-orange-300 border-orange-700/50",order: 4 },
+}
 
 export interface School {
   name: string

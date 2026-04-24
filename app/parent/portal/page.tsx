@@ -424,7 +424,7 @@ function Portal() {
                 "Complete your first PR-VERIFIED combine test",
                 "Start a highlight reel — practice and game clips both count",
                 "Research realistic division levels (D1 / D2 / D3 / NAIA / JuCo)",
-                "Maintain a minimum 2.5 GPA — NCAA eligibility requirement",
+                "Maintain a minimum 2.5 GPA for NCAA eligibility — but top college programs want to see 3.5+. The higher your GPA, the more doors open.",
                 "Register on Hudl and link your film to your PolyRISE profile",
                 "Identify 10–15 schools you like at your realistic division level",
               ],

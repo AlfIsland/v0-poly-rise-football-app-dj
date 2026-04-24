@@ -32,6 +32,7 @@ interface AthleteProfile {
   baseline: Session | null
   current: Session | null
   prvCode?: string | null
+  photoUrl?: string | null
 }
 
 function pct(baseline?: number, current?: number) {
@@ -110,6 +111,7 @@ export default function AthleteProfilePage() {
         baseline: sessions[0] ?? null,
         current: sessions[sessions.length - 1] ?? null,
         prvCode: extra?.athlete?.prvCode ?? null,
+        photoUrl: a.photoUrl ?? null,
       })
     }).catch(() => setNotFound(true))
       .finally(() => setLoading(false))
@@ -169,29 +171,43 @@ export default function AthleteProfilePage() {
         {/* Hero card */}
         <div className="bg-gray-900 border border-white/10 rounded-2xl p-6">
           <div className="flex items-start justify-between gap-4 mb-4">
-            <div>
-              <h1 className="text-3xl font-black text-white leading-tight">{athlete.name}</h1>
-              <div className="flex flex-wrap gap-2 mt-2">
-                {athlete.position && (
-                  <span className="text-xs bg-red-900/50 text-red-300 border border-red-700/50 px-2.5 py-0.5 rounded-full font-semibold">
-                    {athlete.position}
-                  </span>
+            <div className="flex items-start gap-4 flex-1">
+              {/* Athlete photo */}
+              <div className="shrink-0">
+                {athlete.photoUrl ? (
+                  <div className="relative w-20 h-20 rounded-xl overflow-hidden border border-white/10">
+                    <Image src={athlete.photoUrl} alt={athlete.name} fill className="object-cover" unoptimized />
+                  </div>
+                ) : (
+                  <div className="w-20 h-20 rounded-xl bg-gray-800 border border-white/10 flex items-center justify-center">
+                    <span className="text-3xl">🏈</span>
+                  </div>
                 )}
-                {athlete.grade && (
-                  <span className="text-xs bg-white/10 text-gray-300 border border-white/10 px-2.5 py-0.5 rounded-full font-semibold">
-                    Grade {athlete.grade}
-                  </span>
-                )}
-                <span className="text-xs bg-white/10 text-gray-300 border border-white/10 px-2.5 py-0.5 rounded-full font-semibold">
-                  {sportLabel}
-                </span>
               </div>
-              {athlete.school && (
-                <p className="text-gray-400 text-sm mt-2 font-medium">{athlete.school}</p>
-              )}
-              {athlete.twitterHandle && (
-                <p className="text-blue-400 text-xs mt-1">@{athlete.twitterHandle.replace(/^@/, "")}</p>
-              )}
+              <div>
+                <h1 className="text-3xl font-black text-white leading-tight">{athlete.name}</h1>
+                <div className="flex flex-wrap gap-2 mt-2">
+                  {athlete.position && (
+                    <span className="text-xs bg-red-900/50 text-red-300 border border-red-700/50 px-2.5 py-0.5 rounded-full font-semibold">
+                      {athlete.position}
+                    </span>
+                  )}
+                  {athlete.grade && (
+                    <span className="text-xs bg-white/10 text-gray-300 border border-white/10 px-2.5 py-0.5 rounded-full font-semibold">
+                      Grade {athlete.grade}
+                    </span>
+                  )}
+                  <span className="text-xs bg-white/10 text-gray-300 border border-white/10 px-2.5 py-0.5 rounded-full font-semibold">
+                    {sportLabel}
+                  </span>
+                </div>
+                {athlete.school && (
+                  <p className="text-gray-400 text-sm mt-2 font-medium">{athlete.school}</p>
+                )}
+                {athlete.twitterHandle && (
+                  <p className="text-blue-400 text-xs mt-1">@{athlete.twitterHandle.replace(/^@/, "")}</p>
+                )}
+              </div>
             </div>
 
             {/* PR-VERIFIED badge */}

@@ -6,6 +6,7 @@ import Image from "next/image"
 import Link from "next/link"
 import dynamic from "next/dynamic"
 import SchoolFitFinder from "@/components/school-fit-finder"
+import AthletePhotoUpload from "@/components/athlete-photo-upload"
 import { Fragment } from "react"
 
 const ProgressChart = dynamic(() => import("@/components/progress-chart"), { ssr: false })
@@ -194,15 +195,22 @@ function Portal() {
               {/* Athlete header */}
               <div className="bg-gray-800 px-6 py-4">
                 <div className="flex items-start justify-between gap-3">
-                  <div>
-                    <p className="text-white font-bold text-xl">{athlete.name}</p>
-                    <p className="text-gray-400 text-sm mt-0.5">
-                      {athlete.age} yrs · {athlete.grade} · {athlete.school || "—"}
-                      {athlete.position ? ` · ${athlete.position}` : ""}
-                    </p>
-                    <p className="text-gray-600 text-xs mt-1">
-                      {sessions.length} session{sessions.length !== 1 ? "s" : ""} recorded · Member since {new Date(athlete.joinedAt).toLocaleDateString("en-US", { month: "long", year: "numeric" })}
-                    </p>
+                  <div className="flex items-start gap-4 flex-1">
+                    <AthletePhotoUpload
+                      athleteId={athlete.id}
+                      athleteName={athlete.name}
+                      currentPhotoUrl={(athlete as {photoUrl?: string}).photoUrl ?? null}
+                    />
+                    <div>
+                      <p className="text-white font-bold text-xl">{athlete.name}</p>
+                      <p className="text-gray-400 text-sm mt-0.5">
+                        {athlete.age} yrs · {athlete.grade} · {athlete.school || "—"}
+                        {athlete.position ? ` · ${athlete.position}` : ""}
+                      </p>
+                      <p className="text-gray-600 text-xs mt-1">
+                        {sessions.length} session{sessions.length !== 1 ? "s" : ""} recorded · Member since {new Date(athlete.joinedAt).toLocaleDateString("en-US", { month: "long", year: "numeric" })}
+                      </p>
+                    </div>
                   </div>
                   <div className="flex flex-col gap-2 shrink-0">
                     {prvRecords[athlete.id] && (

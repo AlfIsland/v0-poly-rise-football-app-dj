@@ -4,6 +4,7 @@ import { useState, useEffect, FormEvent } from "react"
 import { useRouter, useParams } from "next/navigation"
 import Link from "next/link"
 import LogoutButton from "@/components/logout-button"
+import AthletePhotoUpload from "@/components/athlete-photo-upload"
 
 const GRADES = [
   "3rd Grade","4th Grade","5th Grade","6th Grade","7th Grade","8th Grade",
@@ -44,6 +45,7 @@ export default function EditTrainingAthletePage() {
   const [twitterHandle, setTwitterHandle] = useState("")
   const [sport, setSport] = useState<"football" | "soccer">("football")
   const [gender, setGender] = useState<"M" | "F">("M")
+  const [photoUrl, setPhotoUrl] = useState<string | null>(null)
 
   useEffect(() => {
     fetch(`/api/training?id=${id}`)
@@ -63,6 +65,7 @@ export default function EditTrainingAthletePage() {
           setTwitterHandle(a.twitterHandle ?? "")
           setSport(a.sport === "soccer" ? "soccer" : "football")
           setGender(a.gender === "F" ? "F" : "M")
+          setPhotoUrl(a.photoUrl ?? null)
         } else {
           setError("Athlete not found.")
         }
@@ -122,6 +125,15 @@ export default function EditTrainingAthletePage() {
 
             <form onSubmit={handleSubmit} className="bg-gray-900 rounded-2xl p-6 space-y-4 border border-gray-800">
               <h2 className="text-xs font-bold text-red-400 uppercase tracking-widest">Athlete Info</h2>
+
+              <div className="flex justify-center pb-2">
+                <AthletePhotoUpload
+                  athleteId={id}
+                  athleteName={name}
+                  currentPhotoUrl={photoUrl}
+                  onUploaded={url => setPhotoUrl(url)}
+                />
+              </div>
 
               <div className="grid grid-cols-2 gap-4">
                 <div>

@@ -32,7 +32,7 @@ interface Session {
 }
 interface Athlete {
   id: string; name: string; age: number; grade: string
-  school: string; position?: string; joinedAt: string; sessions: Session[]
+  school: string; position?: string; sport?: string; joinedAt: string; sessions: Session[]
 }
 interface Parent {
   email: string; name: string; tier: string
@@ -411,7 +411,7 @@ function Portal() {
         {/* Camp Suggestions */}
         {hasAccess && (
           <CampSuggestions
-            sport={athletes[0]?.sessions ? "football" : undefined}
+            sport={athletes[0]?.sport}
             grade={athletes[0]?.grade}
           />
         )}

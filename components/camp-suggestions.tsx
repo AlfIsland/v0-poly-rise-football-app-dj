@@ -32,8 +32,8 @@ export default function CampSuggestions({ sport, grade }: Props) {
 
   const relevant = camps.filter(c => {
     if (filter !== "all" && c.type !== filter) return false
-    // Sport filter — show if camp includes athlete's sport or has no sport restriction
-    if (sport && c.sports.length > 0 && !c.sports.includes(sport)) return false
+    // Sport filter — only filter if both athlete sport AND camp sports are known
+    if (sport && c.sports.length > 0 && !c.sports.includes(sport) && !c.sports.includes("all")) return false
     // Grade filter — show if camp has no grade restriction or includes athlete's grade
     if (gradeNum > 0 && c.grades.length > 0 && !c.grades.includes(String(gradeNum))) return false
     return true

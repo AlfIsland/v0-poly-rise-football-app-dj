@@ -203,14 +203,24 @@ function Portal() {
                       {sessions.length} session{sessions.length !== 1 ? "s" : ""} recorded · Member since {new Date(athlete.joinedAt).toLocaleDateString("en-US", { month: "long", year: "numeric" })}
                     </p>
                   </div>
-                  {prvRecords[athlete.id] && (
-                    <a href={prvRecords[athlete.id]!.verifyUrl} target="_blank" rel="noopener noreferrer"
-                      className="shrink-0 flex flex-col items-center bg-red-950/60 border border-red-800/50 rounded-xl px-3 py-2 hover:bg-red-900/60 transition-colors">
-                      <span className="text-red-400 text-xs font-bold uppercase tracking-widest">PR-VERIFIED</span>
-                      <span className="font-mono text-white text-xs font-bold mt-0.5">{prvRecords[athlete.id]!.code}</span>
-                      <span className="text-red-600 text-xs mt-0.5">View Seal →</span>
-                    </a>
-                  )}
+                  <div className="flex flex-col gap-2 shrink-0">
+                    {prvRecords[athlete.id] && (
+                      <a href={prvRecords[athlete.id]!.verifyUrl} target="_blank" rel="noopener noreferrer"
+                        className="flex flex-col items-center bg-red-950/60 border border-red-800/50 rounded-xl px-3 py-2 hover:bg-red-900/60 transition-colors">
+                        <span className="text-red-400 text-xs font-bold uppercase tracking-widest">PR-VERIFIED</span>
+                        <span className="font-mono text-white text-xs font-bold mt-0.5">{prvRecords[athlete.id]!.code}</span>
+                        <span className="text-red-600 text-xs mt-0.5">View Seal →</span>
+                      </a>
+                    )}
+                    {(parent?.tier === "recruit" || parent?.tier === "elite-recruit") && (
+                      <a href={`/athlete/${athlete.id}`} target="_blank" rel="noopener noreferrer"
+                        className="flex flex-col items-center bg-blue-950/60 border border-blue-800/50 rounded-xl px-3 py-2 hover:bg-blue-900/60 transition-colors">
+                        <span className="text-blue-400 text-xs font-bold uppercase tracking-widest">Recruiting</span>
+                        <span className="text-white text-xs font-semibold mt-0.5">Profile</span>
+                        <span className="text-blue-600 text-xs mt-0.5">Share ↗</span>
+                      </a>
+                    )}
+                  </div>
                 </div>
               </div>
 

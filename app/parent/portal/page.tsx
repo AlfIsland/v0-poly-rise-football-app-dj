@@ -5,6 +5,7 @@ import { useRouter, useSearchParams } from "next/navigation"
 import Image from "next/image"
 import Link from "next/link"
 import dynamic from "next/dynamic"
+import SchoolFitFinder from "@/components/school-fit-finder"
 import { Fragment } from "react"
 
 const ProgressChart = dynamic(() => import("@/components/progress-chart"), { ssr: false })
@@ -393,6 +394,9 @@ function Portal() {
             </div>
           )
         })}
+
+        {/* School Fit Finder */}
+        {hasAccess && <SchoolFitFinder />}
 
         {/* Recruiting Roadmap — all subscribers */}
         {hasAccess && (() => {

@@ -394,6 +394,151 @@ function Portal() {
           )
         })}
 
+        {/* Recruiting Roadmap — Recruit & Elite Recruit only */}
+        {(parent?.tier === "recruit" || parent?.tier === "elite-recruit") && (() => {
+          const athleteGrade = athletes[0]?.grade ?? ""
+          const gradeNum = parseInt(athleteGrade.replace(/\D/g, "")) || 0
+
+          const stages = [
+            {
+              grade: "Grade 8 & Under",
+              match: gradeNum <= 8,
+              color: "border-blue-600",
+              dot: "bg-blue-600",
+              label: "Building the Foundation",
+              items: [
+                "Get baseline athletic testing done at a PolyRISE combine camp",
+                "Create your Athlete Training Passport (ATP) profile",
+                "Focus on fundamentals — speed, agility, and position skills",
+                "Build your GPA now — coaches check grades from day one",
+                "Attend monthly PolyRISE combine camps for consistent tracking",
+              ],
+            },
+            {
+              grade: "Freshman · Grade 9",
+              match: gradeNum === 9,
+              color: "border-green-600",
+              dot: "bg-green-600",
+              label: "Establish Your Baseline",
+              items: [
+                "Complete your first PR-VERIFIED combine test",
+                "Start a highlight reel — practice and game clips both count",
+                "Research realistic division levels (D1 / D2 / D3 / NAIA / JuCo)",
+                "Maintain a minimum 2.5 GPA — NCAA eligibility requirement",
+                "Register on Hudl and link your film to your PolyRISE profile",
+                "Identify 10–15 schools you like at your realistic division level",
+              ],
+            },
+            {
+              grade: "Sophomore · Grade 10",
+              match: gradeNum === 10,
+              color: "border-yellow-500",
+              dot: "bg-yellow-500",
+              label: "Build Visibility",
+              items: [
+                "Update your PR-VERIFIED metrics every camp cycle",
+                "Build Hudl highlight film with game and camp footage",
+                "Email 5–10 college coaches introducing your athlete",
+                "Take the PSAT — start preparing for SAT/ACT",
+                "Share your PolyRISE recruiting profile link with target schools",
+                "Attend at least one college football camp at a target school",
+              ],
+            },
+            {
+              grade: "Junior · Grade 11",
+              match: gradeNum === 11,
+              color: "border-red-500",
+              dot: "bg-red-500",
+              label: "Most Critical Year",
+              badge: "ACTION NOW",
+              items: [
+                "Register with NCAA Eligibility Center at eligibilitycenter.org",
+                "Take SAT/ACT — aim for NCAA qualifying scores",
+                "Send your recruiting profile to every school on your list",
+                "Attend official and unofficial visits at target schools",
+                "Request a Kevin Garrett quarterly development review",
+                "Update Hudl with current season game film immediately after games",
+                "Follow up with coaches monthly — persistence matters",
+              ],
+            },
+            {
+              grade: "Senior · Grade 12",
+              match: gradeNum === 12,
+              color: "border-purple-500",
+              dot: "bg-purple-500",
+              label: "Signing & Committing",
+              items: [
+                "Finalize your NCAA / NAIA eligibility certification",
+                "Accept official visits from schools making offers",
+                "Sign your NLI (National Letter of Intent) — Early Signing: Dec, Regular: Feb",
+                "Keep grades up — conditional offers can be pulled for academic issues",
+                "Notify PolyRISE staff of your commitment so we can celebrate you",
+                "Continue training — college coaches watch film through spring",
+              ],
+            },
+          ]
+
+          return (
+            <div className="bg-gray-900 border border-white/10 rounded-2xl overflow-hidden">
+              <div className="bg-gradient-to-r from-red-950/60 to-gray-900 px-6 py-4 border-b border-white/10">
+                <div className="flex items-center justify-between">
+                  <div>
+                    <p className="text-xs font-bold text-red-400 uppercase tracking-widest mb-0.5">PolyRISE Recruiting</p>
+                    <h2 className="text-white font-black text-lg">Recruiting Roadmap</h2>
+                    <p className="text-gray-400 text-xs mt-0.5">Your step-by-step guide to getting recruited at the next level</p>
+                  </div>
+                  {gradeNum > 0 && (
+                    <div className="text-right shrink-0">
+                      <p className="text-xs text-gray-500">Current Grade</p>
+                      <p className="text-2xl font-black text-white">{gradeNum}</p>
+                    </div>
+                  )}
+                </div>
+              </div>
+
+              <div className="divide-y divide-white/5">
+                {stages.map((stage) => (
+                  <div key={stage.grade} className={`p-5 ${stage.match ? "bg-white/5" : ""}`}>
+                    <div className="flex items-center gap-3 mb-3">
+                      <div className={`w-3 h-3 rounded-full shrink-0 ${stage.dot} ${stage.match ? "ring-2 ring-white/30 ring-offset-1 ring-offset-gray-900" : "opacity-50"}`} />
+                      <div className="flex items-center gap-2 flex-wrap">
+                        <p className={`text-sm font-black ${stage.match ? "text-white" : "text-gray-500"}`}>{stage.grade}</p>
+                        <p className={`text-xs ${stage.match ? "text-gray-400" : "text-gray-600"}`}>· {stage.label}</p>
+                        {stage.match && (
+                          <span className="text-xs bg-red-600 text-white font-bold px-2 py-0.5 rounded-full">YOU ARE HERE</span>
+                        )}
+                        {stage.badge && stage.match && (
+                          <span className="text-xs bg-yellow-500 text-black font-black px-2 py-0.5 rounded-full">{stage.badge}</span>
+                        )}
+                      </div>
+                    </div>
+                    <div className="ml-6 space-y-1.5">
+                      {stage.items.map((item) => (
+                        <div key={item} className="flex items-start gap-2">
+                          <span className={`text-xs mt-0.5 shrink-0 ${stage.match ? "text-red-400" : "text-gray-600"}`}>→</span>
+                          <p className={`text-xs leading-relaxed ${stage.match ? "text-gray-300" : "text-gray-600"}`}>{item}</p>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              <div className="px-6 py-4 border-t border-white/5 bg-black/20">
+                <div className="flex items-center gap-3">
+                  <div className="w-8 h-8 rounded-full bg-yellow-700 flex items-center justify-center text-white font-black text-xs shrink-0">KG</div>
+                  <div>
+                    <p className="text-yellow-300 text-xs font-bold">Questions about your recruiting path?</p>
+                    <a href="mailto:kg@polyrisefootball.com" className="text-gray-400 text-xs hover:text-white transition-colors">
+                      Kevin Garrett · kg@polyrisefootball.com
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          )
+        })()}
+
         <p className="text-center text-gray-700 text-xs pb-4">
           PolyRISE Football · (817) 658-3300 · polyrise@polyrisefootball.com
         </p>

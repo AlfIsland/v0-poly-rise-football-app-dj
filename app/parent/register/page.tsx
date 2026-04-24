@@ -84,7 +84,7 @@ const PLANS: PlanOption[] = [
     borderUnselected: "border-gray-700",
     radioSelected: "border-gray-400",
     dot: "bg-gray-400",
-    group: "Middle School & Younger",
+    group: "All Athletes",
     groupColor: "bg-blue-900/60 text-blue-300 border-blue-700/50",
     tagline: "Track your athlete's progress",
     features: [

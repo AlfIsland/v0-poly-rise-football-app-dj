@@ -394,8 +394,8 @@ function Portal() {
           )
         })}
 
-        {/* Recruiting Roadmap — Recruit & Elite Recruit only */}
-        {(parent?.tier === "recruit" || parent?.tier === "elite-recruit") && (() => {
+        {/* Recruiting Roadmap — all subscribers */}
+        {hasAccess && (() => {
           const athleteGrade = athletes[0]?.grade ?? ""
           const gradeNum = parseInt(athleteGrade.replace(/\D/g, "")) || 0
 

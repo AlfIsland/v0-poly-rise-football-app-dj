@@ -428,12 +428,25 @@ function Portal() {
         {/* Recruiting Roadmap — all subscribers */}
         {hasAccess && (() => {
           const athleteGrade = athletes[0]?.grade ?? ""
-          const gradeNum = parseInt(athleteGrade.replace(/\D/g, "")) || 0
+          const gradeNumRaw = (() => {
+            const lower = athleteGrade.toLowerCase()
+            const numMatch = athleteGrade.match(/\b(\d{1,2})\b/)
+            if (numMatch) return parseInt(numMatch[1])
+            if (lower.includes("freshman")  || lower.includes("9th"))  return 9
+            if (lower.includes("sophomore") || lower.includes("10th")) return 10
+            if (lower.includes("junior")    || lower.includes("11th")) return 11
+            if (lower.includes("senior")    || lower.includes("12th")) return 12
+            if (lower.includes("8th")) return 8
+            if (lower.includes("7th")) return 7
+            if (lower.includes("6th")) return 6
+            return 0
+          })()
+          const gradeNum = gradeNumRaw
 
           const stages = [
             {
               grade: "Grade 8 & Under",
-              match: gradeNum <= 8,
+              match: gradeNum > 0 && gradeNum <= 8,
               color: "border-blue-600",
               dot: "bg-blue-600",
               label: "Building the Foundation",

@@ -7,8 +7,8 @@ function getRedis() {
 }
 
 function isAuthed(req: NextRequest) {
-  const adminToken = req.cookies.get("admin_token")?.value
-  const parentToken = req.cookies.get("parent_token")?.value
+  const adminToken = req.cookies.get("pr_admin_session")?.value
+  const parentToken = req.cookies.get("pr_parent_session")?.value
   return !!(adminToken || parentToken)
 }
 

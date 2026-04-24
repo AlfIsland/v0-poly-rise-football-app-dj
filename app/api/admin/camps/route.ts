@@ -7,7 +7,7 @@ function getRedis() {
 }
 
 function isAdmin(req: NextRequest) {
-  return !!req.cookies.get("admin_token")?.value
+  return !!req.cookies.get("pr_admin_session")?.value
 }
 
 

@@ -10,18 +10,15 @@ function isAdmin(req: NextRequest) {
   return !!req.cookies.get("admin_token")?.value
 }
 
-function makeId() {
-  return "camp:" + Date.now() + Math.random().toString(36).slice(2, 7)
-}
 
 // GET — list all camps (including inactive)
 export async function GET(req: NextRequest) {
   if (!isAdmin(req)) return NextResponse.json({ success: false, error: "Unauthorized" }, { status: 401 })
   const r = getRedis()
   try {
-    const keys = await r.keys("camp:*")
-    if (!keys.length) return NextResponse.json({ success: true, camps: [] })
-    const raws = await r.mget(...keys)
+    const ids = await r.smembers("camps:index")
+    if (!ids.length) return NextResponse.json({ success: true, camps: [] })
+    const raws = await r.mget(...ids.map(id => `camp:${id}`))
     const camps = raws
       .filter(Boolean)
       .map(v => JSON.parse(v!) as Camp)
@@ -38,9 +35,9 @@ export async function POST(req: NextRequest) {
   const r = getRedis()
   try {
     const body = await req.json()
-    const id = makeId()
+    const shortId = Date.now() + Math.random().toString(36).slice(2, 7)
     const camp: Camp = {
-      id,
+      id: `camp:${shortId}`,
       name: body.name ?? "",
       organizer: body.organizer ?? "",
       type: body.type ?? "elite",
@@ -54,7 +51,8 @@ export async function POST(req: NextRequest) {
       active: true,
       createdAt: new Date().toISOString(),
     }
-    await r.set(id, JSON.stringify(camp))
+    await r.set(`camp:${shortId}`, JSON.stringify(camp))
+    await r.sadd("camps:index", shortId)
     return NextResponse.json({ success: true, camp })
   } finally {
     await r.quit()
@@ -87,7 +85,9 @@ export async function DELETE(req: NextRequest) {
   try {
     const { id } = await req.json()
     if (!id) return NextResponse.json({ success: false, error: "Missing id" }, { status: 400 })
+    const shortId = id.replace("camp:", "")
     await r.del(id)
+    await r.srem("camps:index", shortId)
     return NextResponse.json({ success: true })
   } finally {
     await r.quit()

@@ -24,15 +24,14 @@ function getRedis() {
 export async function GET() {
   const r = getRedis()
   try {
-    const keys = await r.keys("camp:*")
-    if (!keys.length) return NextResponse.json({ success: true, camps: [] })
-    const raws = await r.mget(...keys)
+    const ids = await r.smembers("camps:index")
+    if (!ids.length) return NextResponse.json({ success: true, camps: [] })
+    const raws = await r.mget(...ids.map(id => `camp:${id}`))
     const camps = raws
       .filter(Boolean)
       .map(v => JSON.parse(v!) as Camp)
       .filter(c => c.active)
       .sort((a, b) => {
-        // PolyRISE camps first, then featured, then by date
         if (a.type === "polyrise" && b.type !== "polyrise") return -1
         if (b.type === "polyrise" && a.type !== "polyrise") return 1
         if (a.featured && !b.featured) return -1

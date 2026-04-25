@@ -103,15 +103,23 @@ export async function POST(req: NextRequest) {
 
         // Handle parent subscription checkout
         const email = session.metadata?.email
-        const plan = session.metadata?.plan as "monthly" | "quarterly"
+        const plan = session.metadata?.plan as string
         if (!email) break
         const parent = await getParentByStripeCustomer(session.customer as string)
           ?? await getParent(email)
         if (parent) {
-          parent.tier = plan ?? "monthly"
+          // Map plan to tier: recruit, elite-recruit, passport all store as-is
+          parent.tier = (plan === "recruit" || plan === "elite-recruit" || plan === "passport")
+            ? plan
+            : plan ?? "passport"
           parent.stripeSubscriptionId = session.subscription as string
           parent.subscriptionStatus = "active"
           await saveParent(parent)
+
+          const planLabel = plan === "elite-recruit" ? "Elite Recruit · $49.99/mo"
+            : plan === "recruit" ? "Recruit · $29.99/mo"
+            : plan === "passport" ? "Passport · $9.99/mo"
+            : plan
 
           // Notify admin of new parent subscription
           const resendKey = process.env.RESEND_API_KEY
@@ -130,7 +138,7 @@ export async function POST(req: NextRequest) {
                     <p><strong>Email:</strong> ${parent.email}</p>
                     <p><strong>Phone:</strong> ${parent.phone || "—"}</p>
                     <p><strong>Athlete Name:</strong> ${parent.athleteName || "—"}</p>
-                    <p><strong>Plan:</strong> ${plan === "quarterly" ? "Quarterly" : "Monthly"}</p>
+                    <p><strong>Plan:</strong> ${planLabel}</p>
                     <p><strong>Subscribed:</strong> ${new Date().toLocaleString()}</p>
                     <p style="margin-top:16px">
                       <strong>Action needed:</strong> Go to your admin panel to link their athlete.

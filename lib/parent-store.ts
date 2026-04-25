@@ -19,7 +19,7 @@ export interface ParentAccount {
   requestedAthleteId?: string    // TRN ID entered at signup for faster matching
   accessExpiry?: string          // ISO date — when program member access expires
   athleteIds: string[]           // training athlete IDs linked to this parent
-  tier: "program" | "monthly" | "quarterly" | "none"
+  tier: "program" | "monthly" | "quarterly" | "passport" | "recruit" | "elite-recruit" | "none"
   approvalStatus?: "pending" | "approved" | "denied"  // for program members
   stripeCustomerId?: string
   stripeSubscriptionId?: string

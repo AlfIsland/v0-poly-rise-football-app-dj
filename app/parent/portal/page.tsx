@@ -414,6 +414,8 @@ function Portal() {
               sport={a0?.sport}
               position={a0?.position}
               fortyYard={latestSession?.fortyYard}
+              weight={latestSession?.weight}
+              verticalJump={latestSession?.verticalJump}
             />
           )
         })()}

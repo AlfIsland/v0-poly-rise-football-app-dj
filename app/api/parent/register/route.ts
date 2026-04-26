@@ -1,9 +1,20 @@
 import { NextRequest, NextResponse } from "next/server"
 import bcrypt from "bcryptjs"
 import { getParent, saveParent, createSession, PARENT_COOKIE, SESSION_MAX_AGE } from "@/lib/parent-store"
+import { rateLimit, getClientIp } from "@/lib/rate-limit"
 
 export async function POST(req: NextRequest) {
   try {
+    // Rate limit: 5 registrations per hour per IP
+    const ip = getClientIp(req)
+    const rl = await rateLimit(`parent:register:${ip}`, 5, 60 * 60)
+    if (!rl.allowed) {
+      return NextResponse.json(
+        { success: false, error: "Too many registration attempts. Please try again later." },
+        { status: 429 }
+      )
+    }
+
     const { email, password, name, phone, athleteName, athleteId, plan } = await req.json()
     if (!email || !password || !name)
       return NextResponse.json({ success: false, error: "Missing required fields" }, { status: 400 })

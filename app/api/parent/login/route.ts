@@ -1,9 +1,21 @@
 import { NextRequest, NextResponse } from "next/server"
 import bcrypt from "bcryptjs"
 import { getParent, createSession, PARENT_COOKIE, SESSION_MAX_AGE } from "@/lib/parent-store"
+import { rateLimit, getClientIp } from "@/lib/rate-limit"
 
 export async function POST(req: NextRequest) {
   try {
+    // Rate limit: 10 attempts per 15 minutes per IP
+    const ip = getClientIp(req)
+    const rl = await rateLimit(`parent:login:${ip}`, 10, 60 * 15)
+    if (!rl.allowed) {
+      const mins = Math.ceil((rl.retryAfterSeconds ?? 900) / 60)
+      return NextResponse.json(
+        { success: false, error: `Too many login attempts. Try again in ${mins} minute(s).` },
+        { status: 429 }
+      )
+    }
+
     const { email, password } = await req.json()
     if (!email || !password)
       return NextResponse.json({ success: false, error: "Missing email or password" }, { status: 400 })

@@ -114,6 +114,7 @@ export default function ParentRegisterPage() {
   const [phone, setPhone] = useState("")
   const [password, setPassword] = useState("")
   const [confirm, setConfirm] = useState("")
+  const [agreedToTerms, setAgreedToTerms] = useState(false)
   const [error, setError] = useState("")
   const [loading, setLoading] = useState(false)
   const router = useRouter()
@@ -121,6 +122,7 @@ export default function ParentRegisterPage() {
   const handleContinue = async () => {
     if (password !== confirm) { setError("Passwords do not match."); return }
     if (password.length < 6) { setError("Password must be at least 6 characters."); return }
+    if (!agreedToTerms) { setError("You must agree to the Terms of Service and Privacy Policy."); return }
     setLoading(true); setError("")
 
     try {
@@ -313,9 +315,26 @@ export default function ParentRegisterPage() {
                   className="w-full bg-gray-800 text-white rounded-lg px-4 py-2.5 border border-gray-700 focus:border-red-500 focus:outline-none placeholder-gray-600 text-sm" />
               </div>
 
+              <div className="flex items-start gap-3">
+                <input
+                  type="checkbox"
+                  id="terms"
+                  checked={agreedToTerms}
+                  onChange={e => setAgreedToTerms(e.target.checked)}
+                  className="mt-0.5 w-4 h-4 accent-red-600 shrink-0 cursor-pointer"
+                />
+                <label htmlFor="terms" className="text-xs text-gray-400 leading-relaxed cursor-pointer">
+                  I agree to the PolyRISE Football{" "}
+                  <a href="/terms" target="_blank" className="text-red-400 hover:text-red-300 underline font-semibold">Terms of Service</a>
+                  {" "}and{" "}
+                  <a href="/privacy" target="_blank" className="text-red-400 hover:text-red-300 underline font-semibold">Privacy Policy</a>.
+                  I confirm I am 18+ and am the parent or guardian of the athlete.
+                </label>
+              </div>
+
               {error && <p className="text-red-400 text-sm bg-red-950 border border-red-900 rounded-lg px-3 py-2">{error}</p>}
 
-              <button onClick={handleContinue} disabled={!name || !email || !password || !confirm || loading}
+              <button onClick={handleContinue} disabled={!name || !email || !password || !confirm || !agreedToTerms || loading}
                 className="w-full bg-red-600 hover:bg-red-700 disabled:bg-gray-700 disabled:cursor-not-allowed text-white font-bold rounded-xl py-3 transition-colors text-sm">
                 {loading ? "Setting up..." : plan === "free" ? "Create Account →" : "Continue to Payment →"}
               </button>

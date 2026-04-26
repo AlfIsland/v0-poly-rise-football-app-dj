@@ -21,6 +21,7 @@ const METRICS = [
   { key: "verticalJump", label: "Vertical Jump",    unit: '"',     lower: false },
   { key: "broadJump",    label: "Broad Jump",       unit: '"',     lower: false },
   { key: "benchPress",   label: "Bench Press 135",  unit: " reps", lower: false },
+  { key: "pushups",      label: "Push-Ups",         unit: " reps", lower: false },
   { key: "weight",       label: "Weight",           unit: " lbs",  lower: false },
 ] as const
 
@@ -354,6 +355,7 @@ function Portal() {
                             <th className="text-right py-2 px-2">Vert</th>
                             <th className="text-right py-2 px-2">Broad</th>
                             <th className="text-right py-2 px-2">Bench</th>
+                            <th className="text-right py-2 px-2">Push-Ups</th>
                             <th className="text-right py-2 px-2">Wt</th>
                           </tr>
                         </thead>
@@ -377,6 +379,7 @@ function Portal() {
                                 <td className="text-right py-2 px-2">{fmt(s.verticalJump, '"')}</td>
                                 <td className="text-right py-2 px-2">{fmt(s.broadJump, '"')}</td>
                                 <td className="text-right py-2 px-2">{fmt(s.benchPress, "")}</td>
+                                <td className="text-right py-2 px-2">{fmt((s as {pushups?: number}).pushups, "")}</td>
                                 <td className="text-right py-2 px-2">{fmt(s.weight, "")}</td>
                               </tr>
                               {s.notes && (

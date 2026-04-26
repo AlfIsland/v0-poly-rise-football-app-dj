@@ -41,6 +41,7 @@ function SessionForm() {
   const [verticalJump, setVerticalJump] = useState("")
   const [broadJump, setBroadJump] = useState("")
   const [benchPress, setBenchPress] = useState("")
+  const [pushups, setPushups] = useState("")
   const [notes, setNotes] = useState("")
   const [saving, setSaving] = useState(false)
   const [error, setError] = useState("")
@@ -82,7 +83,7 @@ function SessionForm() {
           date,
           height: heightFt && heightIn ? `${heightFt}'${heightIn}"` : heightFt ? `${heightFt}'0"` : "",
           weight, fortyYard, twentyYard, shuttle, shuttleLeft, shuttleRight, threeCone,
-          verticalJump, broadJump, benchPress, notes,
+          verticalJump, broadJump, benchPress, pushups, notes,
         }),
       })
       const data = await res.json()
@@ -164,7 +165,10 @@ function SessionForm() {
             <h2 className="text-xs font-bold text-red-400 uppercase tracking-widest">Power & Strength</h2>
             <Input label="Vertical Jump (inches)" value={verticalJump} onChange={setVerticalJump} placeholder="e.g. 24" type="number" step="0.5" />
             <Input label="Broad Jump (inches)" value={broadJump} onChange={setBroadJump} placeholder="e.g. 84" type="number" step="0.5" />
-            <Input label="Bench Press — 135 lbs (reps)" value={benchPress} onChange={setBenchPress} placeholder="e.g. 10" type="number" />
+            <div className="grid grid-cols-2 gap-3">
+              <Input label="Bench Press — 135 lbs (reps)" value={benchPress} onChange={setBenchPress} placeholder="e.g. 10" type="number" />
+              <Input label="Push-Ups (reps)" value={pushups} onChange={setPushups} placeholder="e.g. 30" type="number" />
+            </div>
           </div>
 
           <div className="bg-gray-900 rounded-2xl p-6 border border-gray-800">

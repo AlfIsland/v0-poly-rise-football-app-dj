@@ -40,6 +40,7 @@ export interface TrainingSession {
   verticalJump?: number
   broadJump?: number
   benchPress?: number
+  pushups?: number
   weight?: number
   notes?: string
 }
@@ -150,6 +151,7 @@ export async function PUT(req: NextRequest) {
         ...(body.verticalJump !== "" && body.verticalJump != null ? { verticalJump: parseFloat(body.verticalJump) } : {}),
         ...(body.broadJump !== "" && body.broadJump != null ? { broadJump: parseFloat(body.broadJump) } : {}),
         ...(body.benchPress !== "" && body.benchPress != null ? { benchPress: parseInt(body.benchPress) } : {}),
+        ...(body.pushups !== "" && body.pushups != null ? { pushups: parseInt(body.pushups) } : {}),
         ...(body.weight !== "" && body.weight != null ? { weight: parseFloat(body.weight) } : {}),
         ...(body.notes ? { notes: body.notes } : {}),
       }
@@ -191,6 +193,7 @@ export async function PUT(req: NextRequest) {
         ...(body.verticalJump !== "" && body.verticalJump != null ? { verticalJump: parseFloat(body.verticalJump) } : { verticalJump: undefined }),
         ...(body.broadJump !== "" && body.broadJump != null ? { broadJump: parseFloat(body.broadJump) } : { broadJump: undefined }),
         ...(body.benchPress !== "" && body.benchPress != null ? { benchPress: parseInt(body.benchPress) } : { benchPress: undefined }),
+        ...(body.pushups !== "" && body.pushups != null ? { pushups: parseInt(body.pushups) } : { pushups: undefined }),
         ...(body.weight !== "" && body.weight != null ? { weight: parseFloat(body.weight) } : { weight: undefined }),
         notes: body.notes ?? s.notes,
       }

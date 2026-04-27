@@ -3,8 +3,8 @@ import Redis from "ioredis"
 
 const COOKIE_NAME = "pr_admin_session"
 const MAX_AGE = 60 * 60 * 24 * 7  // 7 days
-const MAX_ATTEMPTS = 5
-const LOCKOUT_SECONDS = 60 * 15   // 15 minutes
+const MAX_ATTEMPTS = 10
+const LOCKOUT_SECONDS = 60 * 5    // 5 minutes
 
 let redis: Redis | null = null
 function getRedis(): Redis | null {
@@ -61,11 +61,11 @@ export async function POST(req: NextRequest) {
               from: "PolyRISE Football <noreply@polyrisefootball.com>",
               to: ["PolyRISE7v7@gmail.com"],
               subject: "⚠️ Admin Login — IP Locked Out",
-              html: `<div style="font-family:sans-serif;padding:20px"><h2 style="color:#dc2626">Admin Login Locked</h2><p>${MAX_ATTEMPTS} failed login attempts from IP <strong>${ip}</strong>. Account locked for 15 minutes.</p><p style="color:#999;font-size:12px">${new Date().toLocaleString()}</p></div>`,
+              html: `<div style="font-family:sans-serif;padding:20px"><h2 style="color:#dc2626">Admin Login Locked</h2><p>${MAX_ATTEMPTS} failed login attempts from IP <strong>${ip}</strong>. Account locked for 5 minutes.</p><p style="color:#999;font-size:12px">${new Date().toLocaleString()}</p></div>`,
             }),
           }).catch(() => {})
         }
-        return NextResponse.json({ success: false, error: "Too many failed attempts. Locked for 15 minutes." }, { status: 429 })
+        return NextResponse.json({ success: false, error: "Too many failed attempts. Locked for 5 minutes." }, { status: 429 })
       }
       const remaining = MAX_ATTEMPTS - attempts
       return NextResponse.json({ success: false, error: `Incorrect password. ${remaining} attempt(s) remaining.` }, { status: 401 })

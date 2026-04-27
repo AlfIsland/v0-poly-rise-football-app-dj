@@ -81,6 +81,17 @@ const MALE: Record<string, Thresholds[]> = {
     { elite: 21, aboveAvg: 16, average: 11, lower: false },
     { elite: 25, aboveAvg: 19, average: 13, lower: false },
   ],
+  // Push-Ups (bodyweight, max reps) — age index 0=≤11 through 7=18+
+  pushups: [
+    { elite: 25, aboveAvg: 18, average: 12, lower: false },
+    { elite: 28, aboveAvg: 20, average: 14, lower: false },
+    { elite: 32, aboveAvg: 24, average: 16, lower: false },
+    { elite: 36, aboveAvg: 27, average: 18, lower: false },
+    { elite: 40, aboveAvg: 30, average: 20, lower: false },
+    { elite: 45, aboveAvg: 34, average: 23, lower: false },
+    { elite: 50, aboveAvg: 38, average: 26, lower: false },
+    { elite: 55, aboveAvg: 42, average: 28, lower: false },
+  ],
 }
 
 const FEMALE: Record<string, Thresholds[]> = {
@@ -156,6 +167,17 @@ const FEMALE: Record<string, Thresholds[]> = {
     { elite: 6,  aboveAvg: 3,  average: 1,  lower: false },
     { elite: 8,  aboveAvg: 5,  average: 2,  lower: false },
     { elite: 11, aboveAvg: 7,  average: 3,  lower: false },
+  ],
+  // Push-Ups female (slightly lower thresholds)
+  pushups: [
+    { elite: 18, aboveAvg: 13, average: 8,  lower: false },
+    { elite: 20, aboveAvg: 15, average: 10, lower: false },
+    { elite: 23, aboveAvg: 17, average: 11, lower: false },
+    { elite: 25, aboveAvg: 19, average: 13, lower: false },
+    { elite: 28, aboveAvg: 21, average: 14, lower: false },
+    { elite: 30, aboveAvg: 23, average: 15, lower: false },
+    { elite: 33, aboveAvg: 25, average: 17, lower: false },
+    { elite: 35, aboveAvg: 27, average: 18, lower: false },
   ],
 }
 

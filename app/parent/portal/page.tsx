@@ -9,6 +9,7 @@ import AthletePhotoUpload from "@/components/athlete-photo-upload"
 import CoachOutreach from "@/components/coach-outreach"
 import CampSuggestions from "@/components/camp-suggestions"
 import { Fragment } from "react"
+import { getAgeTier, tierStyle } from "@/lib/age-tiers"
 
 const ProgressChart = dynamic(() => import("@/components/progress-chart"), { ssr: false })
 
@@ -28,11 +29,11 @@ interface Session {
   date: string
   fortyYard?: number; twentyYard?: number; shuttle?: number; shuttleLeft?: number; shuttleRight?: number
   threeCone?: number; verticalJump?: number; broadJump?: number
-  benchPress?: number; weight?: number; notes?: string
+  benchPress?: number; pushups?: number; weight?: number; notes?: string
 }
 interface Athlete {
   id: string; name: string; age: number; grade: string
-  school: string; position?: string; sport?: string; joinedAt: string; sessions: Session[]
+  school: string; position?: string; sport?: string; gender?: "M" | "F"; joinedAt: string; sessions: Session[]
 }
 interface Parent {
   email: string; name: string; tier: string
@@ -259,9 +260,14 @@ function Portal() {
                   {/* Overview tab */}
                   {tab === "overview" && (
                     <div className="px-6 py-5 space-y-4">
-                      <p className="text-xs text-gray-500 uppercase tracking-wider">
-                        {hasProgress ? "Baseline → Current Progress" : "Baseline Measurements"}
-                      </p>
+                      <div className="flex items-center justify-between flex-wrap gap-2">
+                        <p className="text-xs text-gray-500 uppercase tracking-wider">
+                          {hasProgress ? "Baseline → Current Progress" : "Baseline Measurements"}
+                        </p>
+                        <p className="text-xs text-gray-600">
+                          Ratings compared to athletes age {athlete.age}
+                        </p>
+                      </div>
                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                         {METRICS.map(m => {
                           const bVal = baseline?.[m.key] as number | undefined
@@ -270,6 +276,10 @@ function Portal() {
                           const imp = cVal != null ? (m.lower ? bVal - cVal : cVal - bVal) : 0
                           const improved = imp > 0
                           const pct = cVal != null ? ((Math.abs(imp) / bVal) * 100).toFixed(1) : null
+                          const displayVal = cVal ?? bVal
+                          const tier = m.key !== "weight"
+                            ? getAgeTier(m.key, displayVal, athlete.age, athlete.gender ?? "M")
+                            : null
 
                           return (
                             <div key={m.key} className={`rounded-xl px-4 py-3 border ${
@@ -277,7 +287,14 @@ function Portal() {
                                 ? improved ? "bg-green-950/30 border-green-900" : imp < 0 ? "bg-red-950/20 border-red-900" : "bg-gray-800 border-gray-700"
                                 : "bg-gray-800 border-gray-700"
                             }`}>
-                              <p className="text-xs text-gray-400 mb-2">{m.label}</p>
+                              <div className="flex items-center justify-between gap-2 mb-2">
+                                <p className="text-xs text-gray-400">{m.label}</p>
+                                {tier && (
+                                  <span className={`shrink-0 text-xs font-bold px-2 py-0.5 rounded-lg whitespace-nowrap ${tierStyle(tier)}`}>
+                                    {tier === "Above Average" ? "Above Avg" : tier}
+                                  </span>
+                                )}
+                              </div>
                               <div className="flex items-end justify-between">
                                 <div className="flex items-center gap-3">
                                   <div>

@@ -5,7 +5,6 @@ import { useRouter, useSearchParams } from "next/navigation"
 import Image from "next/image"
 import Link from "next/link"
 import dynamic from "next/dynamic"
-import SchoolFitFinder from "@/components/school-fit-finder"
 import AthletePhotoUpload from "@/components/athlete-photo-upload"
 import CoachOutreach from "@/components/coach-outreach"
 import CampSuggestions from "@/components/camp-suggestions"
@@ -408,20 +407,6 @@ function Portal() {
           )
         })}
 
-        {/* School Fit Finder */}
-        {hasAccess && (() => {
-          const a0 = athletes[0]
-          const latestSession = a0?.sessions?.[a0.sessions.length - 1]
-          return (
-            <SchoolFitFinder
-              sport={a0?.sport}
-              position={a0?.position}
-              fortyYard={latestSession?.fortyYard}
-              weight={latestSession?.weight}
-              verticalJump={latestSession?.verticalJump}
-            />
-          )
-        })()}
 
         {/* Camp Suggestions */}
         {hasAccess && (

@@ -96,21 +96,21 @@ export default function PlansPage() {
 
       {/* Grade Guide Banner */}
       <div className="max-w-3xl mx-auto px-6 mb-10">
-        <div className="bg-gray-900 border border-gray-700 rounded-2xl px-6 py-5 grid md:grid-cols-3 gap-4 text-center text-sm">
-          <div>
-            <p className="text-gray-500 text-xs uppercase tracking-widest mb-1">Middle School</p>
-            <p className="text-white font-semibold">Grades 6–8</p>
-            <p className="text-gray-400 mt-1">Start with <span className="text-gray-300 font-semibold">Passport</span></p>
+        <div className="bg-gray-900 border border-gray-700 rounded-2xl px-6 py-5 grid grid-cols-3 gap-3 text-center text-sm">
+          <div className="py-1">
+            <p className="text-gray-500 text-xs uppercase tracking-widest mb-1 hidden sm:block">Middle School</p>
+            <p className="text-white font-semibold text-xs sm:text-sm">Grades 6–8</p>
+            <p className="text-gray-400 mt-1 text-xs sm:text-sm">→ <span className="text-gray-300 font-semibold">Passport</span></p>
           </div>
-          <div className="border-t md:border-t-0 md:border-l md:border-r border-gray-700 md:px-4 pt-4 md:pt-0">
-            <p className="text-gray-500 text-xs uppercase tracking-widest mb-1">Early High School</p>
-            <p className="text-white font-semibold">Grades 9–10</p>
-            <p className="text-gray-400 mt-1">Start with <span className="text-red-400 font-semibold">Recruit</span></p>
+          <div className="border-l border-r border-gray-700 px-2 py-1">
+            <p className="text-gray-500 text-xs uppercase tracking-widest mb-1 hidden sm:block">Early High School</p>
+            <p className="text-white font-semibold text-xs sm:text-sm">Grades 9–10</p>
+            <p className="text-gray-400 mt-1 text-xs sm:text-sm">→ <span className="text-red-400 font-semibold">Recruit</span></p>
           </div>
-          <div className="border-t md:border-t-0 border-gray-700 pt-4 md:pt-0">
-            <p className="text-gray-500 text-xs uppercase tracking-widest mb-1">Upper High School</p>
-            <p className="text-white font-semibold">Grades 11–12</p>
-            <p className="text-gray-400 mt-1">Start with <span className="text-yellow-400 font-semibold">Elite Recruit</span></p>
+          <div className="py-1">
+            <p className="text-gray-500 text-xs uppercase tracking-widest mb-1 hidden sm:block">Upper High School</p>
+            <p className="text-white font-semibold text-xs sm:text-sm">Grades 11–12</p>
+            <p className="text-gray-400 mt-1 text-xs sm:text-sm">→ <span className="text-yellow-400 font-semibold">Elite Recruit</span></p>
           </div>
         </div>
       </div>

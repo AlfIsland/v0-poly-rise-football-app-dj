@@ -109,23 +109,23 @@ function Portal() {
       <div className="max-w-3xl mx-auto space-y-6">
 
         {/* Header */}
-        <div className="flex items-center justify-between border-b border-gray-800 pb-6">
-          <div className="flex items-center gap-3">
-            <Image src="/poly-rise-logo.png" alt="PolyRISE" width={36} height={36} className="object-contain" />
-            <div>
-              <p className="text-white font-bold">Welcome, {parent?.name}</p>
-              <p className="text-gray-500 text-xs">{parent?.email}</p>
+        <div className="flex items-center justify-between border-b border-gray-800 pb-6 gap-3">
+          <div className="flex items-center gap-3 min-w-0">
+            <Image src="/poly-rise-logo.png" alt="PolyRISE" width={36} height={36} className="object-contain shrink-0" />
+            <div className="min-w-0">
+              <p className="text-white font-bold truncate">Welcome, {parent?.name}</p>
+              <p className="text-gray-500 text-xs truncate">{parent?.email}</p>
             </div>
           </div>
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-2 shrink-0">
             {hasAccess && (
               <button onClick={handleManageBilling} disabled={managingBilling}
-                className="text-xs text-gray-400 hover:text-white border border-gray-700 hover:border-gray-500 px-3 py-1.5 rounded-lg transition-colors">
-                {managingBilling ? "Loading..." : "Manage Billing"}
+                className="text-xs text-gray-400 hover:text-white border border-gray-700 hover:border-gray-500 px-2.5 py-1.5 rounded-lg transition-colors whitespace-nowrap">
+                {managingBilling ? "..." : "Billing"}
               </button>
             )}
             <button onClick={handleLogout}
-              className="text-xs text-gray-500 hover:text-gray-300 border border-gray-700 px-3 py-1.5 rounded-lg transition-colors">
+              className="text-xs text-gray-500 hover:text-gray-300 border border-gray-700 px-2.5 py-1.5 rounded-lg transition-colors whitespace-nowrap">
               Sign Out
             </button>
           </div>
@@ -195,44 +195,44 @@ function Portal() {
             <div key={athlete.id} className="bg-gray-900 rounded-2xl border border-gray-800 overflow-hidden">
 
               {/* Athlete header */}
-              <div className="bg-gray-800 px-6 py-4">
-                <div className="flex items-start justify-between gap-3">
-                  <div className="flex items-start gap-4 flex-1">
-                    <AthletePhotoUpload
-                      athleteId={athlete.id}
-                      athleteName={athlete.name}
-                      currentPhotoUrl={(athlete as {photoUrl?: string}).photoUrl ?? null}
-                    />
-                    <div>
-                      <p className="text-white font-bold text-xl">{athlete.name}</p>
-                      <p className="text-gray-400 text-sm mt-0.5">
-                        {athlete.age} yrs · {athlete.grade} · {athlete.school || "—"}
-                        {athlete.position ? ` · ${athlete.position}` : ""}
-                      </p>
-                      <p className="text-gray-600 text-xs mt-1">
-                        {sessions.length} session{sessions.length !== 1 ? "s" : ""} recorded · Member since {new Date(athlete.joinedAt).toLocaleDateString("en-US", { month: "long", year: "numeric" })}
-                      </p>
-                    </div>
+              <div className="bg-gray-800 px-4 py-4 md:px-6">
+                <div className="flex items-start gap-3">
+                  <AthletePhotoUpload
+                    athleteId={athlete.id}
+                    athleteName={athlete.name}
+                    currentPhotoUrl={(athlete as {photoUrl?: string}).photoUrl ?? null}
+                  />
+                  <div className="flex-1 min-w-0">
+                    <p className="text-white font-bold text-lg md:text-xl leading-tight">{athlete.name}</p>
+                    <p className="text-gray-400 text-xs md:text-sm mt-0.5">
+                      {athlete.age} yrs · {athlete.grade} · {athlete.school || "—"}
+                      {athlete.position ? ` · ${athlete.position}` : ""}
+                    </p>
+                    <p className="text-gray-600 text-xs mt-1">
+                      {sessions.length} session{sessions.length !== 1 ? "s" : ""} · Since {new Date(athlete.joinedAt).toLocaleDateString("en-US", { month: "short", year: "numeric" })}
+                    </p>
                   </div>
-                  <div className="flex flex-col gap-2 shrink-0">
+                </div>
+                {/* Badges row — below info on all screen sizes */}
+                {(prvRecords[athlete.id] || parent?.tier === "recruit" || parent?.tier === "elite-recruit") && (
+                  <div className="flex flex-wrap gap-2 mt-3">
                     {prvRecords[athlete.id] && (
                       <a href={prvRecords[athlete.id]!.verifyUrl} target="_blank" rel="noopener noreferrer"
-                        className="flex flex-col items-center bg-red-950/60 border border-red-800/50 rounded-xl px-3 py-2 hover:bg-red-900/60 transition-colors">
+                        className="flex items-center gap-2 bg-red-950/60 border border-red-800/50 rounded-xl px-3 py-2 hover:bg-red-900/60 transition-colors">
                         <span className="text-red-400 text-xs font-bold uppercase tracking-widest">PR-VERIFIED</span>
-                        <span className="font-mono text-white text-xs font-bold mt-0.5">{prvRecords[athlete.id]!.code}</span>
-                        <span className="text-red-600 text-xs mt-0.5">View Seal →</span>
+                        <span className="font-mono text-white text-xs font-bold">{prvRecords[athlete.id]!.code}</span>
+                        <span className="text-red-600 text-xs">→</span>
                       </a>
                     )}
                     {(parent?.tier === "recruit" || parent?.tier === "elite-recruit") && (
                       <a href={`/athlete/${athlete.id}`} target="_blank" rel="noopener noreferrer"
-                        className="flex flex-col items-center bg-blue-950/60 border border-blue-800/50 rounded-xl px-3 py-2 hover:bg-blue-900/60 transition-colors">
-                        <span className="text-blue-400 text-xs font-bold uppercase tracking-widest">Recruiting</span>
-                        <span className="text-white text-xs font-semibold mt-0.5">Profile</span>
-                        <span className="text-blue-600 text-xs mt-0.5">Share ↗</span>
+                        className="flex items-center gap-2 bg-blue-950/60 border border-blue-800/50 rounded-xl px-3 py-2 hover:bg-blue-900/60 transition-colors">
+                        <span className="text-blue-400 text-xs font-bold uppercase tracking-widest">Recruiting Profile</span>
+                        <span className="text-blue-600 text-xs">↗</span>
                       </a>
                     )}
                   </div>
-                </div>
+                )}
               </div>
 
               {sessions.length === 0 ? (
@@ -245,13 +245,13 @@ function Portal() {
                       <button
                         key={t}
                         onClick={() => setActiveTab(prev => ({ ...prev, [athlete.id]: t }))}
-                        className={`px-5 py-3 text-sm font-medium capitalize transition-colors ${
+                        className={`flex-1 px-2 py-3 text-xs md:text-sm font-medium text-center transition-colors ${
                           tab === t
                             ? "border-b-2 border-red-500 text-white"
                             : "text-gray-500 hover:text-gray-300"
                         }`}
                       >
-                        {t === "chart" ? "Progress Chart" : t === "history" ? "Full History" : "Overview"}
+                        {t === "chart" ? "Chart" : t === "history" ? "History" : "Overview"}
                       </button>
                     ))}
                   </div>
@@ -342,6 +342,7 @@ function Portal() {
                   {/* Full History tab */}
                   {tab === "history" && (
                     <div className="px-4 py-5 overflow-x-auto">
+                      <p className="text-xs text-gray-600 mb-3 md:hidden">← Swipe to see all metrics</p>
                       <table className="w-full text-sm min-w-[600px]">
                         <thead>
                           <tr className="text-xs text-gray-500 border-b border-gray-800">

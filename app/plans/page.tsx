@@ -29,19 +29,9 @@ export default function PlansPage() {
 
       {/* The Problem */}
       <div className="bg-white/5 border-y border-white/10 py-12 px-6">
-        <div className="max-w-4xl mx-auto grid md:grid-cols-3 gap-8 text-center">
-          <div>
-            <p className="text-4xl font-black text-red-500 mb-2">98%</p>
-            <p className="text-gray-400 text-sm leading-relaxed">of high school athletes never get seen by a college recruiter — not because they aren&apos;t good enough, but because they&apos;re invisible.</p>
-          </div>
-          <div>
-            <p className="text-4xl font-black text-red-500 mb-2">0</p>
-            <p className="text-gray-400 text-sm leading-relaxed">college coaches can verify self-reported metrics. Without a verified seal, your athlete&apos;s times mean nothing to a recruiter.</p>
-          </div>
-          <div>
-            <p className="text-4xl font-black text-red-500 mb-2">1</p>
-            <p className="text-gray-400 text-sm leading-relaxed">professional recruiting profile backed by NFL-coached combine data is all it takes to stand out. That&apos;s exactly what we build.</p>
-          </div>
+        <div className="max-w-sm mx-auto text-center">
+          <p className="text-4xl font-black text-red-500 mb-2">98%</p>
+          <p className="text-gray-400 text-sm leading-relaxed">of high school athletes never get seen by a college recruiter — not because they aren&apos;t good enough, but because they&apos;re invisible.</p>
         </div>
       </div>
 

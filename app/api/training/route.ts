@@ -1,5 +1,60 @@
 import { NextRequest, NextResponse } from "next/server"
 import Redis from "ioredis"
+import { getAllParents } from "@/lib/parent-store"
+
+async function notifyParentOfNewSession(athleteId: string, athleteName: string, sessionNumber: number) {
+  try {
+    const resendKey = process.env.RESEND_API_KEY
+    if (!resendKey) return
+
+    // Find parent linked to this athlete
+    const parents = await getAllParents()
+    const parent = parents.find(p => p.athleteIds.includes(athleteId.toUpperCase()))
+    if (!parent?.email) return
+
+    const isBaseline = sessionNumber === 1
+    const sessionLabel = isBaseline ? "Baseline Test" : `Session #${sessionNumber}`
+    const portalUrl = "https://polyrisefootball.com/parent/portal"
+
+    await fetch("https://api.resend.com/emails", {
+      method: "POST",
+      headers: { Authorization: `Bearer ${resendKey}`, "Content-Type": "application/json" },
+      body: JSON.stringify({
+        from: "PolyRISE Football <noreply@polyrisefootball.com>",
+        to: [parent.email],
+        subject: `📊 New Results Posted — ${athleteName}`,
+        html: `
+          <div style="font-family:sans-serif;background:#0a0a0f;color:#fff;padding:0;margin:0">
+            <div style="background:#b40a0a;padding:24px 32px">
+              <h1 style="margin:0;font-size:20px;font-weight:900;letter-spacing:1px">PolyRISE Football</h1>
+              <p style="margin:4px 0 0;font-size:12px;color:#ffaaaa">Athlete Progress Update</p>
+            </div>
+            <div style="padding:32px">
+              <h2 style="color:#fff;font-size:22px;margin:0 0 8px">${athleteName}</h2>
+              <p style="color:#aaa;font-size:14px;margin:0 0 24px">${sessionLabel} has been recorded by your PolyRISE coach.</p>
+
+              <div style="background:#1a1a25;border:1px solid #333;border-radius:12px;padding:20px;margin-bottom:24px">
+                <p style="color:#ccc;font-size:14px;margin:0 0 4px">Your athlete's latest combine results are now available in your parent portal.</p>
+                <p style="color:#888;font-size:13px;margin:0">Log in to view all metrics, progress charts, and coach notes.</p>
+              </div>
+
+              <a href="${portalUrl}" style="display:inline-block;background:#b40a0a;color:#fff;font-weight:700;font-size:15px;padding:14px 32px;border-radius:10px;text-decoration:none">
+                View Results →
+              </a>
+
+              <div style="margin-top:32px;padding-top:24px;border-top:1px solid #222">
+                <p style="color:#555;font-size:12px;margin:0">Questions? Contact us at <a href="mailto:polyrise@polyrisefootball.com" style="color:#b40a0a">polyrise@polyrisefootball.com</a> or <a href="mailto:kg@polyrisefootball.com" style="color:#b40a0a">kg@polyrisefootball.com</a></p>
+                <p style="color:#444;font-size:11px;margin:6px 0 0">PolyRISE Football · Dripping Springs, TX · polyrisefootball.com</p>
+              </div>
+            </div>
+          </div>
+        `,
+      }),
+    })
+  } catch (err) {
+    console.error("[session notify email]", err)
+  }
+}
 
 function isAdmin(req: NextRequest): boolean {
   const session = req.cookies.get("pr_admin_session")?.value
@@ -159,6 +214,8 @@ export async function PUT(req: NextRequest) {
       // Sort sessions by date ascending
       existing.sessions.sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime())
       await kvSet(`training:athlete:${id.toUpperCase()}`, existing)
+      // Notify parent — fire and forget
+      notifyParentOfNewSession(id.toUpperCase(), existing.name, existing.sessions.length).catch(() => {})
       return NextResponse.json({ success: true })
     }
 

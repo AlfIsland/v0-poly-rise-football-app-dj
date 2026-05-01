@@ -1,4 +1,4 @@
-import { ArrowRight, Trophy, Users, Target, MapPin } from "lucide-react"
+import { ArrowRight, Trophy, Users, Target, MapPin, CheckCircle2 } from "lucide-react"
 import Link from "next/link"
 import Image from "next/image"
 import { ProtectedImage } from "@/components/protected-image"
@@ -347,6 +347,155 @@ export default function HomePage() {
               <ArrowRight className="w-4 h-4" />
             </Link>
           </div>
+
+          {/* Training Programs */}
+          <div className="mt-16 pt-12 border-t border-gray-800">
+            <div className="mb-10">
+              <h3 className="text-3xl lg:text-4xl font-display font-bold text-white">Training Programs</h3>
+              <p className="text-lg text-gray-400 mt-2">In-person training packages designed for every level of commitment</p>
+            </div>
+
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+              {/* Player Development */}
+              <div className="bg-card border-primary/50 border-2 overflow-hidden group hover:border-primary transition-colors">
+                <div className="aspect-video relative overflow-hidden">
+                  <img src="/athlete-training-drill.jpg" alt="Player Development Training" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
+                  <div className="absolute top-4 left-4 px-3 py-1 rounded-full bg-background/90 backdrop-blur text-sm font-medium">Most Popular</div>
+                </div>
+                <div className="pt-6 px-6 pb-6 space-y-4">
+                  <div>
+                    <h4 className="text-xl font-display font-bold mb-2">Player Development</h4>
+                    <div className="text-lg font-bold text-white mb-3">$350/mo</div>
+                    <p className="text-muted-foreground text-sm leading-relaxed">8 sessions a month including SAQ, S&amp;C, football drills, tournament entries, military character building events, PR-Verified Camp and Free Athletic Training Passport (Tracker).</p>
+                  </div>
+                  <Link href="https://app.teamlinkt.com/register/find/polyrisefootball" target="_blank" rel="noopener noreferrer" className="block w-full text-center bg-[#FF6600] text-white px-4 py-2 rounded hover:bg-[#FF6600]/80 transition-colors">Register</Link>
+                </div>
+              </div>
+
+              {/* 360 Elite */}
+              <div className="bg-card border-primary/50 border-2 overflow-hidden group hover:border-primary transition-colors relative">
+                <div className="absolute top-4 right-4 z-10 px-3 py-1 rounded-full bg-primary text-primary-foreground text-xs font-bold">ELITE</div>
+                <div className="aspect-video relative overflow-hidden">
+                  <img src="/elite-360-training.jpg" alt="360 Elite Training" className="w-full h-full object-cover object-[50%_35%] group-hover:scale-105 transition-transform duration-300" />
+                </div>
+                <div className="pt-6 px-6 pb-6 space-y-4">
+                  <div>
+                    <h4 className="text-xl font-display font-bold mb-2">360 Elite</h4>
+                    <div className="text-lg font-bold text-white mb-3">$500/mo</div>
+                    <p className="text-muted-foreground text-sm leading-relaxed">Everything in Player Development plus one-on-one coaching from NFL experience staff, recruiting profile, 7 email blasts a month, and exclusive benefits.</p>
+                  </div>
+                  <Link href="https://app.teamlinkt.com/register/find/polyrisefootball" target="_blank" rel="noopener noreferrer" className="block w-full text-center bg-[#FF6600] text-white px-4 py-2 rounded hover:bg-[#FF6600]/80 transition-colors">Register</Link>
+                </div>
+              </div>
+
+              {/* Tournament */}
+              <div className="bg-card border-primary/50 border-2 overflow-hidden group hover:border-primary transition-colors">
+                <div className="pt-6 px-6 pb-6 space-y-4">
+                  <div>
+                    <h4 className="text-xl font-display font-bold mb-1">PolyRISE Football Tournament</h4>
+                    <p className="text-sm font-display font-semibold text-primary italic mb-2">Rise of Warriors</p>
+                    <p className="text-muted-foreground text-sm leading-relaxed mb-2">Middle School (10-team, May 29th - $400) and High School (8-team, May 30th - $425). Minimum 3 games, single game elimination.</p>
+                    <ul className="space-y-1 mt-3">
+                      <li className="flex items-start gap-2 text-sm text-muted-foreground"><CheckCircle2 className="w-4 h-4 text-primary flex-shrink-0 mt-0.5" />Middle School: 10 teams - $400</li>
+                      <li className="flex items-start gap-2 text-sm text-muted-foreground"><CheckCircle2 className="w-4 h-4 text-primary flex-shrink-0 mt-0.5" />High School: 8 teams - $425</li>
+                      <li className="flex items-start gap-2 text-sm text-muted-foreground"><CheckCircle2 className="w-4 h-4 text-primary flex-shrink-0 mt-0.5" />Min. 3 games, single elimination</li>
+                    </ul>
+                  </div>
+                  <Link href="https://app.teamlinkt.com/register/find/polyrisefootball" target="_blank" rel="noopener noreferrer" className="block w-full text-center bg-[#FF6600] text-white px-4 py-2 rounded hover:bg-[#FF6600]/80 transition-colors">Register Team</Link>
+                </div>
+              </div>
+
+              {/* Girls Player Development */}
+              <div className="bg-card border-primary/50 border-2 overflow-hidden group hover:border-primary transition-colors">
+                <div className="pt-6 px-6 pb-6 space-y-4">
+                  <div>
+                    <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 mb-3">
+                      <span className="text-sm font-medium text-primary">Girls Program</span>
+                    </div>
+                    <h4 className="text-xl font-display font-bold mb-2">Girls Player Development</h4>
+                    <p className="text-muted-foreground text-sm leading-relaxed mb-4">Program is on Monday &amp; Friday (5-6:30pm) in May. June and July is player development on Monday &amp; Friday at (1-2:30pm).</p>
+                    <div className="flex items-center justify-between border-t border-dashed border-border pt-4">
+                      <span className="font-medium">2 Days a Week</span>
+                      <span className="text-lg font-bold text-white">$250/mo</span>
+                    </div>
+                  </div>
+                  <Link href="https://app.teamlinkt.com/register/find/polyrisefootball" target="_blank" rel="noopener noreferrer" className="block w-full text-center bg-[#FF6600] text-white px-4 py-2 rounded hover:bg-[#FF6600]/80 transition-colors">Register</Link>
+                </div>
+              </div>
+
+              {/* Multi-Sport Athlete */}
+              <div className="bg-card border-primary/50 border-2 overflow-hidden group hover:border-primary transition-colors">
+                <div className="pt-6 px-6 pb-6 space-y-4">
+                  <div>
+                    <h4 className="text-xl font-display font-bold mb-2">Multi-Sport Athlete</h4>
+                    <div className="text-lg font-bold text-white mb-3">$175/mo</div>
+                    <p className="text-muted-foreground text-sm leading-relaxed">One day a week (Tue or Thur) with camps/events included.</p>
+                  </div>
+                  <Link href="https://app.teamlinkt.com/register/find/polyrisefootball" target="_blank" rel="noopener noreferrer" className="block w-full text-center bg-[#FF6600] text-white px-4 py-2 rounded hover:bg-[#FF6600]/80 transition-colors">Register</Link>
+                </div>
+              </div>
+
+              {/* PR-VERIFIED Combine Camp */}
+              <div className="bg-card border-primary/50 border-2 overflow-hidden group hover:border-primary transition-colors">
+                <div className="pt-6 px-6 pb-6 space-y-4">
+                  <div>
+                    <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 mb-3">
+                      <span className="text-sm font-medium text-primary">Camp</span>
+                    </div>
+                    <h4 className="text-xl font-display font-bold mb-2">PR-VERIFIED Combine Camp</h4>
+                    <p className="text-muted-foreground text-sm leading-relaxed mb-2">Professional Combine Events. H.S Athletes record official metrics.</p>
+                    <div className="flex items-center justify-between border-t border-dashed border-border pt-4">
+                      <span className="font-medium">Camp Registration</span>
+                      <span className="text-lg font-bold text-white">$30</span>
+                    </div>
+                  </div>
+                  <Link href="https://app.teamlinkt.com/register/find/polyrisefootball" target="_blank" rel="noopener noreferrer" className="block w-full text-center bg-[#FF6600] text-white px-4 py-2 rounded hover:bg-[#FF6600]/80 transition-colors">Register</Link>
+                </div>
+              </div>
+
+              {/* Summer Camp */}
+              <div className="bg-card border-primary/50 border-2 overflow-hidden group hover:border-primary transition-colors lg:col-span-3">
+                <div className="pt-6 px-6 pb-6 space-y-4">
+                  <div>
+                    <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 mb-3">
+                      <span className="text-sm font-medium text-primary">Summer Camp</span>
+                    </div>
+                    <h4 className="text-xl font-display font-bold mb-2">Summer Camp</h4>
+                    <p className="text-muted-foreground text-sm leading-relaxed mb-2">Athlete Development &amp; Leadership (June &amp; July) — <span className="text-white font-semibold">Limited to 20 spots ONLY</span></p>
+                    <div className="grid sm:grid-cols-3 gap-4 border-t border-dashed border-border pt-4">
+                      <div><div className="flex items-center justify-between"><span className="font-medium">Elementary (K-5)</span><span className="text-lg font-bold text-white">$265/mo</span></div><p className="text-xs text-muted-foreground">Mon-Thu, 8:00am - 10:00am</p></div>
+                      <div><div className="flex items-center justify-between"><span className="font-medium">Middle School</span><span className="text-lg font-bold text-white">$265/mo</span></div><p className="text-xs text-muted-foreground">Mon-Thu, 10:00am - 12:00pm</p></div>
+                      <div><div className="flex items-center justify-between"><span className="font-medium">High School</span><span className="text-lg font-bold text-white">$265/mo</span></div><p className="text-xs text-muted-foreground">Mon-Thu, 2:00pm - 4:00pm</p></div>
+                    </div>
+                  </div>
+                  <Link href="https://app.teamlinkt.com/register/find/polyrisefootball" target="_blank" rel="noopener noreferrer" className="block w-full text-center bg-[#FF6600] text-white px-4 py-2 rounded hover:bg-[#FF6600]/80 transition-colors">Register Now</Link>
+                </div>
+              </div>
+
+              {/* Recruiting — Kevin Garrett */}
+              <div className="bg-card border-primary/50 border-2 overflow-hidden lg:col-span-3">
+                <div className="pt-6 px-6 pb-6 space-y-4">
+                  <div className="text-center">
+                    <h4 className="text-4xl lg:text-5xl font-display font-bold mb-4">Recruiting</h4>
+                    <h5 className="text-xl font-display font-bold mb-1 text-white">Kevin Garrett</h5>
+                    <p className="text-xs text-white font-semibold mb-3">Former NFL | COO / Director of PolyRISE Football Recruiting</p>
+                    <p className="text-white text-sm leading-relaxed max-w-3xl mx-auto">With extensive experience in football recruiting, Kevin leads all operations at PolyRISE Football Recruiting. He personally oversees player profiles, college outreach strategies, and ensures every athlete receives high-quality exposure to the right college programs. Kevin is passionate about helping student-athletes navigate the recruiting process and has helped dozens of players earn opportunities at the collegiate level.</p>
+                    <p className="text-sm text-white mt-3">Contact Kevin directly: <a href="mailto:KG@polyrisefootball.com" className="text-red-500 underline hover:text-red-400">KG@polyrisefootball.com</a> · <a href="mailto:polyrise@polyrisefootball.com" className="text-red-500 underline hover:text-red-400">polyrise@polyrisefootball.com</a></p>
+                  </div>
+                  <div className="flex flex-wrap justify-center gap-4">
+                    <img src="/recruiting-athlete-1.jpeg" alt="Athlete Introduction Example - James Cabarrus III" className="w-48 h-auto rounded-lg border border-primary/20" />
+                    <img src="/recruiting-athlete-2.jpeg" alt="Athlete Introduction Example - Gevariah Kneubuhl" className="w-48 h-auto rounded-lg border border-primary/20" />
+                  </div>
+                  <div className="text-center">
+                    <Link href="#contact" className="inline-block bg-[#FF6600] text-white px-8 py-3 rounded hover:bg-[#FF6600]/80 transition-colors font-semibold">Get Started with Recruiting</Link>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
         </div>
       </section>
 

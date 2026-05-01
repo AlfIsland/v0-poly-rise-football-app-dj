@@ -13,6 +13,7 @@ interface Session {
   verticalJump?: number
   broadJump?: number
   benchPress?: number
+  pushups?: number
   weight?: number
   notes?: string
 }
@@ -37,6 +38,7 @@ const METRICS = [
   { key: "verticalJump", label: "Vertical Jump",  unit: "in",   lower: false },
   { key: "broadJump",    label: "Broad Jump",     unit: "in",   lower: false },
   { key: "benchPress",   label: "Bench Press 135", unit: "reps", lower: false },
+  { key: "pushups",      label: "Push-Ups",        unit: "reps", lower: false },
 ] as const
 
 function improvement(baseline: number, current: number, lower: boolean): number {

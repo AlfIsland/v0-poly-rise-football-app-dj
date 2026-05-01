@@ -8,6 +8,7 @@ import dynamic from "next/dynamic"
 import AthletePhotoUpload from "@/components/athlete-photo-upload"
 import CoachOutreach from "@/components/coach-outreach"
 import CampSuggestions from "@/components/camp-suggestions"
+import ProgressReportDownload from "@/components/progress-report-download"
 import { Fragment } from "react"
 import { getAgeTier, tierStyle } from "@/lib/age-tiers"
 
@@ -500,6 +501,27 @@ function Portal() {
           )
         })}
 
+
+        {/* Progress Report PDF Download */}
+        {hasAccess && athletes.length > 0 && athletes[0].sessions?.length > 0 && (
+          <div className="bg-gray-900 rounded-2xl border border-gray-800 p-5">
+            <div className="flex items-center gap-2 mb-3">
+              <div className="w-1.5 h-5 bg-red-600 rounded-full" />
+              <h2 className="text-sm font-bold text-white uppercase tracking-widest">Progress Report</h2>
+            </div>
+            <p className="text-xs text-gray-500 mb-4">Download a full PDF report with all metrics, session history, strengths, and coach notes. Bring it to camps or send it to college coaches.</p>
+            <ProgressReportDownload athlete={{
+              id: athletes[0].id,
+              name: athletes[0].name,
+              age: athletes[0].age,
+              grade: athletes[0].grade,
+              school: athletes[0].school,
+              position: athletes[0].position,
+              joinedAt: athletes[0].joinedAt,
+              sessions: athletes[0].sessions,
+            }} />
+          </div>
+        )}
 
         {/* Camp Suggestions */}
         {hasAccess && (

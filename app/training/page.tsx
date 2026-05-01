@@ -2,7 +2,6 @@
 
 import { useState, useEffect, useCallback } from "react"
 import Link from "next/link"
-import Image from "next/image"
 import LogoutButton from "@/components/logout-button"
 
 const GRADES = [
@@ -351,29 +350,21 @@ export default function TrainingRosterPage() {
   )
 
   return (
-    <div className="min-h-screen bg-gray-950 text-white p-6 md:p-10">
+    <div className="min-h-screen bg-gray-950 text-white p-4 md:p-8">
       <div className="max-w-6xl mx-auto">
 
         {/* Header */}
-        <div className="mb-6 border-b border-gray-800 pb-6 flex items-center justify-between">
-          <div className="flex items-center gap-4">
-            <Image src="/poly-rise-logo.png" alt="PolyRISE" width={40} height={40} className="object-contain" />
-            <div>
-              <h1 className="text-2xl font-bold text-white">PolyRISE Training Tracker</h1>
-              <p className="text-gray-400 text-sm">{athletes.length} athlete{athletes.length !== 1 ? "s" : ""} enrolled</p>
-              <Link href="/admin/athletes" className="text-xs text-gray-600 hover:text-gray-400 underline mt-0.5 block">← PR-VERIFIED Roster</Link>
-              <Link href="/training/dedup" className="text-xs text-yellow-600 hover:text-yellow-400 underline mt-0.5 block">🧹 Clean Duplicates</Link>
-            </div>
+        <div className="mb-6 border-b border-gray-800 pb-4 flex items-center justify-between">
+          <div>
+            <h1 className="text-xl font-bold text-white">Training Roster</h1>
+            <p className="text-gray-400 text-sm">{athletes.length} athlete{athletes.length !== 1 ? "s" : ""} enrolled</p>
+            <Link href="/training/dedup" className="text-xs text-yellow-600 hover:text-yellow-400 underline mt-0.5 block">🧹 Clean Duplicates</Link>
           </div>
           <div className="flex items-center gap-3">
             <button onClick={() => { setShowQuickEntry(v => !v); resetForm() }}
               className={`font-semibold px-4 py-2 rounded-xl text-sm transition-colors ${showQuickEntry ? "bg-gray-700 text-white" : "bg-red-600 hover:bg-red-700 text-white"}`}>
               {showQuickEntry ? "✕ Close" : "+ Quick Entry"}
             </button>
-            <Link href="/admin/roster"
-              className="bg-white/10 hover:bg-white/20 text-gray-300 hover:text-white font-semibold px-4 py-2 rounded-xl text-sm border border-white/10 transition-colors">
-              👥 Subscriber Roster
-            </Link>
             <LogoutButton />
           </div>
         </div>

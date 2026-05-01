@@ -62,13 +62,9 @@ export default function NewTrainingAthletePage() {
       <div className="max-w-xl mx-auto">
 
         <div className="mb-8 border-b border-gray-800 pb-6 flex items-center justify-between">
-          <div className="flex items-center gap-4">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/poly-rise-logo.png" alt="PolyRISE" className="h-10 w-auto" />
-            <div>
-              <h1 className="text-2xl font-bold text-white">Add Training Athlete</h1>
-              <Link href="/training" className="text-xs text-gray-500 hover:text-gray-300 underline mt-0.5 block">← Back to Roster</Link>
-            </div>
+          <div>
+            <h1 className="text-xl font-bold text-white">Add Training Athlete</h1>
+            <Link href="/training" className="text-xs text-gray-500 hover:text-gray-300 underline mt-0.5 block">← Back to Roster</Link>
           </div>
           <LogoutButton />
         </div>

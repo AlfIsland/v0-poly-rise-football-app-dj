@@ -1,6 +1,5 @@
 import { notFound } from "next/navigation"
 import Link from "next/link"
-import Image from "next/image"
 import Redis from "ioredis"
 import LogoutButton from "@/components/logout-button"
 import ProgressReportDownload from "@/components/progress-report-download"
@@ -86,7 +85,6 @@ export default async function TrainingAthletePage({ params }: { params: { id: st
         {/* Header */}
         <div className="border-b border-gray-800 pb-6 flex flex-col sm:flex-row sm:items-start gap-4">
           <div className="flex items-center gap-3 flex-1 min-w-0">
-            <Image src="/poly-rise-logo.png" alt="PolyRISE" width={36} height={36} className="object-contain shrink-0" />
             <div className="min-w-0">
               <div className="flex items-center gap-2 flex-wrap">
                 <h1 className="text-xl sm:text-2xl font-bold text-white">{athlete.name}</h1>

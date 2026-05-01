@@ -95,14 +95,7 @@ export default async function AdminHomePage() {
   return (
     <div className="min-h-screen bg-[#0a0a0f] text-white">
       <header className="border-b border-white/10 px-6 py-4 flex items-center justify-between">
-        <div className="flex items-center gap-3">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/poly-rise-logo.png" alt="PolyRISE" className="h-9 w-auto" />
-          <div>
-            <h1 className="text-xl font-bold">Admin Dashboard</h1>
-            <p className="text-xs text-gray-500">PolyRISE Football</p>
-          </div>
-        </div>
+        <h1 className="text-lg font-bold text-white">Dashboard</h1>
         <LogoutButton />
       </header>
 

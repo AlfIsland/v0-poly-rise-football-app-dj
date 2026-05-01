@@ -204,29 +204,6 @@ export default function PlansPage() {
 
       </div>
 
-      {/* Why This Works */}
-      <div className="max-w-4xl mx-auto px-6 py-16">
-        <p className="text-center text-red-500 font-black text-xs uppercase tracking-widest mb-4">Why It Works</p>
-        <h2 className="text-center text-3xl md:text-4xl font-black text-white mb-12">Built by coaches who&apos;ve been on both sides of the recruiting table.</h2>
-        <div className="grid md:grid-cols-3 gap-8">
-          <div className="text-center">
-            <div className="text-4xl mb-4">🔴</div>
-            <h3 className="font-black text-white text-lg mb-2">PR-VERIFIED Seal</h3>
-            <p className="text-gray-400 text-sm leading-relaxed">Every metric is recorded by a PolyRISE Football coach on-site using pro-combine protocols. No self-reported numbers. No inflated times. Just the truth — and that&apos;s what scouts respect.</p>
-          </div>
-          <div className="text-center">
-            <div className="text-4xl mb-4">📊</div>
-            <h3 className="font-black text-white text-lg mb-2">Real Progress Tracking</h3>
-            <p className="text-gray-400 text-sm leading-relaxed">Parents get a clear picture of how their athlete is developing — session by session, month by month — with charts, comparisons, and downloadable reports to share anywhere.</p>
-          </div>
-          <div className="text-center">
-            <div className="text-4xl mb-4">📡</div>
-            <h3 className="font-black text-white text-lg mb-2">Recruiting Visibility</h3>
-            <p className="text-gray-400 text-sm leading-relaxed">Monthly X spotlights put your athlete in front of college programs. A shareable profile with verified metrics means coaches can find your child — and trust what they see.</p>
-          </div>
-        </div>
-      </div>
-
       {/* Final CTA */}
       <div className="bg-red-950/40 border-y border-red-900/40 py-16 px-6 text-center">
         <h2 className="text-3xl md:text-4xl font-black text-white mb-4">The window to get recruited is short.<br /><span className="text-red-400">Don&apos;t let it close.</span></h2>

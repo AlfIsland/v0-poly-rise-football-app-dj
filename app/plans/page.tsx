@@ -5,8 +5,8 @@ const PLANS = [
   {
     name: "Elite Recruit",
     price: "$49.99",
-    badge: "MOST POPULAR",
-    badgeColor: "bg-yellow-500 text-black",
+    badge: null,
+    badgeColor: "",
     border: "border-yellow-500",
     accentText: "text-yellow-400",
     accentBg: "bg-yellow-500",
@@ -15,6 +15,7 @@ const PLANS = [
     tagline: "Full recruiting exposure + player development",
     cta: "Get Elite Recruit",
     ctaStyle: "bg-yellow-500 hover:bg-yellow-400 text-black",
+    comingSoon: true,
     features: [
       "Everything in Recruit",
       "Quarterly Kevin Garrett development report",
@@ -28,8 +29,8 @@ const PLANS = [
   {
     name: "Recruit",
     price: "$29.99",
-    badge: null,
-    badgeColor: "",
+    badge: "MOST POPULAR",
+    badgeColor: "bg-red-600 text-white",
     border: "border-red-500",
     accentText: "text-red-400",
     accentBg: "bg-red-500",
@@ -125,6 +126,14 @@ export default function PlansPage() {
             {plan.badge && (
               <div className={`absolute top-0 left-0 right-0 text-center py-1.5 text-xs font-black tracking-widest ${plan.badgeColor}`}>
                 {plan.badge}
+              </div>
+            )}
+
+            {"comingSoon" in plan && plan.comingSoon && (
+              <div className="absolute inset-0 z-10 flex flex-col items-center justify-center rounded-2xl bg-black/70 backdrop-blur-sm">
+                <span className="text-yellow-400 text-3xl mb-2">🏆</span>
+                <p className="text-white font-black text-xl tracking-widest uppercase">Coming Soon</p>
+                <p className="text-gray-400 text-xs mt-2 text-center px-6">We&apos;re finalizing this package.<br />Check back soon.</p>
               </div>
             )}
 

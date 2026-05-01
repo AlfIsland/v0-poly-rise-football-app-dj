@@ -127,10 +127,10 @@ export default function HomePage() {
             <div className="flex flex-col items-center">
               <div className="flex flex-col items-center mb-4">
                 <Link
-                  href="https://polyrisefootball.com/parent/register" target="_blank" rel="noopener noreferrer"
+                  href="/plans"
                   className="text-base font-semibold bg-[#FF6600] text-white px-6 py-3 rounded hover:bg-[#FF6600]/80 transition-colors text-center"
                 >
-                  Athlete Tracking Passport
+                  Athlete Tracking Passport & Recruiting
                 </Link>
                 <span className="text-sm text-gray-400 italic mt-2">Athlete&apos;s Performance Journey</span>
               </div>

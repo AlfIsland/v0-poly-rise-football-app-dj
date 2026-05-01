@@ -104,8 +104,8 @@ export default function PlansPage() {
             <p className="text-gray-400 mt-1 text-xs sm:text-sm">→ <span className="text-gray-300 font-semibold">Passport</span></p>
           </div>
           <div className="border-l border-r border-gray-700 px-2 py-1">
-            <p className="text-gray-500 text-xs uppercase tracking-widest mb-1 hidden sm:block">Early High School</p>
-            <p className="text-white font-semibold text-xs sm:text-sm">Grades 9–10</p>
+            <p className="text-gray-500 text-xs uppercase tracking-widest mb-1 hidden sm:block">High School</p>
+            <p className="text-white font-semibold text-xs sm:text-sm">Grades 9–12</p>
             <p className="text-gray-400 mt-1 text-xs sm:text-sm">→ <span className="text-red-400 font-semibold">Recruit</span></p>
           </div>
           <div className="py-1">

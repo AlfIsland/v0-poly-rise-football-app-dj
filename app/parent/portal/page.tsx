@@ -523,6 +523,70 @@ function Portal() {
           </div>
         )}
 
+        {/* Recruiting Profile Share Card — Recruit & Elite Recruit */}
+        {hasAccess && athletes.length > 0 && (parent?.tier === "recruit" || parent?.tier === "elite-recruit") && (
+          <div className="bg-gradient-to-br from-blue-950/60 to-gray-900 border border-blue-700/40 rounded-2xl p-5 space-y-4">
+            <div className="flex items-center gap-2">
+              <div className="w-1.5 h-5 bg-blue-500 rounded-full" />
+              <h2 className="text-sm font-black text-white uppercase tracking-widest">Your Recruiting Profile</h2>
+              <span className="ml-auto text-xs bg-blue-900/50 text-blue-300 border border-blue-700/40 px-2 py-0.5 rounded-full font-bold uppercase">Live</span>
+            </div>
+            <p className="text-sm text-gray-300">
+              Your athlete has a <strong className="text-white">public recruiting profile</strong> with verified combine metrics, film, and contact info for college coaches.
+              Share this link anywhere — text it to coaches, add it to Hudl bio, post it on X.
+            </p>
+
+            {/* Profile URL box */}
+            <div className="bg-black/40 border border-blue-800/40 rounded-xl px-4 py-3 flex items-center justify-between gap-3 flex-wrap">
+              <p className="text-blue-300 font-mono text-sm font-bold break-all">
+                polyrisefootball.com/athlete/{athletes[0].id}
+              </p>
+              <a href={`/athlete/${athletes[0].id}`} target="_blank" rel="noopener noreferrer"
+                className="shrink-0 bg-blue-600 hover:bg-blue-500 text-white text-xs font-bold px-4 py-2 rounded-lg transition-colors">
+                Open Profile ↗
+              </a>
+            </div>
+
+            {/* What's on the profile */}
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
+              {[
+                { icon: "📊", label: "Verified Metrics" },
+                { icon: "🏅", label: "PR-VERIFIED Seal" },
+                { icon: "🎬", label: "Hudl Film Link" },
+                { icon: "📩", label: "Coach Contact Info" },
+              ].map(f => (
+                <div key={f.label} className="bg-white/5 rounded-xl px-3 py-2.5 text-center">
+                  <p className="text-base">{f.icon}</p>
+                  <p className="text-xs text-gray-400 mt-1">{f.label}</p>
+                </div>
+              ))}
+            </div>
+
+            <p className="text-xs text-gray-600">
+              Tip: Copy the link above and text it directly to a college coach or recruiting coordinator.
+            </p>
+          </div>
+        )}
+
+        {/* Upgrade prompt — Passport subscribers */}
+        {hasAccess && parent?.tier === "passport" && athletes.length > 0 && (
+          <div className="bg-gray-900 border border-gray-700 rounded-2xl p-5">
+            <div className="flex items-start gap-4">
+              <div className="text-3xl shrink-0">🔒</div>
+              <div className="flex-1">
+                <p className="text-white font-bold text-sm">Unlock Your Recruiting Profile</p>
+                <p className="text-gray-400 text-xs mt-1 mb-3">
+                  Upgrade to <strong className="text-red-400">Recruit ($29.99/mo)</strong> to get a shareable public profile page with verified metrics, film, and direct coach contact info — the link you send to college coaches.
+                </p>
+                <a href="/parent/register"
+                  className="inline-block bg-red-600 hover:bg-red-700 text-white text-xs font-bold px-5 py-2.5 rounded-xl transition-colors">
+                  Upgrade to Recruit →
+                </a>
+              </div>
+            </div>
+          </div>
+        )}
+
         {/* Camp Suggestions */}
         {hasAccess && (
           <CampSuggestions

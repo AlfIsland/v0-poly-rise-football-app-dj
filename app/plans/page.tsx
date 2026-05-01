@@ -23,7 +23,7 @@ export default function PlansPage() {
           <span className="text-red-500">Is Anyone Watching?</span>
         </h1>
         <p className="text-gray-300 text-lg md:text-xl leading-relaxed max-w-2xl mx-auto">
-          Every week athletes train, sweat, and grind — but without verified metrics and a professional profile, college coaches and recruiters simply can&apos;t find them. PolyRISE changes that.
+          Every week athletes train, sweat, and grind — but without verified metrics and a professional profile, college coaches and recruiters simply can&apos;t find them. PolyRISE Football changes that.
         </p>
       </div>
 
@@ -37,12 +37,12 @@ export default function PlansPage() {
 
       {/* The Story */}
       <div className="max-w-3xl mx-auto px-6 py-16 text-center">
-        <p className="text-red-500 font-black text-xs uppercase tracking-widest mb-4">The PolyRISE Difference</p>
+        <p className="text-red-500 font-black text-xs uppercase tracking-widest mb-4">The PolyRISE Football Difference</p>
         <h2 className="text-3xl md:text-4xl font-black text-white mb-6 leading-tight">
           We Don&apos;t Just Track Athletes.<br />We Build Their Legacy.
         </h2>
         <p className="text-gray-300 text-base md:text-lg leading-relaxed mb-6">
-          PolyRISE was built by coaches who played and coached at the highest level — NFL, XFL, collegiate — coaches who know exactly what scouts look for and what separates a recruited athlete from one who gets overlooked.
+          PolyRISE Football was built by coaches who played and coached at the highest level — NFL, XFL, collegiate — coaches who know exactly what scouts look for and what separates a recruited athlete from one who gets overlooked.
         </p>
         <p className="text-gray-300 text-base md:text-lg leading-relaxed">
           Every metric we record is coach-verified. Every profile we build is designed to be found. Every spotlight we post puts your athlete in front of real college programs. This isn&apos;t a highlights app. <strong className="text-white">This is a recruiting machine built for your child.</strong>
@@ -142,7 +142,7 @@ export default function PlansPage() {
               "Hudl film linked directly to your profile",
               "Monthly X (Twitter) spotlight to college recruiters",
               "1 Free Combine Camp per month",
-              "Profile visible to PolyRISE recruiting network",
+              "Profile visible to PolyRISE Football recruiting network",
             ].map(f => (
               <div key={f} className="flex items-start gap-3 text-sm text-gray-300">
                 <span className="mt-0.5 w-4 h-4 rounded-full flex-shrink-0 flex items-center justify-center bg-red-500">
@@ -182,9 +182,9 @@ export default function PlansPage() {
               "Everything in Recruit",
               "Quarterly 1-on-1 Kevin Garrett development report",
               "College program fit analysis by position & grade",
-              "Prospect ranking among PolyRISE athletes",
+              "Prospect ranking among PolyRISE Football athletes",
               "1 Free Combine Camp per month",
-              "Early access to all PolyRISE camps & events",
+              "Early access to all PolyRISE Football camps & events",
               "Direct line to Kevin Garrett — Former NFL",
             ].map(f => (
               <div key={f} className="flex items-start gap-3 text-sm text-gray-300">
@@ -212,7 +212,7 @@ export default function PlansPage() {
           <div className="text-center">
             <div className="text-4xl mb-4">🔴</div>
             <h3 className="font-black text-white text-lg mb-2">PR-VERIFIED Seal</h3>
-            <p className="text-gray-400 text-sm leading-relaxed">Every metric is recorded by a PolyRISE coach on-site using pro-combine protocols. No self-reported numbers. No inflated times. Just the truth — and that&apos;s what scouts respect.</p>
+            <p className="text-gray-400 text-sm leading-relaxed">Every metric is recorded by a PolyRISE Football coach on-site using pro-combine protocols. No self-reported numbers. No inflated times. Just the truth — and that&apos;s what scouts respect.</p>
           </div>
           <div className="text-center">
             <div className="text-4xl mb-4">📊</div>
@@ -234,7 +234,7 @@ export default function PlansPage() {
         <Link href="/parent/register" className="inline-block bg-red-600 hover:bg-red-500 text-white font-black text-lg px-10 py-4 rounded-xl transition-colors tracking-wide shadow-lg shadow-red-900/40">
           Register Your Athlete Today
         </Link>
-        <p className="text-gray-600 text-xs mt-4">After registering, a PolyRISE coach will link your account to your athlete. Questions? <a href="mailto:polyrise@polyrisefootball.com" className="text-red-500 hover:text-red-400 underline">polyrise@polyrisefootball.com</a></p>
+        <p className="text-gray-600 text-xs mt-4">After registering, a PolyRISE Football coach will link your account to your athlete. Questions? <a href="mailto:polyrise@polyrisefootball.com" className="text-red-500 hover:text-red-400 underline">polyrise@polyrisefootball.com</a></p>
       </div>
 
       {/* Footer */}

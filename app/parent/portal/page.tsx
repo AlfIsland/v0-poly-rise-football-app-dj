@@ -591,8 +591,11 @@ function Portal() {
                   <div className="w-8 h-8 rounded-full bg-yellow-700 flex items-center justify-center text-white font-black text-xs shrink-0">KG</div>
                   <div>
                     <p className="text-yellow-300 text-xs font-bold">Questions about your recruiting path?</p>
-                    <a href="mailto:kg@polyrisefootball.com" className="text-gray-400 text-xs hover:text-white transition-colors">
+                    <a href="mailto:kg@polyrisefootball.com" className="text-gray-400 text-xs hover:text-white transition-colors block">
                       Kevin Garrett · kg@polyrisefootball.com
+                    </a>
+                    <a href="mailto:polyrise@polyrisefootball.com" className="text-gray-400 text-xs hover:text-white transition-colors block">
+                      polyrise@polyrisefootball.com
                     </a>
                   </div>
                 </div>

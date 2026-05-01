@@ -218,7 +218,7 @@ export default function ParentGuidePage() {
               <p className="text-gray-500 text-xs">Elite Recruit subscribers receive a quarterly personal development report from Coach Garrett</p>
             </div>
           </div>
-          <p className="text-xs text-gray-600">Questions about recruiting? Contact Coach Garrett directly: <strong>kg@polyrisefootball.com</strong></p>
+          <p className="text-xs text-gray-600">Questions about recruiting? Contact Coach Garrett: <strong>kg@polyrisefootball.com</strong> · <strong>polyrise@polyrisefootball.com</strong></p>
         </div>
 
         {/* FAQ */}

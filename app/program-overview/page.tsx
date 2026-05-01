@@ -242,7 +242,7 @@ export default function ProgramOverviewPage() {
               {[
                 { label: "Create Parent Account / Subscribe", url: "polyrisefootball.com/parent/register" },
                 { label: "Log In to Parent Portal", url: "polyrisefootball.com/parent/login" },
-                { label: "Recruiting inquiries", url: "kg@polyrisefootball.com" },
+                { label: "Recruiting inquiries", url: "kg@polyrisefootball.com · polyrise@polyrisefootball.com" },
               ].map(l => (
                 <div key={l.label} className="flex items-center justify-between gap-2">
                   <span className="text-xs text-gray-600 font-medium">{l.label}</span>
@@ -265,7 +265,7 @@ export default function ProgramOverviewPage() {
             <p className="text-xs font-black text-red-600 uppercase tracking-widest mb-1">Questions? We&apos;re Here.</p>
             <p className="text-gray-700 text-sm font-bold">(817) 658-3300</p>
             <p className="text-gray-500 text-sm">polyrise@polyrisefootball.com</p>
-            <p className="text-gray-400 text-xs mt-1">Recruiting: kg@polyrisefootball.com</p>
+            <p className="text-gray-400 text-xs mt-1">Recruiting: kg@polyrisefootball.com · polyrise@polyrisefootball.com</p>
             <p className="text-gray-400 text-xs mt-3">PolyRISE Football · Dripping Springs, TX · polyrisefootball.com</p>
           </div>
           <div className="text-right text-xs text-gray-400 shrink-0">

@@ -290,12 +290,19 @@ export default async function AthleteProfilePage({ params }: { params: { id: str
               <a href="mailto:kg@polyrisefootball.com" className="text-red-400 hover:text-red-300 text-xs font-bold mt-1 inline-block">
                 kg@polyrisefootball.com
               </a>
+              <a href="mailto:polyrise@polyrisefootball.com" className="text-red-400 hover:text-red-300 text-xs font-bold mt-0.5 inline-block">
+                polyrise@polyrisefootball.com
+              </a>
             </div>
           </div>
           <div className="flex flex-wrap gap-2">
             <a href="mailto:kg@polyrisefootball.com"
               className="text-xs bg-red-600 hover:bg-red-700 text-white font-bold px-4 py-2 rounded-xl transition-colors">
               Email Kevin Garrett
+            </a>
+            <a href="mailto:polyrise@polyrisefootball.com"
+              className="text-xs bg-white/10 hover:bg-white/20 text-gray-300 font-semibold px-4 py-2 rounded-xl border border-white/10 transition-colors">
+              Email PolyRISE
             </a>
             <a href="tel:+18176583300"
               className="text-xs bg-white/10 hover:bg-white/20 text-gray-300 font-semibold px-4 py-2 rounded-xl border border-white/10 transition-colors">

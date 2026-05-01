@@ -31,8 +31,8 @@ const PLANS: PlanOption[] = [
     name: "Elite Recruit",
     price: "$49.99",
     period: "/month",
-    badge: "MOST POPULAR",
-    badgeColor: "bg-yellow-500",
+    badge: "COMING SOON",
+    badgeColor: "bg-gray-600",
     borderSelected: "border-yellow-500",
     borderUnselected: "border-gray-700",
     radioSelected: "border-yellow-500",
@@ -55,8 +55,8 @@ const PLANS: PlanOption[] = [
     name: "Recruit",
     price: "$29.99",
     period: "/month",
-    badge: null,
-    badgeColor: "",
+    badge: "MOST POPULAR",
+    badgeColor: "bg-red-600",
     borderSelected: "border-red-500",
     borderUnselected: "border-gray-700",
     radioSelected: "border-red-500",
@@ -216,8 +216,10 @@ export default function ParentRegisterPage() {
             </div>
 
             {PLANS.map(p => (
-              <button key={p.id} onClick={() => setPlan(p.id)}
-                className={`w-full rounded-2xl p-5 text-left transition-all border-2 relative ${plan === p.id ? p.borderSelected + " bg-gray-900" : p.borderUnselected + " bg-gray-900 hover:border-gray-500"}`}>
+              <button key={p.id}
+                onClick={() => p.id !== "elite-recruit" && setPlan(p.id)}
+                disabled={p.id === "elite-recruit"}
+                className={`w-full rounded-2xl p-5 text-left transition-all border-2 relative ${p.id === "elite-recruit" ? "border-gray-700 bg-gray-900/50 opacity-60 cursor-not-allowed" : plan === p.id ? p.borderSelected + " bg-gray-900" : p.borderUnselected + " bg-gray-900 hover:border-gray-500"}`}>
                 {p.badge && (
                   <span className={`absolute top-3 right-3 ${p.badgeColor} text-white text-xs font-black px-2 py-0.5 rounded-full`}>{p.badge}</span>
                 )}
@@ -273,8 +275,7 @@ export default function ParentRegisterPage() {
                 <p className="text-white font-bold text-sm">{planLabel(plan)}</p>
                 <button onClick={() => setStep("plan")} className="text-xs text-gray-500 hover:text-gray-300 underline">Change plan</button>
               </div>
-              {plan === "elite-recruit" && <span className="text-xs bg-yellow-500 text-black px-2 py-0.5 rounded-full font-black">MOST POPULAR</span>}
-              {plan === "recruit" && <span className="text-xs bg-red-700 text-white px-2 py-0.5 rounded-full font-bold">RECRUIT</span>}
+              {plan === "recruit" && <span className="text-xs bg-red-600 text-white px-2 py-0.5 rounded-full font-black">MOST POPULAR</span>}
             </div>
 
             <div className="px-6 py-5 space-y-4">

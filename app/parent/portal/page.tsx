@@ -53,6 +53,10 @@ function Portal() {
   const [loading, setLoading] = useState(true)
   const [managingBilling, setManagingBilling] = useState(false)
   const [activeTab, setActiveTab] = useState<Record<string, "overview" | "history" | "chart">>({})
+  const [editingAthlete, setEditingAthlete] = useState<string | null>(null)
+  const [editFields, setEditFields] = useState<Record<string, { position: string; school: string; grade: string }>>({})
+  const [editSaving, setEditSaving] = useState(false)
+  const [editError, setEditError] = useState("")
   const router = useRouter()
   const searchParams = useSearchParams()
   const success = searchParams.get("success")
@@ -94,6 +98,38 @@ function Portal() {
     const data = await res.json()
     if (data.url) window.location.href = data.url
     setManagingBilling(false)
+  }
+
+  const startEdit = (athlete: Athlete) => {
+    setEditFields(prev => ({
+      ...prev,
+      [athlete.id]: { position: athlete.position ?? "", school: athlete.school ?? "", grade: athlete.grade ?? "" }
+    }))
+    setEditingAthlete(athlete.id)
+    setEditError("")
+  }
+
+  const saveEdit = async (athleteId: string) => {
+    setEditSaving(true)
+    setEditError("")
+    const fields = editFields[athleteId]
+    try {
+      const res = await fetch("/api/parent/athlete", {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ athleteId, ...fields }),
+      })
+      const data = await res.json()
+      if (data.success) {
+        setAthletes(prev => prev.map(a => a.id === athleteId ? { ...a, ...fields } : a))
+        setEditingAthlete(null)
+      } else {
+        setEditError(data.error ?? "Failed to save")
+      }
+    } catch {
+      setEditError("Something went wrong.")
+    }
+    setEditSaving(false)
   }
 
   if (loading) return (
@@ -214,24 +250,55 @@ function Portal() {
                     </p>
                   </div>
                 </div>
-                {/* Badges row — below info on all screen sizes */}
-                {(prvRecords[athlete.id] || parent?.tier === "recruit" || parent?.tier === "elite-recruit") && (
-                  <div className="flex flex-wrap gap-2 mt-3">
-                    {prvRecords[athlete.id] && (
-                      <a href={prvRecords[athlete.id]!.verifyUrl} target="_blank" rel="noopener noreferrer"
-                        className="flex items-center gap-2 bg-red-950/60 border border-red-800/50 rounded-xl px-3 py-2 hover:bg-red-900/60 transition-colors">
-                        <span className="text-red-400 text-xs font-bold uppercase tracking-widest">PR-VERIFIED</span>
-                        <span className="font-mono text-white text-xs font-bold">{prvRecords[athlete.id]!.code}</span>
-                        <span className="text-red-600 text-xs">→</span>
-                      </a>
-                    )}
-                    {(parent?.tier === "recruit" || parent?.tier === "elite-recruit") && (
-                      <a href={`/athlete/${athlete.id}`} target="_blank" rel="noopener noreferrer"
-                        className="flex items-center gap-2 bg-blue-950/60 border border-blue-800/50 rounded-xl px-3 py-2 hover:bg-blue-900/60 transition-colors">
-                        <span className="text-blue-400 text-xs font-bold uppercase tracking-widest">Recruiting Profile</span>
-                        <span className="text-blue-600 text-xs">↗</span>
-                      </a>
-                    )}
+                {/* Badges + Edit row */}
+                <div className="flex flex-wrap items-center gap-2 mt-3">
+                  {prvRecords[athlete.id] && (
+                    <a href={prvRecords[athlete.id]!.verifyUrl} target="_blank" rel="noopener noreferrer"
+                      className="flex items-center gap-2 bg-red-950/60 border border-red-800/50 rounded-xl px-3 py-2 hover:bg-red-900/60 transition-colors">
+                      <span className="text-red-400 text-xs font-bold uppercase tracking-widest">PR-VERIFIED</span>
+                      <span className="font-mono text-white text-xs font-bold">{prvRecords[athlete.id]!.code}</span>
+                      <span className="text-red-600 text-xs">→</span>
+                    </a>
+                  )}
+                  {(parent?.tier === "recruit" || parent?.tier === "elite-recruit") && (
+                    <a href={`/athlete/${athlete.id}`} target="_blank" rel="noopener noreferrer"
+                      className="flex items-center gap-2 bg-blue-950/60 border border-blue-800/50 rounded-xl px-3 py-2 hover:bg-blue-900/60 transition-colors">
+                      <span className="text-blue-400 text-xs font-bold uppercase tracking-widest">Recruiting Profile</span>
+                      <span className="text-blue-600 text-xs">↗</span>
+                    </a>
+                  )}
+                  <button onClick={() => editingAthlete === athlete.id ? setEditingAthlete(null) : startEdit(athlete)}
+                    className="flex items-center gap-1.5 bg-gray-700 hover:bg-gray-600 border border-gray-600 rounded-xl px-3 py-2 transition-colors ml-auto">
+                    <span className="text-gray-300 text-xs font-semibold">{editingAthlete === athlete.id ? "Cancel" : "Edit Info"}</span>
+                  </button>
+                </div>
+
+                {/* Inline edit form */}
+                {editingAthlete === athlete.id && (
+                  <div className="mt-4 pt-4 border-t border-gray-700 space-y-3">
+                    <p className="text-xs text-gray-400 font-semibold uppercase tracking-wider">Update Athlete Info</p>
+                    {editError && <p className="text-xs text-red-400">{editError}</p>}
+                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                      <div>
+                        <label className="block text-xs text-gray-500 mb-1">Position</label>
+                        <input value={editFields[athlete.id]?.position ?? ""} onChange={e => setEditFields(p => ({ ...p, [athlete.id]: { ...p[athlete.id], position: e.target.value } }))}
+                          placeholder="e.g. WR, QB, CB" className="w-full bg-gray-900 text-white text-sm rounded-lg px-3 py-2 border border-gray-700 focus:border-red-500 focus:outline-none" />
+                      </div>
+                      <div>
+                        <label className="block text-xs text-gray-500 mb-1">School</label>
+                        <input value={editFields[athlete.id]?.school ?? ""} onChange={e => setEditFields(p => ({ ...p, [athlete.id]: { ...p[athlete.id], school: e.target.value } }))}
+                          placeholder="School name" className="w-full bg-gray-900 text-white text-sm rounded-lg px-3 py-2 border border-gray-700 focus:border-red-500 focus:outline-none" />
+                      </div>
+                      <div>
+                        <label className="block text-xs text-gray-500 mb-1">Grade</label>
+                        <input value={editFields[athlete.id]?.grade ?? ""} onChange={e => setEditFields(p => ({ ...p, [athlete.id]: { ...p[athlete.id], grade: e.target.value } }))}
+                          placeholder="e.g. 9th, 10th" className="w-full bg-gray-900 text-white text-sm rounded-lg px-3 py-2 border border-gray-700 focus:border-red-500 focus:outline-none" />
+                      </div>
+                    </div>
+                    <button onClick={() => saveEdit(athlete.id)} disabled={editSaving}
+                      className="bg-red-600 hover:bg-red-700 disabled:bg-gray-700 text-white text-xs font-bold px-5 py-2 rounded-xl transition-colors">
+                      {editSaving ? "Saving..." : "Save Changes"}
+                    </button>
                   </div>
                 )}
               </div>
@@ -348,6 +415,14 @@ function Portal() {
                         </div>
                       )}
 
+                      {/* Latest session notes */}
+                      {current?.notes && (
+                        <div className="bg-gray-800 border border-gray-700 rounded-xl px-4 py-3">
+                          <p className="text-xs text-yellow-400 font-bold uppercase tracking-wider mb-1">Coach Notes — Latest Session</p>
+                          <p className="text-sm text-gray-300 leading-relaxed">{current.notes}</p>
+                        </div>
+                      )}
+
                       <div className="border-t border-gray-800 pt-3">
                         <p className="text-xs text-gray-600">
                           Test dates: {sessions.map(s => new Date(s.date).toLocaleDateString("en-US", { month: "short", day: "numeric" })).join(" · ")}
@@ -401,7 +476,7 @@ function Portal() {
                               </tr>
                               {s.notes && (
                                 <tr className="border-b border-gray-800/30">
-                                  <td colSpan={9} className="px-2 pb-2 pt-0 text-xs text-gray-500 italic">
+                                  <td colSpan={11} className="px-2 pb-2 pt-0 text-xs text-gray-500 italic">
                                     Note: {s.notes}
                                   </td>
                                 </tr>

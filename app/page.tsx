@@ -1,4 +1,4 @@
-import { ArrowRight, Trophy, Users, Target, Calendar, MapPin, CheckCircle2 } from "lucide-react"
+import { ArrowRight, Trophy, Users, Target, MapPin } from "lucide-react"
 import Link from "next/link"
 import Image from "next/image"
 import { ProtectedImage } from "@/components/protected-image"
@@ -43,10 +43,10 @@ export default function HomePage() {
                 Contact
               </Link>
               <Link
-                href="https://app.teamlinkt.com/register/find/polyrisefootball" target="_blank" rel="noopener noreferrer"
+                href="/plans"
                 className="text-sm font-medium bg-[#FF6600] text-white px-4 py-2 rounded hover:bg-[#FF6600]/80 transition-colors"
               >
-                Register Now
+                View Plans
               </Link>
             </div>
           </nav>
@@ -225,392 +225,128 @@ export default function HomePage() {
 
 
       {/* Programs Preview */}
-      <section id="programs" className="py-12 lg:py-20">
+      <section id="programs" className="py-12 lg:py-20 bg-gray-950">
         <div className="container mx-auto px-4 lg:px-8">
-          <div className="flex items-end justify-between mb-12">
-            <div className="space-y-4">
-              <h2 className="text-4xl lg:text-5xl font-display font-bold">Programs</h2>
-              <p className="text-lg text-muted-foreground">Training packages designed for every level of commitment</p>
+          <div className="text-center mb-4">
+            <p className="text-red-500 font-bold text-xs uppercase tracking-widest mb-3">PolyRISE Football</p>
+            <h2 className="text-4xl lg:text-5xl font-display font-bold text-white">Plans & Pricing</h2>
+            <p className="text-lg text-gray-400 mt-3 max-w-xl mx-auto">Every athlete is at a different stage. Pick the plan that fits where your child is right now.</p>
+          </div>
+
+          {/* Grade Guide */}
+          <div className="max-w-2xl mx-auto mb-10 mt-8">
+            <div className="bg-gray-900 border border-gray-700 rounded-2xl px-6 py-4 grid grid-cols-3 gap-3 text-center text-sm">
+              <div>
+                <p className="text-gray-500 text-xs uppercase tracking-widest mb-1">Middle School</p>
+                <p className="text-white font-semibold">Grades 6–8</p>
+                <p className="text-gray-400 mt-1 text-xs">→ <span className="text-gray-300 font-semibold">Passport</span></p>
+              </div>
+              <div className="border-l border-r border-gray-700 px-2">
+                <p className="text-gray-500 text-xs uppercase tracking-widest mb-1">High School</p>
+                <p className="text-white font-semibold">Grades 9–12</p>
+                <p className="text-gray-400 mt-1 text-xs">→ <span className="text-red-400 font-semibold">Recruit</span></p>
+              </div>
+              <div>
+                <p className="text-gray-500 text-xs uppercase tracking-widest mb-1">Upper HS</p>
+                <p className="text-white font-semibold">Grades 11–12</p>
+                <p className="text-gray-400 mt-1 text-xs">→ <span className="text-yellow-400 font-semibold">Elite Recruit</span></p>
+              </div>
             </div>
-            <Link
-              href="#programs"
-              className="hidden md:inline-flex bg-transparent border border-primary px-4 py-2 rounded hover:bg-primary/10 transition-colors"
-            >
-              View All Programs
-              <ArrowRight className="w-4 h-4 ml-2" />
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+            {/* Passport */}
+            <div className="relative bg-gray-900 rounded-2xl border-2 border-gray-500 flex flex-col overflow-hidden">
+              <div className="p-6">
+                <span className="inline-block text-xs font-semibold px-3 py-1 rounded-full bg-blue-900/50 text-blue-300 border border-blue-700/40 mb-4">All Athletes — Middle School &amp; Up</span>
+                <h3 className="text-2xl font-black text-gray-300">Passport</h3>
+                <div className="flex items-end gap-1 mt-1 mb-2">
+                  <span className="text-4xl font-black text-white">$9.99</span>
+                  <span className="text-gray-500 text-sm mb-1">/month</span>
+                </div>
+                <p className="text-gray-400 text-sm">Track your athlete&apos;s progress from day one</p>
+              </div>
+              <div className="border-t border-gray-800 px-6 py-5 flex-1 space-y-3">
+                {["Monthly progress reports & charts","Full session history","Baseline vs. current comparisons","Downloadable PDF reports"].map(f => (
+                  <div key={f} className="flex items-start gap-2.5 text-sm text-gray-300">
+                    <span className="mt-0.5 w-4 h-4 rounded-full flex-shrink-0 flex items-center justify-center bg-gray-500">
+                      <svg className="w-2.5 h-2.5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}><path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" /></svg>
+                    </span>
+                    {f}
+                  </div>
+                ))}
+              </div>
+              <div className="px-6 pb-6 pt-4">
+                <Link href="/parent/register" className="block w-full text-center font-bold rounded-xl py-3 text-sm bg-gray-700 hover:bg-gray-600 text-white transition-colors">Get Passport</Link>
+              </div>
+            </div>
+
+            {/* Recruit — Most Popular */}
+            <div className="relative bg-gray-900 rounded-2xl border-2 border-red-500 flex flex-col overflow-hidden">
+              <div className="absolute top-0 left-0 right-0 text-center py-1.5 text-xs font-black tracking-widest bg-red-600 text-white">MOST POPULAR</div>
+              <div className="p-6 pt-10">
+                <span className="inline-block text-xs font-semibold px-3 py-1 rounded-full bg-red-900/50 text-red-300 border border-red-700/40 mb-4">High School Athletes — Grades 9–12</span>
+                <h3 className="text-2xl font-black text-red-400">Recruit</h3>
+                <div className="flex items-end gap-1 mt-1 mb-2">
+                  <span className="text-4xl font-black text-white">$29.99</span>
+                  <span className="text-gray-500 text-sm mb-1">/month</span>
+                </div>
+                <p className="text-gray-400 text-sm">Verified metrics + recruiting profile + visibility</p>
+              </div>
+              <div className="border-t border-gray-800 px-6 py-5 flex-1 space-y-3">
+                {["Full athlete metrics tracking","PR-VERIFIED seal on profile","Shareable recruiting profile page","Hudl film linked to profile","Monthly X spotlight to college recruiters","1 Free Combine Camp/Month"].map(f => (
+                  <div key={f} className="flex items-start gap-2.5 text-sm text-gray-300">
+                    <span className="mt-0.5 w-4 h-4 rounded-full flex-shrink-0 flex items-center justify-center bg-red-500">
+                      <svg className="w-2.5 h-2.5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}><path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" /></svg>
+                    </span>
+                    {f}
+                  </div>
+                ))}
+              </div>
+              <div className="px-6 pb-6 pt-4">
+                <Link href="/parent/register" className="block w-full text-center font-bold rounded-xl py-3 text-sm bg-red-600 hover:bg-red-500 text-white transition-colors">Get Recruit</Link>
+              </div>
+            </div>
+
+            {/* Elite Recruit — Coming Soon */}
+            <div className="relative bg-gray-900 rounded-2xl border-2 border-yellow-500 flex flex-col overflow-hidden">
+              {/* Coming Soon overlay */}
+              <div className="absolute inset-0 z-10 flex flex-col items-center justify-center rounded-2xl bg-black/70 backdrop-blur-sm">
+                <span className="text-yellow-400 text-3xl mb-2">🏆</span>
+                <p className="text-white font-black text-xl tracking-widest uppercase">Coming Soon</p>
+                <p className="text-gray-400 text-xs mt-2 text-center px-6">We&apos;re finalizing this package.<br />Check back soon.</p>
+              </div>
+              <div className="p-6">
+                <span className="inline-block text-xs font-semibold px-3 py-1 rounded-full bg-yellow-900/50 text-yellow-300 border border-yellow-700/40 mb-4">High School Athletes — Grades 11–12</span>
+                <h3 className="text-2xl font-black text-yellow-400">Elite Recruit</h3>
+                <div className="flex items-end gap-1 mt-1 mb-2">
+                  <span className="text-4xl font-black text-white">$49.99</span>
+                  <span className="text-gray-500 text-sm mb-1">/month</span>
+                </div>
+                <p className="text-gray-400 text-sm">Full recruiting exposure + player development</p>
+              </div>
+              <div className="border-t border-gray-800 px-6 py-5 flex-1 space-y-3">
+                {["Everything in Recruit","Quarterly Kevin Garrett development report","College program fit suggestions","Prospect ranking by position & grade","1 Free Combine Camp/Month","Early access to all PolyRISE camps & events"].map(f => (
+                  <div key={f} className="flex items-start gap-2.5 text-sm text-gray-300">
+                    <span className="mt-0.5 w-4 h-4 rounded-full flex-shrink-0 flex items-center justify-center bg-yellow-500">
+                      <svg className="w-2.5 h-2.5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}><path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" /></svg>
+                    </span>
+                    {f}
+                  </div>
+                ))}
+              </div>
+              <div className="px-6 pb-6 pt-4">
+                <Link href="/parent/register" className="block w-full text-center font-bold rounded-xl py-3 text-sm bg-yellow-500 hover:bg-yellow-400 text-black transition-colors">Get Elite Recruit</Link>
+              </div>
+            </div>
+          </div>
+
+          <div className="text-center mt-10">
+            <Link href="/plans" className="inline-flex items-center gap-2 bg-white/10 hover:bg-white/20 text-white font-semibold px-6 py-3 rounded-xl border border-white/20 transition-colors text-sm">
+              View Full Plan Details
+              <ArrowRight className="w-4 h-4" />
             </Link>
           </div>
-
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            <div className="bg-card border-primary/50 border-2 overflow-hidden group hover:border-primary transition-colors">
-              <div className="aspect-video relative overflow-hidden">
-                <img
-                  src="/athlete-training-drill.jpg"
-                  alt="Player Development Training"
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                />
-                <div className="absolute top-4 left-4 px-3 py-1 rounded-full bg-background/90 backdrop-blur text-sm font-medium">
-                  Most Popular
-                </div>
-              </div>
-              <div className="pt-6 space-y-4">
-                <div>
-                  <h3 className="text-xl font-display font-bold mb-2">Player Development</h3>
-                  <div className="text-lg font-bold text-white mb-3">$350/mo</div>
-                  <p className="text-muted-foreground text-sm leading-relaxed">
-                    8 sessions a month including SAQ, S&C, football drills, tournament entries, military character building events, PR-Verified Camp and Free Athletic Training Passport (Tracker).
-                  </p>
-                </div>
-                <Link
-                  href="https://app.teamlinkt.com/register/find/polyrisefootball" target="_blank" rel="noopener noreferrer"
-                  className="w-full bg-[#FF6600] text-white px-4 py-2 rounded hover:bg-[#FF6600]/80 transition-colors"
-                >
-                  Register
-                </Link>
-              </div>
-            </div>
-
-            <div className="bg-card border-primary/50 border-2 overflow-hidden group hover:border-primary transition-colors relative">
-              <div className="absolute top-4 right-4 z-10 px-3 py-1 rounded-full bg-primary text-primary-foreground text-xs font-bold">
-                ELITE
-              </div>
-              <div className="aspect-video relative overflow-hidden">
-                <img
-                  src="/elite-360-training.jpg"
-                  alt="360 Elite Training"
-                  className="w-full h-full object-cover object-[50%_35%] group-hover:scale-105 transition-transform duration-300"
-                />
-              </div>
-              <div className="pt-6 space-y-4">
-                <div>
-                  <h3 className="text-xl font-display font-bold mb-2">360 Elite</h3>
-                  <div className="text-lg font-bold text-white mb-3">$500/mo</div>
-                  <p className="text-muted-foreground text-sm leading-relaxed">
-                    Everything in Player Development plus one-on-one coaching from NFL experience staff, recruiting profile,
-                    7 email blasts a month, and exclusive benefits.
-                  </p>
-                </div>
-                <Link
-                  href="https://app.teamlinkt.com/register/find/polyrisefootball" target="_blank" rel="noopener noreferrer"
-                  className="w-full bg-[#FF6600] text-white px-4 py-2 rounded hover:bg-[#FF6600]/80 transition-colors"
-                >
-                  Register
-                </Link>
-              </div>
-            </div>
-
-            {/* PolyRISE Football Tournament */}
-            <div className="bg-card border-primary/50 border-2 overflow-hidden group hover:border-primary transition-colors">
-              <div className="pt-6 space-y-4">
-                <div>
-                  <h3 className="text-xl font-display font-bold mb-1">PolyRISE Football Tournament</h3>
-                  <p className="text-sm font-display font-semibold text-primary italic mb-2">Rise of Warriors</p>
-                  <p className="text-muted-foreground text-sm leading-relaxed mb-2">
-                    Middle School (10-team, May 29th - $400) and High School (8-team, May 30th - $425). Minimum 3
-                    games, single game elimination.
-                  </p>
-                </div>
-                <div className="space-y-2">
-                  <div className="flex items-start gap-2">
-                    <CheckCircle2 className="w-4 h-4 text-primary flex-shrink-0 mt-0.5" />
-                    <span className="text-sm text-muted-foreground">Middle School: 10 teams - $400</span>
-                  </div>
-                  <div className="flex items-start gap-2">
-                    <CheckCircle2 className="w-4 h-4 text-primary flex-shrink-0 mt-0.5" />
-                    <span className="text-sm text-muted-foreground">High School: 8 teams - $425</span>
-                  </div>
-                  <div className="flex items-start gap-2">
-                    <CheckCircle2 className="w-4 h-4 text-primary flex-shrink-0 mt-0.5" />
-                    <span className="text-sm text-muted-foreground">Min. 3 games, single elimination</span>
-                  </div>
-                </div>
-                <Link
-                  href="https://app.teamlinkt.com/register/find/polyrisefootball" target="_blank" rel="noopener noreferrer"
-                  className="w-full bg-[#FF6600] text-white px-4 py-2 rounded hover:bg-[#FF6600]/80 transition-colors"
-                >
-                  Register Team
-                </Link>
-              </div>
-            </div>
-
-            {/* Girls Player Development */}
-            <div className="bg-card border-primary/50 border-2 overflow-hidden group hover:border-primary transition-colors">
-              <div className="pt-6 space-y-4">
-                <div>
-                  <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 mb-3">
-                    <span className="text-sm font-medium text-primary">Girls Program</span>
-                  </div>
-                  <h3 className="text-xl font-display font-bold mb-2">Girls Player Development</h3>
-                  <p className="text-muted-foreground text-sm leading-relaxed mb-4">
-                    Program is on Monday & Friday (5-6:30pm) in May. June and July is player development on Monday & Friday at (1-2:30pm).
-                  </p>
-                </div>
-                <div className="border-t border-dashed border-border pt-4 space-y-3">
-                  <div className="flex items-center justify-between">
-                    <span className="font-medium">2 Days a Week</span>
-                    <span className="text-lg font-bold text-white">$250/mo</span>
-                  </div>
-                </div>
-                <Link
-                  href="https://app.teamlinkt.com/register/find/polyrisefootball" target="_blank" rel="noopener noreferrer"
-                  className="w-full bg-[#FF6600] text-white px-4 py-2 rounded hover:bg-[#FF6600]/80 transition-colors"
-                >
-                  Register
-                </Link>
-              </div>
-            </div>
-
-            {/* Multi-Sport Athlete */}
-            <div className="bg-card border-primary/50 border-2 overflow-hidden group hover:border-primary transition-colors">
-              <div className="pt-6 space-y-4">
-                <div>
-                  <h3 className="text-xl font-display font-bold mb-2">Multi-Sport Athlete</h3>
-                  <div className="text-lg font-bold text-white mb-3">$175/mo</div>
-                  <p className="text-muted-foreground text-sm leading-relaxed">
-                    One day a week (Tue or Thur) with camps/events included.
-                  </p>
-                </div>
-                <Link
-                  href="https://app.teamlinkt.com/register/find/polyrisefootball" target="_blank" rel="noopener noreferrer"
-                  className="w-full bg-[#FF6600] text-white px-4 py-2 rounded hover:bg-[#FF6600]/80 transition-colors"
-                >
-                  Register
-                </Link>
-              </div>
-            </div>
-
-            {/* PR-VERIFIED Combine Camp */}
-            <div className="bg-card border-primary/50 border-2 overflow-hidden group hover:border-primary transition-colors">
-              <div className="pt-6 space-y-4">
-                <div>
-                  <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 mb-3">
-                    <span className="text-sm font-medium text-primary">Camp</span>
-                  </div>
-                  <h3 className="text-xl font-display font-bold mb-2">PR-VERIFIED Combine Camp</h3>
-                  <p className="text-muted-foreground text-sm leading-relaxed mb-2">
-                    Professional Combine Events. H.S Athletes record official metrics.
-                  </p>
-                </div>
-                <div className="border-t border-dashed border-border pt-4 space-y-3">
-                  <div className="flex items-center justify-between">
-                    <span className="font-medium">Camp Registration</span>
-                    <span className="text-lg font-bold text-white">$30</span>
-                  </div>
-                </div>
-                <Link
-                  href="https://app.teamlinkt.com/register/find/polyrisefootball" target="_blank" rel="noopener noreferrer"
-                  className="w-full bg-[#FF6600] text-white px-4 py-2 rounded hover:bg-[#FF6600]/80 transition-colors"
-                >
-                  Register
-                </Link>
-              </div>
-            </div>
-
-            {/* Summer Camp */}
-            <div className="bg-card border-primary/50 border-2 overflow-hidden group hover:border-primary transition-colors">
-              <div className="pt-6 space-y-4">
-                <div>
-                  <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 mb-3">
-                    <span className="text-sm font-medium text-primary">Summer Camp</span>
-                  </div>
-                  <h3 className="text-xl font-display font-bold mb-2">Summer Camp</h3>
-                  <p className="text-muted-foreground text-sm leading-relaxed mb-2">
-                    Athlete Development & Leadership (June & July) - <span className="text-white font-semibold">Limited to 20 spots ONLY</span>
-                  </p>
-                </div>
-                <div className="border-t border-dashed border-border pt-4 space-y-3">
-                  <div>
-                    <div className="flex items-center justify-between">
-                      <span className="font-medium">Elementary (K-5) Summer Camp</span>
-                      <span className="text-lg font-bold text-white">$265/mo</span>
-                    </div>
-                    <p className="text-xs text-muted-foreground">Mon-Thu, 8:00am - 10:00am</p>
-                  </div>
-                  <div>
-                    <div className="flex items-center justify-between">
-                      <span className="font-medium">Middle School Summer Camp</span>
-                      <span className="text-lg font-bold text-white">$265/mo</span>
-                    </div>
-                    <p className="text-xs text-muted-foreground">Mon-Thu, 10:00am - 12:00pm</p>
-                  </div>
-                  <div>
-                    <div className="flex items-center justify-between">
-                      <span className="font-medium">High School Summer Camp</span>
-                      <span className="text-lg font-bold text-white">$265/mo</span>
-                    </div>
-                    <p className="text-xs text-muted-foreground">Mon-Thu, 2:00pm - 4:00pm</p>
-                  </div>
-                </div>
-                <Link
-                  href="https://app.teamlinkt.com/register/find/polyrisefootball" target="_blank" rel="noopener noreferrer"
-                  className="w-full bg-[#FF6600] text-white px-4 py-2 rounded hover:bg-[#FF6600]/80 transition-colors"
-                >
-                  Register Now
-                </Link>
-              </div>
-            </div>
-
-            {/* Recruiting Package */}
-            <div className="bg-card border-primary/50 border-2 overflow-hidden group hover:border-primary transition-colors md:col-span-2 lg:col-span-3">
-              <div className="pt-6 space-y-4">
-                <div className="text-center">
-                  <h2 className="text-4xl lg:text-5xl font-display font-bold mb-6">Recruiting</h2>
-                  <h3 className="text-xl font-display font-bold mb-2 text-white">Kevin Garrett</h3>
-                  <p className="text-xs text-white font-semibold mb-2">Former NFL | COO / Director of PolyRISE Football Recruiting</p>
-                  <p className="text-white text-sm leading-relaxed">
-                    With extensive experience in football recruiting, Kevin leads all operations at PolyRISE Football Recruiting. He personally oversees player profiles, college outreach strategies, and ensures every athlete receives high-quality exposure to the right college programs. Kevin is passionate about helping student-athletes navigate the recruiting process and has helped dozens of players earn opportunities at the collegiate level.
-                  </p>
-                  <p className="text-sm text-white mt-3">
-                    Contact Kevin directly: <a href="mailto:KG@polyrisefootball.com" className="text-red-500 underline hover:text-red-400">KG@polyrisefootball.com</a>
-                  </p>
-                </div>
-                
-                {/* Athlete Profile Examples */}
-                <div className="flex flex-wrap justify-center gap-4 px-4">
-                  <img 
-                    src="/recruiting-athlete-1.jpeg" 
-                    alt="Athlete Introduction Example - James Cabarrus III" 
-                    className="w-48 h-auto rounded-lg border border-primary/20"
-                  />
-                  <img 
-                    src="/recruiting-athlete-2.jpeg" 
-                    alt="Athlete Introduction Example - Gevariah Kneubuhl" 
-                    className="w-48 h-auto rounded-lg border border-primary/20"
-                  />
-                </div>
-
-                <div className="border-t border-dashed border-border pt-4 space-y-4">
-                  <div>
-                    <div className="font-medium text-white mb-1">Option 1 - Basic Exposure Package</div>
-                    <p className="text-xs text-muted-foreground mb-2">Professional player image/profile + 5 emails per month to colleges of your choice</p>
-                    <div className="flex flex-wrap gap-4">
-                      <div className="flex items-center justify-between flex-1 min-w-[150px]">
-                        <span className="text-sm text-muted-foreground">3 Months</span>
-                        <span className="text-lg font-bold text-white">$165</span>
-                      </div>
-                      <div className="flex items-center justify-between flex-1 min-w-[150px]">
-                        <span className="text-sm text-muted-foreground">6 Months</span>
-                        <span className="text-lg font-bold text-white">$330</span>
-                      </div>
-                      <div className="flex items-center justify-between flex-1 min-w-[150px]">
-                        <span className="text-sm text-muted-foreground">12 Months</span>
-                        <span className="text-lg font-bold text-white">$660</span>
-                      </div>
-                    </div>
-                  </div>
-                  <div>
-                    <div className="font-medium text-white mb-1">Option 2 - Enhanced Exposure Package</div>
-                    <p className="text-xs text-muted-foreground mb-2">Professional player image/profile + 10 emails per month to colleges of your choice</p>
-                    <div className="flex flex-wrap gap-4">
-                      <div className="flex items-center justify-between flex-1 min-w-[150px]">
-                        <span className="text-sm text-muted-foreground">3 Months</span>
-                        <span className="text-lg font-bold text-white">$225</span>
-                      </div>
-                      <div className="flex items-center justify-between flex-1 min-w-[150px]">
-                        <span className="text-sm text-muted-foreground">6 Months</span>
-                        <span className="text-lg font-bold text-white">$450</span>
-                      </div>
-                      <div className="flex items-center justify-between flex-1 min-w-[150px]">
-                        <span className="text-sm text-muted-foreground">12 Months</span>
-                        <span className="text-lg font-bold text-white">$900</span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <Link
-                  href="https://app.teamlinkt.com/register/find/polyrisefootball" target="_blank" rel="noopener noreferrer"
-                  className="w-full bg-[#FF6600] text-white px-4 py-2 rounded hover:bg-[#FF6600]/80 transition-colors"
-                >
-                  Register Now
-                </Link>
-              </div>
-            </div>
-          </div>
-
-          {/* High School Recruiting Section */}
-          <div className="mt-12 pt-12 border-t border-border">
-            <div className="text-center mb-8">
-              <h2 className="text-3xl lg:text-4xl font-display font-bold mb-4">Get Noticed by College Coaches</h2>
-              <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-                Our recruiting team, led by Head Coach Kevin Garrett (7-year NFL veteran), is actively helping high school athletes get in front of college programs.
-              </p>
-            </div>
-
-            <div className="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto">
-              {/* Basic Exposure Package */}
-              <div className="bg-card border border-border rounded-lg p-6 hover:border-primary/50 transition-colors">
-                <div className="text-center mb-4">
-                  <h3 className="text-xl font-display font-bold text-white mb-2">Option 1 - Basic Exposure Package</h3>
-                  <ul className="text-muted-foreground text-sm space-y-1">
-                    <li>Professional player profile</li>
-                    <li>5 college emails per month</li>
-                  </ul>
-                </div>
-                <div className="border-t border-dashed border-border pt-4 space-y-2 mb-4">
-                  <div className="flex items-center justify-between">
-                    <span className="text-sm text-muted-foreground">3 Months</span>
-                    <span className="text-lg font-bold text-white">$165</span>
-                  </div>
-                  <div className="flex items-center justify-between">
-                    <span className="text-sm text-muted-foreground">6 Months</span>
-                    <span className="text-lg font-bold text-white">$330</span>
-                  </div>
-                  <div className="flex items-center justify-between">
-                    <span className="text-sm text-muted-foreground">12 Months</span>
-                    <span className="text-lg font-bold text-white">$660</span>
-                  </div>
-                </div>
-                <Link
-                  href="#contact"
-                  className="block w-full text-center bg-[#FF6600] text-white px-4 py-2 rounded hover:bg-[#FF6600]/80 transition-colors"
-                >
-                  Get Started
-                </Link>
-              </div>
-
-              {/* Enhanced Exposure Package */}
-              <div className="bg-card border-2 border-primary/50 rounded-lg p-6 hover:border-primary transition-colors relative">
-                <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-primary text-white text-xs font-semibold px-3 py-1 rounded-full">
-                  Most Popular
-                </div>
-                <div className="text-center mb-4">
-                  <h3 className="text-xl font-display font-bold text-white mb-2">Option 2 - Enhanced Exposure Package</h3>
-                  <ul className="text-muted-foreground text-sm space-y-1">
-                    <li>Professional player profile</li>
-                    <li>10 college emails per month</li>
-                  </ul>
-                </div>
-                <div className="border-t border-dashed border-border pt-4 space-y-2 mb-4">
-                  <div className="flex items-center justify-between">
-                    <span className="text-sm text-muted-foreground">3 Months</span>
-                    <span className="text-lg font-bold text-white">$225</span>
-                  </div>
-                  <div className="flex items-center justify-between">
-                    <span className="text-sm text-muted-foreground">6 Months</span>
-                    <span className="text-lg font-bold text-white">$450</span>
-                  </div>
-                  <div className="flex items-center justify-between">
-                    <span className="text-sm text-muted-foreground">12 Months</span>
-                    <span className="text-lg font-bold text-white">$900</span>
-                  </div>
-                </div>
-                <Link
-                  href="#contact"
-                  className="block w-full text-center bg-[#FF6600] text-white px-4 py-2 rounded hover:bg-[#FF6600]/80 transition-colors"
-                >
-                  Get Started
-                </Link>
-              </div>
-            </div>
-          </div>
-
-          <Link
-            href="#programs"
-            className="w-full mt-8 md:hidden bg-transparent border border-primary px-4 py-2 rounded hover:bg-primary/10 transition-colors"
-          >
-            View All Programs
-            <ArrowRight className="w-4 h-4 ml-2" />
-          </Link>
         </div>
       </section>
 

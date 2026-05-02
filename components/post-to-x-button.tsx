@@ -98,9 +98,16 @@ export default function PostToXButton({ atpId }: { atpId: string; athleteName: s
                 </div>
               </div>
               <p className="text-white text-sm whitespace-pre-wrap leading-relaxed">{previewText}</p>
-              <p className={`text-xs mt-3 font-semibold ${previewText.length > 280 ? "text-red-400" : "text-gray-600"}`}>
-                {previewText.length} / 280 characters {previewText.length > 280 ? "— TOO LONG, X will reject this" : ""}
-              </p>
+              {(() => {
+                // X compresses every URL to 23 chars (t.co wrapping)
+                const twitterLen = previewText.replace(/https?:\/\/\S+/g, (u) => "x".repeat(Math.min(u.length, 23))).length
+                const over = twitterLen > 280
+                return (
+                  <p className={`text-xs mt-3 font-semibold ${over ? "text-red-400" : "text-gray-600"}`}>
+                    {twitterLen} / 280 characters (X-adjusted){over ? " — TOO LONG" : ""}
+                  </p>
+                )
+              })()}
             </div>
 
             <p className="text-gray-500 text-xs">This is exactly what will be posted to X. Review it before confirming.</p>
@@ -114,7 +121,7 @@ export default function PostToXButton({ atpId }: { atpId: string; athleteName: s
               </button>
               <button
                 onClick={handlePost}
-                disabled={previewText.length > 280 || posting}
+                disabled={previewText.replace(/https?:\/\/\S+/g, (u) => "x".repeat(Math.min(u.length, 23))).length > 280 || posting}
                 className="flex-1 px-4 py-2.5 bg-sky-600 hover:bg-sky-500 disabled:opacity-40 disabled:cursor-not-allowed text-white text-sm font-bold rounded-xl transition-colors"
               >
                 {posting ? "Posting…" : "✓ Post to X"}

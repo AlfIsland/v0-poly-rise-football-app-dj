@@ -70,7 +70,7 @@ export async function POST(req: NextRequest) {
     if (videoLink) lines.push(`🎬 ${videoLink}`)
     if (sealCode)  lines.push(`📋 polyrisefootball.com/verify/${sealCode}`)
     lines.push(`📩 kg@polyrisefootball.com | polyrise@polyrisefootball.com`)
-    lines.push(`Kevin Garrett (Former NFL) | #PolyRISE #FootballRecruiting`)
+    lines.push(`Kevin Garrett (Former NFL) | #FootballRecruiting`)
 
     const text = lines.join("\n")
 

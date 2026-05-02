@@ -3,7 +3,8 @@
 import { useState } from "react"
 
 export default function PostToXButton({ atpId }: { atpId: string; athleteName: string }) {
-  const [status, setStatus] = useState<"idle" | "loading" | "preview" | "posting" | "done" | "error">("idle")
+  const [status, setStatus] = useState<"idle" | "loading" | "preview" | "done" | "error">("idle")
+  const [posting, setPosting] = useState(false)
   const [previewText, setPreviewText] = useState("")
   const [error, setError] = useState("")
 
@@ -23,17 +24,15 @@ export default function PostToXButton({ atpId }: { atpId: string; athleteName: s
       } else {
         setError(res.error || "Failed to load preview")
         setStatus("error")
-        setTimeout(() => setStatus("idle"), 5000)
       }
     } catch {
-      setError("Network error")
+      setError("Network error — check your connection")
       setStatus("error")
-      setTimeout(() => setStatus("idle"), 5000)
     }
   }
 
   async function handlePost() {
-    setStatus("posting")
+    setPosting(true)
     try {
       const res = await fetch("/api/admin/post-to-x", {
         method: "POST",
@@ -42,17 +41,18 @@ export default function PostToXButton({ atpId }: { atpId: string; athleteName: s
       }).then(r => r.json())
 
       if (res.success) {
+        setPosting(false)
         setStatus("done")
-        setTimeout(() => setStatus("idle"), 6000)
+        setTimeout(() => setStatus("idle"), 8000)
       } else {
+        setPosting(false)
         setError(res.error || "Failed to post")
         setStatus("error")
-        setTimeout(() => setStatus("idle"), 5000)
       }
     } catch {
-      setError("Network error")
+      setPosting(false)
+      setError("Network error — check your connection")
       setStatus("error")
-      setTimeout(() => setStatus("idle"), 5000)
     }
   }
 
@@ -63,8 +63,9 @@ export default function PostToXButton({ atpId }: { atpId: string; athleteName: s
   )
 
   if (status === "error") return (
-    <span className="text-xs bg-red-900/60 border border-red-700/50 text-red-300 px-3 py-2 rounded-xl font-semibold">
+    <span className="flex items-center gap-2 text-xs bg-red-900/60 border border-red-700/50 text-red-300 px-3 py-2 rounded-xl font-semibold">
       ✕ {error}
+      <button onClick={() => setStatus("idle")} className="text-red-400 hover:text-white ml-1 font-bold">✕</button>
     </span>
   )
 
@@ -97,7 +98,9 @@ export default function PostToXButton({ atpId }: { atpId: string; athleteName: s
                 </div>
               </div>
               <p className="text-white text-sm whitespace-pre-wrap leading-relaxed">{previewText}</p>
-              <p className="text-gray-600 text-xs mt-3">{previewText.length} / 280 characters</p>
+              <p className={`text-xs mt-3 font-semibold ${previewText.length > 280 ? "text-red-400" : "text-gray-600"}`}>
+                {previewText.length} / 280 characters {previewText.length > 280 ? "— TOO LONG, X will reject this" : ""}
+              </p>
             </div>
 
             <p className="text-gray-500 text-xs">This is exactly what will be posted to X. Review it before confirming.</p>
@@ -111,10 +114,10 @@ export default function PostToXButton({ atpId }: { atpId: string; athleteName: s
               </button>
               <button
                 onClick={handlePost}
-                disabled={false}
-                className="flex-1 px-4 py-2.5 bg-sky-600 hover:bg-sky-500 text-white text-sm font-bold rounded-xl transition-colors"
+                disabled={previewText.length > 280 || posting}
+                className="flex-1 px-4 py-2.5 bg-sky-600 hover:bg-sky-500 disabled:opacity-40 disabled:cursor-not-allowed text-white text-sm font-bold rounded-xl transition-colors"
               >
-                ✓ Post to X
+                {posting ? "Posting…" : "✓ Post to X"}
               </button>
             </div>
           </div>

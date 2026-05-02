@@ -15,7 +15,7 @@ function getRedis(): Redis | null {
 export async function POST(req: NextRequest) {
   if (!isAdmin(req)) return NextResponse.json({ success: false, error: "Unauthorized" }, { status: 401 })
 
-  const { atpId, preview } = await req.json()
+  const { atpId, preview, extraTags } = await req.json()
   if (!atpId) return NextResponse.json({ success: false, error: "Missing atpId" }, { status: 400 })
 
   const { TWITTER_API_KEY, TWITTER_API_SECRET, TWITTER_ACCESS_TOKEN, TWITTER_ACCESS_SECRET } = process.env
@@ -73,6 +73,13 @@ export async function POST(req: NextRequest) {
     if (sealCode)  lines.push(`📋 polyrisefootball.com/verify/${sealCode}`)
     lines.push(`📩 kg@polyrisefootball.com | polyrise@polyrisefootball.com`)
     lines.push(`Kevin Garrett (Former NFL) | #FootballRecruiting`)
+
+    // Append extra tagged accounts if provided
+    if (extraTags?.trim()) {
+      const tags = extraTags.trim().split(/[\s,]+/).filter(Boolean)
+        .map((t: string) => t.startsWith("@") ? t : `@${t}`).join(" ")
+      if (tags) lines.push(tags)
+    }
 
     const text = lines.join("\n")
 

@@ -2,15 +2,31 @@
 
 import { useState } from "react"
 
+function twitterLen(text: string) {
+  return text.replace(/https?:\/\/\S+/g, (u) => "x".repeat(Math.min(u.length, 23))).length
+}
+
 export default function PostToXButton({ atpId }: { atpId: string; athleteName: string }) {
   const [status, setStatus] = useState<"idle" | "loading" | "preview" | "done" | "error">("idle")
   const [posting, setPosting] = useState(false)
   const [previewText, setPreviewText] = useState("")
+  const [extraTags, setExtraTags] = useState("")
   const [error, setError] = useState("")
+
+  // Build the full tweet text including any extra tags
+  function fullText() {
+    const tags = extraTags.trim()
+      .split(/[\s,]+/)
+      .filter(Boolean)
+      .map(t => t.startsWith("@") ? t : `@${t}`)
+      .join(" ")
+    return tags ? `${previewText}\n${tags}` : previewText
+  }
 
   async function handlePreview() {
     setStatus("loading")
     setError("")
+    setExtraTags("")
     try {
       const res = await fetch("/api/admin/post-to-x", {
         method: "POST",
@@ -37,7 +53,7 @@ export default function PostToXButton({ atpId }: { atpId: string; athleteName: s
       const res = await fetch("/api/admin/post-to-x", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ atpId }),
+        body: JSON.stringify({ atpId, extraTags: extraTags.trim() || undefined }),
       }).then(r => r.json())
 
       if (res.success) {
@@ -69,6 +85,10 @@ export default function PostToXButton({ atpId }: { atpId: string; athleteName: s
     </span>
   )
 
+  const tweet = fullText()
+  const charCount = twitterLen(tweet)
+  const over = charCount > 280
+
   return (
     <>
       <button
@@ -88,6 +108,17 @@ export default function PostToXButton({ atpId }: { atpId: string; athleteName: s
               <button onClick={() => setStatus("idle")} className="text-gray-500 hover:text-white text-xl leading-none">×</button>
             </div>
 
+            {/* Tag others */}
+            <div>
+              <label className="block text-xs text-gray-400 mb-1.5 font-semibold">Tag additional accounts <span className="text-gray-600 font-normal">(optional — separate with spaces or commas)</span></label>
+              <input
+                value={extraTags}
+                onChange={e => setExtraTags(e.target.value)}
+                placeholder="@CoachSmith, @RecruitingU, @TXHSFB"
+                className="w-full bg-gray-900 border border-gray-700 focus:border-sky-500 focus:outline-none rounded-lg px-3 py-2 text-white text-sm placeholder-gray-600"
+              />
+            </div>
+
             {/* Tweet mockup */}
             <div className="bg-black border border-white/10 rounded-xl p-4">
               <div className="flex items-center gap-2 mb-3">
@@ -97,17 +128,10 @@ export default function PostToXButton({ atpId }: { atpId: string; athleteName: s
                   <p className="text-gray-500 text-xs">@PolyRISEFB</p>
                 </div>
               </div>
-              <p className="text-white text-sm whitespace-pre-wrap leading-relaxed">{previewText}</p>
-              {(() => {
-                // X compresses every URL to 23 chars (t.co wrapping)
-                const twitterLen = previewText.replace(/https?:\/\/\S+/g, (u) => "x".repeat(Math.min(u.length, 23))).length
-                const over = twitterLen > 280
-                return (
-                  <p className={`text-xs mt-3 font-semibold ${over ? "text-red-400" : "text-gray-600"}`}>
-                    {twitterLen} / 280 characters (X-adjusted){over ? " — TOO LONG" : ""}
-                  </p>
-                )
-              })()}
+              <p className="text-white text-sm whitespace-pre-wrap leading-relaxed">{tweet}</p>
+              <p className={`text-xs mt-3 font-semibold ${over ? "text-red-400" : "text-gray-600"}`}>
+                {charCount} / 280 characters{over ? " — TOO LONG" : ""}
+              </p>
             </div>
 
             <p className="text-gray-500 text-xs">This is exactly what will be posted to X. Review it before confirming.</p>
@@ -121,7 +145,7 @@ export default function PostToXButton({ atpId }: { atpId: string; athleteName: s
               </button>
               <button
                 onClick={handlePost}
-                disabled={previewText.replace(/https?:\/\/\S+/g, (u) => "x".repeat(Math.min(u.length, 23))).length > 280 || posting}
+                disabled={over || posting}
                 className="flex-1 px-4 py-2.5 bg-sky-600 hover:bg-sky-500 disabled:opacity-40 disabled:cursor-not-allowed text-white text-sm font-bold rounded-xl transition-colors"
               >
                 {posting ? "Posting…" : "✓ Post to X"}

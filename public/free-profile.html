@@ -428,6 +428,15 @@ body {
 .plan-price span { font-size: 11px; font-weight: 400; color: var(--text-3); }
 .plan-desc { font-size: 11px; color: var(--text-2); margin-top: 6px; line-height: 1.5; }
 .plan-tag { font-size: 10px; color: var(--text-3); margin-top: 4px; font-style: italic; }
+.plan-card.coming-soon { opacity: 0.72; cursor: default; pointer-events: none; border-style: dashed; }
+.plan-card.coming-soon:hover { transform: none; box-shadow: none; border-color: var(--border); }
+.cs-badge {
+  position: absolute; top: -9px; left: 50%; transform: translateX(-50%);
+  background: var(--gold); color: #fff;
+  font-size: 9px; font-weight: 700; letter-spacing: 0.5px;
+  padding: 2px 10px; border-radius: 20px; text-transform: uppercase;
+  white-space: nowrap;
+}
 
 .cta-btn-main {
   display: block; width: 100%;
@@ -710,22 +719,23 @@ body {
         <a href="https://polyrisefootball.com/plans" class="plan-card" target="_blank">
           <div class="plan-name">Passport</div>
           <div class="plan-price">$9.99<span>/mo</span></div>
-          <div class="plan-desc">Progress tracking, session history, downloadable reports</div>
-          <div class="plan-tag">Grades 6–8</div>
+          <div class="plan-desc">Monthly progress reports, session history, baseline comparisons, downloadable PDFs</div>
+          <div class="plan-tag">Grades 4–8</div>
         </a>
         <a href="https://polyrisefootball.com/plans" class="plan-card featured" target="_blank">
           <div class="pop-badge">Most Popular</div>
           <div class="plan-name">Recruit</div>
           <div class="plan-price">$29.99<span>/mo</span></div>
-          <div class="plan-desc">PR-VERIFIED profile, Hudl integration, monthly scout spotlight</div>
+          <div class="plan-desc">PR-VERIFIED profile, Hudl integration, monthly scout spotlight, 1 free combine/mo</div>
           <div class="plan-tag">Grades 9–12</div>
         </a>
-        <a href="https://polyrisefootball.com/plans" class="plan-card" target="_blank">
-          <div class="plan-name">360 Elite</div>
+        <div class="plan-card coming-soon">
+          <div class="cs-badge">Coming Soon</div>
+          <div class="plan-name">Elite Recruit</div>
           <div class="plan-price">$49.99<span>/mo</span></div>
-          <div class="plan-desc">Everything + 1-on-1 NFL coaching, 7 coach email blasts/mo</div>
-          <div class="plan-tag">Grades 11–12</div>
-        </a>
+          <div class="plan-desc">Everything in Recruit + Coach Garrett quarterly report, college fit suggestions, prospect rankings</div>
+          <div class="plan-tag">Grades 11–12 · Finalizing now</div>
+        </div>
       </div>
 
       <a href="https://polyrisefootball.com/plans" class="cta-btn-main" target="_blank">View All Plans & Sign Up →</a>
@@ -1002,6 +1012,11 @@ function restart() {
 </script>
 
 
+<script>
+if (typeof emailjs !== 'undefined' && 'YOUR_EMAILJS_PUBLIC_KEY' !== 'YOUR_EMAILJS_PUBLIC_KEY') {
+  emailjs.init(CONFIG.EMAILJS_KEY);
+}
+</script>
 
 </body>
 </html>

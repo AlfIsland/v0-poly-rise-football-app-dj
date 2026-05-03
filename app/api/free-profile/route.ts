@@ -48,7 +48,7 @@ export async function POST(req: NextRequest) {
 
       await resend.emails.send({
         from: "PolyRISE Lead Magnet <noreply@polyrisefootball.com>",
-        to: "kg@polyrisefootball.com",
+        to: ["kg@polyrisefootball.com", "polyrise@polyrisefootball.com"],
         subject: `New Free Profile Lead — ${name}`,
         html: `
 <!DOCTYPE html>

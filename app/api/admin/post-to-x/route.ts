@@ -64,7 +64,7 @@ export async function POST(req: NextRequest) {
       ? (athlete.twitterHandle.startsWith("@") ? athlete.twitterHandle : `@${athlete.twitterHandle}`)
       : ""
 
-    const grade = (athlete.grade || "").replace(/\b(freshman|sophomore|junior|senior)\b/gi, "").trim().replace(/\s+/g, " ")
+    const grade = (athlete.grade || "").replace(/\b(freshman|sophomore|junior|senior)\b/gi, "").replace(/\(\s*\)/g, "").trim().replace(/\s+/g, " ")
 
     const lines: string[] = []
     const sportEmoji = athlete.sport === "soccer" ? "⚽" : "🏈"

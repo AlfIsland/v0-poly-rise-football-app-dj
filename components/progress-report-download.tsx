@@ -149,7 +149,7 @@ export default function ProgressReportDownload({ athlete }: { athlete: Athlete }
         doc.setFontSize(7); doc.setFont("helvetica", "bold"); doc.setTextColor(52, 211, 153)
         doc.text("MLS LEAGUE / TEAM", margin + 3, y + 4.5)
         doc.setFontSize(9); doc.setFont("helvetica", "bold"); doc.setTextColor(255, 255, 255)
-        doc.text(`⚽  ${athlete.mlsTeam}`, margin + 3, y + 10)
+        doc.text(athlete.mlsTeam, margin + 3, y + 10)
         y += badgeH + 3
       }
 

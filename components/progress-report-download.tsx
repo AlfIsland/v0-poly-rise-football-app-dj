@@ -25,6 +25,8 @@ interface Athlete {
   grade: string
   school: string
   position?: string
+  sport?: string
+  mlsTeam?: string
   coachNotes?: string
   joinedAt: string
   sessions: Session[]
@@ -134,6 +136,23 @@ export default function ProgressReportDownload({ athlete }: { athlete: Athlete }
       ].filter(Boolean).join("  ·  ")
       doc.text(info, margin, y)
       y += 5
+
+      // ── MLS Team badge (soccer only) ──
+      if (athlete.sport === "soccer" && athlete.mlsTeam) {
+        const badgeW = 90
+        const badgeH = 12
+        doc.setFillColor(20, 60, 35)
+        doc.roundedRect(margin, y, badgeW, badgeH, 2, 2, "F")
+        doc.setDrawColor(52, 140, 80)
+        doc.setLineWidth(0.4)
+        doc.roundedRect(margin, y, badgeW, badgeH, 2, 2, "S")
+        doc.setFontSize(7); doc.setFont("helvetica", "bold"); doc.setTextColor(52, 211, 153)
+        doc.text("MLS LEAGUE / TEAM", margin + 3, y + 4.5)
+        doc.setFontSize(9); doc.setFont("helvetica", "bold"); doc.setTextColor(255, 255, 255)
+        doc.text(`⚽  ${athlete.mlsTeam}`, margin + 3, y + 10)
+        y += badgeH + 3
+      }
+
       doc.setFontSize(8); doc.setTextColor(140, 140, 140)
       const joined = new Date(athlete.joinedAt).toLocaleDateString("en-US", { month: "long", year: "numeric" })
       doc.text(`Member since ${joined}  ·  ${sessionCount} test session${sessionCount !== 1 ? "s" : ""}  ·  Athlete ID: ${athlete.id}`, margin, y)

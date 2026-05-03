@@ -99,7 +99,13 @@ export default async function TrainingAthletePage({ params }: { params: { id: st
               </div>
               <p className="text-gray-400 text-sm">{athlete.age} yrs · {athlete.grade} · {athlete.school || "—"}</p>
               {athlete.mlsTeam && (
-                <p className="text-green-400 text-xs mt-0.5 font-semibold">⚽ {athlete.mlsTeam}</p>
+                <div className="mt-1.5 inline-flex items-center gap-1.5 bg-green-900/40 border border-green-700/50 rounded-lg px-2.5 py-1">
+                  <span className="text-sm leading-none">⚽</span>
+                  <div>
+                    <p className="text-xs text-green-500 font-bold uppercase tracking-wider leading-none mb-0.5">MLS League / Team</p>
+                    <p className="text-xs text-green-200 font-semibold leading-none">{athlete.mlsTeam}</p>
+                  </div>
+                </div>
               )}
               <Link href="/training" className="text-xs text-gray-600 hover:text-gray-400 underline mt-0.5 block">← Training Roster</Link>
             </div>

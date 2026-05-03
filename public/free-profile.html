@@ -1,0 +1,1007 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Free Athlete Profile — PolyRISE Football</title>
+<meta name="description" content="Get your athlete's FREE college recruiting profile — built by AI, powered by NFL-experienced coaches. PolyRISE Football, Austin TX."/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Lato:wght@300;400;700&display=swap" rel="stylesheet"/>
+
+<!--
+╔══════════════════════════════════════════════════════════════════════╗
+║       POLYRISE FOOTBALL — AI LEAD MAGNET (Deployable File)         ║
+╠══════════════════════════════════════════════════════════════════════╣
+║                                                                      ║
+║  SETUP REQUIRED — 2 things to configure before deploying:           ║
+║                                                                      ║
+║  1. CRM WEBHOOK (line ~420):                                         ║
+║     Replace CRM_WEBHOOK_URL with your actual endpoint.              ║
+║     If using Zapier/Make: paste your webhook URL there.             ║
+║     If using a custom endpoint: it should accept POST with JSON.    ║
+║                                                                      ║
+║  2. EMAIL ALERT (line ~430):                                         ║
+║     Replace EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID,               ║
+║     and EMAILJS_PUBLIC_KEY with your EmailJS credentials.           ║
+║     Free at emailjs.com — sends alert to kg@polyrisefootball.com    ║
+║                                                                      ║
+║  DEPLOY:                                                             ║
+║     Upload to polyrisefootball.com/free-profile                     ║
+║     Add link to Instagram bio, social posts, QR codes at camp.      ║
+║                                                                      ║
+╚══════════════════════════════════════════════════════════════════════╝
+-->
+
+<style>
+:root {
+  --green: #1A6B3A;
+  --green-dk: #0f4524;
+  --green-lt: #e6f2eb;
+  --green-mid: #2d8a50;
+  --gold: #C8860A;
+  --gold-lt: #fdf3e0;
+  --dark: #0d1b0f;
+  --white: #ffffff;
+  --gray: #f4f6f4;
+  --text: #1a2e1d;
+  --text-2: #4a5e4d;
+  --text-3: #8a9e8d;
+  --border: rgba(26,107,58,0.15);
+  --shadow: 0 2px 20px rgba(13,27,15,0.10);
+  --font-display: 'Barlow Condensed', sans-serif;
+  --font-body: 'Lato', sans-serif;
+  --radius: 12px;
+  --radius-sm: 8px;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: var(--font-body);
+  background: var(--dark);
+  color: var(--text);
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── HERO SECTION ── */
+.hero {
+  background: var(--dark);
+  padding: 48px 20px 56px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.hero::before {
+  content: '';
+  position: absolute;
+  top: -60px; left: 50%;
+  transform: translateX(-50%);
+  width: 600px; height: 300px;
+  background: radial-gradient(ellipse, rgba(26,107,58,0.35) 0%, transparent 70%);
+  pointer-events: none;
+}
+.hero-logo {
+  font-family: var(--font-display);
+  font-size: 13px; font-weight: 700;
+  letter-spacing: 3px; color: var(--green-mid);
+  text-transform: uppercase; margin-bottom: 24px;
+  display: flex; align-items: center; justify-content: center; gap: 8px;
+}
+.hero-logo::before, .hero-logo::after {
+  content: ''; display: block;
+  width: 32px; height: 1px; background: var(--green-mid);
+}
+.hero h1 {
+  font-family: var(--font-display);
+  font-size: clamp(36px, 7vw, 62px);
+  font-weight: 800; line-height: 1.0;
+  color: var(--white); letter-spacing: 1px;
+  margin-bottom: 8px;
+}
+.hero h1 span { color: var(--gold); }
+.hero-sub {
+  font-size: clamp(14px, 3vw, 17px);
+  color: rgba(255,255,255,0.65);
+  font-weight: 300; margin-bottom: 32px;
+  line-height: 1.6; max-width: 520px; margin-left: auto; margin-right: auto;
+}
+.hero-badges {
+  display: flex; flex-wrap: wrap; justify-content: center; gap: 10px;
+  margin-bottom: 0;
+}
+.hero-badge {
+  background: rgba(26,107,58,0.25);
+  border: 1px solid rgba(26,107,58,0.4);
+  color: #7fd4a0;
+  font-size: 11.5px; font-weight: 700;
+  letter-spacing: 0.5px; padding: 5px 14px;
+  border-radius: 20px; text-transform: uppercase;
+}
+
+/* ── MAIN CARD ── */
+.card-wrap {
+  max-width: 640px; margin: 0 auto;
+  padding: 0 16px 60px;
+}
+.card {
+  background: var(--white);
+  border-radius: 20px;
+  box-shadow: 0 24px 80px rgba(0,0,0,0.4);
+  overflow: hidden;
+  margin-top: -8px;
+}
+
+/* ── PROGRESS ── */
+.progress-header {
+  padding: 20px 28px 16px;
+  border-bottom: 1px solid var(--border);
+}
+.progress-steps {
+  display: flex; align-items: center; gap: 0;
+}
+.p-step {
+  display: flex; align-items: center; gap: 8px; flex: 1;
+}
+.p-dot {
+  width: 28px; height: 28px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 11px; font-weight: 700; flex-shrink: 0;
+  transition: all 0.3s;
+}
+.p-dot.done { background: var(--green); color: #fff; }
+.p-dot.active { background: var(--green); color: #fff; box-shadow: 0 0 0 4px rgba(26,107,58,0.2); }
+.p-dot.inactive { background: var(--gray); color: var(--text-3); }
+.p-label { font-size: 11px; font-weight: 700; letter-spacing: 0.3px; color: var(--text-3); transition: color 0.3s; }
+.p-label.active { color: var(--green); }
+.p-line { flex: 1; height: 2px; background: var(--gray); margin: 0 6px; transition: background 0.3s; }
+.p-line.done { background: var(--green); }
+
+/* ── FORM STEPS ── */
+.step { display: none; padding: 28px; }
+.step.active { display: block; }
+.step-title {
+  font-family: var(--font-display);
+  font-size: 22px; font-weight: 700;
+  color: var(--text); margin-bottom: 4px; letter-spacing: 0.3px;
+}
+.step-sub {
+  font-size: 13px; color: var(--text-2);
+  margin-bottom: 24px; line-height: 1.5;
+}
+.field-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.field { display: flex; flex-direction: column; gap: 5px; }
+.field.full { grid-column: 1/-1; }
+.field label {
+  font-size: 11.5px; font-weight: 700;
+  letter-spacing: 0.4px; color: var(--text-2);
+  text-transform: uppercase;
+}
+.field input, .field select, .field textarea {
+  padding: 11px 14px; font-size: 14px;
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--gray); color: var(--text);
+  font-family: var(--font-body);
+  transition: border-color 0.15s, background 0.15s;
+  width: 100%;
+}
+.field input:focus, .field select:focus, .field textarea:focus {
+  outline: none; border-color: var(--green);
+  background: #fff; box-shadow: 0 0 0 3px rgba(26,107,58,0.1);
+}
+.field textarea { resize: vertical; min-height: 90px; }
+.field input::placeholder { color: var(--text-3); }
+.required-note { font-size: 11px; color: var(--text-3); margin-bottom: 16px; }
+
+.metrics-label {
+  font-size: 11.5px; font-weight: 700; letter-spacing: 0.4px;
+  color: var(--text-2); text-transform: uppercase;
+  margin-bottom: 10px; margin-top: 8px;
+}
+.metrics-note {
+  font-size: 11px; color: var(--text-3); margin-bottom: 12px;
+}
+.metric-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 10px; }
+.metric-box {
+  background: var(--gray); border: 1.5px solid var(--border);
+  border-radius: var(--radius-sm); padding: 10px 12px;
+}
+.metric-box label { font-size: 10.5px; font-weight: 700; color: var(--text-3); letter-spacing: 0.3px; text-transform: uppercase; display: block; margin-bottom: 4px; }
+.metric-box input {
+  font-size: 15px; font-weight: 700; color: var(--text);
+  background: transparent; border: none; width: 100%;
+  outline: none; font-family: var(--font-body); padding: 0;
+}
+.metric-box .unit { font-size: 10px; color: var(--text-3); margin-top: 2px; }
+
+/* Email capture gate */
+.gate-wrap {
+  background: linear-gradient(135deg, var(--green-lt) 0%, #fff 100%);
+  border-radius: var(--radius-sm); padding: 20px;
+  border: 1px solid var(--border); margin-bottom: 20px;
+}
+.gate-title {
+  font-family: var(--font-display);
+  font-size: 17px; font-weight: 700;
+  color: var(--green); margin-bottom: 4px;
+}
+.gate-sub { font-size: 13px; color: var(--text-2); margin-bottom: 14px; line-height: 1.5; }
+.privacy-note { font-size: 11px; color: var(--text-3); margin-top: 10px; }
+.privacy-note a { color: var(--green); }
+
+/* nav buttons */
+.nav-row {
+  display: flex; gap: 10px; margin-top: 24px;
+  justify-content: space-between; align-items: center;
+}
+.btn-back {
+  padding: 11px 22px; font-size: 13px; font-weight: 700;
+  border: 1.5px solid var(--border); border-radius: var(--radius-sm);
+  background: transparent; cursor: pointer; color: var(--text-2);
+  font-family: var(--font-body); letter-spacing: 0.3px;
+  transition: all 0.15s;
+}
+.btn-back:hover { background: var(--gray); }
+.btn-next {
+  padding: 13px 28px; font-size: 14px; font-weight: 700;
+  background: var(--green); color: #fff;
+  border: none; border-radius: var(--radius-sm);
+  cursor: pointer; font-family: var(--font-body);
+  letter-spacing: 0.5px; transition: all 0.15s;
+  text-transform: uppercase;
+}
+.btn-next:hover { background: var(--green-dk); transform: translateY(-1px); }
+.btn-next:active { transform: translateY(0); }
+.err { font-size: 12px; color: #d32f2f; margin-top: 8px; display: none; }
+
+/* ── LOADING ── */
+.loading {
+  padding: 60px 28px; text-align: center; display: none;
+}
+.loading.active { display: block; }
+.spinner {
+  width: 48px; height: 48px; border-radius: 50%;
+  border: 3px solid var(--green-lt);
+  border-top-color: var(--green);
+  animation: spin 0.75s linear infinite;
+  margin: 0 auto 20px;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+.loading-title {
+  font-family: var(--font-display);
+  font-size: 20px; font-weight: 700; color: var(--text); margin-bottom: 6px;
+}
+.loading-sub { font-size: 13px; color: var(--text-2); }
+.loading-items { margin-top: 20px; display: flex; flex-direction: column; gap: 8px; max-width: 240px; margin-left: auto; margin-right: auto; }
+.l-item { font-size: 12px; display: flex; align-items: center; gap: 8px; color: var(--text-3); }
+.l-item.done { color: var(--green); }
+.l-item.active-item { color: var(--text-2); font-weight: 700; }
+.l-dot { width: 6px; height: 6px; border-radius: 50%; background: currentColor; flex-shrink: 0; }
+.l-item.active-item .l-dot { animation: blink 0.8s infinite; }
+@keyframes blink { 0%,100%{opacity:1}50%{opacity:0.3} }
+
+/* ── PROFILE OUTPUT ── */
+.profile-wrap { display: none; }
+.profile-wrap.active { display: block; }
+
+.profile-top {
+  background: var(--green);
+  padding: 28px;
+  position: relative; overflow: hidden;
+}
+.profile-top::before {
+  content: '';
+  position: absolute; top: -40px; right: -40px;
+  width: 180px; height: 180px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.06);
+}
+.profile-top::after {
+  content: '';
+  position: absolute; bottom: -60px; left: 20px;
+  width: 140px; height: 140px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.04);
+}
+.pr-badge-row {
+  display: flex; align-items: center; gap: 8px; margin-bottom: 14px;
+}
+.pr-badge {
+  background: rgba(255,255,255,0.18);
+  border: 1px solid rgba(255,255,255,0.3);
+  color: #fff; font-size: 10px; font-weight: 700;
+  letter-spacing: 1px; padding: 4px 12px;
+  border-radius: 20px; text-transform: uppercase;
+}
+.profile-name {
+  font-family: var(--font-display);
+  font-size: 34px; font-weight: 800;
+  color: #fff; line-height: 1.0; margin-bottom: 6px;
+  position: relative; z-index: 1;
+}
+.profile-pos {
+  font-size: 13px; color: rgba(255,255,255,0.75);
+  position: relative; z-index: 1;
+}
+
+.profile-body { padding: 24px 28px; }
+.section-lbl {
+  font-size: 10px; font-weight: 700; letter-spacing: 1.5px;
+  color: var(--text-3); text-transform: uppercase;
+  margin-bottom: 10px; margin-top: 22px;
+}
+.section-lbl:first-child { margin-top: 0; }
+
+.bio-text {
+  font-size: 14px; line-height: 1.75; color: var(--text);
+}
+
+.stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(90px,1fr)); gap: 8px; }
+.stat-box {
+  background: var(--gray); border-radius: var(--radius-sm);
+  padding: 12px 10px; text-align: center;
+}
+.stat-val { font-family: var(--font-display); font-size: 22px; font-weight: 700; color: var(--text); line-height: 1; }
+.stat-unit { font-size: 10px; color: var(--text-3); font-weight: 400; }
+.stat-lbl { font-size: 10px; color: var(--text-2); margin-top: 4px; font-weight: 700; letter-spacing: 0.3px; text-transform: uppercase; }
+
+.strengths-row { display: flex; flex-wrap: wrap; gap: 7px; }
+.strength-pill {
+  background: var(--green-lt); color: var(--green-dk);
+  font-size: 12px; font-weight: 700;
+  padding: 5px 12px; border-radius: 20px;
+  border: 1px solid var(--border);
+}
+
+/* PR-VERIFIED callout */
+.prv-callout {
+  background: var(--gold-lt);
+  border: 1px solid rgba(200,134,10,0.3);
+  border-radius: var(--radius-sm);
+  padding: 16px 18px; margin-top: 22px;
+}
+.prv-callout-title {
+  font-family: var(--font-display);
+  font-size: 15px; font-weight: 700;
+  color: var(--gold); margin-bottom: 6px;
+}
+.prv-callout-body { font-size: 13px; color: #5a4010; line-height: 1.6; }
+
+/* PolyRISE info strip */
+.pr-info-strip {
+  background: var(--dark);
+  padding: 22px 28px;
+}
+.pr-info-title {
+  font-family: var(--font-display);
+  font-size: 18px; font-weight: 700;
+  color: #fff; margin-bottom: 10px;
+}
+.pr-coaches {
+  display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 14px;
+}
+.coach-pill {
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.15);
+  color: rgba(255,255,255,0.8);
+  font-size: 11px; padding: 4px 10px; border-radius: 20px;
+}
+.pr-info-body {
+  font-size: 13px; color: rgba(255,255,255,0.6); line-height: 1.65;
+}
+
+/* CTA section */
+.cta-section {
+  padding: 24px 28px 28px;
+  border-top: 1px solid var(--border);
+  background: var(--white);
+}
+.cta-headline {
+  font-family: var(--font-display);
+  font-size: 22px; font-weight: 800;
+  color: var(--text); margin-bottom: 6px;
+  line-height: 1.2;
+}
+.cta-sub {
+  font-size: 13px; color: var(--text-2);
+  margin-bottom: 18px; line-height: 1.55;
+}
+.plans-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(160px,1fr)); gap: 10px; margin-bottom: 18px; }
+.plan-card {
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-sm); padding: 14px 14px;
+  text-decoration: none; display: block;
+  transition: all 0.15s; position: relative;
+}
+.plan-card:hover { border-color: var(--green); transform: translateY(-2px); box-shadow: var(--shadow); }
+.plan-card.featured { border-color: var(--green); }
+.plan-card .pop-badge {
+  position: absolute; top: -9px; left: 50%; transform: translateX(-50%);
+  background: var(--green); color: #fff;
+  font-size: 9px; font-weight: 700; letter-spacing: 0.5px;
+  padding: 2px 10px; border-radius: 20px; text-transform: uppercase;
+  white-space: nowrap;
+}
+.plan-name { font-family: var(--font-display); font-size: 16px; font-weight: 700; color: var(--green); margin-bottom: 2px; }
+.plan-price { font-size: 19px; font-weight: 700; color: var(--text); }
+.plan-price span { font-size: 11px; font-weight: 400; color: var(--text-3); }
+.plan-desc { font-size: 11px; color: var(--text-2); margin-top: 6px; line-height: 1.5; }
+.plan-tag { font-size: 10px; color: var(--text-3); margin-top: 4px; font-style: italic; }
+
+.cta-btn-main {
+  display: block; width: 100%;
+  background: var(--green); color: #fff;
+  text-align: center; padding: 16px;
+  border-radius: var(--radius-sm); text-decoration: none;
+  font-family: var(--font-display);
+  font-size: 18px; font-weight: 700;
+  letter-spacing: 0.5px; text-transform: uppercase;
+  transition: all 0.15s; margin-bottom: 10px;
+}
+.cta-btn-main:hover { background: var(--green-dk); transform: translateY(-1px); box-shadow: 0 6px 20px rgba(26,107,58,0.35); }
+.cta-btn-sec {
+  display: block; width: 100%; text-align: center;
+  padding: 12px; border-radius: var(--radius-sm);
+  border: 1.5px solid var(--border); text-decoration: none;
+  font-size: 13px; font-weight: 700; color: var(--text-2);
+  transition: all 0.15s;
+}
+.cta-btn-sec:hover { border-color: var(--green); color: var(--green); }
+.contact-line {
+  text-align: center; font-size: 12px; color: var(--text-3);
+  margin-top: 14px;
+}
+.contact-line a { color: var(--green); font-weight: 700; text-decoration: none; }
+
+.profile-footer {
+  background: var(--dark); padding: 14px 28px;
+  text-align: center;
+}
+.profile-footer p { font-size: 11px; color: rgba(255,255,255,0.3); }
+
+/* copy btn */
+.copy-row { display: flex; gap: 8px; margin-top: 16px; }
+.copy-btn {
+  flex: 1; padding: 10px; font-size: 12px; font-weight: 700;
+  border: 1.5px solid var(--border); border-radius: var(--radius-sm);
+  background: transparent; cursor: pointer; color: var(--text-2);
+  font-family: var(--font-body); letter-spacing: 0.3px;
+  transition: all 0.15s; text-transform: uppercase;
+}
+.copy-btn:hover { background: var(--gray); border-color: var(--text-3); }
+.restart-btn {
+  padding: 10px 16px; font-size: 12px; font-weight: 700;
+  border: none; background: transparent; cursor: pointer;
+  color: var(--text-3); font-family: var(--font-body);
+  text-decoration: underline;
+}
+
+@media (max-width: 500px) {
+  .field-grid { grid-template-columns: 1fr; }
+  .metric-grid { grid-template-columns: 1fr 1fr; }
+  .hero h1 { font-size: 32px; }
+}
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-logo">PolyRISE Football</div>
+  <h1>Get Your Athlete's<br><span>FREE Profile</span></h1>
+  <p class="hero-sub">Built by AI. Powered by NFL-experienced coaches. See exactly what college scouts will see — and what it takes to stand out.</p>
+  <div class="hero-badges">
+    <span class="hero-badge">100% Free</span>
+    <span class="hero-badge">Takes 3 minutes</span>
+    <span class="hero-badge">K–12 athletes</span>
+    <span class="hero-badge">Austin & Central Texas</span>
+  </div>
+</div>
+
+<!-- MAIN CARD -->
+<div class="card-wrap">
+<div class="card">
+
+  <!-- PROGRESS -->
+  <div class="progress-header">
+    <div class="progress-steps">
+      <div class="p-step">
+        <div class="p-dot active" id="pd1">1</div>
+        <span class="p-label active" id="pl1">Athlete</span>
+      </div>
+      <div class="p-line" id="pline1"></div>
+      <div class="p-step">
+        <div class="p-dot inactive" id="pd2">2</div>
+        <span class="p-label" id="pl2">Stats</span>
+      </div>
+      <div class="p-line" id="pline2"></div>
+      <div class="p-step">
+        <div class="p-dot inactive" id="pd3">3</div>
+        <span class="p-label" id="pl3">Goals</span>
+      </div>
+      <div class="p-line" id="pline3"></div>
+      <div class="p-step">
+        <div class="p-dot inactive" id="pd4">4</div>
+        <span class="p-label" id="pl4">Profile</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- STEP 1: Athlete Info -->
+  <div class="step active" id="s1">
+    <div class="step-title">About your athlete</div>
+    <div class="step-sub">Tell us the basics — we'll do the rest.</div>
+    <p class="required-note">Fields marked * are required</p>
+    <div class="field-grid">
+      <div class="field"><label>First name *</label><input id="fname" placeholder="Marcus" autocomplete="given-name"/></div>
+      <div class="field"><label>Last name *</label><input id="lname" placeholder="Johnson" autocomplete="family-name"/></div>
+      <div class="field"><label>Primary position *</label>
+        <select id="position">
+          <option value="">Select position</option>
+          <option>QB – Quarterback</option><option>RB – Running Back</option>
+          <option>WR – Wide Receiver</option><option>TE – Tight End</option>
+          <option>OL – Offensive Lineman</option><option>DE – Defensive End</option>
+          <option>DT – Defensive Tackle</option><option>LB – Linebacker</option>
+          <option>CB – Cornerback</option><option>S – Safety</option>
+          <option>K/P – Kicker/Punter</option><option>ATH – Multi-position</option>
+        </select>
+      </div>
+      <div class="field"><label>Grad year *</label>
+        <select id="gradyr">
+          <option value="">Select year</option>
+          <option>2025</option><option>2026</option><option>2027</option>
+          <option>2028</option><option>2029</option><option>2030</option>
+        </select>
+      </div>
+      <div class="field"><label>School / City</label><input id="school" placeholder="Dripping Springs HS, TX"/></div>
+      <div class="field"><label>GPA</label><input id="gpa" placeholder="3.6"/></div>
+    </div>
+    <div id="err1" class="err">Please fill in the required fields to continue.</div>
+    <div class="nav-row">
+      <div></div>
+      <button class="btn-next" onclick="goStep(2)">Next: Physical Stats →</button>
+    </div>
+  </div>
+
+  <!-- STEP 2: Physical + Metrics -->
+  <div class="step" id="s2">
+    <div class="step-title">Physical stats & combine metrics</div>
+    <div class="step-sub">Enter what you know — skip anything you don't have yet.</div>
+    <div class="field-grid">
+      <div class="field"><label>Height</label><input id="height" placeholder='6&apos;1"'/></div>
+      <div class="field"><label>Weight (lbs)</label><input id="weight" placeholder="185"/></div>
+    </div>
+    <div class="metrics-label" style="margin-top:20px">Combine metrics (if tested)</div>
+    <div class="metrics-note">Athletes with verified PR-VERIFIED combine results get a stronger profile — we'll show you how to get yours certified.</div>
+    <div class="metric-grid">
+      <div class="metric-box"><label>40-Yard Dash</label><input id="m40" placeholder="4.52"/><div class="unit">seconds</div></div>
+      <div class="metric-box"><label>Vertical Jump</label><input id="mvert" placeholder="34"/><div class="unit">inches</div></div>
+      <div class="metric-box"><label>Broad Jump</label><input id="mbroad" placeholder='9&apos;6"'/><div class="unit">ft / in</div></div>
+      <div class="metric-box"><label>3-Cone Drill</label><input id="mcone" placeholder="6.85"/><div class="unit">seconds</div></div>
+      <div class="metric-box"><label>Pro Agility</label><input id="magility" placeholder="4.32"/><div class="unit">seconds</div></div>
+      <div class="metric-box"><label>Bench Reps</label><input id="mbench" placeholder="12"/><div class="unit">@ 185 lbs</div></div>
+    </div>
+    <div class="nav-row">
+      <button class="btn-back" onclick="goStep(1)">← Back</button>
+      <button class="btn-next" onclick="goStep(3)">Next: Goals →</button>
+    </div>
+  </div>
+
+  <!-- STEP 3: Goals + Email Gate -->
+  <div class="step" id="s3">
+    <div class="step-title">Recruiting goals</div>
+    <div class="step-sub">Help us write a profile that speaks directly to the right college programs.</div>
+    <div class="field-grid">
+      <div class="field"><label>Target division *</label>
+        <select id="division">
+          <option value="">Select goal</option>
+          <option>D1 – Power 4</option><option>D1 – Group of 5</option>
+          <option>D1 – FCS</option><option>D2</option><option>D3</option>
+          <option>NAIA</option><option>JUCO</option><option>Open – any opportunity</option>
+        </select>
+      </div>
+      <div class="field"><label>Dream schools</label><input id="dreams" placeholder="Texas, A&M, SMU, Baylor"/></div>
+      <div class="field full"><label>Top achievements *</label>
+        <textarea id="achievements" placeholder="e.g. 1,200 rushing yards sophomore year, team captain, All-District 2024, 4x track state qualifier, honor roll..."></textarea>
+      </div>
+      <div class="field full"><label>Key strengths</label>
+        <textarea id="strengths" placeholder="e.g. elite acceleration, route running, football IQ, leadership, great hands..."></textarea>
+      </div>
+    </div>
+
+    <!-- EMAIL GATE -->
+    <div class="gate-wrap" style="margin-top:20px">
+      <div class="gate-title">Almost there — where should we send your profile?</div>
+      <div class="gate-sub">Enter your contact info below. Your athlete's free profile will generate instantly, and a PolyRISE coach may reach out with personalized advice.</div>
+      <div class="field-grid">
+        <div class="field"><label>Parent name *</label><input id="parent-name" placeholder="Your name" autocomplete="name"/></div>
+        <div class="field"><label>Parent email *</label><input id="parent-email" type="email" placeholder="you@email.com" autocomplete="email"/></div>
+        <div class="field"><label>Phone (optional)</label><input id="parent-phone" type="tel" placeholder="(512) 555-0100" autocomplete="tel"/></div>
+        <div class="field"><label>How'd you find us?</label>
+          <select id="source">
+            <option value="">Select</option>
+            <option>Instagram</option><option>Facebook</option>
+            <option>Friend / referral</option><option>Google search</option>
+            <option>QR code at event</option><option>TikTok</option><option>Other</option>
+          </select>
+        </div>
+      </div>
+      <div class="privacy-note">Your info is never sold or shared. PolyRISE Football may contact you about programs. <a href="https://polyrisefootball.com" target="_blank">polyrisefootball.com</a></div>
+    </div>
+
+    <div id="err3" class="err">Please fill in required fields including your name and email.</div>
+    <div class="nav-row">
+      <button class="btn-back" onclick="goStep(2)">← Back</button>
+      <button class="btn-next" onclick="generate()" id="gen-btn">Generate My Profile →</button>
+    </div>
+  </div>
+
+  <!-- LOADING -->
+  <div class="loading" id="loading">
+    <div class="spinner"></div>
+    <div class="loading-title">Building your profile...</div>
+    <div class="loading-sub">Our AI is crafting something worth sharing</div>
+    <div class="loading-items">
+      <div class="l-item" id="li1"><div class="l-dot"></div>Analyzing athlete data</div>
+      <div class="l-item" id="li2"><div class="l-dot"></div>Writing recruiting bio</div>
+      <div class="l-item" id="li3"><div class="l-dot"></div>Building strength profile</div>
+      <div class="l-item" id="li4"><div class="l-dot"></div>Adding PolyRISE insights</div>
+      <div class="l-item" id="li5"><div class="l-dot"></div>Sending to coach</div>
+    </div>
+  </div>
+
+  <!-- PROFILE OUTPUT -->
+  <div class="profile-wrap" id="profile-out">
+
+    <!-- Profile Header -->
+    <div class="profile-top">
+      <div class="pr-badge-row">
+        <span class="pr-badge" id="out-badge">PolyRISE Football</span>
+      </div>
+      <div class="profile-name" id="out-name"></div>
+      <div class="profile-pos" id="out-pos"></div>
+    </div>
+
+    <!-- Profile Body -->
+    <div class="profile-body">
+      <div class="section-lbl">Athlete bio</div>
+      <div class="bio-text" id="out-bio"></div>
+
+      <div id="stats-sec">
+        <div class="section-lbl">Combine metrics</div>
+        <div class="stats-grid" id="out-stats"></div>
+      </div>
+
+      <div class="section-lbl">Key strengths</div>
+      <div class="strengths-row" id="out-strengths"></div>
+
+      <!-- PR-VERIFIED callout -->
+      <div class="prv-callout" id="prv-box">
+        <div class="prv-callout-title" id="prv-title"></div>
+        <div class="prv-callout-body" id="prv-body"></div>
+      </div>
+
+      <div class="copy-row">
+        <button class="copy-btn" onclick="copyProfile()">Copy profile text</button>
+        <button class="restart-btn" onclick="restart()">Start over</button>
+      </div>
+    </div>
+
+    <!-- PolyRISE Info Strip -->
+    <div class="pr-info-strip">
+      <div class="pr-info-title">Why PolyRISE Football changes everything</div>
+      <div class="pr-coaches">
+        <span class="coach-pill">Coach Garrett — 7 yrs NFL (Rams, Texans)</span>
+        <span class="coach-pill">Coach Brayden — NFL Draft 2023</span>
+        <span class="coach-pill">Coach Jordan — XFL Draft 2022</span>
+        <span class="coach-pill">Coach Traves — Navy Football</span>
+        <span class="coach-pill">Coach John — Naval Academy</span>
+      </div>
+      <div class="pr-info-body">PolyRISE Football is the only youth program in Austin and Central Texas with NFL-experienced coaches running standardized, pro-style combine testing. When your athlete earns a PR-VERIFIED seal, every metric is certified on-site — no self-reported numbers, no inflated times. College scouts trust PR-VERIFIED data instantly because the people behind it have played and coached at the highest levels.</div>
+    </div>
+
+    <!-- CTA Section -->
+    <div class="cta-section">
+      <div class="cta-headline">Ready to take this to the next level?</div>
+      <div class="cta-sub">This free profile is just the beginning. PolyRISE membership gives your athlete verified metrics, a shareable recruiting page, direct exposure to college scouts, and one-on-one coaching from coaches who've been there.</div>
+
+      <div class="plans-grid">
+        <a href="https://polyrisefootball.com/plans" class="plan-card" target="_blank">
+          <div class="plan-name">Passport</div>
+          <div class="plan-price">$9.99<span>/mo</span></div>
+          <div class="plan-desc">Progress tracking, session history, downloadable reports</div>
+          <div class="plan-tag">Grades 6–8</div>
+        </a>
+        <a href="https://polyrisefootball.com/plans" class="plan-card featured" target="_blank">
+          <div class="pop-badge">Most Popular</div>
+          <div class="plan-name">Recruit</div>
+          <div class="plan-price">$29.99<span>/mo</span></div>
+          <div class="plan-desc">PR-VERIFIED profile, Hudl integration, monthly scout spotlight</div>
+          <div class="plan-tag">Grades 9–12</div>
+        </a>
+        <a href="https://polyrisefootball.com/plans" class="plan-card" target="_blank">
+          <div class="plan-name">360 Elite</div>
+          <div class="plan-price">$500<span>/mo</span></div>
+          <div class="plan-desc">Everything + 1-on-1 NFL coaching, 7 coach email blasts/mo</div>
+          <div class="plan-tag">Grades 11–12</div>
+        </a>
+      </div>
+
+      <a href="https://polyrisefootball.com/plans" class="cta-btn-main" target="_blank">View All Plans & Sign Up →</a>
+      <a href="https://polyrisefootball.com/register" class="cta-btn-sec" target="_blank">Register for the $30 PR-VERIFIED Combine Camp</a>
+      <div class="contact-line">Questions? Contact Coach Garrett directly: <a href="mailto:kg@polyrisefootball.com">kg@polyrisefootball.com</a> · <a href="tel:+18176583300">(817) 658-3300</a></div>
+    </div>
+
+    <div class="profile-footer">
+      <p>PolyRISE Football · polyrisefootball.com · Dripping Springs, TX (Austin area) · Expanding nationwide</p>
+    </div>
+
+  </div><!-- /profile-wrap -->
+
+</div><!-- /card -->
+</div><!-- /card-wrap -->
+
+<script>
+// ─── CONFIGURATION ───────────────────────────────────────────────────
+// Replace these with your real values before deploying
+
+const CONFIG = {
+  // Your CRM webhook URL (Zapier, Make, or custom endpoint)
+  // Must accept POST with JSON body
+  CRM_WEBHOOK: 'YOUR_CRM_WEBHOOK_URL_HERE',
+
+  // EmailJS config for sending alert to Coach Garrett
+  // Sign up free at emailjs.com
+  EMAILJS_SERVICE: 'YOUR_EMAILJS_SERVICE_ID',
+  EMAILJS_TEMPLATE: 'YOUR_EMAILJS_TEMPLATE_ID',
+  EMAILJS_KEY: 'YOUR_EMAILJS_PUBLIC_KEY',
+
+  // Alert email recipient
+  ALERT_TO: 'kg@polyrisefootball.com',
+};
+// ─────────────────────────────────────────────────────────────────────
+
+const steps = [null,'s1','s2','s3'];
+let currentStep = 1;
+let profileText = '';
+
+function v(id) { return (document.getElementById(id)||{}).value?.trim()||''; }
+
+function goStep(n) {
+  if (n === 2) {
+    if (!v('fname')||!v('lname')||!v('position')||!v('gradyr')) {
+      document.getElementById('err1').style.display = 'block'; return;
+    }
+    document.getElementById('err1').style.display = 'none';
+  }
+  document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
+  if (steps[n]) document.getElementById(steps[n]).classList.add('active');
+  currentStep = n;
+  updateProgress(n);
+  window.scrollTo({top: 0, behavior: 'smooth'});
+}
+
+function updateProgress(n) {
+  for (let i = 1; i <= 4; i++) {
+    const dot = document.getElementById('pd'+i);
+    const lbl = document.getElementById('pl'+i);
+    if (i < n) {
+      dot.className = 'p-dot done'; dot.textContent = '✓';
+    } else if (i === n) {
+      dot.className = 'p-dot active'; dot.textContent = i;
+      lbl.className = 'p-label active';
+    } else {
+      dot.className = 'p-dot inactive'; dot.textContent = i;
+      lbl.className = 'p-label';
+    }
+    if (i <= 3) {
+      document.getElementById('pline'+i).className = 'p-line' + (i < n ? ' done' : '');
+    }
+  }
+}
+
+async function generate() {
+  // Validate
+  if (!v('achievements')||!v('division')||!v('parent-name')||!v('parent-email')) {
+    document.getElementById('err3').style.display = 'block'; return;
+  }
+  document.getElementById('err3').style.display = 'none';
+
+  // Show loading
+  document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
+  const loading = document.getElementById('loading');
+  loading.style.display = 'block';
+  updateProgress(4);
+
+  // Animate loading steps
+  const litems = ['li1','li2','li3','li4','li5'];
+  const lmsgs = ['Analyzing athlete data...','Writing recruiting bio...','Building strength profile...','Adding PolyRISE insights...','Sending to coach...'];
+  let li = 0;
+  const lintv = setInterval(() => {
+    if (li > 0) document.getElementById(litems[li-1]).className = 'l-item done';
+    if (li < litems.length) {
+      document.getElementById(litems[li]).className = 'l-item active-item';
+      document.querySelector('.loading-sub').textContent = lmsgs[li];
+    }
+    li++;
+    if (li > litems.length) clearInterval(lintv);
+  }, 900);
+
+  const hasCombine = v('m40')||v('mvert')||v('mbroad')||v('mcone');
+
+  // Fire CRM + email in parallel (don't block on these)
+  const leadData = {
+    parent_name: v('parent-name'),
+    parent_email: v('parent-email'),
+    parent_phone: v('parent-phone'),
+    source: v('source'),
+    athlete_name: v('fname')+' '+v('lname'),
+    position: v('position'),
+    grad_year: v('gradyr'),
+    school: v('school'),
+    gpa: v('gpa'),
+    height: v('height'),
+    weight: v('weight'),
+    forty: v('m40'),
+    vertical: v('mvert'),
+    broad: v('mbroad'),
+    cone: v('mcone'),
+    agility: v('magility'),
+    bench: v('mbench'),
+    division: v('division'),
+    dream_schools: v('dreams'),
+    achievements: v('achievements'),
+    strengths: v('strengths'),
+    has_combine_metrics: hasCombine ? 'Yes' : 'No',
+    submitted_at: new Date().toISOString(),
+    lead_source_url: window.location.href,
+  };
+
+  // Send to CRM webhook
+  if (CONFIG.CRM_WEBHOOK && CONFIG.CRM_WEBHOOK !== 'YOUR_CRM_WEBHOOK_URL_HERE') {
+    fetch(CONFIG.CRM_WEBHOOK, {
+      method: 'POST',
+      headers: {'Content-Type':'application/json'},
+      body: JSON.stringify(leadData)
+    }).catch(()=>{});
+  }
+
+  // Generate AI profile
+  const prompt = `You are writing a college football recruiting profile for a high school athlete at PolyRISE Football. Write a compelling, professional 3-paragraph athlete bio that a college coach would find impressive and credible. Be specific, vivid, and highlight the athlete's unique value. Do not use generic filler. Make every sentence count.
+
+After the bio, output ONLY this JSON (nothing else after):
+{"strengths":["s1","s2","s3","s4","s5"],"prv_title":"[short headline about their PR-VERIFIED readiness or opportunity]","prv_body":"[2 sentences about how PolyRISE Football and PR-VERIFIED certification can specifically help THIS athlete get more college exposure — mention their position, target division, and what verified metrics mean for scouts at that level]"}
+
+ATHLETE DATA:
+Name: ${v('fname')} ${v('lname')}
+Position: ${v('position')}
+Grad Year: ${v('gradyr')}
+School: ${v('school')||'Central Texas'}
+GPA: ${v('gpa')||'not provided'}
+Height: ${v('height')||'not provided'} | Weight: ${v('weight')||'not provided'}
+40-Yard Dash: ${v('m40')||'not yet tested'}
+Vertical: ${v('mvert')||'not yet tested'}
+Broad Jump: ${v('mbroad')||'not yet tested'}
+3-Cone: ${v('mcone')||'not yet tested'}
+Pro Agility: ${v('magility')||'not yet tested'}
+Target Division: ${v('division')}
+Dream Schools: ${v('dreams')||'not specified'}
+Achievements: ${v('achievements')}
+Strengths: ${v('strengths')||'not provided'}
+${hasCombine ? 'Note: Athlete has some combine metrics but has NOT yet completed official PolyRISE PR-VERIFIED testing. Mention the importance of getting officially certified.' : 'Note: Athlete has no combine metrics yet. Emphasize that the first step is getting PR-VERIFIED certified at a PolyRISE combine camp.'}
+
+Write the bio now, then the JSON block.`;
+
+  try {
+    const res = await fetch('/api/free-profile', {
+      method: 'POST',
+      headers: {'Content-Type':'application/json'},
+      body: JSON.stringify({ prompt, leadData })
+    });
+    const data = await res.json();
+    clearInterval(lintv);
+    litems.forEach(id => document.getElementById(id).className = 'l-item done');
+
+    const raw = data?.reply || '';
+    const jsonMatch = raw.match(/\{[\s\S]*"strengths"[\s\S]*\}/);
+    let strengths = [], prvTitle = '', prvBody = '', bio = raw;
+    if (jsonMatch) {
+      try {
+        const parsed = JSON.parse(jsonMatch[0]);
+        strengths = parsed.strengths || [];
+        prvTitle = parsed.prv_title || '';
+        prvBody = parsed.prv_body || '';
+      } catch(e){}
+      bio = raw.replace(jsonMatch[0],'').trim();
+    }
+
+    await new Promise(r => setTimeout(r, 600));
+    renderProfile(bio, strengths, prvTitle, prvBody, hasCombine);
+
+  } catch(e) {
+    clearInterval(lintv);
+    // Fallback profile
+    const fallbackBio = `${v('fname')} ${v('lname')} is a ${v('gradyr')} ${v('position')} from ${v('school')||'Central Texas'} with the drive and dedication that college programs at the ${v('division')} level are actively looking for. ${v('achievements')}. A competitor in every sense of the word, ${v('fname')} brings both athleticism and character to the field — qualities that PolyRISE Football coaches have helped develop in athletes now playing at every level of college football.`;
+    renderProfile(fallbackBio, ['Speed','Leadership','Football IQ','Coachability','Work ethic'], 'Get officially PR-VERIFIED', `A ${v('position')} targeting ${v('division')} programs needs verifiable metrics. The PolyRISE PR-VERIFIED Combine Camp gives ${v('fname')} certified numbers that scouts trust — tested by coaches who've played and coached at the NFL level.`, hasCombine);
+  }
+}
+
+function renderProfile(bio, strengths, prvTitle, prvBody, hasCombine) {
+  // Hide loading, show profile
+  document.getElementById('loading').style.display = 'none';
+  const out = document.getElementById('profile-out');
+  out.classList.add('active');
+
+  // Header
+  document.getElementById('out-name').textContent = v('fname')+' '+v('lname');
+  document.getElementById('out-pos').textContent =
+    v('position') + (v('gradyr') ? ' · Class of '+v('gradyr') : '') + (v('school') ? ' · '+v('school') : '');
+  document.getElementById('out-badge').textContent = hasCombine ? 'PolyRISE Football — Combine Metrics on File' : 'PolyRISE Football — Free Profile';
+
+  // Bio
+  document.getElementById('out-bio').textContent = bio;
+
+  // Stats
+  const metrics = [
+    {l:'40 Dash', v:v('m40'), u:'sec'},{l:'Vertical', v:v('mvert'), u:'in'},
+    {l:'Broad Jump', v:v('mbroad'), u:''},{l:'3-Cone', v:v('mcone'), u:'sec'},
+    {l:'Pro Agility', v:v('magility'), u:'sec'},{l:'Height', v:v('height'), u:''},
+    {l:'Weight', v:v('weight'), u:'lbs'},{l:'GPA', v:v('gpa'), u:''},
+  ].filter(m => m.v);
+
+  const sg = document.getElementById('out-stats');
+  sg.innerHTML = '';
+  if (metrics.length) {
+    metrics.forEach(m => {
+      sg.innerHTML += `<div class="stat-box"><div class="stat-val">${m.v}${m.u?'<span class="stat-unit"> '+m.u+'</span>':''}</div><div class="stat-lbl">${m.l}</div></div>`;
+    });
+    document.getElementById('stats-sec').style.display = '';
+  } else {
+    document.getElementById('stats-sec').style.display = 'none';
+  }
+
+  // Strengths
+  const sl = document.getElementById('out-strengths');
+  sl.innerHTML = (strengths.length ? strengths : ['Speed','Leadership','Football IQ','Versatility','Work ethic'])
+    .map(s => `<span class="strength-pill">${s}</span>`).join('');
+
+  // PR-VERIFIED callout
+  document.getElementById('prv-title').textContent = prvTitle || (hasCombine ? 'Next step: Get officially PR-VERIFIED' : 'Your athlete is not yet PR-VERIFIED — here\'s why that matters');
+  document.getElementById('prv-body').textContent = prvBody || `College scouts at the ${v('division')||'collegiate'} level discount self-reported numbers every recruiting cycle. The PolyRISE PR-VERIFIED Combine Camp gives ${v('fname')} certified, on-site metrics tested by NFL-experienced coaches — the credibility that makes a recruiting profile stand out immediately.`;
+
+  // Build plain text copy
+  profileText = [
+    `RECRUITING PROFILE — ${v('fname')} ${v('lname')}`,
+    `${v('position')} | Class of ${v('gradyr')} | ${v('school')}`,
+    '', 'BIO:', bio,
+    '', 'METRICS:', ...metrics.map(m => `${m.l}: ${m.v}${m.u?' '+m.u:''}`),
+    '', 'KEY STRENGTHS:', strengths.join(', '),
+    '', '---',
+    'PolyRISE Football | polyrisefootball.com | (817) 658-3300 | kg@polyrisefootball.com'
+  ].join('\n');
+
+  window.scrollTo({top: 0, behavior: 'smooth'});
+}
+
+function copyProfile() {
+  navigator.clipboard.writeText(profileText).then(() => {
+    const btn = document.querySelector('.copy-btn');
+    btn.textContent = 'Copied!';
+    setTimeout(() => btn.textContent = 'Copy profile text', 2000);
+  });
+}
+
+function restart() {
+  document.querySelectorAll('input,select,textarea').forEach(el => el.value='');
+  document.getElementById('profile-out').classList.remove('active');
+  document.getElementById('loading').style.display = 'none';
+  goStep(1);
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+</script>
+
+
+
+</body>
+</html>

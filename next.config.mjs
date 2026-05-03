@@ -14,6 +14,7 @@ const nextConfig = {
   async rewrites() {
     return [
       { source: "/advisor", destination: "/advisor.html" },
+      { source: "/free-profile", destination: "/free-profile.html" },
     ]
   },
 

@@ -10,6 +10,13 @@ const nextConfig = {
     unoptimized: true,
   },
 
+  // Serve static HTML pages at clean URLs
+  async rewrites() {
+    return [
+      { source: "/advisor", destination: "/advisor.html" },
+    ]
+  },
+
   // Security headers on every response
   async headers() {
     return [

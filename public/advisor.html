@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>PolyRISE Football — AI Recruiting Advisor</title>
+
+<!--
+  ╔══════════════════════════════════════════════════════════════════╗
+  ║         POLYRISE FOOTBALL — AI RECRUITING ADVISOR WIDGET        ║
+  ║                  Built with Claude AI (Anthropic)               ║
+  ╠══════════════════════════════════════════════════════════════════╣
+  ║                                                                  ║
+  ║  EMBED ON YOUR WEBSITE — TWO OPTIONS:                           ║
+  ║                                                                  ║
+  ║  OPTION A — Full Page:                                          ║
+  ║    Upload this file to your server and link to it directly.     ║
+  ║    e.g. polyrisefootball.com/advisor                            ║
+  ║                                                                  ║
+  ║  OPTION B — Floating Chat Bubble (recommended):                 ║
+  ║    Add this one line before </body> on any page of your site:   ║
+  ║                                                                  ║
+  ║    <script>                                                      ║
+  ║    (function(){                                                  ║
+  ║      var b=document.createElement('button');                    ║
+  ║      b.innerHTML='🏈 Ask AI Advisor';                           ║
+  ║      b.style.cssText='position:fixed;bottom:24px;right:24px;    ║
+  ║        z-index:9999;background:#1A6B3A;color:#fff;              ║
+  ║        border:none;padding:12px 20px;border-radius:30px;        ║
+  ║        font-size:14px;font-weight:600;cursor:pointer;           ║
+  ║        box-shadow:0 4px 20px rgba(0,0,0,0.25)';                 ║
+  ║      var f=document.createElement('iframe');                    ║
+  ║      f.src='YOUR-URL/polyrise-chatbot-widget.html';             ║
+  ║      f.style.cssText='position:fixed;bottom:90px;right:24px;    ║
+  ║        width:380px;height:560px;border:none;border-radius:16px; ║
+  ║        box-shadow:0 8px 40px rgba(0,0,0,0.2);display:none;      ║
+  ║        z-index:9998';                                           ║
+  ║      b.onclick=function(){                                       ║
+  ║        f.style.display=f.style.display==='none'?'block':'none'; ║
+  ║      };                                                          ║
+  ║      document.body.appendChild(f);                              ║
+  ║      document.body.appendChild(b);                              ║
+  ║    })();                                                         ║
+  ║    </script>                                                     ║
+  ║                                                                  ║
+  ║  Replace YOUR-URL with the URL where you upload this file.      ║
+  ║                                                                  ║
+  ╚══════════════════════════════════════════════════════════════════╝
+-->
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700&family=Barlow+Condensed:wght@600;700&display=swap" rel="stylesheet" />
+
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --green: #1A6B3A;
+    --green-dark: #124d2a;
+    --green-light: #e8f5ee;
+    --green-mid: #2d8a50;
+    --gold: #C8860A;
+    --gold-light: #fff8e6;
+    --text: #0d1b2a;
+    --text-2: #4a5568;
+    --text-3: #8a96a3;
+    --bg: #f7f8fa;
+    --surface: #ffffff;
+    --border: rgba(0,0,0,0.08);
+    --border-strong: rgba(0,0,0,0.14);
+    --shadow-sm: 0 1px 4px rgba(0,0,0,0.06);
+    --shadow-md: 0 4px 16px rgba(0,0,0,0.10);
+    --radius: 12px;
+    --radius-sm: 8px;
+    --font: 'Barlow', sans-serif;
+    --font-display: 'Barlow Condensed', sans-serif;
+  }
+
+  html, body {
+    height: 100%; font-family: var(--font);
+    background: var(--bg); color: var(--text);
+    font-size: 15px; line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ── PAGE LAYOUT ── */
+  .page-wrap {
+    min-height: 100vh; display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    padding: 24px 16px;
+    background:
+      radial-gradient(ellipse 60% 40% at 80% 10%, rgba(26,107,58,0.06) 0%, transparent 60%),
+      radial-gradient(ellipse 40% 30% at 10% 90%, rgba(200,134,10,0.05) 0%, transparent 60%),
+      var(--bg);
+  }
+
+  .widget-shell {
+    width: 100%; max-width: 440px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    box-shadow: 0 8px 40px rgba(0,0,0,0.10), 0 1px 3px rgba(0,0,0,0.06);
+    overflow: hidden;
+    display: flex; flex-direction: column;
+    height: min(640px, 90vh);
+  }
+
+  /* ── HEADER ── */
+  .chat-header {
+    background: var(--green);
+    padding: 16px 18px;
+    display: flex; align-items: center; gap: 12px;
+    flex-shrink: 0; position: relative; overflow: hidden;
+  }
+  .chat-header::before {
+    content: ''; position: absolute; top: -30px; right: -20px;
+    width: 100px; height: 100px; border-radius: 50%;
+    background: rgba(255,255,255,0.06);
+  }
+  .chat-header::after {
+    content: ''; position: absolute; bottom: -40px; right: 40px;
+    width: 80px; height: 80px; border-radius: 50%;
+    background: rgba(255,255,255,0.04);
+  }
+  .header-avatar {
+    width: 42px; height: 42px; border-radius: 50%;
+    background: rgba(255,255,255,0.18);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px; flex-shrink: 0; position: relative; z-index: 1;
+  }
+  .header-info { flex: 1; position: relative; z-index: 1; }
+  .header-name {
+    font-family: var(--font-display); font-size: 17px;
+    font-weight: 700; color: #fff; letter-spacing: 0.3px;
+  }
+  .header-sub {
+    font-size: 11px; color: rgba(255,255,255,0.72); margin-top: 1px;
+    display: flex; align-items: center; gap: 5px;
+  }
+  .status-dot {
+    width: 6px; height: 6px; border-radius: 50%;
+    background: #4ade80; flex-shrink: 0;
+    animation: pulse 2s infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
+  }
+  .header-badge {
+    background: rgba(255,255,255,0.15);
+    border: 1px solid rgba(255,255,255,0.25);
+    color: #fff; font-size: 10px; font-weight: 600;
+    padding: 3px 9px; border-radius: 20px;
+    letter-spacing: 0.5px; position: relative; z-index: 1;
+  }
+
+  /* ── MESSAGES ── */
+  #messages {
+    flex: 1; overflow-y: auto; padding: 18px 16px;
+    display: flex; flex-direction: column; gap: 14px;
+    background: var(--bg);
+    scrollbar-width: thin; scrollbar-color: var(--border) transparent;
+  }
+  #messages::-webkit-scrollbar { width: 4px; }
+  #messages::-webkit-scrollbar-thumb { background: var(--border-strong); border-radius: 4px; }
+
+  .msg { display: flex; gap: 8px; max-width: 88%; animation: fadeUp 0.2s ease; }
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(6px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .msg.bot { align-self: flex-start; }
+  .msg.user { align-self: flex-end; flex-direction: row-reverse; }
+
+  .bot-avatar {
+    width: 30px; height: 30px; border-radius: 50%;
+    background: var(--green); color: #fff;
+    font-family: var(--font-display); font-size: 11px; font-weight: 700;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; margin-top: 2px; letter-spacing: 0.3px;
+  }
+
+  .bubble {
+    padding: 11px 14px; border-radius: 16px;
+    font-size: 13.5px; line-height: 1.65; color: var(--text);
+  }
+  .msg.bot .bubble {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 4px 16px 16px 16px;
+    box-shadow: var(--shadow-sm);
+  }
+  .msg.user .bubble {
+    background: var(--green); color: #fff;
+    border-radius: 16px 4px 16px 16px;
+  }
+  .bubble strong { font-weight: 600; }
+  .bubble a { color: var(--green); text-decoration: underline; text-underline-offset: 2px; }
+  .msg.user .bubble a { color: rgba(255,255,255,0.85); }
+
+  /* Typing indicator */
+  .typing-wrap { display: flex; align-items: center; gap: 5px; padding: 4px 0; }
+  .typing-wrap span {
+    width: 7px; height: 7px; border-radius: 50%;
+    background: var(--text-3); display: inline-block;
+    animation: blink 1.3s infinite ease-in-out;
+  }
+  .typing-wrap span:nth-child(2) { animation-delay: 0.18s; }
+  .typing-wrap span:nth-child(3) { animation-delay: 0.36s; }
+  @keyframes blink {
+    0%, 60%, 100% { transform: translateY(0); opacity: 0.5; }
+    30% { transform: translateY(-5px); opacity: 1; }
+  }
+
+  /* CTA card inside bubble */
+  .cta-inline {
+    margin-top: 10px; padding: 10px 12px;
+    background: var(--green-light); border-radius: var(--radius-sm);
+    border: 1px solid rgba(26,107,58,0.2);
+  }
+  .cta-inline .cta-label {
+    font-size: 11px; font-weight: 600; color: var(--green);
+    text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 6px;
+  }
+  .cta-inline a {
+    display: inline-block; background: var(--green); color: #fff !important;
+    font-size: 12px; font-weight: 600; padding: 7px 14px;
+    border-radius: var(--radius-sm); text-decoration: none !important;
+    transition: background 0.15s;
+  }
+  .cta-inline a:hover { background: var(--green-dark); }
+
+  /* Plan cards */
+  .plan-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; margin-top: 10px; }
+  .plan-card {
+    padding: 9px 10px; border-radius: var(--radius-sm);
+    border: 1px solid var(--border); background: var(--bg);
+  }
+  .plan-card .pn { font-size: 12px; font-weight: 600; color: var(--green); margin-bottom: 2px; }
+  .plan-card .pp { font-size: 11px; color: var(--text-2); }
+  .plan-card .pd { font-size: 11px; color: var(--text-3); margin-top: 3px; line-height: 1.4; }
+
+  /* ── QUICK PROMPTS ── */
+  #quick-area {
+    padding: 10px 14px; display: flex; gap: 6px; flex-wrap: wrap;
+    border-top: 1px solid var(--border);
+    background: var(--surface); flex-shrink: 0;
+  }
+  .qbtn {
+    font-size: 11.5px; font-weight: 500; padding: 5px 11px;
+    border: 1px solid var(--border-strong); border-radius: 20px;
+    background: var(--bg); cursor: pointer; color: var(--text-2);
+    transition: all 0.12s; white-space: nowrap;
+    font-family: var(--font);
+  }
+  .qbtn:hover { background: var(--green-light); border-color: var(--green); color: var(--green); }
+
+  /* ── INPUT ROW ── */
+  #input-row {
+    display: flex; gap: 8px; padding: 12px 14px;
+    border-top: 1px solid var(--border);
+    background: var(--surface); flex-shrink: 0;
+    align-items: center;
+  }
+  #user-input {
+    flex: 1; padding: 10px 14px; font-size: 13.5px;
+    border: 1px solid var(--border-strong); border-radius: 24px;
+    background: var(--bg); color: var(--text);
+    outline: none; font-family: var(--font);
+    transition: border-color 0.15s;
+  }
+  #user-input::placeholder { color: var(--text-3); }
+  #user-input:focus { border-color: var(--green); background: var(--surface); }
+  #send-btn {
+    width: 38px; height: 38px; border-radius: 50%;
+    background: var(--green); border: none; cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; transition: background 0.15s, transform 0.1s;
+  }
+  #send-btn:hover { background: var(--green-dark); }
+  #send-btn:active { transform: scale(0.93); }
+  #send-btn svg { width: 16px; height: 16px; fill: #fff; }
+
+  /* ── BRANDING FOOTER ── */
+  .chat-footer {
+    padding: 7px 14px; text-align: center;
+    border-top: 1px solid var(--border);
+    background: var(--surface); flex-shrink: 0;
+  }
+  .chat-footer span {
+    font-size: 10.5px; color: var(--text-3);
+  }
+  .chat-footer a { color: var(--green); text-decoration: none; font-weight: 500; }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 480px) {
+    .page-wrap { padding: 0; align-items: stretch; justify-content: flex-start; }
+    .widget-shell { max-width: 100%; border-radius: 0; height: 100vh; box-shadow: none; }
+  }
+</style>
+</head>
+<body>
+
+<div class="page-wrap">
+  <div class="widget-shell">
+
+    <!-- HEADER -->
+    <div class="chat-header">
+      <div class="header-avatar">🏈</div>
+      <div class="header-info">
+        <div class="header-name">PolyRISE AI Advisor</div>
+        <div class="header-sub">
+          <div class="status-dot"></div>
+          <span>Online — Ask me anything</span>
+        </div>
+      </div>
+      <div class="header-badge">PR-VERIFIED</div>
+    </div>
+
+    <!-- MESSAGES -->
+    <div id="messages">
+      <div class="msg bot">
+        <div class="bot-avatar">PR</div>
+        <div class="bubble">
+          Hey! I'm the <strong>PolyRISE AI Recruiting Advisor</strong> — powered by real knowledge of every program, price, coach, and the PR-VERIFIED process.<br><br>
+          Whether you're a parent getting started or an athlete building a college recruiting profile, I've got answers. What can I help you with?
+          <div class="cta-inline">
+            <div class="cta-label">Ready to register?</div>
+            <a href="https://polyrisefootball.com/register" target="_blank">View All Programs →</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- QUICK PROMPTS -->
+    <div id="quick-area">
+      <button class="qbtn" onclick="quickAsk('What is PR-VERIFIED?')">What is PR-VERIFIED?</button>
+      <button class="qbtn" onclick="quickAsk('Show me all programs and pricing')">Programs & pricing</button>
+      <button class="qbtn" onclick="quickAsk('Which plan is right for my athlete?')">Which plan fits us?</button>
+      <button class="qbtn" onclick="quickAsk('Tell me about the coaches')">The coaches</button>
+      <button class="qbtn" onclick="quickAsk('How do I register my athlete?')">How to register</button>
+      <button class="qbtn" onclick="quickAsk('Tell me about the combine camp')">Combine Camp</button>
+    </div>
+
+    <!-- INPUT -->
+    <div id="input-row">
+      <input id="user-input" type="text" placeholder="Ask about programs, pricing, recruiting…" maxlength="400" autocomplete="off" />
+      <button id="send-btn" onclick="sendMessage()" aria-label="Send">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/>
+        </svg>
+      </button>
+    </div>
+
+    <!-- FOOTER -->
+    <div class="chat-footer">
+      <span>Powered by AI · <a href="https://polyrisefootball.com" target="_blank">polyrisefootball.com</a> · <a href="tel:+18176583300">(817) 658-3300</a></span>
+    </div>
+
+  </div>
+</div>
+
+<script>
+const SYSTEM = `
+You are the PolyRISE Football AI Recruiting Advisor — a friendly, sharp, and knowledgeable assistant for PolyRISE Football. You help parents and athletes understand programs, pricing, the PR-VERIFIED credentialing process, coaches, and guide them to register. You represent PolyRISE with professionalism and enthusiasm.
+
+TONE: Warm, confident, direct. Like a helpful coach who knows recruiting inside out. Keep answers concise — 3-5 sentences max unless explaining something complex. Use line breaks for readability. Always end with a relevant next-step nudge when appropriate. Use ** for bold. Do NOT use markdown headers or bullet dashes — use plain line breaks and bold text instead.
+
+ABOUT POLYRISE FOOTBALL:
+Elite youth football training for K-12 athletes in Austin & Central Texas. Based in Dripping Springs, TX at Swift Sessions and local fields. Expanding to other cities nationwide.
+Phone/WhatsApp: +1 (817) 658-3300
+Email: polyrise@polyrisefootball.com | kg@polyrisefootball.com
+Website: polyrisefootball.com
+
+PR-VERIFIED SEAL:
+Awarded to athletes who complete PolyRISE programs, camps, or tryouts. Overseen by coaches with NFL and collegiate experience. Uses standardized pro-style combine testing with consistent protocols and multiple trials. Athletes get official documentation + digital badge for recruiting profiles. No self-reported times or inflated numbers — everything is measured on-site.
+Events: 40-Yard Dash, Broad Jump, Vertical Jump, 3-Cone Drill (L-Drill), 5-10-5 Shuttle (Pro-Agility), Skill-specific (Catching, Throwing, Footwork, position drills).
+
+COACHES:
+Head Coach Kevin Garrett (DB Coach): 7 years NFL (Rams & Texans), 3 years CFL, Drafted 2003 from SMU. Also COO/Director of Recruiting. Email: KG@polyrisefootball.com
+Coach Jordan (WR/TE): XFL Draft 2022, Omaha Beef 2X Champion, HCU Assistant WR Coach
+Coach Traves (RB/S): Former Navy Safety & LB, All-East Teams 2011-12, Citadel Football
+Coach John (QB): Former Navy Football QB, Naval Academy Graduate & Officer
+Coach Brayden (LB/DL): Baylor 2018-21, NFL Draft 2023, IFL All-Pro & League Champion 2025
+
+MEMBERSHIP PLANS:
+Passport — $9.99/month (Middle School grades 6-8): Monthly progress reports & charts, full session history, baseline vs current comparisons, downloadable PDF reports.
+Recruit — $29.99/month (High School grades 9-12, MOST POPULAR): Full athlete metrics tracking, PR-VERIFIED seal on profile, shareable recruiting profile, Hudl film linked, monthly X spotlight to college recruiters, 1 free combine camp/month.
+Elite Recruit — $49.99/month (Grades 11-12): Everything in Recruit PLUS quarterly Kevin Garrett development report, college program fit suggestions, prospect ranking by position & grade, 1 free combine camp/month, early access to all camps. (Coming soon — finalizing.)
+
+IN-PERSON TRAINING PROGRAMS:
+Player Development — $350/month (MOST POPULAR): 8 sessions/month, SAQ, S&C, football drills, tournament entries, military character building events, PR-Verified Camp, free Passport tracker. Tue & Thu 6:30-7:45pm.
+360 Elite — $500/month (ELITE): Everything in Player Development PLUS one-on-one NFL-coach sessions, recruiting profile, 7 college coach email blasts/month, weekly film study, unlimited camps, college visits, NIL & financial literacy classes, sports medicine/nutrition discounts.
+Girls Player Development — $250/month: 2 days/week. May: Mon & Fri 5-6:30pm. June/July: Mon & Fri 1-2:30pm.
+Multi-Sport Athlete — $175/month: One day/week (Tue or Thu), camps/events included.
+Summer Camp — $265/month (June & July, max 20 spots): K-5 Mon-Thu 8-10am, Middle School Mon-Thu 10am-12pm, High School Mon-Thu 2-4pm.
+
+CAMPS & EVENTS:
+PR-VERIFIED Combine Camp: $30/athlete. Professional combine events. HS athletes record official metrics.
+Rise of Warriors Tournament: Middle School (10 teams, May 29, $400) and High School (8 teams, May 30, $425). Min 3 games, single elimination.
+
+REGISTRATION: https://polyrisefootball.com/register
+PLANS PAGE: https://polyrisefootball.com/plans
+
+PLAN RECOMMENDATIONS:
+K-5 → Summer Camp ($265/mo), then Player Development
+Middle school 6-8 → Player Development ($350/mo) + Passport ($9.99/mo)
+High school 9-10 → Player Development + Recruit plan ($29.99/mo)
+High school 11-12 serious about college → 360 Elite ($500/mo) + Elite Recruit ($49.99/mo)
+Just want combine metrics verified → PR-VERIFIED Combine Camp ($30 one-time)
+Multiple sports → Multi-Sport Athlete ($175/mo)
+Girl athlete → Girls Player Development ($250/mo)
+
+IMPORTANT: Be helpful, warm, and always guide toward the right next step. If someone seems ready to register, give them the registration link. For recruiting questions, suggest contacting Coach Garrett at KG@polyrisefootball.com.
+`;
+
+const history = [];
+const msgsEl = document.getElementById('messages');
+const input = document.getElementById('user-input');
+
+function escHtml(t) {
+  return t.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+
+function formatText(text) {
+  return escHtml(text)
+    .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+    .replace(/\n\n/g, '<br><br>')
+    .replace(/\n/g, '<br>')
+    .replace(/(https?:\/\/[^\s<"]+)/g, '<a href="$1" target="_blank">$1</a>');
+}
+
+function addMsg(role, html, isRaw) {
+  const wrap = document.createElement('div');
+  wrap.className = 'msg ' + role;
+  if (role === 'bot') {
+    wrap.innerHTML = '<div class="bot-avatar">PR</div><div class="bubble">' + (isRaw ? html : formatText(html)) + '</div>';
+  } else {
+    wrap.innerHTML = '<div class="bubble">' + escHtml(html) + '</div>';
+  }
+  msgsEl.appendChild(wrap);
+  wrap.scrollIntoView({ behavior: 'smooth', block: 'end' });
+  return wrap;
+}
+
+function showTyping() {
+  const wrap = document.createElement('div');
+  wrap.className = 'msg bot'; wrap.id = 'typing-bubble';
+  wrap.innerHTML = '<div class="bot-avatar">PR</div><div class="bubble"><div class="typing-wrap"><span></span><span></span><span></span></div></div>';
+  msgsEl.appendChild(wrap);
+  wrap.scrollIntoView({ behavior: 'smooth', block: 'end' });
+}
+
+function removeTyping() {
+  const t = document.getElementById('typing-bubble');
+  if (t) t.remove();
+}
+
+function injectCTA(bubbleEl, text) {
+  const lower = text.toLowerCase();
+  const wantsReg = lower.includes('register') || lower.includes('sign up') || lower.includes('enroll') || lower.includes('get started') || lower.includes('join');
+  const wantsPlans = lower.includes('plan') || lower.includes('passport') || lower.includes('recruit') || lower.includes('pricing') || lower.includes('cost') || lower.includes('price') || lower.includes('per month');
+  if (wantsReg || wantsPlans) {
+    const card = document.createElement('div');
+    card.className = 'cta-inline';
+    card.innerHTML = '<div class="cta-label">Ready to get started?</div><a href="https://polyrisefootball.com/register" target="_blank">Register Now →</a>' + (wantsPlans ? '&nbsp;&nbsp;<a href="https://polyrisefootball.com/plans" target="_blank" style="background:transparent;color:var(--green);border:1px solid var(--green);padding:6px 12px;border-radius:8px;font-size:12px;font-weight:600;text-decoration:none;">View Plans →</a>' : '');
+    bubbleEl.querySelector('.bubble').appendChild(card);
+  }
+}
+
+async function askAI(userMsg) {
+  history.push({ role: 'user', content: userMsg });
+  showTyping();
+
+  try {
+    const res = await fetch('/api/advisor', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ messages: history })
+    });
+
+    const data = await res.json();
+    removeTyping();
+
+    const reply = data?.reply ||
+      "I'm having a connection issue right now! Please reach us directly at (817) 658-3300 or polyrise@polyrisefootball.com — we're happy to help!";
+
+    history.push({ role: 'assistant', content: reply });
+    const msgEl = addMsg('bot', reply, false);
+    injectCTA(msgEl, reply);
+
+  } catch (err) {
+    removeTyping();
+    addMsg('bot', 'Having trouble connecting right now. Please call or text us at <strong>(817) 658-3300</strong> or email <a href="mailto:polyrise@polyrisefootball.com">polyrise@polyrisefootball.com</a> — we\'ll get right back to you!', true);
+  }
+}
+
+function sendMessage() {
+  const val = input.value.trim();
+  if (!val) return;
+  addMsg('user', val, false);
+  input.value = '';
+  askAI(val);
+}
+
+function quickAsk(q) {
+  // Hide quick prompts after first use to save space
+  document.getElementById('quick-area').style.display = 'none';
+  addMsg('user', q, false);
+  askAI(q);
+}
+
+input.addEventListener('keydown', e => {
+  if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); sendMessage(); }
+});
+</script>
+</body>
+</html>

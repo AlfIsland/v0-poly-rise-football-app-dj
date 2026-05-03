@@ -74,8 +74,7 @@ export async function POST(req: NextRequest) {
     if (videoLink) lines.push(`🎬 ${videoLink}`)
     if (sealCode)  lines.push(`📋 polyrisefootball.com/verify/${sealCode}`)
     lines.push(`📩 kg@polyrisefootball.com | polyrise@polyrisefootball.com`)
-    const recruitingTag = athlete.sport === "soccer" ? "#SoccerRecruiting" : "#FootballRecruiting"
-    lines.push(`Kevin Garrett (Former NFL) | ${recruitingTag}`)
+    lines.push(`Kevin Garrett (Former NFL)`)
 
     // Append extra tagged accounts if provided
     if (extraTags?.trim()) {

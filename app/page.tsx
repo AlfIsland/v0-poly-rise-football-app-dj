@@ -125,14 +125,20 @@ export default function HomePage() {
               </p>
             </div>
             <div className="flex flex-col items-center">
-              <div className="flex flex-col items-center mb-4">
+              <div className="flex flex-col items-center mb-4 gap-3">
                 <Link
                   href="/plans"
                   className="text-base font-semibold bg-[#FF6600] text-white px-6 py-3 rounded hover:bg-[#FF6600]/80 transition-colors text-center"
                 >
                   Athlete Tracking Passport & Recruiting
                 </Link>
-                <span className="text-sm text-gray-400 italic mt-2">Athlete&apos;s Performance Journey</span>
+                <Link
+                  href="/free-profile"
+                  className="text-base font-semibold bg-green-700 text-white px-6 py-3 rounded hover:bg-green-800 transition-colors text-center"
+                >
+                  Get Your FREE Athlete Profile
+                </Link>
+                <span className="text-sm text-gray-400 italic mt-1">Athlete&apos;s Performance Journey</span>
               </div>
               <ProtectedImage
                 src="/pr-verified-badge.png"
@@ -853,6 +859,13 @@ export default function HomePage() {
                 className="text-base bg-[#FF6600] text-white px-4 py-2 rounded hover:bg-[#FF6600]/80 transition-colors inline-flex items-center"
               >
                 Register for Training
+                <ArrowRight className="w-4 h-4 ml-2" />
+              </Link>
+              <Link
+                href="/free-profile"
+                className="text-base bg-green-700 text-white px-4 py-2 rounded hover:bg-green-800 transition-colors inline-flex items-center"
+              >
+                Free Athlete Profile
                 <ArrowRight className="w-4 h-4 ml-2" />
               </Link>
               <Link

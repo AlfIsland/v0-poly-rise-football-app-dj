@@ -179,7 +179,7 @@ function NewAthleteForm() {
           body: JSON.stringify({
             name, age: age || "0", grade: gradYear,
             school, position, coachNotes,
-            phone, email, sport,
+            phone, email, sport, gpa: gpa || undefined,
             ...(sport === "soccer" && mlsTeam ? { mlsTeam } : {}),
           }),
         }).then(r => r.json())

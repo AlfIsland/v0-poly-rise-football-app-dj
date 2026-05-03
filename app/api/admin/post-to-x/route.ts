@@ -68,7 +68,8 @@ export async function POST(req: NextRequest) {
 
     const lines: string[] = []
     const sportEmoji = athlete.sport === "soccer" ? "⚽" : "🏈"
-    lines.push(`${sportEmoji} ${athlete.name}${handle ? ` ${handle}` : ""} | ${athlete.position || "ATH"} | ${grade} | ${athlete.school || ""}`)
+    const gpaStr = athlete.gpa ? ` | GPA: ${athlete.gpa}` : ""
+    lines.push(`${sportEmoji} ${athlete.name}${handle ? ` ${handle}` : ""} | ${athlete.position || "ATH"} | ${grade} | ${athlete.school || ""}${gpaStr}`)
     if (metrics.length) lines.push(metrics.join(" · "))
     if (videoLink) lines.push(`🎬 ${videoLink}`)
     if (sealCode)  lines.push(`📋 polyrisefootball.com/verify/${sealCode}`)

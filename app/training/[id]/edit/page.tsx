@@ -45,6 +45,7 @@ export default function EditTrainingAthletePage() {
   const [twitterHandle, setTwitterHandle] = useState("")
   const [sport, setSport] = useState<"football" | "soccer">("football")
   const [mlsTeam, setMlsTeam] = useState("")
+  const [gpa, setGpa] = useState("")
   const [gender, setGender] = useState<"M" | "F">("M")
   const [photoUrl, setPhotoUrl] = useState<string | null>(null)
 
@@ -66,6 +67,7 @@ export default function EditTrainingAthletePage() {
           setTwitterHandle(a.twitterHandle ?? "")
           setSport(a.sport === "soccer" ? "soccer" : "football")
           setMlsTeam(a.mlsTeam ?? "")
+          setGpa(a.gpa ?? "")
           setGender(a.gender === "F" ? "F" : "M")
           setPhotoUrl(a.photoUrl ?? null)
         } else {
@@ -85,7 +87,7 @@ export default function EditTrainingAthletePage() {
       const res = await fetch("/api/training", {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ id, name, age, grade, school, position, phone, email, coachNotes, videoLink, twitterHandle, sport, mlsTeam: mlsTeam || undefined, gender }),
+        body: JSON.stringify({ id, name, age, grade, school, position, phone, email, coachNotes, videoLink, twitterHandle, sport, mlsTeam: mlsTeam || undefined, gpa: gpa || undefined, gender }),
       })
       const data = await res.json()
       if (data.success) {
@@ -188,6 +190,7 @@ export default function EditTrainingAthletePage() {
               <Input label="Position" value={position} onChange={setPosition} placeholder="e.g. Running Back" />
               <Input label="Phone" value={phone} onChange={setPhone} placeholder="e.g. 512-555-1234" type="tel" />
               <Input label="Email" value={email} onChange={setEmail} placeholder="e.g. parent@email.com" type="email" />
+              <Input label="GPA" value={gpa} onChange={setGpa} placeholder="e.g. 3.8" />
               <Input label="Hudl / Film Link" value={videoLink} onChange={setVideoLink} placeholder="https://hudl.com/v/..." />
               <Input label="X / Twitter Handle" value={twitterHandle} onChange={setTwitterHandle} placeholder="@AthleteHandle" />
 

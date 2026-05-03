@@ -124,6 +124,9 @@ export default async function AthleteProfilePage({ params }: { params: { id: str
               {athlete.school && (
                 <p className="text-gray-400 text-sm mt-2 font-medium">{athlete.school}</p>
               )}
+              {athlete.gpa && (
+                <p className="text-yellow-400 text-xs mt-1 font-semibold">GPA {athlete.gpa}</p>
+              )}
               {athlete.mlsTeam && (
                 <div className="mt-2 inline-flex items-center gap-2 bg-green-900/40 border border-green-600/50 rounded-lg px-3 py-1.5">
                   <span className="text-base leading-none">⚽</span>

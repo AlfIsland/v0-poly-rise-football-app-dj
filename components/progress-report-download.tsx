@@ -118,7 +118,7 @@ export default function ProgressReportDownload({ athlete }: { athlete: Athlete }
       if (logoBase64) doc.addImage(logoBase64, "PNG", margin, 2, 24, 24)
       doc.setTextColor(255, 255, 255)
       doc.setFontSize(14); doc.setFont("helvetica", "bold")
-      doc.text("PolyRISE Football", margin + 27, 13)
+      doc.text(athlete.sport === "soccer" ? "PolyRISE Soccer" : "PolyRISE Football", margin + 27, 13)
       doc.setFontSize(9); doc.setFont("helvetica", "normal")
       doc.setTextColor(255, 200, 200)
       doc.text("ATHLETE PROGRESS REPORT", W - margin, 11, { align: "right" })

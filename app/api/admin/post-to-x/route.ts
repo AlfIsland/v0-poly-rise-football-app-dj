@@ -67,7 +67,8 @@ export async function POST(req: NextRequest) {
     const grade = (athlete.grade || "").replace(/\b(freshman|sophomore|junior|senior)\b/gi, "").trim().replace(/\s+/g, " ")
 
     const lines: string[] = []
-    lines.push(`🏈 ${athlete.name}${handle ? ` ${handle}` : ""} | ${athlete.position || "ATH"} | ${grade} | ${athlete.school || ""}`)
+    const sportEmoji = athlete.sport === "soccer" ? "⚽" : "🏈"
+    lines.push(`${sportEmoji} ${athlete.name}${handle ? ` ${handle}` : ""} | ${athlete.position || "ATH"} | ${grade} | ${athlete.school || ""}`)
     if (metrics.length) lines.push(metrics.join(" · "))
     if (videoLink) lines.push(`🎬 ${videoLink}`)
     if (sealCode)  lines.push(`📋 polyrisefootball.com/verify/${sealCode}`)

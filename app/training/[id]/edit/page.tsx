@@ -44,6 +44,7 @@ export default function EditTrainingAthletePage() {
   const [videoLink, setVideoLink] = useState("")
   const [twitterHandle, setTwitterHandle] = useState("")
   const [sport, setSport] = useState<"football" | "soccer">("football")
+  const [mlsTeam, setMlsTeam] = useState("")
   const [gender, setGender] = useState<"M" | "F">("M")
   const [photoUrl, setPhotoUrl] = useState<string | null>(null)
 
@@ -64,6 +65,7 @@ export default function EditTrainingAthletePage() {
           setVideoLink(a.videoLink ?? "")
           setTwitterHandle(a.twitterHandle ?? "")
           setSport(a.sport === "soccer" ? "soccer" : "football")
+          setMlsTeam(a.mlsTeam ?? "")
           setGender(a.gender === "F" ? "F" : "M")
           setPhotoUrl(a.photoUrl ?? null)
         } else {
@@ -83,7 +85,7 @@ export default function EditTrainingAthletePage() {
       const res = await fetch("/api/training", {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ id, name, age, grade, school, position, phone, email, coachNotes, videoLink, twitterHandle, sport, gender }),
+        body: JSON.stringify({ id, name, age, grade, school, position, phone, email, coachNotes, videoLink, twitterHandle, sport, mlsTeam: mlsTeam || undefined, gender }),
       })
       const data = await res.json()
       if (data.success) {
@@ -163,6 +165,10 @@ export default function EditTrainingAthletePage() {
                   </div>
                 </div>
               </div>
+
+              {sport === "soccer" && (
+                <Input label="MLS League / Team" value={mlsTeam} onChange={setMlsTeam} placeholder="e.g. Austin FC Academy, MLS NEXT" />
+              )}
 
               <Input label="Full Name" required value={name} onChange={setName} placeholder="e.g. Marcus Johnson" />
 

@@ -124,6 +124,9 @@ export default async function AthleteProfilePage({ params }: { params: { id: str
               {athlete.school && (
                 <p className="text-gray-400 text-sm mt-2 font-medium">{athlete.school}</p>
               )}
+              {athlete.mlsTeam && (
+                <p className="text-green-400 text-sm mt-1 font-semibold">⚽ {athlete.mlsTeam}</p>
+              )}
               {athlete.twitterHandle && (
                 <p className="text-blue-400 text-xs mt-1">@{athlete.twitterHandle.replace(/^@/, "")}</p>
               )}

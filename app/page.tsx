@@ -369,7 +369,7 @@ export default function HomePage() {
                     <div className="text-lg font-bold text-white mb-3">$350/mo</div>
                     <p className="text-muted-foreground text-sm leading-relaxed">8 sessions a month including SAQ, S&amp;C, football drills, tournament entries, military character building events, PR-Verified Camp and Free Athletic Training Passport (Tracker).</p>
                   </div>
-                  <Link href="https://app.teamlinkt.com/register/find/polyrisefootball" target="_blank" rel="noopener noreferrer" className="block w-full text-center bg-[#FF6600] text-white px-4 py-2 rounded hover:bg-[#FF6600]/80 transition-colors">Register</Link>
+                  <Link href="/register?program=player-dev" className="block w-full text-center bg-[#FF6600] text-white px-4 py-2 rounded hover:bg-[#FF6600]/80 transition-colors">Register</Link>
                 </div>
               </div>
 
@@ -385,7 +385,7 @@ export default function HomePage() {
                     <div className="text-lg font-bold text-white mb-3">$500/mo</div>
                     <p className="text-muted-foreground text-sm leading-relaxed">Everything in Player Development plus one-on-one coaching from NFL experience staff, recruiting profile, 7 email blasts a month, and exclusive benefits.</p>
                   </div>
-                  <Link href="https://app.teamlinkt.com/register/find/polyrisefootball" target="_blank" rel="noopener noreferrer" className="block w-full text-center bg-[#FF6600] text-white px-4 py-2 rounded hover:bg-[#FF6600]/80 transition-colors">Register</Link>
+                  <Link href="/register?program=elite-360" className="block w-full text-center bg-[#FF6600] text-white px-4 py-2 rounded hover:bg-[#FF6600]/80 transition-colors">Register</Link>
                 </div>
               </div>
 
@@ -402,7 +402,7 @@ export default function HomePage() {
                       <li className="flex items-start gap-2 text-sm text-muted-foreground"><CheckCircle2 className="w-4 h-4 text-primary flex-shrink-0 mt-0.5" />Min. 3 games, single elimination</li>
                     </ul>
                   </div>
-                  <Link href="https://app.teamlinkt.com/register/find/polyrisefootball" target="_blank" rel="noopener noreferrer" className="block w-full text-center bg-[#FF6600] text-white px-4 py-2 rounded hover:bg-[#FF6600]/80 transition-colors">Register Team</Link>
+                  <Link href="/register?program=tournament-ms" className="block w-full text-center bg-[#FF6600] text-white px-4 py-2 rounded hover:bg-[#FF6600]/80 transition-colors">Register Team</Link>
                 </div>
               </div>
 
@@ -420,7 +420,7 @@ export default function HomePage() {
                       <span className="text-lg font-bold text-white">$250/mo</span>
                     </div>
                   </div>
-                  <Link href="https://app.teamlinkt.com/register/find/polyrisefootball" target="_blank" rel="noopener noreferrer" className="block w-full text-center bg-[#FF6600] text-white px-4 py-2 rounded hover:bg-[#FF6600]/80 transition-colors">Register</Link>
+                  <Link href="/register?program=girls-dev" className="block w-full text-center bg-[#FF6600] text-white px-4 py-2 rounded hover:bg-[#FF6600]/80 transition-colors">Register</Link>
                 </div>
               </div>
 
@@ -432,7 +432,7 @@ export default function HomePage() {
                     <div className="text-lg font-bold text-white mb-3">$175/mo</div>
                     <p className="text-muted-foreground text-sm leading-relaxed">One day a week (Tue or Thur) with camps/events included.</p>
                   </div>
-                  <Link href="https://app.teamlinkt.com/register/find/polyrisefootball" target="_blank" rel="noopener noreferrer" className="block w-full text-center bg-[#FF6600] text-white px-4 py-2 rounded hover:bg-[#FF6600]/80 transition-colors">Register</Link>
+                  <Link href="/register?program=multi-sport" className="block w-full text-center bg-[#FF6600] text-white px-4 py-2 rounded hover:bg-[#FF6600]/80 transition-colors">Register</Link>
                 </div>
               </div>
 
@@ -450,7 +450,7 @@ export default function HomePage() {
                       <span className="text-lg font-bold text-white">$30</span>
                     </div>
                   </div>
-                  <Link href="https://app.teamlinkt.com/register/find/polyrisefootball" target="_blank" rel="noopener noreferrer" className="block w-full text-center bg-[#FF6600] text-white px-4 py-2 rounded hover:bg-[#FF6600]/80 transition-colors">Register</Link>
+                  <Link href="/register?program=combine" className="block w-full text-center bg-[#FF6600] text-white px-4 py-2 rounded hover:bg-[#FF6600]/80 transition-colors">Register</Link>
                 </div>
               </div>
 
@@ -469,7 +469,7 @@ export default function HomePage() {
                       <div><div className="flex items-center justify-between"><span className="font-medium">High School</span><span className="text-lg font-bold text-white">$265/mo</span></div><p className="text-xs text-muted-foreground">Mon-Thu, 2:00pm - 4:00pm</p></div>
                     </div>
                   </div>
-                  <Link href="https://app.teamlinkt.com/register/find/polyrisefootball" target="_blank" rel="noopener noreferrer" className="block w-full text-center bg-[#FF6600] text-white px-4 py-2 rounded hover:bg-[#FF6600]/80 transition-colors">Register Now</Link>
+                  <Link href="/register?program=summer-ms" className="block w-full text-center bg-[#FF6600] text-white px-4 py-2 rounded hover:bg-[#FF6600]/80 transition-colors">Register Now</Link>
                 </div>
               </div>
 
@@ -849,7 +849,7 @@ export default function HomePage() {
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link
-                href="https://app.teamlinkt.com/register/find/polyrisefootball" target="_blank" rel="noopener noreferrer"
+                href="/register"
                 className="text-base bg-[#FF6600] text-white px-4 py-2 rounded hover:bg-[#FF6600]/80 transition-colors inline-flex items-center"
               >
                 Register for Training
@@ -923,7 +923,7 @@ export default function HomePage() {
                 </li>
                 <li>
                   <Link
-                    href="https://app.teamlinkt.com/register/find/polyrisefootball" target="_blank" rel="noopener noreferrer"
+                    href="/register"
                     className="hover:text-foreground transition-colors"
                   >
                     Register

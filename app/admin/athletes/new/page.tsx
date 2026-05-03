@@ -66,6 +66,7 @@ function NewAthleteForm() {
   // ── ATP only ──
   const [age, setAge] = useState("")
   const [sport, setSport] = useState<"football" | "soccer">("football")
+  const [mlsTeam, setMlsTeam] = useState("")
 
   // ── Save results ──
   const [saving, setSaving] = useState(false)
@@ -179,6 +180,7 @@ function NewAthleteForm() {
             name, age: age || "0", grade: gradYear,
             school, position, coachNotes,
             phone, email, sport,
+            ...(sport === "soccer" && mlsTeam ? { mlsTeam } : {}),
           }),
         }).then(r => r.json())
         if (res.success) { setAtpId(res.id); setSavedATP(true) }
@@ -343,20 +345,29 @@ function NewAthleteForm() {
 
               {/* ATP sport toggle */}
               {showATP && (
-                <Field label="Sport">
-                  <div className="flex gap-2">
-                    {(["football", "soccer"] as const).map(s => (
-                      <button key={s} onClick={() => setSport(s)}
-                        className={`flex-1 py-2 rounded-lg text-sm font-bold transition-colors border ${
-                          sport === s
-                            ? s === "football" ? "bg-red-700 border-red-600 text-white" : "bg-green-700 border-green-600 text-white"
-                            : "bg-gray-800 border-gray-700 text-gray-400"
-                        }`}>
-                        {s === "football" ? "🏈 Football" : "⚽ Soccer"}
-                      </button>
-                    ))}
-                  </div>
-                </Field>
+                <>
+                  <Field label="Sport">
+                    <div className="flex gap-2">
+                      {(["football", "soccer"] as const).map(s => (
+                        <button key={s} onClick={() => setSport(s)}
+                          className={`flex-1 py-2 rounded-lg text-sm font-bold transition-colors border ${
+                            sport === s
+                              ? s === "football" ? "bg-red-700 border-red-600 text-white" : "bg-green-700 border-green-600 text-white"
+                              : "bg-gray-800 border-gray-700 text-gray-400"
+                          }`}>
+                          {s === "football" ? "🏈 Football" : "⚽ Soccer"}
+                        </button>
+                      ))}
+                    </div>
+                  </Field>
+                  {sport === "soccer" && (
+                    <Field label="MLS League / Team">
+                      <input value={mlsTeam} onChange={e => setMlsTeam(e.target.value)}
+                        placeholder="e.g. Austin FC Academy, MLS NEXT"
+                        className={inputCls} />
+                    </Field>
+                  )}
+                </>
               )}
             </div>
 

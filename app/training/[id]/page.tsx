@@ -98,6 +98,9 @@ export default async function TrainingAthletePage({ params }: { params: { id: st
                 }
               </div>
               <p className="text-gray-400 text-sm">{athlete.age} yrs · {athlete.grade} · {athlete.school || "—"}</p>
+              {athlete.mlsTeam && (
+                <p className="text-green-400 text-xs mt-0.5 font-semibold">⚽ {athlete.mlsTeam}</p>
+              )}
               <Link href="/training" className="text-xs text-gray-600 hover:text-gray-400 underline mt-0.5 block">← Training Roster</Link>
             </div>
           </div>

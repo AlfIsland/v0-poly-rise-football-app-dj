@@ -1,12 +1,13 @@
 "use client"
 
-import { useState, Suspense } from "react"
+import { useState, useEffect, Suspense } from "react"
 import { useSearchParams } from "next/navigation"
 import Image from "next/image"
 
 const PROGRAMS_DATA: Record<string, { name: string; price: number; priceLabel: string; billing: "one_time" | "monthly" }> = {
   "player-dev":           { name: "Player Development",                    price: 350, priceLabel: "$350/mo",  billing: "monthly" },
   "elite-360":            { name: "360 Elite",                             price: 500, priceLabel: "$500/mo",  billing: "monthly" },
+  "multi-sport":          { name: "Multi-Sport Athlete",                   price: 175, priceLabel: "$175/mo",  billing: "monthly" },
   "girls-dev":            { name: "Girls Player Development",              price: 250, priceLabel: "$250/mo",  billing: "monthly" },
   "summer-k5":            { name: "Summer Camp — Elementary (K-5)",        price: 265, priceLabel: "$265",      billing: "one_time" },
   "summer-ms":            { name: "Summer Camp — Middle School",           price: 265, priceLabel: "$265",      billing: "one_time" },
@@ -27,9 +28,10 @@ const CATEGORIES = [
   {
     label: "Training Programs", badge: "bg-red-900 text-red-300", color: "border-red-800 hover:border-red-500",
     programs: [
-      { id: "player-dev", desc: "16 sessions/month · SAQ, S&C, football drills, tournament entries, film study & quarterly character events" },
-      { id: "elite-360",  desc: "Everything in Player Development + 1-on-1 NFL coaching, recruiting profile & 7 college email blasts/month", highlight: "BEST" },
-      { id: "girls-dev",  desc: "May: Mon & Fri 5–6:30pm · June–July: Mon & Fri 1–2:30pm" },
+      { id: "player-dev",  desc: "8 sessions/month · SAQ, S&C, football drills, tournament entries, military character events, PR-Verified Camp & Athlete Tracking Passport" },
+      { id: "elite-360",   desc: "Everything in Player Development + 1-on-1 NFL coaching, recruiting profile & 7 college email blasts/month", highlight: "BEST" },
+      { id: "multi-sport", desc: "1 day/week (Tue or Thu) · SAQ, S&C, multi-sport athleticism with camps & events included" },
+      { id: "girls-dev",   desc: "May: Mon & Fri 5–6:30pm · June–July: Mon & Fri 1–2:30pm" },
     ],
   },
   {
@@ -83,6 +85,14 @@ function RegisterPage() {
   const [error, setError] = useState("")
   const searchParams = useSearchParams()
   const canceled = searchParams.get("canceled")
+
+  useEffect(() => {
+    const program = searchParams.get("program")
+    if (program && PROGRAMS_DATA[program] && !cart.includes(program)) {
+      addToCart(program)
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
   const addToCart = (id: string) => {
     if (!cart.includes(id)) setCart(prev => [...prev, id])

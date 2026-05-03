@@ -21,7 +21,7 @@ const STATUS_COLORS: Record<string, string> = {
 }
 
 const CATEGORY_LABELS: Record<string, string> = {
-  "player-dev": "Training", "elite-360": "Training", "girls-dev": "Training",
+  "player-dev": "Training", "elite-360": "Training", "multi-sport": "Training", "girls-dev": "Training",
   "summer-k5": "Camp", "summer-ms": "Camp", "summer-hs": "Camp",
   "combine": "Event", "hike": "Event", "tournament-ms": "Event", "tournament-hs": "Event",
   "exposure-basic-3": "Recruiting", "exposure-basic-6": "Recruiting", "exposure-basic-12": "Recruiting",

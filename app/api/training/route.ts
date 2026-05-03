@@ -114,6 +114,7 @@ export interface TrainingAthlete {
   phone?: string
   email?: string
   sport?: "football" | "soccer"
+  mlsTeam?: string
   joinedAt: string
   sessions: TrainingSession[]
   featured?: boolean
@@ -141,6 +142,7 @@ export async function POST(req: NextRequest) {
       phone: body.phone || "",
       email: body.email || "",
       sport: body.sport === "soccer" ? "soccer" : "football",
+      ...(body.sport === "soccer" && body.mlsTeam ? { mlsTeam: body.mlsTeam } : {}),
       gender: body.gender === "F" ? "F" as const : "M" as const,
       joinedAt: new Date().toISOString(),
       sessions: [],
@@ -281,6 +283,7 @@ export async function PUT(req: NextRequest) {
       phone: body.phone ?? existing.phone,
       email: body.email ?? existing.email,
       sport: body.sport === "soccer" ? "soccer" : body.sport === "football" ? "football" : existing.sport,
+      mlsTeam: body.mlsTeam !== undefined ? (body.mlsTeam || undefined) : existing.mlsTeam,
       gender: body.gender === "F" ? "F" : body.gender === "M" ? "M" : existing.gender,
     }
     await kvSet(`training:athlete:${id.toUpperCase()}`, updated)

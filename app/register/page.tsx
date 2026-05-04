@@ -5,14 +5,16 @@ import { useSearchParams } from "next/navigation"
 import Image from "next/image"
 
 const PROGRAMS_DATA: Record<string, { name: string; price: number; priceLabel: string; billing: "one_time" | "monthly" }> = {
-  "player-dev":           { name: "Player Development",                    price: 350, priceLabel: "$350/mo",  billing: "monthly" },
+  "player-dev":           { name: "Player Development",                    price: 315, priceLabel: "$315/mo",  billing: "monthly" },
   "elite-360":            { name: "360 Elite",                             price: 500, priceLabel: "$500/mo",  billing: "monthly" },
   "multi-sport":          { name: "Multi-Sport Athlete",                   price: 175, priceLabel: "$175/mo",  billing: "monthly" },
   "girls-dev":            { name: "Girls Player Development",              price: 250, priceLabel: "$250/mo",  billing: "monthly" },
+  "drop-in-1day":         { name: "Drop-In — 1 Day",                       price: 45,  priceLabel: "$45",       billing: "one_time" },
+  "drop-in-2day":         { name: "Drop-In — 2 Days",                      price: 80,  priceLabel: "$80",       billing: "one_time" },
   "summer-k5":            { name: "Summer Camp — Elementary (K-5)",        price: 265, priceLabel: "$265",      billing: "one_time" },
   "summer-ms":            { name: "Summer Camp — Middle School",           price: 265, priceLabel: "$265",      billing: "one_time" },
   "summer-hs":            { name: "Summer Camp — High School",             price: 265, priceLabel: "$265",      billing: "one_time" },
-  "combine":              { name: "PR-VERIFIED Combine Camp",              price: 50,  priceLabel: "$50",       billing: "one_time" },
+  "combine":              { name: "Combine Metrics Camp",                  price: 30,  priceLabel: "$30",       billing: "one_time" },
   "hike":                 { name: "Leadership Hike",                       price: 25,  priceLabel: "$25",       billing: "one_time" },
   "tournament-ms":        { name: "Football Tournament (Middle School)",   price: 400, priceLabel: "$400",      billing: "one_time" },
   "tournament-hs":        { name: "Football Tournament (High School)",     price: 425, priceLabel: "$425",      billing: "one_time" },
@@ -28,10 +30,12 @@ const CATEGORIES = [
   {
     label: "Training Programs", badge: "bg-red-900 text-red-300", color: "border-red-800 hover:border-red-500",
     programs: [
-      { id: "player-dev",  desc: "8 sessions/month · SAQ, S&C, football drills, tournament entries, military character events, PR-Verified Camp & Athlete Tracking Passport" },
-      { id: "elite-360",   desc: "Everything in Player Development + 1-on-1 NFL coaching, recruiting profile & 7 college email blasts/month", highlight: "BEST" },
-      { id: "multi-sport", desc: "1 day/week (Tue or Thu) · SAQ, S&C, multi-sport athleticism with camps & events included" },
-      { id: "girls-dev",   desc: "May: Mon & Fri 5–6:30pm · June–July: Mon & Fri 1–2:30pm" },
+      { id: "player-dev",    desc: "8 sessions/month · SAQ, S&C, football drills, tournament entries, military character events, PR-Verified Camp & Athlete Tracking Passport" },
+      { id: "elite-360",     desc: "Everything in Player Development + 1-on-1 NFL coaching, recruiting profile & 7 college email blasts/month", highlight: "BEST" },
+      { id: "multi-sport",   desc: "1 day/week (Tue or Thu) · SAQ, S&C, multi-sport athleticism with camps & events included" },
+      { id: "girls-dev",     desc: "May: Mon & Fri 5–6:30pm · June–July: Mon & Fri 1–2:30pm" },
+      { id: "drop-in-1day",  desc: "Single day training session — try a session before committing to a full program" },
+      { id: "drop-in-2day",  desc: "2 day training package · Save $10 vs. 2 single drop-ins ($45 + $35 additional day)" },
     ],
   },
   {
@@ -45,7 +49,7 @@ const CATEGORIES = [
   {
     label: "Events", badge: "bg-green-900 text-green-300", color: "border-green-800 hover:border-green-500",
     programs: [
-      { id: "combine",       desc: "40-yard dash, vertical jump, 3-cone drill & position-specific evaluations" },
+      { id: "combine",       desc: "40-yard dash, vertical jump, broad jump, 3-cone drill & position-specific evaluations · Earn your PR-VERIFIED seal" },
       { id: "tournament-ms", desc: "May 29–30 · 8–10 team bracket · Minimum 3 games guaranteed" },
       { id: "tournament-hs", desc: "May 29–30 · 8–10 team bracket · Minimum 3 games guaranteed" },
       { id: "hike",          desc: "2201 Barton Springs Rd, Austin · Military character building event" },

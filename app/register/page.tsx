@@ -15,6 +15,7 @@ const PROGRAMS_DATA: Record<string, { name: string; price: number; priceLabel: s
   "summer-ms":            { name: "Summer Camp — Middle School",           price: 265, priceLabel: "$265",      billing: "one_time" },
   "summer-hs":            { name: "Summer Camp — High School",             price: 265, priceLabel: "$265",      billing: "one_time" },
   "combine":              { name: "Combine Metrics Camp",                  price: 30,  priceLabel: "$30",       billing: "one_time" },
+  "tackling-camp":        { name: "Tackling Camp",                         price: 25,  priceLabel: "$25",       billing: "one_time" },
   "hike":                 { name: "Leadership Hike",                       price: 25,  priceLabel: "$25",       billing: "one_time" },
   "tournament-ms":        { name: "Football Tournament (Middle School)",   price: 400, priceLabel: "$400",      billing: "one_time" },
   "tournament-hs":        { name: "Football Tournament (High School)",     price: 425, priceLabel: "$425",      billing: "one_time" },
@@ -47,6 +48,7 @@ const CATEGORIES = [
     label: "Events", badge: "bg-green-900 text-green-300", color: "border-green-800 hover:border-green-500",
     programs: [
       { id: "combine",       desc: "40-yard dash, vertical jump, broad jump, 3-cone drill & position-specific evaluations · Earn your PR-VERIFIED seal" },
+      { id: "tackling-camp", desc: "June 12 · 9:00am · Dripping Springs (location TBD) · Proper tackling technique & fundamentals" },
       { id: "tournament-ms", desc: "May 29–30 · 8–10 team bracket · Minimum 3 games guaranteed" },
       { id: "tournament-hs", desc: "May 29–30 · 8–10 team bracket · Minimum 3 games guaranteed" },
       { id: "hike",          desc: "2201 Barton Springs Rd, Austin · Military character building event" },

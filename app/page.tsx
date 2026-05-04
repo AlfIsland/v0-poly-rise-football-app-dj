@@ -372,7 +372,7 @@ export default function HomePage() {
                 <div className="pt-6 px-6 pb-6 space-y-4">
                   <div>
                     <h4 className="text-xl font-display font-bold mb-2">Player Development</h4>
-                    <div className="text-lg font-bold text-white mb-3">$350/mo</div>
+                    <div className="text-lg font-bold text-white mb-3">$315/mo</div>
                     <p className="text-muted-foreground text-sm leading-relaxed">8 sessions a month including SAQ, S&amp;C, football drills, tournament entries, military character building events, PR-Verified Camp and Free Athletic Training Passport (Tracker).</p>
                   </div>
                   <Link href="/register?program=player-dev" className="block w-full text-center bg-[#FF6600] text-white px-4 py-2 rounded hover:bg-[#FF6600]/80 transition-colors">Register</Link>
@@ -442,6 +442,30 @@ export default function HomePage() {
                 </div>
               </div>
 
+              {/* Drop-In */}
+              <div className="bg-card border-primary/50 border-2 overflow-hidden group hover:border-primary transition-colors">
+                <div className="pt-6 px-6 pb-6 space-y-4">
+                  <div>
+                    <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 mb-3">
+                      <span className="text-sm font-medium text-primary">Drop-In</span>
+                    </div>
+                    <h4 className="text-xl font-display font-bold mb-2">Drop-In Training</h4>
+                    <p className="text-muted-foreground text-sm leading-relaxed mb-2">Try a session before committing to a full program. Add a second day for just $35 more.</p>
+                    <div className="space-y-2 border-t border-dashed border-border pt-4">
+                      <div className="flex items-center justify-between">
+                        <span className="font-medium text-sm">1 Day</span>
+                        <span className="text-lg font-bold text-white">$45</span>
+                      </div>
+                      <div className="flex items-center justify-between">
+                        <span className="font-medium text-sm">2 Days</span>
+                        <span className="text-lg font-bold text-white">$80</span>
+                      </div>
+                    </div>
+                  </div>
+                  <Link href="/register?program=drop-in-1day" className="block w-full text-center bg-[#FF6600] text-white px-4 py-2 rounded hover:bg-[#FF6600]/80 transition-colors">Register</Link>
+                </div>
+              </div>
+
               {/* PR-VERIFIED Combine Camp */}
               <div className="bg-card border-primary/50 border-2 overflow-hidden group hover:border-primary transition-colors">
                 <div className="pt-6 px-6 pb-6 space-y-4">
@@ -449,7 +473,7 @@ export default function HomePage() {
                     <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 mb-3">
                       <span className="text-sm font-medium text-primary">Camp</span>
                     </div>
-                    <h4 className="text-xl font-display font-bold mb-2">PR-VERIFIED Combine Camp</h4>
+                    <h4 className="text-xl font-display font-bold mb-2">Combine Metrics Camp</h4>
                     <p className="text-muted-foreground text-sm leading-relaxed mb-2">Professional Combine Events. H.S Athletes record official metrics.</p>
                     <div className="flex items-center justify-between border-t border-dashed border-border pt-4">
                       <span className="font-medium">Camp Registration</span>
@@ -593,7 +617,7 @@ export default function HomePage() {
                     What is included in the Player Development program?
                   </h3>
                   <p className="text-muted-foreground leading-relaxed">
-                    Player Development ($350/month) includes 2 training sessions weekly, (PolyRISE tee after 3 months), SAQ, S&C training, football drills, monthly camp/tryout, leadership event, film study.
+                    Player Development ($315/month) includes 2 training sessions weekly, (PolyRISE tee after 3 months), SAQ, S&C training, football drills, monthly camp/tryout, leadership event, film study.
                   </p>
                 </div>
               </div>

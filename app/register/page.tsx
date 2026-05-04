@@ -18,12 +18,9 @@ const PROGRAMS_DATA: Record<string, { name: string; price: number; priceLabel: s
   "hike":                 { name: "Leadership Hike",                       price: 25,  priceLabel: "$25",       billing: "one_time" },
   "tournament-ms":        { name: "Football Tournament (Middle School)",   price: 400, priceLabel: "$400",      billing: "one_time" },
   "tournament-hs":        { name: "Football Tournament (High School)",     price: 425, priceLabel: "$425",      billing: "one_time" },
-  "exposure-basic-3":     { name: "Basic Exposure — 3 Months",            price: 165, priceLabel: "$165",      billing: "one_time" },
-  "exposure-basic-6":     { name: "Basic Exposure — 6 Months",            price: 330, priceLabel: "$330",      billing: "one_time" },
-  "exposure-basic-12":    { name: "Basic Exposure — 12 Months",           price: 660, priceLabel: "$660",      billing: "one_time" },
-  "exposure-enhanced-3":  { name: "Enhanced Exposure — 3 Months",         price: 225, priceLabel: "$225",      billing: "one_time" },
-  "exposure-enhanced-6":  { name: "Enhanced Exposure — 6 Months",         price: 450, priceLabel: "$450",      billing: "one_time" },
-  "exposure-enhanced-12": { name: "Enhanced Exposure — 12 Months",        price: 900, priceLabel: "$900",      billing: "one_time" },
+  "passport":             { name: "Passport",                              price: 9.99,  priceLabel: "$9.99/mo",  billing: "monthly" },
+  "recruit":              { name: "Recruit",                               price: 29.99, priceLabel: "$29.99/mo", billing: "monthly" },
+  "elite-recruit":        { name: "Elite Recruit",                         price: 49.99, priceLabel: "$49.99/mo", billing: "monthly" },
 }
 
 const CATEGORIES = [
@@ -56,14 +53,11 @@ const CATEGORIES = [
     ],
   },
   {
-    label: "Recruiting Exposure", badge: "bg-purple-900 text-purple-300", color: "border-purple-800 hover:border-purple-500",
+    label: "Memberships", badge: "bg-purple-900 text-purple-300", color: "border-purple-800 hover:border-purple-500",
     programs: [
-      { id: "exposure-basic-3",     desc: "Professional player profile + 5 monthly college outreach emails" },
-      { id: "exposure-basic-6",     desc: "Professional player profile + 5 monthly college outreach emails · Save 17%" },
-      { id: "exposure-basic-12",    desc: "Professional player profile + 5 monthly college outreach emails · Best value" },
-      { id: "exposure-enhanced-3",  desc: "Professional profile + 10 monthly college contact emails", highlight: "POPULAR" },
-      { id: "exposure-enhanced-6",  desc: "Professional profile + 10 monthly college contact emails · Save 17%" },
-      { id: "exposure-enhanced-12", desc: "Professional profile + 10 monthly college contact emails · Best value" },
+      { id: "passport",      desc: "Monthly progress reports, session history, baseline comparisons, downloadable PDFs · Grades 4–8" },
+      { id: "recruit",       desc: "PR-VERIFIED profile, Hudl integration, monthly scout spotlight, 1 free combine/mo · Grades 8–12", highlight: "POPULAR" },
+      { id: "elite-recruit", desc: "Everything in Recruit + Coach Garrett quarterly report, college fit suggestions, prospect rankings · Grades 11–12" },
     ],
   },
 ]

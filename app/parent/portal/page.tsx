@@ -13,6 +13,7 @@ import { Fragment } from "react"
 import { getAgeTier, tierStyle } from "@/lib/age-tiers"
 
 const ProgressChart = dynamic(() => import("@/components/progress-chart"), { ssr: false })
+const RecruitingRoadmap = dynamic(() => import("@/components/recruiting-roadmap"), { ssr: false })
 
 const METRICS = [
   { key: "fortyYard",    label: "40-Yard Dash",    unit: "s",     lower: true  },
@@ -53,7 +54,7 @@ function Portal() {
   const [prvRecords, setPrvRecords] = useState<Record<string, { code: string; verifyUrl: string } | null>>({})
   const [loading, setLoading] = useState(true)
   const [managingBilling, setManagingBilling] = useState(false)
-  const [activeTab, setActiveTab] = useState<Record<string, "overview" | "history" | "chart">>({})
+  const [activeTab, setActiveTab] = useState<Record<string, "overview" | "history" | "chart" | "recruiting">>({})
   const [editingAthlete, setEditingAthlete] = useState<string | null>(null)
   const [editFields, setEditFields] = useState<Record<string, { position: string; school: string; grade: string }>>({})
   const [editSaving, setEditSaving] = useState(false)
@@ -310,7 +311,7 @@ function Portal() {
                 <>
                   {/* Tabs */}
                   <div className="flex border-b border-gray-800">
-                    {(["overview", "history", "chart"] as const).map(t => (
+                    {(["overview", "history", "chart", "recruiting"] as const).map(t => (
                       <button
                         key={t}
                         onClick={() => setActiveTab(prev => ({ ...prev, [athlete.id]: t }))}
@@ -320,7 +321,7 @@ function Portal() {
                             : "text-gray-500 hover:text-gray-300"
                         }`}
                       >
-                        {t === "chart" ? "Chart" : t === "history" ? "History" : "Overview"}
+                        {t === "chart" ? "Chart" : t === "history" ? "History" : t === "recruiting" ? "Recruiting" : "Overview"}
                       </button>
                     ))}
                   </div>
@@ -493,6 +494,17 @@ function Portal() {
                   {tab === "chart" && (
                     <div className="px-4 py-5">
                       <ProgressChart sessions={sessions} />
+                    </div>
+                  )}
+
+                  {/* Recruiting tab */}
+                  {tab === "recruiting" && (
+                    <div className="px-4 py-5">
+                      <RecruitingRoadmap
+                        athleteId={athlete.id}
+                        grade={athlete.grade ?? ""}
+                        sport={athlete.sport}
+                      />
                     </div>
                   )}
                 </>

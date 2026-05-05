@@ -13,6 +13,7 @@ import { calculateRatings } from "@/lib/athlete-ratings"
 import { gradeToClassYear } from "@/lib/grade-to-class-year"
 import { getAllParents } from "@/lib/parent-store"
 import { getAgeTier, tierStyle } from "@/lib/age-tiers"
+import RecruitingRoadmap from "@/components/recruiting-roadmap"
 
 async function getAthlete(id: string) {
   try {
@@ -461,6 +462,14 @@ export default async function TrainingAthletePage({ params }: { params: { id: st
                 <p className="text-gray-300 text-sm leading-relaxed">{athlete.coachNotes}</p>
               </div>
             )}
+
+            {/* Recruiting Roadmap */}
+            <RecruitingRoadmap
+              athleteId={athlete.id}
+              grade={athlete.grade ?? ""}
+              sport={athlete.sport}
+              twitterHandle={athlete.twitterHandle}
+            />
 
             {/* Send report */}
             <SendTrainingReport athlete={athlete} />

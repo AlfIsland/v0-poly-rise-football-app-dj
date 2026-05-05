@@ -477,7 +477,7 @@ export default function HomePage() {
                     <p className="text-muted-foreground text-sm leading-relaxed mb-2">Professional Combine Events. H.S Athletes record official metrics.</p>
                     <div className="flex items-center justify-between border-t border-dashed border-border pt-4">
                       <span className="font-medium">Camp Registration</span>
-                      <span className="text-lg font-bold text-white">$30</span>
+                      <span className="text-lg font-bold text-white">$25</span>
                     </div>
                   </div>
                   <Link href="/register?program=combine" className="block w-full text-center bg-[#FF6600] text-white px-4 py-2 rounded hover:bg-[#FF6600]/80 transition-colors">Register</Link>

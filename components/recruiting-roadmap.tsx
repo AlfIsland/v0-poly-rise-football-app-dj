@@ -112,7 +112,8 @@ function emptyRoadmap(instagram?: string, ncaaId?: string): RecruitingRoadmapDat
 
 export default function RecruitingRoadmap({ athleteId, grade, sport, instagram, ncaaId }: Props) {
   const tier = gradeTier(grade)
-  const visibleItems = ITEMS.filter(item => item.tier <= tier)
+  const currentItems = ITEMS.filter(item => item.tier <= tier)
+  const futureItems  = ITEMS.filter(item => item.tier >  tier)
 
   const [roadmap, setRoadmap] = useState<RecruitingRoadmapData>(emptyRoadmap(instagram, ncaaId))
   const [saveStatus, setSaveStatus] = useState<"idle" | "saving" | "saved">("idle")
@@ -207,18 +208,25 @@ export default function RecruitingRoadmap({ athleteId, grade, sport, instagram, 
     }))
   }
 
-  // Progress
-  const checked = visibleItems.filter(i => roadmap.checklist[i.id]).length
-  const total = visibleItems.length
+  // Progress — only count current-tier items
+  const checked = currentItems.filter(i => roadmap.checklist[i.id]).length
+  const total = currentItems.length
   const pct = total > 0 ? Math.round((checked / total) * 100) : 0
 
   const emailedCount = roadmap.colleges.filter(c => c.emailed).length
 
-  // Group visible items by tier
+  // Group current items by tier
   const tierGroups: Record<number, typeof ITEMS> = {}
-  for (const item of visibleItems) {
+  for (const item of currentItems) {
     if (!tierGroups[item.tier]) tierGroups[item.tier] = []
     tierGroups[item.tier].push(item)
+  }
+
+  // Group future items by tier
+  const futureTierGroups: Record<number, typeof ITEMS> = {}
+  for (const item of futureItems) {
+    if (!futureTierGroups[item.tier]) futureTierGroups[item.tier] = []
+    futureTierGroups[item.tier].push(item)
   }
 
   return (
@@ -254,7 +262,7 @@ export default function RecruitingRoadmap({ athleteId, grade, sport, instagram, 
 
       <div className="px-6 py-5 space-y-6">
 
-        {/* Checklist by tier */}
+        {/* Checklist — current tiers (active) */}
         {Object.entries(tierGroups).map(([tierStr, items]) => {
           const t = parseInt(tierStr)
           return (
@@ -272,9 +280,7 @@ export default function RecruitingRoadmap({ athleteId, grade, sport, instagram, 
                       className="w-full flex items-center gap-3 text-left group"
                     >
                       <span className={`shrink-0 w-5 h-5 rounded-full border-2 flex items-center justify-center transition-colors ${
-                        done
-                          ? "bg-green-600 border-green-600"
-                          : "border-gray-600 group-hover:border-gray-400"
+                        done ? "bg-green-600 border-green-600" : "border-gray-600 group-hover:border-gray-400"
                       }`}>
                         {done && (
                           <svg className="w-3 h-3 text-white" viewBox="0 0 12 12" fill="none">
@@ -294,6 +300,44 @@ export default function RecruitingRoadmap({ athleteId, grade, sport, instagram, 
             </div>
           )
         })}
+
+        {/* Future Requirements — locked, shown for awareness */}
+        {futureItems.length > 0 && (
+          <div className="rounded-xl border border-amber-600/40 bg-amber-950/30 overflow-hidden">
+            {/* Banner */}
+            <div className="bg-amber-600/20 border-b border-amber-600/30 px-4 py-2.5 flex items-center gap-2">
+              <svg className="w-4 h-4 text-amber-400 shrink-0" viewBox="0 0 16 16" fill="none">
+                <path d="M8 1.5a3.5 3.5 0 00-3.5 3.5V7H3.5A1.5 1.5 0 002 8.5v5A1.5 1.5 0 003.5 15h9a1.5 1.5 0 001.5-1.5v-5A1.5 1.5 0 0012.5 7h-1V5A3.5 3.5 0 008 1.5zm-2 3.5a2 2 0 014 0V7H6V5zm2 5a1 1 0 110 2 1 1 0 010-2z" fill="currentColor"/>
+              </svg>
+              <p className="text-xs font-black text-amber-400 uppercase tracking-widest">Future Requirements — Coming Up Next</p>
+            </div>
+            <div className="px-4 py-3 space-y-4">
+              <p className="text-xs text-amber-500/80">These milestones unlock as your athlete advances in grade. Start thinking about them now!</p>
+              {Object.entries(futureTierGroups).map(([tierStr, items]) => {
+                const t = parseInt(tierStr)
+                return (
+                  <div key={t}>
+                    <p className="text-xs font-bold text-amber-600/70 uppercase tracking-widest mb-2">
+                      {TIER_LABELS[t]}
+                    </p>
+                    <div className="space-y-2">
+                      {items.map(item => (
+                        <div key={item.id} className="flex items-center gap-3 opacity-60 cursor-not-allowed">
+                          <span className="shrink-0 w-5 h-5 rounded-full border-2 border-amber-700/50 flex items-center justify-center">
+                            <svg className="w-2.5 h-2.5 text-amber-600" viewBox="0 0 10 12" fill="none">
+                              <path d="M5 1a2.5 2.5 0 00-2.5 2.5V5H2a1 1 0 00-1 1v4a1 1 0 001 1h6a1 1 0 001-1V6a1 1 0 00-1-1h-.5V3.5A2.5 2.5 0 005 1zm-1 2.5a1 1 0 012 0V5H4V3.5zM5 8a.75.75 0 110 1.5A.75.75 0 015 8z" fill="currentColor"/>
+                            </svg>
+                          </span>
+                          <span className="text-sm text-amber-700/80">{item.label}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )
+              })}
+            </div>
+          </div>
+        )}
 
         {/* NCAA ID + Instagram */}
         <div className="border-t border-gray-800 pt-5">

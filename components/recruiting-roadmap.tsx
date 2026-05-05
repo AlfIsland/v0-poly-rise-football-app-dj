@@ -1,6 +1,7 @@
 "use client"
 
 import { useState, useEffect, useCallback, useRef } from "react"
+import { searchPrograms, type CollegeProgram } from "@/lib/college-programs"
 
 interface CollegeTarget {
   id: string
@@ -89,6 +90,7 @@ const ITEMS = [
 ]
 
 const DIVISIONS = [
+  "",
   "D1 – Power 4",
   "D1 – Group of 5",
   "D1 – FCS",
@@ -96,7 +98,6 @@ const DIVISIONS = [
   "D3",
   "NAIA",
   "JUCO",
-  "Open",
 ]
 
 function emptyRoadmap(instagram?: string, ncaaId?: string): RecruitingRoadmapData {
@@ -109,12 +110,14 @@ function emptyRoadmap(instagram?: string, ncaaId?: string): RecruitingRoadmapDat
   }
 }
 
-export default function RecruitingRoadmap({ athleteId, grade, instagram, ncaaId }: Props) {
+export default function RecruitingRoadmap({ athleteId, grade, sport, instagram, ncaaId }: Props) {
   const tier = gradeTier(grade)
   const visibleItems = ITEMS.filter(item => item.tier <= tier)
 
   const [roadmap, setRoadmap] = useState<RecruitingRoadmapData>(emptyRoadmap(instagram, ncaaId))
   const [saveStatus, setSaveStatus] = useState<"idle" | "saving" | "saved">("idle")
+  const [dropdowns, setDropdowns] = useState<Record<string, boolean>>({})
+  const [suggestions, setSuggestions] = useState<Record<string, CollegeProgram[]>>({})
   const debounceRef = useRef<ReturnType<typeof setTimeout> | null>(null)
   const initialLoadRef = useRef(false)
 
@@ -351,13 +354,51 @@ export default function RecruitingRoadmap({ athleteId, grade, instagram, ncaaId 
               {roadmap.colleges.map(college => (
                 <div key={college.id} className="bg-gray-800 rounded-xl border border-gray-700 p-3">
                   <div className="grid grid-cols-1 sm:grid-cols-[1fr_140px_80px_1fr_44px_28px] gap-2 items-center">
-                    <input
-                      type="text"
-                      value={college.school}
-                      onChange={e => updateCollege(college.id, "school", e.target.value)}
-                      placeholder="School name"
-                      className="bg-gray-900 border border-gray-700 text-white text-xs rounded-lg px-2.5 py-1.5 focus:border-red-500 focus:outline-none placeholder-gray-600"
-                    />
+                    {/* School name with typeahead */}
+                    <div className="relative">
+                      <input
+                        type="text"
+                        value={college.school}
+                        onChange={e => {
+                          const value = e.target.value
+                          updateCollege(college.id, "school", value)
+                          const results = searchPrograms(value)
+                          setSuggestions(prev => ({ ...prev, [college.id]: results }))
+                          setDropdowns(prev => ({ ...prev, [college.id]: results.length > 0 }))
+                        }}
+                        onBlur={() => {
+                          // Delay so click on suggestion fires first
+                          setTimeout(() => setDropdowns(prev => ({ ...prev, [college.id]: false })), 150)
+                        }}
+                        placeholder="School name"
+                        className="w-full bg-gray-900 border border-gray-700 text-white text-xs rounded-lg px-2.5 py-1.5 focus:border-red-500 focus:outline-none placeholder-gray-600"
+                      />
+                      {dropdowns[college.id] && (suggestions[college.id] ?? []).length > 0 && (
+                        <ul className="absolute z-50 bg-gray-800 border border-gray-700 rounded-lg shadow-xl mt-1 max-h-48 overflow-y-auto w-full">
+                          {(suggestions[college.id] ?? []).map(program => (
+                            <li
+                              key={program.name}
+                              onMouseDown={() => {
+                                updateRoadmap(prev => ({
+                                  ...prev,
+                                  colleges: prev.colleges.map(c =>
+                                    c.id === college.id
+                                      ? { ...c, school: program.name, state: program.state, division: program.division }
+                                      : c
+                                  ),
+                                }))
+                                setDropdowns(prev => ({ ...prev, [college.id]: false }))
+                                setSuggestions(prev => ({ ...prev, [college.id]: [] }))
+                              }}
+                              className="flex items-center justify-between gap-2 px-3 py-2 cursor-pointer hover:bg-gray-700 text-xs"
+                            >
+                              <span className="font-semibold text-white truncate">{program.name}</span>
+                              <span className="shrink-0 text-gray-400">{program.state} · <span className="text-gray-500">{program.division}</span></span>
+                            </li>
+                          ))}
+                        </ul>
+                      )}
+                    </div>
                     <select
                       value={college.division}
                       onChange={e => updateCollege(college.id, "division", e.target.value)}
@@ -374,13 +415,28 @@ export default function RecruitingRoadmap({ athleteId, grade, instagram, ncaaId 
                       placeholder="TX"
                       className="bg-gray-900 border border-gray-700 text-white text-xs rounded-lg px-2.5 py-1.5 focus:border-red-500 focus:outline-none placeholder-gray-600"
                     />
-                    <input
-                      type="text"
-                      value={college.coachName}
-                      onChange={e => updateCollege(college.id, "coachName", e.target.value)}
-                      placeholder="Coach name"
-                      className="bg-gray-900 border border-gray-700 text-white text-xs rounded-lg px-2.5 py-1.5 focus:border-red-500 focus:outline-none placeholder-gray-600"
-                    />
+                    {/* Coach name + Find button */}
+                    <div className="flex gap-1 items-center">
+                      <input
+                        type="text"
+                        value={college.coachName}
+                        onChange={e => updateCollege(college.id, "coachName", e.target.value)}
+                        placeholder="Coach name"
+                        className="flex-1 min-w-0 bg-gray-900 border border-gray-700 text-white text-xs rounded-lg px-2.5 py-1.5 focus:border-red-500 focus:outline-none placeholder-gray-600"
+                      />
+                      <button
+                        type="button"
+                        onClick={() => {
+                          const sportName = sport === "soccer" ? "soccer" : "football"
+                          const query = encodeURIComponent(`${college.school} ${sportName} recruiting coach 2025`)
+                          window.open(`https://www.google.com/search?q=${query}`, "_blank")
+                        }}
+                        title="Search for recruiting coach"
+                        className="flex-shrink-0 bg-gray-700 hover:bg-gray-600 text-gray-300 px-2 py-1.5 rounded text-xs transition-colors whitespace-nowrap"
+                      >
+                        🔍 Find
+                      </button>
+                    </div>
                     <div className="flex items-center justify-center sm:justify-start gap-2">
                       <label className="flex items-center gap-1.5 cursor-pointer">
                         <input

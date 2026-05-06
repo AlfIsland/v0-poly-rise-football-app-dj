@@ -14,6 +14,8 @@ import { gradeToClassYear } from "@/lib/grade-to-class-year"
 import { getAllParents } from "@/lib/parent-store"
 import { getAgeTier, tierStyle } from "@/lib/age-tiers"
 import RecruitingRoadmap from "@/components/recruiting-roadmap"
+import CopyProfileLink from "@/components/copy-profile-link"
+import ShareCardDownload from "@/components/share-card-download"
 
 async function getAthlete(id: string) {
   try {
@@ -112,6 +114,15 @@ export default async function TrainingAthletePage({ params }: { params: { id: st
             </div>
           </div>
           <div className="flex items-center gap-2 flex-wrap">
+            {/* ── Player Profile / Share Card ── */}
+            <Link
+              href={`/athlete/${athlete.id}`}
+              target="_blank"
+              className="flex items-center gap-1.5 bg-red-600 hover:bg-red-500 text-white font-black px-3 py-2 rounded-xl text-xs transition-colors tracking-wide uppercase"
+            >
+              📲 Player Card
+            </Link>
+            <CopyProfileLink athleteId={athlete.id} />
             <FeaturedToggle id={athlete.id} initialFeatured={athlete.featured ?? false} />
             {linkedParent ? (
               <span className="text-xs bg-green-900/50 border border-green-700/50 text-green-300 px-3 py-2 rounded-xl font-semibold">
@@ -135,6 +146,26 @@ export default async function TrainingAthletePage({ params }: { params: { id: st
             </Link>
             <LogoutButton />
           </div>
+        </div>
+
+        {/* ── Share Recruiting Card ── */}
+        <div className="relative overflow-hidden rounded-2xl border border-red-700/40 bg-gradient-to-r from-red-950 to-gray-900 p-5">
+          <p className="text-xs text-red-400 font-bold uppercase tracking-widest mb-1">📲 Recruiting Card</p>
+          <p className="text-sm text-gray-400 mb-3">Download and share with the athlete or post directly to social media.</p>
+          <ShareCardDownload
+            athleteId={athlete.id}
+            name={athlete.name}
+            position={athlete.position}
+            school={athlete.school}
+            grade={athlete.grade}
+            age={athlete.age ?? 16}
+            gender={athlete.gender ?? "M"}
+            featured={athlete.featured}
+            photoUrl={athlete.photoUrl}
+            videoLink={athlete.videoLink}
+            twitterHandle={athlete.twitterHandle}
+            sessions={sessions}
+          />
         </div>
 
         {/* Athlete info cards */}

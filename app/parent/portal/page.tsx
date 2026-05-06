@@ -6,6 +6,7 @@ import Image from "next/image"
 import Link from "next/link"
 import dynamic from "next/dynamic"
 import AthletePhotoUpload from "@/components/athlete-photo-upload"
+import ShareCardDownload from "@/components/share-card-download"
 import CoachOutreach from "@/components/coach-outreach"
 import CampSuggestions from "@/components/camp-suggestions"
 import ProgressReportDownload from "@/components/progress-report-download"
@@ -59,6 +60,9 @@ function Portal() {
   const [editFields, setEditFields] = useState<Record<string, { position: string; school: string; grade: string }>>({})
   const [editSaving, setEditSaving] = useState(false)
   const [editError, setEditError] = useState("")
+  const [inviteEmail, setInviteEmail] = useState<Record<string, string>>({})
+  const [inviteSending, setInviteSending] = useState<Record<string, boolean>>({})
+  const [inviteStatus, setInviteStatus] = useState<Record<string, "sent" | "error" | null>>({})
   const router = useRouter()
   const searchParams = useSearchParams()
   const success = searchParams.get("success")
@@ -132,6 +136,25 @@ function Portal() {
       setEditError("Something went wrong.")
     }
     setEditSaving(false)
+  }
+
+  const handleInvite = async (athleteId: string) => {
+    const email = inviteEmail[athleteId]?.trim()
+    if (!email) return
+    setInviteSending(prev => ({ ...prev, [athleteId]: true }))
+    setInviteStatus(prev => ({ ...prev, [athleteId]: null }))
+    try {
+      const res = await fetch("/api/parent/invite-athlete", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ athleteId, athleteEmail: email }),
+      })
+      const data = await res.json()
+      setInviteStatus(prev => ({ ...prev, [athleteId]: data.success ? "sent" : "error" }))
+    } catch {
+      setInviteStatus(prev => ({ ...prev, [athleteId]: "error" }))
+    }
+    setInviteSending(prev => ({ ...prev, [athleteId]: false }))
   }
 
   if (loading) return (
@@ -305,6 +328,26 @@ function Portal() {
                 )}
               </div>
 
+              {/* ── Share Recruiting Card ── */}
+              <div className="px-4 py-4 md:px-6 border-t border-gray-800 bg-gradient-to-r from-red-950/40 to-gray-900">
+                <p className="text-xs text-red-400 font-bold uppercase tracking-widest mb-2">📲 Share Recruiting Card</p>
+                <ShareCardDownload
+                  athleteId={athlete.id}
+                  name={athlete.name}
+                  position={athlete.position}
+                  school={athlete.school}
+                  grade={athlete.grade}
+                  age={athlete.age}
+                  gender={athlete.gender ?? "M"}
+                  featured={(athlete as any).featured}
+                  photoUrl={(athlete as any).photoUrl}
+                  videoLink={(athlete as any).videoLink}
+                  twitterHandle={(athlete as any).twitterHandle}
+                  sessions={sessions}
+                />
+                <p className="text-xs text-gray-600 mt-2">Downloads a 1080×1080 card — post to Instagram, Twitter, or text to coaches.</p>
+              </div>
+
               {sessions.length === 0 ? (
                 <div className="px-6 py-8 text-center text-gray-600 text-sm">No test sessions recorded yet.</div>
               ) : (
@@ -430,6 +473,7 @@ function Portal() {
                           Test dates: {sessions.map(s => new Date(s.date).toLocaleDateString("en-US", { month: "short", day: "numeric" })).join(" · ")}
                         </p>
                       </div>
+
                     </div>
                   )}
 

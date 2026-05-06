@@ -4,6 +4,7 @@ import Link from "next/link"
 import Redis from "ioredis"
 import { getAgeTier, tierStyle } from "@/lib/age-tiers"
 import CopyLinkButton from "@/components/copy-link-button"
+import ShareCardDownload from "@/components/share-card-download"
 
 export async function generateMetadata({ params }: { params: { id: string } }) {
   const athlete = await getAthlete(params.id)
@@ -40,9 +41,16 @@ const METRICS = [
   { key: "pushups",     label: "Push-Ups",          unit: " reps", lower: false },
 ] as const
 
-export default async function AthleteProfilePage({ params }: { params: { id: string } }) {
+export default async function AthleteProfilePage({
+  params,
+  searchParams,
+}: {
+  params: { id: string }
+  searchParams: { welcome?: string }
+}) {
   const athlete = await getAthlete(params.id)
   if (!athlete) notFound()
+  const isWelcome = searchParams.welcome === "1"
 
   const sessions = athlete.sessions ?? []
   const baseline = sessions[0] ?? null
@@ -69,18 +77,62 @@ export default async function AthleteProfilePage({ params }: { params: { id: str
     <div className="min-h-screen bg-gray-950 text-white">
 
       {/* Header */}
-      <header className="border-b border-white/10 bg-black px-5 py-4 flex items-center justify-between">
-        <div className="flex items-center gap-3">
-          <Image src="/poly-rise-logo.png" alt="PolyRISE Football" width={36} height={36} className="object-contain" />
-          <div>
-            <p className="text-xs font-bold text-red-500 uppercase tracking-widest">PolyRISE Football</p>
-            <p className="text-xs text-gray-500">Athlete Recruiting Profile</p>
+      <header className="border-b border-white/10 bg-black px-4 py-3 flex items-center justify-between gap-3">
+        <div className="flex items-center gap-3 min-w-0">
+          <Image src="/poly-rise-logo.png" alt="PolyRISE Football" width={32} height={32} className="object-contain shrink-0" />
+          <div className="min-w-0">
+            <p className="text-xs font-bold text-red-500 uppercase tracking-widest truncate">PolyRISE Football</p>
+            <p className="text-xs text-gray-500 truncate">{athlete.name}</p>
           </div>
         </div>
-        <CopyLinkButton />
+        <div className="flex items-center gap-2 shrink-0">
+          <ShareCardDownload
+            athleteId={athlete.id}
+            name={athlete.name}
+            position={athlete.position}
+            school={athlete.school}
+            grade={athlete.grade}
+            age={age}
+            gender={gender}
+            featured={athlete.featured}
+            photoUrl={athlete.photoUrl}
+            videoLink={athlete.videoLink}
+            twitterHandle={athlete.twitterHandle}
+            sessions={sessions}
+            compact
+          />
+          <CopyLinkButton />
+        </div>
       </header>
 
       <main className="max-w-2xl mx-auto px-4 py-8 space-y-5">
+
+        {/* Welcome banner — shown when athlete arrives via parent invite */}
+        {isWelcome && (
+          <div className="relative overflow-hidden bg-gradient-to-br from-red-950/80 to-gray-900 border border-red-700/50 rounded-2xl p-5">
+            {/* Background glow */}
+            <div className="absolute inset-0 bg-gradient-to-r from-red-900/20 to-transparent pointer-events-none" />
+            <div className="relative">
+              <p className="text-xs font-bold text-red-400 uppercase tracking-widest mb-1">Welcome to PolyRISE</p>
+              <h2 className="text-xl font-black text-white mb-1">
+                {athlete.name.split(" ")[0]}, this is your profile.
+              </h2>
+              <p className="text-sm text-gray-400 mb-4">
+                Your verified combine metrics and national ranking are below. Scroll down to download your recruiting card and share it.
+              </p>
+              <div className="flex flex-wrap gap-2">
+                <div className="flex items-center gap-1.5 bg-black/30 border border-white/10 rounded-lg px-3 py-1.5">
+                  <span className="text-green-400 font-bold text-sm">✓</span>
+                  <span className="text-xs text-gray-300 font-semibold">Metrics verified by PolyRISE coaches</span>
+                </div>
+                <div className="flex items-center gap-1.5 bg-black/30 border border-white/10 rounded-lg px-3 py-1.5">
+                  <span className="text-red-400 font-bold text-sm">↓</span>
+                  <span className="text-xs text-gray-300 font-semibold">Scroll down to grab your recruiting card</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
 
         {/* Hero card */}
         <div className="bg-gray-900 border border-white/10 rounded-2xl p-6">
@@ -167,6 +219,42 @@ export default async function AthleteProfilePage({ params }: { params: { id: str
               </p>
               <p className="text-xs text-gray-500 mt-0.5">Member Since</p>
             </div>
+          </div>
+        </div>
+
+        {/* ── Share Card — prominent, right under hero ── */}
+        <div className="relative overflow-hidden rounded-2xl border border-red-700/40 bg-gradient-to-br from-red-950 via-gray-900 to-gray-950">
+          {/* Background texture */}
+          <div className="absolute inset-0 opacity-10"
+            style={{ backgroundImage: "repeating-linear-gradient(45deg,#fff 0,#fff 1px,transparent 0,transparent 50%)", backgroundSize: "18px 18px" }} />
+
+          <div className="relative p-5">
+            <div className="flex items-center gap-2 mb-1">
+              <span className="text-xl">📲</span>
+              <p className="text-base font-black text-white uppercase tracking-wide">Your Recruiting Card</p>
+            </div>
+            <p className="text-sm text-gray-400 mb-4">
+              Download your card and post it to Instagram, Twitter, or send directly to college coaches.
+            </p>
+
+            <ShareCardDownload
+              athleteId={athlete.id}
+              name={athlete.name}
+              position={athlete.position}
+              school={athlete.school}
+              grade={athlete.grade}
+              age={age}
+              gender={gender}
+              featured={athlete.featured}
+              photoUrl={athlete.photoUrl}
+              videoLink={athlete.videoLink}
+              twitterHandle={athlete.twitterHandle}
+              sessions={sessions}
+            />
+
+            <p className="text-xs text-gray-600 mt-3 text-center">
+              1080×1080 PNG · ready to post on Instagram, Twitter, or send to coaches
+            </p>
           </div>
         </div>
 

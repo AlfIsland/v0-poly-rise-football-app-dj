@@ -86,65 +86,73 @@ export default async function TrainingAthletePage({ params }: { params: { id: st
       <div className="max-w-4xl mx-auto space-y-6">
 
         {/* Header */}
-        <div className="border-b border-gray-800 pb-6 flex flex-col sm:flex-row sm:items-start gap-4">
-          <div className="flex items-center gap-3 flex-1 min-w-0">
+        <div className="border-b border-gray-800 pb-5">
+
+          {/* Row 1 — Athlete identity + primary actions */}
+          <div className="flex items-start justify-between gap-4">
             <div className="min-w-0">
-              <div className="flex items-center gap-2 flex-wrap">
-                <h1 className="text-xl sm:text-2xl font-bold text-white">{athlete.name}</h1>
+              <Link href="/training" className="text-xs text-gray-600 hover:text-gray-400 transition-colors">← Roster</Link>
+              <div className="flex items-center gap-2 flex-wrap mt-1">
+                <h1 className="text-2xl font-bold text-white">{athlete.name}</h1>
                 {athlete.sport === "soccer"
                   ? <span className="text-xs bg-green-800 text-green-300 px-2 py-0.5 rounded-full font-semibold">⚽ Soccer</span>
                   : <span className="text-xs bg-red-900 text-red-300 px-2 py-0.5 rounded-full font-semibold">🏈 Football</span>
                 }
                 {athlete.gender === "F"
-                  ? <span className="text-xs bg-pink-900 text-pink-300 px-2 py-0.5 rounded-full font-semibold">F Female</span>
-                  : <span className="text-xs bg-blue-900 text-blue-300 px-2 py-0.5 rounded-full font-semibold">M Male</span>
+                  ? <span className="text-xs bg-pink-900 text-pink-300 px-2 py-0.5 rounded-full font-semibold">Female</span>
+                  : <span className="text-xs bg-blue-900 text-blue-300 px-2 py-0.5 rounded-full font-semibold">Male</span>
                 }
               </div>
-              <p className="text-gray-400 text-sm">{athlete.age} yrs · {athlete.grade} · {athlete.school || "—"}</p>
+              <p className="text-gray-400 text-sm mt-0.5">
+                {[athlete.age ? `Age ${athlete.age}` : null, athlete.grade, athlete.position, athlete.school].filter(Boolean).join(" · ")}
+              </p>
               {athlete.mlsTeam && (
-                <div className="mt-1.5 inline-flex items-center gap-1.5 bg-green-900/40 border border-green-700/50 rounded-lg px-2.5 py-1">
-                  <span className="text-sm leading-none">⚽</span>
-                  <div>
-                    <p className="text-xs text-green-500 font-bold uppercase tracking-wider leading-none mb-0.5">MLS League / Team</p>
-                    <p className="text-xs text-green-200 font-semibold leading-none">{athlete.mlsTeam}</p>
-                  </div>
-                </div>
+                <p className="text-xs text-green-400 font-semibold mt-1">⚽ {athlete.mlsTeam}</p>
               )}
-              <Link href="/training" className="text-xs text-gray-600 hover:text-gray-400 underline mt-0.5 block">← Training Roster</Link>
+            </div>
+            <div className="flex items-center gap-2 shrink-0">
+              <Link href={`/training/${athlete.id}/edit`}
+                className="bg-gray-700 hover:bg-gray-600 text-white font-semibold px-4 py-2 rounded-xl text-sm transition-colors">
+                Edit
+              </Link>
+              <Link href={`/training/${athlete.id}/session`}
+                className="bg-red-600 hover:bg-red-700 text-white font-bold px-4 py-2 rounded-xl text-sm transition-colors">
+                + Add Test
+              </Link>
+              <LogoutButton />
             </div>
           </div>
-          <div className="flex items-center gap-2 flex-wrap">
-            {/* ── Player Profile / Share Card ── */}
-            <Link
-              href={`/athlete/${athlete.id}`}
-              target="_blank"
-              className="flex items-center gap-1.5 bg-red-600 hover:bg-red-500 text-white font-black px-3 py-2 rounded-xl text-xs transition-colors tracking-wide uppercase"
-            >
+
+          {/* Row 2 — Admin action bar */}
+          <div className="mt-4 flex flex-wrap items-center gap-2">
+
+            {/* Share group */}
+            <Link href={`/athlete/${athlete.id}`} target="_blank"
+              className="flex items-center gap-1.5 bg-gray-800 hover:bg-gray-700 border border-gray-700 text-white font-semibold px-3 py-1.5 rounded-lg text-xs transition-colors">
               📲 Player Card
             </Link>
             <CopyProfileLink athleteId={athlete.id} />
+
+            <div className="w-px h-5 bg-gray-700 mx-1" />
+
+            {/* Admin tools */}
             <FeaturedToggle id={athlete.id} initialFeatured={athlete.featured ?? false} />
+            <Link href={`/admin/athletes/new?mode=prv&name=${encodeURIComponent(athlete.name)}&position=${encodeURIComponent(athlete.position ?? "")}&school=${encodeURIComponent(athlete.school ?? "")}&gradYear=${encodeURIComponent(classYear ?? "")}`}
+              className="bg-gray-800 hover:bg-yellow-900/60 border border-gray-700 hover:border-yellow-700/60 text-yellow-400 font-semibold px-3 py-1.5 rounded-lg text-xs transition-colors">
+              PR-V Seal
+            </Link>
+            <PostToXButton atpId={athlete.id} athleteName={athlete.name} />
+
+            <div className="w-px h-5 bg-gray-700 mx-1" />
+
+            {/* Parent status */}
             {linkedParent ? (
-              <span className="text-xs bg-green-900/50 border border-green-700/50 text-green-300 px-3 py-2 rounded-xl font-semibold">
-                ✓ Parent: {linkedParent.name}
+              <span className="text-xs bg-green-900/40 border border-green-800/50 text-green-400 px-3 py-1.5 rounded-lg font-medium">
+                ✓ {linkedParent.name}
               </span>
             ) : (
               <InviteParentButton athleteId={athlete.id} athleteName={athlete.name} />
             )}
-            <Link href={`/admin/athletes/new?mode=prv&name=${encodeURIComponent(athlete.name)}&position=${encodeURIComponent(athlete.position ?? "")}&school=${encodeURIComponent(athlete.school ?? "")}&gradYear=${encodeURIComponent(classYear ?? "")}`}
-              className="bg-yellow-700 hover:bg-yellow-600 text-white font-semibold px-3 py-2 rounded-xl text-xs transition-colors">
-              🔴 PR-V Seal
-            </Link>
-            <PostToXButton atpId={athlete.id} athleteName={athlete.name} />
-            <Link href={`/training/${athlete.id}/edit`}
-              className="bg-gray-700 hover:bg-gray-600 text-white font-semibold px-3 py-2 rounded-xl text-sm transition-colors">
-              Edit
-            </Link>
-            <Link href={`/training/${athlete.id}/session`}
-              className="bg-red-600 hover:bg-red-700 text-white font-semibold px-3 py-2 rounded-xl text-sm transition-colors">
-              + Add Test
-            </Link>
-            <LogoutButton />
           </div>
         </div>
 

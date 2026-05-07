@@ -209,14 +209,46 @@ export default function ShareCardDownload({
       ctx.font      = "17px Arial, sans-serif"
       ctx.fillText("VERIFIED RECRUITING PROFILE", labelX, headerY + 16)
 
-      // ── Athlete Name ──
-      // Max width = space to left of photo minus a gap
-      const nameMaxW    = PHOTO_X - MARGIN - 24
-      const nameFontPx  = name.length > 18 ? 64 : name.length > 14 ? 74 : 84
-      ctx.font          = `bold ${nameFontPx}px Arial, sans-serif`
-      const nameY       = 208
-      ctx.fillStyle     = "#FFFFFF"
-      ctx.fillText(fitText(ctx, name.toUpperCase(), nameMaxW), MARGIN, nameY)
+      // ── Athlete Name (full width, wraps to two lines if needed) ──
+      const NAME_MAX_W  = SIZE - MARGIN * 2   // full card width
+      const nameUpper   = name.toUpperCase()
+      const nameParts   = nameUpper.split(" ") // ["LEMANATELE", "KNEUBUHL"]
+
+      // Pick font size: start large, shrink until longest word fits
+      let nameFontPx = 88
+      ctx.font = `bold ${nameFontPx}px Arial, sans-serif`
+      const longestWord = nameParts.reduce((a, b) => a.length > b.length ? a : b, "")
+      while (nameFontPx > 48 && ctx.measureText(longestWord).width > NAME_MAX_W) {
+        nameFontPx -= 4
+        ctx.font = `bold ${nameFontPx}px Arial, sans-serif`
+      }
+
+      // Check if full name fits on one line
+      ctx.font = `bold ${nameFontPx}px Arial, sans-serif`
+      ctx.fillStyle = "#FFFFFF"
+      const nameLineH = Math.round(nameFontPx * 1.1)
+      let nameY = 210
+
+      if (ctx.measureText(nameUpper).width <= NAME_MAX_W) {
+        // One line
+        ctx.fillText(nameUpper, MARGIN, nameY)
+      } else {
+        // Two lines — split at the last space that fits on line 1
+        let line1 = ""
+        let line2 = nameUpper
+        for (let i = nameParts.length - 1; i >= 1; i--) {
+          const candidate = nameParts.slice(0, i).join(" ")
+          if (ctx.measureText(candidate).width <= NAME_MAX_W) {
+            line1 = candidate
+            line2 = nameParts.slice(i).join(" ")
+            break
+          }
+        }
+        if (!line1) { line1 = nameParts[0]; line2 = nameParts.slice(1).join(" ") }
+        ctx.fillText(line1, MARGIN, nameY)
+        nameY += nameLineH
+        ctx.fillText(line2, MARGIN, nameY)
+      }
 
       // ── Position · School · Grade ──
       const subY    = nameY + 42

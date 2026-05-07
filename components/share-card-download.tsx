@@ -85,15 +85,6 @@ function loadImage(src: string): Promise<HTMLImageElement | null> {
   })
 }
 
-/** Truncate text to fit within maxWidth pixels on the given canvas context */
-function fitText(ctx: CanvasRenderingContext2D, text: string, maxWidth: number): string {
-  if (ctx.measureText(text).width <= maxWidth) return text
-  let truncated = text
-  while (truncated.length > 1 && ctx.measureText(truncated + "…").width > maxWidth) {
-    truncated = truncated.slice(0, -1)
-  }
-  return truncated + "…"
-}
 
 export default function ShareCardDownload({
   athleteId, name, position, school, grade, age, gender,
@@ -209,16 +200,16 @@ export default function ShareCardDownload({
       ctx.font      = "17px Arial, sans-serif"
       ctx.fillText("VERIFIED RECRUITING PROFILE", labelX, headerY + 16)
 
-      // ── Athlete Name (full width, wraps to two lines if needed) ──
-      const NAME_MAX_W  = SIZE - MARGIN * 2   // full card width
+      // ── Athlete Name (constrained left of photo, wraps to two lines) ──
+      const NAME_MAX_W  = PHOTO_X - MARGIN - 28   // stay clear of photo
       const nameUpper   = name.toUpperCase()
-      const nameParts   = nameUpper.split(" ") // ["LEMANATELE", "KNEUBUHL"]
+      const nameParts   = nameUpper.split(" ")
 
-      // Pick font size: start large, shrink until longest word fits
-      let nameFontPx = 88
+      // Start at 68px and shrink until the longest single word fits
+      let nameFontPx = 68
       ctx.font = `bold ${nameFontPx}px Arial, sans-serif`
       const longestWord = nameParts.reduce((a, b) => a.length > b.length ? a : b, "")
-      while (nameFontPx > 48 && ctx.measureText(longestWord).width > NAME_MAX_W) {
+      while (nameFontPx > 40 && ctx.measureText(longestWord).width > NAME_MAX_W) {
         nameFontPx -= 4
         ctx.font = `bold ${nameFontPx}px Arial, sans-serif`
       }

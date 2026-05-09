@@ -130,7 +130,7 @@ export default function TrainingRosterPage() {
   const [grade, setGrade] = useState("")
   const [position, setPosition] = useState("")
   const [school, setSchool] = useState("")
-  const [sport, setSport] = useState<"football" | "soccer">("football")
+  const [sport, setSport] = useState<"football" | "soccer" | "flag-football">("football")
   const [gender, setGender] = useState<"M" | "F">("M")
   const [fortyYard, setFortyYard] = useState("")
   const [twentyYard, setTwentyYard] = useState("")
@@ -233,13 +233,17 @@ export default function TrainingRosterPage() {
       )}
 
       {/* Sport + Gender toggles */}
-      <div className="grid grid-cols-2 gap-3 mb-1">
+      <div className="space-y-3 mb-1">
         <div>
           <p className="text-xs text-gray-500 mb-1.5 uppercase tracking-wider">Sport</p>
           <div className="flex gap-2">
             <button onClick={() => setSport("football")}
               className={`flex-1 py-2 rounded-lg text-sm font-bold transition-colors ${sport === "football" ? "bg-red-600 text-white" : "bg-gray-800 text-gray-400 hover:text-white border border-gray-700"}`}>
               🏈 Football
+            </button>
+            <button onClick={() => setSport("flag-football")}
+              className={`flex-1 py-2 rounded-lg text-sm font-bold transition-colors ${sport === "flag-football" ? "bg-purple-600 text-white" : "bg-gray-800 text-gray-400 hover:text-white border border-gray-700"}`}>
+              🚩 Flag Football
             </button>
             <button onClick={() => setSport("soccer")}
               className={`flex-1 py-2 rounded-lg text-sm font-bold transition-colors ${sport === "soccer" ? "bg-green-600 text-white" : "bg-gray-800 text-gray-400 hover:text-white border border-gray-700"}`}>
@@ -456,13 +460,16 @@ export default function TrainingRosterPage() {
                     {sorted.map((a) => {
                       const lastSession = a.sessions?.length ? a.sessions[a.sessions.length - 1] : null
                       const isSoccer = a.sport === "soccer"
+                      const isFlag = a.sport === "flag-football"
                       return (
                         <tr key={a.id} className={`border-b transition-colors ${
                           a.featured
                             ? "bg-yellow-950/30 border-yellow-900/40 hover:bg-yellow-950/50"
                             : isSoccer
                               ? "bg-green-950/20 border-green-900/30 hover:bg-green-950/40"
-                              : "border-gray-800 hover:bg-gray-800"
+                              : isFlag
+                                ? "bg-purple-950/20 border-purple-900/30 hover:bg-purple-950/40"
+                                : "border-gray-800 hover:bg-gray-800"
                         }`}>
                           <td className="px-6 py-4">
                             <div className="flex items-center gap-2">
@@ -475,6 +482,7 @@ export default function TrainingRosterPage() {
                                 <div className="flex items-center gap-2">
                                   <p className={`font-semibold ${a.featured ? "text-yellow-100" : "text-white"}`}>{a.name}</p>
                                   {isSoccer && <span className="text-xs bg-green-800 text-green-300 px-1.5 py-0.5 rounded font-medium">⚽ Soccer</span>}
+                                  {isFlag && <span className="text-xs bg-purple-900 text-purple-300 px-1.5 py-0.5 rounded font-medium">🚩 Flag</span>}
                                 </div>
                                 <p className="text-xs text-gray-600 font-mono">{a.id}</p>
                               </div>
@@ -515,10 +523,12 @@ export default function TrainingRosterPage() {
                 {sorted.map((a) => {
                   const lastSession = a.sessions?.length ? a.sessions[a.sessions.length - 1] : null
                   const isSoccer = a.sport === "soccer"
+                  const isFlag = a.sport === "flag-football"
                   return (
                     <div key={a.id} className={`rounded-2xl p-4 border ${
                       a.featured ? "bg-yellow-950/30 border-yellow-700/40"
                       : isSoccer ? "bg-green-950/20 border-green-800/40"
+                      : isFlag ? "bg-purple-950/20 border-purple-800/40"
                       : "bg-gray-900 border-gray-800"
                     }`}>
                       <div className="flex justify-between items-start mb-2">
@@ -532,6 +542,7 @@ export default function TrainingRosterPage() {
                             <div className="flex items-center gap-2">
                               <p className={`font-bold ${a.featured ? "text-yellow-100" : "text-white"}`}>{a.name}</p>
                               {isSoccer && <span className="text-xs bg-green-800 text-green-300 px-1.5 py-0.5 rounded font-medium">⚽ Soccer</span>}
+                              {isFlag && <span className="text-xs bg-purple-900 text-purple-300 px-1.5 py-0.5 rounded font-medium">🚩 Flag</span>}
                             </div>
                             <p className="text-xs text-gray-600 font-mono">{a.id}</p>
                           </div>

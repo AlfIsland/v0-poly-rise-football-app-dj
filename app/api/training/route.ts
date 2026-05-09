@@ -105,6 +105,7 @@ export interface TrainingAthlete {
   name: string
   age: number
   grade: string
+  gradYear?: number
   school: string
   position?: string
   gender?: "M" | "F"
@@ -113,7 +114,7 @@ export interface TrainingAthlete {
   twitterHandle?: string
   phone?: string
   email?: string
-  sport?: "football" | "soccer"
+  sport?: "football" | "soccer" | "flag-football"
   mlsTeam?: string
   gpa?: string
   joinedAt: string
@@ -142,9 +143,10 @@ export async function POST(req: NextRequest) {
       coachNotes: body.coachNotes || "",
       phone: body.phone || "",
       email: body.email || "",
-      sport: body.sport === "soccer" ? "soccer" : "football",
+      sport: body.sport === "soccer" ? "soccer" : body.sport === "flag-football" ? "flag-football" : "football",
       ...(body.sport === "soccer" && body.mlsTeam ? { mlsTeam: body.mlsTeam } : {}),
       ...(body.gpa ? { gpa: body.gpa } : {}),
+      ...(body.gradYear ? { gradYear: Number(body.gradYear) } : {}),
       gender: body.gender === "F" ? "F" as const : "M" as const,
       joinedAt: new Date().toISOString(),
       sessions: [],
@@ -284,9 +286,10 @@ export async function PUT(req: NextRequest) {
       twitterHandle: body.twitterHandle ?? existing.twitterHandle ?? "",
       phone: body.phone ?? existing.phone,
       email: body.email ?? existing.email,
-      sport: body.sport === "soccer" ? "soccer" : body.sport === "football" ? "football" : existing.sport,
+      sport: body.sport === "soccer" ? "soccer" : body.sport === "flag-football" ? "flag-football" : body.sport === "football" ? "football" : existing.sport,
       mlsTeam: body.mlsTeam !== undefined ? (body.mlsTeam || undefined) : existing.mlsTeam,
       gpa: body.gpa !== undefined ? (body.gpa || undefined) : existing.gpa,
+      gradYear: body.gradYear !== undefined ? (body.gradYear ? Number(body.gradYear) : undefined) : existing.gradYear,
       gender: body.gender === "F" ? "F" : body.gender === "M" ? "M" : existing.gender,
     }
     await kvSet(`training:athlete:${id.toUpperCase()}`, updated)

@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useCallback, useRef } from "react"
 import { searchPrograms, type CollegeProgram } from "@/lib/college-programs"
+import { tierFromGradYear } from "@/lib/grad-year"
 
 interface CollegeTarget {
   id: string
@@ -23,6 +24,7 @@ interface RecruitingRoadmapData {
 interface Props {
   athleteId: string
   grade: string
+  gradYear?: number
   sport?: string
   twitterHandle?: string
   instagram?: string
@@ -110,8 +112,8 @@ function emptyRoadmap(instagram?: string, ncaaId?: string): RecruitingRoadmapDat
   }
 }
 
-export default function RecruitingRoadmap({ athleteId, grade, sport, instagram, ncaaId }: Props) {
-  const tier = gradeTier(grade)
+export default function RecruitingRoadmap({ athleteId, grade, gradYear, sport, instagram, ncaaId }: Props) {
+  const tier = gradYear ? tierFromGradYear(gradYear) : gradeTier(grade)
   const currentItems = ITEMS.filter(item => item.tier <= tier)
   const futureItems  = ITEMS.filter(item => item.tier >  tier)
 
@@ -471,7 +473,7 @@ export default function RecruitingRoadmap({ athleteId, grade, sport, instagram, 
                       <button
                         type="button"
                         onClick={() => {
-                          const sportName = sport === "soccer" ? "soccer" : "football"
+                          const sportName = sport === "soccer" ? "soccer" : sport === "flag-football" ? "flag football" : "football"
                           const query = encodeURIComponent(`${college.school} ${sportName} recruiting coach 2025`)
                           window.open(`https://www.google.com/search?q=${query}`, "_blank")
                         }}

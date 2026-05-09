@@ -96,7 +96,9 @@ export default async function TrainingAthletePage({ params }: { params: { id: st
                 <h1 className="text-2xl font-bold text-white">{athlete.name}</h1>
                 {athlete.sport === "soccer"
                   ? <span className="text-xs bg-green-800 text-green-300 px-2 py-0.5 rounded-full font-semibold">⚽ Soccer</span>
-                  : <span className="text-xs bg-red-900 text-red-300 px-2 py-0.5 rounded-full font-semibold">🏈 Football</span>
+                  : athlete.sport === "flag-football"
+                    ? <span className="text-xs bg-purple-900 text-purple-300 px-2 py-0.5 rounded-full font-semibold">🚩 Flag Football</span>
+                    : <span className="text-xs bg-red-900 text-red-300 px-2 py-0.5 rounded-full font-semibold">🏈 Football</span>
                 }
                 {athlete.gender === "F"
                   ? <span className="text-xs bg-pink-900 text-pink-300 px-2 py-0.5 rounded-full font-semibold">Female</span>
@@ -506,6 +508,7 @@ export default async function TrainingAthletePage({ params }: { params: { id: st
             <RecruitingRoadmap
               athleteId={athlete.id}
               grade={athlete.grade ?? ""}
+              gradYear={athlete.gradYear}
               sport={athlete.sport}
               twitterHandle={athlete.twitterHandle}
             />

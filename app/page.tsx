@@ -412,7 +412,7 @@ export default function HomePage() {
                 </div>
               </div>
 
-              {/* Girls Player Development */}
+              {/* Girls Player Development — 2 Day */}
               <div className="bg-card border-primary/50 border-2 overflow-hidden group hover:border-primary transition-colors">
                 <div className="pt-6 px-6 pb-6 space-y-4">
                   <div>
@@ -427,6 +427,24 @@ export default function HomePage() {
                     </div>
                   </div>
                   <Link href="/register?program=girls-dev" className="block w-full text-center bg-[#FF6600] text-white px-4 py-2 rounded hover:bg-[#FF6600]/80 transition-colors">Register</Link>
+                </div>
+              </div>
+
+              {/* Girls Player Development — 3 Day */}
+              <div className="bg-card border-primary/50 border-2 overflow-hidden group hover:border-primary transition-colors">
+                <div className="pt-6 px-6 pb-6 space-y-4">
+                  <div>
+                    <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 mb-3">
+                      <span className="text-sm font-medium text-primary">Girls Program</span>
+                    </div>
+                    <h4 className="text-xl font-display font-bold mb-2">Girls Player Development — 3 Day</h4>
+                    <p className="text-muted-foreground text-sm leading-relaxed mb-4">Monday, Wednesday &amp; Friday. More reps, more development — for athletes who want to accelerate their progress.</p>
+                    <div className="flex items-center justify-between border-t border-dashed border-border pt-4">
+                      <span className="font-medium">3 Days a Week · Mon / Wed / Fri</span>
+                      <span className="text-lg font-bold text-white">$315/mo</span>
+                    </div>
+                  </div>
+                  <Link href="/register?program=girls-dev-3day" className="block w-full text-center bg-[#FF6600] text-white px-4 py-2 rounded hover:bg-[#FF6600]/80 transition-colors">Register</Link>
                 </div>
               </div>
 

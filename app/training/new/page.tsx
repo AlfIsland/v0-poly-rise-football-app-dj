@@ -4,6 +4,7 @@ import { useState, FormEvent } from "react"
 import { useRouter } from "next/navigation"
 import Link from "next/link"
 import LogoutButton from "@/components/logout-button"
+import { gradYearOptions } from "@/lib/grad-year"
 
 const GRADES = [
   "3rd Grade","4th Grade","5th Grade","6th Grade","7th Grade","8th Grade",
@@ -32,6 +33,7 @@ export default function NewTrainingAthletePage() {
   const [phone, setPhone] = useState("")
   const [email, setEmail] = useState("")
   const [coachNotes, setCoachNotes] = useState("")
+  const [gradYear, setGradYear] = useState("")
   const [saving, setSaving] = useState(false)
   const [error, setError] = useState("")
 
@@ -43,7 +45,7 @@ export default function NewTrainingAthletePage() {
       const res = await fetch("/api/training", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ name, age, grade, school, position, phone, email, coachNotes }),
+        body: JSON.stringify({ name, age, grade, school, position, phone, email, coachNotes, gradYear: gradYear ? Number(gradYear) : undefined }),
       })
       const data = await res.json()
       if (data.success) {
@@ -86,6 +88,19 @@ export default function NewTrainingAthletePage() {
                 {GRADES.map(g => <option key={g} value={g}>{g}</option>)}
               </select>
             </div>
+          </div>
+
+          <div>
+            <label className="block text-sm text-gray-300 mb-1.5">
+              Graduation Year
+              <span className="ml-1.5 text-xs text-amber-400 font-normal">(auto-advances grade every May 25)</span>
+            </label>
+            <select value={gradYear} onChange={e => setGradYear(e.target.value)}
+              className="w-full bg-gray-800 text-white rounded-lg px-4 py-2.5 border border-gray-700 focus:border-red-500 focus:outline-none text-sm">
+              <option value="">Not set</option>
+              {gradYearOptions().map(y => <option key={y} value={y}>{y}</option>)}
+            </select>
+            <p className="text-xs text-gray-600 mt-1">Set once — Recruiting Roadmap grade updates automatically each year.</p>
           </div>
 
           <Input label="School" value={school} onChange={setSchool} placeholder="e.g. Austin Middle School" />

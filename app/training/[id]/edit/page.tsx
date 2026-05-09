@@ -5,6 +5,7 @@ import { useRouter, useParams } from "next/navigation"
 import Link from "next/link"
 import LogoutButton from "@/components/logout-button"
 import AthletePhotoUpload from "@/components/athlete-photo-upload"
+import { gradYearOptions } from "@/lib/grad-year"
 
 const GRADES = [
   "3rd Grade","4th Grade","5th Grade","6th Grade","7th Grade","8th Grade",
@@ -43,9 +44,10 @@ export default function EditTrainingAthletePage() {
   const [coachNotes, setCoachNotes] = useState("")
   const [videoLink, setVideoLink] = useState("")
   const [twitterHandle, setTwitterHandle] = useState("")
-  const [sport, setSport] = useState<"football" | "soccer">("football")
+  const [sport, setSport] = useState<"football" | "soccer" | "flag-football">("football")
   const [mlsTeam, setMlsTeam] = useState("")
   const [gpa, setGpa] = useState("")
+  const [gradYear, setGradYear] = useState<string>("")
   const [gender, setGender] = useState<"M" | "F">("M")
   const [photoUrl, setPhotoUrl] = useState<string | null>(null)
 
@@ -65,9 +67,10 @@ export default function EditTrainingAthletePage() {
           setCoachNotes(a.coachNotes ?? "")
           setVideoLink(a.videoLink ?? "")
           setTwitterHandle(a.twitterHandle ?? "")
-          setSport(a.sport === "soccer" ? "soccer" : "football")
+          setSport(a.sport === "soccer" ? "soccer" : a.sport === "flag-football" ? "flag-football" : "football")
           setMlsTeam(a.mlsTeam ?? "")
           setGpa(a.gpa ?? "")
+          setGradYear(a.gradYear ? String(a.gradYear) : "")
           setGender(a.gender === "F" ? "F" : "M")
           setPhotoUrl(a.photoUrl ?? null)
         } else {
@@ -87,7 +90,7 @@ export default function EditTrainingAthletePage() {
       const res = await fetch("/api/training", {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ id, name, age, grade, school, position, phone, email, coachNotes, videoLink, twitterHandle, sport, mlsTeam: mlsTeam || undefined, gpa: gpa || undefined, gender }),
+        body: JSON.stringify({ id, name, age, grade, school, position, phone, email, coachNotes, videoLink, twitterHandle, sport, mlsTeam: mlsTeam || undefined, gpa: gpa || undefined, gradYear: gradYear ? Number(gradYear) : undefined, gender }),
       })
       const data = await res.json()
       if (data.success) {
@@ -139,32 +142,34 @@ export default function EditTrainingAthletePage() {
                 />
               </div>
 
-              <div className="grid grid-cols-2 gap-4">
-                <div>
-                  <label className="block text-sm text-gray-300 mb-1.5">Sport</label>
-                  <div className="flex gap-2">
-                    <button type="button" onClick={() => setSport("football")}
-                      className={`flex-1 py-2 rounded-lg text-sm font-bold transition-colors ${sport === "football" ? "bg-red-600 text-white" : "bg-gray-800 text-gray-400 hover:text-white border border-gray-700"}`}>
-                      🏈 Football
-                    </button>
-                    <button type="button" onClick={() => setSport("soccer")}
-                      className={`flex-1 py-2 rounded-lg text-sm font-bold transition-colors ${sport === "soccer" ? "bg-green-600 text-white" : "bg-gray-800 text-gray-400 hover:text-white border border-gray-700"}`}>
-                      ⚽ Soccer
-                    </button>
-                  </div>
+              <div>
+                <label className="block text-sm text-gray-300 mb-1.5">Sport</label>
+                <div className="flex gap-2">
+                  <button type="button" onClick={() => setSport("football")}
+                    className={`flex-1 py-2 rounded-lg text-sm font-bold transition-colors ${sport === "football" ? "bg-red-600 text-white" : "bg-gray-800 text-gray-400 hover:text-white border border-gray-700"}`}>
+                    🏈 Football
+                  </button>
+                  <button type="button" onClick={() => setSport("flag-football")}
+                    className={`flex-1 py-2 rounded-lg text-sm font-bold transition-colors ${sport === "flag-football" ? "bg-purple-600 text-white" : "bg-gray-800 text-gray-400 hover:text-white border border-gray-700"}`}>
+                    🚩 Flag Football
+                  </button>
+                  <button type="button" onClick={() => setSport("soccer")}
+                    className={`flex-1 py-2 rounded-lg text-sm font-bold transition-colors ${sport === "soccer" ? "bg-green-600 text-white" : "bg-gray-800 text-gray-400 hover:text-white border border-gray-700"}`}>
+                    ⚽ Soccer
+                  </button>
                 </div>
-                <div>
-                  <label className="block text-sm text-gray-300 mb-1.5">Gender</label>
-                  <div className="flex gap-2">
-                    <button type="button" onClick={() => setGender("M")}
-                      className={`flex-1 py-2 rounded-lg text-sm font-bold transition-colors ${gender === "M" ? "bg-blue-600 text-white" : "bg-gray-800 text-gray-400 hover:text-white border border-gray-700"}`}>
-                      M Male
-                    </button>
-                    <button type="button" onClick={() => setGender("F")}
-                      className={`flex-1 py-2 rounded-lg text-sm font-bold transition-colors ${gender === "F" ? "bg-pink-600 text-white" : "bg-gray-800 text-gray-400 hover:text-white border border-gray-700"}`}>
-                      F Female
-                    </button>
-                  </div>
+              </div>
+              <div>
+                <label className="block text-sm text-gray-300 mb-1.5">Gender</label>
+                <div className="flex gap-2">
+                  <button type="button" onClick={() => setGender("M")}
+                    className={`flex-1 py-2 rounded-lg text-sm font-bold transition-colors ${gender === "M" ? "bg-blue-600 text-white" : "bg-gray-800 text-gray-400 hover:text-white border border-gray-700"}`}>
+                    M Male
+                  </button>
+                  <button type="button" onClick={() => setGender("F")}
+                    className={`flex-1 py-2 rounded-lg text-sm font-bold transition-colors ${gender === "F" ? "bg-pink-600 text-white" : "bg-gray-800 text-gray-400 hover:text-white border border-gray-700"}`}>
+                    F Female
+                  </button>
                 </div>
               </div>
 
@@ -184,6 +189,19 @@ export default function EditTrainingAthletePage() {
                     {GRADES.map(g => <option key={g} value={g}>{g}</option>)}
                   </select>
                 </div>
+              </div>
+
+              <div>
+                <label className="block text-sm text-gray-300 mb-1.5">
+                  Graduation Year
+                  <span className="ml-1.5 text-xs text-amber-400 font-normal">(auto-advances grade every May 25)</span>
+                </label>
+                <select value={gradYear} onChange={e => setGradYear(e.target.value)}
+                  className="w-full bg-gray-800 text-white rounded-lg px-4 py-2.5 border border-gray-700 focus:border-red-500 focus:outline-none text-sm">
+                  <option value="">Not set</option>
+                  {gradYearOptions().map(y => <option key={y} value={y}>{y}</option>)}
+                </select>
+                <p className="text-xs text-gray-600 mt-1">Set this once — grade on the Recruiting Roadmap updates automatically each year.</p>
               </div>
 
               <Input label="School" value={school} onChange={setSchool} placeholder="e.g. Austin Middle School" />

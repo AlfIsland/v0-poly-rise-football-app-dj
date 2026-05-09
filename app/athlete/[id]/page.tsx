@@ -70,8 +70,8 @@ export default async function AthleteProfilePage({
     }
   }
 
-  const sportLabel = athlete.sport === "soccer" ? "Soccer" : "Football"
-  const sportEmoji = athlete.sport === "soccer" ? "⚽" : "🏈"
+  const sportLabel = athlete.sport === "soccer" ? "Soccer" : athlete.sport === "flag-football" ? "Flag Football" : "Football"
+  const sportEmoji = athlete.sport === "soccer" ? "⚽" : athlete.sport === "flag-football" ? "🚩" : "🏈"
 
   return (
     <div className="min-h-screen bg-gray-950 text-white">

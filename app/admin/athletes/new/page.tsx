@@ -65,7 +65,7 @@ function NewAthleteForm() {
 
   // ── ATP only ──
   const [age, setAge] = useState("")
-  const [sport, setSport] = useState<"football" | "soccer">("football")
+  const [sport, setSport] = useState<"football" | "soccer" | "flag-football">("football")
   const [mlsTeam, setMlsTeam] = useState("")
 
   // ── Save results ──
@@ -348,14 +348,16 @@ function NewAthleteForm() {
                 <>
                   <Field label="Sport">
                     <div className="flex gap-2">
-                      {(["football", "soccer"] as const).map(s => (
-                        <button key={s} onClick={() => setSport(s)}
+                      {([
+                        { value: "football",      label: "🏈 Football",      active: "bg-red-700 border-red-600 text-white" },
+                        { value: "flag-football", label: "🚩 Flag Football",  active: "bg-purple-700 border-purple-600 text-white" },
+                        { value: "soccer",        label: "⚽ Soccer",         active: "bg-green-700 border-green-600 text-white" },
+                      ] as const).map(s => (
+                        <button key={s.value} onClick={() => setSport(s.value)}
                           className={`flex-1 py-2 rounded-lg text-sm font-bold transition-colors border ${
-                            sport === s
-                              ? s === "football" ? "bg-red-700 border-red-600 text-white" : "bg-green-700 border-green-600 text-white"
-                              : "bg-gray-800 border-gray-700 text-gray-400"
+                            sport === s.value ? s.active : "bg-gray-800 border-gray-700 text-gray-400"
                           }`}>
-                          {s === "football" ? "🏈 Football" : "⚽ Soccer"}
+                          {s.label}
                         </button>
                       ))}
                     </div>

@@ -7,6 +7,7 @@ import { calculateRatings } from "@/lib/athlete-ratings"
 import { gradeToClassYear } from "@/lib/grade-to-class-year"
 import CopyLinkButton from "@/components/copy-link-button"
 import ShareCardDownload from "@/components/share-card-download"
+import StoriesCardDownload from "@/components/stories-card-download"
 import ShareProfileCard from "@/components/share-profile-card"
 
 export async function generateMetadata({ params }: { params: { id: string } }) {
@@ -371,35 +372,73 @@ ${athlete.name}${athlete.phone ? `\n${athlete.phone}` : ""}${athlete.email ? `\n
           </div>
         )}
 
-        {/* ── Share Card ── */}
-        <div className="relative overflow-hidden rounded-2xl border border-red-700/40 bg-gradient-to-br from-red-950 via-gray-900 to-gray-950">
-          <div className="absolute inset-0 opacity-10"
+        {/* ── Share Cards ── */}
+        <div className="relative overflow-hidden rounded-2xl border border-white/10 bg-gradient-to-br from-gray-900 to-gray-950">
+          <div className="absolute inset-0 opacity-5"
             style={{ backgroundImage: "repeating-linear-gradient(45deg,#fff 0,#fff 1px,transparent 0,transparent 50%)", backgroundSize: "18px 18px" }} />
-          <div className="relative p-5">
-            <div className="flex items-center gap-2 mb-1">
-              <span className="text-xl">📲</span>
-              <p className="text-base font-black text-white uppercase tracking-wide">Your Recruiting Card</p>
+          <div className="relative p-5 space-y-4">
+
+            <div>
+              <div className="flex items-center gap-2 mb-1">
+                <span className="text-xl">📲</span>
+                <p className="text-base font-black text-white uppercase tracking-wide">Download Your Card</p>
+              </div>
+              <p className="text-sm text-gray-400 mb-4">
+                Send to coaches or post on social. Tag <span className="text-pink-400 font-bold">@polyrisefootball</span> and we&apos;ll repost the best ones.
+              </p>
             </div>
-            <p className="text-sm text-gray-400 mb-4">
-              Download and send directly to college coaches, post on social, or add to your email signature.
-            </p>
-            <ShareCardDownload
-              athleteId={athlete.id}
-              name={athlete.name}
-              position={athlete.position}
-              school={athlete.school}
-              grade={athlete.grade}
-              age={age}
-              gender={gender}
-              featured={athlete.featured}
-              photoUrl={athlete.photoUrl}
-              videoLink={athlete.videoLink}
-              twitterHandle={athlete.twitterHandle}
-              sessions={sessions}
-            />
-            <p className="text-xs text-gray-600 mt-3 text-center">
-              1080×1080 PNG · ready to post on Instagram, Twitter, or send to coaches
-            </p>
+
+            {/* Square card — email / Twitter */}
+            <div>
+              <p className="text-xs text-gray-500 uppercase tracking-wider mb-2">Square — Email to Coaches / Twitter</p>
+              <ShareCardDownload
+                athleteId={athlete.id}
+                name={athlete.name}
+                position={athlete.position}
+                school={athlete.school}
+                grade={athlete.grade}
+                age={age}
+                gender={gender}
+                featured={athlete.featured}
+                photoUrl={athlete.photoUrl}
+                videoLink={athlete.videoLink}
+                twitterHandle={athlete.twitterHandle}
+                sessions={sessions}
+              />
+              <p className="text-xs text-gray-600 mt-1.5 text-center">1080×1080 PNG</p>
+            </div>
+
+            {/* Stories card — Instagram / Snapchat */}
+            <div>
+              <p className="text-xs text-gray-500 uppercase tracking-wider mb-2">Story — Instagram / Snapchat</p>
+              <StoriesCardDownload
+                athleteId={athlete.id}
+                name={athlete.name}
+                position={athlete.position}
+                school={athlete.school}
+                grade={athlete.grade}
+                classYear={classYear}
+                age={age}
+                gender={gender}
+                featured={athlete.featured}
+                photoUrl={athlete.photoUrl}
+                twitterHandle={athlete.twitterHandle}
+                sessions={sessions}
+              />
+              <p className="text-xs text-gray-600 mt-1.5 text-center">1080×1920 PNG · fits Instagram &amp; Snapchat Stories perfectly</p>
+            </div>
+
+            {/* Tag us callout */}
+            <div className="bg-gradient-to-r from-purple-950/60 to-pink-950/40 border border-purple-700/30 rounded-xl px-4 py-3 flex items-center gap-3">
+              <span className="text-2xl shrink-0">🔁</span>
+              <div>
+                <p className="text-sm font-bold text-white">Tag us and get reposted</p>
+                <p className="text-xs text-gray-400 mt-0.5">
+                  Post on Instagram and tag <span className="text-pink-400 font-semibold">@polyrisefootball</span> — we repost top athletes to our followers.
+                </p>
+              </div>
+            </div>
+
           </div>
         </div>
 

@@ -2,13 +2,16 @@ import { notFound } from "next/navigation"
 import Image from "next/image"
 import Link from "next/link"
 import Redis from "ioredis"
+import { cookies } from "next/headers"
 import { getAgeTier, tierStyle } from "@/lib/age-tiers"
 import { calculateRatings } from "@/lib/athlete-ratings"
 import { gradeToClassYear } from "@/lib/grade-to-class-year"
+import { ATHLETE_COOKIE, getAthleteIdFromSession } from "@/lib/athlete-auth"
 import CopyLinkButton from "@/components/copy-link-button"
 import ShareCardDownload from "@/components/share-card-download"
 import StoriesCardDownload from "@/components/stories-card-download"
 import ShareProfileCard from "@/components/share-profile-card"
+import AthleteLogoutButton from "@/components/athlete-logout-button"
 
 export async function generateMetadata({ params }: { params: { id: string } }) {
   const athlete = await getAthlete(params.id)
@@ -55,6 +58,12 @@ export default async function AthleteProfilePage({
   const athlete = await getAthlete(params.id)
   if (!athlete) notFound()
   const isWelcome = searchParams.welcome === "1"
+
+  // Detect logged-in athlete owner
+  const cookieStore = await cookies()
+  const sessionToken = cookieStore.get(ATHLETE_COOKIE)?.value
+  const loggedInAthleteId = sessionToken ? await getAthleteIdFromSession(sessionToken) : null
+  const isOwner = !!loggedInAthleteId && loggedInAthleteId.toUpperCase() === params.id.toUpperCase()
 
   const sessions = athlete.sessions ?? []
   const baseline = sessions[0] ?? null
@@ -169,6 +178,12 @@ ${athlete.name}${athlete.phone ? `\n${athlete.phone}` : ""}${athlete.email ? `\n
             compact
           />
           <CopyLinkButton />
+          {isOwner && <AthleteLogoutButton />}
+          {!isOwner && !sessionToken && (
+            <Link href="/athlete/login" className="text-xs bg-purple-900/50 hover:bg-purple-800/60 border border-purple-700/50 text-purple-300 font-semibold px-3 py-1.5 rounded-lg transition-colors">
+              Sign In
+            </Link>
+          )}
         </div>
       </header>
 

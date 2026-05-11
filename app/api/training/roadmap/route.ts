@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server"
 import { getRedis, getSessionEmail, PARENT_COOKIE, getParent } from "@/lib/parent-store"
+import { ATHLETE_COOKIE, getAthleteIdFromSession } from "@/lib/athlete-auth"
 
 export interface CollegeTarget {
   id: string
@@ -33,6 +34,13 @@ async function isAuthorizedParent(req: NextRequest, athleteId: string): Promise<
   return parent.athleteIds.includes(athleteId.toUpperCase())
 }
 
+async function isAthleteOwner(req: NextRequest, athleteId: string): Promise<boolean> {
+  const token = req.cookies.get(ATHLETE_COOKIE)?.value
+  if (!token) return false
+  const id = await getAthleteIdFromSession(token)
+  return !!id && id.toUpperCase() === athleteId.toUpperCase()
+}
+
 // GET /api/training/roadmap?id=TRN-0001
 export async function GET(req: NextRequest) {
   const id = req.nextUrl.searchParams.get("id")
@@ -42,8 +50,9 @@ export async function GET(req: NextRequest) {
 
   const adminOk = isAdmin(req)
   const parentOk = adminOk ? false : await isAuthorizedParent(req, upperid)
+  const athleteOk = adminOk || parentOk ? false : await isAthleteOwner(req, upperid)
 
-  if (!adminOk && !parentOk) {
+  if (!adminOk && !parentOk && !athleteOk) {
     return NextResponse.json({ success: false, error: "Unauthorized" }, { status: 401 })
   }
 
@@ -77,8 +86,9 @@ export async function PUT(req: NextRequest) {
 
   const adminOk = isAdmin(req)
   const parentOk = adminOk ? false : await isAuthorizedParent(req, upperid)
+  const athleteOk = adminOk || parentOk ? false : await isAthleteOwner(req, upperid)
 
-  if (!adminOk && !parentOk) {
+  if (!adminOk && !parentOk && !athleteOk) {
     return NextResponse.json({ success: false, error: "Unauthorized" }, { status: 401 })
   }
 

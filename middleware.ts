@@ -24,6 +24,18 @@ export function middleware(req: NextRequest) {
     return NextResponse.next()
   }
 
+  // Athlete portal protection — redirect to athlete login if no session cookie
+  if (pathname.startsWith("/athlete/portal")) {
+    const token = req.cookies.get("pr_athlete_session")?.value
+    if (!token) {
+      const url = req.nextUrl.clone()
+      url.pathname = "/athlete/login"
+      url.searchParams.set("from", pathname)
+      return NextResponse.redirect(url)
+    }
+    return NextResponse.next()
+  }
+
   // Admin + training protection
   if ((!pathname.startsWith(ADMIN_PREFIX) && !pathname.startsWith(TRAINING_PREFIX)) || pathname === LOGIN_PATH) {
     return NextResponse.next()
@@ -43,5 +55,5 @@ export function middleware(req: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/admin", "/admin/:path*", "/training/:path*", "/parent/portal/:path*", "/parent/portal"],
+  matcher: ["/admin", "/admin/:path*", "/training/:path*", "/parent/portal/:path*", "/parent/portal", "/athlete/portal", "/athlete/portal/:path*"],
 }

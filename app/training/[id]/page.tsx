@@ -8,6 +8,7 @@ import FeaturedToggle from "@/components/featured-toggle"
 import ProgressChart from "@/components/progress-chart"
 import DeleteSessionButton from "@/components/delete-session-button"
 import InviteParentButton from "@/components/invite-parent-button"
+import InviteAthleteButton from "@/components/invite-athlete-button"
 import PostToXButton from "@/components/post-to-x-button"
 import { calculateRatings } from "@/lib/athlete-ratings"
 import { gradeToClassYear } from "@/lib/grade-to-class-year"
@@ -155,6 +156,9 @@ export default async function TrainingAthletePage({ params }: { params: { id: st
             ) : (
               <InviteParentButton athleteId={athlete.id} athleteName={athlete.name} />
             )}
+
+            {/* Athlete portal invite */}
+            <InviteAthleteButton athleteId={athlete.id} athleteName={athlete.name} athleteEmail={athlete.email} />
           </div>
         </div>
 

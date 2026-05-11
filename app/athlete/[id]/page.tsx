@@ -7,6 +7,7 @@ import { calculateRatings } from "@/lib/athlete-ratings"
 import { gradeToClassYear } from "@/lib/grade-to-class-year"
 import CopyLinkButton from "@/components/copy-link-button"
 import ShareCardDownload from "@/components/share-card-download"
+import ShareProfileCard from "@/components/share-profile-card"
 
 export async function generateMetadata({ params }: { params: { id: string } }) {
   const athlete = await getAthlete(params.id)
@@ -100,6 +101,38 @@ export default async function AthleteProfilePage({
   const memberSince = athlete.joinedAt
     ? new Date(athlete.joinedAt).toLocaleDateString("en-US", { month: "long", year: "numeric" })
     : null
+
+  const profileUrl = `https://polyrisefootball.com/athlete/${athlete.id}`
+
+  // Build coach email template with real athlete data
+  const metricLines = METRICS
+    .map(m => {
+      const val = current?.[m.key as keyof typeof current] ?? baseline?.[m.key as keyof typeof baseline]
+      if (val == null) return null
+      return `  • ${m.label}: ${val}${m.unit}`
+    })
+    .filter(Boolean)
+    .join("\n")
+
+  const rankingLine = ratings
+    ? `\nNational Percentile: ${ratings.overallPercentile}th  |  Texas Percentile: ${ratings.texasPercentile}th\n`
+    : ""
+
+  const emailSubject = `Recruiting Inquiry — ${athlete.name} | ${athlete.position ?? "Athlete"} | Class of ${classYear}`
+  const emailTemplate = `Coach [Last Name],
+
+My name is ${athlete.name} and I am a Class of ${classYear} ${athlete.position ?? "athlete"}${athlete.school ? ` from ${athlete.school}` : ""}. I wanted to reach out and introduce myself as a prospective student-athlete interested in your program.
+
+Here are my most recent combine metrics, verified by PolyRISE Football:
+${metricLines}${rankingLine ? `\n${rankingLine}` : ""}
+You can view my full recruiting profile here:
+${profileUrl}
+
+I would love to learn more about [School Name]'s program and the opportunity to compete at the next level. Please let me know if you have any questions or would like additional information.
+
+Thank you for your time and consideration.
+
+${athlete.name}${athlete.phone ? `\n${athlete.phone}` : ""}${athlete.email ? `\n${athlete.email}` : ""}${athlete.twitterHandle ? `\nTwitter/X: @${athlete.twitterHandle.replace(/^@/, "")}` : ""}`
 
   return (
     <div className="min-h-screen bg-gray-950 text-white">
@@ -364,6 +397,13 @@ export default async function AthleteProfilePage({
             </p>
           </div>
         </div>
+
+        {/* ── Share Profile ── */}
+        <ShareProfileCard
+          profileUrl={profileUrl}
+          emailTemplate={emailTemplate}
+          emailSubject={emailSubject}
+        />
 
         {/* ── Performance Metrics ── */}
         {(baseline || current) && (

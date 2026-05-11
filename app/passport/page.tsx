@@ -1,26 +1,6 @@
 import Link from "next/link"
 import Image from "next/image"
-import Redis from "ioredis"
 import { ProtectedImage } from "@/components/protected-image"
-
-async function getFeaturedAthlete() {
-  try {
-    if (!process.env.REDIS_URL) return null
-    const redis = new Redis(process.env.REDIS_URL, { maxRetriesPerRequest: 3, connectTimeout: 5000 })
-    const keys = await redis.keys("training:athlete:*")
-    const athletes = await Promise.all(
-      keys.map(async k => {
-        const raw = await redis.get(k)
-        return raw ? JSON.parse(raw) : null
-      })
-    )
-    await redis.quit()
-    const featured = athletes
-      .filter(a => a && a.featured && a.sessions?.length >= 2 && a.photoUrl)
-      .sort((a, b) => (b.sessions?.length ?? 0) - (a.sessions?.length ?? 0))
-    return featured[0] ?? null
-  } catch { return null }
-}
 
 const WHAT_INSIDE = [
   {
@@ -109,8 +89,7 @@ const WITH = [
   "Shareable profile + Instagram story card",
 ]
 
-export default async function PassportLandingPage() {
-  const sampleAthlete = await getFeaturedAthlete()
+export default function PassportLandingPage() {
 
   return (
     <div className="min-h-screen bg-gray-950 text-white">
@@ -164,13 +143,11 @@ export default async function PassportLandingPage() {
                   Get Your Passport
                   <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}><path strokeLinecap="round" strokeLinejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" /></svg>
                 </Link>
-                {sampleAthlete && (
-                  <Link href={`/athlete/${sampleAthlete.id}`} target="_blank"
-                    className="inline-flex items-center justify-center gap-2 bg-white/10 hover:bg-white/20 border border-white/20 text-white font-semibold px-6 py-3.5 rounded-xl text-base transition-colors">
-                    See a Sample Passport
-                    <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" /></svg>
-                  </Link>
-                )}
+                <Link href="/athlete/sample"
+                  className="inline-flex items-center justify-center gap-2 bg-white/10 hover:bg-white/20 border border-white/20 text-white font-semibold px-6 py-3.5 rounded-xl text-base transition-colors">
+                  See a Sample Passport
+                  <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" /></svg>
+                </Link>
               </div>
 
               {/* Trust signals */}
@@ -320,56 +297,61 @@ export default async function PassportLandingPage() {
       </section>
 
       {/* ── Live Sample ── */}
-      {sampleAthlete && (
-        <section className="py-16 lg:py-20 bg-black">
-          <div className="max-w-4xl mx-auto px-4 text-center">
-            <p className="text-xs font-bold text-red-500 uppercase tracking-widest mb-3">See the Real Thing</p>
-            <h2 className="text-3xl lg:text-4xl font-black text-white mb-4">This is what a PolyRISE Passport looks like</h2>
-            <p className="text-gray-400 mb-10 max-w-xl mx-auto">A real athlete. Real metrics. Real rankings. Click to explore a live passport profile.</p>
+      <section className="py-16 lg:py-20 bg-black">
+        <div className="max-w-4xl mx-auto px-4 text-center">
+          <p className="text-xs font-bold text-red-500 uppercase tracking-widest mb-3">See the Real Thing</p>
+          <h2 className="text-3xl lg:text-4xl font-black text-white mb-4">This is what a PolyRISE Passport looks like</h2>
+          <p className="text-gray-400 mb-10 max-w-xl mx-auto">Explore a sample profile — verified metrics, national rankings, progress tracking, and recruiting tools, all in one place.</p>
 
-            {/* Sample card */}
-            <div className="relative bg-gray-900 rounded-2xl border border-red-700/40 overflow-hidden max-w-sm mx-auto shadow-2xl">
-              <div className="h-1 bg-gradient-to-r from-red-600 to-red-800" />
-              <div className="p-6">
-                <div className="flex items-center justify-between mb-4">
-                  <div className="text-left">
-                    <p className="text-xs font-bold text-red-500 uppercase tracking-widest">PolyRISE Football</p>
-                    <p className="text-xs text-gray-500">Athlete Recruiting Profile</p>
-                  </div>
-                  <div className="flex items-center gap-1.5 bg-green-900/40 border border-green-700/50 rounded-full px-2.5 py-1">
-                    <svg className="w-3 h-3 text-green-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}><path strokeLinecap="round" strokeLinejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" /></svg>
-                    <span className="text-xs font-bold text-green-400">PR-VERIFIED</span>
-                  </div>
+          {/* Sample card */}
+          <div className="relative bg-gray-900 rounded-2xl border border-red-700/40 overflow-hidden max-w-sm mx-auto shadow-2xl">
+            <div className="h-1 bg-gradient-to-r from-red-600 to-red-800" />
+            <div className="p-6">
+              <div className="flex items-center justify-between mb-4">
+                <div className="text-left">
+                  <p className="text-xs font-bold text-red-500 uppercase tracking-widest">PolyRISE Football</p>
+                  <p className="text-xs text-gray-500">Athlete Recruiting Profile</p>
                 </div>
-
-                {sampleAthlete.photoUrl ? (
-                  <div className="w-20 h-20 rounded-full overflow-hidden mx-auto mb-3 border-2 border-red-600/50">
-                    <img src={sampleAthlete.photoUrl} alt={sampleAthlete.name} className="w-full h-full object-cover" />
-                  </div>
-                ) : (
-                  <div className="w-20 h-20 rounded-full bg-gray-700 mx-auto mb-3 flex items-center justify-center text-3xl">🏈</div>
-                )}
-                <p className="font-black text-white text-lg">{sampleAthlete.name}</p>
-                <p className="text-sm text-gray-400">{sampleAthlete.position} · {sampleAthlete.grade}</p>
-                <p className="text-xs text-gray-500 mt-0.5">{sampleAthlete.school}</p>
-
-                <div className="mt-4 pt-4 border-t border-gray-800">
-                  <p className="text-xs text-gray-500 mb-2">{sampleAthlete.sessions?.length ?? 0} sessions tracked</p>
+                <div className="flex items-center gap-1.5 bg-green-900/40 border border-green-700/50 rounded-full px-2.5 py-1">
+                  <svg className="w-3 h-3 text-green-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}><path strokeLinecap="round" strokeLinejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" /></svg>
+                  <span className="text-xs font-bold text-green-400">PR-VERIFIED</span>
                 </div>
               </div>
-            </div>
 
-            <div className="mt-8">
-              <Link href={`/athlete/${sampleAthlete.id}`} target="_blank"
-                className="inline-flex items-center gap-2 bg-red-600 hover:bg-red-500 text-white font-black px-8 py-4 rounded-xl text-base transition-colors">
-                View Full Passport
-                <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}><path strokeLinecap="round" strokeLinejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" /></svg>
-              </Link>
-              <p className="text-xs text-gray-600 mt-3">Opens a real athlete's profile in a new tab</p>
+              <div className="w-20 h-20 rounded-full bg-gray-700 mx-auto mb-3 flex items-center justify-center text-3xl border-2 border-red-600/40">🏈</div>
+              <p className="font-black text-white text-lg">Fname M. Lname</p>
+              <p className="text-sm text-gray-400">Linebacker · 10th Grade</p>
+              <p className="text-xs text-gray-500 mt-0.5">Dripping Springs HS · Class of 2027</p>
+
+              <div className="grid grid-cols-2 gap-2 mt-4">
+                {[{ l: "40-Yard Dash", v: "4.62s", pct: 76 }, { l: "Vertical Jump", v: "34\"", pct: 71 }, { l: "5-10-5 Shuttle", v: "4.41s", pct: 79 }, { l: "Broad Jump", v: "107\"", pct: 68 }].map(m => (
+                  <div key={m.l} className="bg-gray-800 rounded-xl p-2.5 text-left">
+                    <p className="text-xs text-gray-500">{m.l}</p>
+                    <p className="text-sm font-black text-white">{m.v}</p>
+                    <div className="mt-1 h-1 bg-gray-700 rounded-full overflow-hidden">
+                      <div className="h-full bg-red-500 rounded-full" style={{ width: `${m.pct}%` }} />
+                    </div>
+                    <p className="text-xs text-red-400 font-semibold mt-0.5">{m.pct}th national</p>
+                  </div>
+                ))}
+              </div>
+
+              <div className="mt-4 pt-4 border-t border-gray-800">
+                <p className="text-xs text-gray-500">4 sessions tracked · progress since baseline</p>
+              </div>
             </div>
           </div>
-        </section>
-      )}
+
+          <div className="mt-8">
+            <Link href="/athlete/sample"
+              className="inline-flex items-center gap-2 bg-red-600 hover:bg-red-500 text-white font-black px-8 py-4 rounded-xl text-base transition-colors">
+              View Full Sample Passport
+              <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}><path strokeLinecap="round" strokeLinejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" /></svg>
+            </Link>
+            <p className="text-xs text-gray-600 mt-3">Sample data only — no real athlete information</p>
+          </div>
+        </div>
+      </section>
 
       {/* ── Rankings Teaser ── */}
       <section className="py-16 lg:py-24 bg-gray-950">

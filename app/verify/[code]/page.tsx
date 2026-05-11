@@ -253,7 +253,7 @@ export default async function VerifyPage({ params }: { params: { code: string } 
                   <div className="border-t border-gray-800 pt-4">
                     <p className="text-xs text-gray-500 uppercase tracking-wider mb-2">Film / Highlights</p>
                     <a
-                      href={athlete.videoLink}
+                      href={/^https?:\/\//i.test(athlete.videoLink) ? athlete.videoLink : `https://${athlete.videoLink}`}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="inline-flex items-center gap-2 bg-red-600 hover:bg-red-700 text-white text-sm font-semibold px-4 py-2 rounded-xl transition-colors"

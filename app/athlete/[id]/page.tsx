@@ -104,6 +104,11 @@ export default async function AthleteProfilePage({
 
   const profileUrl = `https://polyrisefootball.com/athlete/${athlete.id}`
 
+  function absUrl(url: string): string {
+    if (!url) return url
+    return /^https?:\/\//i.test(url) ? url : `https://${url}`
+  }
+
   // Build coach email template with real athlete data
   const metricLines = METRICS
     .map(m => {
@@ -491,7 +496,7 @@ ${athlete.name}${athlete.phone ? `\n${athlete.phone}` : ""}${athlete.email ? `\n
               <div className="w-1.5 h-5 bg-red-600 rounded-full" />
               <h2 className="text-sm font-black text-white uppercase tracking-widest">Film</h2>
             </div>
-            <a href={athlete.videoLink} target="_blank" rel="noopener noreferrer"
+            <a href={absUrl(athlete.videoLink)} target="_blank" rel="noopener noreferrer"
               className="flex items-center gap-3 bg-black/40 hover:bg-black/60 border border-white/10 rounded-xl px-4 py-3 transition-colors group">
               <span className="text-2xl">🎬</span>
               <div className="flex-1 min-w-0">

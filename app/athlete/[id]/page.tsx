@@ -3,6 +3,8 @@ import Image from "next/image"
 import Link from "next/link"
 import Redis from "ioredis"
 import { getAgeTier, tierStyle } from "@/lib/age-tiers"
+import { calculateRatings } from "@/lib/athlete-ratings"
+import { gradeToClassYear } from "@/lib/grade-to-class-year"
 import CopyLinkButton from "@/components/copy-link-button"
 import ShareCardDownload from "@/components/share-card-download"
 
@@ -58,20 +60,46 @@ export default async function AthleteProfilePage({
   const age: number = athlete.age ?? 16
   const gender: "M" | "F" = athlete.gender ?? "M"
 
-  // Top metrics for the highlight bar
-  const highlights: { label: string; value: string; tier: string | null }[] = []
-  for (const m of METRICS) {
-    const val = current?.[m.key] ?? baseline?.[m.key]
-    if (val == null) continue
-    const tier = getAgeTier(m.key, val, age, gender)
-    if (tier === "Elite" || tier === "Above Average") {
-      highlights.push({ label: m.label, value: `${val}${m.unit}`, tier })
-      if (highlights.length >= 3) break
+  // Class year — use stored gradYear if available, else derive from grade string
+  const classYear = athlete.gradYear ? String(athlete.gradYear) : gradeToClassYear(athlete.grade ?? "")
+
+  // Rankings from latest session
+  const ratings = current ? calculateRatings({
+    fortyYard: current.fortyYard,
+    twentyYard: current.twentyYard,
+    shuttle: current.shuttle,
+    threeCone: current.threeCone,
+    verticalJump: current.verticalJump,
+    broadJump: current.broadJump,
+    benchPress: current.benchPress,
+  }, athlete.position ?? "", classYear) : null
+
+  // Progress highlights — top improvements since baseline
+  const improvements: { label: string; unit: string; from: number; to: number; delta: number; pct: number; lower: boolean }[] = []
+  if (baseline && current && sessions.length >= 2) {
+    for (const m of METRICS) {
+      const bVal = baseline[m.key as keyof typeof baseline] as number | undefined
+      const cVal = current[m.key as keyof typeof current] as number | undefined
+      if (bVal == null || cVal == null || bVal === cVal) continue
+      const improvement = m.lower ? bVal - cVal : cVal - bVal
+      if (improvement > 0) {
+        improvements.push({
+          label: m.label, unit: m.unit,
+          from: bVal, to: cVal,
+          delta: Math.abs(bVal - cVal),
+          pct: (improvement / bVal) * 100,
+          lower: m.lower,
+        })
+      }
     }
+    improvements.sort((a, b) => b.pct - a.pct)
   }
 
   const sportLabel = athlete.sport === "soccer" ? "Soccer" : athlete.sport === "flag-football" ? "Flag Football" : "Football"
   const sportEmoji = athlete.sport === "soccer" ? "⚽" : athlete.sport === "flag-football" ? "🚩" : "🏈"
+  const memberSince = athlete.joinedAt
+    ? new Date(athlete.joinedAt).toLocaleDateString("en-US", { month: "long", year: "numeric" })
+    : null
 
   return (
     <div className="min-h-screen bg-gray-950 text-white">
@@ -82,7 +110,7 @@ export default async function AthleteProfilePage({
           <Image src="/poly-rise-logo.png" alt="PolyRISE Football" width={32} height={32} className="object-contain shrink-0" />
           <div className="min-w-0">
             <p className="text-xs font-bold text-red-500 uppercase tracking-widest truncate">PolyRISE Football</p>
-            <p className="text-xs text-gray-500 truncate">{athlete.name}</p>
+            <p className="text-xs text-gray-500 truncate">Athlete Recruiting Profile</p>
           </div>
         </div>
         <div className="flex items-center gap-2 shrink-0">
@@ -107,10 +135,9 @@ export default async function AthleteProfilePage({
 
       <main className="max-w-2xl mx-auto px-4 py-8 space-y-5">
 
-        {/* Welcome banner — shown when athlete arrives via parent invite */}
+        {/* Welcome banner */}
         {isWelcome && (
           <div className="relative overflow-hidden bg-gradient-to-br from-red-950/80 to-gray-900 border border-red-700/50 rounded-2xl p-5">
-            {/* Background glow */}
             <div className="absolute inset-0 bg-gradient-to-r from-red-900/20 to-transparent pointer-events-none" />
             <div className="relative">
               <p className="text-xs font-bold text-red-400 uppercase tracking-widest mb-1">Welcome to PolyRISE</p>
@@ -134,109 +161,190 @@ export default async function AthleteProfilePage({
           </div>
         )}
 
-        {/* Hero card */}
-        <div className="bg-gray-900 border border-white/10 rounded-2xl p-6">
-          <div className="flex items-start gap-4">
-            {/* Photo */}
-            <div className="shrink-0">
-              {athlete.photoUrl ? (
-                <div className="relative w-20 h-20 md:w-24 md:h-24 rounded-xl overflow-hidden border border-white/10">
-                  <Image src={athlete.photoUrl} alt={athlete.name} fill className="object-cover" unoptimized />
-                </div>
-              ) : (
-                <div className="w-20 h-20 md:w-24 md:h-24 rounded-xl bg-gray-800 border border-white/10 flex items-center justify-center text-4xl">
-                  {sportEmoji}
-                </div>
-              )}
-            </div>
+        {/* ── Hero Card ── */}
+        <div className="bg-gray-900 border border-white/10 rounded-2xl overflow-hidden">
 
-            {/* Info */}
-            <div className="flex-1 min-w-0">
-              <h1 className="text-2xl md:text-3xl font-black text-white leading-tight">{athlete.name}</h1>
-              <div className="flex flex-wrap gap-1.5 mt-2">
-                {athlete.position && (
-                  <span className="text-xs bg-red-900/50 text-red-300 border border-red-700/50 px-2.5 py-0.5 rounded-full font-semibold">
-                    {athlete.position}
-                  </span>
-                )}
-                {athlete.grade && (
-                  <span className="text-xs bg-white/10 text-gray-300 border border-white/10 px-2.5 py-0.5 rounded-full font-semibold">
-                    Grade {athlete.grade}
-                  </span>
-                )}
-                {athlete.age && (
-                  <span className="text-xs bg-white/10 text-gray-300 border border-white/10 px-2.5 py-0.5 rounded-full font-semibold">
-                    Age {athlete.age}
-                  </span>
-                )}
-                <span className="text-xs bg-white/10 text-gray-300 border border-white/10 px-2.5 py-0.5 rounded-full font-semibold">
-                  {sportLabel}
-                </span>
-              </div>
-              {athlete.school && (
-                <p className="text-gray-400 text-sm mt-2 font-medium">{athlete.school}</p>
-              )}
-              {athlete.gpa && (
-                <p className="text-yellow-400 text-xs mt-1 font-semibold">GPA {athlete.gpa}</p>
-              )}
-              {athlete.mlsTeam && (
-                <div className="mt-2 inline-flex items-center gap-2 bg-green-900/40 border border-green-600/50 rounded-lg px-3 py-1.5">
-                  <span className="text-base leading-none">⚽</span>
-                  <div>
-                    <p className="text-xs text-green-400 font-bold uppercase tracking-wider leading-none mb-0.5">MLS League / Team</p>
-                    <p className="text-sm text-green-200 font-semibold leading-none">{athlete.mlsTeam}</p>
+          {/* Top accent bar */}
+          <div className="h-1.5 bg-gradient-to-r from-red-700 via-red-500 to-red-700" />
+
+          <div className="p-6">
+            <div className="flex items-start gap-4">
+              {/* Photo */}
+              <div className="shrink-0">
+                {athlete.photoUrl ? (
+                  <div className="relative w-24 h-24 md:w-28 md:h-28 rounded-xl overflow-hidden border-2 border-red-700/40">
+                    <Image src={athlete.photoUrl} alt={athlete.name} fill className="object-cover" unoptimized />
                   </div>
+                ) : (
+                  <div className="w-24 h-24 md:w-28 md:h-28 rounded-xl bg-gray-800 border-2 border-white/10 flex items-center justify-center text-5xl">
+                    {sportEmoji}
+                  </div>
+                )}
+              </div>
+
+              {/* Identity */}
+              <div className="flex-1 min-w-0">
+                <h1 className="text-2xl md:text-3xl font-black text-white leading-tight">{athlete.name}</h1>
+
+                {/* Position + Class year */}
+                <div className="flex flex-wrap items-center gap-1.5 mt-2">
+                  {athlete.position && (
+                    <span className="text-sm bg-red-900/60 text-red-300 border border-red-700/50 px-2.5 py-0.5 rounded-full font-bold">
+                      {athlete.position}
+                    </span>
+                  )}
+                  {classYear && (
+                    <span className="text-sm bg-white/10 text-white border border-white/20 px-2.5 py-0.5 rounded-full font-bold">
+                      Class of {classYear}
+                    </span>
+                  )}
+                  <span className="text-xs bg-white/5 text-gray-400 border border-white/10 px-2 py-0.5 rounded-full">
+                    {sportLabel}
+                  </span>
                 </div>
-              )}
-              {athlete.twitterHandle && (
-                <p className="text-blue-400 text-xs mt-1">@{athlete.twitterHandle.replace(/^@/, "")}</p>
+
+                {/* School */}
+                {athlete.school && (
+                  <p className="text-gray-300 text-sm mt-2 font-semibold">{athlete.school}</p>
+                )}
+
+                {/* Secondary details */}
+                <div className="flex flex-wrap gap-x-4 gap-y-0.5 mt-1.5">
+                  {athlete.gpa && (
+                    <p className="text-yellow-400 text-xs font-semibold">GPA {athlete.gpa}</p>
+                  )}
+                  {athlete.age && (
+                    <p className="text-gray-500 text-xs">Age {athlete.age}</p>
+                  )}
+                  {athlete.twitterHandle && (
+                    <p className="text-blue-400 text-xs">@{athlete.twitterHandle.replace(/^@/, "")}</p>
+                  )}
+                </div>
+
+                {athlete.mlsTeam && (
+                  <div className="mt-2 inline-flex items-center gap-2 bg-green-900/40 border border-green-600/50 rounded-lg px-3 py-1.5">
+                    <span className="text-base leading-none">⚽</span>
+                    <div>
+                      <p className="text-xs text-green-400 font-bold uppercase tracking-wider leading-none mb-0.5">MLS League / Team</p>
+                      <p className="text-sm text-green-200 font-semibold leading-none">{athlete.mlsTeam}</p>
+                    </div>
+                  </div>
+                )}
+              </div>
+
+              {/* PR-VERIFIED seal */}
+              {athlete.featured && (
+                <Link href={`/verify/${athlete.id}`} target="_blank"
+                  className="shrink-0 flex flex-col items-center gap-1 bg-red-950 border-2 border-red-600 rounded-xl px-3 py-2.5 hover:bg-red-900 transition-colors">
+                  <svg className="w-5 h-5 text-red-400" viewBox="0 0 20 20" fill="currentColor">
+                    <path fillRule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                  </svg>
+                  <p className="text-xs text-red-400 font-black uppercase tracking-wide leading-none">PR-VERIFIED</p>
+                  <p className="text-xs text-gray-500 font-mono leading-none mt-0.5">{athlete.id}</p>
+                </Link>
               )}
             </div>
 
-            {/* PR-VERIFIED */}
-            {athlete.featured && (
-              <Link href={`/verify/${athlete.id}`} target="_blank"
-                className="shrink-0 flex flex-col items-center gap-1 bg-red-950/60 border border-red-700/50 rounded-xl px-3 py-2 hover:bg-red-950 transition-colors">
-                <p className="text-xs text-red-400 font-black uppercase tracking-wide">PR-VERIFIED</p>
-                <p className="text-xs text-gray-400 font-mono">{athlete.id}</p>
-              </Link>
-            )}
-          </div>
-
-          {/* Stats row */}
-          <div className="grid grid-cols-3 gap-3 mt-5 pt-5 border-t border-white/5 text-center">
-            <div>
-              <p className="text-2xl font-black text-white">{sessions.length}</p>
-              <p className="text-xs text-gray-500 mt-0.5">Sessions</p>
-            </div>
-            <div className="border-x border-white/5">
-              <p className="text-2xl font-black text-red-400">{athlete.featured ? "✓" : "—"}</p>
-              <p className="text-xs text-gray-500 mt-0.5">PR-Verified</p>
-            </div>
-            <div>
-              <p className="text-2xl font-black text-white">
-                {athlete.joinedAt ? new Date(athlete.joinedAt).getFullYear() : "—"}
-              </p>
-              <p className="text-xs text-gray-500 mt-0.5">Member Since</p>
+            {/* Stats row */}
+            <div className="grid grid-cols-3 gap-3 mt-5 pt-5 border-t border-white/5 text-center">
+              <div>
+                <p className="text-2xl font-black text-white">{sessions.length}</p>
+                <p className="text-xs text-gray-500 mt-0.5">Training Sessions</p>
+              </div>
+              <div className="border-x border-white/5">
+                <p className="text-2xl font-black text-white">{improvements.length > 0 ? `${improvements.length}` : "—"}</p>
+                <p className="text-xs text-gray-500 mt-0.5">Metrics Improved</p>
+              </div>
+              <div>
+                <p className="text-sm font-black text-white leading-tight mt-1">{memberSince ?? "—"}</p>
+                <p className="text-xs text-gray-500 mt-0.5">Training Since</p>
+              </div>
             </div>
           </div>
         </div>
 
-        {/* ── Share Card — prominent, right under hero ── */}
+        {/* ── National & Texas Rankings ── */}
+        {ratings && ratings.metrics.length > 0 && (
+          <div className="bg-gray-900 border border-white/10 rounded-2xl overflow-hidden">
+            <div className="bg-gradient-to-r from-red-950/80 to-gray-900 px-5 py-4 border-b border-white/5">
+              <div className="flex items-center gap-2">
+                <div className="w-1.5 h-5 bg-red-600 rounded-full" />
+                <h2 className="text-sm font-black text-white uppercase tracking-widest">National Rankings</h2>
+              </div>
+              <p className="text-xs text-gray-500 mt-0.5 ml-3.5">{ratings.positionGroup} · {ratings.comparedAgainst.split("·").pop()?.trim()}</p>
+            </div>
+            <div className="p-5">
+              <div className="grid grid-cols-2 gap-3 mb-5">
+                <div className="bg-gray-800 rounded-xl px-4 py-4 border border-gray-700 text-center">
+                  <p className="text-xs text-gray-500 uppercase tracking-wider mb-1.5">National Percentile</p>
+                  <p className="text-4xl font-black text-white leading-none">{ratings.overallPercentile}<span className="text-xl text-gray-400">th</span></p>
+                  <div className="mt-3 h-2 rounded-full bg-gray-700 overflow-hidden">
+                    <div className="h-full rounded-full bg-red-500 transition-all" style={{ width: `${ratings.overallPercentile}%` }} />
+                  </div>
+                  <p className="text-xs text-gray-600 mt-1.5">Better than {ratings.overallPercentile}% of athletes</p>
+                </div>
+                <div className="bg-gray-800 rounded-xl px-4 py-4 border border-gray-700 text-center">
+                  <p className="text-xs text-gray-500 uppercase tracking-wider mb-1.5">Texas Percentile</p>
+                  <p className="text-4xl font-black text-white leading-none">{ratings.texasPercentile}<span className="text-xl text-gray-400">th</span></p>
+                  <div className="mt-3 h-2 rounded-full bg-gray-700 overflow-hidden">
+                    <div className="h-full rounded-full bg-orange-500 transition-all" style={{ width: `${ratings.texasPercentile}%` }} />
+                  </div>
+                  <p className="text-xs text-gray-600 mt-1.5">Better than {ratings.texasPercentile}% in Texas</p>
+                </div>
+              </div>
+              <p className="text-xs text-gray-600 italic">{ratings.description}</p>
+            </div>
+          </div>
+        )}
+
+        {/* ── Progress Highlights ── */}
+        {improvements.length > 0 && (
+          <div className="bg-gray-900 border border-white/10 rounded-2xl overflow-hidden">
+            <div className="px-5 py-4 border-b border-white/5">
+              <div className="flex items-center gap-2">
+                <div className="w-1.5 h-5 bg-green-600 rounded-full" />
+                <h2 className="text-sm font-black text-white uppercase tracking-widest">Progress Since Baseline</h2>
+                <span className="ml-auto text-xs bg-green-900/50 text-green-400 border border-green-700/40 px-2 py-0.5 rounded-full font-bold">
+                  {sessions.length} sessions
+                </span>
+              </div>
+              <p className="text-xs text-gray-500 mt-0.5 ml-3.5">Improvement from first test to most recent</p>
+            </div>
+            <div className="p-5 grid grid-cols-1 sm:grid-cols-2 gap-3">
+              {improvements.slice(0, 4).map(imp => (
+                <div key={imp.label} className="bg-green-950/30 border border-green-800/40 rounded-xl px-4 py-3 flex items-center justify-between gap-3">
+                  <div>
+                    <p className="text-xs text-gray-400">{imp.label}</p>
+                    <div className="flex items-center gap-1.5 mt-0.5">
+                      <span className="text-gray-500 text-sm">{imp.from}{imp.unit}</span>
+                      <span className="text-gray-600 text-xs">→</span>
+                      <span className="text-white font-bold text-sm">{imp.to}{imp.unit}</span>
+                    </div>
+                  </div>
+                  <div className="text-right shrink-0">
+                    <p className="text-green-400 font-black text-lg leading-none">
+                      {imp.lower ? "−" : "+"}{imp.delta.toFixed(imp.unit === "s" ? 2 : 1)}{imp.unit}
+                    </p>
+                    <p className="text-green-600 text-xs mt-0.5">▲ {imp.pct.toFixed(1)}% better</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* ── Share Card ── */}
         <div className="relative overflow-hidden rounded-2xl border border-red-700/40 bg-gradient-to-br from-red-950 via-gray-900 to-gray-950">
-          {/* Background texture */}
           <div className="absolute inset-0 opacity-10"
             style={{ backgroundImage: "repeating-linear-gradient(45deg,#fff 0,#fff 1px,transparent 0,transparent 50%)", backgroundSize: "18px 18px" }} />
-
           <div className="relative p-5">
             <div className="flex items-center gap-2 mb-1">
               <span className="text-xl">📲</span>
               <p className="text-base font-black text-white uppercase tracking-wide">Your Recruiting Card</p>
             </div>
             <p className="text-sm text-gray-400 mb-4">
-              Download your card and post it to Instagram, Twitter, or send directly to college coaches.
+              Download and send directly to college coaches, post on social, or add to your email signature.
             </p>
-
             <ShareCardDownload
               athleteId={athlete.id}
               name={athlete.name}
@@ -251,50 +359,30 @@ export default async function AthleteProfilePage({
               twitterHandle={athlete.twitterHandle}
               sessions={sessions}
             />
-
             <p className="text-xs text-gray-600 mt-3 text-center">
               1080×1080 PNG · ready to post on Instagram, Twitter, or send to coaches
             </p>
           </div>
         </div>
 
-        {/* Highlight bar — top metrics */}
-        {highlights.length > 0 && (
-          <div className="bg-gradient-to-r from-red-950/50 to-gray-900 border border-red-800/30 rounded-2xl px-5 py-4">
-            <p className="text-xs text-red-400 font-bold uppercase tracking-widest mb-3">Top Metrics for Age {age}</p>
-            <div className="flex flex-wrap gap-3">
-              {highlights.map(h => (
-                <div key={h.label} className="flex items-center gap-2 bg-black/30 rounded-xl px-3 py-2">
-                  <span className="text-white font-black text-lg">{h.value}</span>
-                  <div>
-                    <p className="text-gray-400 text-xs">{h.label}</p>
-                    {h.tier && (
-                      <span className={`text-xs font-bold px-1.5 py-0.5 rounded-md ${tierStyle(h.tier as "Elite" | "Above Average" | "Average" | "Below Average")}`}>
-                        {h.tier === "Above Average" ? "Above Avg" : h.tier}
-                      </span>
-                    )}
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        )}
-
-        {/* Performance Metrics */}
+        {/* ── Performance Metrics ── */}
         {(baseline || current) && (
-          <div className="bg-gray-900 border border-white/10 rounded-2xl p-5">
-            <div className="flex items-center gap-2 mb-1">
-              <div className="w-1.5 h-5 bg-red-600 rounded-full" />
-              <h2 className="text-sm font-black text-white uppercase tracking-widest">Performance Metrics</h2>
-              {athlete.featured && (
-                <span className="ml-auto text-xs bg-red-900/50 text-red-400 border border-red-700/40 px-2 py-0.5 rounded-full font-bold">
-                  Coach-Verified
-                </span>
-              )}
+          <div className="bg-gray-900 border border-white/10 rounded-2xl overflow-hidden">
+            <div className="px-5 py-4 border-b border-white/5 flex items-center justify-between">
+              <div className="flex items-center gap-2">
+                <div className="w-1.5 h-5 bg-red-600 rounded-full" />
+                <h2 className="text-sm font-black text-white uppercase tracking-widest">Performance Metrics</h2>
+              </div>
+              <div className="flex items-center gap-2">
+                {athlete.featured && (
+                  <span className="text-xs bg-red-900/50 text-red-400 border border-red-700/40 px-2 py-0.5 rounded-full font-bold">
+                    ✓ Coach-Verified
+                  </span>
+                )}
+              </div>
             </div>
-            <p className="text-xs text-gray-600 mb-4 ml-4">Compared to athletes age {age}</p>
-
-            <div>
+            <div className="px-5 py-1">
+              <p className="text-xs text-gray-600 py-3">Compared to {sportLabel} athletes age {age}</p>
               {METRICS.map(m => {
                 const bVal: number | undefined = baseline?.[m.key]
                 const cVal: number | undefined = current?.[m.key]
@@ -349,15 +437,14 @@ export default async function AthleteProfilePage({
                   <p className="text-white font-bold text-sm">{current?.height ?? baseline?.height}</p>
                 </div>
               )}
+              <p className="text-xs text-gray-600 py-4">
+                Metrics recorded at PolyRISE Football combine camps · Dripping Springs, TX
+              </p>
             </div>
-
-            <p className="text-xs text-gray-600 mt-4">
-              Metrics recorded at PolyRISE Football combine camps · Dripping Springs, TX
-            </p>
           </div>
         )}
 
-        {/* Film */}
+        {/* ── Film ── */}
         {athlete.videoLink && (
           <div className="bg-gray-900 border border-white/10 rounded-2xl p-5">
             <div className="flex items-center gap-2 mb-4">
@@ -376,7 +463,7 @@ export default async function AthleteProfilePage({
           </div>
         )}
 
-        {/* Recruiting contact */}
+        {/* ── Recruiting Contact ── */}
         <div className="bg-gradient-to-br from-red-950/60 to-gray-900 border border-red-800/40 rounded-2xl p-5">
           <div className="flex items-center gap-2 mb-3">
             <div className="w-1.5 h-5 bg-red-600 rounded-full" />
@@ -387,10 +474,10 @@ export default async function AthleteProfilePage({
             <div>
               <p className="text-yellow-300 font-bold text-sm">Kevin Garrett · Former NFL</p>
               <p className="text-gray-400 text-xs">Director of Player Development · PolyRISE Football</p>
-              <a href="mailto:kg@polyrisefootball.com" className="text-red-400 hover:text-red-300 text-xs font-bold mt-1 inline-block">
+              <a href="mailto:kg@polyrisefootball.com" className="text-red-400 hover:text-red-300 text-xs font-bold mt-1 block">
                 kg@polyrisefootball.com
               </a>
-              <a href="mailto:polyrise@polyrisefootball.com" className="text-red-400 hover:text-red-300 text-xs font-bold mt-0.5 inline-block">
+              <a href="mailto:polyrise@polyrisefootball.com" className="text-red-400 hover:text-red-300 text-xs font-bold mt-0.5 block">
                 polyrise@polyrisefootball.com
               </a>
             </div>

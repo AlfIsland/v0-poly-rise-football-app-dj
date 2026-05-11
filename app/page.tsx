@@ -43,6 +43,12 @@ export default function HomePage() {
                 Contact
               </Link>
               <Link
+                href="/passport"
+                className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors hidden md:inline"
+              >
+                Athlete Passport
+              </Link>
+              <Link
                 href="/plans"
                 className="text-sm font-medium bg-[#FF6600] text-white px-4 py-2 rounded hover:bg-[#FF6600]/80 transition-colors"
               >
@@ -958,6 +964,11 @@ export default function HomePage() {
             <div>
               <h4 className="font-display font-bold mb-4">Programs</h4>
               <ul className="space-y-2 text-sm text-muted-foreground">
+                <li>
+                  <Link href="/passport" className="hover:text-foreground transition-colors">
+                    Athlete Passport
+                  </Link>
+                </li>
                 <li>
                   <Link href="#programs" className="hover:text-foreground transition-colors">
                     Player Development

@@ -90,34 +90,44 @@ export async function POST(req: NextRequest) {
     let session: Stripe.Checkout.Session
 
     if (isMixed) {
-      // Mixed cart: charge monthly items first, then redirect to one-time payment
-      // success_url takes them to an intermediate page that triggers the one-time checkout
+      // Mixed cart: Stripe doesn't allow mixing subscription + one-time in one session.
+      // Charge everything as a single payment (first month + one-time fees).
+      // Admin is notified to set up ongoing monthly billing in Stripe dashboard.
       session = await stripe.checkout.sessions.create({
         payment_method_types: ["card"],
-        line_items: monthlyItems.map(p => ({
-          price_data: {
-            currency: "usd",
-            product_data: { name: p.name },
-            unit_amount: applyPrice(p.price) * 100,
-            recurring: { interval: "month" },
-          },
-          quantity: 1,
-        })),
-        mode: "subscription",
-        success_url: `${origin}/register/pay-remaining?id=${regId}`,
+        line_items: [
+          ...monthlyItems.map(p => ({
+            price_data: {
+              currency: "usd",
+              product_data: { name: `${p.name} — 1st Month` },
+              unit_amount: Math.round(applyPrice(p.price) * 100),
+            },
+            quantity: 1,
+          })),
+          ...oneTimeItems.map(p => ({
+            price_data: {
+              currency: "usd",
+              product_data: { name: p.name },
+              unit_amount: Math.round(applyPrice(p.price) * 100),
+            },
+            quantity: 1,
+          })),
+        ],
+        mode: "payment",
+        success_url: `${origin}/register/success?id=${regId}`,
         cancel_url: `${origin}/register?canceled=1`,
         customer_email: email,
-        metadata: { registrationId: regId },
+        metadata: { registrationId: regId, requiresMonthlySetup: "true", monthlyItems: monthlyItems.map(p => `${p.name} $${p.price}/mo`).join(", ") },
       })
     } else if (monthlyItems.length > 0) {
-      // Only monthly items
+      // Only monthly items — use subscription mode for automatic recurring billing
       session = await stripe.checkout.sessions.create({
         payment_method_types: ["card"],
         line_items: monthlyItems.map(p => ({
           price_data: {
             currency: "usd",
             product_data: { name: p.name },
-            unit_amount: applyPrice(p.price) * 100,
+            unit_amount: Math.round(applyPrice(p.price) * 100),
             recurring: { interval: "month" },
           },
           quantity: 1,
@@ -136,7 +146,7 @@ export async function POST(req: NextRequest) {
           price_data: {
             currency: "usd",
             product_data: { name: p.name },
-            unit_amount: applyPrice(p.price) * 100,
+            unit_amount: Math.round(applyPrice(p.price) * 100),
           },
           quantity: 1,
         })),

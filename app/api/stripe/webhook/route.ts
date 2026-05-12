@@ -30,6 +30,8 @@ export async function POST(req: NextRequest) {
         const registrationId = session.metadata?.registrationId
         if (registrationId) {
           const reg = await getRegistrationBySession(session.id)
+          const requiresMonthlySetup = session.metadata?.requiresMonthlySetup === "true"
+          const monthlyItemsNote = session.metadata?.monthlyItems ?? ""
           if (reg) {
             reg.status = "paid"
             reg.paidAt = new Date().toISOString()
@@ -90,6 +92,13 @@ export async function POST(req: NextRequest) {
                         <tr style="background:#f9fafb"><td style="padding:10px 12px;color:#555">Phone</td><td style="padding:10px 12px">${reg.phone}</td></tr>
                         ${reg.discountCode ? `<tr><td style="padding:10px 12px;color:#555">Discount</td><td style="padding:10px 12px;color:#d97706">${reg.discountCode}</td></tr>` : ""}
                       </table>
+                      ${requiresMonthlySetup ? `
+                      <div style="background:#fff7ed;border:2px solid #f97316;border-radius:8px;padding:16px;margin-top:20px">
+                        <p style="margin:0;font-weight:bold;color:#c2410c;font-size:14px">⚠️ Action Required: Set Up Monthly Billing</p>
+                        <p style="margin:8px 0 0;color:#444;font-size:13px">This registration included both a monthly program and a one-time fee. The first payment was collected as a single charge. You must set up the ongoing monthly subscription in Stripe:</p>
+                        <p style="margin:8px 0 0;color:#444;font-size:13px"><strong>Monthly program(s):</strong> ${monthlyItemsNote}</p>
+                        <p style="margin:8px 0 0;font-size:13px"><a href="https://dashboard.stripe.com/customers" style="color:#dc2626">Set up recurring billing in Stripe Dashboard →</a></p>
+                      </div>` : ""}
                       <p style="margin-top:20px"><a href="https://polyrisefootball.com/admin/registrations" style="background:#dc2626;color:#fff;padding:10px 20px;border-radius:8px;text-decoration:none;font-weight:bold;font-size:13px">View All Registrations →</a></p>
                       <p style="color:#999;font-size:12px;margin-top:16px">PolyRISE Football · polyrisefootball.com</p>
                     </div>

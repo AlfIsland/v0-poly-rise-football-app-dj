@@ -6,6 +6,28 @@ export interface Accolade {
   type: "mvp" | "offensive" | "defensive" | "academic" | "character" | "team"
 }
 
+export interface EducationAccolade {
+  id: string
+  title: string
+  year: string
+  detail?: string  // e.g. "3.9 GPA", "Top 5%", "800 Math"
+}
+
+export const EDUCATION_PRESETS: { title: string; placeholder: string }[] = [
+  { title: "Honor Roll",                    placeholder: "e.g. 3.8 GPA" },
+  { title: "Principal's List",              placeholder: "e.g. 4.0 GPA" },
+  { title: "National Honor Society",        placeholder: "e.g. NHS Member" },
+  { title: "Valedictorian",                 placeholder: "e.g. Class of 2026" },
+  { title: "Salutatorian",                  placeholder: "e.g. Class of 2026" },
+  { title: "AP Scholar",                    placeholder: "e.g. 4 AP courses" },
+  { title: "Academic All-District",         placeholder: "e.g. District 25-5A" },
+  { title: "Academic All-State",            placeholder: "e.g. THSCA" },
+  { title: "Academic Scholarship",          placeholder: "e.g. $10,000 award" },
+  { title: "Perfect Attendance",            placeholder: "" },
+  { title: "Student Athlete of the Month",  placeholder: "" },
+  { title: "Community Service Award",       placeholder: "" },
+]
+
 export const ACCOLADE_PRESETS: { title: string; type: Accolade["type"]; emoji: string }[] = [
   { title: "League MVP",                    type: "mvp",       emoji: "🏆" },
   { title: "Player of the Year",            type: "mvp",       emoji: "🏆" },

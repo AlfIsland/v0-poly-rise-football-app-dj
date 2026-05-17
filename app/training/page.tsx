@@ -3,6 +3,7 @@
 import { useState, useEffect, useCallback } from "react"
 import Link from "next/link"
 import LogoutButton from "@/components/logout-button"
+import { SPORTS, getSport } from "@/lib/sports"
 
 const GRADES = [
   "3rd Grade","4th Grade","5th Grade","6th Grade","7th Grade","8th Grade",
@@ -130,7 +131,7 @@ export default function TrainingRosterPage() {
   const [grade, setGrade] = useState("")
   const [position, setPosition] = useState("")
   const [school, setSchool] = useState("")
-  const [sport, setSport] = useState<"football" | "soccer" | "flag-football">("football")
+  const [sport, setSport] = useState<string>("football")
   const [gender, setGender] = useState<"M" | "F">("M")
   const [fortyYard, setFortyYard] = useState("")
   const [twentyYard, setTwentyYard] = useState("")
@@ -237,18 +238,12 @@ export default function TrainingRosterPage() {
         <div>
           <p className="text-xs text-gray-500 mb-1.5 uppercase tracking-wider">Sport</p>
           <div className="flex gap-2">
-            <button onClick={() => setSport("football")}
-              className={`flex-1 py-2 rounded-lg text-sm font-bold transition-colors ${sport === "football" ? "bg-red-600 text-white" : "bg-gray-800 text-gray-400 hover:text-white border border-gray-700"}`}>
-              🏈 Football
-            </button>
-            <button onClick={() => setSport("flag-football")}
-              className={`flex-1 py-2 rounded-lg text-sm font-bold transition-colors ${sport === "flag-football" ? "bg-purple-600 text-white" : "bg-gray-800 text-gray-400 hover:text-white border border-gray-700"}`}>
-              🚩 Flag Football
-            </button>
-            <button onClick={() => setSport("soccer")}
-              className={`flex-1 py-2 rounded-lg text-sm font-bold transition-colors ${sport === "soccer" ? "bg-green-600 text-white" : "bg-gray-800 text-gray-400 hover:text-white border border-gray-700"}`}>
-              ⚽ Soccer
-            </button>
+            {SPORTS.map(s => (
+              <button key={s.value} onClick={() => setSport(s.value)}
+                className={`flex-1 py-2 rounded-lg text-xs font-bold transition-colors ${sport === s.value ? `${s.bg} text-white` : "bg-gray-800 text-gray-400 hover:text-white border border-gray-700"}`}>
+                {s.emoji} {s.label}
+              </button>
+            ))}
           </div>
         </div>
         <div>
@@ -459,17 +454,13 @@ export default function TrainingRosterPage() {
                   <tbody>
                     {sorted.map((a) => {
                       const lastSession = a.sessions?.length ? a.sessions[a.sessions.length - 1] : null
-                      const isSoccer = a.sport === "soccer"
-                      const isFlag = a.sport === "flag-football"
+                      const sp = getSport(a.sport)
+                      const isFootball = a.sport === "football" || !a.sport
                       return (
                         <tr key={a.id} className={`border-b transition-colors ${
-                          a.featured
-                            ? "bg-yellow-950/30 border-yellow-900/40 hover:bg-yellow-950/50"
-                            : isSoccer
-                              ? "bg-green-950/20 border-green-900/30 hover:bg-green-950/40"
-                              : isFlag
-                                ? "bg-purple-950/20 border-purple-900/30 hover:bg-purple-950/40"
-                                : "border-gray-800 hover:bg-gray-800"
+                          a.featured ? "bg-yellow-950/30 border-yellow-900/40 hover:bg-yellow-950/50"
+                                     : isFootball ? "border-gray-800 hover:bg-gray-800"
+                                     : "border-gray-800 hover:bg-gray-800/80"
                         }`}>
                           <td className="px-6 py-4">
                             <div className="flex items-center gap-2">
@@ -481,8 +472,7 @@ export default function TrainingRosterPage() {
                               <div>
                                 <div className="flex items-center gap-2">
                                   <p className={`font-semibold ${a.featured ? "text-yellow-100" : "text-white"}`}>{a.name}</p>
-                                  {isSoccer && <span className="text-xs bg-green-800 text-green-300 px-1.5 py-0.5 rounded font-medium">⚽ Soccer</span>}
-                                  {isFlag && <span className="text-xs bg-purple-900 text-purple-300 px-1.5 py-0.5 rounded font-medium">🚩 Flag</span>}
+                                  {!isFootball && <span className={`text-xs ${sp.bg} ${sp.text} px-1.5 py-0.5 rounded font-medium`}>{sp.emoji} {sp.label}</span>}
                                 </div>
                                 <p className="text-xs text-gray-600 font-mono">{a.id}</p>
                               </div>

@@ -17,6 +17,7 @@ import { getAgeTier, tierStyle } from "@/lib/age-tiers"
 import RecruitingRoadmap from "@/components/recruiting-roadmap"
 import CopyProfileLink from "@/components/copy-profile-link"
 import ShareCardDownload from "@/components/share-card-download"
+import { getSport } from "@/lib/sports"
 
 async function getAthlete(id: string) {
   try {
@@ -95,12 +96,7 @@ export default async function TrainingAthletePage({ params }: { params: { id: st
               <Link href="/training" className="text-xs text-gray-600 hover:text-gray-400 transition-colors">← Roster</Link>
               <div className="flex items-center gap-2 flex-wrap mt-1">
                 <h1 className="text-2xl font-bold text-white">{athlete.name}</h1>
-                {athlete.sport === "soccer"
-                  ? <span className="text-xs bg-green-800 text-green-300 px-2 py-0.5 rounded-full font-semibold">⚽ Soccer</span>
-                  : athlete.sport === "flag-football"
-                    ? <span className="text-xs bg-purple-900 text-purple-300 px-2 py-0.5 rounded-full font-semibold">🚩 Flag Football</span>
-                    : <span className="text-xs bg-red-900 text-red-300 px-2 py-0.5 rounded-full font-semibold">🏈 Football</span>
-                }
+                {(() => { const s = getSport(athlete.sport); return <span className={`text-xs ${s.bg} ${s.text} px-2 py-0.5 rounded-full font-semibold`}>{s.emoji} {s.label}</span> })()}
                 {athlete.gender === "F"
                   ? <span className="text-xs bg-pink-900 text-pink-300 px-2 py-0.5 rounded-full font-semibold">Female</span>
                   : <span className="text-xs bg-blue-900 text-blue-300 px-2 py-0.5 rounded-full font-semibold">Male</span>

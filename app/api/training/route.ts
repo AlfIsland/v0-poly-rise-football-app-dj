@@ -114,10 +114,11 @@ export interface TrainingAthlete {
   twitterHandle?: string
   phone?: string
   email?: string
-  sport?: "football" | "soccer" | "flag-football"
+  sport?: string
   mlsTeam?: string
   gpa?: string
   accolades?: import("@/lib/accolades").Accolade[]
+  educationAccolades?: import("@/lib/accolades").EducationAccolade[]
   joinedAt: string
   sessions: TrainingSession[]
   featured?: boolean
@@ -287,12 +288,13 @@ export async function PUT(req: NextRequest) {
       twitterHandle: body.twitterHandle ?? existing.twitterHandle ?? "",
       phone: body.phone ?? existing.phone,
       email: body.email ?? existing.email,
-      sport: body.sport === "soccer" ? "soccer" : body.sport === "flag-football" ? "flag-football" : body.sport === "football" ? "football" : existing.sport,
+      sport: body.sport !== undefined ? body.sport : existing.sport,
       mlsTeam: body.mlsTeam !== undefined ? (body.mlsTeam || undefined) : existing.mlsTeam,
       gpa: body.gpa !== undefined ? (body.gpa || undefined) : existing.gpa,
       gradYear: body.gradYear !== undefined ? (body.gradYear ? Number(body.gradYear) : undefined) : existing.gradYear,
       gender: body.gender === "F" ? "F" : body.gender === "M" ? "M" : existing.gender,
       accolades: body.accolades !== undefined ? body.accolades : existing.accolades,
+      educationAccolades: body.educationAccolades !== undefined ? body.educationAccolades : existing.educationAccolades,
     }
     await kvSet(`training:athlete:${id.toUpperCase()}`, updated)
     return NextResponse.json({ success: true })

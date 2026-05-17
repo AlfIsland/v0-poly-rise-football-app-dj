@@ -6,8 +6,10 @@ import Link from "next/link"
 import LogoutButton from "@/components/logout-button"
 import AthletePhotoUpload from "@/components/athlete-photo-upload"
 import AccoladesEditor from "@/components/accolades-editor"
+import EducationAccoladesEditor from "@/components/education-accolades-editor"
 import { gradYearOptions } from "@/lib/grad-year"
-import type { Accolade } from "@/lib/accolades"
+import { SPORTS } from "@/lib/sports"
+import type { Accolade, EducationAccolade } from "@/lib/accolades"
 
 const GRADES = [
   "3rd Grade","4th Grade","5th Grade","6th Grade","7th Grade","8th Grade",
@@ -46,13 +48,14 @@ export default function EditTrainingAthletePage() {
   const [coachNotes, setCoachNotes] = useState("")
   const [videoLink, setVideoLink] = useState("")
   const [twitterHandle, setTwitterHandle] = useState("")
-  const [sport, setSport] = useState<"football" | "soccer" | "flag-football">("football")
+  const [sport, setSport] = useState<string>("football")
   const [mlsTeam, setMlsTeam] = useState("")
   const [gpa, setGpa] = useState("")
   const [gradYear, setGradYear] = useState<string>("")
   const [gender, setGender] = useState<"M" | "F">("M")
   const [photoUrl, setPhotoUrl]     = useState<string | null>(null)
-  const [accolades, setAccolades]   = useState<Accolade[]>([])
+  const [accolades, setAccolades]             = useState<Accolade[]>([])
+  const [educationAccolades, setEducationAccolades] = useState<EducationAccolade[]>([])
 
   useEffect(() => {
     fetch(`/api/training?id=${id}`)
@@ -77,6 +80,7 @@ export default function EditTrainingAthletePage() {
           setGender(a.gender === "F" ? "F" : "M")
           setPhotoUrl(a.photoUrl ?? null)
           setAccolades(a.accolades ?? [])
+          setEducationAccolades(a.educationAccolades ?? [])
         } else {
           setError("Athlete not found.")
         }
@@ -94,7 +98,7 @@ export default function EditTrainingAthletePage() {
       const res = await fetch("/api/training", {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ id, name, age, grade, school, position, phone, email, coachNotes, videoLink, twitterHandle, sport, mlsTeam: mlsTeam || undefined, gpa: gpa || undefined, gradYear: gradYear ? Number(gradYear) : undefined, gender, accolades }),
+        body: JSON.stringify({ id, name, age, grade, school, position, phone, email, coachNotes, videoLink, twitterHandle, sport, mlsTeam: mlsTeam || undefined, gpa: gpa || undefined, gradYear: gradYear ? Number(gradYear) : undefined, gender, accolades, educationAccolades }),
       })
       const data = await res.json()
       if (data.success) {
@@ -148,19 +152,13 @@ export default function EditTrainingAthletePage() {
 
               <div>
                 <label className="block text-sm text-gray-300 mb-1.5">Sport</label>
-                <div className="flex gap-2">
-                  <button type="button" onClick={() => setSport("football")}
-                    className={`flex-1 py-2 rounded-lg text-sm font-bold transition-colors ${sport === "football" ? "bg-red-600 text-white" : "bg-gray-800 text-gray-400 hover:text-white border border-gray-700"}`}>
-                    🏈 Football
-                  </button>
-                  <button type="button" onClick={() => setSport("flag-football")}
-                    className={`flex-1 py-2 rounded-lg text-sm font-bold transition-colors ${sport === "flag-football" ? "bg-purple-600 text-white" : "bg-gray-800 text-gray-400 hover:text-white border border-gray-700"}`}>
-                    🚩 Flag Football
-                  </button>
-                  <button type="button" onClick={() => setSport("soccer")}
-                    className={`flex-1 py-2 rounded-lg text-sm font-bold transition-colors ${sport === "soccer" ? "bg-green-600 text-white" : "bg-gray-800 text-gray-400 hover:text-white border border-gray-700"}`}>
-                    ⚽ Soccer
-                  </button>
+                <div className="grid grid-cols-3 gap-1.5">
+                  {SPORTS.map(s => (
+                    <button key={s.value} type="button" onClick={() => setSport(s.value)}
+                      className={`py-2 px-1 rounded-lg text-xs font-bold transition-colors truncate ${sport === s.value ? `${s.bg} text-white ring-1 ring-white/30` : "bg-gray-800 text-gray-400 hover:text-white border border-gray-700"}`}>
+                      {s.emoji} {s.label}
+                    </button>
+                  ))}
                 </div>
               </div>
               <div>
@@ -216,10 +214,16 @@ export default function EditTrainingAthletePage() {
               <Input label="Hudl / Film Link" value={videoLink} onChange={setVideoLink} placeholder="https://hudl.com/v/..." />
               <Input label="X / Twitter Handle" value={twitterHandle} onChange={setTwitterHandle} placeholder="@AthleteHandle" />
 
-              {/* Accolades */}
+              {/* Athletic Accolades */}
               <div className="pt-2 border-t border-gray-700">
-                <h2 className="text-xs font-bold text-yellow-400 uppercase tracking-widest mb-3">🏆 Accolades & Awards</h2>
+                <h2 className="text-xs font-bold text-yellow-400 uppercase tracking-widest mb-3">🏆 Athletic Accolades & Awards</h2>
                 <AccoladesEditor accolades={accolades} onChange={setAccolades} />
+              </div>
+
+              {/* Education Accolades */}
+              <div className="pt-2 border-t border-gray-700">
+                <h2 className="text-xs font-bold text-green-400 uppercase tracking-widest mb-3">📚 Academic Achievements</h2>
+                <EducationAccoladesEditor accolades={educationAccolades} onChange={setEducationAccolades} />
               </div>
 
               <div>

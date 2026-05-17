@@ -8,6 +8,7 @@ import { calculateRatings } from "@/lib/athlete-ratings"
 import { gradeToClassYear } from "@/lib/grade-to-class-year"
 import { ATHLETE_COOKIE, getAthleteIdFromSession } from "@/lib/athlete-auth"
 import { accoladeColors, accoladeEmoji } from "@/lib/accolades"
+import { getSport } from "@/lib/sports"
 import CopyLinkButton from "@/components/copy-link-button"
 import ShareCardDownload from "@/components/share-card-download"
 import StoriesCardDownload from "@/components/stories-card-download"
@@ -107,8 +108,9 @@ export default async function AthleteProfilePage({
     improvements.sort((a, b) => b.pct - a.pct)
   }
 
-  const sportLabel = athlete.sport === "soccer" ? "Soccer" : athlete.sport === "flag-football" ? "Flag Football" : "Football"
-  const sportEmoji = athlete.sport === "soccer" ? "⚽" : athlete.sport === "flag-football" ? "🚩" : "🏈"
+  const sport      = getSport(athlete.sport)
+  const sportLabel = sport.label
+  const sportEmoji = sport.emoji
   const memberSince = athlete.joinedAt
     ? new Date(athlete.joinedAt).toLocaleDateString("en-US", { month: "long", year: "numeric" })
     : null
@@ -377,6 +379,32 @@ ${athlete.name}${athlete.phone ? `\n${athlete.phone}` : ""}${athlete.email ? `\n
                   </div>
                 )
               })}
+            </div>
+          </div>
+        )}
+
+        {/* ── Academic Achievements ── */}
+        {athlete.educationAccolades && athlete.educationAccolades.length > 0 && (
+          <div className="bg-gray-900 border border-green-700/30 rounded-2xl overflow-hidden">
+            <div className="px-5 py-4 border-b border-white/5 flex items-center gap-2">
+              <div className="w-1.5 h-5 bg-green-500 rounded-full" />
+              <h2 className="text-sm font-black text-white uppercase tracking-widest">Academic Achievements</h2>
+              <span className="ml-auto text-xs bg-green-900/50 text-green-400 border border-green-700/40 px-2 py-0.5 rounded-full font-bold">
+                {athlete.educationAccolades.length}
+              </span>
+            </div>
+            <div className="p-4 grid grid-cols-1 sm:grid-cols-2 gap-3">
+              {athlete.educationAccolades.map(a => (
+                <div key={a.id} className="flex items-start gap-3 rounded-xl border border-green-800/40 bg-green-950/30 p-3.5">
+                  <span className="text-xl shrink-0 mt-0.5">📚</span>
+                  <div className="min-w-0">
+                    <p className="text-sm font-black text-green-300 leading-tight">{a.title}</p>
+                    <p className="text-xs text-gray-500 mt-0.5">
+                      {a.year}{a.detail ? ` · ${a.detail}` : ""}
+                    </p>
+                  </div>
+                </div>
+              ))}
             </div>
           </div>
         )}

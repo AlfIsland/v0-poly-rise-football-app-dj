@@ -123,6 +123,7 @@ export interface TrainingAthlete {
   sessions: TrainingSession[]
   featured?: boolean
   profilePublic?: boolean
+  hasSubscription?: boolean
 }
 
 // ─── POST /api/training — create athlete ──────────────────────────────────────
@@ -283,6 +284,13 @@ export async function PUT(req: NextRequest) {
       existing.profilePublic = !(existing.profilePublic !== false)
       await kvSet(`training:athlete:${id.toUpperCase()}`, existing)
       return NextResponse.json({ success: true, profilePublic: existing.profilePublic })
+    }
+
+    // Toggle subscription status
+    if (action === "toggle-subscription") {
+      existing.hasSubscription = !existing.hasSubscription
+      await kvSet(`training:athlete:${id.toUpperCase()}`, existing)
+      return NextResponse.json({ success: true, hasSubscription: existing.hasSubscription })
     }
 
     // Update athlete info

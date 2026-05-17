@@ -6,6 +6,7 @@ import ProgressReportDownload from "@/components/progress-report-download"
 import SendTrainingReport from "@/components/send-training-report"
 import FeaturedToggle from "@/components/featured-toggle"
 import ProfileVisibilityToggle from "@/components/profile-visibility-toggle"
+import SubscriptionToggle from "@/components/subscription-toggle"
 import ProgressChart from "@/components/progress-chart"
 import DeleteSessionButton from "@/components/delete-session-button"
 import InviteParentButton from "@/components/invite-parent-button"
@@ -136,6 +137,7 @@ export default async function TrainingAthletePage({ params }: { params: { id: st
             <div className="w-px h-5 bg-gray-700 mx-1" />
 
             {/* Admin tools */}
+            <SubscriptionToggle id={athlete.id} initialValue={athlete.hasSubscription ?? false} />
             <ProfileVisibilityToggle id={athlete.id} initialPublic={athlete.profilePublic !== false} />
             <FeaturedToggle id={athlete.id} initialFeatured={athlete.featured ?? false} />
             <Link href={`/admin/athletes/new?mode=prv&name=${encodeURIComponent(athlete.name)}&position=${encodeURIComponent(athlete.position ?? "")}&school=${encodeURIComponent(athlete.school ?? "")}&gradYear=${encodeURIComponent(classYear ?? "")}`}

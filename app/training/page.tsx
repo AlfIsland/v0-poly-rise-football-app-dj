@@ -13,6 +13,7 @@ const GRADES = [
 interface Athlete {
   id: string; name: string; age: number; grade: string
   school: string; position?: string; sport?: string; sessions: { date: string }[]; featured?: boolean
+  profilePublic?: boolean; hasSubscription?: boolean
 }
 
 function MetricInput({ label, value, onChange, placeholder, step = "0.01" }: {
@@ -474,7 +475,19 @@ export default function TrainingRosterPage() {
                                   <p className={`font-semibold ${a.featured ? "text-yellow-100" : "text-white"}`}>{a.name}</p>
                                   {!isFootball && <span className={`text-xs ${sp.bg} ${sp.text} px-1.5 py-0.5 rounded font-medium`}>{sp.emoji} {sp.label}</span>}
                                 </div>
-                                <p className="text-xs text-gray-600 font-mono">{a.id}</p>
+                                <div className="flex items-center gap-1.5 mt-1">
+                                  <p className="text-xs text-gray-600 font-mono">{a.id}</p>
+                                  {a.hasSubscription && (
+                                    <span className="text-xs bg-emerald-900/50 text-emerald-400 border border-emerald-800/60 px-1.5 py-0.5 rounded font-bold leading-none">SUB</span>
+                                  )}
+                                  <span className={`text-xs px-1.5 py-0.5 rounded font-bold leading-none border ${
+                                    a.profilePublic !== false
+                                      ? "bg-blue-900/30 text-blue-400 border-blue-800/50"
+                                      : "bg-gray-800 text-gray-500 border-gray-700"
+                                  }`}>
+                                    {a.profilePublic !== false ? "🌐" : "🔒"}
+                                  </span>
+                                </div>
                               </div>
                             </div>
                           </td>
@@ -534,7 +547,19 @@ export default function TrainingRosterPage() {
                               {isSoccer && <span className="text-xs bg-green-800 text-green-300 px-1.5 py-0.5 rounded font-medium">⚽ Soccer</span>}
                               {isFlag && <span className="text-xs bg-purple-900 text-purple-300 px-1.5 py-0.5 rounded font-medium">🚩 Flag</span>}
                             </div>
-                            <p className="text-xs text-gray-600 font-mono">{a.id}</p>
+                            <div className="flex items-center gap-1.5">
+                              <p className="text-xs text-gray-600 font-mono">{a.id}</p>
+                              {a.hasSubscription && (
+                                <span className="text-xs bg-emerald-900/50 text-emerald-400 border border-emerald-800/60 px-1.5 py-0.5 rounded font-bold leading-none">SUB</span>
+                              )}
+                              <span className={`text-xs px-1.5 py-0.5 rounded font-bold leading-none border ${
+                                a.profilePublic !== false
+                                  ? "bg-blue-900/30 text-blue-400 border-blue-800/50"
+                                  : "bg-gray-800 text-gray-500 border-gray-700"
+                              }`}>
+                                {a.profilePublic !== false ? "🌐" : "🔒"}
+                              </span>
+                            </div>
                           </div>
                         </div>
                         <span className="text-xs text-gray-500">{a.sessions?.length ?? 0} sessions</span>

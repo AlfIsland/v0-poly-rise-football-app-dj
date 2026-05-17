@@ -122,6 +122,7 @@ export interface TrainingAthlete {
   joinedAt: string
   sessions: TrainingSession[]
   featured?: boolean
+  profilePublic?: boolean
 }
 
 // ─── POST /api/training — create athlete ──────────────────────────────────────
@@ -150,6 +151,7 @@ export async function POST(req: NextRequest) {
       ...(body.gpa ? { gpa: body.gpa } : {}),
       ...(body.gradYear ? { gradYear: Number(body.gradYear) } : {}),
       gender: body.gender === "F" ? "F" as const : "M" as const,
+      profilePublic: false,
       joinedAt: new Date().toISOString(),
       sessions: [],
     }
@@ -273,6 +275,14 @@ export async function PUT(req: NextRequest) {
       existing.featured = !existing.featured
       await kvSet(`training:athlete:${id.toUpperCase()}`, existing)
       return NextResponse.json({ success: true, featured: existing.featured })
+    }
+
+    // Toggle public/private visibility
+    if (action === "toggle-public") {
+      // existing athletes without the field default to public
+      existing.profilePublic = !(existing.profilePublic !== false)
+      await kvSet(`training:athlete:${id.toUpperCase()}`, existing)
+      return NextResponse.json({ success: true, profilePublic: existing.profilePublic })
     }
 
     // Update athlete info

@@ -4,6 +4,7 @@ import Link from "next/link"
 import Redis from "ioredis"
 import { cookies } from "next/headers"
 import { getAgeTier, tierStyle } from "@/lib/age-tiers"
+import LockedProfilePage from "@/components/locked-profile-page"
 import { calculateRatings } from "@/lib/athlete-ratings"
 import { gradeToClassYear } from "@/lib/grade-to-class-year"
 import { ATHLETE_COOKIE, getAthleteIdFromSession } from "@/lib/athlete-auth"
@@ -61,11 +62,19 @@ export default async function AthleteProfilePage({
   if (!athlete) notFound()
   const isWelcome = searchParams.welcome === "1"
 
-  // Detect logged-in athlete owner
+  // Detect logged-in athlete owner and admin
   const cookieStore = await cookies()
   const sessionToken = cookieStore.get(ATHLETE_COOKIE)?.value
+  const adminToken = cookieStore.get("pr_admin_session")?.value
+  const isAdmin = !!adminToken && !!process.env.ADMIN_SESSION_TOKEN && adminToken === process.env.ADMIN_SESSION_TOKEN
   const loggedInAthleteId = sessionToken ? await getAthleteIdFromSession(sessionToken) : null
   const isOwner = !!loggedInAthleteId && loggedInAthleteId.toUpperCase() === params.id.toUpperCase()
+
+  // Private profile gate — undefined/missing defaults to public for existing athletes
+  const isPublic = athlete.profilePublic !== false
+  if (!isPublic && !isOwner && !isAdmin) {
+    return <LockedProfilePage athleteId={athlete.id} />
+  }
 
   const sessions = athlete.sessions ?? []
   const baseline = sessions[0] ?? null

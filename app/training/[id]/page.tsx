@@ -7,6 +7,7 @@ import SendTrainingReport from "@/components/send-training-report"
 import FeaturedToggle from "@/components/featured-toggle"
 import ProfileVisibilityToggle from "@/components/profile-visibility-toggle"
 import SubscriptionToggle from "@/components/subscription-toggle"
+import DeleteAthleteButton from "@/components/delete-athlete-button"
 import ProgressChart from "@/components/progress-chart"
 import DeleteSessionButton from "@/components/delete-session-button"
 import InviteParentButton from "@/components/invite-parent-button"
@@ -120,6 +121,7 @@ export default async function TrainingAthletePage({ params }: { params: { id: st
                 className="bg-red-600 hover:bg-red-700 text-white font-bold px-4 py-2 rounded-xl text-sm transition-colors">
                 + Add Test
               </Link>
+              <DeleteAthleteButton athleteId={athlete.id} athleteName={athlete.name} redirectAfter />
               <LogoutButton />
             </div>
           </div>

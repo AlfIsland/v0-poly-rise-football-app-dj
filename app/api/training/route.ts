@@ -167,6 +167,27 @@ export async function POST(req: NextRequest) {
   }
 }
 
+// ─── DELETE /api/training — remove athlete ────────────────────────────────────
+export async function DELETE(req: NextRequest) {
+  if (!isAdmin(req)) return NextResponse.json({ success: false, error: "Unauthorized" }, { status: 401 })
+  try {
+    const id = req.nextUrl.searchParams.get("id")
+    if (!id) return NextResponse.json({ success: false, error: "Missing id" }, { status: 400 })
+    const key = `training:athlete:${id.toUpperCase()}`
+    const r = getRedis()
+    if (r) {
+      await r.del(key)
+      await r.srem("training:roster", id.toUpperCase())
+    } else {
+      devStore.delete(key)
+    }
+    return NextResponse.json({ success: true })
+  } catch (err) {
+    console.error("[training DELETE]", err)
+    return NextResponse.json({ success: false, error: "Failed to delete" }, { status: 500 })
+  }
+}
+
 // ─── GET /api/training — list all OR fetch one ────────────────────────────────
 export async function GET(req: NextRequest) {
   const id = req.nextUrl.searchParams.get("id")

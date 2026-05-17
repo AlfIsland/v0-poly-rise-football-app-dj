@@ -3,6 +3,7 @@
 import { useState, useEffect, useCallback } from "react"
 import Link from "next/link"
 import LogoutButton from "@/components/logout-button"
+import DeleteAthleteButton from "@/components/delete-athlete-button"
 import { SPORTS, getSport } from "@/lib/sports"
 
 const GRADES = [
@@ -503,7 +504,7 @@ export default function TrainingRosterPage() {
                             {lastSession ? new Date(lastSession.date).toLocaleDateString() : "Never"}
                           </td>
                           <td className="px-6 py-4">
-                            <div className="flex gap-2">
+                            <div className="flex gap-2 items-center">
                               <Link href={`/training/${a.id}`}
                                 className="text-xs bg-red-700 hover:bg-red-600 text-white px-3 py-1.5 rounded-lg transition-colors">
                                 View
@@ -512,6 +513,7 @@ export default function TrainingRosterPage() {
                                 className="text-xs bg-gray-700 hover:bg-gray-600 px-3 py-1.5 rounded-lg transition-colors">
                                 + Test
                               </Link>
+                              <DeleteAthleteButton athleteId={a.id} athleteName={a.name} />
                             </div>
                           </td>
                         </tr>
@@ -569,9 +571,10 @@ export default function TrainingRosterPage() {
                         <p>Position: <span className="text-gray-300">{a.position || "—"}</span></p>
                         <p className="col-span-2">Last tested: <span className="text-gray-300">{lastSession ? new Date(lastSession.date).toLocaleDateString() : "Never"}</span></p>
                       </div>
-                      <div className="flex gap-2">
+                      <div className="flex gap-2 flex-wrap">
                         <Link href={`/training/${a.id}`} className="flex-1 text-center text-xs bg-red-700 hover:bg-red-600 text-white px-3 py-2 rounded-lg">View</Link>
                         <Link href={`/training/${a.id}/session`} className="flex-1 text-center text-xs bg-gray-700 hover:bg-gray-600 px-3 py-2 rounded-lg">+ Test</Link>
+                        <DeleteAthleteButton athleteId={a.id} athleteName={a.name} />
                       </div>
                     </div>
                   )

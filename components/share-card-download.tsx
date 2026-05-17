@@ -29,6 +29,7 @@ interface ShareCardProps {
   videoLink?: string
   twitterHandle?: string
   sessions: Session[]
+  accolades?: import("@/lib/accolades").Accolade[]
   compact?: boolean
 }
 
@@ -88,7 +89,7 @@ function loadImage(src: string): Promise<HTMLImageElement | null> {
 
 export default function ShareCardDownload({
   athleteId, name, position, school, grade, age, gender,
-  featured, photoUrl, videoLink, twitterHandle, sessions, compact,
+  featured, photoUrl, videoLink, twitterHandle, sessions, accolades, compact,
 }: ShareCardProps) {
   const [loading, setLoading] = useState(false)
 
@@ -392,6 +393,25 @@ export default function ShareCardDownload({
         ctx.stroke()
         ctx.fillStyle = "#D1D5DB"
         ctx.fillText(hudlLabel, badgeRowX + 14, badgeRowY + 33)
+      }
+
+      // ── Accolades strip (top 2) ──
+      const topAccolades = (accolades ?? []).slice(0, 2)
+      if (topAccolades.length > 0) {
+        const accY = SIZE - 220
+        ctx.fillStyle = "rgba(234,179,8,0.12)"
+        roundRect(ctx, MARGIN, accY - 36, SIZE - MARGIN * 2, topAccolades.length * 44 + 16, 10)
+        ctx.fill()
+        ctx.strokeStyle = "rgba(234,179,8,0.4)"
+        ctx.lineWidth = 1
+        ctx.stroke()
+        topAccolades.forEach((a, i) => {
+          const emoji = a.type === "mvp" ? "🏆" : a.type === "offensive" ? "🏈" : a.type === "defensive" ? "🛡️" : a.type === "academic" ? "📚" : a.type === "character" ? "🎖️" : "⭐"
+          ctx.font      = "bold 22px Arial, sans-serif"
+          ctx.fillStyle = "#FDE68A"
+          ctx.textAlign = "left"
+          ctx.fillText(`${emoji}  ${a.title}  ·  ${a.year}`, MARGIN + 14, accY - 6 + i * 44)
+        })
       }
 
       // ── Footer ──

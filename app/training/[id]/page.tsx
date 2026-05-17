@@ -179,6 +179,7 @@ export default async function TrainingAthletePage({ params }: { params: { id: st
             videoLink={athlete.videoLink}
             twitterHandle={athlete.twitterHandle}
             sessions={sessions}
+            accolades={athlete.accolades}
           />
         </div>
 

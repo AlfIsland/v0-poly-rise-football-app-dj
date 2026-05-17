@@ -7,6 +7,7 @@ import { getAgeTier, tierStyle } from "@/lib/age-tiers"
 import { calculateRatings } from "@/lib/athlete-ratings"
 import { gradeToClassYear } from "@/lib/grade-to-class-year"
 import { ATHLETE_COOKIE, getAthleteIdFromSession } from "@/lib/athlete-auth"
+import { accoladeColors, accoladeEmoji } from "@/lib/accolades"
 import CopyLinkButton from "@/components/copy-link-button"
 import ShareCardDownload from "@/components/share-card-download"
 import StoriesCardDownload from "@/components/stories-card-download"
@@ -351,6 +352,35 @@ ${athlete.name}${athlete.phone ? `\n${athlete.phone}` : ""}${athlete.email ? `\n
           </div>
         )}
 
+        {/* ── Accolades ── */}
+        {athlete.accolades && athlete.accolades.length > 0 && (
+          <div className="bg-gray-900 border border-yellow-700/30 rounded-2xl overflow-hidden">
+            <div className="px-5 py-4 border-b border-white/5 flex items-center gap-2">
+              <div className="w-1.5 h-5 bg-yellow-500 rounded-full" />
+              <h2 className="text-sm font-black text-white uppercase tracking-widest">Accolades & Awards</h2>
+              <span className="ml-auto text-xs bg-yellow-900/50 text-yellow-400 border border-yellow-700/40 px-2 py-0.5 rounded-full font-bold">
+                {athlete.accolades.length} award{athlete.accolades.length !== 1 ? "s" : ""}
+              </span>
+            </div>
+            <div className="p-4 grid grid-cols-1 sm:grid-cols-2 gap-3">
+              {athlete.accolades.map(a => {
+                const colors = accoladeColors(a.type)
+                return (
+                  <div key={a.id} className={`flex items-start gap-3 rounded-xl border p-3.5 ${colors.bg} ${colors.border}`}>
+                    <span className="text-2xl shrink-0 mt-0.5">{accoladeEmoji(a.type)}</span>
+                    <div className="min-w-0">
+                      <p className={`text-sm font-black leading-tight ${colors.text}`}>{a.title}</p>
+                      <p className="text-xs text-gray-500 mt-0.5">
+                        {a.year}{a.organization ? ` · ${a.organization}` : ""}
+                      </p>
+                    </div>
+                  </div>
+                )
+              })}
+            </div>
+          </div>
+        )}
+
         {/* ── Progress Highlights ── */}
         {improvements.length > 0 && (
           <div className="bg-gray-900 border border-white/10 rounded-2xl overflow-hidden">
@@ -419,6 +449,7 @@ ${athlete.name}${athlete.phone ? `\n${athlete.phone}` : ""}${athlete.email ? `\n
                 videoLink={athlete.videoLink}
                 twitterHandle={athlete.twitterHandle}
                 sessions={sessions}
+                accolades={athlete.accolades}
               />
               <p className="text-xs text-gray-600 mt-1.5 text-center">1080×1080 PNG</p>
             </div>
@@ -439,6 +470,7 @@ ${athlete.name}${athlete.phone ? `\n${athlete.phone}` : ""}${athlete.email ? `\n
                 photoUrl={athlete.photoUrl}
                 twitterHandle={athlete.twitterHandle}
                 sessions={sessions}
+                accolades={athlete.accolades}
               />
               <p className="text-xs text-gray-600 mt-1.5 text-center">1080×1920 PNG · fits Instagram &amp; Snapchat Stories perfectly</p>
             </div>

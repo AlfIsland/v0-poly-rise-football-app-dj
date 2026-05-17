@@ -29,6 +29,7 @@ interface Props {
   photoUrl?: string
   twitterHandle?: string
   sessions: Session[]
+  accolades?: import("@/lib/accolades").Accolade[]
   compact?: boolean
 }
 
@@ -87,7 +88,7 @@ function loadImage(src: string): Promise<HTMLImageElement | null> {
 
 export default function StoriesCardDownload({
   athleteId, name, position, school, grade, classYear,
-  age, gender, featured, photoUrl, twitterHandle, sessions, compact,
+  age, gender, featured, photoUrl, twitterHandle, sessions, accolades, compact,
 }: Props) {
   const [loading, setLoading] = useState(false)
 
@@ -376,6 +377,25 @@ export default function StoriesCardDownload({
         ctx.fillText(`𝕏 ${handle}`, W / 2, botY + 32)
         ctx.textAlign    = "left"
         botY += 52
+      }
+
+      // ── Accolades (top 3) ──
+      const topAccolades = (accolades ?? []).slice(0, 3)
+      if (topAccolades.length > 0) {
+        botY += 20
+        ctx.font      = "bold 26px Arial, sans-serif"
+        ctx.fillStyle = "#EAB308"
+        ctx.textAlign = "center"
+        ctx.fillText("🏆  ACCOLADES", W / 2, botY)
+        botY += 42
+        for (const a of topAccolades) {
+          const emoji = a.type === "mvp" ? "🏆" : a.type === "offensive" ? "🏈" : a.type === "defensive" ? "🛡️" : a.type === "academic" ? "📚" : a.type === "character" ? "🎖️" : "⭐"
+          ctx.font      = "bold 24px Arial, sans-serif"
+          ctx.fillStyle = "#FDE68A"
+          ctx.textAlign = "center"
+          ctx.fillText(`${emoji}  ${a.title}  ·  ${a.year}`, W / 2, botY)
+          botY += 38
+        }
       }
 
       // ── Dark footer strip ──

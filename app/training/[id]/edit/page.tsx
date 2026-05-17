@@ -5,7 +5,9 @@ import { useRouter, useParams } from "next/navigation"
 import Link from "next/link"
 import LogoutButton from "@/components/logout-button"
 import AthletePhotoUpload from "@/components/athlete-photo-upload"
+import AccoladesEditor from "@/components/accolades-editor"
 import { gradYearOptions } from "@/lib/grad-year"
+import type { Accolade } from "@/lib/accolades"
 
 const GRADES = [
   "3rd Grade","4th Grade","5th Grade","6th Grade","7th Grade","8th Grade",
@@ -49,7 +51,8 @@ export default function EditTrainingAthletePage() {
   const [gpa, setGpa] = useState("")
   const [gradYear, setGradYear] = useState<string>("")
   const [gender, setGender] = useState<"M" | "F">("M")
-  const [photoUrl, setPhotoUrl] = useState<string | null>(null)
+  const [photoUrl, setPhotoUrl]     = useState<string | null>(null)
+  const [accolades, setAccolades]   = useState<Accolade[]>([])
 
   useEffect(() => {
     fetch(`/api/training?id=${id}`)
@@ -73,6 +76,7 @@ export default function EditTrainingAthletePage() {
           setGradYear(a.gradYear ? String(a.gradYear) : "")
           setGender(a.gender === "F" ? "F" : "M")
           setPhotoUrl(a.photoUrl ?? null)
+          setAccolades(a.accolades ?? [])
         } else {
           setError("Athlete not found.")
         }
@@ -90,7 +94,7 @@ export default function EditTrainingAthletePage() {
       const res = await fetch("/api/training", {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ id, name, age, grade, school, position, phone, email, coachNotes, videoLink, twitterHandle, sport, mlsTeam: mlsTeam || undefined, gpa: gpa || undefined, gradYear: gradYear ? Number(gradYear) : undefined, gender }),
+        body: JSON.stringify({ id, name, age, grade, school, position, phone, email, coachNotes, videoLink, twitterHandle, sport, mlsTeam: mlsTeam || undefined, gpa: gpa || undefined, gradYear: gradYear ? Number(gradYear) : undefined, gender, accolades }),
       })
       const data = await res.json()
       if (data.success) {
@@ -211,6 +215,12 @@ export default function EditTrainingAthletePage() {
               <Input label="GPA" value={gpa} onChange={setGpa} placeholder="e.g. 3.8" />
               <Input label="Hudl / Film Link" value={videoLink} onChange={setVideoLink} placeholder="https://hudl.com/v/..." />
               <Input label="X / Twitter Handle" value={twitterHandle} onChange={setTwitterHandle} placeholder="@AthleteHandle" />
+
+              {/* Accolades */}
+              <div className="pt-2 border-t border-gray-700">
+                <h2 className="text-xs font-bold text-yellow-400 uppercase tracking-widest mb-3">🏆 Accolades & Awards</h2>
+                <AccoladesEditor accolades={accolades} onChange={setAccolades} />
+              </div>
 
               <div>
                 <label className="block text-sm text-gray-300 mb-1.5">Coach Notes</label>

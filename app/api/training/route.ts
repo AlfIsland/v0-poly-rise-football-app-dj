@@ -117,6 +117,7 @@ export interface TrainingAthlete {
   sport?: "football" | "soccer" | "flag-football"
   mlsTeam?: string
   gpa?: string
+  accolades?: import("@/lib/accolades").Accolade[]
   joinedAt: string
   sessions: TrainingSession[]
   featured?: boolean
@@ -291,6 +292,7 @@ export async function PUT(req: NextRequest) {
       gpa: body.gpa !== undefined ? (body.gpa || undefined) : existing.gpa,
       gradYear: body.gradYear !== undefined ? (body.gradYear ? Number(body.gradYear) : undefined) : existing.gradYear,
       gender: body.gender === "F" ? "F" : body.gender === "M" ? "M" : existing.gender,
+      accolades: body.accolades !== undefined ? body.accolades : existing.accolades,
     }
     await kvSet(`training:athlete:${id.toUpperCase()}`, updated)
     return NextResponse.json({ success: true })

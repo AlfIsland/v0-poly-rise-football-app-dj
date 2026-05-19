@@ -5,7 +5,7 @@ import { useSearchParams } from "next/navigation"
 import Image from "next/image"
 
 const PROGRAMS_DATA: Record<string, { name: string; price: number; priceLabel: string; billing: "one_time" | "monthly" }> = {
-  "player-dev":           { name: "Player Development",                    price: 315, priceLabel: "$315/mo",  billing: "monthly" },
+  "player-dev":           { name: "Player Development",                    price: 250, priceLabel: "$250/mo (reg. $315)",  billing: "monthly" },
   "elite-360":            { name: "360 Elite",                             price: 500, priceLabel: "$500/mo",  billing: "monthly" },
   "multi-sport":          { name: "Multi-Sport Athlete",                   price: 175, priceLabel: "$175/mo",  billing: "monthly" },
   "girls-dev":            { name: "Girls Player Development",              price: 250, priceLabel: "$250/mo",  billing: "monthly" },
@@ -29,7 +29,7 @@ const CATEGORIES = [
   {
     label: "Training Programs", badge: "bg-red-900 text-red-300", color: "border-red-800 hover:border-red-500",
     programs: [
-      { id: "player-dev",    desc: "8 sessions/month · SAQ, S&C, football drills, tournament entries, military character events, PR-Verified Camp & Athlete Tracking Passport" },
+      { id: "player-dev",    desc: "8 sessions/month · SAQ, S&C, football drills, tournament entries, military character events, PR-Verified Camp & Athlete Tracking Passport · Deal ends midnight May 25th", highlight: "🇺🇸 MEMORIAL DAY" },
       { id: "elite-360",     desc: "Everything in Player Development + 1-on-1 NFL coaching, recruiting profile & 7 college email blasts/month", highlight: "BEST" },
       { id: "multi-sport",   desc: "1 day/week (Tue or Thu) · SAQ, S&C, multi-sport athleticism with camps & events included" },
       { id: "girls-dev",     desc: "2 days/week · May: Mon & Fri 5–6:30pm · June–July: Mon & Fri 1–2:30pm" },

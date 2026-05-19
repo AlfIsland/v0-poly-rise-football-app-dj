@@ -4,7 +4,7 @@ import { saveRegistration, Registration } from "@/lib/registration-store"
 import { getDiscount, validateDiscount, incrementUsage } from "@/lib/discount-store"
 
 export const PROGRAMS: Record<string, { name: string; price: number; billing: "one_time" | "monthly" }> = {
-  "player-dev":           { name: "Player Development",                      price: 315, billing: "monthly"  },
+  "player-dev":           { name: "Player Development",                      price: 250, billing: "monthly"  },
   "elite-360":            { name: "360 Elite",                               price: 500, billing: "monthly"  },
   "multi-sport":          { name: "Multi-Sport Athlete",                     price: 175, billing: "monthly"  },
   "girls-dev":            { name: "Girls Player Development",                price: 250, billing: "monthly"  },

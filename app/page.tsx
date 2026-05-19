@@ -245,7 +245,14 @@ export default function HomePage() {
                 <div className="pt-6 px-6 pb-6 space-y-4">
                   <div>
                     <h4 className="text-xl font-display font-bold mb-2">Player Development</h4>
-                    <div className="text-lg font-bold text-white mb-3">$315/mo</div>
+                    <div className="mb-1">
+                      <span className="inline-block text-xs font-black uppercase tracking-widest bg-red-600 text-white px-2 py-0.5 rounded mb-2">🇺🇸 Memorial Day Special</span>
+                    </div>
+                    <div className="flex items-end gap-2 mb-1">
+                      <span className="text-3xl font-black text-white">$250<span className="text-base font-semibold text-gray-400">/mo</span></span>
+                      <span className="text-base font-bold text-gray-500 line-through mb-0.5">$315</span>
+                    </div>
+                    <p className="text-red-400 text-xs font-semibold mb-3">Deal ends midnight May 25th — then goes back to $315</p>
                     <p className="text-muted-foreground text-sm leading-relaxed">8 sessions a month including SAQ, S&amp;C, football drills, tournament entries, military character building events, PR-Verified Camp and Free Athletic Training Passport (Tracker).</p>
                   </div>
                   <Link href="/register?program=player-dev" className="block w-full text-center bg-[#FF6600] text-white px-4 py-2 rounded hover:bg-[#FF6600]/80 transition-colors">Register</Link>

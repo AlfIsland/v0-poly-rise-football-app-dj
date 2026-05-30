@@ -362,6 +362,10 @@ export default function TrainingRosterPage() {
             <Link href="/training/dedup" className="text-xs text-yellow-600 hover:text-yellow-400 underline mt-0.5 block">🧹 Clean Duplicates</Link>
           </div>
           <div className="flex items-center gap-3">
+            <a href="/api/training/export" download
+              className="font-semibold px-4 py-2 rounded-xl text-sm transition-colors bg-emerald-700 hover:bg-emerald-600 text-white">
+              ↓ Export CSV
+            </a>
             <button onClick={() => { setShowQuickEntry(v => !v); resetForm() }}
               className={`font-semibold px-4 py-2 rounded-xl text-sm transition-colors ${showQuickEntry ? "bg-gray-700 text-white" : "bg-red-600 hover:bg-red-700 text-white"}`}>
               {showQuickEntry ? "✕ Close" : "+ Quick Entry"}

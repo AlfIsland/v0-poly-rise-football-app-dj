@@ -17,7 +17,7 @@ const PROGRAMS_DATA: Record<string, { name: string; price: number; priceLabel: s
   "summer-hs":            { name: "Summer Camp — High School",             price: 265, priceLabel: "$265",      billing: "one_time" },
   "combine":              { name: "Combine Metrics Camp",                  price: 25,  priceLabel: "$25",       billing: "one_time" },
   "tackling-camp":        { name: "Tackling Camp",                         price: 25,  priceLabel: "$25",       billing: "one_time" },
-  "hike":                 { name: "Leadership Hike",                       price: 25,  priceLabel: "$25",       billing: "one_time" },
+  "hike":                 { name: "Leadership & Mentorship Hike",           price: 25,  priceLabel: "$25",       billing: "one_time" },
   "tournament-ms":        { name: "Football Tournament (Middle School)",   price: 400, priceLabel: "$400",      billing: "one_time" },
   "tournament-hs":        { name: "Football Tournament (High School)",     price: 425, priceLabel: "$425",      billing: "one_time" },
   "passport":             { name: "Passport",                              price: 9.99,  priceLabel: "$9.99/mo",  billing: "monthly" },

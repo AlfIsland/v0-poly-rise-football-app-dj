@@ -16,7 +16,7 @@ export const PROGRAMS: Record<string, { name: string; price: number; billing: "o
   "summer-hs":            { name: "Summer Camp (High School)",               price: 265, billing: "one_time" },
   "combine":              { name: "PR-VERIFIED Combine Camp",                price: 25,  billing: "one_time" },
   "tackling-camp":        { name: "Tackling Camp",                           price: 25,  billing: "one_time" },
-  "hike":                 { name: "Leadership Hike",                         price: 25,  billing: "one_time" },
+  "hike":                 { name: "Leadership & Mentorship Hike",             price: 25,  billing: "one_time" },
   "tournament-ms":        { name: "Football Tournament (Middle School)",     price: 400, billing: "one_time" },
   "tournament-hs":        { name: "Football Tournament (High School)",       price: 425, billing: "one_time" },
   "passport":             { name: "Passport",                                price: 9.99,  billing: "monthly"  },

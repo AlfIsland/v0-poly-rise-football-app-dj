@@ -357,6 +357,24 @@ export default function HomePage() {
                 </div>
               </div>
 
+              {/* Leadership & Mentorship Hike */}
+              <div className="bg-card border-primary/50 border-2 overflow-hidden group hover:border-primary transition-colors">
+                <div className="pt-6 px-6 pb-6 space-y-4">
+                  <div>
+                    <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 mb-3">
+                      <span className="text-sm font-medium text-primary">Leadership</span>
+                    </div>
+                    <h4 className="text-xl font-display font-bold mb-2">Leadership &amp; Mentorship Hike</h4>
+                    <p className="text-muted-foreground text-sm leading-relaxed mb-2">A character-building hike experience focused on developing leadership, mentorship, and mental toughness beyond the field.</p>
+                    <div className="flex items-center justify-between border-t border-dashed border-border pt-4">
+                      <span className="font-medium text-sm">Per Athlete</span>
+                      <span className="text-lg font-bold text-white">$25</span>
+                    </div>
+                  </div>
+                  <Link href="/register?program=hike" className="block w-full text-center bg-[#FF6600] text-white px-4 py-2 rounded hover:bg-[#FF6600]/80 transition-colors">Register</Link>
+                </div>
+              </div>
+
               {/* Tackling Camp */}
               <div className="bg-card border-primary/50 border-2 overflow-hidden group hover:border-primary transition-colors">
                 <div className="pt-6 px-6 pb-6 space-y-4">

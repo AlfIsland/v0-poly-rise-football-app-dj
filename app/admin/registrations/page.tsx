@@ -10,7 +10,7 @@ interface Registration {
   playerName: string; playerAge: string; playerGrade: string
   playerSchool: string; playerPosition: string
   parentName: string; email: string; phone: string
-  amount: number; billing: string; status: string
+  amount: number; billing: string; billingMonth?: string; status: string
   createdAt: string; paidAt?: string
 }
 
@@ -148,6 +148,9 @@ export default function RegistrationsPage() {
                       <td className="px-5 py-4">
                         <p className="text-white text-xs font-semibold">{r.programName}</p>
                         <span className="text-xs text-gray-500">{CATEGORY_LABELS[r.program] ?? "—"} · {r.billing === "monthly" ? "Monthly" : "One-time"}</span>
+                        {r.billingMonth && (
+                          <p className="text-xs text-blue-400 font-semibold mt-0.5">📅 {r.billingMonth}</p>
+                        )}
                       </td>
                       <td className="px-5 py-4">
                         <p className="text-white font-semibold">${r.amount}{r.billing === "monthly" ? "/mo" : ""}</p>

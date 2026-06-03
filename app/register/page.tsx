@@ -83,8 +83,22 @@ function RegisterPage() {
   const [discountCode, setDiscountCode] = useState("")
   const [discountResult, setDiscountResult] = useState<{ valid: boolean; label?: string; savings?: number; code?: string } | null>(null)
   const [validatingCode, setValidatingCode] = useState(false)
+  const [billingMonth, setBillingMonth] = useState(() => {
+    const now = new Date()
+    return `${now.toLocaleString("en-US", { month: "long" })} ${now.getFullYear()}`
+  })
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState("")
+
+  const billingMonthOptions = (() => {
+    const opts: string[] = []
+    const now = new Date()
+    for (let i = 0; i < 5; i++) {
+      const d = new Date(now.getFullYear(), now.getMonth() + i, 1)
+      opts.push(`${d.toLocaleString("en-US", { month: "long" })} ${d.getFullYear()}`)
+    }
+    return opts
+  })()
   const searchParams = useSearchParams()
   const canceled = searchParams.get("canceled")
 
@@ -129,7 +143,7 @@ function RegisterPage() {
       const res = await fetch("/api/register/checkout", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ programIds: cart, playerName, playerAge, playerGrade, playerSchool, playerPosition, parentName, email, phone, discountCode: discountResult?.valid ? discountResult.code : undefined }),
+        body: JSON.stringify({ programIds: cart, playerName, playerAge, playerGrade, playerSchool, playerPosition, parentName, email, phone, discountCode: discountResult?.valid ? discountResult.code : undefined, billingMonth: hasMonthly ? billingMonth : undefined }),
       })
       const data = await res.json()
       if (data.success && data.url) {
@@ -266,6 +280,20 @@ function RegisterPage() {
                 </div>
               )}
             </div>
+
+            {/* Billing Month — only shown for monthly programs */}
+            {hasMonthly && (
+              <div className="bg-blue-950/50 border border-blue-800 rounded-xl px-4 py-4 space-y-2">
+                <p className="text-xs font-bold text-blue-300 uppercase tracking-widest">Billing Month</p>
+                <p className="text-xs text-blue-400">Which month is this payment for?</p>
+                <select value={billingMonth} onChange={e => setBillingMonth(e.target.value)}
+                  className="w-full bg-gray-800 text-white rounded-lg px-3 py-2 border border-blue-700 focus:border-blue-400 focus:outline-none text-sm font-semibold">
+                  {billingMonthOptions.map(m => (
+                    <option key={m} value={m}>{m}</option>
+                  ))}
+                </select>
+              </div>
+            )}
 
             {/* Player info */}
             <div className="space-y-1">

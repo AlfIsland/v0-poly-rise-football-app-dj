@@ -33,7 +33,7 @@ export const PROGRAMS: Record<string, { name: string; price: number; billing: "o
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json()
-    const { programIds, playerName, playerAge, playerGrade, playerSchool, playerPosition, parentName, email, phone, discountCode } = body
+    const { programIds, playerName, playerAge, playerGrade, playerSchool, playerPosition, parentName, email, phone, discountCode, billingMonth } = body
 
     const ids: string[] = programIds ?? (body.programId ? [body.programId] : [])
     if (!ids.length || !playerName || !parentName || !email || !phone)
@@ -82,6 +82,7 @@ export async function POST(req: NextRequest) {
       amount: totalAmount,
       discountCode: appliedCode,
       billing: monthlyItems.length > 0 ? "monthly" : "one_time",
+      billingMonth: billingMonth || undefined,
       status: "pending",
       createdAt: new Date().toISOString(),
     }
@@ -117,7 +118,7 @@ export async function POST(req: NextRequest) {
         success_url: `${origin}/register/success?id=${regId}`,
         cancel_url: `${origin}/register?canceled=1`,
         customer_email: email,
-        metadata: { registrationId: regId, requiresMonthlySetup: "true", monthlyItems: monthlyItems.map(p => `${p.name} $${p.price}/mo`).join(", ") },
+        metadata: { registrationId: regId, requiresMonthlySetup: "true", monthlyItems: monthlyItems.map(p => `${p.name} $${p.price}/mo`).join(", "), ...(billingMonth ? { billingMonth } : {}) },
       })
     } else if (monthlyItems.length > 0) {
       // Only monthly items — use subscription mode for automatic recurring billing
@@ -136,7 +137,7 @@ export async function POST(req: NextRequest) {
         success_url: `${origin}/register/success?id=${regId}`,
         cancel_url: `${origin}/register?canceled=1`,
         customer_email: email,
-        metadata: { registrationId: regId },
+        metadata: { registrationId: regId, ...(billingMonth ? { billingMonth } : {}) },
       })
     } else {
       // Only one-time items

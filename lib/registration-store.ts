@@ -25,6 +25,7 @@ export interface Registration {
   amount: number
   discountCode?: string
   billing: "one_time" | "monthly"
+  billingMonth?: string
   stripeSessionId?: string
   status: "pending" | "paid" | "canceled"
   createdAt: string

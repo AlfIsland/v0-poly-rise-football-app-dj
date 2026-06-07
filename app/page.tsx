@@ -712,6 +712,9 @@ export default function HomePage() {
             <div className="w-44 h-40 rounded-lg border-2 border-primary/20 bg-white flex items-center justify-center overflow-hidden hover:border-primary/50 transition-colors p-4">
               <img src="/sponsor-main-design.png" alt="Main Design Print Co." className="w-full h-full object-contain" />
             </div>
+            <div className="w-44 h-40 rounded-lg border-2 border-primary/20 bg-white flex items-center justify-center overflow-hidden hover:border-primary/50 transition-colors p-4">
+              <img src="/sponsor-longhorn-mobile-detailing.webp" alt="Longhorn Mobile Detailing" className="w-full h-full object-contain" />
+            </div>
           </div>
 
           <div className="text-center mt-12">

@@ -408,10 +408,8 @@ export default function HomePage() {
                     </div>
                     <h4 className="text-xl font-display font-bold mb-2">Summer Camp</h4>
                     <p className="text-muted-foreground text-sm leading-relaxed mb-2">Athlete Development &amp; Leadership (June &amp; July) — <span className="text-white font-semibold">Limited to 20 spots ONLY</span></p>
-                    <div className="grid sm:grid-cols-3 gap-4 border-t border-dashed border-border pt-4">
-                      <div><div className="flex items-center justify-between"><span className="font-medium">Elementary (K-5)</span><span className="text-lg font-bold text-white">$265/mo</span></div><p className="text-xs text-muted-foreground">Mon-Thu, 8:00am - 10:00am</p></div>
-                      <div><div className="flex items-center justify-between"><span className="font-medium">Middle School</span><span className="text-lg font-bold text-white">$265/mo</span></div><p className="text-xs text-muted-foreground">Mon-Thu, 10:00am - 12:00pm</p></div>
-                      <div><div className="flex items-center justify-between"><span className="font-medium">High School</span><span className="text-lg font-bold text-white">$265/mo</span></div><p className="text-xs text-muted-foreground">Mon-Thu, 2:00pm - 4:00pm</p></div>
+                    <div className="border-t border-dashed border-border pt-4">
+                      <div><div className="flex items-center justify-between"><span className="font-medium">Athletic Camp</span><span className="text-lg font-bold text-white">$265/mo</span></div><p className="text-xs text-muted-foreground mt-1">Open to all Elementary &amp; Middle School athletes · Mon, Tue &amp; Thu · 10:00am – 12:00pm (noon)</p></div>
                     </div>
                   </div>
                   <Link href="/register?program=summer-ms" className="block w-full text-center bg-[#FF6600] text-white px-4 py-2 rounded hover:bg-[#FF6600]/80 transition-colors">Register Now</Link>

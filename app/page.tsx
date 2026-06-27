@@ -244,9 +244,9 @@ export default function HomePage() {
                 </div>
                 <div className="pt-6 px-6 pb-6 space-y-4">
                   <div>
-                    <h4 className="text-xl font-display font-bold mb-2">Player Development</h4>
+                    <h4 className="text-xl font-display font-bold mb-2">Football Player Development</h4>
                     <div className="text-lg font-bold text-white mb-3">$300/mo</div>
-                    <p className="text-muted-foreground text-sm leading-relaxed">8 sessions a month including SAQ, S&amp;C, football drills, tournament entries, military character building events, PR-Verified Camp and Free Athletic Training Passport (Tracker).</p>
+                    <p className="text-muted-foreground text-sm leading-relaxed">Tuesday &amp; Thursday (6:30–7:30pm) including SAQ, S&amp;C, football drills, tournament entries, military character building events, PR-Verified Camp and Free Athletic Training Passport (Tracker).</p>
                   </div>
                   <Link href="/register?program=player-dev" className="block w-full text-center bg-[#FF6600] text-white px-4 py-2 rounded hover:bg-[#FF6600]/80 transition-colors">Register</Link>
                 </div>

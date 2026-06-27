@@ -7,7 +7,7 @@ import Image from "next/image"
 const PROGRAMS_DATA: Record<string, { name: string; price: number; priceLabel: string; billing: "one_time" | "monthly" }> = {
   // Football Player Development tiers
   "player-dev":              { name: "Football Player Development — Monthly",      price: 315,   priceLabel: "$315/mo",   billing: "monthly"   },
-  "player-dev-annual":       { name: "Football Player Development — Annual",       price: 250,   priceLabel: "$250/mo",   billing: "monthly"   },
+  "player-dev-annual":       { name: "Football Player Development — Annual Subscription", price: 250, priceLabel: "$250/mo (annual)",  billing: "monthly"   },
   "player-dev-1day":         { name: "Football Player Development — Once a Week",  price: 175,   priceLabel: "$175/mo",   billing: "monthly"   },
   "player-dev-dropin":       { name: "Football Player Development — Drop-In",      price: 40,    priceLabel: "$40",       billing: "one_time"  },
   // Multi-Sport Development
@@ -41,7 +41,7 @@ const CATEGORIES = [
     label: "Training Programs", badge: "bg-red-900 text-red-300", color: "border-red-800 hover:border-red-500",
     programs: [
       { id: "player-dev",        desc: "Tue & Thu 6:30–7:30pm · SAQ, S&C, football drills, tournament entries, military character events, PR-Verified Camp & Free Athletic Training Passport", highlight: "POPULAR" },
-      { id: "player-dev-annual", desc: "Same as monthly — save more by paying annually · Tue & Thu 6:30–7:30pm" },
+      { id: "player-dev-annual", desc: "Annual commitment billed at $250/mo · Save $65/mo vs. month-to-month · Tue & Thu 6:30–7:30pm · 12-month subscription required" },
       { id: "player-dev-1day",   desc: "Once a week (Tue or Thu) · Ideal for athletes with limited availability" },
       { id: "player-dev-dropin", desc: "Single drop-in session · Try before committing to a full program" },
       { id: "multi-sport-dev",   desc: "Youth sports development — wrestling, girls flag football, soccer, baseball, softball & more · Building well-rounded athletes" },

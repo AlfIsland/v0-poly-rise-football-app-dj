@@ -132,7 +132,7 @@ export default function HomePage() {
                         <span className="text-lg font-bold text-white">$315/mo</span>
                       </div>
                       <div className="flex items-center justify-between">
-                        <span className="font-medium text-sm">Annual <span className="text-xs text-primary font-semibold">Save more</span></span>
+                        <span className="font-medium text-sm">Annual Subscription <span className="text-xs text-red-400 font-semibold">12-mo commitment</span></span>
                         <span className="text-lg font-bold text-white">$250/mo</span>
                       </div>
                       <div className="flex items-center justify-between">

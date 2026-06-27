@@ -90,10 +90,9 @@
 }
 
 @theme inline {
-  /* Updated fonts to Inter for display and body, keeping Geist Mono */
-  --font-sans: "Inter", "Geist", "Geist Fallback", system-ui, sans-serif;
-  --font-display: "Inter", "Geist", "Geist Fallback", system-ui, sans-serif;
-  --font-mono: "Geist Mono", "Geist Mono Fallback", monospace;
+  --font-sans: var(--font-sans, "Inter", system-ui, sans-serif);
+  --font-display: var(--font-display, "Barlow Condensed", "Inter", system-ui, sans-serif);
+  --font-mono: var(--font-mono, "Geist Mono", monospace);
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-card: var(--card);
@@ -138,5 +137,15 @@
   }
   body {
     @apply bg-background text-foreground;
+    font-feature-settings: "kern" 1, "liga" 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  .font-display {
+    font-family: var(--font-display);
+    letter-spacing: 0.01em;
+  }
+  h1, h2, h3, h4 {
+    text-rendering: optimizeLegibility;
   }
 }

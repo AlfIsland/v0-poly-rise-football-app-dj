@@ -2,13 +2,18 @@ import "iterator-helpers-polyfill"
 
 import type React from "react"
 import type { Metadata } from "next"
-import { Inter, Geist_Mono } from "next/font/google"
+import { Inter, Barlow_Condensed, Geist_Mono } from "next/font/google"
 import { Analytics } from "@vercel/analytics/next"
 import AdvisorBubble from "@/components/advisor-bubble"
 import "./globals.css"
 
 const _inter = Inter({ subsets: ["latin"], variable: "--font-sans" })
 const _geistMono = Geist_Mono({ subsets: ["latin"], variable: "--font-mono" })
+const barlowCondensed = Barlow_Condensed({
+  subsets: ["latin"],
+  variable: "--font-display",
+  weight: ["400", "500", "600", "700", "800", "900"],
+})
 
 export const metadata: Metadata = {
   title: "PolyRISE Athletix | Elite Youth Football Training in Austin & Dripping Springs, TX",
@@ -107,7 +112,7 @@ export default function RootLayout({
         <link rel="alternate" type="text/plain" href="/llms.txt" title="LLM Information" />
         <link rel="alternate" type="application/json" href="/api/openapi.json" title="OpenAPI Specification" />
       </head>
-      <body className={`font-sans antialiased`}>
+      <body className={`${_inter.variable} ${barlowCondensed.variable} ${_geistMono.variable} font-sans antialiased`}>
         {children}
         <AdvisorBubble />
 <Analytics />

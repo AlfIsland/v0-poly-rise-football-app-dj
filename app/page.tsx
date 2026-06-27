@@ -284,20 +284,57 @@ export default function HomePage() {
                 </div>
               </div>
 
-              {/* Tournament */}
+              {/* HS Athlete Recruiting & Exposure */}
               <div className="bg-card border-primary/50 border-2 overflow-hidden group hover:border-primary transition-colors">
                 <div className="pt-6 px-6 pb-6 space-y-4">
                   <div>
-                    <h4 className="text-xl font-display font-bold mb-1">PolyRISE Athletix Tournament</h4>
-                    <p className="text-sm font-display font-semibold text-primary italic mb-2">Rise of Warriors</p>
-                    <p className="text-white text-sm leading-relaxed mb-2">Middle School (10-team, May 29th - $400) and High School (8-team, May 30th - $425). Minimum 3 games, single game elimination.</p>
-                    <ul className="space-y-1 mt-3">
-                      <li className="flex items-start gap-2 text-sm text-white"><CheckCircle2 className="w-4 h-4 text-primary flex-shrink-0 mt-0.5" />Middle School: 10 teams - $400</li>
-                      <li className="flex items-start gap-2 text-sm text-white"><CheckCircle2 className="w-4 h-4 text-primary flex-shrink-0 mt-0.5" />High School: 8 teams - $425</li>
-                      <li className="flex items-start gap-2 text-sm text-white"><CheckCircle2 className="w-4 h-4 text-primary flex-shrink-0 mt-0.5" />Min. 3 games, single elimination</li>
-                    </ul>
+                    <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 mb-3">
+                      <span className="text-sm font-medium text-primary">High School</span>
+                    </div>
+                    <h4 className="text-xl font-display font-bold mb-1">HS Athlete Recruiting & Exposure</h4>
+                    <p className="text-white text-sm leading-relaxed mb-4">Professional recruiting exposure packages built to get your athlete seen by college coaches — social media blasts, personalized coach outreach, and profile optimization.</p>
+                    <div className="space-y-3">
+                      {/* Elite Exposure */}
+                      <div className="rounded-lg border border-primary/40 bg-primary/5 p-3">
+                        <div className="flex items-center justify-between mb-1">
+                          <span className="font-bold text-white text-sm">Elite Exposure</span>
+                          <span className="text-lg font-bold text-primary">$150<span className="text-xs font-normal text-white">/mo</span></span>
+                        </div>
+                        <ul className="space-y-1">
+                          <li className="flex items-start gap-2 text-xs text-white"><CheckCircle2 className="w-3 h-3 text-primary flex-shrink-0 mt-0.5" />X (Twitter) blast + Instagram blast</li>
+                          <li className="flex items-start gap-2 text-xs text-white"><CheckCircle2 className="w-3 h-3 text-primary flex-shrink-0 mt-0.5" />5 personalized emails to college coaches/mo</li>
+                          <li className="flex items-start gap-2 text-xs text-white"><CheckCircle2 className="w-3 h-3 text-primary flex-shrink-0 mt-0.5" />Profile optimization</li>
+                        </ul>
+                        <p className="text-xs text-gray-400 mt-2 italic">Best for: Serious recruits aiming for D1/D2</p>
+                      </div>
+                      {/* Pro Exposure */}
+                      <div className="rounded-lg border border-border bg-card p-3">
+                        <div className="flex items-center justify-between mb-1">
+                          <span className="font-bold text-white text-sm">Pro Exposure</span>
+                          <span className="text-lg font-bold text-white">$125<span className="text-xs font-normal text-gray-400">/mo</span></span>
+                        </div>
+                        <ul className="space-y-1">
+                          <li className="flex items-start gap-2 text-xs text-white"><CheckCircle2 className="w-3 h-3 text-primary flex-shrink-0 mt-0.5" />X (Twitter) blast + Instagram blast</li>
+                          <li className="flex items-start gap-2 text-xs text-white"><CheckCircle2 className="w-3 h-3 text-primary flex-shrink-0 mt-0.5" />3 personalized emails to college coaches/mo</li>
+                          <li className="flex items-start gap-2 text-xs text-white"><CheckCircle2 className="w-3 h-3 text-primary flex-shrink-0 mt-0.5" />Profile optimization</li>
+                        </ul>
+                        <p className="text-xs text-gray-400 mt-2 italic">Best for: Recruits targeting D2/D3 or strong exposure</p>
+                      </div>
+                      {/* Basic Exposure */}
+                      <div className="rounded-lg border border-border bg-card p-3">
+                        <div className="flex items-center justify-between mb-1">
+                          <span className="font-bold text-white text-sm">Basic Exposure</span>
+                          <span className="text-lg font-bold text-white">$85<span className="text-xs font-normal text-gray-400">/mo</span></span>
+                        </div>
+                        <ul className="space-y-1">
+                          <li className="flex items-start gap-2 text-xs text-white"><CheckCircle2 className="w-3 h-3 text-primary flex-shrink-0 mt-0.5" />Professional profile image package</li>
+                          <li className="flex items-start gap-2 text-xs text-white"><CheckCircle2 className="w-3 h-3 text-primary flex-shrink-0 mt-0.5" />X (Twitter) blast (1–2x monthly)</li>
+                        </ul>
+                        <p className="text-xs text-gray-400 mt-2 italic">Best for: Athletes testing the waters or building initial visibility</p>
+                      </div>
+                    </div>
                   </div>
-                  <Link href="/register?program=tournament-ms" className="block w-full text-center bg-[#FF6600] text-white px-4 py-2 rounded hover:bg-[#FF6600]/80 transition-colors">Register Team</Link>
+                  <Link href="/register?program=hs-recruiting-exposure" className="block w-full text-center bg-[#FF6600] text-white px-4 py-2 rounded hover:bg-[#FF6600]/80 transition-colors">Get Started</Link>
                 </div>
               </div>
 
@@ -880,7 +917,7 @@ export default function HomePage() {
                 <li><Link href="#programs" className="hover:text-foreground transition-colors">Player Development</Link></li>
                 <li><Link href="#programs" className="hover:text-foreground transition-colors">{"Player Dev & Recruiting"}</Link></li>
                 <li><Link href="#programs" className="hover:text-foreground transition-colors">360 Elite</Link></li>
-                <li><Link href="#programs" className="hover:text-foreground transition-colors">Football Tournament</Link></li>
+                <li><Link href="#programs" className="hover:text-foreground transition-colors">HS Recruiting & Exposure</Link></li>
               </ul>
             </div>
 

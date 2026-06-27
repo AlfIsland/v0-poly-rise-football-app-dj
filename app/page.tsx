@@ -59,48 +59,17 @@ export default function HomePage() {
         </div>
       </header>
 
-      {/* Hero Section */}
-      <section className="relative pt-32 pb-20 lg:pt-40 lg:pb-32 overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-b from-primary/10 via-background to-background" />
-
-        <div className="container mx-auto px-4 lg:px-8 relative">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
-            <div className="space-y-6">
-              <h1 className="text-4xl lg:text-6xl font-display font-bold leading-tight text-balance">
-                Elite Youth Multi-Sport Athlete Development for{" "}
-                <span className="text-white">Austin & Central Texas</span>
-              </h1>
-
-              <p className="text-lg lg:text-xl text-white leading-relaxed text-pretty">
-                Professional level training in football, soccer, baseball, softball, girls flag football, wrestling and more — plus expert recruiting & exposure for H.S. athletes with trusted PR-VERIFIED metrics.
-              </p>
-            </div>
-
-            <div className="relative">
-              <div className="aspect-[4/5] rounded-2xl overflow-hidden border border-border bg-muted">
-                <Image
-                  src="/combine-training-athletes.jpg"
-                  alt="Youth athlete training at PolyRISE Athletix"
-                  width={800}
-                  height={1000}
-                  priority
-                  quality={85}
-                  className="w-full h-full object-cover"
-                />
-              </div>
-              <div className="absolute -bottom-6 -left-6 bg-card border border-border rounded-xl p-6 shadow-2xl">
-                <div className="flex items-center gap-4">
-                  <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center">
-                    <Trophy className="w-6 h-6 text-primary" />
-                  </div>
-                  <div>
-                    <div className="font-display font-bold text-lg">Elite Training</div>
-                    <div className="text-sm text-white">Professional Coaching</div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+      {/* Hero Banner */}
+      <section className="relative w-full mt-16 overflow-hidden">
+        <div className="relative w-full" style={{ aspectRatio: "2519/1068" }}>
+          <Image
+            src="/hero-banner.jpg"
+            alt="PolyRISE Athletix — Elite Youth Multi-Sport Development"
+            fill
+            priority
+            quality={90}
+            className="object-cover object-center w-full h-full"
+          />
         </div>
       </section>
 

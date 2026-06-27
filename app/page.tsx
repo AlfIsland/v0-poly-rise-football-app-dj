@@ -269,19 +269,18 @@ export default function HomePage() {
                 </div>
               </div>
 
-              {/* 360 Elite */}
+              {/* Multi-Sport Development */}
               <div className="bg-card border-primary/50 border-2 overflow-hidden group hover:border-primary transition-colors relative">
-                <div className="absolute top-4 right-4 z-10 px-3 py-1 rounded-full bg-primary text-primary-foreground text-xs font-bold">ELITE</div>
                 <div className="aspect-video relative overflow-hidden">
-                  <img src="/elite-360-training.jpg" alt="360 Elite Training" className="w-full h-full object-cover object-[50%_35%] group-hover:scale-105 transition-transform duration-300" />
+                  <img src="/elite-360-training.jpg" alt="Multi-Sport Development Training" className="w-full h-full object-cover object-[50%_35%] group-hover:scale-105 transition-transform duration-300" />
                 </div>
                 <div className="pt-6 px-6 pb-6 space-y-4">
                   <div>
-                    <h4 className="text-xl font-display font-bold mb-2">360 Elite</h4>
-                    <div className="text-lg font-bold text-white mb-3">$500/mo</div>
-                    <p className="text-muted-foreground text-sm leading-relaxed">Everything in Player Development plus one-on-one coaching from NFL experience staff, recruiting profile, 7 email blasts a month, and exclusive benefits.</p>
+                    <h4 className="text-xl font-display font-bold mb-2">Multi-Sport Development</h4>
+                    <div className="text-lg font-bold text-white mb-3">$265/mo</div>
+                    <p className="text-muted-foreground text-sm leading-relaxed">Youth sports development training covering wrestling, girls flag football, soccer, baseball, softball, and more — building well-rounded athletes across multiple sports.</p>
                   </div>
-                  <Link href="/register?program=elite-360" className="block w-full text-center bg-[#FF6600] text-white px-4 py-2 rounded hover:bg-[#FF6600]/80 transition-colors">Register</Link>
+                  <Link href="/register?program=multi-sport-dev" className="block w-full text-center bg-[#FF6600] text-white px-4 py-2 rounded hover:bg-[#FF6600]/80 transition-colors">Register</Link>
                 </div>
               </div>
 

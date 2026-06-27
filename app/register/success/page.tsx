@@ -26,7 +26,7 @@ function SuccessPage() {
     <div className="min-h-screen bg-gray-950 text-white flex items-center justify-center px-4 py-12">
       <div className="max-w-md w-full space-y-6 text-center">
         <div className="flex justify-center">
-          <Image src="/poly-rise-logo.png" alt="PolyRISE Football" width={60} height={60} className="object-contain" />
+          <Image src="/poly-rise-logo.png" alt="PolyRISE Athletix" width={60} height={60} className="object-contain" />
         </div>
 
         <div className="bg-green-950 border border-green-700 rounded-2xl p-8 space-y-4">

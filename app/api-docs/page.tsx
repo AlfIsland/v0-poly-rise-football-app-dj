@@ -2,9 +2,9 @@ import Image from "next/image"
 import Link from "next/link"
 
 export const metadata = {
-  title: "API Documentation - PolyRISE Football",
+  title: "API Documentation - PolyRISE Athletix",
   description:
-    "Public REST API documentation for AI agents and developers to integrate with PolyRISE Football programs, check availability, and submit registration inquiries.",
+    "Public REST API documentation for AI agents and developers to integrate with PolyRISE Athletix programs, check availability, and submit registration inquiries.",
 }
 
 export default function ApiDocsPage() {
@@ -14,8 +14,8 @@ export default function ApiDocsPage() {
       <header className="border-b border-border">
         <div className="container mx-auto px-4 py-4 flex items-center justify-between">
           <Link href="/" className="flex items-center gap-2">
-            <Image src="/poly-rise-logo.png" alt="PolyRISE Football" width={40} height={40} />
-            <span className="text-xl font-bold">PolyRISE Football</span>
+            <Image src="/poly-rise-logo.png" alt="PolyRISE Athletix" width={40} height={40} />
+            <span className="text-xl font-bold">PolyRISE Athletix</span>
           </Link>
           <Link href="/" className="text-sm text-muted-foreground hover:text-foreground">
             Back to Home
@@ -30,7 +30,7 @@ export default function ApiDocsPage() {
           <div className="space-y-4">
             <h1 className="text-4xl font-bold">API Documentation</h1>
             <p className="text-xl text-muted-foreground leading-relaxed">
-              Public REST API for AI agents and developers to integrate with PolyRISE Football
+              Public REST API for AI agents and developers to integrate with PolyRISE Athletix
             </p>
           </div>
 
@@ -38,7 +38,7 @@ export default function ApiDocsPage() {
           <section className="space-y-4">
             <h2 className="text-2xl font-bold">Overview</h2>
             <p className="text-muted-foreground leading-relaxed">
-              The PolyRISE Football API enables AI agents (ChatGPT, Grok, Gemini, Claude) and developers to
+              The PolyRISE Athletix API enables AI agents (ChatGPT, Grok, Gemini, Claude) and developers to
               programmatically access program information, check availability by location, and submit registration
               inquiries on behalf of users.
             </p>
@@ -248,7 +248,7 @@ Content-Type: application/json
       <footer className="border-t border-border mt-12">
         <div className="container mx-auto px-4 py-8">
           <div className="flex flex-col md:flex-row items-center justify-between gap-4">
-            <p className="text-sm text-muted-foreground">© 2026 PolyRISE Football. All rights reserved.</p>
+            <p className="text-sm text-muted-foreground">© 2026 PolyRISE Athletix. All rights reserved.</p>
             <Link href="/" className="text-sm text-primary hover:underline">
               Back to Home
             </Link>

@@ -18,12 +18,12 @@ import AthleteLogoutButton from "@/components/athlete-logout-button"
 
 export async function generateMetadata({ params }: { params: { id: string } }) {
   const athlete = await getAthlete(params.id)
-  if (!athlete) return { title: "Athlete Profile · PolyRISE Football" }
+  if (!athlete) return { title: "Athlete Profile · PolyRISE Athletix" }
   return {
-    title: `${athlete.name} · PolyRISE Football Recruiting Profile`,
-    description: `${athlete.position ?? "Athlete"} · ${athlete.grade ?? ""} · ${athlete.school ?? ""}. Verified combine metrics from PolyRISE Football.`,
+    title: `${athlete.name} · PolyRISE Athletix Recruiting Profile`,
+    description: `${athlete.position ?? "Athlete"} · ${athlete.grade ?? ""} · ${athlete.school ?? ""}. Verified combine metrics from PolyRISE Athletix.`,
     openGraph: {
-      title: `${athlete.name} — PolyRISE Football`,
+      title: `${athlete.name} — PolyRISE Athletix`,
       description: `${athlete.position ?? "Athlete"} · ${athlete.school ?? ""}. View verified combine metrics.`,
       images: athlete.photoUrl ? [athlete.photoUrl] : ["/poly-rise-logo.png"],
     },
@@ -150,7 +150,7 @@ export default async function AthleteProfilePage({
 
 My name is ${athlete.name} and I am a Class of ${classYear} ${athlete.position ?? "athlete"}${athlete.school ? ` from ${athlete.school}` : ""}. I wanted to reach out and introduce myself as a prospective student-athlete interested in your program.
 
-Here are my most recent combine metrics, verified by PolyRISE Football:
+Here are my most recent combine metrics, verified by PolyRISE Athletix:
 ${metricLines}${rankingLine ? `\n${rankingLine}` : ""}
 You can view my full recruiting profile here:
 ${profileUrl}
@@ -167,9 +167,9 @@ ${athlete.name}${athlete.phone ? `\n${athlete.phone}` : ""}${athlete.email ? `\n
       {/* Header */}
       <header className="border-b border-white/10 bg-black px-4 py-3 flex items-center justify-between gap-3">
         <div className="flex items-center gap-3 min-w-0">
-          <Image src="/poly-rise-logo.png" alt="PolyRISE Football" width={32} height={32} className="object-contain shrink-0" />
+          <Image src="/poly-rise-logo.png" alt="PolyRISE Athletix" width={32} height={32} className="object-contain shrink-0" />
           <div className="min-w-0">
-            <p className="text-xs font-bold text-red-500 uppercase tracking-widest truncate">PolyRISE Football</p>
+            <p className="text-xs font-bold text-red-500 uppercase tracking-widest truncate">PolyRISE Athletix</p>
             <p className="text-xs text-gray-500 truncate">Athlete Recruiting Profile</p>
           </div>
         </div>
@@ -606,7 +606,7 @@ ${athlete.name}${athlete.phone ? `\n${athlete.phone}` : ""}${athlete.email ? `\n
                 </div>
               )}
               <p className="text-xs text-gray-600 py-4">
-                Metrics recorded at PolyRISE Football combine camps · Dripping Springs, TX
+                Metrics recorded at PolyRISE Athletix combine camps · Dripping Springs, TX
               </p>
             </div>
           </div>
@@ -641,7 +641,7 @@ ${athlete.name}${athlete.phone ? `\n${athlete.phone}` : ""}${athlete.email ? `\n
             <div className="w-10 h-10 rounded-full bg-yellow-700 flex items-center justify-center text-white font-black text-sm shrink-0">KG</div>
             <div>
               <p className="text-yellow-300 font-bold text-sm">Kevin Garrett · Former NFL</p>
-              <p className="text-gray-400 text-xs">Director of Player Development · PolyRISE Football</p>
+              <p className="text-gray-400 text-xs">Director of Player Development · PolyRISE Athletix</p>
               <a href="mailto:kg@polyrisefootball.com" className="text-red-400 hover:text-red-300 text-xs font-bold mt-1 block">
                 kg@polyrisefootball.com
               </a>
@@ -670,7 +670,7 @@ ${athlete.name}${athlete.phone ? `\n${athlete.phone}` : ""}${athlete.email ? `\n
         <div className="flex items-center justify-between pt-2 pb-8">
           <div className="flex items-center gap-2">
             <Image src="/poly-rise-logo.png" alt="PolyRISE" width={24} height={24} className="object-contain opacity-50" />
-            <p className="text-xs text-gray-600">PolyRISE Football · polyrisefootball.com</p>
+            <p className="text-xs text-gray-600">PolyRISE Athletix · polyrisefootball.com</p>
           </div>
           <Link href="/plans" className="text-xs text-gray-600 hover:text-gray-400 underline transition-colors">
             Join PolyRISE →

@@ -52,7 +52,7 @@ export async function POST(req: NextRequest) {
         method: "POST",
         headers: { Authorization: `Bearer ${resendKey}`, "Content-Type": "application/json" },
         body: JSON.stringify({
-          from: "PolyRISE Football <noreply@polyrisefootball.com>",
+          from: "PolyRISE Athletix <noreply@polyrisefootball.com>",
           to: ["PolyRISE7v7@gmail.com"],
           subject: isProgramMember
             ? `⏳ Program Member Approval Needed — ${name}`
@@ -70,7 +70,7 @@ export async function POST(req: NextRequest) {
               <p style="margin-top:20px">
                 <a href="https://polyrisefootball.com/admin/parents" style="background:#dc2626;color:#fff;padding:10px 20px;border-radius:8px;text-decoration:none;font-weight:bold;font-size:13px">Approve or Deny →</a>
               </p>
-              <p style="color:#999;font-size:12px;margin-top:16px">PolyRISE Football · polyrisefootball.com/admin/parents</p>
+              <p style="color:#999;font-size:12px;margin-top:16px">PolyRISE Athletix · polyrisefootball.com/admin/parents</p>
             </div>
           ` : `
             <div style="font-family:sans-serif;max-width:520px;margin:0 auto;padding:24px;background:#0a0a0f;color:#fff">
@@ -85,7 +85,7 @@ export async function POST(req: NextRequest) {
               <p style="margin-top:12px">
                 <a href="https://polyrisefootball.com/admin/parents" style="background:#dc2626;color:#fff;padding:10px 20px;border-radius:8px;text-decoration:none;font-weight:bold;font-size:13px">Manage Parents →</a>
               </p>
-              <p style="color:#999;font-size:12px;margin-top:16px">PolyRISE Football · polyrisefootball.com/admin/parents</p>
+              <p style="color:#999;font-size:12px;margin-top:16px">PolyRISE Athletix · polyrisefootball.com/admin/parents</p>
             </div>
           `,
         }),

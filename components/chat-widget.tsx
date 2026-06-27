@@ -3,7 +3,7 @@
 import { useState, useRef, useEffect } from "react"
 import Image from "next/image"
 
-const GREETING = "Hey! Welcome to PolyRISE Football! I'm here to help with any questions about our programs, coaches, camps, tournaments, or recruiting. What can I help you with today?"
+const GREETING = "Hey! Welcome to PolyRISE Athletix! I'm here to help with any questions about our programs, coaches, camps, tournaments, or recruiting. What can I help you with today?"
 
 const SUGGESTIONS = [
   "What programs do you offer?",
@@ -99,7 +99,7 @@ export default function ChatWidget() {
           <div className="bg-gray-950 px-4 py-3 flex items-center gap-3 flex-shrink-0">
             <Image src="/poly-rise-logo.png" alt="PolyRISE" width={32} height={32} className="object-contain rounded-full" />
             <div className="flex-1">
-              <p className="text-white text-sm font-bold">PolyRISE Football</p>
+              <p className="text-white text-sm font-bold">PolyRISE Athletix</p>
               <p className="text-green-400 text-xs flex items-center gap-1">
                 <span className="w-1.5 h-1.5 rounded-full bg-green-400 inline-block" />
                 Online · Replies instantly

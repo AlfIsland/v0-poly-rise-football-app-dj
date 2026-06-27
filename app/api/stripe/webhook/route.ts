@@ -44,13 +44,13 @@ export async function POST(req: NextRequest) {
                 method: "POST",
                 headers: { Authorization: `Bearer ${resendKeyParent}`, "Content-Type": "application/json" },
                 body: JSON.stringify({
-                  from: "PolyRISE Football <noreply@polyrisefootball.com>",
+                  from: "PolyRISE Athletix <noreply@polyrisefootball.com>",
                   to: [reg.email],
                   subject: `Registration Confirmed — ${reg.programName}`,
                   html: `
                     <div style="font-family:sans-serif;max-width:520px;margin:0 auto;padding:24px">
                       <h2 style="color:#dc2626;margin-bottom:4px">You're Registered!</h2>
-                      <p style="color:#444;margin-top:0">Hi ${reg.parentName}, thank you for registering with PolyRISE Football. Here's a summary of your registration.</p>
+                      <p style="color:#444;margin-top:0">Hi ${reg.parentName}, thank you for registering with PolyRISE Athletix. Here's a summary of your registration.</p>
                       <table style="width:100%;border-collapse:collapse;font-size:14px;margin-top:16px">
                         <tr style="background:#f9fafb"><td style="padding:10px 12px;color:#555;width:140px">Program</td><td style="padding:10px 12px;font-weight:bold">${reg.programName}</td></tr>
                         <tr><td style="padding:10px 12px;color:#555">Amount Paid</td><td style="padding:10px 12px;font-weight:bold;color:#16a34a">$${reg.amount}${reg.billing === "monthly" ? "/month" : ""}</td></tr>
@@ -61,7 +61,7 @@ export async function POST(req: NextRequest) {
                         <p style="margin:0;color:#444;font-size:13px">A PolyRISE staff member will follow up with program details, schedule, and next steps. If you have any questions in the meantime:</p>
                         <p style="margin:8px 0 0;color:#444;font-size:13px"><strong>(817) 658-3300</strong> · <strong>polyrise@polyrisefootball.com</strong></p>
                       </div>
-                      <p style="color:#999;font-size:12px;margin-top:20px">PolyRISE Football · Dripping Springs, TX · polyrisefootball.com</p>
+                      <p style="color:#999;font-size:12px;margin-top:20px">PolyRISE Athletix · Dripping Springs, TX · polyrisefootball.com</p>
                     </div>
                   `,
                 }),
@@ -100,7 +100,7 @@ export async function POST(req: NextRequest) {
                         <p style="margin:8px 0 0;font-size:13px"><a href="https://dashboard.stripe.com/customers" style="color:#dc2626">Set up recurring billing in Stripe Dashboard →</a></p>
                       </div>` : ""}
                       <p style="margin-top:20px"><a href="https://polyrisefootball.com/admin/registrations" style="background:#dc2626;color:#fff;padding:10px 20px;border-radius:8px;text-decoration:none;font-weight:bold;font-size:13px">View All Registrations →</a></p>
-                      <p style="color:#999;font-size:12px;margin-top:16px">PolyRISE Football · polyrisefootball.com</p>
+                      <p style="color:#999;font-size:12px;margin-top:16px">PolyRISE Athletix · polyrisefootball.com</p>
                     </div>
                   `,
                 }),
@@ -137,7 +137,7 @@ export async function POST(req: NextRequest) {
               method: "POST",
               headers: { Authorization: `Bearer ${resendKey}`, "Content-Type": "application/json" },
               body: JSON.stringify({
-                from: "PolyRISE Football <noreply@polyrisefootball.com>",
+                from: "PolyRISE Athletix <noreply@polyrisefootball.com>",
                 to: ["PolyRISE7v7@gmail.com"],
                 subject: `Parent Subscribed — ${parent.name}`,
                 html: `
@@ -155,7 +155,7 @@ export async function POST(req: NextRequest) {
                     <p style="margin-top:12px">
                       <a href="https://polyrisefootball.com/admin/parents" style="background:#dc2626;color:#fff;padding:10px 20px;border-radius:8px;text-decoration:none;font-weight:bold;font-size:13px">Manage Parents →</a>
                     </p>
-                    <p style="color:#999;font-size:12px;margin-top:16px">PolyRISE Football · polyrisefootball.com/admin/parents</p>
+                    <p style="color:#999;font-size:12px;margin-top:16px">PolyRISE Athletix · polyrisefootball.com/admin/parents</p>
                   </div>
                 `,
               }),

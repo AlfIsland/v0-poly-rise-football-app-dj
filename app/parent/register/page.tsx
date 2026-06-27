@@ -173,12 +173,12 @@ export default function ParentRegisterPage() {
       <div className="max-w-lg mx-auto space-y-6">
 
         <div className="flex justify-center">
-          <Image src="/poly-rise-logo.png" alt="PolyRISE Football" width={160} height={60} className="object-contain" />
+          <Image src="/poly-rise-logo.png" alt="PolyRISE Athletix" width={160} height={60} className="object-contain" />
         </div>
 
         <div className="text-center space-y-2">
           <h1 className="text-2xl font-black text-white">Get Recruited. Get Verified. Get Noticed.</h1>
-          <p className="text-gray-400 text-sm">PolyRISE Football · Player Development & Recruiting</p>
+          <p className="text-gray-400 text-sm">PolyRISE Athletix · Player Development & Recruiting</p>
           <div className="pt-1">
             <p className="text-white font-bold text-sm">Built for Every Athlete. Trusted by Coaches.</p>
             <p className="text-gray-500 text-xs mt-1">Football · Soccer · Track & Field · Basketball · Baseball · and more</p>
@@ -325,7 +325,7 @@ export default function ParentRegisterPage() {
                   className="mt-0.5 w-4 h-4 accent-red-600 shrink-0 cursor-pointer"
                 />
                 <label htmlFor="terms" className="text-xs text-gray-400 leading-relaxed cursor-pointer">
-                  I agree to the PolyRISE Football{" "}
+                  I agree to the PolyRISE Athletix{" "}
                   <a href="/terms" target="_blank" className="text-red-400 hover:text-red-300 underline font-semibold">Terms of Service</a>
                   {" "}and{" "}
                   <a href="/privacy" target="_blank" className="text-red-400 hover:text-red-300 underline font-semibold">Privacy Policy</a>.
@@ -349,7 +349,7 @@ export default function ParentRegisterPage() {
           </div>
         )}
 
-        <p className="text-center text-gray-700 text-xs">PolyRISE Football · (817) 658-3300 · polyrisefootball.com</p>
+        <p className="text-center text-gray-700 text-xs">PolyRISE Athletix · (817) 658-3300 · polyrisefootball.com</p>
       </div>
     </div>
   )

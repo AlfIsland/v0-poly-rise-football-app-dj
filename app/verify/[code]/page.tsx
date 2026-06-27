@@ -5,8 +5,8 @@ import Redis from "ioredis"
 import RecruitingCardDownload from "@/components/recruiting-card-download"
 
 export const metadata: Metadata = {
-  title: "PR-VERIFIED Athlete Profile | PolyRISE Football",
-  description: "Verify an athlete's PR-VERIFIED seal and view their PolyRISE Football Ratings",
+  title: "PR-VERIFIED Athlete Profile | PolyRISE Athletix",
+  description: "Verify an athlete's PR-VERIFIED seal and view their PolyRISE Athletix Ratings",
 }
 
 function isValidCode(code: string) {
@@ -89,7 +89,7 @@ export default async function VerifyPage({ params }: { params: { code: string } 
 
         {/* Logo */}
         <div className="flex justify-center mb-2">
-          <Image src="/poly-rise-logo.png" alt="PolyRISE Football" width={140} height={52} className="object-contain" />
+          <Image src="/poly-rise-logo.png" alt="PolyRISE Athletix" width={140} height={52} className="object-contain" />
         </div>
 
         {!valid ? (
@@ -105,7 +105,7 @@ export default async function VerifyPage({ params }: { params: { code: string } 
             <div className="px-6 py-5 space-y-3">
               <p className="text-gray-400 text-sm">
                 Valid codes look like <span className="font-mono text-red-400">PR-VJMW-0027</span>.
-                Contact PolyRISE Football if you believe this is an error.
+                Contact PolyRISE Athletix if you believe this is an error.
               </p>
               <p className="text-gray-400 text-sm">📞 (817) 658-3300 · polyrise@polyrisefootball.com</p>
             </div>
@@ -125,7 +125,7 @@ export default async function VerifyPage({ params }: { params: { code: string } 
               <p className="text-gray-300 font-mono text-lg font-bold text-yellow-400">{raw}</p>
               <p className="text-gray-400 text-sm">
                 This seal code is properly formatted but the athlete&apos;s profile hasn&apos;t been saved yet.
-                Contact PolyRISE Football to verify.
+                Contact PolyRISE Athletix to verify.
               </p>
               <p className="text-gray-400 text-sm">📞 (817) 658-3300 · polyrise@polyrisefootball.com</p>
             </div>
@@ -183,7 +183,7 @@ export default async function VerifyPage({ params }: { params: { code: string } 
               <div>
                 <p className="text-white font-bold text-lg">{sealStatus?.status === "expired" ? "SEAL EXPIRED" : "PR-VERIFIED"}</p>
                 <p className={`text-xs ${sealStatus?.status === "expired" ? "text-gray-300" : "text-green-100"}`}>
-                  {sealStatus?.status === "expired" ? "This seal is no longer active" : "Officially verified by PolyRISE Football"}
+                  {sealStatus?.status === "expired" ? "This seal is no longer active" : "Officially verified by PolyRISE Athletix"}
                 </p>
                 {athlete.expiresAt && sealStatus?.status === "active" && (
                   <p className="text-green-200 text-xs mt-0.5">Valid through {new Date(athlete.expiresAt).toLocaleDateString()}</p>
@@ -275,11 +275,11 @@ export default async function VerifyPage({ params }: { params: { code: string } 
               </div>
             </div>
 
-            {/* PolyRISE Football Ratings */}
+            {/* PolyRISE Athletix Ratings */}
             {ratings && (
               <div className="bg-gray-900 rounded-2xl border border-gray-800 overflow-hidden">
                 <div className="bg-gray-800 px-6 py-4 space-y-3">
-                  <p className="text-xs text-gray-400 uppercase tracking-widest">PolyRISE Football Ratings</p>
+                  <p className="text-xs text-gray-400 uppercase tracking-widest">PolyRISE Athletix Ratings</p>
                   <p className="text-xs text-gray-500">Compared: <span className="text-gray-300">{ratings.comparedAgainst}</span></p>
 
                   {/* National — percentile only, no stars */}
@@ -323,7 +323,7 @@ export default async function VerifyPage({ params }: { params: { code: string } 
 
                   <p className="text-xs text-gray-600 pt-2 border-t border-gray-800">
                     Percentiles based on national high school football athlete combine data.
-                    Ratings issued by PolyRISE Football coaching staff.
+                    Ratings issued by PolyRISE Athletix coaching staff.
                   </p>
                 </div>
               </div>

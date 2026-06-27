@@ -19,7 +19,7 @@ export async function POST(req: NextRequest) {
   try {
     const client = twilio(accountSid, authToken)
     await client.messages.create({
-      body: `Congrats ${athleteName}! Your PR-VERIFIED seal from PolyRISE Football is ready. View your official recruiting profile here:\n\nhttps://polyrisefootball.com/verify/${code}\n\nShare this link with coaches and recruiters.\n\n- PolyRISE Football`,
+      body: `Congrats ${athleteName}! Your PR-VERIFIED seal from PolyRISE Athletix is ready. View your official recruiting profile here:\n\nhttps://polyrisefootball.com/verify/${code}\n\nShare this link with coaches and recruiters.\n\n- PolyRISE Athletix`,
       from: fromNumber,
       to: phone,
     })

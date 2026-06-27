@@ -45,14 +45,14 @@ function LoginForm() {
 
         {/* Logo */}
         <div className="flex justify-center">
-          <Image src="/poly-rise-logo.png" alt="PolyRISE Football" width={160} height={60} className="object-contain" />
+          <Image src="/poly-rise-logo.png" alt="PolyRISE Athletix" width={160} height={60} className="object-contain" />
         </div>
 
         {/* Card */}
         <div className="bg-gray-900 rounded-2xl border border-gray-800 overflow-hidden">
           <div className="bg-red-700 px-6 py-4">
             <h1 className="text-white font-bold text-lg">Admin Access</h1>
-            <p className="text-red-200 text-xs">PR-VERIFIED Seal System · PolyRISE Football</p>
+            <p className="text-red-200 text-xs">PR-VERIFIED Seal System · PolyRISE Athletix</p>
           </div>
 
           <form onSubmit={handleSubmit} className="px-6 py-6 space-y-4">
@@ -84,7 +84,7 @@ function LoginForm() {
         </div>
 
         <p className="text-center text-gray-700 text-xs">
-          PolyRISE Football · Austin, TX · polyrisefootball.com
+          PolyRISE Athletix · Austin, TX · polyrisefootball.com
         </p>
       </div>
     </div>

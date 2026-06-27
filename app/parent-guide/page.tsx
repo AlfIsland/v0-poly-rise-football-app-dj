@@ -125,9 +125,9 @@ export default function ParentGuidePage() {
         {/* Header */}
         <div className="flex items-center justify-between mb-6 border-b-4 border-red-600 pb-6">
           <div className="flex items-center gap-4">
-            <Image src="/poly-rise-logo.png" alt="PolyRISE Football" width={60} height={60} className="object-contain" />
+            <Image src="/poly-rise-logo.png" alt="PolyRISE Athletix" width={60} height={60} className="object-contain" />
             <div>
-              <p className="text-xs font-bold text-red-600 uppercase tracking-widest">PolyRISE Football</p>
+              <p className="text-xs font-bold text-red-600 uppercase tracking-widest">PolyRISE Athletix</p>
               <h1 className="text-3xl font-black text-gray-900 leading-tight">Parent Setup Guide</h1>
               <p className="text-gray-500 text-sm mt-1">Athlete Training Passport · Recruiting Portal · 6 Steps</p>
             </div>
@@ -142,7 +142,7 @@ export default function ParentGuidePage() {
 
         {/* Intro */}
         <p className="text-gray-600 text-sm leading-relaxed mb-8">
-          PolyRISE Football tracks your athlete&apos;s performance from first combine test through signing day.
+          PolyRISE Athletix tracks your athlete&apos;s performance from first combine test through signing day.
           This guide walks you through setting up your parent account and explains everything available inside your portal.
         </p>
 
@@ -258,7 +258,7 @@ export default function ParentGuidePage() {
             <p className="text-xs font-black text-red-600 uppercase tracking-widest mb-1">Need Help?</p>
             <p className="text-gray-700 text-sm font-bold">(817) 658-3300</p>
             <p className="text-gray-500 text-sm">polyrise@polyrisefootball.com</p>
-            <p className="text-gray-400 text-xs mt-3">PolyRISE Football · Dripping Springs, TX · polyrisefootball.com</p>
+            <p className="text-gray-400 text-xs mt-3">PolyRISE Athletix · Dripping Springs, TX · polyrisefootball.com</p>
           </div>
           <div className="text-right text-xs text-gray-400 shrink-0">
             <p className="font-bold text-gray-600">Program details:</p>

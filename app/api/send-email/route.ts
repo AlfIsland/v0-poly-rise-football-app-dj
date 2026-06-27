@@ -28,7 +28,7 @@ export async function POST(req: NextRequest) {
         <!-- Header -->
         <tr>
           <td style="background:#b40a0a;padding:24px 32px;border-radius:12px 12px 0 0;">
-            <p style="margin:0;color:#fff;font-size:20px;font-weight:bold;">PolyRISE Football</p>
+            <p style="margin:0;color:#fff;font-size:20px;font-weight:bold;">PolyRISE Athletix</p>
             <p style="margin:4px 0 0;color:#ffcccc;font-size:12px;">PR-VERIFIED Seal Program · Austin, Texas</p>
           </td>
         </tr>
@@ -37,7 +37,7 @@ export async function POST(req: NextRequest) {
         <tr>
           <td style="background:#111116;padding:32px;border-radius:0 0 12px 12px;">
             <p style="color:#fff;font-size:22px;font-weight:bold;margin:0 0 8px;">Congratulations, ${athleteName}!</p>
-            <p style="color:#aaa;font-size:15px;margin:0 0 24px;">Your PR-VERIFIED seal has been issued by PolyRISE Football.</p>
+            <p style="color:#aaa;font-size:15px;margin:0 0 24px;">Your PR-VERIFIED seal has been issued by PolyRISE Athletix.</p>
 
             ${position || school || gradYear ? `
             <table cellpadding="0" cellspacing="0" style="margin-bottom:24px;">
@@ -70,7 +70,7 @@ export async function POST(req: NextRequest) {
 
         <tr>
           <td style="padding:20px 0;text-align:center;">
-            <p style="color:#333;font-size:11px;margin:0;">PolyRISE Football · Austin, TX · polyrisefootball.com</p>
+            <p style="color:#333;font-size:11px;margin:0;">PolyRISE Athletix · Austin, TX · polyrisefootball.com</p>
           </td>
         </tr>
 
@@ -83,7 +83,7 @@ export async function POST(req: NextRequest) {
   try {
     const resend = new Resend(apiKey)
     await resend.emails.send({
-      from: "PolyRISE Football <noreply@polyrisefootball.com>",
+      from: "PolyRISE Athletix <noreply@polyrisefootball.com>",
       to: email,
       subject: `Your PR-VERIFIED Seal is Ready — ${athleteName}`,
       html,

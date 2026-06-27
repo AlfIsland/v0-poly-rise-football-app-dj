@@ -4,7 +4,7 @@
 export const organizationSchema = {
   "@context": "https://schema.org",
   "@type": "SportsOrganization",
-  name: "PolyRISE Football",
+  name: "PolyRISE Athletix",
   description:
     "Elite youth football training organization focused on developing athletic excellence, discipline, and leadership in K-12 athletes.",
   url: "https://polyrisefootball.com",
@@ -35,7 +35,7 @@ export const localBusinessSchema = {
   "@context": "https://schema.org",
   "@type": "LocalBusiness",
   "@id": "https://polyrisefootball.com/#localbusiness",
-  name: "PolyRISE Football",
+  name: "PolyRISE Athletix",
   description:
     "Elite youth football training for kids ages 5-18 in Austin, Texas. Professional NFL-experienced coaches offering SAQ training, strength conditioning, 7v7 tournaments, and college recruitment support.",
   url: "https://polyrisefootball.com",
@@ -90,7 +90,7 @@ export const faqSchema = {
     },
     {
       "@type": "Question",
-      name: "Where is PolyRISE Football located?",
+      name: "Where is PolyRISE Athletix located?",
       acceptedAnswer: {
         "@type": "Answer",
         text: "We are based in Austin, Texas with training facilities at Swift Sessions. We also offer camps in Marble Falls, TX and are expanding to cities nationwide.",

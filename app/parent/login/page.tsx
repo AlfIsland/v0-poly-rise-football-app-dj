@@ -34,7 +34,7 @@ function LoginForm() {
     <div className="min-h-screen bg-gray-950 flex flex-col items-center justify-center px-4">
       <div className="w-full max-w-sm space-y-8">
         <div className="flex justify-center">
-          <Image src="/poly-rise-logo.png" alt="PolyRISE Football" width={160} height={60} className="object-contain" />
+          <Image src="/poly-rise-logo.png" alt="PolyRISE Athletix" width={160} height={60} className="object-contain" />
         </div>
         <div className="bg-gray-900 rounded-2xl border border-gray-800 overflow-hidden">
           <div className="bg-red-700 px-6 py-4">
@@ -65,7 +65,7 @@ function LoginForm() {
             </div>
           </form>
         </div>
-        <p className="text-center text-gray-700 text-xs">PolyRISE Football · Austin, TX</p>
+        <p className="text-center text-gray-700 text-xs">PolyRISE Athletix · Austin, TX</p>
       </div>
     </div>
   )

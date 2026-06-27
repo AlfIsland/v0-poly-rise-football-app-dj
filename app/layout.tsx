@@ -11,9 +11,9 @@ const _inter = Inter({ subsets: ["latin"], variable: "--font-sans" })
 const _geistMono = Geist_Mono({ subsets: ["latin"], variable: "--font-mono" })
 
 export const metadata: Metadata = {
-  title: "PolyRISE Football | Elite Youth Football Training in Austin & Dripping Springs, TX",
+  title: "PolyRISE Athletix | Elite Youth Football Training in Austin & Dripping Springs, TX",
   description:
-    "PolyRISE Football offers NFL-coached youth, middle school, and high school football training in Dripping Springs and Austin, TX. PR-VERIFIED combine testing, recruiting packages, and elite player development for K-12 athletes.",
+    "PolyRISE Athletix offers NFL-coached youth, middle school, and high school football training in Dripping Springs and Austin, TX. PR-VERIFIED combine testing, recruiting packages, and elite player development for K-12 athletes.",
   generator: "v0.app",
   keywords: [
     "youth football training Dripping Springs TX",
@@ -44,7 +44,7 @@ export const metadata: Metadata = {
     "defensive back training",
     "youth football combine",
     "PR-VERIFIED combine testing",
-    "PolyRISE Football",
+    "PolyRISE Athletix",
     "360 Elite program",
     "Player Development football",
     "Dripping Springs football",
@@ -58,8 +58,8 @@ export const metadata: Metadata = {
     type: "website",
     locale: "en_US",
     url: "https://polyrisefootball.com",
-    siteName: "PolyRISE Football",
-    title: "PolyRISE Football | Elite Youth Football Training in Austin & Dripping Springs, TX",
+    siteName: "PolyRISE Athletix",
+    title: "PolyRISE Athletix | Elite Youth Football Training in Austin & Dripping Springs, TX",
     description:
       "NFL-coached youth football training in Dripping Springs and Austin, TX. PR-VERIFIED combine testing, recruiting packages, and elite player development for K-12 athletes.",
     images: [
@@ -67,14 +67,14 @@ export const metadata: Metadata = {
         url: "https://polyrisefootball.com/poly-rise-logo.png",
         width: 1200,
         height: 630,
-        alt: "PolyRISE Football - Elite Youth Football Training in Dripping Springs and Austin Texas",
+        alt: "PolyRISE Athletix - Elite Youth Football Training in Dripping Springs and Austin Texas",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
     site: "@polyrisefootball",
-    title: "PolyRISE Football | Elite Youth Football Training in Austin & Dripping Springs, TX",
+    title: "PolyRISE Athletix | Elite Youth Football Training in Austin & Dripping Springs, TX",
     description: "NFL-coached youth football training in Dripping Springs and Austin, TX. PR-VERIFIED combine testing and elite player development for K-12 athletes.",
     images: ["https://polyrisefootball.com/poly-rise-logo.png"],
   },

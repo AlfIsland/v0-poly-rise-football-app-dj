@@ -7,9 +7,9 @@ export default function LockedProfilePage({ athleteId }: { athleteId: string }) 
 
       {/* Header */}
       <header className="border-b border-white/10 bg-black px-4 py-3 flex items-center gap-3">
-        <Image src="/poly-rise-logo.png" alt="PolyRISE Football" width={32} height={32} className="object-contain" />
+        <Image src="/poly-rise-logo.png" alt="PolyRISE Athletix" width={32} height={32} className="object-contain" />
         <div>
-          <p className="text-xs font-bold text-red-500 uppercase tracking-widest">PolyRISE Football</p>
+          <p className="text-xs font-bold text-red-500 uppercase tracking-widest">PolyRISE Athletix</p>
           <p className="text-xs text-gray-500">Athlete Recruiting Profile</p>
         </div>
       </header>
@@ -69,7 +69,7 @@ export default function LockedProfilePage({ athleteId }: { athleteId: string }) 
       <footer className="border-t border-white/5 px-4 py-4 flex items-center justify-between">
         <div className="flex items-center gap-2">
           <Image src="/poly-rise-logo.png" alt="PolyRISE" width={20} height={20} className="object-contain opacity-40" />
-          <p className="text-xs text-gray-600">PolyRISE Football · polyrisefootball.com</p>
+          <p className="text-xs text-gray-600">PolyRISE Athletix · polyrisefootball.com</p>
         </div>
         <Link href="/plans" className="text-xs text-gray-600 hover:text-gray-400 underline transition-colors">
           Join PolyRISE →

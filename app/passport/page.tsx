@@ -98,8 +98,8 @@ export default function PassportLandingPage() {
       <header className="fixed top-0 left-0 right-0 z-50 bg-gray-950/95 backdrop-blur border-b border-white/10">
         <div className="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
           <Link href="/" className="flex items-center gap-3">
-            <Image src="/poly-rise-logo.png" alt="PolyRISE Football" width={40} height={40} className="object-contain" />
-            <span className="font-bold text-white hidden sm:inline">PolyRISE Football</span>
+            <Image src="/poly-rise-logo.png" alt="PolyRISE Athletix" width={40} height={40} className="object-contain" />
+            <span className="font-bold text-white hidden sm:inline">PolyRISE Athletix</span>
           </Link>
           <div className="flex items-center gap-3">
             <Link href="/" className="text-sm text-gray-400 hover:text-white transition-colors hidden sm:inline">← Back to Site</Link>
@@ -176,7 +176,7 @@ export default function PassportLandingPage() {
                   {/* Header */}
                   <div className="flex items-center justify-between">
                     <div>
-                      <p className="text-xs font-bold text-red-500 uppercase tracking-widest">PolyRISE Football</p>
+                      <p className="text-xs font-bold text-red-500 uppercase tracking-widest">PolyRISE Athletix</p>
                       <p className="text-xs text-gray-500">Athlete Recruiting Profile</p>
                     </div>
                     <div className="flex items-center gap-1.5 bg-green-900/40 border border-green-700/50 rounded-full px-3 py-1">
@@ -309,7 +309,7 @@ export default function PassportLandingPage() {
             <div className="p-6">
               <div className="flex items-center justify-between mb-4">
                 <div className="text-left">
-                  <p className="text-xs font-bold text-red-500 uppercase tracking-widest">PolyRISE Football</p>
+                  <p className="text-xs font-bold text-red-500 uppercase tracking-widest">PolyRISE Athletix</p>
                   <p className="text-xs text-gray-500">Athlete Recruiting Profile</p>
                 </div>
                 <div className="flex items-center gap-1.5 bg-green-900/40 border border-green-700/50 rounded-full px-2.5 py-1">
@@ -641,8 +641,8 @@ export default function PassportLandingPage() {
       <footer className="border-t border-gray-800 py-8 bg-black">
         <div className="max-w-6xl mx-auto px-4 flex flex-col md:flex-row items-center justify-between gap-4">
           <div className="flex items-center gap-3">
-            <Image src="/poly-rise-logo.png" alt="PolyRISE Football" width={32} height={32} className="object-contain" />
-            <span className="text-sm text-gray-500">PolyRISE Football · Dripping Springs, TX</span>
+            <Image src="/poly-rise-logo.png" alt="PolyRISE Athletix" width={32} height={32} className="object-contain" />
+            <span className="text-sm text-gray-500">PolyRISE Athletix · Dripping Springs, TX</span>
           </div>
           <div className="flex items-center gap-6 text-sm text-gray-600">
             <Link href="/" className="hover:text-gray-400 transition-colors">Home</Link>
@@ -650,7 +650,7 @@ export default function PassportLandingPage() {
             <Link href="/plans" className="hover:text-gray-400 transition-colors">All Plans</Link>
             <a href="mailto:polyrise@polyrisefootball.com" className="hover:text-gray-400 transition-colors">Contact</a>
           </div>
-          <p className="text-xs text-gray-700">© 2026 PolyRISE Football. All rights reserved.</p>
+          <p className="text-xs text-gray-700">© 2026 PolyRISE Athletix. All rights reserved.</p>
         </div>
       </footer>
 

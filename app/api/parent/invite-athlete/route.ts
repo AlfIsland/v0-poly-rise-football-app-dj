@@ -69,7 +69,7 @@ export async function POST(req: NextRequest) {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        from: "PolyRISE Football <noreply@polyrisefootball.com>",
+        from: "PolyRISE Athletix <noreply@polyrisefootball.com>",
         to: [athleteEmail],
         subject: `${firstName}, your PolyRISE recruiting profile is live 🏈`,
         html: `
@@ -80,7 +80,7 @@ export async function POST(req: NextRequest) {
 
             <!-- Header -->
             <div style="padding:32px 32px 0 32px">
-              <p style="color:#b40a0a;font-size:12px;font-weight:bold;letter-spacing:3px;text-transform:uppercase;margin:0 0 8px 0">PolyRISE Football</p>
+              <p style="color:#b40a0a;font-size:12px;font-weight:bold;letter-spacing:3px;text-transform:uppercase;margin:0 0 8px 0">PolyRISE Athletix</p>
               <h1 style="color:#ffffff;font-size:28px;font-weight:900;margin:0 0 6px 0;line-height:1.2">
                 ${firstName}, your profile<br/>is live.
               </h1>
@@ -142,7 +142,7 @@ export async function POST(req: NextRequest) {
               <p style="color:#4b5563;font-size:12px;margin:0">
                 <strong style="color:#6b7280">Kevin Garrett</strong> · kg@polyrisefootball.com · (817) 658-3300
               </p>
-              <p style="color:#374151;font-size:11px;margin:12px 0 0 0">PolyRISE Football · Austin, Texas · polyrisefootball.com</p>
+              <p style="color:#374151;font-size:11px;margin:12px 0 0 0">PolyRISE Athletix · Austin, Texas · polyrisefootball.com</p>
             </div>
 
             <!-- Bottom bar -->

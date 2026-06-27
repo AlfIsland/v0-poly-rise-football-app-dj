@@ -307,7 +307,7 @@ export default async function AdminHomePage() {
           ))}
         </div>
 
-        <p className="text-center text-gray-700 text-xs pb-4">PolyRISE Football · Admin · polyrisefootball.com</p>
+        <p className="text-center text-gray-700 text-xs pb-4">PolyRISE Athletix · Admin · polyrisefootball.com</p>
       </main>
     </div>
   )

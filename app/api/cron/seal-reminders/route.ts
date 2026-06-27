@@ -15,7 +15,7 @@ async function sendEmail(resendKey: string, to: string, subject: string, html: s
   await fetch("https://api.resend.com/emails", {
     method: "POST",
     headers: { Authorization: `Bearer ${resendKey}`, "Content-Type": "application/json" },
-    body: JSON.stringify({ from: "PolyRISE Football <noreply@polyrisefootball.com>", to: [to], subject, html }),
+    body: JSON.stringify({ from: "PolyRISE Athletix <noreply@polyrisefootball.com>", to: [to], subject, html }),
   }).catch(err => console.error("[cron] email failed", err))
 }
 
@@ -74,7 +74,7 @@ export async function GET(req: NextRequest) {
           <p style="background:#f3f4f6;padding:12px;border-radius:8px;word-break:break-all;font-size:13px">${registerUrl}</p>
           <p style="color:#555;font-size:13px;margin-top:12px">View your current profile (copy and paste):</p>
           <p style="background:#f3f4f6;padding:12px;border-radius:8px;word-break:break-all;font-size:13px">${verifyUrl}</p>
-          <p style="color:#999;font-size:12px;margin-top:16px">PolyRISE Football · (817) 658-3300 · polyrise@polyrisefootball.com</p>
+          <p style="color:#999;font-size:12px;margin-top:16px">PolyRISE Athletix · (817) 658-3300 · polyrise@polyrisefootball.com</p>
         </div>
       `
       const sms = `PolyRISE: ${athlete.athleteName}'s PR-VERIFIED seal expires in 30 days (${expiresFormatted}). Sign up to re-verify: ${registerUrl}`
@@ -100,7 +100,7 @@ export async function GET(req: NextRequest) {
           <p>Sign up for the next PR-VERIFIED Combine Camp to renew your seal and keep your recruiting profile active.</p>
           <p style="color:#555;font-size:13px">Sign up here (copy and paste):</p>
           <p style="background:#f3f4f6;padding:12px;border-radius:8px;word-break:break-all;font-size:13px">${registerUrl}</p>
-          <p style="color:#999;font-size:12px;margin-top:16px">PolyRISE Football · (817) 658-3300 · polyrise@polyrisefootball.com</p>
+          <p style="color:#999;font-size:12px;margin-top:16px">PolyRISE Athletix · (817) 658-3300 · polyrise@polyrisefootball.com</p>
         </div>
       `
       const sms = `PolyRISE: ${athlete.athleteName}'s PR-VERIFIED seal has expired. Sign up to re-verify at ${registerUrl}`

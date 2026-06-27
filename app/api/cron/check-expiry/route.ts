@@ -63,7 +63,7 @@ export async function GET(req: NextRequest) {
         method: "POST",
         headers: { Authorization: `Bearer ${resendKey}`, "Content-Type": "application/json" },
         body: JSON.stringify({
-          from: "PolyRISE Football <noreply@polyrisefootball.com>",
+          from: "PolyRISE Athletix <noreply@polyrisefootball.com>",
           to: [adminEmail],
           subject: `PolyRISE Access Expiry Alert — ${expiredList.length} revoked, ${soonList.length} expiring soon`,
           html: `
@@ -74,7 +74,7 @@ export async function GET(req: NextRequest) {
               <p style="margin-top:24px">
                 <a href="https://polyrisefootball.com/admin/parents?filter=expiring" style="background:#dc2626;color:#fff;padding:10px 20px;border-radius:8px;text-decoration:none;font-weight:bold;font-size:13px">View in Admin →</a>
               </p>
-              <p style="color:#555;font-size:12px;margin-top:16px">PolyRISE Football · polyrisefootball.com</p>
+              <p style="color:#555;font-size:12px;margin-top:16px">PolyRISE Athletix · polyrisefootball.com</p>
             </div>
           `,
         }),

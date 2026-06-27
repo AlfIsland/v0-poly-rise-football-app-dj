@@ -65,12 +65,12 @@ function SubscribePage() {
     <div className="min-h-screen bg-gray-950 text-white px-4 py-12">
       <div className="max-w-2xl mx-auto space-y-8">
         <div className="flex justify-center">
-          <Image src="/poly-rise-logo.png" alt="PolyRISE Football" width={160} height={60} className="object-contain" />
+          <Image src="/poly-rise-logo.png" alt="PolyRISE Athletix" width={160} height={60} className="object-contain" />
         </div>
 
         <div className="text-center">
           <h1 className="text-3xl font-bold text-white">Athlete Progress Reports</h1>
-          <p className="text-gray-400 mt-2">Track your athlete&apos;s development with monthly PolyRISE Football reports</p>
+          <p className="text-gray-400 mt-2">Track your athlete&apos;s development with monthly PolyRISE Athletix reports</p>
         </div>
 
         {canceled && (

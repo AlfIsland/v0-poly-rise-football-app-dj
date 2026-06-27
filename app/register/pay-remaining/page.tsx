@@ -30,7 +30,7 @@ function PayRemainingPage() {
 
   return (
     <div className="min-h-screen bg-gray-950 flex flex-col items-center justify-center px-4 gap-4 text-center">
-      <Image src="/poly-rise-logo.png" alt="PolyRISE Football" width={60} height={60} className="object-contain" />
+      <Image src="/poly-rise-logo.png" alt="PolyRISE Athletix" width={60} height={60} className="object-contain" />
       <p className="text-white font-semibold">Monthly subscription confirmed!</p>
       <p className="text-gray-400 text-sm">Setting up your one-time payment now...</p>
       <div className="w-6 h-6 border-2 border-red-500 border-t-transparent rounded-full animate-spin mt-2" />

@@ -162,7 +162,7 @@ function RegisterPage() {
         {/* Header */}
         <div className="text-center space-y-3">
           <div className="flex justify-center">
-            <Image src="/poly-rise-logo.png" alt="PolyRISE Football" width={60} height={60} className="object-contain" />
+            <Image src="/poly-rise-logo.png" alt="PolyRISE Athletix" width={60} height={60} className="object-contain" />
           </div>
           <h1 className="text-3xl font-bold text-white">Register for Programs</h1>
           <p className="text-gray-400">Add one or more programs to your cart, then check out together.</p>
@@ -386,7 +386,7 @@ function RegisterPage() {
         )}
 
         <p className="text-center text-gray-700 text-xs pb-4">
-          PolyRISE Football · (817) 658-3300 · polyrise@polyrisefootball.com · Dripping Springs, TX
+          PolyRISE Athletix · (817) 658-3300 · polyrise@polyrisefootball.com · Dripping Springs, TX
         </p>
       </div>
     </div>

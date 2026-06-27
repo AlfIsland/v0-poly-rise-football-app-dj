@@ -15,12 +15,12 @@ export default function HomePage() {
             <Link href="/" className="flex items-center gap-3">
               <Image
                 src="/poly-rise-logo.png"
-                alt="PolyRISE Football Logo"
+                alt="PolyRISE Athletix Logo"
                 width={48}
                 height={48}
                 className="h-12 w-auto"
               />
-              <span className="font-display font-bold text-xl hidden sm:inline">PolyRISE Football</span>
+              <span className="font-display font-bold text-xl hidden sm:inline">PolyRISE Athletix</span>
             </Link>
 
             <div className="flex items-center gap-6">
@@ -72,7 +72,7 @@ export default function HomePage() {
               </h1>
 
               <p className="text-lg lg:text-xl text-muted-foreground leading-relaxed text-pretty">
-                PolyRISE Football develops K-12 athletes in Austin and Central Texas with pro-level training, recruiting support, and the PR-VERIFIED seal that college scouts trust.
+                PolyRISE Athletix develops K-12 athletes in Austin and Central Texas with pro-level training, recruiting support, and the PR-VERIFIED seal that college scouts trust.
               </p>
             </div>
 
@@ -80,7 +80,7 @@ export default function HomePage() {
               <div className="aspect-[4/5] rounded-2xl overflow-hidden border border-border bg-muted">
                 <Image
                   src="/combine-training-athletes.jpg"
-                  alt="Youth athlete training at PolyRISE Football"
+                  alt="Youth athlete training at PolyRISE Athletix"
                   width={800}
                   height={1000}
                   priority
@@ -108,7 +108,7 @@ export default function HomePage() {
       <section id="programs" className="py-12 lg:py-20 bg-gray-950">
         <div className="container mx-auto px-4 lg:px-8">
           <div className="text-center mb-4">
-            <p className="text-red-500 font-bold text-xs uppercase tracking-widest mb-3">PolyRISE Football</p>
+            <p className="text-red-500 font-bold text-xs uppercase tracking-widest mb-3">PolyRISE Athletix</p>
             <h2 className="text-4xl lg:text-5xl font-display font-bold text-white">Plans & Pricing</h2>
             <p className="text-lg text-gray-400 mt-3 max-w-xl mx-auto">Every athlete is at a different stage. Pick the plan that fits where your child is right now.</p>
           </div>
@@ -272,7 +272,7 @@ export default function HomePage() {
               <div className="bg-card border-primary/50 border-2 overflow-hidden group hover:border-primary transition-colors">
                 <div className="pt-6 px-6 pb-6 space-y-4">
                   <div>
-                    <h4 className="text-xl font-display font-bold mb-1">PolyRISE Football Tournament</h4>
+                    <h4 className="text-xl font-display font-bold mb-1">PolyRISE Athletix Tournament</h4>
                     <p className="text-sm font-display font-semibold text-primary italic mb-2">Rise of Warriors</p>
                     <p className="text-muted-foreground text-sm leading-relaxed mb-2">Middle School (10-team, May 29th - $400) and High School (8-team, May 30th - $425). Minimum 3 games, single game elimination.</p>
                     <ul className="space-y-1 mt-3">
@@ -422,8 +422,8 @@ export default function HomePage() {
                   <div className="text-center">
                     <h4 className="text-4xl lg:text-5xl font-display font-bold mb-4">Recruiting</h4>
                     <h5 className="text-xl font-display font-bold mb-1 text-white">Kevin Garrett</h5>
-                    <p className="text-xs text-white font-semibold mb-3">Former NFL | COO / Director of PolyRISE Football Recruiting</p>
-                    <p className="text-white text-sm leading-relaxed max-w-3xl mx-auto">With extensive experience in football recruiting, Kevin leads all operations at PolyRISE Football Recruiting. He personally oversees player profiles, college outreach strategies, and ensures every athlete receives high-quality exposure to the right college programs. Kevin is passionate about helping student-athletes navigate the recruiting process and has helped dozens of players earn opportunities at the collegiate level.</p>
+                    <p className="text-xs text-white font-semibold mb-3">Former NFL | COO / Director of PolyRISE Athletix Recruiting</p>
+                    <p className="text-white text-sm leading-relaxed max-w-3xl mx-auto">With extensive experience in football recruiting, Kevin leads all operations at PolyRISE Athletix Recruiting. He personally oversees player profiles, college outreach strategies, and ensures every athlete receives high-quality exposure to the right college programs. Kevin is passionate about helping student-athletes navigate the recruiting process and has helped dozens of players earn opportunities at the collegiate level.</p>
                     <p className="text-sm text-white mt-3">Contact Kevin directly: <a href="mailto:KG@polyrisefootball.com" className="text-red-500 underline hover:text-red-400">KG@polyrisefootball.com</a> · <a href="mailto:polyrise@polyrisefootball.com" className="text-red-500 underline hover:text-red-400">polyrise@polyrisefootball.com</a></p>
                   </div>
                   <div className="flex flex-wrap justify-center gap-4">
@@ -442,12 +442,12 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* PolyRISE Football Coaches Board Section */}
+      {/* PolyRISE Athletix Coaches Board Section */}
       <section className="py-10 lg:py-16 bg-background">
         <div className="container mx-auto px-4 lg:px-8">
           <div className="text-center mb-10">
             <h2 className="text-3xl lg:text-5xl font-display font-bold mb-4 text-balance">
-              PolyRISE Football Coaches Board
+              PolyRISE Athletix Coaches Board
             </h2>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
               Learn from coaches with professional playing experience at the highest levels
@@ -508,7 +508,7 @@ export default function HomePage() {
                 PR-VERIFIED <span className="text-xl lg:text-2xl font-normal text-gray-300">(Seal of Authenticity)</span>
               </h2>
               <p className="text-base lg:text-lg text-gray-300 mb-4 leading-relaxed">
-                The PR-VERIFIED seal is awarded exclusively to athletes who complete PolyRISE Football programs, camps, or tryouts. Overseen by a board of coaches with NFL and collegiate playing/coaching experience conducts standardized, pro-style combine testing using consistent protocols and multiple trials for maximum reliability. This seal certifies that the athlete&apos;s metrics were directly measured and verified by our team on-site. No self-reported times or inflated numbers. The data is accurate, unbiased, and built to stand up under recruiter scrutiny.
+                The PR-VERIFIED seal is awarded exclusively to athletes who complete PolyRISE Athletix programs, camps, or tryouts. Overseen by a board of coaches with NFL and collegiate playing/coaching experience conducts standardized, pro-style combine testing using consistent protocols and multiple trials for maximum reliability. This seal certifies that the athlete&apos;s metrics were directly measured and verified by our team on-site. No self-reported times or inflated numbers. The data is accurate, unbiased, and built to stand up under recruiter scrutiny.
               </p>
               <div className="mb-4">
                 <p className="text-white font-semibold mb-2">Tested Events Include:</p>
@@ -543,7 +543,7 @@ export default function HomePage() {
               </div>
               <ProtectedImage
                 src="/pr-verified-badge.png"
-                alt="PolyRISE PR-VERIFIED Badge - Copyright 2026 PolyRISE Football All Rights Reserved"
+                alt="PolyRISE PR-VERIFIED Badge - Copyright 2026 PolyRISE Athletix All Rights Reserved"
                 className="w-full h-full object-contain"
                 containerClassName="w-48 h-48 md:w-64 md:h-64 flex-shrink-0"
               />
@@ -556,7 +556,7 @@ export default function HomePage() {
       <section id="about" className="py-12 lg:py-20 bg-muted/30">
         <div className="container mx-auto px-4 lg:px-8">
           <div className="max-w-3xl mx-auto text-center mb-8">
-            <h2 className="text-4xl lg:text-5xl font-display font-bold text-balance">About PolyRISE Football</h2>
+            <h2 className="text-4xl lg:text-5xl font-display font-bold text-balance">About PolyRISE Athletix</h2>
           </div>
 
           <div className="grid md:grid-cols-3 gap-8">
@@ -608,15 +608,15 @@ export default function HomePage() {
           <div className="max-w-3xl mx-auto">
             <div className="text-center mb-12">
               <h2 className="text-4xl lg:text-5xl font-display font-bold mb-4">Frequently Asked Questions</h2>
-              <p className="text-lg text-muted-foreground">Everything you need to know about PolyRISE Football</p>
+              <p className="text-lg text-muted-foreground">Everything you need to know about PolyRISE Athletix</p>
             </div>
 
             <div className="space-y-6">
               <div className="bg-card border-border">
                 <div className="pt-6">
-                  <h3 className="font-display font-bold text-lg mb-2">What age groups does PolyRISE Football train?</h3>
+                  <h3 className="font-display font-bold text-lg mb-2">What age groups does PolyRISE Athletix train?</h3>
                   <p className="text-muted-foreground leading-relaxed">
-                    PolyRISE Football provides elite training for K-12 athletes, including youth, middle school, and
+                    PolyRISE Athletix provides elite training for K-12 athletes, including youth, middle school, and
                     high school players. Our programs are designed to develop athletes at every level, from beginners to
                     those preparing for college recruitment.
                   </p>
@@ -625,9 +625,9 @@ export default function HomePage() {
 
               <div className="bg-card border-border">
                 <div className="pt-6">
-                  <h3 className="font-display font-bold text-lg mb-2">Where is PolyRISE Football located?</h3>
+                  <h3 className="font-display font-bold text-lg mb-2">Where is PolyRISE Athletix located?</h3>
                   <p className="text-muted-foreground leading-relaxed">
-                    PolyRISE Football is based in Dripping Springs, Texas (Austin area), with training sessions held at Swift Sessions and local fields. We are expanding to other cities nationwide. Contact us to find out when we&apos;re coming to your location.
+                    PolyRISE Athletix is based in Dripping Springs, Texas (Austin area), with training sessions held at Swift Sessions and local fields. We are expanding to other cities nationwide. Contact us to find out when we&apos;re coming to your location.
                   </p>
                 </div>
               </div>
@@ -664,9 +664,9 @@ export default function HomePage() {
 
               <div className="bg-card border-border">
                 <div className="pt-6">
-                  <h3 className="font-display font-bold text-lg mb-2">Does PolyRISE Football have coaches with NFL experience?</h3>
+                  <h3 className="font-display font-bold text-lg mb-2">Does PolyRISE Athletix have coaches with NFL experience?</h3>
                   <p className="text-muted-foreground leading-relaxed">
-                    Yes, PolyRISE Football has coaches with NFL experience on staff who provide one-on-one coaching,
+                    Yes, PolyRISE Athletix has coaches with NFL experience on staff who provide one-on-one coaching,
                     film study, and advanced training for athletes in the 360 Elite program.
                   </p>
                 </div>
@@ -850,7 +850,7 @@ export default function HomePage() {
                 <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
                   <span className="text-primary-foreground font-display font-bold">PR</span>
                 </div>
-                <span className="font-display font-bold">PolyRISE Football</span>
+                <span className="font-display font-bold">PolyRISE Athletix</span>
               </div>
               <p className="text-sm text-muted-foreground leading-relaxed">
                 Building stronger, faster, and character-driven young athletes in Dripping Springs, Texas (Austin area) and beyond.
@@ -903,7 +903,7 @@ export default function HomePage() {
           </div>
 
           <div className="pt-8 border-t border-border text-center text-sm text-muted-foreground">
-            <p>Copyright © 2025 PolyRISE Football - All Rights Reserved.</p>
+            <p>Copyright © 2025 PolyRISE Athletix - All Rights Reserved.</p>
           </div>
         </div>
       </footer>

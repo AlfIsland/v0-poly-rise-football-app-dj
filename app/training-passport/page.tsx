@@ -34,9 +34,9 @@ export default function TrainingPassportPage() {
         {/* Header */}
         <div className="flex items-center justify-between mb-8 border-b-4 border-red-600 pb-6">
           <div className="flex items-center gap-4">
-            <Image src="/poly-rise-logo.png" alt="PolyRISE Football" width={60} height={60} className="object-contain" />
+            <Image src="/poly-rise-logo.png" alt="PolyRISE Athletix" width={60} height={60} className="object-contain" />
             <div>
-              <p className="text-xs font-bold text-red-600 uppercase tracking-widest">PolyRISE Football</p>
+              <p className="text-xs font-bold text-red-600 uppercase tracking-widest">PolyRISE Athletix</p>
               <h1 className="text-3xl font-black text-gray-900 leading-tight">Athlete Training</h1>
               <h1 className="text-3xl font-black text-red-600 leading-tight">Tracking Passport</h1>
             </div>
@@ -51,7 +51,7 @@ export default function TrainingPassportPage() {
         {/* Intro */}
         <div className="mb-8">
           <p className="text-gray-700 text-base leading-relaxed">
-            Every athlete we train at PolyRISE Football receives a <strong>personal digital Tracking Passport</strong> —
+            Every athlete we train at PolyRISE Athletix receives a <strong>personal digital Tracking Passport</strong> —
             a complete performance record that documents their journey from day one.
             Parents can log in anytime to see exactly how their athlete is developing.
           </p>
@@ -164,7 +164,7 @@ export default function TrainingPassportPage() {
         {/* Footer */}
         <div className="mt-8 pt-4 border-t border-gray-200 text-center">
           <p className="text-xs text-gray-400">
-            PolyRISE Football · Dripping Springs, TX · polyrisefootball.com · (817) 658-3300
+            PolyRISE Athletix · Dripping Springs, TX · polyrisefootball.com · (817) 658-3300
           </p>
           <p className="text-xs text-gray-300 mt-1">
             Developing athletes through data-driven training and measurable progress.

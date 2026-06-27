@@ -29,7 +29,7 @@ export async function POST(req: NextRequest) {
     <table width="600" cellpadding="0" cellspacing="0" style="max-width:600px;width:100%;">
       <tr>
         <td style="background:#b40a0a;padding:24px 32px;border-radius:12px 12px 0 0;">
-          <p style="margin:0;color:#fff;font-size:20px;font-weight:bold;">PolyRISE Football</p>
+          <p style="margin:0;color:#fff;font-size:20px;font-weight:bold;">PolyRISE Athletix</p>
           <p style="margin:4px 0 0;color:#ffcccc;font-size:12px;">Monthly Progress Report · Training Program</p>
         </td>
       </tr>
@@ -67,12 +67,12 @@ export async function POST(req: NextRequest) {
           </table>
 
           <hr style="border:none;border-top:1px solid #222;margin:0 0 20px;">
-          <p style="color:#666;font-size:12px;margin:0;">Questions? Contact PolyRISE Football</p>
+          <p style="color:#666;font-size:12px;margin:0;">Questions? Contact PolyRISE Athletix</p>
           <p style="color:#666;font-size:12px;margin:6px 0 0;">(817) 658-3300 · polyrise@polyrisefootball.com</p>
         </td>
       </tr>
       <tr><td style="padding:20px 0;text-align:center;">
-        <p style="color:#333;font-size:11px;margin:0;">PolyRISE Football · Austin, TX · polyrisefootball.com</p>
+        <p style="color:#333;font-size:11px;margin:0;">PolyRISE Athletix · Austin, TX · polyrisefootball.com</p>
       </td></tr>
     </table>
   </td></tr>
@@ -83,9 +83,9 @@ export async function POST(req: NextRequest) {
   try {
     const resend = new Resend(apiKey)
     await resend.emails.send({
-      from: "PolyRISE Football <noreply@polyrisefootball.com>",
+      from: "PolyRISE Athletix <noreply@polyrisefootball.com>",
       to: email,
-      subject: `Monthly Progress Report — ${athleteName} | PolyRISE Football`,
+      subject: `Monthly Progress Report — ${athleteName} | PolyRISE Athletix`,
       html,
     })
     return NextResponse.json({ success: true })

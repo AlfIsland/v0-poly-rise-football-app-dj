@@ -196,7 +196,7 @@ export default function ShareCardDownload({
       const labelX = logo ? MARGIN + 52 : MARGIN
       ctx.fillStyle = "#B40A0A"
       ctx.font      = "bold 21px Arial, sans-serif"
-      ctx.fillText("POLYRISE FOOTBALL", labelX, headerY - 4)
+      ctx.fillText("PolyRISE Athletix", labelX, headerY - 4)
       ctx.fillStyle = "#4B5563"
       ctx.font      = "17px Arial, sans-serif"
       ctx.fillText("VERIFIED RECRUITING PROFILE", labelX, headerY + 16)
@@ -451,7 +451,7 @@ export default function ShareCardDownload({
       // Branding
       ctx.fillStyle = "#374151"
       ctx.font      = "18px Arial, sans-serif"
-      ctx.fillText("PolyRISE Football  ·  Austin, Texas  ·  polyrisefootball.com", MARGIN, footerY + 124)
+      ctx.fillText("PolyRISE Athletix  ·  Austin, Texas  ·  polyrisefootball.com", MARGIN, footerY + 124)
 
       // ── Bottom red bar ──
       ctx.fillStyle = topBar

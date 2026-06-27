@@ -58,7 +58,7 @@ export async function POST(req: NextRequest) {
             method: "POST",
             headers: { Authorization: `Bearer ${resendKey}`, "Content-Type": "application/json" },
             body: JSON.stringify({
-              from: "PolyRISE Football <noreply@polyrisefootball.com>",
+              from: "PolyRISE Athletix <noreply@polyrisefootball.com>",
               to: ["PolyRISE7v7@gmail.com"],
               subject: "⚠️ Admin Login — IP Locked Out",
               html: `<div style="font-family:sans-serif;padding:20px"><h2 style="color:#dc2626">Admin Login Locked</h2><p>${MAX_ATTEMPTS} failed login attempts from IP <strong>${ip}</strong>. Account locked for 5 minutes.</p><p style="color:#999;font-size:12px">${new Date().toLocaleString()}</p></div>`,
@@ -86,7 +86,7 @@ export async function POST(req: NextRequest) {
       method: "POST",
       headers: { Authorization: `Bearer ${resendKey}`, "Content-Type": "application/json" },
       body: JSON.stringify({
-        from: "PolyRISE Football <noreply@polyrisefootball.com>",
+        from: "PolyRISE Athletix <noreply@polyrisefootball.com>",
         to: ["PolyRISE7v7@gmail.com"],
         subject: "✅ Admin Login — PolyRISE",
         html: `<div style="font-family:sans-serif;padding:20px"><h2 style="color:#16a34a">Admin Login Successful</h2><p>Someone logged into the PolyRISE admin panel.</p><p><strong>IP:</strong> ${ip}</p><p><strong>Time:</strong> ${new Date().toLocaleString()}</p><p style="color:#999;font-size:12px">If this wasn't you, change your ADMIN_PASSWORD immediately in Vercel.</p></div>`,

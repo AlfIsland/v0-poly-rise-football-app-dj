@@ -25,13 +25,13 @@ export async function POST(req: NextRequest) {
       method: "POST",
       headers: { Authorization: `Bearer ${resendKey}`, "Content-Type": "application/json" },
       body: JSON.stringify({
-        from: "PolyRISE Football <noreply@polyrisefootball.com>",
+        from: "PolyRISE Athletix <noreply@polyrisefootball.com>",
         to: [email],
         subject: `${athleteName ?? "Your"} PolyRISE Recruiting Profile is ready 🏈`,
         html: `
           <div style="font-family:sans-serif;background:#0a0a0f;color:#fff;padding:0;margin:0;max-width:600px">
             <div style="background:#b40a0a;padding:24px 32px">
-              <h1 style="margin:0;font-size:20px;font-weight:900;letter-spacing:1px">PolyRISE Football</h1>
+              <h1 style="margin:0;font-size:20px;font-weight:900;letter-spacing:1px">PolyRISE Athletix</h1>
               <p style="margin:4px 0 0;font-size:12px;color:#ffaaaa">Athlete Profile Access</p>
             </div>
             <div style="padding:32px">
@@ -60,7 +60,7 @@ export async function POST(req: NextRequest) {
 
               <div style="margin-top:32px;padding-top:24px;border-top:1px solid #222">
                 <p style="color:#555;font-size:12px;margin:0">Questions? Contact us at <a href="mailto:polyrise@polyrisefootball.com" style="color:#b40a0a">polyrise@polyrisefootball.com</a></p>
-                <p style="color:#444;font-size:11px;margin:6px 0 0">PolyRISE Football · Dripping Springs, TX · polyrisefootball.com</p>
+                <p style="color:#444;font-size:11px;margin:6px 0 0">PolyRISE Athletix · Dripping Springs, TX · polyrisefootball.com</p>
               </div>
             </div>
           </div>

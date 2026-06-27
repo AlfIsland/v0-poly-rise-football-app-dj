@@ -8,9 +8,9 @@ export default function TermsPage() {
 
         {/* Header */}
         <div className="flex items-center gap-4 mb-8 pb-6 border-b-2 border-red-600">
-          <Image src="/poly-rise-logo.png" alt="PolyRISE Football" width={48} height={48} className="object-contain" />
+          <Image src="/poly-rise-logo.png" alt="PolyRISE Athletix" width={48} height={48} className="object-contain" />
           <div>
-            <p className="text-xs font-bold text-red-600 uppercase tracking-widest">PolyRISE Football</p>
+            <p className="text-xs font-bold text-red-600 uppercase tracking-widest">PolyRISE Athletix</p>
             <h1 className="text-2xl font-black text-gray-900">Terms of Service</h1>
             <p className="text-gray-400 text-xs mt-0.5">Effective Date: April 26, 2026 · Last Updated: April 26, 2026</p>
           </div>
@@ -20,7 +20,7 @@ export default function TermsPage() {
 
           <section>
             <p>
-              These Terms of Service (&quot;Terms&quot;) govern your access to and use of the PolyRISE Football platform,
+              These Terms of Service (&quot;Terms&quot;) govern your access to and use of the PolyRISE Athletix platform,
               including the website at <strong>polyrisefootball.com</strong>, the Athlete Training Passport (ATP),
               the Parent Portal, the PR-VERIFIED seal system, the School Fit Finder, Coach Outreach Templates,
               and all related services (collectively, the &quot;Platform&quot;).
@@ -30,7 +30,7 @@ export default function TermsPage() {
               these Terms. If you do not agree, do not use the Platform.
             </p>
             <p className="mt-3">
-              The Platform is operated by <strong>PolyRISE Football</strong>, based in Dripping Springs, Texas
+              The Platform is operated by <strong>PolyRISE Athletix</strong>, based in Dripping Springs, Texas
               (&quot;PolyRISE,&quot; &quot;we,&quot; &quot;us,&quot; or &quot;our&quot;).
             </p>
           </section>
@@ -39,11 +39,11 @@ export default function TermsPage() {
             <h2 className="text-base font-black text-gray-900 uppercase tracking-wide mb-3">1. Intellectual Property & Ownership</h2>
             <p>
               All content, features, tools, designs, source code, data structures, algorithms, branding, and
-              technology comprising the Platform are the exclusive intellectual property of PolyRISE Football.
+              technology comprising the Platform are the exclusive intellectual property of PolyRISE Athletix.
               This includes but is not limited to:
             </p>
             <ul className="list-disc pl-6 mt-2 space-y-1">
-              <li>The <strong>PolyRISE Football</strong> name, logo, and brand identity</li>
+              <li>The <strong>PolyRISE Athletix</strong> name, logo, and brand identity</li>
               <li>The <strong>PR-VERIFIED</strong> seal system, verification codes, and associated technology</li>
               <li>The <strong>Athlete Training Passport (ATP)</strong> system and data presentation</li>
               <li>The <strong>School Fit Finder</strong> matching algorithm and benchmarks</li>
@@ -53,10 +53,10 @@ export default function TermsPage() {
             </ul>
             <p className="mt-3">
               You may not copy, reproduce, reverse-engineer, redistribute, resell, or create derivative works
-              based on any part of the Platform without express written permission from PolyRISE Football.
+              based on any part of the Platform without express written permission from PolyRISE Athletix.
             </p>
             <p className="mt-3">
-              &copy; {new Date().getFullYear()} PolyRISE Football. All rights reserved.
+              &copy; {new Date().getFullYear()} PolyRISE Athletix. All rights reserved.
             </p>
           </section>
 
@@ -75,7 +75,7 @@ export default function TermsPage() {
             <h2 className="text-base font-black text-gray-900 uppercase tracking-wide mb-3">3. Subscriptions & Payments</h2>
             <p>
               Paid subscriptions are billed monthly through Stripe, a third-party payment processor. By subscribing, you authorize
-              PolyRISE Football to charge your payment method on a recurring monthly basis.
+              PolyRISE Athletix to charge your payment method on a recurring monthly basis.
             </p>
             <ul className="list-disc pl-6 mt-3 space-y-2">
               <li><strong>Passport — $9.99/month:</strong> Access to athlete metrics tracking, progress charts, and session history.</li>
@@ -91,14 +91,14 @@ export default function TermsPage() {
               If you believe you were charged in error, contact us within 7 days at polyrise@polyrisefootball.com.
             </p>
             <p className="mt-3">
-              PolyRISE Football reserves the right to change subscription pricing with 30 days&apos; notice.
+              PolyRISE Athletix reserves the right to change subscription pricing with 30 days&apos; notice.
             </p>
           </section>
 
           <section>
             <h2 className="text-base font-black text-gray-900 uppercase tracking-wide mb-3">4. Athlete Data & Content</h2>
             <p>
-              By submitting athlete performance data, photos, and information to the Platform, you grant PolyRISE Football
+              By submitting athlete performance data, photos, and information to the Platform, you grant PolyRISE Athletix
               a non-exclusive license to store, display, and use that data to provide the services described on the Platform.
             </p>
             <ul className="list-disc pl-6 mt-3 space-y-2">
@@ -113,8 +113,8 @@ export default function TermsPage() {
             <h2 className="text-base font-black text-gray-900 uppercase tracking-wide mb-3">5. PR-VERIFIED Seal</h2>
             <p>
               The PR-VERIFIED seal certifies that an athlete&apos;s performance metrics were recorded at an official
-              PolyRISE Football combine camp under supervised conditions. The seal is issued solely at the discretion of
-              PolyRISE Football staff and may not be falsified, altered, or misrepresented.
+              PolyRISE Athletix combine camp under supervised conditions. The seal is issued solely at the discretion of
+              PolyRISE Athletix staff and may not be falsified, altered, or misrepresented.
             </p>
             <p className="mt-3">
               Misuse of the PR-VERIFIED seal, including but not limited to falsifying or reproducing it without
@@ -126,7 +126,7 @@ export default function TermsPage() {
             <h2 className="text-base font-black text-gray-900 uppercase tracking-wide mb-3">6. Recruiting Tools Disclaimer</h2>
             <p>
               The School Fit Finder, Coach Outreach Templates, Recruiting Roadmap, and all recruiting-related tools on
-              the Platform are provided for <strong>informational and educational purposes only</strong>. PolyRISE Football
+              the Platform are provided for <strong>informational and educational purposes only</strong>. PolyRISE Athletix
               does not guarantee college placement, scholarship offers, or recruiting outcomes.
             </p>
             <p className="mt-3">
@@ -157,20 +157,20 @@ export default function TermsPage() {
           <section>
             <h2 className="text-base font-black text-gray-900 uppercase tracking-wide mb-3">8. Limitation of Liability</h2>
             <p>
-              To the maximum extent permitted by law, PolyRISE Football shall not be liable for any indirect,
+              To the maximum extent permitted by law, PolyRISE Athletix shall not be liable for any indirect,
               incidental, special, consequential, or punitive damages arising from your use of the Platform,
               including loss of data, recruiting opportunities, or scholarship offers.
             </p>
             <p className="mt-3">
               Our total liability for any claim arising out of these Terms shall not exceed the amount you paid
-              to PolyRISE Football in the 3 months preceding the claim.
+              to PolyRISE Athletix in the 3 months preceding the claim.
             </p>
           </section>
 
           <section>
             <h2 className="text-base font-black text-gray-900 uppercase tracking-wide mb-3">9. Termination</h2>
             <p>
-              PolyRISE Football reserves the right to suspend or terminate your account at any time for violation
+              PolyRISE Athletix reserves the right to suspend or terminate your account at any time for violation
               of these Terms, fraudulent activity, or any conduct that we determine, in our sole discretion, to be
               harmful to the Platform or other users.
             </p>
@@ -197,7 +197,7 @@ export default function TermsPage() {
             <h2 className="text-base font-black text-gray-900 uppercase tracking-wide mb-3">12. Contact</h2>
             <p>Questions about these Terms? Contact us:</p>
             <div className="mt-2 bg-gray-50 border border-gray-200 rounded-xl p-4">
-              <p className="font-bold text-gray-900">PolyRISE Football</p>
+              <p className="font-bold text-gray-900">PolyRISE Athletix</p>
               <p>Dripping Springs, Texas</p>
               <p>(817) 658-3300</p>
               <p>polyrise@polyrisefootball.com</p>
@@ -208,7 +208,7 @@ export default function TermsPage() {
         </div>
 
         <div className="mt-10 pt-6 border-t border-gray-200 flex items-center justify-between text-xs text-gray-400">
-          <p>&copy; {new Date().getFullYear()} PolyRISE Football. All rights reserved.</p>
+          <p>&copy; {new Date().getFullYear()} PolyRISE Athletix. All rights reserved.</p>
           <Link href="/privacy" className="text-red-600 hover:text-red-700 font-semibold">Privacy Policy →</Link>
         </div>
 

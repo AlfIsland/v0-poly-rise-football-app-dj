@@ -3,8 +3,8 @@ import Link from "next/link"
 import { calculateRatings } from "@/lib/athlete-ratings"
 
 export const metadata = {
-  title: "Sample Athlete Passport · PolyRISE Football",
-  description: "See what a PolyRISE Football Athlete Passport looks like — verified combine metrics, national rankings, progress tracking, and recruiting tools.",
+  title: "Sample Athlete Passport · PolyRISE Athletix",
+  description: "See what a PolyRISE Athletix Athlete Passport looks like — verified combine metrics, national rankings, progress tracking, and recruiting tools.",
 }
 
 const SAMPLE_SESSIONS = [
@@ -98,9 +98,9 @@ export default function SamplePassportPage() {
       {/* Header */}
       <header className="border-b border-white/10 bg-black px-4 py-3 flex items-center justify-between gap-3">
         <div className="flex items-center gap-3 min-w-0">
-          <Image src="/poly-rise-logo.png" alt="PolyRISE Football" width={32} height={32} className="object-contain shrink-0" />
+          <Image src="/poly-rise-logo.png" alt="PolyRISE Athletix" width={32} height={32} className="object-contain shrink-0" />
           <div className="min-w-0">
-            <p className="text-xs font-bold text-red-500 uppercase tracking-widest truncate">PolyRISE Football</p>
+            <p className="text-xs font-bold text-red-500 uppercase tracking-widest truncate">PolyRISE Athletix</p>
             <p className="text-xs text-gray-500 truncate">Athlete Recruiting Profile</p>
           </div>
         </div>

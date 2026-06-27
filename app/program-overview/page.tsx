@@ -33,11 +33,11 @@ export default function ProgramOverviewPage() {
         {/* Header */}
         <div className="flex items-center justify-between mb-6 -mx-8 px-8 py-6 bg-gray-950 print:-mx-12 print:px-12 border-b-4 border-red-600">
           <div className="flex items-center gap-4">
-            <Image src="/poly-rise-logo.png" alt="PolyRISE Football" width={88} height={88} className="object-contain" />
+            <Image src="/poly-rise-logo.png" alt="PolyRISE Athletix" width={88} height={88} className="object-contain" />
             <div className="w-px h-12 bg-gray-700 shrink-0" />
             <Image src="/sponsor-swift-sessions.png" alt="Swift Sessions" width={80} height={40} className="object-contain" />
             <div>
-              <p className="text-xs font-bold text-red-500 uppercase tracking-widest">PolyRISE Football</p>
+              <p className="text-xs font-bold text-red-500 uppercase tracking-widest">PolyRISE Athletix</p>
               <h1 className="text-3xl font-black text-white leading-tight">Get Recruited. Get Verified. Get Noticed.</h1>
               <p className="text-gray-400 text-sm mt-1">Player Development & Recruiting · Powered by PolyRISE</p>
             </div>
@@ -266,7 +266,7 @@ export default function ProgramOverviewPage() {
             <p className="text-gray-700 text-sm font-bold">(817) 658-3300</p>
             <p className="text-gray-500 text-sm">polyrise@polyrisefootball.com</p>
             <p className="text-gray-400 text-xs mt-1">Recruiting: kg@polyrisefootball.com · polyrise@polyrisefootball.com</p>
-            <p className="text-gray-400 text-xs mt-3">PolyRISE Football · Dripping Springs, TX · polyrisefootball.com</p>
+            <p className="text-gray-400 text-xs mt-3">PolyRISE Athletix · Dripping Springs, TX · polyrisefootball.com</p>
           </div>
           <div className="text-right text-xs text-gray-400 shrink-0">
             <p className="font-bold text-gray-600">Follow us:</p>

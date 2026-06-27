@@ -22,7 +22,7 @@ export async function POST(req: NextRequest) {
       method: "POST",
       headers: { Authorization: `Bearer ${resendKey}`, "Content-Type": "application/json" },
       body: JSON.stringify({
-        from: "PolyRISE Football <noreply@polyrisefootball.com>",
+        from: "PolyRISE Athletix <noreply@polyrisefootball.com>",
         to: [email],
         subject: `Your athlete's PolyRISE Training Passport is ready — ${athleteName}`,
         html: `
@@ -37,7 +37,7 @@ export async function POST(req: NextRequest) {
               <a href="${registerUrl}" style="background:#dc2626;color:#fff;padding:12px 24px;border-radius:8px;text-decoration:none;font-weight:bold;font-size:14px">Create Your Account →</a>
             </p>
             <p style="color:#999;font-size:13px;margin-top:24px">Questions? Call <strong>(817) 658-3300</strong> or email <strong>polyrise@polyrisefootball.com</strong></p>
-            <p style="color:#555;font-size:12px;margin-top:8px">PolyRISE Football · Dripping Springs, TX · polyrisefootball.com</p>
+            <p style="color:#555;font-size:12px;margin-top:8px">PolyRISE Athletix · Dripping Springs, TX · polyrisefootball.com</p>
           </div>
         `,
       }),

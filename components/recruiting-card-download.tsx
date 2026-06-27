@@ -88,11 +88,11 @@ export default function RecruitingCardDownload({
         doc.addImage(logoBase64, "PNG", margin, 2, 22, 22)
       }
 
-      // ── PolyRISE Football title ──
+      // ── PolyRISE Athletix title ──
       doc.setTextColor(255, 255, 255)
       doc.setFontSize(13)
       doc.setFont("helvetica", "bold")
-      doc.text("PolyRISE Football", margin + 25, 12)
+      doc.text("PolyRISE Athletix", margin + 25, 12)
 
       // ── PR-VERIFIED badge text ──
       doc.setFontSize(10)
@@ -138,7 +138,7 @@ export default function RecruitingCardDownload({
         doc.setFontSize(9)
         doc.setFont("helvetica", "bold")
         doc.setTextColor(150, 150, 150)
-        doc.text("POLYRISE FOOTBALL RATINGS", margin, y)
+        doc.text("PolyRISE Athletix RATINGS", margin, y)
 
         y += 6
         // National percentile
@@ -262,7 +262,7 @@ export default function RecruitingCardDownload({
 
       doc.setTextColor(140, 140, 140)
       doc.setFontSize(8)
-      doc.text("PolyRISE Football · Austin, Texas · polyrisefootball.com", W / 2, footerY + 14, { align: "center" })
+      doc.text("PolyRISE Athletix · Austin, Texas · polyrisefootball.com", W / 2, footerY + 14, { align: "center" })
 
       if (athlete.videoLink) {
         doc.setFontSize(8)

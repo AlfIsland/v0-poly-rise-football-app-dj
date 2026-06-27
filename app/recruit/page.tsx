@@ -101,7 +101,7 @@ export default function RecruitPage() {
         <div className="flex items-center gap-3">
           <Image src="/poly-rise-logo.png" alt="PolyRISE" width={36} height={36} className="object-contain" />
           <div>
-            <p className="font-bold text-white text-sm">PolyRISE Football</p>
+            <p className="font-bold text-white text-sm">PolyRISE Athletix</p>
             <p className="text-xs text-gray-500">Dripping Springs & Austin, TX</p>
           </div>
         </div>

@@ -1,5 +1,5 @@
 // ─────────────────────────────────────────────────────────────────────────────
-// PolyRISE Football Ratings Engine
+// PolyRISE Athletix Ratings Engine
 // Position + Class Year specific benchmarks (National & Texas)
 // ─────────────────────────────────────────────────────────────────────────────
 

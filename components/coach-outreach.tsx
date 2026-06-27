@@ -76,7 +76,7 @@ function buildTemplate(
 
 My name is ${parentName}, and I am reaching out on behalf of my athlete ${athlete.name}, a Class of ${yr} ${pos} at ${hs}.
 
-${athlete.name} has a strong interest in ${school} and your program. Below are their current coach-verified athletic metrics from PolyRISE Football:
+${athlete.name} has a strong interest in ${school} and your program. Below are their current coach-verified athletic metrics from PolyRISE Athletix:
 
 ${metrics || "  [Metrics will appear here once sessions are recorded]"}
 

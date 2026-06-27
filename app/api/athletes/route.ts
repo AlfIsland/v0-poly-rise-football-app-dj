@@ -87,7 +87,7 @@ export async function POST(req: NextRequest) {
     const emailHtml = `
       <div style="font-family:sans-serif;max-width:520px;margin:0 auto;padding:24px">
         <h2 style="color:#dc2626;margin-bottom:4px">PR-VERIFIED Seal Issued</h2>
-        <p style="color:#444;margin-top:0"><strong>${body.athleteName}</strong> has been PR-VERIFIED by PolyRISE Football.</p>
+        <p style="color:#444;margin-top:0"><strong>${body.athleteName}</strong> has been PR-VERIFIED by PolyRISE Athletix.</p>
         <table style="width:100%;border-collapse:collapse;font-size:14px;margin-top:16px">
           <tr style="background:#f9fafb"><td style="padding:10px 12px;color:#555;width:140px">Seal Code</td><td style="padding:10px 12px;font-weight:bold;font-family:monospace">${upperCode}</td></tr>
           <tr><td style="padding:10px 12px;color:#555">Position</td><td style="padding:10px 12px">${body.position || "—"}</td></tr>
@@ -97,7 +97,7 @@ export async function POST(req: NextRequest) {
         <p style="color:#666;font-size:13px;margin-top:16px">Copy and paste the link below to view your PR-VERIFIED profile. Share it with college coaches and recruiters.</p>
         <p style="background:#f3f4f6;padding:12px;border-radius:8px;word-break:break-all;font-size:13px;margin:8px 0">${verifyUrl}</p>
         <p style="color:#666;font-size:13px;">Your seal expires on <strong>${expiresFormatted}</strong> — you will receive a reminder to re-verify before then.</p>
-        <p style="color:#999;font-size:12px;margin-top:16px">PolyRISE Football · (817) 658-3300 · polyrise@polyrisefootball.com</p>
+        <p style="color:#999;font-size:12px;margin-top:16px">PolyRISE Athletix · (817) 658-3300 · polyrise@polyrisefootball.com</p>
       </div>
     `
 
@@ -112,7 +112,7 @@ export async function POST(req: NextRequest) {
           method: "POST",
           headers: { Authorization: `Bearer ${resendKey}`, "Content-Type": "application/json" },
           body: JSON.stringify({
-            from: "PolyRISE Football <noreply@polyrisefootball.com>",
+            from: "PolyRISE Athletix <noreply@polyrisefootball.com>",
             to: [rec.to],
             subject: `PR-VERIFIED Seal Issued — ${body.athleteName} (${upperCode})`,
             html: emailHtml,
@@ -126,7 +126,7 @@ export async function POST(req: NextRequest) {
     const twilioToken = process.env.TWILIO_AUTH_TOKEN
     const twilioFrom = process.env.TWILIO_PHONE_NUMBER
     if (twilioSid && twilioToken && twilioFrom) {
-      const smsText = `PolyRISE Football: ${body.athleteName} has been PR-VERIFIED! View profile: ${verifyUrl} | Expires ${expiresFormatted}. Re-verify at https://polyrisefootball.com/register`
+      const smsText = `PolyRISE Athletix: ${body.athleteName} has been PR-VERIFIED! View profile: ${verifyUrl} | Expires ${expiresFormatted}. Re-verify at https://polyrisefootball.com/register`
       const numbers = [body.phone, body.parentPhone].filter(Boolean)
       for (const num of numbers) {
         await fetch(`https://api.twilio.com/2010-04-01/Accounts/${twilioSid}/Messages.json`, {

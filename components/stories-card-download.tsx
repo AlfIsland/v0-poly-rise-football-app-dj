@@ -152,7 +152,7 @@ export default function StoriesCardDownload({
       ctx.fillStyle = "#B40A0A"
       ctx.font      = "bold 22px Arial, sans-serif"
       ctx.textAlign = "center"
-      ctx.fillText("POLYRISE FOOTBALL", W / 2, headerY + 62)
+      ctx.fillText("PolyRISE Athletix", W / 2, headerY + 62)
       ctx.fillStyle = "#4B5563"
       ctx.font      = "18px Arial, sans-serif"
       ctx.fillText("VERIFIED RECRUITING PROFILE", W / 2, headerY + 84)
@@ -421,7 +421,7 @@ export default function StoriesCardDownload({
 
       ctx.font      = "18px Arial, sans-serif"
       ctx.fillStyle = "#374151"
-      ctx.fillText("PolyRISE Football  ·  Dripping Springs, TX", W / 2, footerY + 118)
+      ctx.fillText("PolyRISE Athletix  ·  Dripping Springs, TX", W / 2, footerY + 118)
 
       // Sessions line
       if (sessions.length > 0) {

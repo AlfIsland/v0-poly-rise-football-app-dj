@@ -124,7 +124,7 @@ export default function PostToXButton({ atpId }: { atpId: string; athleteName: s
               <div className="flex items-center gap-2 mb-3">
                 <div className="w-8 h-8 rounded-full bg-sky-700 flex items-center justify-center text-white text-xs font-bold">P</div>
                 <div>
-                  <p className="text-white text-sm font-bold leading-tight">PolyRISE Football</p>
+                  <p className="text-white text-sm font-bold leading-tight">PolyRISE Athletix</p>
                   <p className="text-gray-500 text-xs">@PolyRISEFB</p>
                 </div>
               </div>

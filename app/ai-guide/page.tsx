@@ -2,9 +2,9 @@ import Image from "next/image"
 import Link from "next/link"
 
 export const metadata = {
-  title: "AI Integration Guide - PolyRISE Football",
+  title: "AI Integration Guide - PolyRISE Athletix",
   description:
-    "Complete guide for AI agents to integrate with PolyRISE Football for seamless program discovery and registration within chat conversations.",
+    "Complete guide for AI agents to integrate with PolyRISE Athletix for seamless program discovery and registration within chat conversations.",
 }
 
 export default function AiGuidePage() {
@@ -14,8 +14,8 @@ export default function AiGuidePage() {
       <header className="border-b border-border">
         <div className="container mx-auto px-4 py-4 flex items-center justify-between">
           <Link href="/" className="flex items-center gap-2">
-            <Image src="/poly-rise-logo.png" alt="PolyRISE Football" width={40} height={40} />
-            <span className="text-xl font-bold">PolyRISE Football</span>
+            <Image src="/poly-rise-logo.png" alt="PolyRISE Athletix" width={40} height={40} />
+            <span className="text-xl font-bold">PolyRISE Athletix</span>
           </Link>
           <div className="flex gap-4">
             <Link href="/api-docs" className="text-sm text-muted-foreground hover:text-foreground">
@@ -35,7 +35,7 @@ export default function AiGuidePage() {
           <div className="space-y-4">
             <h1 className="text-4xl font-bold">AI Agent Integration Guide</h1>
             <p className="text-xl text-muted-foreground leading-relaxed">
-              Complete guide for AI assistants to help parents discover and register for PolyRISE Football programs
+              Complete guide for AI assistants to help parents discover and register for PolyRISE Athletix programs
             </p>
           </div>
 
@@ -43,7 +43,7 @@ export default function AiGuidePage() {
           <section className="bg-primary/5 border border-primary/20 rounded-lg p-6 space-y-4">
             <h2 className="text-2xl font-bold">Quick Start</h2>
             <p className="text-muted-foreground leading-relaxed">
-              PolyRISE Football provides public REST APIs that enable AI agents (ChatGPT, Grok, Gemini, Claude, etc.)
+              PolyRISE Athletix provides public REST APIs that enable AI agents (ChatGPT, Grok, Gemini, Claude, etc.)
               to help parents find the right football training program and submit registration inquiries without leaving
               the chat conversation.
             </p>
@@ -200,7 +200,7 @@ Content-Type: application/json
           <section className="space-y-4">
             <h2 className="text-2xl font-bold">Structured Data Discovery</h2>
             <p className="text-muted-foreground leading-relaxed">
-              The PolyRISE Football website includes JSON-LD structured data with PotentialAction schemas to help AI
+              The PolyRISE Athletix website includes JSON-LD structured data with PotentialAction schemas to help AI
               agents automatically discover these APIs when analyzing the site.
             </p>
             <div className="bg-muted p-4 rounded-lg">
@@ -249,7 +249,7 @@ Content-Type: application/json
       <footer className="border-t border-border mt-12">
         <div className="container mx-auto px-4 py-8">
           <div className="flex flex-col md:flex-row items-center justify-between gap-4">
-            <p className="text-sm text-muted-foreground">© 2026 PolyRISE Football. All rights reserved.</p>
+            <p className="text-sm text-muted-foreground">© 2026 PolyRISE Athletix. All rights reserved.</p>
             <div className="flex gap-4">
               <Link href="/api-docs" className="text-sm text-primary hover:underline">
                 API Documentation

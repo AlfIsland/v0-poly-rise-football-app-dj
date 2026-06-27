@@ -24,17 +24,17 @@ export async function POST(req: NextRequest) {
         method: "POST",
         headers: { Authorization: `Bearer ${resendKey}`, "Content-Type": "application/json" },
         body: JSON.stringify({
-          from: "PolyRISE Football <noreply@polyrisefootball.com>",
+          from: "PolyRISE Athletix <noreply@polyrisefootball.com>",
           to: [parent.email],
           subject: "Reset Your PolyRISE Password",
           html: `
             <div style="font-family:sans-serif;max-width:480px;margin:0 auto;padding:24px">
-              <h2 style="color:#dc2626">PolyRISE Football</h2>
+              <h2 style="color:#dc2626">PolyRISE Athletix</h2>
               <p>Hi ${parent.name},</p>
               <p>We received a request to reset your password. Copy and paste the link below into your browser to set a new password. This link expires in 1 hour.</p>
               <p style="background:#f3f4f6;padding:12px;border-radius:8px;word-break:break-all;font-size:13px">${resetLink}</p>
               <p style="color:#666;font-size:13px">If you didn't request this, you can ignore this email.</p>
-              <p style="color:#999;font-size:12px">PolyRISE Football · (817) 658-3300 · polyrise@polyrisefootball.com</p>
+              <p style="color:#999;font-size:12px">PolyRISE Athletix · (817) 658-3300 · polyrise@polyrisefootball.com</p>
             </div>
           `,
         }),

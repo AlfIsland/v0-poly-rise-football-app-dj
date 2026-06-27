@@ -8,9 +8,9 @@ export default function PrivacyPage() {
 
         {/* Header */}
         <div className="flex items-center gap-4 mb-8 pb-6 border-b-2 border-red-600">
-          <Image src="/poly-rise-logo.png" alt="PolyRISE Football" width={48} height={48} className="object-contain" />
+          <Image src="/poly-rise-logo.png" alt="PolyRISE Athletix" width={48} height={48} className="object-contain" />
           <div>
-            <p className="text-xs font-bold text-red-600 uppercase tracking-widest">PolyRISE Football</p>
+            <p className="text-xs font-bold text-red-600 uppercase tracking-widest">PolyRISE Athletix</p>
             <h1 className="text-2xl font-black text-gray-900">Privacy Policy</h1>
             <p className="text-gray-400 text-xs mt-0.5">Effective Date: April 26, 2026 · Last Updated: April 26, 2026</p>
           </div>
@@ -20,7 +20,7 @@ export default function PrivacyPage() {
 
           <section>
             <p>
-              PolyRISE Football (&quot;PolyRISE,&quot; &quot;we,&quot; &quot;us,&quot; or &quot;our&quot;) is committed to protecting your privacy.
+              PolyRISE Athletix (&quot;PolyRISE,&quot; &quot;we,&quot; &quot;us,&quot; or &quot;our&quot;) is committed to protecting your privacy.
               This Privacy Policy explains what information we collect, how we use it, and your rights regarding
               your data when you use <strong>polyrisefootball.com</strong> and all related services (the &quot;Platform&quot;).
             </p>
@@ -201,7 +201,7 @@ export default function PrivacyPage() {
             <h2 className="text-base font-black text-gray-900 uppercase tracking-wide mb-3">11. Contact Us</h2>
             <p>For any privacy questions, data requests, or concerns:</p>
             <div className="mt-2 bg-gray-50 border border-gray-200 rounded-xl p-4">
-              <p className="font-bold text-gray-900">PolyRISE Football</p>
+              <p className="font-bold text-gray-900">PolyRISE Athletix</p>
               <p>Dripping Springs, Texas</p>
               <p>(817) 658-3300</p>
               <p>polyrise@polyrisefootball.com</p>
@@ -212,7 +212,7 @@ export default function PrivacyPage() {
         </div>
 
         <div className="mt-10 pt-6 border-t border-gray-200 flex items-center justify-between text-xs text-gray-400">
-          <p>&copy; {new Date().getFullYear()} PolyRISE Football. All rights reserved.</p>
+          <p>&copy; {new Date().getFullYear()} PolyRISE Athletix. All rights reserved.</p>
           <Link href="/terms" className="text-red-600 hover:text-red-700 font-semibold">Terms of Service →</Link>
         </div>
 

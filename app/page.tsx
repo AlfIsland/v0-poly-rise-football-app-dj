@@ -21,7 +21,7 @@ export default function HomePage() {
                 height={48}
                 className="h-12 w-auto"
               />
-              <span className="font-display font-black text-2xl tracking-tight hidden sm:inline">PolyRISE <span className="text-[#CC0000]">Athletix</span></span>
+              <span className="font-display font-black text-2xl tracking-tight hidden sm:inline text-white">PolyRISE Athletix</span>
             </Link>
 
             <div className="flex items-center gap-8">

@@ -104,139 +104,19 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Plans & Pricing */}
+      {/* Programs & Pricing */}
       <section id="programs" className="py-12 lg:py-20 bg-gray-950">
         <div className="container mx-auto px-4 lg:px-8">
-          <div className="text-center mb-4">
+          <div className="text-center mb-10">
             <p className="text-red-500 font-bold text-xs uppercase tracking-widest mb-3">PolyRISE Athletix</p>
-            <h2 className="text-4xl lg:text-5xl font-display font-bold text-white">Plans & Pricing</h2>
-            <p className="text-lg text-white mt-3 max-w-xl mx-auto">Every athlete is at a different stage. Pick the plan that fits where your child is right now.</p>
+            <h2 className="text-4xl lg:text-5xl font-display font-bold text-white">Programs & Pricing</h2>
+            <p className="text-lg text-white mt-3 max-w-xl mx-auto">In-person training packages designed for every level of commitment.</p>
           </div>
 
-          {/* Grade Guide */}
-          <div className="max-w-2xl mx-auto mb-10 mt-8">
-            <div className="bg-gray-900 border border-gray-700 rounded-2xl px-6 py-4 grid grid-cols-3 gap-3 text-center text-sm">
-              <div>
-                <p className="text-white text-xs uppercase tracking-widest mb-1">Middle School</p>
-                <p className="text-white font-semibold">Grades 6–8</p>
-                <p className="text-white mt-1 text-xs">→ <span className="text-white font-semibold">Passport</span></p>
-              </div>
-              <div className="border-l border-r border-gray-700 px-2">
-                <p className="text-white text-xs uppercase tracking-widest mb-1">High School</p>
-                <p className="text-white font-semibold">Grades 9–12</p>
-                <p className="text-white mt-1 text-xs">→ <span className="text-red-400 font-semibold">Recruit</span></p>
-              </div>
-              <div>
-                <p className="text-white text-xs uppercase tracking-widest mb-1">Upper HS</p>
-                <p className="text-white font-semibold">Grades 11–12</p>
-                <p className="text-white mt-1 text-xs">→ <span className="text-yellow-400 font-semibold">Elite Recruit</span></p>
-              </div>
-            </div>
-          </div>
+          {/* Training Programs Grid */}
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
 
-          <div className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
-            {/* Passport */}
-            <div className="relative bg-gray-900 rounded-2xl border-2 border-gray-500 flex flex-col overflow-hidden">
-              <div className="p-6">
-                <span className="inline-block text-xs font-semibold px-3 py-1 rounded-full bg-blue-900/50 text-blue-300 border border-blue-700/40 mb-4">All Athletes — Middle School &amp; Up</span>
-                <h3 className="text-2xl font-black text-white">Passport</h3>
-                <div className="flex items-end gap-1 mt-1 mb-2">
-                  <span className="text-4xl font-black text-white">$9.99</span>
-                  <span className="text-white text-sm mb-1">/month</span>
-                </div>
-                <p className="text-white text-sm">Track your athlete&apos;s progress from day one</p>
-              </div>
-              <div className="border-t border-gray-800 px-6 py-5 flex-1 space-y-3">
-                {["Monthly progress reports & charts","Full session history","Baseline vs. current comparisons","Downloadable PDF reports"].map(f => (
-                  <div key={f} className="flex items-start gap-2.5 text-sm text-white">
-                    <span className="mt-0.5 w-4 h-4 rounded-full flex-shrink-0 flex items-center justify-center bg-gray-500">
-                      <svg className="w-2.5 h-2.5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}><path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" /></svg>
-                    </span>
-                    {f}
-                  </div>
-                ))}
-              </div>
-              <div className="px-6 pb-6 pt-4">
-                <Link href="/parent/register" className="block w-full text-center font-bold rounded-xl py-3 text-sm bg-gray-700 hover:bg-gray-600 text-white transition-colors">Get Passport</Link>
-              </div>
-            </div>
-
-            {/* Recruit — Most Popular */}
-            <div className="relative bg-gray-900 rounded-2xl border-2 border-red-500 flex flex-col overflow-hidden">
-              <div className="absolute top-0 left-0 right-0 text-center py-1.5 text-xs font-black tracking-widest bg-red-600 text-white">MOST POPULAR</div>
-              <div className="p-6 pt-10">
-                <span className="inline-block text-xs font-semibold px-3 py-1 rounded-full bg-red-900/50 text-red-300 border border-red-700/40 mb-4">High School Athletes — Grades 9–12</span>
-                <h3 className="text-2xl font-black text-red-400">Recruit</h3>
-                <div className="flex items-end gap-1 mt-1 mb-2">
-                  <span className="text-4xl font-black text-white">$29.99</span>
-                  <span className="text-white text-sm mb-1">/month</span>
-                </div>
-                <p className="text-white text-sm">Verified metrics + recruiting profile + visibility</p>
-              </div>
-              <div className="border-t border-gray-800 px-6 py-5 flex-1 space-y-3">
-                {["Full athlete metrics tracking","PR-VERIFIED seal on profile","Shareable recruiting profile page","Hudl film linked to profile","Monthly X spotlight to college recruiters","1 Free Combine Camp/Month"].map(f => (
-                  <div key={f} className="flex items-start gap-2.5 text-sm text-white">
-                    <span className="mt-0.5 w-4 h-4 rounded-full flex-shrink-0 flex items-center justify-center bg-red-500">
-                      <svg className="w-2.5 h-2.5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}><path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" /></svg>
-                    </span>
-                    {f}
-                  </div>
-                ))}
-              </div>
-              <div className="px-6 pb-6 pt-4">
-                <Link href="/parent/register" className="block w-full text-center font-bold rounded-xl py-3 text-sm bg-red-600 hover:bg-red-500 text-white transition-colors">Get Recruit</Link>
-              </div>
-            </div>
-
-            {/* Elite Recruit — Coming Soon */}
-            <div className="relative bg-gray-900 rounded-2xl border-2 border-yellow-500 flex flex-col overflow-hidden">
-              <div className="absolute inset-0 z-10 flex flex-col items-center justify-center rounded-2xl bg-black/70 backdrop-blur-sm">
-                <span className="text-yellow-400 text-3xl mb-2">🏆</span>
-                <p className="text-white font-black text-xl tracking-widest uppercase">Coming Soon</p>
-                <p className="text-white text-xs mt-2 text-center px-6">We&apos;re finalizing this package.<br />Check back soon.</p>
-              </div>
-              <div className="p-6">
-                <span className="inline-block text-xs font-semibold px-3 py-1 rounded-full bg-yellow-900/50 text-yellow-300 border border-yellow-700/40 mb-4">High School Athletes — Grades 11–12</span>
-                <h3 className="text-2xl font-black text-yellow-400">Elite Recruit</h3>
-                <div className="flex items-end gap-1 mt-1 mb-2">
-                  <span className="text-4xl font-black text-white">$49.99</span>
-                  <span className="text-white text-sm mb-1">/month</span>
-                </div>
-                <p className="text-white text-sm">Full recruiting exposure + player development</p>
-              </div>
-              <div className="border-t border-gray-800 px-6 py-5 flex-1 space-y-3">
-                {["Everything in Recruit","Quarterly Kevin Garrett development report","College program fit suggestions","Prospect ranking by position & grade","1 Free Combine Camp/Month","Early access to all PolyRISE camps & events"].map(f => (
-                  <div key={f} className="flex items-start gap-2.5 text-sm text-white">
-                    <span className="mt-0.5 w-4 h-4 rounded-full flex-shrink-0 flex items-center justify-center bg-yellow-500">
-                      <svg className="w-2.5 h-2.5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}><path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" /></svg>
-                    </span>
-                    {f}
-                  </div>
-                ))}
-              </div>
-              <div className="px-6 pb-6 pt-4">
-                <Link href="/parent/register" className="block w-full text-center font-bold rounded-xl py-3 text-sm bg-yellow-500 hover:bg-yellow-400 text-black transition-colors">Get Elite Recruit</Link>
-              </div>
-            </div>
-          </div>
-
-          <div className="text-center mt-10">
-            <Link href="/plans" className="inline-flex items-center gap-2 bg-white/10 hover:bg-white/20 text-white font-semibold px-6 py-3 rounded-xl border border-white/20 transition-colors text-sm">
-              View Full Plan Details
-              <ArrowRight className="w-4 h-4" />
-            </Link>
-          </div>
-
-          {/* Training Programs */}
-          <div className="mt-16 pt-12 border-t border-gray-800">
-            <div className="mb-10">
-              <h3 className="text-3xl lg:text-4xl font-display font-bold text-white">Training Programs</h3>
-              <p className="text-lg text-white mt-2">In-person training packages designed for every level of commitment</p>
-            </div>
-
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-
-              {/* Player Development */}
+              {/* Football Player Development */}
               <div className="bg-card border-primary/50 border-2 overflow-hidden group hover:border-primary transition-colors">
                 <div className="aspect-video relative overflow-hidden">
                   <img src="/athlete-training-drill.jpg" alt="Player Development Training" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
@@ -489,6 +369,128 @@ export default function HomePage() {
                 </div>
               </div>
 
+          </div>
+
+          {/* Athlete Tracking & Profile Plans */}
+          <div className="mt-16 pt-12 border-t border-gray-800 max-w-6xl mx-auto">
+            <div className="text-center mb-8">
+              <p className="text-red-500 font-bold text-xs uppercase tracking-widest mb-2">Add-On</p>
+              <h3 className="text-3xl lg:text-4xl font-display font-bold text-white">Athlete Tracking & Recruiting Profiles</h3>
+              <p className="text-lg text-white mt-2">Enhance your athlete&apos;s development with verified metrics, a shareable recruiting profile, and college coach visibility.</p>
+            </div>
+
+            {/* Grade Guide */}
+            <div className="max-w-2xl mx-auto mb-10">
+              <div className="bg-gray-900 border border-gray-700 rounded-2xl px-6 py-4 grid grid-cols-3 gap-3 text-center text-sm">
+                <div>
+                  <p className="text-white text-xs uppercase tracking-widest mb-1">Middle School</p>
+                  <p className="text-white font-semibold">Grades 6–8</p>
+                  <p className="text-white mt-1 text-xs">→ <span className="text-white font-semibold">Passport</span></p>
+                </div>
+                <div className="border-l border-r border-gray-700 px-2">
+                  <p className="text-white text-xs uppercase tracking-widest mb-1">High School</p>
+                  <p className="text-white font-semibold">Grades 9–12</p>
+                  <p className="text-white mt-1 text-xs">→ <span className="text-red-400 font-semibold">Recruit</span></p>
+                </div>
+                <div>
+                  <p className="text-white text-xs uppercase tracking-widest mb-1">Upper HS</p>
+                  <p className="text-white font-semibold">Grades 11–12</p>
+                  <p className="text-white mt-1 text-xs">→ <span className="text-yellow-400 font-semibold">Elite Recruit</span></p>
+                </div>
+              </div>
+            </div>
+
+            <div className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+              {/* Passport */}
+              <div className="relative bg-gray-900 rounded-2xl border-2 border-gray-500 flex flex-col overflow-hidden">
+                <div className="p-6">
+                  <span className="inline-block text-xs font-semibold px-3 py-1 rounded-full bg-blue-900/50 text-blue-300 border border-blue-700/40 mb-4">All Athletes — Middle School &amp; Up</span>
+                  <h3 className="text-2xl font-black text-white">Passport</h3>
+                  <div className="flex items-end gap-1 mt-1 mb-2">
+                    <span className="text-4xl font-black text-white">$9.99</span>
+                    <span className="text-white text-sm mb-1">/month</span>
+                  </div>
+                  <p className="text-white text-sm">Track your athlete&apos;s progress from day one</p>
+                </div>
+                <div className="border-t border-gray-800 px-6 py-5 flex-1 space-y-3">
+                  {["Monthly progress reports & charts","Full session history","Baseline vs. current comparisons","Downloadable PDF reports"].map(f => (
+                    <div key={f} className="flex items-start gap-2.5 text-sm text-white">
+                      <span className="mt-0.5 w-4 h-4 rounded-full flex-shrink-0 flex items-center justify-center bg-gray-500">
+                        <svg className="w-2.5 h-2.5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}><path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" /></svg>
+                      </span>
+                      {f}
+                    </div>
+                  ))}
+                </div>
+                <div className="px-6 pb-6 pt-4">
+                  <Link href="/parent/register" className="block w-full text-center font-bold rounded-xl py-3 text-sm bg-gray-700 hover:bg-gray-600 text-white transition-colors">Get Passport</Link>
+                </div>
+              </div>
+
+              {/* Recruit — Most Popular */}
+              <div className="relative bg-gray-900 rounded-2xl border-2 border-red-500 flex flex-col overflow-hidden">
+                <div className="absolute top-0 left-0 right-0 text-center py-1.5 text-xs font-black tracking-widest bg-red-600 text-white">MOST POPULAR</div>
+                <div className="p-6 pt-10">
+                  <span className="inline-block text-xs font-semibold px-3 py-1 rounded-full bg-red-900/50 text-red-300 border border-red-700/40 mb-4">High School Athletes — Grades 9–12</span>
+                  <h3 className="text-2xl font-black text-red-400">Recruit</h3>
+                  <div className="flex items-end gap-1 mt-1 mb-2">
+                    <span className="text-4xl font-black text-white">$29.99</span>
+                    <span className="text-white text-sm mb-1">/month</span>
+                  </div>
+                  <p className="text-white text-sm">Verified metrics + recruiting profile + visibility</p>
+                </div>
+                <div className="border-t border-gray-800 px-6 py-5 flex-1 space-y-3">
+                  {["Full athlete metrics tracking","PR-VERIFIED seal on profile","Shareable recruiting profile page","Hudl film linked to profile","Monthly X spotlight to college recruiters","1 Free Combine Camp/Month"].map(f => (
+                    <div key={f} className="flex items-start gap-2.5 text-sm text-white">
+                      <span className="mt-0.5 w-4 h-4 rounded-full flex-shrink-0 flex items-center justify-center bg-red-500">
+                        <svg className="w-2.5 h-2.5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}><path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" /></svg>
+                      </span>
+                      {f}
+                    </div>
+                  ))}
+                </div>
+                <div className="px-6 pb-6 pt-4">
+                  <Link href="/parent/register" className="block w-full text-center font-bold rounded-xl py-3 text-sm bg-red-600 hover:bg-red-500 text-white transition-colors">Get Recruit</Link>
+                </div>
+              </div>
+
+              {/* Elite Recruit — Coming Soon */}
+              <div className="relative bg-gray-900 rounded-2xl border-2 border-yellow-500 flex flex-col overflow-hidden">
+                <div className="absolute inset-0 z-10 flex flex-col items-center justify-center rounded-2xl bg-black/70 backdrop-blur-sm">
+                  <span className="text-yellow-400 text-3xl mb-2">🏆</span>
+                  <p className="text-white font-black text-xl tracking-widest uppercase">Coming Soon</p>
+                  <p className="text-white text-xs mt-2 text-center px-6">We&apos;re finalizing this package.<br />Check back soon.</p>
+                </div>
+                <div className="p-6">
+                  <span className="inline-block text-xs font-semibold px-3 py-1 rounded-full bg-yellow-900/50 text-yellow-300 border border-yellow-700/40 mb-4">High School Athletes — Grades 11–12</span>
+                  <h3 className="text-2xl font-black text-yellow-400">Elite Recruit</h3>
+                  <div className="flex items-end gap-1 mt-1 mb-2">
+                    <span className="text-4xl font-black text-white">$49.99</span>
+                    <span className="text-white text-sm mb-1">/month</span>
+                  </div>
+                  <p className="text-white text-sm">Full recruiting exposure + player development</p>
+                </div>
+                <div className="border-t border-gray-800 px-6 py-5 flex-1 space-y-3">
+                  {["Everything in Recruit","Quarterly Kevin Garrett development report","College program fit suggestions","Prospect ranking by position & grade","1 Free Combine Camp/Month","Early access to all PolyRISE camps & events"].map(f => (
+                    <div key={f} className="flex items-start gap-2.5 text-sm text-white">
+                      <span className="mt-0.5 w-4 h-4 rounded-full flex-shrink-0 flex items-center justify-center bg-yellow-500">
+                        <svg className="w-2.5 h-2.5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}><path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" /></svg>
+                      </span>
+                      {f}
+                    </div>
+                  ))}
+                </div>
+                <div className="px-6 pb-6 pt-4">
+                  <Link href="/parent/register" className="block w-full text-center font-bold rounded-xl py-3 text-sm bg-yellow-500 hover:bg-yellow-400 text-black transition-colors">Get Elite Recruit</Link>
+                </div>
+              </div>
+            </div>
+
+            <div className="text-center mt-10">
+              <Link href="/plans" className="inline-flex items-center gap-2 bg-white/10 hover:bg-white/20 text-white font-semibold px-6 py-3 rounded-xl border border-white/20 transition-colors text-sm">
+                View Full Plan Details
+                <ArrowRight className="w-4 h-4" />
+              </Link>
             </div>
           </div>
 

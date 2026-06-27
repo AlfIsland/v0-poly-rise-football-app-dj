@@ -26,25 +26,25 @@ export default function HomePage() {
             <div className="flex items-center gap-6">
               <Link
                 href="#programs"
-                className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors hidden md:inline"
+                className="text-sm font-medium text-white hover:text-foreground transition-colors hidden md:inline"
               >
                 Programs
               </Link>
               <Link
                 href="#about"
-                className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors hidden md:inline"
+                className="text-sm font-medium text-white hover:text-foreground transition-colors hidden md:inline"
               >
                 About
               </Link>
               <Link
                 href="#contact"
-                className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors hidden md:inline"
+                className="text-sm font-medium text-white hover:text-foreground transition-colors hidden md:inline"
               >
                 Contact
               </Link>
               <Link
                 href="/passport"
-                className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors hidden md:inline"
+                className="text-sm font-medium text-white hover:text-foreground transition-colors hidden md:inline"
               >
                 Athlete Passport
               </Link>
@@ -71,7 +71,7 @@ export default function HomePage() {
                 <span className="text-white">Austin & Central Texas</span>
               </h1>
 
-              <p className="text-lg lg:text-xl text-muted-foreground leading-relaxed text-pretty">
+              <p className="text-lg lg:text-xl text-white leading-relaxed text-pretty">
                 Professional level training in football, soccer, baseball, softball, girls flag football, wrestling and more — plus expert recruiting & exposure for H.S. athletes with trusted PR-VERIFIED metrics.
               </p>
             </div>
@@ -95,7 +95,7 @@ export default function HomePage() {
                   </div>
                   <div>
                     <div className="font-display font-bold text-lg">Elite Training</div>
-                    <div className="text-sm text-muted-foreground">Professional Coaching</div>
+                    <div className="text-sm text-white">Professional Coaching</div>
                   </div>
                 </div>
               </div>
@@ -110,26 +110,26 @@ export default function HomePage() {
           <div className="text-center mb-4">
             <p className="text-red-500 font-bold text-xs uppercase tracking-widest mb-3">PolyRISE Athletix</p>
             <h2 className="text-4xl lg:text-5xl font-display font-bold text-white">Plans & Pricing</h2>
-            <p className="text-lg text-gray-400 mt-3 max-w-xl mx-auto">Every athlete is at a different stage. Pick the plan that fits where your child is right now.</p>
+            <p className="text-lg text-white mt-3 max-w-xl mx-auto">Every athlete is at a different stage. Pick the plan that fits where your child is right now.</p>
           </div>
 
           {/* Grade Guide */}
           <div className="max-w-2xl mx-auto mb-10 mt-8">
             <div className="bg-gray-900 border border-gray-700 rounded-2xl px-6 py-4 grid grid-cols-3 gap-3 text-center text-sm">
               <div>
-                <p className="text-gray-500 text-xs uppercase tracking-widest mb-1">Middle School</p>
+                <p className="text-white text-xs uppercase tracking-widest mb-1">Middle School</p>
                 <p className="text-white font-semibold">Grades 6–8</p>
-                <p className="text-gray-400 mt-1 text-xs">→ <span className="text-gray-300 font-semibold">Passport</span></p>
+                <p className="text-white mt-1 text-xs">→ <span className="text-white font-semibold">Passport</span></p>
               </div>
               <div className="border-l border-r border-gray-700 px-2">
-                <p className="text-gray-500 text-xs uppercase tracking-widest mb-1">High School</p>
+                <p className="text-white text-xs uppercase tracking-widest mb-1">High School</p>
                 <p className="text-white font-semibold">Grades 9–12</p>
-                <p className="text-gray-400 mt-1 text-xs">→ <span className="text-red-400 font-semibold">Recruit</span></p>
+                <p className="text-white mt-1 text-xs">→ <span className="text-red-400 font-semibold">Recruit</span></p>
               </div>
               <div>
-                <p className="text-gray-500 text-xs uppercase tracking-widest mb-1">Upper HS</p>
+                <p className="text-white text-xs uppercase tracking-widest mb-1">Upper HS</p>
                 <p className="text-white font-semibold">Grades 11–12</p>
-                <p className="text-gray-400 mt-1 text-xs">→ <span className="text-yellow-400 font-semibold">Elite Recruit</span></p>
+                <p className="text-white mt-1 text-xs">→ <span className="text-yellow-400 font-semibold">Elite Recruit</span></p>
               </div>
             </div>
           </div>
@@ -139,16 +139,16 @@ export default function HomePage() {
             <div className="relative bg-gray-900 rounded-2xl border-2 border-gray-500 flex flex-col overflow-hidden">
               <div className="p-6">
                 <span className="inline-block text-xs font-semibold px-3 py-1 rounded-full bg-blue-900/50 text-blue-300 border border-blue-700/40 mb-4">All Athletes — Middle School &amp; Up</span>
-                <h3 className="text-2xl font-black text-gray-300">Passport</h3>
+                <h3 className="text-2xl font-black text-white">Passport</h3>
                 <div className="flex items-end gap-1 mt-1 mb-2">
                   <span className="text-4xl font-black text-white">$9.99</span>
-                  <span className="text-gray-500 text-sm mb-1">/month</span>
+                  <span className="text-white text-sm mb-1">/month</span>
                 </div>
-                <p className="text-gray-400 text-sm">Track your athlete&apos;s progress from day one</p>
+                <p className="text-white text-sm">Track your athlete&apos;s progress from day one</p>
               </div>
               <div className="border-t border-gray-800 px-6 py-5 flex-1 space-y-3">
                 {["Monthly progress reports & charts","Full session history","Baseline vs. current comparisons","Downloadable PDF reports"].map(f => (
-                  <div key={f} className="flex items-start gap-2.5 text-sm text-gray-300">
+                  <div key={f} className="flex items-start gap-2.5 text-sm text-white">
                     <span className="mt-0.5 w-4 h-4 rounded-full flex-shrink-0 flex items-center justify-center bg-gray-500">
                       <svg className="w-2.5 h-2.5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}><path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" /></svg>
                     </span>
@@ -169,13 +169,13 @@ export default function HomePage() {
                 <h3 className="text-2xl font-black text-red-400">Recruit</h3>
                 <div className="flex items-end gap-1 mt-1 mb-2">
                   <span className="text-4xl font-black text-white">$29.99</span>
-                  <span className="text-gray-500 text-sm mb-1">/month</span>
+                  <span className="text-white text-sm mb-1">/month</span>
                 </div>
-                <p className="text-gray-400 text-sm">Verified metrics + recruiting profile + visibility</p>
+                <p className="text-white text-sm">Verified metrics + recruiting profile + visibility</p>
               </div>
               <div className="border-t border-gray-800 px-6 py-5 flex-1 space-y-3">
                 {["Full athlete metrics tracking","PR-VERIFIED seal on profile","Shareable recruiting profile page","Hudl film linked to profile","Monthly X spotlight to college recruiters","1 Free Combine Camp/Month"].map(f => (
-                  <div key={f} className="flex items-start gap-2.5 text-sm text-gray-300">
+                  <div key={f} className="flex items-start gap-2.5 text-sm text-white">
                     <span className="mt-0.5 w-4 h-4 rounded-full flex-shrink-0 flex items-center justify-center bg-red-500">
                       <svg className="w-2.5 h-2.5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}><path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" /></svg>
                     </span>
@@ -193,20 +193,20 @@ export default function HomePage() {
               <div className="absolute inset-0 z-10 flex flex-col items-center justify-center rounded-2xl bg-black/70 backdrop-blur-sm">
                 <span className="text-yellow-400 text-3xl mb-2">🏆</span>
                 <p className="text-white font-black text-xl tracking-widest uppercase">Coming Soon</p>
-                <p className="text-gray-400 text-xs mt-2 text-center px-6">We&apos;re finalizing this package.<br />Check back soon.</p>
+                <p className="text-white text-xs mt-2 text-center px-6">We&apos;re finalizing this package.<br />Check back soon.</p>
               </div>
               <div className="p-6">
                 <span className="inline-block text-xs font-semibold px-3 py-1 rounded-full bg-yellow-900/50 text-yellow-300 border border-yellow-700/40 mb-4">High School Athletes — Grades 11–12</span>
                 <h3 className="text-2xl font-black text-yellow-400">Elite Recruit</h3>
                 <div className="flex items-end gap-1 mt-1 mb-2">
                   <span className="text-4xl font-black text-white">$49.99</span>
-                  <span className="text-gray-500 text-sm mb-1">/month</span>
+                  <span className="text-white text-sm mb-1">/month</span>
                 </div>
-                <p className="text-gray-400 text-sm">Full recruiting exposure + player development</p>
+                <p className="text-white text-sm">Full recruiting exposure + player development</p>
               </div>
               <div className="border-t border-gray-800 px-6 py-5 flex-1 space-y-3">
                 {["Everything in Recruit","Quarterly Kevin Garrett development report","College program fit suggestions","Prospect ranking by position & grade","1 Free Combine Camp/Month","Early access to all PolyRISE camps & events"].map(f => (
-                  <div key={f} className="flex items-start gap-2.5 text-sm text-gray-300">
+                  <div key={f} className="flex items-start gap-2.5 text-sm text-white">
                     <span className="mt-0.5 w-4 h-4 rounded-full flex-shrink-0 flex items-center justify-center bg-yellow-500">
                       <svg className="w-2.5 h-2.5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}><path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" /></svg>
                     </span>
@@ -231,7 +231,7 @@ export default function HomePage() {
           <div className="mt-16 pt-12 border-t border-gray-800">
             <div className="mb-10">
               <h3 className="text-3xl lg:text-4xl font-display font-bold text-white">Training Programs</h3>
-              <p className="text-lg text-gray-400 mt-2">In-person training packages designed for every level of commitment</p>
+              <p className="text-lg text-white mt-2">In-person training packages designed for every level of commitment</p>
             </div>
 
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -245,7 +245,7 @@ export default function HomePage() {
                 <div className="pt-6 px-6 pb-6 space-y-4">
                   <div>
                     <h4 className="text-xl font-display font-bold mb-2">Football Player Development</h4>
-                    <p className="text-muted-foreground text-sm leading-relaxed mb-4">Tuesday &amp; Thursday (6:30–7:30pm) including SAQ, S&amp;C, football drills, tournament entries, military character building events, PR-Verified Camp and Free Athletic Training Passport (Tracker).</p>
+                    <p className="text-white text-sm leading-relaxed mb-4">Tuesday &amp; Thursday (6:30–7:30pm) including SAQ, S&amp;C, football drills, tournament entries, military character building events, PR-Verified Camp and Free Athletic Training Passport (Tracker).</p>
                     <div className="space-y-2 border-t border-dashed border-border pt-4">
                       <div className="flex items-center justify-between">
                         <span className="font-medium text-sm">Monthly</span>
@@ -278,7 +278,7 @@ export default function HomePage() {
                   <div>
                     <h4 className="text-xl font-display font-bold mb-2">Multi-Sport Development</h4>
                     <div className="text-lg font-bold text-white mb-3">$265/mo</div>
-                    <p className="text-muted-foreground text-sm leading-relaxed">Youth sports development training covering wrestling, girls flag football, soccer, baseball, softball, and more — building well-rounded athletes across multiple sports.</p>
+                    <p className="text-white text-sm leading-relaxed">Youth sports development training covering wrestling, girls flag football, soccer, baseball, softball, and more — building well-rounded athletes across multiple sports.</p>
                   </div>
                   <Link href="/register?program=multi-sport-dev" className="block w-full text-center bg-[#FF6600] text-white px-4 py-2 rounded hover:bg-[#FF6600]/80 transition-colors">Register</Link>
                 </div>
@@ -290,11 +290,11 @@ export default function HomePage() {
                   <div>
                     <h4 className="text-xl font-display font-bold mb-1">PolyRISE Athletix Tournament</h4>
                     <p className="text-sm font-display font-semibold text-primary italic mb-2">Rise of Warriors</p>
-                    <p className="text-muted-foreground text-sm leading-relaxed mb-2">Middle School (10-team, May 29th - $400) and High School (8-team, May 30th - $425). Minimum 3 games, single game elimination.</p>
+                    <p className="text-white text-sm leading-relaxed mb-2">Middle School (10-team, May 29th - $400) and High School (8-team, May 30th - $425). Minimum 3 games, single game elimination.</p>
                     <ul className="space-y-1 mt-3">
-                      <li className="flex items-start gap-2 text-sm text-muted-foreground"><CheckCircle2 className="w-4 h-4 text-primary flex-shrink-0 mt-0.5" />Middle School: 10 teams - $400</li>
-                      <li className="flex items-start gap-2 text-sm text-muted-foreground"><CheckCircle2 className="w-4 h-4 text-primary flex-shrink-0 mt-0.5" />High School: 8 teams - $425</li>
-                      <li className="flex items-start gap-2 text-sm text-muted-foreground"><CheckCircle2 className="w-4 h-4 text-primary flex-shrink-0 mt-0.5" />Min. 3 games, single elimination</li>
+                      <li className="flex items-start gap-2 text-sm text-white"><CheckCircle2 className="w-4 h-4 text-primary flex-shrink-0 mt-0.5" />Middle School: 10 teams - $400</li>
+                      <li className="flex items-start gap-2 text-sm text-white"><CheckCircle2 className="w-4 h-4 text-primary flex-shrink-0 mt-0.5" />High School: 8 teams - $425</li>
+                      <li className="flex items-start gap-2 text-sm text-white"><CheckCircle2 className="w-4 h-4 text-primary flex-shrink-0 mt-0.5" />Min. 3 games, single elimination</li>
                     </ul>
                   </div>
                   <Link href="/register?program=tournament-ms" className="block w-full text-center bg-[#FF6600] text-white px-4 py-2 rounded hover:bg-[#FF6600]/80 transition-colors">Register Team</Link>
@@ -309,7 +309,7 @@ export default function HomePage() {
                       <span className="text-sm font-medium text-primary">Girls Program</span>
                     </div>
                     <h4 className="text-xl font-display font-bold mb-2">Girls Player Development</h4>
-                    <p className="text-muted-foreground text-sm leading-relaxed mb-2">Monday &amp; Friday (5–6:30pm) in May · June &amp; July: Mon &amp; Fri (1–2:30pm). Add Wednesday for more reps and faster development.</p>
+                    <p className="text-white text-sm leading-relaxed mb-2">Monday &amp; Friday (5–6:30pm) in May · June &amp; July: Mon &amp; Fri (1–2:30pm). Add Wednesday for more reps and faster development.</p>
                     <div className="space-y-2 border-t border-dashed border-border pt-4">
                       <div className="flex items-center justify-between">
                         <span className="font-medium text-sm">2 Days a Week · Mon &amp; Fri</span>
@@ -331,7 +331,7 @@ export default function HomePage() {
                   <div>
                     <h4 className="text-xl font-display font-bold mb-2">Multi-Sport Athlete</h4>
                     <div className="text-lg font-bold text-white mb-3">$175/mo</div>
-                    <p className="text-muted-foreground text-sm leading-relaxed">One day a week (Tue or Thur) with camps/events included.</p>
+                    <p className="text-white text-sm leading-relaxed">One day a week (Tue or Thur) with camps/events included.</p>
                   </div>
                   <Link href="/register?program=multi-sport" className="block w-full text-center bg-[#FF6600] text-white px-4 py-2 rounded hover:bg-[#FF6600]/80 transition-colors">Register</Link>
                 </div>
@@ -345,7 +345,7 @@ export default function HomePage() {
                       <span className="text-sm font-medium text-primary">Drop-In</span>
                     </div>
                     <h4 className="text-xl font-display font-bold mb-2">Drop-In Training</h4>
-                    <p className="text-muted-foreground text-sm leading-relaxed mb-2">Try a session before committing to a full program. Add a second day for just $35 more.</p>
+                    <p className="text-white text-sm leading-relaxed mb-2">Try a session before committing to a full program. Add a second day for just $35 more.</p>
                     <div className="space-y-2 border-t border-dashed border-border pt-4">
                       <div className="flex items-center justify-between">
                         <span className="font-medium text-sm">1 Day</span>
@@ -369,7 +369,7 @@ export default function HomePage() {
                       <span className="text-sm font-medium text-primary">Leadership</span>
                     </div>
                     <h4 className="text-xl font-display font-bold mb-2">Leadership &amp; Mentorship Hike</h4>
-                    <p className="text-muted-foreground text-sm leading-relaxed mb-2">A character-building hike experience focused on developing leadership, mentorship, and mental toughness beyond the field.</p>
+                    <p className="text-white text-sm leading-relaxed mb-2">A character-building hike experience focused on developing leadership, mentorship, and mental toughness beyond the field.</p>
                     <div className="flex items-center justify-between border-t border-dashed border-border pt-4">
                       <span className="font-medium text-sm">Per Athlete</span>
                       <span className="text-lg font-bold text-white">$25</span>
@@ -387,7 +387,7 @@ export default function HomePage() {
                       <span className="text-sm font-medium text-primary">Camp</span>
                     </div>
                     <h4 className="text-xl font-display font-bold mb-2">Tackling Camp</h4>
-                    <p className="text-muted-foreground text-sm leading-relaxed mb-2">Proper tackling technique &amp; fundamentals coached by NFL-experienced staff.</p>
+                    <p className="text-white text-sm leading-relaxed mb-2">Proper tackling technique &amp; fundamentals coached by NFL-experienced staff.</p>
                     <div className="flex items-center justify-between border-t border-dashed border-border pt-4">
                       <span className="font-medium text-sm">June 12 · 9:00am · Dripping Springs</span>
                       <span className="text-lg font-bold text-white">$25</span>
@@ -405,7 +405,7 @@ export default function HomePage() {
                       <span className="text-sm font-medium text-primary">Camp</span>
                     </div>
                     <h4 className="text-xl font-display font-bold mb-2">Combine Metrics Camp</h4>
-                    <p className="text-muted-foreground text-sm leading-relaxed mb-2">Professional Combine Events. H.S Athletes record official metrics.</p>
+                    <p className="text-white text-sm leading-relaxed mb-2">Professional Combine Events. H.S Athletes record official metrics.</p>
                     <div className="flex items-center justify-between border-t border-dashed border-border pt-4">
                       <span className="font-medium">Camp Registration</span>
                       <span className="text-lg font-bold text-white">$25</span>
@@ -423,9 +423,9 @@ export default function HomePage() {
                       <span className="text-sm font-medium text-primary">Summer Camp</span>
                     </div>
                     <h4 className="text-xl font-display font-bold mb-2">Summer Camp</h4>
-                    <p className="text-muted-foreground text-sm leading-relaxed mb-2">Athlete Development &amp; Leadership (June &amp; July) — <span className="text-white font-semibold">Limited to 20 spots ONLY</span></p>
+                    <p className="text-white text-sm leading-relaxed mb-2">Athlete Development &amp; Leadership (June &amp; July) — <span className="text-white font-semibold">Limited to 20 spots ONLY</span></p>
                     <div className="border-t border-dashed border-border pt-4">
-                      <div><div className="flex items-center justify-between"><span className="font-medium">Athletic Camp</span><span className="text-lg font-bold text-white">$265/mo</span></div><p className="text-xs text-muted-foreground mt-1">Open to all Elementary &amp; Middle School athletes · Mon, Tue &amp; Thu · 10:00am – 12:00pm (noon)</p></div>
+                      <div><div className="flex items-center justify-between"><span className="font-medium">Athletic Camp</span><span className="text-lg font-bold text-white">$265/mo</span></div><p className="text-xs text-white mt-1">Open to all Elementary &amp; Middle School athletes · Mon, Tue &amp; Thu · 10:00am – 12:00pm (noon)</p></div>
                     </div>
                   </div>
                   <Link href="/register?program=summer-ms" className="block w-full text-center bg-[#FF6600] text-white px-4 py-2 rounded hover:bg-[#FF6600]/80 transition-colors">Register Now</Link>
@@ -465,7 +465,7 @@ export default function HomePage() {
             <h2 className="text-3xl lg:text-5xl font-display font-bold mb-4 text-balance">
               PolyRISE Athletix Coaches Board
             </h2>
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+            <p className="text-lg text-white max-w-2xl mx-auto">
               Learn from coaches with professional playing experience at the highest levels
             </p>
           </div>
@@ -477,7 +477,7 @@ export default function HomePage() {
               </div>
               <h3 className="font-bold text-foreground mb-1">Head Coach Garrett</h3>
               <p className="text-xs text-primary font-semibold mb-2">DB Coach</p>
-              <p className="text-xs text-muted-foreground">7 yrs NFL (Rams, Texans), 3 yrs CFL, Drafted 2003 from SMU</p>
+              <p className="text-xs text-white">7 yrs NFL (Rams, Texans), 3 yrs CFL, Drafted 2003 from SMU</p>
             </div>
             <div className="text-center p-4 bg-card rounded-lg border border-border">
               <div className="w-24 h-24 mx-auto mb-3 rounded-full overflow-hidden border-2 border-primary">
@@ -485,7 +485,7 @@ export default function HomePage() {
               </div>
               <h3 className="font-bold text-foreground mb-1">Coach Jordan</h3>
               <p className="text-xs text-primary font-semibold mb-2">WR/TE</p>
-              <p className="text-xs text-muted-foreground">XFL Draft 2022, Omaha Beef 2X Champion, HCU Assistant WR Coach</p>
+              <p className="text-xs text-white">XFL Draft 2022, Omaha Beef 2X Champion, HCU Assistant WR Coach</p>
             </div>
             <div className="text-center p-4 bg-card rounded-lg border border-border">
               <div className="w-24 h-24 rounded-full overflow-hidden mx-auto mb-3 border-2 border-primary/20">
@@ -493,7 +493,7 @@ export default function HomePage() {
               </div>
               <h3 className="font-bold text-foreground mb-1">Coach Traves</h3>
               <p className="text-xs text-primary font-semibold mb-2">RB/S</p>
-              <p className="text-xs text-muted-foreground">Former Navy Safety & LB, All-East Teams 2011-12, Citadel Football</p>
+              <p className="text-xs text-white">Former Navy Safety & LB, All-East Teams 2011-12, Citadel Football</p>
             </div>
             <div className="text-center p-4 bg-card rounded-lg border border-border">
               <div className="w-24 h-24 rounded-full overflow-hidden mx-auto mb-3 border-2 border-primary/20">
@@ -501,7 +501,7 @@ export default function HomePage() {
               </div>
               <h3 className="font-bold text-foreground mb-1">Coach John</h3>
               <p className="text-xs text-primary font-semibold mb-2">QB</p>
-              <p className="text-xs text-muted-foreground">Former Navy Football QB, Naval Academy Graduate & Officer</p>
+              <p className="text-xs text-white">Former Navy Football QB, Naval Academy Graduate & Officer</p>
             </div>
             <div className="text-center p-4 bg-card rounded-lg border border-border">
               <div className="w-24 h-24 rounded-full overflow-hidden mx-auto mb-3 border-2 border-primary/20">
@@ -509,7 +509,7 @@ export default function HomePage() {
               </div>
               <h3 className="font-bold text-foreground mb-1">Coach Brayden</h3>
               <p className="text-xs text-primary font-semibold mb-2">LB/DL</p>
-              <p className="text-xs text-muted-foreground">Baylor 18-21, NFL Draft 2023, IFL All-Pro & League Champion 2025</p>
+              <p className="text-xs text-white">Baylor 18-21, NFL Draft 2023, IFL All-Pro & League Champion 2025</p>
             </div>
           </div>
         </div>
@@ -521,14 +521,14 @@ export default function HomePage() {
           <div className="flex flex-col md:flex-row items-center justify-center gap-8 md:gap-12">
             <div className="text-center md:text-left max-w-3xl">
               <h2 className="text-3xl lg:text-4xl font-display font-bold mb-4 text-balance">
-                PR-VERIFIED <span className="text-xl lg:text-2xl font-normal text-gray-300">(Seal of Authenticity)</span>
+                PR-VERIFIED <span className="text-xl lg:text-2xl font-normal text-white">(Seal of Authenticity)</span>
               </h2>
-              <p className="text-base lg:text-lg text-gray-300 mb-4 leading-relaxed">
+              <p className="text-base lg:text-lg text-white mb-4 leading-relaxed">
                 The PR-VERIFIED seal is awarded exclusively to athletes who complete PolyRISE Athletix programs, camps, or tryouts. Overseen by a board of coaches with NFL and collegiate playing/coaching experience conducts standardized, pro-style combine testing using consistent protocols and multiple trials for maximum reliability. This seal certifies that the athlete&apos;s metrics were directly measured and verified by our team on-site. No self-reported times or inflated numbers. The data is accurate, unbiased, and built to stand up under recruiter scrutiny.
               </p>
               <div className="mb-4">
                 <p className="text-white font-semibold mb-2">Tested Events Include:</p>
-                <ul className="text-gray-300 text-sm lg:text-base space-y-1 list-disc list-inside">
+                <ul className="text-white text-sm lg:text-base space-y-1 list-disc list-inside">
                   <li>40-Yard Dash</li>
                   <li>Broad Jump</li>
                   <li>Vertical Jump</li>
@@ -537,7 +537,7 @@ export default function HomePage() {
                   <li>Skill-specific evaluations: Catching, Throwing, Footwork, and position drills</li>
                 </ul>
               </div>
-              <p className="text-base lg:text-lg text-gray-300 leading-relaxed">
+              <p className="text-base lg:text-lg text-white leading-relaxed">
                 Athletes earning the PR-VERIFIED seal receive official documentation and a digital badge they can display on recruiting profiles. This gives coaches and scouts immediate confidence that the numbers are real and PolyRISE-vetted.
               </p>
             </div>
@@ -555,7 +555,7 @@ export default function HomePage() {
                 >
                   Get Your FREE Athlete Profile
                 </Link>
-                <span className="text-sm text-gray-400 italic mt-1">Athlete&apos;s Performance Journey</span>
+                <span className="text-sm text-white italic mt-1">Athlete&apos;s Performance Journey</span>
               </div>
               <ProtectedImage
                 src="/pr-verified-badge.png"
@@ -582,7 +582,7 @@ export default function HomePage() {
                   <Target className="w-6 h-6 text-primary" />
                 </div>
                 <h3 className="text-xl font-display font-bold">Athletic Excellence</h3>
-                <p className="text-muted-foreground leading-relaxed">
+                <p className="text-white leading-relaxed">
                   Top-tier training with NFL experience staff, including Speed, Agility, Quickness (SAQ) and Strength &
                   Conditioning (S&C) programs designed to maximize potential.
                 </p>
@@ -595,7 +595,7 @@ export default function HomePage() {
                   <Users className="w-6 h-6 text-accent" />
                 </div>
                 <h3 className="text-xl font-display font-bold">Character Development</h3>
-                <p className="text-muted-foreground leading-relaxed">
+                <p className="text-white leading-relaxed">
                   Building discipline, leadership, and integrity through military character building events and
                   structured programs that emphasize growth beyond the game.
                 </p>
@@ -608,7 +608,7 @@ export default function HomePage() {
                   <Trophy className="w-6 h-6 text-primary" />
                 </div>
                 <h3 className="text-xl font-display font-bold">Complete Development</h3>
-                <p className="text-muted-foreground leading-relaxed">
+                <p className="text-white leading-relaxed">
                   Film study, college visits, NIL & financial literacy classes, and tournament opportunities to prepare
                   athletes for the next level.
                 </p>
@@ -624,14 +624,14 @@ export default function HomePage() {
           <div className="max-w-3xl mx-auto">
             <div className="text-center mb-12">
               <h2 className="text-4xl lg:text-5xl font-display font-bold mb-4">Frequently Asked Questions</h2>
-              <p className="text-lg text-muted-foreground">Everything you need to know about PolyRISE Athletix</p>
+              <p className="text-lg text-white">Everything you need to know about PolyRISE Athletix</p>
             </div>
 
             <div className="space-y-6">
               <div className="bg-card border-border">
                 <div className="pt-6">
                   <h3 className="font-display font-bold text-lg mb-2">What age groups does PolyRISE Athletix train?</h3>
-                  <p className="text-muted-foreground leading-relaxed">
+                  <p className="text-white leading-relaxed">
                     PolyRISE Athletix provides elite training for K-12 athletes, including youth, middle school, and
                     high school players. Our programs are designed to develop athletes at every level, from beginners to
                     those preparing for college recruitment.
@@ -642,7 +642,7 @@ export default function HomePage() {
               <div className="bg-card border-border">
                 <div className="pt-6">
                   <h3 className="font-display font-bold text-lg mb-2">Where is PolyRISE Athletix located?</h3>
-                  <p className="text-muted-foreground leading-relaxed">
+                  <p className="text-white leading-relaxed">
                     PolyRISE Athletix is based in Dripping Springs, Texas (Austin area), with training sessions held at Swift Sessions and local fields. We are expanding to other cities nationwide. Contact us to find out when we&apos;re coming to your location.
                   </p>
                 </div>
@@ -651,7 +651,7 @@ export default function HomePage() {
               <div className="bg-card border-border">
                 <div className="pt-6">
                   <h3 className="font-display font-bold text-lg mb-2">What is included in the Player Development program?</h3>
-                  <p className="text-muted-foreground leading-relaxed">
+                  <p className="text-white leading-relaxed">
                     Player Development ($300/month) includes 2 training sessions weekly, (PolyRISE tee after 3 months), SAQ, S&C training, football drills, monthly camp/tryout, leadership event, film study.
                   </p>
                 </div>
@@ -660,7 +660,7 @@ export default function HomePage() {
               <div className="bg-card border-border">
                 <div className="pt-6">
                   <h3 className="font-display font-bold text-lg mb-2">What makes 360 Elite different from Player Development?</h3>
-                  <p className="text-muted-foreground leading-relaxed">
+                  <p className="text-white leading-relaxed">
                     360 Elite ($500/month) includes everything in Player Development plus a recruiting profile, 7 email blasts a month, one-on-one coaching from NFL
                     experience staff, weekly film study, unlimited free camps, monthly character building events,
                     college visits, NIL & financial literacy classes, and discounts at affiliated sports medicine and
@@ -672,7 +672,7 @@ export default function HomePage() {
               <div className="bg-card border-border">
                 <div className="pt-6">
                   <h3 className="font-display font-bold text-lg mb-2">What is the training schedule?</h3>
-                  <p className="text-muted-foreground leading-relaxed">
+                  <p className="text-white leading-relaxed">
                     Tuesday 6:30-7:45pm and Thursday 6:30-7:45pm intense player development. Monthly camp/tryout and a monthly leadership event on Saturday or Sunday.
                   </p>
                 </div>
@@ -681,7 +681,7 @@ export default function HomePage() {
               <div className="bg-card border-border">
                 <div className="pt-6">
                   <h3 className="font-display font-bold text-lg mb-2">Does PolyRISE Athletix have coaches with NFL experience?</h3>
-                  <p className="text-muted-foreground leading-relaxed">
+                  <p className="text-white leading-relaxed">
                     Yes, PolyRISE Athletix has coaches with NFL experience on staff who provide one-on-one coaching,
                     film study, and advanced training for athletes in the 360 Elite program.
                   </p>
@@ -691,7 +691,7 @@ export default function HomePage() {
               <div className="bg-card border-border">
                 <div className="pt-6">
                   <h3 className="font-display font-bold text-lg mb-2">What is SAQ and S&C training?</h3>
-                  <p className="text-muted-foreground leading-relaxed">
+                  <p className="text-white leading-relaxed">
                     SAQ stands for Speed, Agility, and Quickness training - focused on improving footwork, reaction
                     time, and movement efficiency. S&C stands for Strength and Conditioning - building physical power,
                     endurance, and injury prevention through targeted exercises.
@@ -708,7 +708,7 @@ export default function HomePage() {
         <div className="container mx-auto px-4 lg:px-8">
           <div className="text-center mb-12">
             <h2 className="text-4xl lg:text-5xl font-display font-bold mb-4">Our Sponsors</h2>
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed">
+            <p className="text-lg text-white max-w-2xl mx-auto leading-relaxed">
               We are grateful for the support that help make our program possible.
             </p>
           </div>
@@ -732,7 +732,7 @@ export default function HomePage() {
           </div>
 
           <div className="text-center mt-12">
-            <p className="text-muted-foreground mb-4">Interested in becoming a sponsor?</p>
+            <p className="text-white mb-4">Interested in becoming a sponsor?</p>
             <a href="#contact" className="inline-flex items-center justify-center px-6 py-3 rounded-lg bg-primary text-primary-foreground font-medium hover:bg-primary/90 transition-colors">
               Contact Us
             </a>
@@ -747,7 +747,7 @@ export default function HomePage() {
             <div className="space-y-8">
               <div>
                 <h2 className="text-4xl font-display font-bold mb-4">Send Message</h2>
-                <p className="text-lg text-muted-foreground leading-relaxed">
+                <p className="text-lg text-white leading-relaxed">
                   Do you have questions or comments about our youth football program and improving your football skills?
                   Send me a message, and I will get back to you soon.
                 </p>
@@ -760,8 +760,8 @@ export default function HomePage() {
                   </div>
                   <div>
                     <div className="font-medium mb-1">Location</div>
-                    <div className="text-muted-foreground">Dripping Springs, Texas (Austin area)</div>
-                    <div className="text-sm text-muted-foreground">
+                    <div className="text-white">Dripping Springs, Texas (Austin area)</div>
+                    <div className="text-sm text-white">
                       Training at Swift Sessions and local fields. Expanding to other cities nationwide.
                     </div>
                   </div>
@@ -822,7 +822,7 @@ export default function HomePage() {
                     <textarea id="message" rows={6} className="w-full px-4 py-2 rounded-lg bg-background border border-input focus:outline-none focus:ring-2 focus:ring-ring resize-none" placeholder="Your message..." />
                   </div>
                   <button type="submit" className="w-full bg-[#FF6600] text-white px-4 py-2 rounded hover:bg-[#FF6600]/80 transition-colors">Send Message</button>
-                  <p className="text-xs text-muted-foreground text-center">This site is protected by reCAPTCHA and the Google Privacy Policy and Terms of Service apply.</p>
+                  <p className="text-xs text-white text-center">This site is protected by reCAPTCHA and the Google Privacy Policy and Terms of Service apply.</p>
                 </form>
               </div>
             </div>
@@ -868,14 +868,14 @@ export default function HomePage() {
                 </div>
                 <span className="font-display font-bold">PolyRISE Athletix</span>
               </div>
-              <p className="text-sm text-muted-foreground leading-relaxed">
+              <p className="text-sm text-white leading-relaxed">
                 Building stronger, faster, and character-driven young athletes in Dripping Springs, Texas (Austin area) and beyond.
               </p>
             </div>
 
             <div>
               <h4 className="font-display font-bold mb-4">Programs</h4>
-              <ul className="space-y-2 text-sm text-muted-foreground">
+              <ul className="space-y-2 text-sm text-white">
                 <li><Link href="/passport" className="hover:text-foreground transition-colors">Athlete Passport</Link></li>
                 <li><Link href="#programs" className="hover:text-foreground transition-colors">Player Development</Link></li>
                 <li><Link href="#programs" className="hover:text-foreground transition-colors">{"Player Dev & Recruiting"}</Link></li>
@@ -886,7 +886,7 @@ export default function HomePage() {
 
             <div>
               <h4 className="font-display font-bold mb-4">Company</h4>
-              <ul className="space-y-2 text-sm text-muted-foreground">
+              <ul className="space-y-2 text-sm text-white">
                 <li><Link href="/#about" className="hover:text-foreground transition-colors">About Us</Link></li>
                 <li><Link href="/#contact" className="hover:text-foreground transition-colors">Contact</Link></li>
                 <li><Link href="/register" className="hover:text-foreground transition-colors">Register</Link></li>
@@ -918,7 +918,7 @@ export default function HomePage() {
             </div>
           </div>
 
-          <div className="pt-8 border-t border-border text-center text-sm text-muted-foreground">
+          <div className="pt-8 border-t border-border text-center text-sm text-white">
             <p>Copyright © 2025 PolyRISE Athletix - All Rights Reserved.</p>
           </div>
         </div>

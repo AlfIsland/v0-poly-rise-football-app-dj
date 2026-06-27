@@ -50,7 +50,7 @@ export default function HomePage() {
               </Link>
               <Link
                 href="/plans"
-                className="text-sm font-medium bg-[#FF6600] text-white px-4 py-2 rounded hover:bg-[#FF6600]/80 transition-colors"
+                className="text-sm font-medium bg-red-600 text-white px-4 py-2 rounded hover:bg-red-600/80 transition-colors"
               >
                 View Plans
               </Link>
@@ -265,7 +265,7 @@ export default function HomePage() {
                       </div>
                     </div>
                   </div>
-                  <Link href="/register?program=player-dev" className="block w-full text-center bg-[#FF6600] text-white px-4 py-2 rounded hover:bg-[#FF6600]/80 transition-colors">Register</Link>
+                  <Link href="/register?program=player-dev" className="block w-full text-center bg-red-600 text-white px-4 py-2 rounded hover:bg-red-600/80 transition-colors">Register</Link>
                 </div>
               </div>
 
@@ -280,7 +280,7 @@ export default function HomePage() {
                     <div className="text-lg font-bold text-red-500 mb-3">$265/mo</div>
                     <p className="text-white text-sm leading-relaxed">Youth sports development training covering wrestling, girls flag football, soccer, baseball, softball, and more — building well-rounded athletes across multiple sports.</p>
                   </div>
-                  <Link href="/register?program=multi-sport-dev" className="block w-full text-center bg-[#FF6600] text-white px-4 py-2 rounded hover:bg-[#FF6600]/80 transition-colors">Register</Link>
+                  <Link href="/register?program=multi-sport-dev" className="block w-full text-center bg-red-600 text-white px-4 py-2 rounded hover:bg-red-600/80 transition-colors">Register</Link>
                 </div>
               </div>
 
@@ -334,7 +334,7 @@ export default function HomePage() {
                       </div>
                     </div>
                   </div>
-                  <Link href="/register?program=hs-recruiting-exposure" className="block w-full text-center bg-[#FF6600] text-white px-4 py-2 rounded hover:bg-[#FF6600]/80 transition-colors">Get Started</Link>
+                  <Link href="/register?program=hs-recruiting-exposure" className="block w-full text-center bg-red-600 text-white px-4 py-2 rounded hover:bg-red-600/80 transition-colors">Get Started</Link>
                 </div>
               </div>
 
@@ -358,7 +358,7 @@ export default function HomePage() {
                       </div>
                     </div>
                   </div>
-                  <Link href="/register?program=girls-dev" className="block w-full text-center bg-[#FF6600] text-white px-4 py-2 rounded hover:bg-[#FF6600]/80 transition-colors">Register</Link>
+                  <Link href="/register?program=girls-dev" className="block w-full text-center bg-red-600 text-white px-4 py-2 rounded hover:bg-red-600/80 transition-colors">Register</Link>
                 </div>
               </div>
 
@@ -370,7 +370,7 @@ export default function HomePage() {
                     <div className="text-lg font-bold text-red-500 mb-3">$175/mo</div>
                     <p className="text-white text-sm leading-relaxed">One day a week (Tue or Thur) with camps/events included.</p>
                   </div>
-                  <Link href="/register?program=multi-sport" className="block w-full text-center bg-[#FF6600] text-white px-4 py-2 rounded hover:bg-[#FF6600]/80 transition-colors">Register</Link>
+                  <Link href="/register?program=multi-sport" className="block w-full text-center bg-red-600 text-white px-4 py-2 rounded hover:bg-red-600/80 transition-colors">Register</Link>
                 </div>
               </div>
 
@@ -394,7 +394,7 @@ export default function HomePage() {
                       </div>
                     </div>
                   </div>
-                  <Link href="/register?program=drop-in-1day" className="block w-full text-center bg-[#FF6600] text-white px-4 py-2 rounded hover:bg-[#FF6600]/80 transition-colors">Register</Link>
+                  <Link href="/register?program=drop-in-1day" className="block w-full text-center bg-red-600 text-white px-4 py-2 rounded hover:bg-red-600/80 transition-colors">Register</Link>
                 </div>
               </div>
 
@@ -412,7 +412,7 @@ export default function HomePage() {
                       <span className="text-lg font-bold text-red-500">$25</span>
                     </div>
                   </div>
-                  <Link href="/register?program=hike" className="block w-full text-center bg-[#FF6600] text-white px-4 py-2 rounded hover:bg-[#FF6600]/80 transition-colors">Register</Link>
+                  <Link href="/register?program=hike" className="block w-full text-center bg-red-600 text-white px-4 py-2 rounded hover:bg-red-600/80 transition-colors">Register</Link>
                 </div>
               </div>
 
@@ -430,7 +430,7 @@ export default function HomePage() {
                       <span className="text-lg font-bold text-red-500">$25</span>
                     </div>
                   </div>
-                  <Link href="/register?program=tackling-camp" className="block w-full text-center bg-[#FF6600] text-white px-4 py-2 rounded hover:bg-[#FF6600]/80 transition-colors">Register</Link>
+                  <Link href="/register?program=tackling-camp" className="block w-full text-center bg-red-600 text-white px-4 py-2 rounded hover:bg-red-600/80 transition-colors">Register</Link>
                 </div>
               </div>
 
@@ -448,7 +448,7 @@ export default function HomePage() {
                       <span className="text-lg font-bold text-red-500">$25</span>
                     </div>
                   </div>
-                  <Link href="/register?program=combine" className="block w-full text-center bg-[#FF6600] text-white px-4 py-2 rounded hover:bg-[#FF6600]/80 transition-colors">Register</Link>
+                  <Link href="/register?program=combine" className="block w-full text-center bg-red-600 text-white px-4 py-2 rounded hover:bg-red-600/80 transition-colors">Register</Link>
                 </div>
               </div>
 
@@ -465,7 +465,7 @@ export default function HomePage() {
                       <div><div className="flex items-center justify-between"><span className="font-medium">Athletic Camp</span><span className="text-lg font-bold text-red-500">$265/mo</span></div><p className="text-xs text-white mt-1">Open to all Elementary &amp; Middle School athletes · Mon, Tue &amp; Thu · 10:00am – 12:00pm (noon)</p></div>
                     </div>
                   </div>
-                  <Link href="/register?program=summer-ms" className="block w-full text-center bg-[#FF6600] text-white px-4 py-2 rounded hover:bg-[#FF6600]/80 transition-colors">Register Now</Link>
+                  <Link href="/register?program=summer-ms" className="block w-full text-center bg-red-600 text-white px-4 py-2 rounded hover:bg-red-600/80 transition-colors">Register Now</Link>
                 </div>
               </div>
 
@@ -484,7 +484,7 @@ export default function HomePage() {
                     <img src="/recruiting-athlete-2.jpeg" alt="Athlete Introduction Example - Gevariah Kneubuhl" className="w-48 h-auto rounded-lg border border-primary/20" />
                   </div>
                   <div className="text-center">
-                    <Link href="#contact" className="inline-block bg-[#FF6600] text-white px-8 py-3 rounded hover:bg-[#FF6600]/80 transition-colors font-semibold">Get Started with Recruiting</Link>
+                    <Link href="#contact" className="inline-block bg-red-600 text-white px-8 py-3 rounded hover:bg-red-600/80 transition-colors font-semibold">Get Started with Recruiting</Link>
                   </div>
                 </div>
               </div>
@@ -582,7 +582,7 @@ export default function HomePage() {
               <div className="flex flex-col items-center mb-4 gap-3">
                 <Link
                   href="/plans"
-                  className="text-base font-semibold bg-[#FF6600] text-white px-6 py-3 rounded hover:bg-[#FF6600]/80 transition-colors text-center"
+                  className="text-base font-semibold bg-red-600 text-white px-6 py-3 rounded hover:bg-red-600/80 transition-colors text-center"
                 >
                   Athlete Tracking Passport & Recruiting
                 </Link>
@@ -858,7 +858,7 @@ export default function HomePage() {
                     <label htmlFor="message" className="text-sm font-medium">Message</label>
                     <textarea id="message" rows={6} className="w-full px-4 py-2 rounded-lg bg-background border border-input focus:outline-none focus:ring-2 focus:ring-ring resize-none" placeholder="Your message..." />
                   </div>
-                  <button type="submit" className="w-full bg-[#FF6600] text-white px-4 py-2 rounded hover:bg-[#FF6600]/80 transition-colors">Send Message</button>
+                  <button type="submit" className="w-full bg-red-600 text-white px-4 py-2 rounded hover:bg-red-600/80 transition-colors">Send Message</button>
                   <p className="text-xs text-white text-center">This site is protected by reCAPTCHA and the Google Privacy Policy and Terms of Service apply.</p>
                 </form>
               </div>
@@ -878,7 +878,7 @@ export default function HomePage() {
               Join our football program for expert coaching and football skills development. Registration is now open for all programs.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link href="/register" className="text-base bg-[#FF6600] text-white px-4 py-2 rounded hover:bg-[#FF6600]/80 transition-colors inline-flex items-center">
+              <Link href="/register" className="text-base bg-red-600 text-white px-4 py-2 rounded hover:bg-red-600/80 transition-colors inline-flex items-center">
                 Register for Training
                 <ArrowRight className="w-4 h-4 ml-2" />
               </Link>

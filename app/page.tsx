@@ -67,12 +67,12 @@ export default function HomePage() {
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div className="space-y-6">
               <h1 className="text-4xl lg:text-6xl font-display font-bold leading-tight text-balance">
-                Elite Youth Football Player Development for{" "}
-                <span className="text-white">Austin & Central Texas Athletes</span>
+                Elite Youth Multi-Sport Athlete Development for{" "}
+                <span className="text-white">Austin & Central Texas</span>
               </h1>
 
               <p className="text-lg lg:text-xl text-muted-foreground leading-relaxed text-pretty">
-                PolyRISE Athletix develops K-12 athletes in Austin and Central Texas with pro-level training, recruiting support, and the PR-VERIFIED seal that college scouts trust.
+                Professional level training in football, soccer, baseball, softball, girls flag football, wrestling and more — plus expert recruiting & exposure for H.S. athletes with trusted PR-VERIFIED metrics.
               </p>
             </div>
 

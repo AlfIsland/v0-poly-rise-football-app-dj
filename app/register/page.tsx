@@ -89,6 +89,8 @@ function RegisterPage() {
   })
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState("")
+  const [waiverAccepted, setWaiverAccepted] = useState(false)
+  const [waiverExpanded, setWaiverExpanded] = useState(false)
 
   const billingMonthOptions = (() => {
     const opts: string[] = []
@@ -374,10 +376,53 @@ function RegisterPage() {
               )}
             </div>
 
+            {/* Waiver */}
+            <div className="space-y-3">
+              <p className="text-xs font-bold text-red-400 uppercase tracking-widest">Liability Waiver & Release</p>
+              <div className="bg-gray-800 border border-gray-700 rounded-xl overflow-hidden">
+                <button
+                  type="button"
+                  onClick={() => setWaiverExpanded(v => !v)}
+                  className="w-full flex items-center justify-between px-4 py-3 text-sm text-white font-semibold hover:bg-gray-750 transition-colors"
+                >
+                  <span>Read Full Waiver</span>
+                  <span className="text-gray-400 text-xs">{waiverExpanded ? "▲ Collapse" : "▼ Expand"}</span>
+                </button>
+                {waiverExpanded && (
+                  <div className="px-4 pb-4 text-xs text-gray-300 leading-relaxed space-y-3 border-t border-gray-700 pt-3 max-h-64 overflow-y-auto">
+                    <p><strong className="text-white">WAIVER OF LIABILITY, ASSUMPTION OF RISK, AND INDEMNITY AGREEMENT</strong></p>
+                    <p>In consideration of being permitted to participate in any and all PolyRISE Athletix programs, camps, events, training sessions, and activities (collectively, &quot;Activities&quot;), I, the undersigned parent or legal guardian, on behalf of myself and the minor participant named in this registration form, hereby agree to the following:</p>
+                    <p><strong className="text-white">1. ASSUMPTION OF RISK.</strong> I acknowledge that participation in athletic training and sports activities involves inherent risks of injury, including but not limited to sprains, strains, fractures, concussions, and other serious injuries. I voluntarily assume all such risks on behalf of the minor participant.</p>
+                    <p><strong className="text-white">2. RELEASE OF LIABILITY.</strong> I hereby release, waive, discharge, and covenant not to sue PolyRISE Athletix, its coaches, staff, volunteers, sponsors, and affiliates (collectively, &quot;Released Parties&quot;) from any and all claims, damages, losses, or liability arising out of or related to the minor participant&apos;s participation in the Activities, including claims arising from the negligence of the Released Parties.</p>
+                    <p><strong className="text-white">3. MEDICAL AUTHORIZATION.</strong> In the event of an injury or medical emergency, I authorize the Released Parties to seek and consent to emergency medical treatment for the minor participant. I agree to be responsible for all medical costs incurred.</p>
+                    <p><strong className="text-white">4. PHOTO & MEDIA CONSENT.</strong> I grant PolyRISE Athletix permission to photograph and/or video record the minor participant during Activities and to use such images or footage for promotional, educational, and marketing purposes without compensation.</p>
+                    <p><strong className="text-white">5. CODE OF CONDUCT.</strong> I agree that the minor participant will conduct themselves in a respectful, sportsmanlike manner at all times. PolyRISE Athletix reserves the right to remove any participant who engages in disruptive or unsafe behavior without refund.</p>
+                    <p><strong className="text-white">6. INDEMNIFICATION.</strong> I agree to indemnify and hold harmless the Released Parties from any claims, damages, or expenses (including attorneys&apos; fees) arising from the minor participant&apos;s participation in the Activities.</p>
+                    <p><strong className="text-white">7. GOVERNING LAW.</strong> This agreement shall be governed by the laws of the State of Texas. If any provision is found to be unenforceable, the remaining provisions shall remain in full effect.</p>
+                    <p>By checking the box below, I confirm that I am the parent or legal guardian of the minor participant, that I have read and understand this waiver in its entirety, and that I agree to be bound by its terms.</p>
+                  </div>
+                )}
+              </div>
+              <label className="flex items-start gap-3 cursor-pointer group">
+                <input
+                  type="checkbox"
+                  checked={waiverAccepted}
+                  onChange={e => setWaiverAccepted(e.target.checked)}
+                  className="mt-0.5 w-4 h-4 accent-red-600 cursor-pointer shrink-0"
+                />
+                <span className="text-sm text-white leading-snug group-hover:text-gray-200 transition-colors">
+                  I have read and agree to the <button type="button" onClick={() => setWaiverExpanded(true)} className="text-red-400 underline hover:text-red-300">Liability Waiver & Release</button>. I am the parent or legal guardian of the athlete named above and accept all terms on their behalf.
+                </span>
+              </label>
+              {!waiverAccepted && cart.length > 0 && playerName && parentName && email && phone && (
+                <p className="text-yellow-400 text-xs">⚠ You must accept the waiver before proceeding to payment.</p>
+              )}
+            </div>
+
             {error && <p className="text-red-400 text-sm bg-red-950 border border-red-900 rounded-lg px-3 py-2">{error}</p>}
 
             <button onClick={handleCheckout}
-              disabled={!cart.length || !playerName || !parentName || !email || !phone || loading}
+              disabled={!cart.length || !playerName || !parentName || !email || !phone || !waiverAccepted || loading}
               className="w-full bg-red-600 hover:bg-red-700 disabled:bg-gray-700 disabled:cursor-not-allowed text-white font-bold rounded-xl py-3 transition-colors text-sm">
               {loading ? "Setting up..." : `Pay $${discountResult?.valid ? cartTotal - (discountResult.savings ?? 0) : cartTotal}${hasMonthly ? "/mo" : ""} →`}
             </button>

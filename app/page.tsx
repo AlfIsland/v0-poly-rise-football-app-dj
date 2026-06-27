@@ -141,7 +141,7 @@ export default function HomePage() {
                 <span className="inline-block text-xs font-semibold px-3 py-1 rounded-full bg-blue-900/50 text-blue-300 border border-blue-700/40 mb-4">All Athletes — Middle School &amp; Up</span>
                 <h3 className="text-2xl font-black text-white">Passport</h3>
                 <div className="flex items-end gap-1 mt-1 mb-2">
-                  <span className="text-4xl font-black text-white">$9.99</span>
+                  <span className="text-4xl font-black text-red-500">$9.99</span>
                   <span className="text-white text-sm mb-1">/month</span>
                 </div>
                 <p className="text-white text-sm">Track your athlete&apos;s progress from day one</p>
@@ -168,7 +168,7 @@ export default function HomePage() {
                 <span className="inline-block text-xs font-semibold px-3 py-1 rounded-full bg-red-900/50 text-red-300 border border-red-700/40 mb-4">High School Athletes — Grades 9–12</span>
                 <h3 className="text-2xl font-black text-red-400">Recruit</h3>
                 <div className="flex items-end gap-1 mt-1 mb-2">
-                  <span className="text-4xl font-black text-white">$29.99</span>
+                  <span className="text-4xl font-black text-red-500">$29.99</span>
                   <span className="text-white text-sm mb-1">/month</span>
                 </div>
                 <p className="text-white text-sm">Verified metrics + recruiting profile + visibility</p>
@@ -199,7 +199,7 @@ export default function HomePage() {
                 <span className="inline-block text-xs font-semibold px-3 py-1 rounded-full bg-yellow-900/50 text-yellow-300 border border-yellow-700/40 mb-4">High School Athletes — Grades 11–12</span>
                 <h3 className="text-2xl font-black text-yellow-400">Elite Recruit</h3>
                 <div className="flex items-end gap-1 mt-1 mb-2">
-                  <span className="text-4xl font-black text-white">$49.99</span>
+                  <span className="text-4xl font-black text-red-500">$49.99</span>
                   <span className="text-white text-sm mb-1">/month</span>
                 </div>
                 <p className="text-white text-sm">Full recruiting exposure + player development</p>
@@ -249,19 +249,19 @@ export default function HomePage() {
                     <div className="space-y-2 border-t border-dashed border-border pt-4">
                       <div className="flex items-center justify-between">
                         <span className="font-medium text-sm">Monthly</span>
-                        <span className="text-lg font-bold text-white">$315/mo</span>
+                        <span className="text-lg font-bold text-red-500">$315/mo</span>
                       </div>
                       <div className="flex items-center justify-between">
                         <span className="font-medium text-sm">Annual <span className="text-xs text-primary font-semibold">Save more</span></span>
-                        <span className="text-lg font-bold text-white">$250/mo</span>
+                        <span className="text-lg font-bold text-red-500">$250/mo</span>
                       </div>
                       <div className="flex items-center justify-between">
                         <span className="font-medium text-sm">Once a Week</span>
-                        <span className="text-lg font-bold text-white">$175/mo</span>
+                        <span className="text-lg font-bold text-red-500">$175/mo</span>
                       </div>
                       <div className="flex items-center justify-between">
                         <span className="font-medium text-sm">Drop-In</span>
-                        <span className="text-lg font-bold text-white">$40</span>
+                        <span className="text-lg font-bold text-red-500">$40</span>
                       </div>
                     </div>
                   </div>
@@ -277,7 +277,7 @@ export default function HomePage() {
                 <div className="pt-6 px-6 pb-6 space-y-4">
                   <div>
                     <h4 className="text-xl font-display font-bold mb-2">Multi-Sport Development</h4>
-                    <div className="text-lg font-bold text-white mb-3">$265/mo</div>
+                    <div className="text-lg font-bold text-red-500 mb-3">$265/mo</div>
                     <p className="text-white text-sm leading-relaxed">Youth sports development training covering wrestling, girls flag football, soccer, baseball, softball, and more — building well-rounded athletes across multiple sports.</p>
                   </div>
                   <Link href="/register?program=multi-sport-dev" className="block w-full text-center bg-[#FF6600] text-white px-4 py-2 rounded hover:bg-[#FF6600]/80 transition-colors">Register</Link>
@@ -350,11 +350,11 @@ export default function HomePage() {
                     <div className="space-y-2 border-t border-dashed border-border pt-4">
                       <div className="flex items-center justify-between">
                         <span className="font-medium text-sm">2 Days a Week · Mon &amp; Fri</span>
-                        <span className="text-lg font-bold text-white">$250/mo</span>
+                        <span className="text-lg font-bold text-red-500">$250/mo</span>
                       </div>
                       <div className="flex items-center justify-between">
                         <span className="font-medium text-sm">3 Days a Week · Mon, Wed &amp; Fri</span>
-                        <span className="text-lg font-bold text-white">$315/mo</span>
+                        <span className="text-lg font-bold text-red-500">$315/mo</span>
                       </div>
                     </div>
                   </div>
@@ -367,7 +367,7 @@ export default function HomePage() {
                 <div className="pt-6 px-6 pb-6 space-y-4">
                   <div>
                     <h4 className="text-xl font-display font-bold mb-2">Multi-Sport Athlete</h4>
-                    <div className="text-lg font-bold text-white mb-3">$175/mo</div>
+                    <div className="text-lg font-bold text-red-500 mb-3">$175/mo</div>
                     <p className="text-white text-sm leading-relaxed">One day a week (Tue or Thur) with camps/events included.</p>
                   </div>
                   <Link href="/register?program=multi-sport" className="block w-full text-center bg-[#FF6600] text-white px-4 py-2 rounded hover:bg-[#FF6600]/80 transition-colors">Register</Link>
@@ -386,11 +386,11 @@ export default function HomePage() {
                     <div className="space-y-2 border-t border-dashed border-border pt-4">
                       <div className="flex items-center justify-between">
                         <span className="font-medium text-sm">1 Day</span>
-                        <span className="text-lg font-bold text-white">$45</span>
+                        <span className="text-lg font-bold text-red-500">$45</span>
                       </div>
                       <div className="flex items-center justify-between">
                         <span className="font-medium text-sm">2 Days</span>
-                        <span className="text-lg font-bold text-white">$80</span>
+                        <span className="text-lg font-bold text-red-500">$80</span>
                       </div>
                     </div>
                   </div>
@@ -409,7 +409,7 @@ export default function HomePage() {
                     <p className="text-white text-sm leading-relaxed mb-2">A character-building hike experience focused on developing leadership, mentorship, and mental toughness beyond the field.</p>
                     <div className="flex items-center justify-between border-t border-dashed border-border pt-4">
                       <span className="font-medium text-sm">Per Athlete</span>
-                      <span className="text-lg font-bold text-white">$25</span>
+                      <span className="text-lg font-bold text-red-500">$25</span>
                     </div>
                   </div>
                   <Link href="/register?program=hike" className="block w-full text-center bg-[#FF6600] text-white px-4 py-2 rounded hover:bg-[#FF6600]/80 transition-colors">Register</Link>
@@ -427,7 +427,7 @@ export default function HomePage() {
                     <p className="text-white text-sm leading-relaxed mb-2">Proper tackling technique &amp; fundamentals coached by NFL-experienced staff.</p>
                     <div className="flex items-center justify-between border-t border-dashed border-border pt-4">
                       <span className="font-medium text-sm">June 12 · 9:00am · Dripping Springs</span>
-                      <span className="text-lg font-bold text-white">$25</span>
+                      <span className="text-lg font-bold text-red-500">$25</span>
                     </div>
                   </div>
                   <Link href="/register?program=tackling-camp" className="block w-full text-center bg-[#FF6600] text-white px-4 py-2 rounded hover:bg-[#FF6600]/80 transition-colors">Register</Link>
@@ -445,7 +445,7 @@ export default function HomePage() {
                     <p className="text-white text-sm leading-relaxed mb-2">Professional Combine Events. H.S Athletes record official metrics.</p>
                     <div className="flex items-center justify-between border-t border-dashed border-border pt-4">
                       <span className="font-medium">Camp Registration</span>
-                      <span className="text-lg font-bold text-white">$25</span>
+                      <span className="text-lg font-bold text-red-500">$25</span>
                     </div>
                   </div>
                   <Link href="/register?program=combine" className="block w-full text-center bg-[#FF6600] text-white px-4 py-2 rounded hover:bg-[#FF6600]/80 transition-colors">Register</Link>
@@ -462,7 +462,7 @@ export default function HomePage() {
                     <h4 className="text-xl font-display font-bold mb-2">Summer Camp</h4>
                     <p className="text-white text-sm leading-relaxed mb-2">Athlete Development &amp; Leadership (June &amp; July) — <span className="text-white font-semibold">Limited to 20 spots ONLY</span></p>
                     <div className="border-t border-dashed border-border pt-4">
-                      <div><div className="flex items-center justify-between"><span className="font-medium">Athletic Camp</span><span className="text-lg font-bold text-white">$265/mo</span></div><p className="text-xs text-white mt-1">Open to all Elementary &amp; Middle School athletes · Mon, Tue &amp; Thu · 10:00am – 12:00pm (noon)</p></div>
+                      <div><div className="flex items-center justify-between"><span className="font-medium">Athletic Camp</span><span className="text-lg font-bold text-red-500">$265/mo</span></div><p className="text-xs text-white mt-1">Open to all Elementary &amp; Middle School athletes · Mon, Tue &amp; Thu · 10:00am – 12:00pm (noon)</p></div>
                     </div>
                   </div>
                   <Link href="/register?program=summer-ms" className="block w-full text-center bg-[#FF6600] text-white px-4 py-2 rounded hover:bg-[#FF6600]/80 transition-colors">Register Now</Link>

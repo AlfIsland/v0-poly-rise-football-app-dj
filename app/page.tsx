@@ -214,7 +214,7 @@ export default function HomePage() {
                       </div>
                     </div>
                   </div>
-                  <Link href="/register?program=hs-recruiting-exposure" className="block w-full text-center bg-red-600 text-white px-4 py-2 rounded hover:bg-red-600/80 transition-colors">Get Started</Link>
+                  <Link href="/register?program=hs-recruiting-elite" className="block w-full text-center bg-red-600 text-white px-4 py-2 rounded hover:bg-red-600/80 transition-colors">Get Started</Link>
                 </div>
               </div>
 

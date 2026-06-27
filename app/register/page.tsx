@@ -5,62 +5,80 @@ import { useSearchParams } from "next/navigation"
 import Image from "next/image"
 
 const PROGRAMS_DATA: Record<string, { name: string; price: number; priceLabel: string; billing: "one_time" | "monthly" }> = {
-  "player-dev":           { name: "Player Development",                    price: 300, priceLabel: "$300/mo",  billing: "monthly" },
-  "elite-360":            { name: "360 Elite",                             price: 500, priceLabel: "$500/mo",  billing: "monthly" },
-  "multi-sport":          { name: "Multi-Sport Athlete",                   price: 175, priceLabel: "$175/mo",  billing: "monthly" },
-  "girls-dev":            { name: "Girls Player Development",              price: 250, priceLabel: "$250/mo",  billing: "monthly" },
-  "girls-dev-3day":       { name: "Girls Player Development — 3 Day",      price: 315, priceLabel: "$315/mo",  billing: "monthly" },
-  "drop-in-1day":         { name: "Drop-In — 1 Day",                       price: 45,  priceLabel: "$45",       billing: "one_time" },
-  "drop-in-2day":         { name: "Drop-In — 2 Days",                      price: 80,  priceLabel: "$80",       billing: "one_time" },
-  "summer-k5":            { name: "Summer Camp — Elementary (K-5)",        price: 265, priceLabel: "$265",      billing: "one_time" },
-  "summer-ms":            { name: "Summer Camp — Middle School",           price: 265, priceLabel: "$265",      billing: "one_time" },
-  "summer-hs":            { name: "Summer Camp — High School",             price: 265, priceLabel: "$265",      billing: "one_time" },
-  "combine":              { name: "Combine Metrics Camp",                  price: 25,  priceLabel: "$25",       billing: "one_time" },
-  "tackling-camp":        { name: "Tackling Camp",                         price: 25,  priceLabel: "$25",       billing: "one_time" },
-  "hike":                 { name: "Leadership & Mentorship Hike",           price: 25,  priceLabel: "$25",       billing: "one_time" },
-  "tournament-ms":        { name: "Football Tournament (Middle School)",   price: 400, priceLabel: "$400",      billing: "one_time" },
-  "tournament-hs":        { name: "Football Tournament (High School)",     price: 425, priceLabel: "$425",      billing: "one_time" },
-  "passport":             { name: "Passport",                              price: 9.99,  priceLabel: "$9.99/mo",  billing: "monthly" },
-  "recruit":              { name: "Recruit",                               price: 29.99, priceLabel: "$29.99/mo", billing: "monthly" },
-  "elite-recruit":        { name: "Elite Recruit",                         price: 49.99, priceLabel: "$49.99/mo", billing: "monthly" },
+  // Football Player Development tiers
+  "player-dev":              { name: "Football Player Development — Monthly",      price: 315,   priceLabel: "$315/mo",   billing: "monthly"   },
+  "player-dev-annual":       { name: "Football Player Development — Annual",       price: 250,   priceLabel: "$250/mo",   billing: "monthly"   },
+  "player-dev-1day":         { name: "Football Player Development — Once a Week",  price: 175,   priceLabel: "$175/mo",   billing: "monthly"   },
+  "player-dev-dropin":       { name: "Football Player Development — Drop-In",      price: 40,    priceLabel: "$40",       billing: "one_time"  },
+  // Multi-Sport Development
+  "multi-sport-dev":         { name: "Multi-Sport Development",                    price: 265,   priceLabel: "$265/mo",   billing: "monthly"   },
+  // Girls Player Development
+  "girls-dev":               { name: "Girls Player Development — 2 Days/Week",    price: 250,   priceLabel: "$250/mo",   billing: "monthly"   },
+  "girls-dev-3day":          { name: "Girls Player Development — 3 Days/Week",    price: 315,   priceLabel: "$315/mo",   billing: "monthly"   },
+  // Multi-Sport Athlete
+  "multi-sport":             { name: "Multi-Sport Athlete",                        price: 175,   priceLabel: "$175/mo",   billing: "monthly"   },
+  // Drop-In
+  "drop-in-1day":            { name: "Drop-In Training — 1 Day",                  price: 45,    priceLabel: "$45",       billing: "one_time"  },
+  "drop-in-2day":            { name: "Drop-In Training — 2 Days",                 price: 80,    priceLabel: "$80",       billing: "one_time"  },
+  // HS Recruiting & Exposure
+  "hs-recruiting-elite":     { name: "HS Recruiting — Elite Exposure",            price: 150,   priceLabel: "$150/mo",   billing: "monthly"   },
+  "hs-recruiting-pro":       { name: "HS Recruiting — Pro Exposure",              price: 125,   priceLabel: "$125/mo",   billing: "monthly"   },
+  "hs-recruiting-basic":     { name: "HS Recruiting — Basic Exposure",            price: 85,    priceLabel: "$85/mo",    billing: "monthly"   },
+  // Summer / Athletic Camp
+  "summer-ms":               { name: "Athletic Camp",                             price: 265,   priceLabel: "$265/mo",   billing: "monthly"   },
+  // Events
+  "combine":                 { name: "Combine Metrics Camp",                      price: 25,    priceLabel: "$25",       billing: "one_time"  },
+  "tackling-camp":           { name: "Tackling Camp",                             price: 25,    priceLabel: "$25",       billing: "one_time"  },
+  "hike":                    { name: "Leadership & Mentorship Hike",              price: 25,    priceLabel: "$25",       billing: "one_time"  },
+  // Athlete Tracking & Recruiting Profiles
+  "passport":                { name: "Passport",                                  price: 9.99,  priceLabel: "$9.99/mo",  billing: "monthly"   },
+  "recruit":                 { name: "Recruit",                                   price: 29.99, priceLabel: "$29.99/mo", billing: "monthly"   },
+  "elite-recruit":           { name: "Elite Recruit",                             price: 49.99, priceLabel: "$49.99/mo", billing: "monthly"   },
 }
 
 const CATEGORIES = [
   {
     label: "Training Programs", badge: "bg-red-900 text-red-300", color: "border-red-800 hover:border-red-500",
     programs: [
-      { id: "player-dev",    desc: "8 sessions/month · SAQ, S&C, football drills, tournament entries, military character events, PR-Verified Camp & Athlete Tracking Passport" },
-      { id: "elite-360",     desc: "Everything in Player Development + 1-on-1 NFL coaching, recruiting profile & 7 college email blasts/month", highlight: "BEST" },
-      { id: "multi-sport",   desc: "1 day/week (Tue or Thu) · SAQ, S&C, multi-sport athleticism with camps & events included" },
-      { id: "girls-dev",     desc: "2 days/week · May: Mon & Fri 5–6:30pm · June–July: Mon & Fri 1–2:30pm" },
-      { id: "girls-dev-3day", desc: "3 days/week · Mon, Wed & Fri · More reps, more development" },
-      { id: "drop-in-1day",  desc: "Single day training session — try a session before committing to a full program" },
-      { id: "drop-in-2day",  desc: "2 day training package · Save $10 vs. 2 single drop-ins ($45 + $35 additional day)" },
+      { id: "player-dev",        desc: "Tue & Thu 6:30–7:30pm · SAQ, S&C, football drills, tournament entries, military character events, PR-Verified Camp & Free Athletic Training Passport", highlight: "POPULAR" },
+      { id: "player-dev-annual", desc: "Same as monthly — save more by paying annually · Tue & Thu 6:30–7:30pm" },
+      { id: "player-dev-1day",   desc: "Once a week (Tue or Thu) · Ideal for athletes with limited availability" },
+      { id: "player-dev-dropin", desc: "Single drop-in session · Try before committing to a full program" },
+      { id: "multi-sport-dev",   desc: "Youth sports development — wrestling, girls flag football, soccer, baseball, softball & more · Building well-rounded athletes" },
+      { id: "girls-dev",         desc: "2 days/week · May: Mon & Fri 5–6:30pm · June–July: Mon & Fri 1–2:30pm" },
+      { id: "girls-dev-3day",    desc: "3 days/week · Mon, Wed & Fri · More reps and faster development" },
+      { id: "multi-sport",       desc: "1 day/week (Tue or Thu) · SAQ, S&C, multi-sport athleticism with camps & events included" },
+      { id: "drop-in-1day",      desc: "Single day training session · Try a session before committing to a full program" },
+      { id: "drop-in-2day",      desc: "2 day training package · Add a second day for just $35 more" },
     ],
   },
   {
-    label: "Summer Camps", badge: "bg-blue-900 text-blue-300", color: "border-blue-800 hover:border-blue-500",
+    label: "HS Recruiting & Exposure", badge: "bg-orange-900 text-orange-300", color: "border-orange-800 hover:border-orange-500",
     programs: [
-      { id: "summer-k5", desc: "June–July · Mon–Thu · Limited to 20 participants per session" },
-      { id: "summer-ms", desc: "June–July · Mon–Thu · Limited to 20 participants per session" },
-      { id: "summer-hs", desc: "June–July · Mon–Thu · Limited to 20 participants per session" },
+      { id: "hs-recruiting-elite", desc: "X blast + Instagram blast + 5 personalized emails to college coaches/mo + profile optimization", highlight: "ELITE" },
+      { id: "hs-recruiting-pro",   desc: "X blast + Instagram blast + 3 personalized emails to college coaches/mo + profile optimization" },
+      { id: "hs-recruiting-basic", desc: "Professional profile image package + X blast (1–2x monthly) · Great for athletes building initial visibility" },
+    ],
+  },
+  {
+    label: "Summer Camp", badge: "bg-blue-900 text-blue-300", color: "border-blue-800 hover:border-blue-500",
+    programs: [
+      { id: "summer-ms", desc: "Athletic Camp · Open to all Elementary & Middle School athletes · Mon, Tue & Thu · 10:00am–12:00pm · Limited to 20 spots" },
     ],
   },
   {
     label: "Events", badge: "bg-green-900 text-green-300", color: "border-green-800 hover:border-green-500",
     programs: [
-      { id: "combine",       desc: "40-yard dash, vertical jump, broad jump, 3-cone drill & position-specific evaluations · Earn your PR-VERIFIED seal" },
-      { id: "tackling-camp", desc: "June 12 · 9:00am · Dripping Springs (location TBD) · Proper tackling technique & fundamentals" },
-      { id: "tournament-ms", desc: "May 29–30 · 8–10 team bracket · Minimum 3 games guaranteed" },
-      { id: "tournament-hs", desc: "May 29–30 · 8–10 team bracket · Minimum 3 games guaranteed" },
-      { id: "hike",          desc: "2201 Barton Springs Rd, Austin · Military character building event" },
+      { id: "combine",       desc: "Professional Combine Events · H.S. athletes record official metrics · Earn your PR-VERIFIED seal" },
+      { id: "tackling-camp", desc: "June 12 · 9:00am · Dripping Springs · Proper tackling technique & fundamentals coached by NFL-experienced staff" },
+      { id: "hike",          desc: "Leadership & Mentorship Hike · Character-building experience developing leadership, mentorship & mental toughness" },
     ],
   },
   {
-    label: "Memberships", badge: "bg-purple-900 text-purple-300", color: "border-purple-800 hover:border-purple-500",
+    label: "Athlete Tracking & Profiles", badge: "bg-purple-900 text-purple-300", color: "border-purple-800 hover:border-purple-500",
     programs: [
-      { id: "passport",      desc: "Monthly progress reports, session history, baseline comparisons, downloadable PDFs · Grades 4–8" },
-      { id: "recruit",       desc: "PR-VERIFIED profile, Hudl integration, monthly scout spotlight, 1 free combine/mo · Grades 8–12", highlight: "POPULAR" },
+      { id: "passport",      desc: "Monthly progress reports, session history, baseline comparisons, downloadable PDFs · All athletes MS & up" },
+      { id: "recruit",       desc: "PR-VERIFIED profile, Hudl integration, monthly X spotlight to college recruiters, 1 free combine/mo · Grades 9–12", highlight: "POPULAR" },
       { id: "elite-recruit", desc: "Everything in Recruit + Coach Garrett quarterly report, college fit suggestions, prospect rankings · Grades 11–12" },
     ],
   },

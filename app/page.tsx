@@ -298,7 +298,7 @@ export default function HomePage() {
                       <div className="rounded-lg border border-primary/40 bg-primary/5 p-3">
                         <div className="flex items-center justify-between mb-1">
                           <span className="font-bold text-white text-sm">Elite Exposure</span>
-                          <span className="text-lg font-bold text-primary">$150<span className="text-xs font-normal text-white">/mo</span></span>
+                          <span className="text-lg font-bold text-red-500">$150<span className="text-xs font-normal text-white">/mo</span></span>
                         </div>
                         <ul className="space-y-1">
                           <li className="flex items-start gap-2 text-xs text-white"><CheckCircle2 className="w-3 h-3 text-primary flex-shrink-0 mt-0.5" />X (Twitter) blast + Instagram blast</li>

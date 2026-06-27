@@ -305,7 +305,7 @@ export default function HomePage() {
                           <li className="flex items-start gap-2 text-xs text-white"><CheckCircle2 className="w-3 h-3 text-primary flex-shrink-0 mt-0.5" />5 personalized emails to college coaches/mo</li>
                           <li className="flex items-start gap-2 text-xs text-white"><CheckCircle2 className="w-3 h-3 text-primary flex-shrink-0 mt-0.5" />Profile optimization</li>
                         </ul>
-                        <p className="text-xs text-gray-400 mt-2 italic">Best for: Serious recruits aiming for D1/D2</p>
+                        <p className="text-xs text-gray-400 mt-2 italic">Best for: Serious recruits</p>
                       </div>
                       {/* Pro Exposure */}
                       <div className="rounded-lg border border-border bg-card p-3">
@@ -318,7 +318,7 @@ export default function HomePage() {
                           <li className="flex items-start gap-2 text-xs text-white"><CheckCircle2 className="w-3 h-3 text-primary flex-shrink-0 mt-0.5" />3 personalized emails to college coaches/mo</li>
                           <li className="flex items-start gap-2 text-xs text-white"><CheckCircle2 className="w-3 h-3 text-primary flex-shrink-0 mt-0.5" />Profile optimization</li>
                         </ul>
-                        <p className="text-xs text-gray-400 mt-2 italic">Best for: Recruits targeting D2/D3 or strong exposure</p>
+                        <p className="text-xs text-gray-400 mt-2 italic">Best for: Recruits targeting strong exposure</p>
                       </div>
                       {/* Basic Exposure */}
                       <div className="rounded-lg border border-border bg-card p-3">

@@ -9,10 +9,9 @@ export default function HomePage() {
     <>
       <div className="min-h-screen bg-background">
       {/* Navigation */}
-      <header className="fixed top-0 left-0 right-0 z-50 bg-black/95 backdrop-blur border-b border-white/5">
-        <div className="absolute bottom-0 left-0 right-0 h-[2px] bg-[#8B0000]" />
+      <header className="fixed top-0 left-0 right-0 z-50 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/80 border-b border-border">
         <div className="container mx-auto px-4 lg:px-8">
-          <nav className="flex items-center justify-between h-20">
+          <nav className="flex items-center justify-between h-16">
             <Link href="/" className="flex items-center gap-3">
               <Image
                 src="/poly-rise-logo.png"
@@ -21,15 +20,38 @@ export default function HomePage() {
                 height={48}
                 className="h-12 w-auto"
               />
-              <span className="font-display font-black text-2xl tracking-tight hidden sm:inline text-white">PolyRISE Athletix</span>
+              <span className="font-display font-bold text-xl hidden sm:inline">PolyRISE Athletix</span>
             </Link>
 
-            <div className="flex items-center gap-8">
-              <Link href="#programs" className="text-xs font-semibold uppercase tracking-widest text-gray-400 hover:text-white transition-colors hidden md:inline">Programs</Link>
-              <Link href="#about" className="text-xs font-semibold uppercase tracking-widest text-gray-400 hover:text-white transition-colors hidden md:inline">About</Link>
-              <Link href="#contact" className="text-xs font-semibold uppercase tracking-widest text-gray-400 hover:text-white transition-colors hidden md:inline">Contact</Link>
-              <Link href="/passport" className="text-xs font-semibold uppercase tracking-widest text-gray-400 hover:text-white transition-colors hidden md:inline">Passport</Link>
-              <Link href="/plans" className="text-xs font-black uppercase tracking-widest bg-[#8B0000] text-white px-5 py-2.5 hover:bg-[#6B0000] transition-colors">
+            <div className="flex items-center gap-6">
+              <Link
+                href="#programs"
+                className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors hidden md:inline"
+              >
+                Programs
+              </Link>
+              <Link
+                href="#about"
+                className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors hidden md:inline"
+              >
+                About
+              </Link>
+              <Link
+                href="#contact"
+                className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors hidden md:inline"
+              >
+                Contact
+              </Link>
+              <Link
+                href="/passport"
+                className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors hidden md:inline"
+              >
+                Athlete Passport
+              </Link>
+              <Link
+                href="/plans"
+                className="text-sm font-medium bg-[#FF6600] text-white px-4 py-2 rounded hover:bg-[#FF6600]/80 transition-colors"
+              >
                 View Plans
               </Link>
             </div>
@@ -38,41 +60,24 @@ export default function HomePage() {
       </header>
 
       {/* Hero Section */}
-      <section className="relative pt-36 pb-20 lg:pt-48 lg:pb-36 overflow-hidden bg-black">
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_left,_#8B0000_0%,_transparent_50%)] opacity-10" />
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black" />
+      <section className="relative pt-32 pb-20 lg:pt-40 lg:pb-32 overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-b from-primary/10 via-background to-background" />
 
         <div className="container mx-auto px-4 lg:px-8 relative">
-          <div className="grid lg:grid-cols-2 gap-16 items-center">
-            <div className="space-y-8">
-              <div className="space-y-2">
-                <div className="flex items-center gap-3 mb-4">
-                  <div className="w-8 h-[3px] bg-[#8B0000]" />
-                  <span className="text-[#8B0000] text-xs font-black uppercase tracking-[0.2em]">Austin & Central Texas</span>
-                </div>
-                <h1 className="text-5xl lg:text-7xl font-display font-black leading-none tracking-tight text-white">
-                  Elite Youth<br />
-                  <span className="text-[#8B0000]">Multi-Sport</span><br />
-                  Development
-                </h1>
-              </div>
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
+            <div className="space-y-6">
+              <h1 className="text-4xl lg:text-6xl font-display font-bold leading-tight text-balance">
+                Elite Youth Multi-Sport Athlete Development for{" "}
+                <span className="text-white">Austin & Central Texas</span>
+              </h1>
 
-              <p className="text-base lg:text-lg text-gray-400 leading-relaxed max-w-lg">
-                Professional training in football, soccer, baseball, softball, girls flag football, wrestling & more — plus expert recruiting & PR-VERIFIED exposure for H.S. athletes.
+              <p className="text-lg lg:text-xl text-muted-foreground leading-relaxed text-pretty">
+                Professional level training in football, soccer, baseball, softball, girls flag football, wrestling and more — plus expert recruiting & exposure for H.S. athletes with trusted PR-VERIFIED metrics.
               </p>
-
-              <div className="flex flex-wrap gap-3 pt-2">
-                <Link href="#programs" className="inline-flex items-center gap-2 bg-[#8B0000] text-white px-6 py-3 text-xs font-black uppercase tracking-widest hover:bg-[#6B0000] transition-colors">
-                  View Programs <ArrowRight className="w-3.5 h-3.5" />
-                </Link>
-                <Link href="#contact" className="inline-flex items-center gap-2 border border-white/20 text-white px-6 py-3 text-xs font-black uppercase tracking-widest hover:border-[#8B0000] hover:text-[#8B0000] transition-colors">
-                  Contact Us
-                </Link>
-              </div>
             </div>
 
             <div className="relative">
-              <div className="aspect-[4/5] rounded-2xl overflow-hidden border border-border bg-[#0a0a0a]">
+              <div className="aspect-[4/5] rounded-2xl overflow-hidden border border-border bg-muted">
                 <Image
                   src="/combine-training-athletes.jpg"
                   alt="Youth athlete training at PolyRISE Athletix"
@@ -85,8 +90,8 @@ export default function HomePage() {
               </div>
               <div className="absolute -bottom-6 -left-6 bg-card border border-border rounded-xl p-6 shadow-2xl">
                 <div className="flex items-center gap-4">
-                  <div className="w-12 h-12 rounded-full bg-[#8B0000]/10 flex items-center justify-center">
-                    <Trophy className="w-6 h-6 text-[#8B0000]" />
+                  <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center">
+                    <Trophy className="w-6 h-6 text-primary" />
                   </div>
                   <div>
                     <div className="font-display font-bold text-lg">Elite Training</div>
@@ -100,17 +105,17 @@ export default function HomePage() {
       </section>
 
       {/* Plans & Pricing */}
-      <section id="programs" className="py-12 lg:py-20 bg-black">
+      <section id="programs" className="py-12 lg:py-20 bg-gray-950">
         <div className="container mx-auto px-4 lg:px-8">
           <div className="text-center mb-4">
-            <p className="text-[#8B0000] font-bold text-xs uppercase tracking-widest mb-3">PolyRISE Athletix</p>
+            <p className="text-red-500 font-bold text-xs uppercase tracking-widest mb-3">PolyRISE Athletix</p>
             <h2 className="text-4xl lg:text-5xl font-display font-bold text-white">Plans & Pricing</h2>
             <p className="text-lg text-gray-400 mt-3 max-w-xl mx-auto">Every athlete is at a different stage. Pick the plan that fits where your child is right now.</p>
           </div>
 
           {/* Grade Guide */}
           <div className="max-w-2xl mx-auto mb-10 mt-8">
-            <div className="bg-[#0a0a0a] border border-gray-700 rounded-2xl px-6 py-4 grid grid-cols-3 gap-3 text-center text-sm">
+            <div className="bg-gray-900 border border-gray-700 rounded-2xl px-6 py-4 grid grid-cols-3 gap-3 text-center text-sm">
               <div>
                 <p className="text-gray-500 text-xs uppercase tracking-widest mb-1">Middle School</p>
                 <p className="text-white font-semibold">Grades 6–8</p>
@@ -131,7 +136,7 @@ export default function HomePage() {
 
           <div className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
             {/* Passport */}
-            <div className="relative bg-[#0a0a0a] rounded-2xl border-2 border-gray-500 flex flex-col overflow-hidden">
+            <div className="relative bg-gray-900 rounded-2xl border-2 border-gray-500 flex flex-col overflow-hidden">
               <div className="p-6">
                 <span className="inline-block text-xs font-semibold px-3 py-1 rounded-full bg-blue-900/50 text-blue-300 border border-blue-700/40 mb-4">All Athletes — Middle School &amp; Up</span>
                 <h3 className="text-2xl font-black text-gray-300">Passport</h3>
@@ -157,7 +162,7 @@ export default function HomePage() {
             </div>
 
             {/* Recruit — Most Popular */}
-            <div className="relative bg-[#0a0a0a] rounded-2xl border-2 border-red-500 flex flex-col overflow-hidden">
+            <div className="relative bg-gray-900 rounded-2xl border-2 border-red-500 flex flex-col overflow-hidden">
               <div className="absolute top-0 left-0 right-0 text-center py-1.5 text-xs font-black tracking-widest bg-red-600 text-white">MOST POPULAR</div>
               <div className="p-6 pt-10">
                 <span className="inline-block text-xs font-semibold px-3 py-1 rounded-full bg-red-900/50 text-red-300 border border-red-700/40 mb-4">High School Athletes — Grades 9–12</span>
@@ -184,7 +189,7 @@ export default function HomePage() {
             </div>
 
             {/* Elite Recruit — Coming Soon */}
-            <div className="relative bg-[#0a0a0a] rounded-2xl border-2 border-yellow-500 flex flex-col overflow-hidden">
+            <div className="relative bg-gray-900 rounded-2xl border-2 border-yellow-500 flex flex-col overflow-hidden">
               <div className="absolute inset-0 z-10 flex flex-col items-center justify-center rounded-2xl bg-black/70 backdrop-blur-sm">
                 <span className="text-yellow-400 text-3xl mb-2">🏆</span>
                 <p className="text-white font-black text-xl tracking-widest uppercase">Coming Soon</p>
@@ -232,7 +237,7 @@ export default function HomePage() {
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
 
               {/* Player Development */}
-              <div className="bg-[#0a0a0a] border border-white/5 border-t-2 border-t-[#8B0000] overflow-hidden group transition-colors">
+              <div className="bg-card border-primary/50 border-2 overflow-hidden group hover:border-primary transition-colors">
                 <div className="aspect-video relative overflow-hidden">
                   <img src="/athlete-training-drill.jpg" alt="Player Development Training" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
                   <div className="absolute top-4 left-4 px-3 py-1 rounded-full bg-background/90 backdrop-blur text-sm font-medium">Most Popular</div>
@@ -247,7 +252,7 @@ export default function HomePage() {
                         <span className="text-lg font-bold text-white">$315/mo</span>
                       </div>
                       <div className="flex items-center justify-between">
-                        <span className="font-medium text-sm">Annual <span className="text-xs text-[#8B0000] font-semibold">Save more</span></span>
+                        <span className="font-medium text-sm">Annual <span className="text-xs text-primary font-semibold">Save more</span></span>
                         <span className="text-lg font-bold text-white">$250/mo</span>
                       </div>
                       <div className="flex items-center justify-between">
@@ -260,12 +265,12 @@ export default function HomePage() {
                       </div>
                     </div>
                   </div>
-                  <Link href="/register?program=player-dev" className="block w-full text-center bg-[#8B0000] text-white px-4 py-3 text-xs font-black uppercase tracking-widest hover:bg-[#6B0000] transition-colors">Register</Link>
+                  <Link href="/register?program=player-dev" className="block w-full text-center bg-[#FF6600] text-white px-4 py-2 rounded hover:bg-[#FF6600]/80 transition-colors">Register</Link>
                 </div>
               </div>
 
               {/* Multi-Sport Development */}
-              <div className="bg-[#0a0a0a] border border-white/5 border-t-2 border-t-[#8B0000] overflow-hidden group transition-colors relative">
+              <div className="bg-card border-primary/50 border-2 overflow-hidden group hover:border-primary transition-colors relative">
                 <div className="aspect-video relative overflow-hidden">
                   <img src="/elite-360-training.jpg" alt="Multi-Sport Development Training" className="w-full h-full object-cover object-[50%_35%] group-hover:scale-105 transition-transform duration-300" />
                 </div>
@@ -275,33 +280,33 @@ export default function HomePage() {
                     <div className="text-lg font-bold text-white mb-3">$265/mo</div>
                     <p className="text-muted-foreground text-sm leading-relaxed">Youth sports development training covering wrestling, girls flag football, soccer, baseball, softball, and more — building well-rounded athletes across multiple sports.</p>
                   </div>
-                  <Link href="/register?program=multi-sport-dev" className="block w-full text-center bg-[#8B0000] text-white px-4 py-3 text-xs font-black uppercase tracking-widest hover:bg-[#6B0000] transition-colors">Register</Link>
+                  <Link href="/register?program=multi-sport-dev" className="block w-full text-center bg-[#FF6600] text-white px-4 py-2 rounded hover:bg-[#FF6600]/80 transition-colors">Register</Link>
                 </div>
               </div>
 
               {/* Tournament */}
-              <div className="bg-[#0a0a0a] border border-white/5 border-t-2 border-t-[#8B0000] overflow-hidden group transition-colors">
+              <div className="bg-card border-primary/50 border-2 overflow-hidden group hover:border-primary transition-colors">
                 <div className="pt-6 px-6 pb-6 space-y-4">
                   <div>
                     <h4 className="text-xl font-display font-bold mb-1">PolyRISE Athletix Tournament</h4>
-                    <p className="text-sm font-display font-semibold text-[#8B0000] italic mb-2">Rise of Warriors</p>
+                    <p className="text-sm font-display font-semibold text-primary italic mb-2">Rise of Warriors</p>
                     <p className="text-muted-foreground text-sm leading-relaxed mb-2">Middle School (10-team, May 29th - $400) and High School (8-team, May 30th - $425). Minimum 3 games, single game elimination.</p>
                     <ul className="space-y-1 mt-3">
-                      <li className="flex items-start gap-2 text-sm text-muted-foreground"><CheckCircle2 className="w-4 h-4 text-[#8B0000] flex-shrink-0 mt-0.5" />Middle School: 10 teams - $400</li>
-                      <li className="flex items-start gap-2 text-sm text-muted-foreground"><CheckCircle2 className="w-4 h-4 text-[#8B0000] flex-shrink-0 mt-0.5" />High School: 8 teams - $425</li>
-                      <li className="flex items-start gap-2 text-sm text-muted-foreground"><CheckCircle2 className="w-4 h-4 text-[#8B0000] flex-shrink-0 mt-0.5" />Min. 3 games, single elimination</li>
+                      <li className="flex items-start gap-2 text-sm text-muted-foreground"><CheckCircle2 className="w-4 h-4 text-primary flex-shrink-0 mt-0.5" />Middle School: 10 teams - $400</li>
+                      <li className="flex items-start gap-2 text-sm text-muted-foreground"><CheckCircle2 className="w-4 h-4 text-primary flex-shrink-0 mt-0.5" />High School: 8 teams - $425</li>
+                      <li className="flex items-start gap-2 text-sm text-muted-foreground"><CheckCircle2 className="w-4 h-4 text-primary flex-shrink-0 mt-0.5" />Min. 3 games, single elimination</li>
                     </ul>
                   </div>
-                  <Link href="/register?program=tournament-ms" className="block w-full text-center bg-[#8B0000] text-white px-4 py-3 text-xs font-black uppercase tracking-widest hover:bg-[#6B0000] transition-colors">Register Team</Link>
+                  <Link href="/register?program=tournament-ms" className="block w-full text-center bg-[#FF6600] text-white px-4 py-2 rounded hover:bg-[#FF6600]/80 transition-colors">Register Team</Link>
                 </div>
               </div>
 
               {/* Girls Player Development */}
-              <div className="bg-[#0a0a0a] border border-white/5 border-t-2 border-t-[#8B0000] overflow-hidden group transition-colors">
+              <div className="bg-card border-primary/50 border-2 overflow-hidden group hover:border-primary transition-colors">
                 <div className="pt-6 px-6 pb-6 space-y-4">
                   <div>
-                    <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#8B0000]/10 border border-[#8B0000]/20 mb-3">
-                      <span className="text-sm font-medium text-[#8B0000]">Girls Program</span>
+                    <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 mb-3">
+                      <span className="text-sm font-medium text-primary">Girls Program</span>
                     </div>
                     <h4 className="text-xl font-display font-bold mb-2">Girls Player Development</h4>
                     <p className="text-muted-foreground text-sm leading-relaxed mb-2">Monday &amp; Friday (5–6:30pm) in May · June &amp; July: Mon &amp; Fri (1–2:30pm). Add Wednesday for more reps and faster development.</p>
@@ -316,28 +321,28 @@ export default function HomePage() {
                       </div>
                     </div>
                   </div>
-                  <Link href="/register?program=girls-dev" className="block w-full text-center bg-[#8B0000] text-white px-4 py-3 text-xs font-black uppercase tracking-widest hover:bg-[#6B0000] transition-colors">Register</Link>
+                  <Link href="/register?program=girls-dev" className="block w-full text-center bg-[#FF6600] text-white px-4 py-2 rounded hover:bg-[#FF6600]/80 transition-colors">Register</Link>
                 </div>
               </div>
 
               {/* Multi-Sport Athlete */}
-              <div className="bg-[#0a0a0a] border border-white/5 border-t-2 border-t-[#8B0000] overflow-hidden group transition-colors">
+              <div className="bg-card border-primary/50 border-2 overflow-hidden group hover:border-primary transition-colors">
                 <div className="pt-6 px-6 pb-6 space-y-4">
                   <div>
                     <h4 className="text-xl font-display font-bold mb-2">Multi-Sport Athlete</h4>
                     <div className="text-lg font-bold text-white mb-3">$175/mo</div>
                     <p className="text-muted-foreground text-sm leading-relaxed">One day a week (Tue or Thur) with camps/events included.</p>
                   </div>
-                  <Link href="/register?program=multi-sport" className="block w-full text-center bg-[#8B0000] text-white px-4 py-3 text-xs font-black uppercase tracking-widest hover:bg-[#6B0000] transition-colors">Register</Link>
+                  <Link href="/register?program=multi-sport" className="block w-full text-center bg-[#FF6600] text-white px-4 py-2 rounded hover:bg-[#FF6600]/80 transition-colors">Register</Link>
                 </div>
               </div>
 
               {/* Drop-In */}
-              <div className="bg-[#0a0a0a] border border-white/5 border-t-2 border-t-[#8B0000] overflow-hidden group transition-colors">
+              <div className="bg-card border-primary/50 border-2 overflow-hidden group hover:border-primary transition-colors">
                 <div className="pt-6 px-6 pb-6 space-y-4">
                   <div>
-                    <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#8B0000]/10 border border-[#8B0000]/20 mb-3">
-                      <span className="text-sm font-medium text-[#8B0000]">Drop-In</span>
+                    <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 mb-3">
+                      <span className="text-sm font-medium text-primary">Drop-In</span>
                     </div>
                     <h4 className="text-xl font-display font-bold mb-2">Drop-In Training</h4>
                     <p className="text-muted-foreground text-sm leading-relaxed mb-2">Try a session before committing to a full program. Add a second day for just $35 more.</p>
@@ -352,16 +357,16 @@ export default function HomePage() {
                       </div>
                     </div>
                   </div>
-                  <Link href="/register?program=drop-in-1day" className="block w-full text-center bg-[#8B0000] text-white px-4 py-3 text-xs font-black uppercase tracking-widest hover:bg-[#6B0000] transition-colors">Register</Link>
+                  <Link href="/register?program=drop-in-1day" className="block w-full text-center bg-[#FF6600] text-white px-4 py-2 rounded hover:bg-[#FF6600]/80 transition-colors">Register</Link>
                 </div>
               </div>
 
               {/* Leadership & Mentorship Hike */}
-              <div className="bg-[#0a0a0a] border border-white/5 border-t-2 border-t-[#8B0000] overflow-hidden group transition-colors">
+              <div className="bg-card border-primary/50 border-2 overflow-hidden group hover:border-primary transition-colors">
                 <div className="pt-6 px-6 pb-6 space-y-4">
                   <div>
-                    <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#8B0000]/10 border border-[#8B0000]/20 mb-3">
-                      <span className="text-sm font-medium text-[#8B0000]">Leadership</span>
+                    <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 mb-3">
+                      <span className="text-sm font-medium text-primary">Leadership</span>
                     </div>
                     <h4 className="text-xl font-display font-bold mb-2">Leadership &amp; Mentorship Hike</h4>
                     <p className="text-muted-foreground text-sm leading-relaxed mb-2">A character-building hike experience focused on developing leadership, mentorship, and mental toughness beyond the field.</p>
@@ -370,16 +375,16 @@ export default function HomePage() {
                       <span className="text-lg font-bold text-white">$25</span>
                     </div>
                   </div>
-                  <Link href="/register?program=hike" className="block w-full text-center bg-[#8B0000] text-white px-4 py-3 text-xs font-black uppercase tracking-widest hover:bg-[#6B0000] transition-colors">Register</Link>
+                  <Link href="/register?program=hike" className="block w-full text-center bg-[#FF6600] text-white px-4 py-2 rounded hover:bg-[#FF6600]/80 transition-colors">Register</Link>
                 </div>
               </div>
 
               {/* Tackling Camp */}
-              <div className="bg-[#0a0a0a] border border-white/5 border-t-2 border-t-[#8B0000] overflow-hidden group transition-colors">
+              <div className="bg-card border-primary/50 border-2 overflow-hidden group hover:border-primary transition-colors">
                 <div className="pt-6 px-6 pb-6 space-y-4">
                   <div>
-                    <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#8B0000]/10 border border-[#8B0000]/20 mb-3">
-                      <span className="text-sm font-medium text-[#8B0000]">Camp</span>
+                    <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 mb-3">
+                      <span className="text-sm font-medium text-primary">Camp</span>
                     </div>
                     <h4 className="text-xl font-display font-bold mb-2">Tackling Camp</h4>
                     <p className="text-muted-foreground text-sm leading-relaxed mb-2">Proper tackling technique &amp; fundamentals coached by NFL-experienced staff.</p>
@@ -388,16 +393,16 @@ export default function HomePage() {
                       <span className="text-lg font-bold text-white">$25</span>
                     </div>
                   </div>
-                  <Link href="/register?program=tackling-camp" className="block w-full text-center bg-[#8B0000] text-white px-4 py-3 text-xs font-black uppercase tracking-widest hover:bg-[#6B0000] transition-colors">Register</Link>
+                  <Link href="/register?program=tackling-camp" className="block w-full text-center bg-[#FF6600] text-white px-4 py-2 rounded hover:bg-[#FF6600]/80 transition-colors">Register</Link>
                 </div>
               </div>
 
               {/* PR-VERIFIED Combine Camp */}
-              <div className="bg-[#0a0a0a] border border-white/5 border-t-2 border-t-[#8B0000] overflow-hidden group transition-colors">
+              <div className="bg-card border-primary/50 border-2 overflow-hidden group hover:border-primary transition-colors">
                 <div className="pt-6 px-6 pb-6 space-y-4">
                   <div>
-                    <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#8B0000]/10 border border-[#8B0000]/20 mb-3">
-                      <span className="text-sm font-medium text-[#8B0000]">Camp</span>
+                    <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 mb-3">
+                      <span className="text-sm font-medium text-primary">Camp</span>
                     </div>
                     <h4 className="text-xl font-display font-bold mb-2">Combine Metrics Camp</h4>
                     <p className="text-muted-foreground text-sm leading-relaxed mb-2">Professional Combine Events. H.S Athletes record official metrics.</p>
@@ -406,16 +411,16 @@ export default function HomePage() {
                       <span className="text-lg font-bold text-white">$25</span>
                     </div>
                   </div>
-                  <Link href="/register?program=combine" className="block w-full text-center bg-[#8B0000] text-white px-4 py-3 text-xs font-black uppercase tracking-widest hover:bg-[#6B0000] transition-colors">Register</Link>
+                  <Link href="/register?program=combine" className="block w-full text-center bg-[#FF6600] text-white px-4 py-2 rounded hover:bg-[#FF6600]/80 transition-colors">Register</Link>
                 </div>
               </div>
 
               {/* Summer Camp */}
-              <div className="bg-card border-[#8B0000]/70 border-2 overflow-hidden group hover:border-[#8B0000] transition-colors lg:col-span-3">
+              <div className="bg-card border-primary/50 border-2 overflow-hidden group hover:border-primary transition-colors lg:col-span-3">
                 <div className="pt-6 px-6 pb-6 space-y-4">
                   <div>
-                    <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#8B0000]/10 border border-[#8B0000]/20 mb-3">
-                      <span className="text-sm font-medium text-[#8B0000]">Summer Camp</span>
+                    <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 mb-3">
+                      <span className="text-sm font-medium text-primary">Summer Camp</span>
                     </div>
                     <h4 className="text-xl font-display font-bold mb-2">Summer Camp</h4>
                     <p className="text-muted-foreground text-sm leading-relaxed mb-2">Athlete Development &amp; Leadership (June &amp; July) — <span className="text-white font-semibold">Limited to 20 spots ONLY</span></p>
@@ -423,12 +428,12 @@ export default function HomePage() {
                       <div><div className="flex items-center justify-between"><span className="font-medium">Athletic Camp</span><span className="text-lg font-bold text-white">$265/mo</span></div><p className="text-xs text-muted-foreground mt-1">Open to all Elementary &amp; Middle School athletes · Mon, Tue &amp; Thu · 10:00am – 12:00pm (noon)</p></div>
                     </div>
                   </div>
-                  <Link href="/register?program=summer-ms" className="block w-full text-center bg-[#8B0000] text-white px-4 py-3 text-xs font-black uppercase tracking-widest hover:bg-[#6B0000] transition-colors">Register Now</Link>
+                  <Link href="/register?program=summer-ms" className="block w-full text-center bg-[#FF6600] text-white px-4 py-2 rounded hover:bg-[#FF6600]/80 transition-colors">Register Now</Link>
                 </div>
               </div>
 
               {/* Recruiting — Kevin Garrett */}
-              <div className="bg-card border-[#8B0000]/70 border-2 overflow-hidden lg:col-span-3">
+              <div className="bg-card border-primary/50 border-2 overflow-hidden lg:col-span-3">
                 <div className="pt-6 px-6 pb-6 space-y-4">
                   <div className="text-center">
                     <h4 className="text-4xl lg:text-5xl font-display font-bold mb-4">Recruiting</h4>
@@ -438,11 +443,11 @@ export default function HomePage() {
                     <p className="text-sm text-white mt-3">Contact Kevin directly: <a href="mailto:KG@polyrisefootball.com" className="text-red-500 underline hover:text-red-400">KG@polyrisefootball.com</a> · <a href="mailto:polyrise@polyrisefootball.com" className="text-red-500 underline hover:text-red-400">polyrise@polyrisefootball.com</a></p>
                   </div>
                   <div className="flex flex-wrap justify-center gap-4">
-                    <img src="/recruiting-athlete-1.jpeg" alt="Athlete Introduction Example - James Cabarrus III" className="w-48 h-auto rounded-lg border border-[#8B0000]/20" />
-                    <img src="/recruiting-athlete-2.jpeg" alt="Athlete Introduction Example - Gevariah Kneubuhl" className="w-48 h-auto rounded-lg border border-[#8B0000]/20" />
+                    <img src="/recruiting-athlete-1.jpeg" alt="Athlete Introduction Example - James Cabarrus III" className="w-48 h-auto rounded-lg border border-primary/20" />
+                    <img src="/recruiting-athlete-2.jpeg" alt="Athlete Introduction Example - Gevariah Kneubuhl" className="w-48 h-auto rounded-lg border border-primary/20" />
                   </div>
                   <div className="text-center">
-                    <Link href="#contact" className="inline-block bg-[#8B0000] text-white px-8 py-3 rounded hover:bg-[#8B0000]/80 transition-colors font-semibold">Get Started with Recruiting</Link>
+                    <Link href="#contact" className="inline-block bg-[#FF6600] text-white px-8 py-3 rounded hover:bg-[#FF6600]/80 transition-colors font-semibold">Get Started with Recruiting</Link>
                   </div>
                 </div>
               </div>
@@ -467,43 +472,43 @@ export default function HomePage() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6 max-w-6xl mx-auto">
             <div className="text-center p-4 bg-card rounded-lg border border-border">
-              <div className="w-24 h-24 mx-auto mb-3 rounded-full overflow-hidden border-2 border-[#8B0000]">
+              <div className="w-24 h-24 mx-auto mb-3 rounded-full overflow-hidden border-2 border-primary">
                 <img src="/coach-garrett.jpg" alt="Head Coach Kevin Garrett - St. Louis Rams #21" className="w-full h-full object-cover object-top" />
               </div>
               <h3 className="font-bold text-foreground mb-1">Head Coach Garrett</h3>
-              <p className="text-xs text-[#8B0000] font-semibold mb-2">DB Coach</p>
+              <p className="text-xs text-primary font-semibold mb-2">DB Coach</p>
               <p className="text-xs text-muted-foreground">7 yrs NFL (Rams, Texans), 3 yrs CFL, Drafted 2003 from SMU</p>
             </div>
             <div className="text-center p-4 bg-card rounded-lg border border-border">
-              <div className="w-24 h-24 mx-auto mb-3 rounded-full overflow-hidden border-2 border-[#8B0000]">
+              <div className="w-24 h-24 mx-auto mb-3 rounded-full overflow-hidden border-2 border-primary">
                 <img src="/coach-jordan.jpg" alt="Coach Jordan - Omaha Beef #18" className="w-full h-full object-cover object-top" />
               </div>
               <h3 className="font-bold text-foreground mb-1">Coach Jordan</h3>
-              <p className="text-xs text-[#8B0000] font-semibold mb-2">WR/TE</p>
+              <p className="text-xs text-primary font-semibold mb-2">WR/TE</p>
               <p className="text-xs text-muted-foreground">XFL Draft 2022, Omaha Beef 2X Champion, HCU Assistant WR Coach</p>
             </div>
             <div className="text-center p-4 bg-card rounded-lg border border-border">
-              <div className="w-24 h-24 rounded-full overflow-hidden mx-auto mb-3 border-2 border-[#8B0000]/20">
+              <div className="w-24 h-24 rounded-full overflow-hidden mx-auto mb-3 border-2 border-primary/20">
                 <img src="/coach-traves.jpg" alt="Coach Traves - Former Navy Safety and LB" className="w-full h-full object-cover" />
               </div>
               <h3 className="font-bold text-foreground mb-1">Coach Traves</h3>
-              <p className="text-xs text-[#8B0000] font-semibold mb-2">RB/S</p>
+              <p className="text-xs text-primary font-semibold mb-2">RB/S</p>
               <p className="text-xs text-muted-foreground">Former Navy Safety & LB, All-East Teams 2011-12, Citadel Football</p>
             </div>
             <div className="text-center p-4 bg-card rounded-lg border border-border">
-              <div className="w-24 h-24 rounded-full overflow-hidden mx-auto mb-3 border-2 border-[#8B0000]/20">
+              <div className="w-24 h-24 rounded-full overflow-hidden mx-auto mb-3 border-2 border-primary/20">
                 <img src="/coach-john.jpg" alt="Coach John - Former Navy Football QB" className="w-full h-full object-cover" />
               </div>
               <h3 className="font-bold text-foreground mb-1">Coach John</h3>
-              <p className="text-xs text-[#8B0000] font-semibold mb-2">QB</p>
+              <p className="text-xs text-primary font-semibold mb-2">QB</p>
               <p className="text-xs text-muted-foreground">Former Navy Football QB, Naval Academy Graduate & Officer</p>
             </div>
             <div className="text-center p-4 bg-card rounded-lg border border-border">
-              <div className="w-24 h-24 rounded-full overflow-hidden mx-auto mb-3 border-2 border-[#8B0000]/20">
+              <div className="w-24 h-24 rounded-full overflow-hidden mx-auto mb-3 border-2 border-primary/20">
                 <img src="/coach-brayden.jpg" alt="Coach Brayden - Baylor Football, NFL Draft, IFL All-Pro" className="w-full h-full object-cover" />
               </div>
               <h3 className="font-bold text-foreground mb-1">Coach Brayden</h3>
-              <p className="text-xs text-[#8B0000] font-semibold mb-2">LB/DL</p>
+              <p className="text-xs text-primary font-semibold mb-2">LB/DL</p>
               <p className="text-xs text-muted-foreground">Baylor 18-21, NFL Draft 2023, IFL All-Pro & League Champion 2025</p>
             </div>
           </div>
@@ -511,7 +516,7 @@ export default function HomePage() {
       </section>
 
       {/* PR-VERIFIED Section */}
-      <section className="py-8 lg:py-12 bg-black border-y border-white/5">
+      <section className="py-8 lg:py-12 bg-black text-white">
         <div className="container mx-auto px-4 lg:px-8">
           <div className="flex flex-col md:flex-row items-center justify-center gap-8 md:gap-12">
             <div className="text-center md:text-left max-w-3xl">
@@ -540,7 +545,7 @@ export default function HomePage() {
               <div className="flex flex-col items-center mb-4 gap-3">
                 <Link
                   href="/plans"
-                  className="text-base font-semibold bg-[#8B0000] text-white px-6 py-3 rounded hover:bg-[#8B0000]/80 transition-colors text-center"
+                  className="text-base font-semibold bg-[#FF6600] text-white px-6 py-3 rounded hover:bg-[#FF6600]/80 transition-colors text-center"
                 >
                   Athlete Tracking Passport & Recruiting
                 </Link>
@@ -564,17 +569,17 @@ export default function HomePage() {
       </section>
 
       {/* About Section */}
-      <section id="about" className="py-12 lg:py-20 bg-black">
+      <section id="about" className="py-12 lg:py-20 bg-muted/30">
         <div className="container mx-auto px-4 lg:px-8">
           <div className="max-w-3xl mx-auto text-center mb-8">
             <h2 className="text-4xl lg:text-5xl font-display font-bold text-balance">About PolyRISE Athletix</h2>
           </div>
 
           <div className="grid md:grid-cols-3 gap-8">
-            <div className="bg-[#0a0a0a] border border-white/5">
+            <div className="bg-card border-border">
               <div className="pt-6 space-y-4">
-                <div className="w-12 h-12 rounded-full bg-[#8B0000]/10 flex items-center justify-center">
-                  <Target className="w-6 h-6 text-[#8B0000]" />
+                <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center">
+                  <Target className="w-6 h-6 text-primary" />
                 </div>
                 <h3 className="text-xl font-display font-bold">Athletic Excellence</h3>
                 <p className="text-muted-foreground leading-relaxed">
@@ -584,7 +589,7 @@ export default function HomePage() {
               </div>
             </div>
 
-            <div className="bg-[#0a0a0a] border border-white/5">
+            <div className="bg-card border-border">
               <div className="pt-6 space-y-4">
                 <div className="w-12 h-12 rounded-full bg-accent/10 flex items-center justify-center">
                   <Users className="w-6 h-6 text-accent" />
@@ -597,10 +602,10 @@ export default function HomePage() {
               </div>
             </div>
 
-            <div className="bg-[#0a0a0a] border border-white/5">
+            <div className="bg-card border-border">
               <div className="pt-6 space-y-4">
-                <div className="w-12 h-12 rounded-full bg-[#8B0000]/10 flex items-center justify-center">
-                  <Trophy className="w-6 h-6 text-[#8B0000]" />
+                <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center">
+                  <Trophy className="w-6 h-6 text-primary" />
                 </div>
                 <h3 className="text-xl font-display font-bold">Complete Development</h3>
                 <p className="text-muted-foreground leading-relaxed">
@@ -623,7 +628,7 @@ export default function HomePage() {
             </div>
 
             <div className="space-y-6">
-              <div className="bg-[#0a0a0a] border border-white/5">
+              <div className="bg-card border-border">
                 <div className="pt-6">
                   <h3 className="font-display font-bold text-lg mb-2">What age groups does PolyRISE Athletix train?</h3>
                   <p className="text-muted-foreground leading-relaxed">
@@ -634,7 +639,7 @@ export default function HomePage() {
                 </div>
               </div>
 
-              <div className="bg-[#0a0a0a] border border-white/5">
+              <div className="bg-card border-border">
                 <div className="pt-6">
                   <h3 className="font-display font-bold text-lg mb-2">Where is PolyRISE Athletix located?</h3>
                   <p className="text-muted-foreground leading-relaxed">
@@ -643,7 +648,7 @@ export default function HomePage() {
                 </div>
               </div>
 
-              <div className="bg-[#0a0a0a] border border-white/5">
+              <div className="bg-card border-border">
                 <div className="pt-6">
                   <h3 className="font-display font-bold text-lg mb-2">What is included in the Player Development program?</h3>
                   <p className="text-muted-foreground leading-relaxed">
@@ -652,7 +657,7 @@ export default function HomePage() {
                 </div>
               </div>
 
-              <div className="bg-[#0a0a0a] border border-white/5">
+              <div className="bg-card border-border">
                 <div className="pt-6">
                   <h3 className="font-display font-bold text-lg mb-2">What makes 360 Elite different from Player Development?</h3>
                   <p className="text-muted-foreground leading-relaxed">
@@ -664,7 +669,7 @@ export default function HomePage() {
                 </div>
               </div>
 
-              <div className="bg-[#0a0a0a] border border-white/5">
+              <div className="bg-card border-border">
                 <div className="pt-6">
                   <h3 className="font-display font-bold text-lg mb-2">What is the training schedule?</h3>
                   <p className="text-muted-foreground leading-relaxed">
@@ -673,7 +678,7 @@ export default function HomePage() {
                 </div>
               </div>
 
-              <div className="bg-[#0a0a0a] border border-white/5">
+              <div className="bg-card border-border">
                 <div className="pt-6">
                   <h3 className="font-display font-bold text-lg mb-2">Does PolyRISE Athletix have coaches with NFL experience?</h3>
                   <p className="text-muted-foreground leading-relaxed">
@@ -683,7 +688,7 @@ export default function HomePage() {
                 </div>
               </div>
 
-              <div className="bg-[#0a0a0a] border border-white/5">
+              <div className="bg-card border-border">
                 <div className="pt-6">
                   <h3 className="font-display font-bold text-lg mb-2">What is SAQ and S&C training?</h3>
                   <p className="text-muted-foreground leading-relaxed">
@@ -709,26 +714,26 @@ export default function HomePage() {
           </div>
 
           <div className="flex flex-wrap justify-center items-center gap-8 lg:gap-16">
-            <div className="w-44 h-40 rounded-lg border-2 border-[#8B0000]/20 bg-white flex items-center justify-center overflow-hidden hover:border-[#8B0000]/70 transition-colors p-4">
+            <div className="w-44 h-40 rounded-lg border-2 border-primary/20 bg-white flex items-center justify-center overflow-hidden hover:border-primary/50 transition-colors p-4">
               <img src="/sponsor-sgm.png" alt="SGM Sponsor" className="w-full h-full object-contain" />
             </div>
-            <div className="w-44 h-40 rounded-lg border-2 border-[#8B0000]/20 bg-white flex items-center justify-center overflow-hidden hover:border-[#8B0000]/70 transition-colors p-4">
+            <div className="w-44 h-40 rounded-lg border-2 border-primary/20 bg-white flex items-center justify-center overflow-hidden hover:border-primary/50 transition-colors p-4">
               <img src="/sponsor-grease-monkey.png" alt="Grease Monkey - Oil Changes & More" className="w-full h-full object-contain" />
             </div>
-            <div className="w-44 h-40 rounded-lg border-2 border-[#8B0000]/20 bg-white flex items-center justify-center overflow-hidden hover:border-[#8B0000]/70 transition-colors p-4">
+            <div className="w-44 h-40 rounded-lg border-2 border-primary/20 bg-white flex items-center justify-center overflow-hidden hover:border-primary/50 transition-colors p-4">
               <img src="/sponsor-swift-sessions.png" alt="Swift Sessions" className="w-full h-full object-contain" />
             </div>
-            <div className="w-44 h-40 rounded-lg border-2 border-[#8B0000]/20 bg-white flex items-center justify-center overflow-hidden hover:border-[#8B0000]/70 transition-colors p-4">
+            <div className="w-44 h-40 rounded-lg border-2 border-primary/20 bg-white flex items-center justify-center overflow-hidden hover:border-primary/50 transition-colors p-4">
               <img src="/sponsor-main-design.png" alt="Main Design Print Co." className="w-full h-full object-contain" />
             </div>
-            <div className="w-44 h-40 rounded-lg border-2 border-[#8B0000]/20 bg-white flex items-center justify-center overflow-hidden hover:border-[#8B0000]/70 transition-colors p-4">
+            <div className="w-44 h-40 rounded-lg border-2 border-primary/20 bg-white flex items-center justify-center overflow-hidden hover:border-primary/50 transition-colors p-4">
               <img src="/sponsor-longhorn-mobile-detailing.jpg" alt="Longhorn Mobile Detailing" className="w-full h-full object-contain" />
             </div>
           </div>
 
           <div className="text-center mt-12">
             <p className="text-muted-foreground mb-4">Interested in becoming a sponsor?</p>
-            <a href="#contact" className="inline-flex items-center justify-center px-6 py-3 rounded-lg bg-primary text-[#8B0000]-foreground font-medium hover:bg-primary/90 transition-colors">
+            <a href="#contact" className="inline-flex items-center justify-center px-6 py-3 rounded-lg bg-primary text-primary-foreground font-medium hover:bg-primary/90 transition-colors">
               Contact Us
             </a>
           </div>
@@ -736,7 +741,7 @@ export default function HomePage() {
       </section>
 
       {/* Contact Section */}
-      <section id="contact" className="py-12 lg:py-20 bg-black">
+      <section id="contact" className="py-12 lg:py-20 bg-muted/30">
         <div className="container mx-auto px-4 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-12">
             <div className="space-y-8">
@@ -750,8 +755,8 @@ export default function HomePage() {
 
               <div className="space-y-6">
                 <div className="flex items-start gap-4">
-                  <div className="w-10 h-10 rounded-full bg-[#8B0000]/10 flex items-center justify-center flex-shrink-0">
-                    <MapPin className="w-5 h-5 text-[#8B0000]" />
+                  <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
+                    <MapPin className="w-5 h-5 text-primary" />
                   </div>
                   <div>
                     <div className="font-medium mb-1">Location</div>
@@ -763,8 +768,8 @@ export default function HomePage() {
                 </div>
 
                 <div className="flex items-start gap-4">
-                  <div className="w-10 h-10 rounded-full bg-[#8B0000]/10 flex items-center justify-center flex-shrink-0">
-                    <svg className="w-5 h-5 text-[#8B0000]" fill="currentColor" viewBox="0 0 24 24">
+                  <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
+                    <svg className="w-5 h-5 text-primary" fill="currentColor" viewBox="0 0 24 24">
                       <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
                     </svg>
                   </div>
@@ -775,7 +780,7 @@ export default function HomePage() {
                 </div>
 
                 <div className="flex items-start gap-4">
-                  <div className="w-10 h-10 rounded-full bg-[#8B0000]/10 flex items-center justify-center flex-shrink-0">
+                  <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
                     <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                     </svg>
@@ -788,7 +793,7 @@ export default function HomePage() {
                 </div>
 
                 <div className="flex items-start gap-4">
-                  <div className="w-10 h-10 rounded-full bg-[#8B0000]/10 flex items-center justify-center flex-shrink-0">
+                  <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
                     <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
                     </svg>
@@ -801,7 +806,7 @@ export default function HomePage() {
               </div>
             </div>
 
-            <div className="bg-[#0a0a0a] border border-white/5">
+            <div className="bg-card border-border">
               <div className="pt-6">
                 <form className="space-y-6">
                   <div className="space-y-2">
@@ -816,7 +821,7 @@ export default function HomePage() {
                     <label htmlFor="message" className="text-sm font-medium">Message</label>
                     <textarea id="message" rows={6} className="w-full px-4 py-2 rounded-lg bg-background border border-input focus:outline-none focus:ring-2 focus:ring-ring resize-none" placeholder="Your message..." />
                   </div>
-                  <button type="submit" className="w-full bg-[#8B0000] text-white px-4 py-2 rounded hover:bg-[#8B0000]/80 transition-colors">Send Message</button>
+                  <button type="submit" className="w-full bg-[#FF6600] text-white px-4 py-2 rounded hover:bg-[#FF6600]/80 transition-colors">Send Message</button>
                   <p className="text-xs text-muted-foreground text-center">This site is protected by reCAPTCHA and the Google Privacy Policy and Terms of Service apply.</p>
                 </form>
               </div>
@@ -829,14 +834,14 @@ export default function HomePage() {
       <section id="register" className="py-12 lg:py-20 bg-primary">
         <div className="container mx-auto px-4 lg:px-8">
           <div className="max-w-3xl mx-auto text-center space-y-8">
-            <h2 className="text-4xl lg:text-5xl font-display font-bold text-[#8B0000]-foreground text-balance">
+            <h2 className="text-4xl lg:text-5xl font-display font-bold text-primary-foreground text-balance">
               Ready to Start Your Journey?
             </h2>
-            <p className="text-lg text-[#8B0000]-foreground/90 leading-relaxed text-pretty">
+            <p className="text-lg text-primary-foreground/90 leading-relaxed text-pretty">
               Join our football program for expert coaching and football skills development. Registration is now open for all programs.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link href="/register" className="text-base bg-[#8B0000] text-white px-4 py-2 rounded hover:bg-[#8B0000]/80 transition-colors inline-flex items-center">
+              <Link href="/register" className="text-base bg-[#FF6600] text-white px-4 py-2 rounded hover:bg-[#FF6600]/80 transition-colors inline-flex items-center">
                 Register for Training
                 <ArrowRight className="w-4 h-4 ml-2" />
               </Link>
@@ -844,7 +849,7 @@ export default function HomePage() {
                 Free Athlete Profile
                 <ArrowRight className="w-4 h-4 ml-2" />
               </Link>
-              <Link href="#contact" className="text-base bg-transparent border border-[#8B0000] px-4 py-2 rounded hover:bg-[#8B0000]/10 transition-colors">
+              <Link href="#contact" className="text-base bg-transparent border border-primary px-4 py-2 rounded hover:bg-primary/10 transition-colors">
                 Contact Us
               </Link>
             </div>
@@ -853,13 +858,13 @@ export default function HomePage() {
       </section>
 
       {/* Footer */}
-      <footer className="border-t border-border py-12 bg-black">
+      <footer className="border-t border-border py-12 bg-muted/30">
         <div className="container mx-auto px-4 lg:px-8">
           <div className="grid md:grid-cols-4 gap-8 mb-8">
             <div className="space-y-4">
               <div className="flex items-center gap-2">
                 <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
-                  <span className="text-[#8B0000]-foreground font-display font-bold">PR</span>
+                  <span className="text-primary-foreground font-display font-bold">PR</span>
                 </div>
                 <span className="font-display font-bold">PolyRISE Athletix</span>
               </div>
@@ -892,19 +897,19 @@ export default function HomePage() {
               <h4 className="font-display font-bold mb-4">Connect</h4>
               <div className="flex gap-4">
                 <a href="https://www.facebook.com/profile.php?id=61573903568901" target="_blank" rel="noopener noreferrer"
-                  className="w-10 h-10 rounded-full bg-[#0a0a0a] hover:bg-primary hover:text-[#8B0000]-foreground transition-colors flex items-center justify-center">
+                  className="w-10 h-10 rounded-full bg-muted hover:bg-primary hover:text-primary-foreground transition-colors flex items-center justify-center">
                   <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
                     <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
                   </svg>
                 </a>
                 <a href="https://www.x.com/PolyRise7v7" target="_blank" rel="noopener noreferrer"
-                  className="w-10 h-10 rounded-full bg-[#0a0a0a] hover:bg-primary hover:text-[#8B0000]-foreground transition-colors flex items-center justify-center">
+                  className="w-10 h-10 rounded-full bg-muted hover:bg-primary hover:text-primary-foreground transition-colors flex items-center justify-center">
                   <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
                     <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
                   </svg>
                 </a>
                 <a href="https://www.instagram.com/polyrise_football/" target="_blank" rel="noopener noreferrer"
-                  className="w-10 h-10 rounded-full bg-[#0a0a0a] hover:bg-primary hover:text-[#8B0000]-foreground transition-colors flex items-center justify-center">
+                  className="w-10 h-10 rounded-full bg-muted hover:bg-primary hover:text-primary-foreground transition-colors flex items-center justify-center">
                   <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
                     <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.012-3.584.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
                   </svg>

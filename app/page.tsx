@@ -307,7 +307,7 @@ export default function HomePage() {
                     <h4 className="text-xl font-display font-bold mb-2">Tackling Camp</h4>
                     <p className="text-white text-sm leading-relaxed mb-2">Proper tackling technique &amp; fundamentals coached by NFL-experienced staff.</p>
                     <div className="flex items-center justify-between border-t border-dashed border-border pt-4">
-                      <span className="font-medium text-sm">June 12 · 9:00am · Dripping Springs</span>
+                      <span className="font-medium text-sm">July 25 · 9:00am · Dripping Springs</span>
                       <span className="text-lg font-bold text-white">$25</span>
                     </div>
                   </div>

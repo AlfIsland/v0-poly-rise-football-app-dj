@@ -70,7 +70,7 @@ const CATEGORIES = [
     label: "Events", badge: "bg-green-900 text-green-300", color: "border-green-800 hover:border-green-500",
     programs: [
       { id: "combine",       desc: "Professional Combine Events · H.S. athletes record official metrics · Earn your PR-VERIFIED seal" },
-      { id: "tackling-camp", desc: "June 12 · 9:00am · Dripping Springs · Proper tackling technique & fundamentals coached by NFL-experienced staff" },
+      { id: "tackling-camp", desc: "July 25 · 9:00am · Dripping Springs · Proper tackling technique & fundamentals coached by NFL-experienced staff" },
       { id: "hike",          desc: "Leadership & Mentorship Hike · Character-building experience developing leadership, mentorship & mental toughness" },
     ],
   },

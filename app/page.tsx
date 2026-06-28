@@ -67,8 +67,9 @@ export default function HomePage() {
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div className="space-y-6">
               <h1 className="text-4xl lg:text-6xl font-display font-bold leading-tight text-balance">
-                Elite Youth Multi-Sport Athlete Development for{" "}
-                <span className="text-white">Austin & Central Texas</span>
+                Where{" "}
+                <span className="text-red-500">Central Texas</span>
+                {" "}Athletes Are Built.
               </h1>
 
               <p className="text-lg lg:text-xl text-white leading-relaxed text-pretty">

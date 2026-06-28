@@ -73,7 +73,7 @@ export default function HomePage() {
               </h1>
 
               <p className="text-lg lg:text-xl text-white leading-relaxed text-pretty">
-                Professional level training in football, soccer, baseball, softball, girls flag football, wrestling and more — plus expert recruiting & exposure for H.S. athletes with trusted PR-VERIFIED metrics.
+                Rooted in football. Trained for every sport. PolyRISE Athletix delivers professional coaching and strength & conditioning across football, soccer, wrestling, baseball, softball, girls flag football and more — plus recruiting exposure and PR-VERIFIED combine testing for high school athletes.
               </p>
             </div>
 

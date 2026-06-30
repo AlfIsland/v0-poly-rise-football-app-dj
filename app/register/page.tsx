@@ -109,6 +109,7 @@ function RegisterPage() {
   const [error, setError] = useState("")
   const [waiverAccepted, setWaiverAccepted] = useState(false)
   const [waiverExpanded, setWaiverExpanded] = useState(false)
+  const [recruitingMonths, setRecruitingMonths] = useState<3 | 6 | 12>(3)
 
   const billingMonthOptions = (() => {
     const opts: string[] = []
@@ -142,6 +143,7 @@ function RegisterPage() {
 
   const cartTotal = cart.reduce((sum, id) => sum + (PROGRAMS_DATA[id]?.price ?? 0), 0)
   const hasMonthly = cart.some(id => PROGRAMS_DATA[id]?.billing === "monthly")
+  const hasRecruiting = cart.some(id => id.startsWith("hs-recruiting"))
 
   const validateCode = async () => {
     if (!discountCode.trim()) return
@@ -163,7 +165,7 @@ function RegisterPage() {
       const res = await fetch("/api/register/checkout", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ programIds: cart, playerName, playerAge, playerGrade, playerSchool, playerPosition, parentName, email, phone, discountCode: discountResult?.valid ? discountResult.code : undefined, billingMonth: hasMonthly ? billingMonth : undefined }),
+        body: JSON.stringify({ programIds: cart, playerName, playerAge, playerGrade, playerSchool, playerPosition, parentName, email, phone, discountCode: discountResult?.valid ? discountResult.code : undefined, billingMonth: hasMonthly ? billingMonth : undefined, recruitingMonths: hasRecruiting ? recruitingMonths : undefined }),
       })
       const data = await res.json()
       if (data.success && data.url) {
@@ -300,6 +302,35 @@ function RegisterPage() {
                 </div>
               )}
             </div>
+
+            {/* Recruiting Subscription Length */}
+            {hasRecruiting && (
+              <div className="bg-red-950/40 border border-red-800 rounded-xl px-4 py-4 space-y-3">
+                <p className="text-xs font-bold text-red-400 uppercase tracking-widest">Recruiting Subscription Length</p>
+                <p className="text-xs text-gray-400">Choose how many months you want to subscribe. Your card will be auto-drafted monthly for the duration you select.</p>
+                <div className="grid grid-cols-3 gap-3">
+                  {([3, 6, 12] as const).map(months => {
+                    const recruitingTotal = cart
+                      .filter(id => id.startsWith("hs-recruiting"))
+                      .reduce((sum, id) => sum + (PROGRAMS_DATA[id]?.price ?? 0), 0)
+                    const total = recruitingTotal * months
+                    return (
+                      <button
+                        key={months}
+                        type="button"
+                        onClick={() => setRecruitingMonths(months)}
+                        className={`rounded-xl border-2 p-3 text-center transition-all ${recruitingMonths === months ? "border-red-500 bg-red-950" : "border-gray-700 bg-gray-800 hover:border-gray-500"}`}
+                      >
+                        <p className={`text-sm font-black ${recruitingMonths === months ? "text-red-400" : "text-white"}`}>{months} mo</p>
+                        <p className="text-xs text-gray-400 mt-0.5">${total} total</p>
+                        {months === 12 && <p className="text-xs text-green-400 font-semibold mt-1">Best Value</p>}
+                      </button>
+                    )
+                  })}
+                </div>
+                <p className="text-xs text-gray-500">Subscription auto-cancels after {recruitingMonths} month{recruitingMonths > 1 ? "s" : ""}. No surprise charges.</p>
+              </div>
+            )}
 
             {/* Billing Month — only shown for monthly programs */}
             {hasMonthly && (

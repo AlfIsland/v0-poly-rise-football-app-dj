@@ -21,11 +21,14 @@ const STATUS_COLORS: Record<string, string> = {
 }
 
 const CATEGORY_LABELS: Record<string, string> = {
-  "player-dev": "Training", "elite-360": "Training", "multi-sport": "Training", "girls-dev": "Training",
-  "summer-k5": "Camp", "summer-ms": "Camp", "summer-hs": "Camp",
-  "combine": "Event", "hike": "Event", "tournament-ms": "Event", "tournament-hs": "Event",
-  "exposure-basic-3": "Recruiting", "exposure-basic-6": "Recruiting", "exposure-basic-12": "Recruiting",
-  "exposure-enhanced-3": "Recruiting", "exposure-enhanced-6": "Recruiting", "exposure-enhanced-12": "Recruiting",
+  "player-dev": "Training", "player-dev-annual": "Training", "player-dev-1day": "Training", "player-dev-dropin": "Training",
+  "multi-sport-dev": "Training", "multi-sport": "Training",
+  "girls-dev": "Training", "girls-dev-3day": "Training",
+  "drop-in-1day": "Training", "drop-in-2day": "Training",
+  "summer-ms": "Camp",
+  "combine": "Event", "hike": "Event", "tackling-camp": "Event",
+  "hs-recruiting-elite": "Recruiting", "hs-recruiting-pro": "Recruiting", "hs-recruiting-basic": "Recruiting",
+  "passport": "Membership", "recruit": "Membership", "elite-recruit": "Membership",
 }
 
 export default function RegistrationsPage() {

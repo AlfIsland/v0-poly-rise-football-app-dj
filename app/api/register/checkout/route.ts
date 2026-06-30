@@ -4,30 +4,35 @@ import { saveRegistration, Registration } from "@/lib/registration-store"
 import { getDiscount, validateDiscount, incrementUsage } from "@/lib/discount-store"
 
 export const PROGRAMS: Record<string, { name: string; price: number; billing: "one_time" | "monthly" }> = {
-  "player-dev":           { name: "Player Development",                      price: 300, billing: "monthly"  },
-  "elite-360":            { name: "360 Elite",                               price: 500, billing: "monthly"  },
-  "multi-sport":          { name: "Multi-Sport Athlete",                     price: 175, billing: "monthly"  },
-  "girls-dev":            { name: "Girls Player Development",                price: 250, billing: "monthly"  },
-  "girls-dev-3day":       { name: "Girls Player Development — 3 Day",        price: 315, billing: "monthly"  },
-  "drop-in-1day":         { name: "Drop-In — 1 Day",                         price: 45,  billing: "one_time" },
-  "drop-in-2day":         { name: "Drop-In — 2 Days",                        price: 80,  billing: "one_time" },
-  "summer-k5":            { name: "Summer Camp (Elementary K-5)",            price: 265, billing: "one_time" },
-  "summer-ms":            { name: "Summer Camp (Middle School)",             price: 265, billing: "one_time" },
-  "summer-hs":            { name: "Summer Camp (High School)",               price: 265, billing: "one_time" },
-  "combine":              { name: "PR-VERIFIED Combine Camp",                price: 25,  billing: "one_time" },
-  "tackling-camp":        { name: "Tackling Camp",                           price: 25,  billing: "one_time" },
-  "hike":                 { name: "Leadership & Mentorship Hike",             price: 25,  billing: "one_time" },
-  "tournament-ms":        { name: "Football Tournament (Middle School)",     price: 400, billing: "one_time" },
-  "tournament-hs":        { name: "Football Tournament (High School)",       price: 425, billing: "one_time" },
-  "passport":             { name: "Passport",                                price: 9.99,  billing: "monthly"  },
-  "recruit":              { name: "Recruit",                                 price: 29.99, billing: "monthly"  },
-  "elite-recruit":        { name: "Elite Recruit",                           price: 49.99, billing: "monthly"  },
-  "exposure-basic-3":     { name: "Basic Exposure Package (3 months)",       price: 165, billing: "one_time" },
-  "exposure-basic-6":     { name: "Basic Exposure Package (6 months)",       price: 330, billing: "one_time" },
-  "exposure-basic-12":    { name: "Basic Exposure Package (12 months)",      price: 660, billing: "one_time" },
-  "exposure-enhanced-3":  { name: "Enhanced Exposure Package (3 months)",    price: 225, billing: "one_time" },
-  "exposure-enhanced-6":  { name: "Enhanced Exposure Package (6 months)",    price: 450, billing: "one_time" },
-  "exposure-enhanced-12": { name: "Enhanced Exposure Package (12 months)",   price: 900, billing: "one_time" },
+  // Football Player Development tiers
+  "player-dev":              { name: "Football Player Development — Monthly",           price: 315,   billing: "monthly"  },
+  "player-dev-annual":       { name: "Football Player Development — Annual Subscription", price: 250, billing: "monthly"  },
+  "player-dev-1day":         { name: "Football Player Development — Once a Week",       price: 175,   billing: "monthly"  },
+  "player-dev-dropin":       { name: "Football Player Development — Drop-In",           price: 40,    billing: "one_time" },
+  // Multi-Sport Development
+  "multi-sport-dev":         { name: "Multi-Sport Development",                         price: 265,   billing: "monthly"  },
+  // Girls Player Development
+  "girls-dev":               { name: "Girls Player Development — 2 Days/Week",         price: 250,   billing: "monthly"  },
+  "girls-dev-3day":          { name: "Girls Player Development — 3 Days/Week",         price: 315,   billing: "monthly"  },
+  // Multi-Sport Athlete
+  "multi-sport":             { name: "Multi-Sport Athlete",                             price: 175,   billing: "monthly"  },
+  // Drop-In Training
+  "drop-in-1day":            { name: "Drop-In Training — 1 Day",                       price: 45,    billing: "one_time" },
+  "drop-in-2day":            { name: "Drop-In Training — 2 Days",                      price: 80,    billing: "one_time" },
+  // HS Recruiting & Exposure
+  "hs-recruiting-elite":     { name: "HS Recruiting — Elite Exposure",                 price: 150,   billing: "monthly"  },
+  "hs-recruiting-pro":       { name: "HS Recruiting — Pro Exposure",                   price: 125,   billing: "monthly"  },
+  "hs-recruiting-basic":     { name: "HS Recruiting — Basic Exposure",                 price: 85,    billing: "monthly"  },
+  // Summer / Athletic Camp
+  "summer-ms":               { name: "Athletic Camp",                                  price: 265,   billing: "monthly"  },
+  // Events
+  "combine":                 { name: "Combine Metrics Camp",                           price: 25,    billing: "one_time" },
+  "tackling-camp":           { name: "Tackling Camp",                                  price: 25,    billing: "one_time" },
+  "hike":                    { name: "Leadership & Mentorship Hike",                   price: 25,    billing: "one_time" },
+  // Athlete Tracking & Recruiting Profiles
+  "passport":                { name: "Passport",                                        price: 9.99,  billing: "monthly"  },
+  "recruit":                 { name: "Recruit",                                         price: 29.99, billing: "monthly"  },
+  "elite-recruit":           { name: "Elite Recruit",                                   price: 49.99, billing: "monthly"  },
 }
 
 export async function POST(req: NextRequest) {

@@ -24,16 +24,16 @@ export async function POST(req: NextRequest) {
       ? session.subscription
       : session.subscription.id
 
-    // Get recruitingMonths from session metadata
-    const recruitingMonths = session.metadata?.recruitingMonths
-      ? Number(session.metadata.recruitingMonths)
+    // Get cancelMonths from session metadata (covers player dev commitments + recruiting picker)
+    const cancelMonths = session.metadata?.cancelMonths
+      ? Number(session.metadata.cancelMonths)
       : null
 
-    if (!recruitingMonths) return NextResponse.json({ success: true, note: "No recruiting months set" })
+    if (!cancelMonths) return NextResponse.json({ success: true, note: "No commitment period set" })
 
     // Calculate cancel_at date
     const cancelAt = new Date()
-    cancelAt.setMonth(cancelAt.getMonth() + recruitingMonths)
+    cancelAt.setMonth(cancelAt.getMonth() + cancelMonths)
     const cancelAtTimestamp = Math.floor(cancelAt.getTime() / 1000)
 
     // Update subscription with cancel_at
@@ -41,7 +41,7 @@ export async function POST(req: NextRequest) {
       cancel_at: cancelAtTimestamp,
     })
 
-    return NextResponse.json({ success: true, cancelAt: cancelAt.toISOString(), months: recruitingMonths })
+    return NextResponse.json({ success: true, cancelAt: cancelAt.toISOString(), months: cancelMonths })
   } catch (err) {
     const message = err instanceof Error ? err.message : "Failed"
     console.error("[finalize-subscription]", err)

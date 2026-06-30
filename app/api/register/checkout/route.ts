@@ -40,16 +40,16 @@ export async function POST(req: NextRequest) {
     const body = await req.json()
     const { programIds, playerName, playerAge, playerGrade, playerSchool, playerPosition, parentName, email, phone, discountCode, billingMonth, recruitingMonths } = body
 
+    const ids: string[] = programIds ?? (body.programId ? [body.programId] : [])
+    if (!ids.length || !playerName || !parentName || !email || !phone)
+      return NextResponse.json({ success: false, error: "Missing required fields" }, { status: 400 })
+
     // Determine fixed commitment months from program IDs or recruiting picker
     const cancelMonths: number | null =
       ids.includes("player-dev-annual") ? 12
       : ids.includes("player-dev-6mo") ? 6
       : recruitingMonths ? Number(recruitingMonths)
       : null
-
-    const ids: string[] = programIds ?? (body.programId ? [body.programId] : [])
-    if (!ids.length || !playerName || !parentName || !email || !phone)
-      return NextResponse.json({ success: false, error: "Missing required fields" }, { status: 400 })
 
     const programs = ids.map(id => ({ id, ...PROGRAMS[id] })).filter(p => p.name)
     if (!programs.length) return NextResponse.json({ success: false, error: "Invalid program(s)" }, { status: 400 })

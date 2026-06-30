@@ -130,7 +130,11 @@ export default function HomePage() {
                     <div className="space-y-2 border-t border-dashed border-border pt-4">
                       <div className="flex items-center justify-between">
                         <span className="font-medium text-sm">Monthly</span>
-                        <span className="text-lg font-bold text-white">$315/mo</span>
+                        <span className="text-lg font-bold text-white">$325/mo</span>
+                      </div>
+                      <div className="flex items-center justify-between">
+                        <span className="font-medium text-sm">6-Month Commitment <span className="text-xs text-red-400 font-semibold">Save $45/mo</span></span>
+                        <span className="text-lg font-bold text-white">$280/mo</span>
                       </div>
                       <div className="flex items-center justify-between">
                         <span className="font-medium text-sm">Annual Subscription <span className="text-xs text-red-400 font-semibold">12-mo commitment</span></span>
@@ -139,10 +143,6 @@ export default function HomePage() {
                       <div className="flex items-center justify-between">
                         <span className="font-medium text-sm">Once a Week</span>
                         <span className="text-lg font-bold text-white">$175/mo</span>
-                      </div>
-                      <div className="flex items-center justify-between">
-                        <span className="font-medium text-sm">Drop-In</span>
-                        <span className="text-lg font-bold text-white">$40</span>
                       </div>
                     </div>
                   </div>

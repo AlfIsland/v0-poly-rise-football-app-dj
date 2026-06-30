@@ -182,11 +182,13 @@ export default function HomePage() {
                           <span className="text-lg font-bold text-white">$150<span className="text-xs font-normal text-white">/mo</span></span>
                         </div>
                         <ul className="space-y-1">
-                          <li className="flex items-start gap-2 text-xs text-white"><CheckCircle2 className="w-3 h-3 text-primary flex-shrink-0 mt-0.5" />X (Twitter) blast + Instagram blast</li>
-                          <li className="flex items-start gap-2 text-xs text-white"><CheckCircle2 className="w-3 h-3 text-primary flex-shrink-0 mt-0.5" />5 personalized emails to college coaches/mo</li>
+                          <li className="flex items-start gap-2 text-xs text-white"><CheckCircle2 className="w-3 h-3 text-primary flex-shrink-0 mt-0.5" />2× X + Instagram blast/mo</li>
+                          <li className="flex items-start gap-2 text-xs text-white"><CheckCircle2 className="w-3 h-3 text-primary flex-shrink-0 mt-0.5" />5 personalized coach emails/mo</li>
                           <li className="flex items-start gap-2 text-xs text-white"><CheckCircle2 className="w-3 h-3 text-primary flex-shrink-0 mt-0.5" />Profile optimization</li>
+                          <li className="flex items-start gap-2 text-xs text-white"><CheckCircle2 className="w-3 h-3 text-primary flex-shrink-0 mt-0.5" />Weekly recruiting report</li>
+                          <li className="flex items-start gap-2 text-xs text-white"><CheckCircle2 className="w-3 h-3 text-primary flex-shrink-0 mt-0.5" />1-on-1 coach call</li>
                         </ul>
-                        <p className="text-xs text-gray-400 mt-2 italic">Best for: Serious recruits</p>
+                        <p className="text-xs text-gray-400 mt-2 italic">Best for: Serious Recruits</p>
                       </div>
                       {/* Pro Exposure */}
                       <div className="rounded-lg border border-border bg-card p-3">
@@ -195,11 +197,12 @@ export default function HomePage() {
                           <span className="text-lg font-bold text-white">$125<span className="text-xs font-normal text-white">/mo</span></span>
                         </div>
                         <ul className="space-y-1">
-                          <li className="flex items-start gap-2 text-xs text-white"><CheckCircle2 className="w-3 h-3 text-primary flex-shrink-0 mt-0.5" />X (Twitter) blast + Instagram blast</li>
-                          <li className="flex items-start gap-2 text-xs text-white"><CheckCircle2 className="w-3 h-3 text-primary flex-shrink-0 mt-0.5" />3 personalized emails to college coaches/mo</li>
+                          <li className="flex items-start gap-2 text-xs text-white"><CheckCircle2 className="w-3 h-3 text-primary flex-shrink-0 mt-0.5" />X + Instagram blast</li>
+                          <li className="flex items-start gap-2 text-xs text-white"><CheckCircle2 className="w-3 h-3 text-primary flex-shrink-0 mt-0.5" />3 personalized coach emails/mo</li>
                           <li className="flex items-start gap-2 text-xs text-white"><CheckCircle2 className="w-3 h-3 text-primary flex-shrink-0 mt-0.5" />Profile optimization</li>
+                          <li className="flex items-start gap-2 text-xs text-white"><CheckCircle2 className="w-3 h-3 text-primary flex-shrink-0 mt-0.5" />Bi-weekly recruiting report</li>
                         </ul>
-                        <p className="text-xs text-gray-400 mt-2 italic">Best for: Recruits targeting strong exposure</p>
+                        <p className="text-xs text-gray-400 mt-2 italic">Best for: Strong Exposure</p>
                       </div>
                       {/* Basic Exposure */}
                       <div className="rounded-lg border border-border bg-card p-3">
@@ -208,10 +211,11 @@ export default function HomePage() {
                           <span className="text-lg font-bold text-white">$85<span className="text-xs font-normal text-white">/mo</span></span>
                         </div>
                         <ul className="space-y-1">
-                          <li className="flex items-start gap-2 text-xs text-white"><CheckCircle2 className="w-3 h-3 text-primary flex-shrink-0 mt-0.5" />Professional profile image package</li>
-                          <li className="flex items-start gap-2 text-xs text-white"><CheckCircle2 className="w-3 h-3 text-primary flex-shrink-0 mt-0.5" />X (Twitter) blast (1–2x monthly)</li>
+                          <li className="flex items-start gap-2 text-xs text-white"><CheckCircle2 className="w-3 h-3 text-primary flex-shrink-0 mt-0.5" />Pro profile image package</li>
+                          <li className="flex items-start gap-2 text-xs text-white"><CheckCircle2 className="w-3 h-3 text-primary flex-shrink-0 mt-0.5" />X blast (1–2× monthly)</li>
+                          <li className="flex items-start gap-2 text-xs text-white"><CheckCircle2 className="w-3 h-3 text-primary flex-shrink-0 mt-0.5" />Access to coach directory</li>
                         </ul>
-                        <p className="text-xs text-gray-400 mt-2 italic">Best for: Athletes testing the waters or building initial visibility</p>
+                        <p className="text-xs text-gray-400 mt-2 italic">Best for: Initial Visibility</p>
                       </div>
                     </div>
                   </div>

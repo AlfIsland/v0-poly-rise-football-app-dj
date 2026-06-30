@@ -55,9 +55,9 @@ const CATEGORIES = [
   {
     label: "HS Recruiting & Exposure", badge: "bg-orange-900 text-orange-300", color: "border-orange-800 hover:border-orange-500",
     programs: [
-      { id: "hs-recruiting-elite", desc: "X blast + Instagram blast + 5 personalized emails to college coaches/mo + profile optimization", highlight: "ELITE" },
-      { id: "hs-recruiting-pro",   desc: "X blast + Instagram blast + 3 personalized emails to college coaches/mo + profile optimization" },
-      { id: "hs-recruiting-basic", desc: "Professional profile image package + X blast (1–2x monthly) · Great for athletes building initial visibility" },
+      { id: "hs-recruiting-elite", desc: "2× X + Instagram blast/mo · 5 personalized coach emails/mo · Profile optimization · Weekly recruiting report · 1-on-1 coach call", highlight: "ELITE" },
+      { id: "hs-recruiting-pro",   desc: "X + Instagram blast · 3 personalized coach emails/mo · Profile optimization · Bi-weekly recruiting report" },
+      { id: "hs-recruiting-basic", desc: "Pro profile image package · X blast (1–2× monthly) · Access to coach directory" },
     ],
   },
   {

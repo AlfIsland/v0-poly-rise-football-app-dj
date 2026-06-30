@@ -20,6 +20,12 @@ function SuccessPage() {
     fetch(`/api/register/confirmation?id=${id}`)
       .then(r => r.json())
       .then(d => { if (d.success) setReg(d.registration) })
+    // Set cancel_at on subscription if recruiting months were selected
+    fetch("/api/register/finalize-subscription", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ id }),
+    }).catch(() => {})
   }, [id])
 
   return (

@@ -127,9 +127,6 @@ export async function POST(req: NextRequest) {
       })
     } else if (monthlyItems.length > 0) {
       // Only monthly items — use subscription mode for automatic recurring billing
-      const cancelAt = recruitingMonths
-        ? Math.floor(new Date(Date.now()).setMonth(new Date().getMonth() + Number(recruitingMonths)) / 1000)
-        : undefined
       session = await stripe.checkout.sessions.create({
         payment_method_types: ["card"],
         line_items: monthlyItems.map(p => ({
@@ -142,7 +139,11 @@ export async function POST(req: NextRequest) {
           quantity: 1,
         })),
         mode: "subscription",
-        subscription_data: cancelAt ? { cancel_at: cancelAt } : undefined,
+        subscription_data: {
+          metadata: {
+            ...(recruitingMonths ? { recruitingMonths: String(recruitingMonths) } : {}),
+          },
+        },
         success_url: `${origin}/register/success?id=${regId}`,
         cancel_url: `${origin}/register?canceled=1`,
         customer_email: email,

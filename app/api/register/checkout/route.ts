@@ -5,7 +5,6 @@ import { getDiscount, validateDiscount, incrementUsage } from "@/lib/discount-st
 
 export const PROGRAMS: Record<string, { name: string; price: number; billing: "one_time" | "monthly" }> = {
   // Football Player Development tiers
-  "player-dev":              { name: "Football Player Development — Monthly",           price: 325,  billing: "one_time" },
   "player-dev-6mo":          { name: "Football Player Development — 6-Month",          price: 280,  billing: "monthly"  },
   "player-dev-annual":       { name: "Football Player Development — Annual",           price: 250,  billing: "monthly"  },
   "player-dev-1day":         { name: "Football Player Development — Once a Week",      price: 175,  billing: "monthly"  },
@@ -32,7 +31,6 @@ export const PROGRAMS: Record<string, { name: string; price: number; billing: "o
   // Athlete Tracking & Recruiting Profiles
   "passport":                { name: "Passport",                                        price: 9.99,  billing: "monthly"  },
   "recruit":                 { name: "Recruit",                                         price: 29.99, billing: "monthly"  },
-  "elite-recruit":           { name: "Elite Recruit",                                   price: 49.99, billing: "monthly"  },
 }
 
 export async function POST(req: NextRequest) {

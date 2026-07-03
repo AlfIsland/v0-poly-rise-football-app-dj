@@ -25,7 +25,7 @@ const PROGRAMS_DATA: Record<string, { name: string; price: number; priceLabel: s
   "hs-recruiting-pro":       { name: "HS Recruiting — Pro Exposure",              price: 125,   priceLabel: "$125/mo",   billing: "monthly"   },
   "hs-recruiting-basic":     { name: "HS Recruiting — Basic Exposure",            price: 85,    priceLabel: "$85/mo",    billing: "monthly"   },
   // Summer / Athletic Camp
-  "summer-ms":               { name: "Athletic Camp",                             price: 265,   priceLabel: "$265/mo",   billing: "monthly"   },
+  "summer-ms":               { name: "Athletic Camp",                             price: 265,   priceLabel: "$265",      billing: "one_time"  },
   // Events
   "combine":                 { name: "Combine Metrics Camp",                      price: 25,    priceLabel: "$25",       billing: "one_time"  },
   "tackling-camp":           { name: "Tackling Camp",                             price: 25,    priceLabel: "$25",       billing: "one_time"  },

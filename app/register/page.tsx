@@ -109,6 +109,8 @@ function RegisterPage() {
   const [error, setError] = useState("")
   const [waiverAccepted, setWaiverAccepted] = useState(false)
   const [waiverExpanded, setWaiverExpanded] = useState(false)
+  const [subscriptionAcknowledged, setSubscriptionAcknowledged] = useState(false)
+  const [subscriptionExpanded, setSubscriptionExpanded] = useState(false)
   const [recruitingMonths, setRecruitingMonths] = useState<3 | 6 | 12>(3)
 
   const billingMonthOptions = (() => {
@@ -468,10 +470,73 @@ function RegisterPage() {
               )}
             </div>
 
+            {/* Subscription Acknowledgment — only shown when cart has monthly programs */}
+            {hasMonthly && (() => {
+              const monthlyItems = cart.filter(id => PROGRAMS_DATA[id]?.billing === "monthly")
+              const commitmentMonths =
+                cart.includes("player-dev-annual") ? 12
+                : cart.includes("player-dev-6mo") ? 6
+                : hasRecruiting ? recruitingMonths
+                : null
+              const isCommitment = commitmentMonths !== null
+              return (
+                <div className="space-y-3">
+                  <p className="text-xs font-bold text-blue-400 uppercase tracking-widest">Subscription & Billing Authorization</p>
+                  <div className="bg-gray-800 border border-gray-700 rounded-xl overflow-hidden">
+                    <button
+                      type="button"
+                      onClick={() => setSubscriptionExpanded(v => !v)}
+                      className="w-full flex items-center justify-between px-4 py-3 text-sm text-white font-semibold hover:bg-gray-750 transition-colors"
+                    >
+                      <span>Read Billing Terms</span>
+                      <span className="text-gray-400 text-xs">{subscriptionExpanded ? "▲ Collapse" : "▼ Expand"}</span>
+                    </button>
+                    {subscriptionExpanded && (
+                      <div className="px-4 pb-4 text-xs text-gray-300 leading-relaxed space-y-3 border-t border-gray-700 pt-3 max-h-64 overflow-y-auto">
+                        <p><strong className="text-white">SUBSCRIPTION & AUTO-BILLING AGREEMENT</strong></p>
+                        <p>By completing this registration, you authorize PolyRISE Athletix to charge the payment method you provide through Stripe for the following monthly subscription{monthlyItems.length > 1 ? "s" : ""}:</p>
+                        <ul className="list-disc list-inside space-y-1 pl-1">
+                          {monthlyItems.map(id => (
+                            <li key={id}><strong className="text-white">{PROGRAMS_DATA[id]?.name}</strong> — {PROGRAMS_DATA[id]?.priceLabel}</li>
+                          ))}
+                        </ul>
+                        <p><strong className="text-white">AUTO-DRAFT.</strong> Your card will be automatically charged on the same day each month. Charges will appear on your statement as &quot;PolyRISE Athletix.&quot; You will receive a receipt via email after each successful charge.</p>
+                        {isCommitment ? (
+                          <p><strong className="text-white">COMMITMENT PERIOD.</strong> This subscription is a <strong className="text-white">{commitmentMonths}-month commitment</strong>. Your card will be auto-drafted monthly for {commitmentMonths} months, after which your subscription will automatically cancel — no action required. Early cancellation is not available for commitment-based plans.</p>
+                        ) : (
+                          <p><strong className="text-white">MONTH-TO-MONTH.</strong> This is a month-to-month subscription with no minimum commitment. You may cancel at any time by contacting PolyRISE Athletix at least 7 days before your next billing date.</p>
+                        )}
+                        <p><strong className="text-white">CANCELLATION.</strong> To cancel or modify your subscription, contact us at (817) 658-3300 or polyrise7v7@gmail.com at least 7 days before your next billing date. Cancellation requests submitted after the billing date will take effect the following month.</p>
+                        <p><strong className="text-white">REFUND POLICY.</strong> Monthly subscription charges are non-refundable once processed. If a charge fails, Stripe will automatically retry. After 3 failed attempts, your subscription access may be paused until payment is resolved.</p>
+                        <p>By checking the box below, you confirm that you understand and authorize recurring charges as described above and agree to these billing terms.</p>
+                      </div>
+                    )}
+                  </div>
+                  <label className="flex items-start gap-3 cursor-pointer group">
+                    <input
+                      type="checkbox"
+                      checked={subscriptionAcknowledged}
+                      onChange={e => setSubscriptionAcknowledged(e.target.checked)}
+                      className="mt-0.5 w-4 h-4 accent-red-600 cursor-pointer shrink-0"
+                    />
+                    <span className="text-sm text-white leading-snug group-hover:text-gray-200 transition-colors">
+                      I authorize PolyRISE Athletix to auto-draft my card monthly
+                      {isCommitment ? ` for ${commitmentMonths} months` : " on a month-to-month basis"}
+                      {" "}and I have read and agree to the{" "}
+                      <button type="button" onClick={() => setSubscriptionExpanded(true)} className="text-blue-400 underline hover:text-blue-300">Subscription & Billing Terms</button>.
+                    </span>
+                  </label>
+                  {!subscriptionAcknowledged && cart.length > 0 && playerName && parentName && email && phone && waiverAccepted && (
+                    <p className="text-yellow-400 text-xs">⚠ You must authorize the subscription billing before proceeding to payment.</p>
+                  )}
+                </div>
+              )
+            })()}
+
             {error && <p className="text-red-400 text-sm bg-red-950 border border-red-900 rounded-lg px-3 py-2">{error}</p>}
 
             <button onClick={handleCheckout}
-              disabled={!cart.length || !playerName || !parentName || !email || !phone || !waiverAccepted || loading}
+              disabled={!cart.length || !playerName || !parentName || !email || !phone || !waiverAccepted || (hasMonthly && !subscriptionAcknowledged) || loading}
               className="w-full bg-red-600 hover:bg-red-700 disabled:bg-gray-700 disabled:cursor-not-allowed text-white font-bold rounded-xl py-3 transition-colors text-sm">
               {loading ? "Setting up..." : `Pay $${discountResult?.valid ? cartTotal - (discountResult.savings ?? 0) : cartTotal}${hasMonthly ? "/mo" : ""} →`}
             </button>

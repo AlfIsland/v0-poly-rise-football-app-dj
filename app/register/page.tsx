@@ -6,6 +6,7 @@ import Image from "next/image"
 
 const PROGRAMS_DATA: Record<string, { name: string; price: number; priceLabel: string; billing: "one_time" | "monthly" }> = {
   // Football Player Development tiers
+  "player-dev":              { name: "Football Player Development — Monthly",           price: 325,  priceLabel: "$325/mo",          billing: "one_time" },
   "player-dev-6mo":          { name: "Football Player Development — 6-Month",          price: 280,  priceLabel: "$280/mo (6-mo)",   billing: "monthly"  },
   "player-dev-annual":       { name: "Football Player Development — Annual",           price: 250,  priceLabel: "$250/mo (annual)", billing: "monthly"  },
   "player-dev-1day":         { name: "Football Player Development — Once a Week",      price: 175,  priceLabel: "$175/mo",          billing: "monthly"  },
@@ -38,7 +39,8 @@ const CATEGORIES = [
   {
     label: "Training Programs", badge: "bg-red-900 text-red-300", color: "border-red-800 hover:border-red-500",
     programs: [
-      { id: "player-dev-6mo",    desc: "6-month commitment billed at $280/mo · Tue & Thu 6:30–7:30pm", highlight: "POPULAR" },
+      { id: "player-dev",        desc: "Tue & Thu 6:30–7:30pm · SAQ, S&C, football drills, tournament entries, military character events, PR-Verified Camp & Free Athletic Training Passport", highlight: "POPULAR" },
+      { id: "player-dev-6mo",    desc: "6-month commitment billed at $280/mo · Save $45/mo vs. month-to-month · Tue & Thu 6:30–7:30pm" },
       { id: "player-dev-annual", desc: "Annual commitment billed at $250/mo · Save $75/mo vs. month-to-month · Tue & Thu 6:30–7:30pm · 12-month subscription required" },
       { id: "player-dev-1day",   desc: "Once a week (Tue or Thu) · Ideal for athletes with limited availability" },
       { id: "multi-sport-dev",   desc: "Youth sports development — wrestling, girls flag football, soccer, baseball, softball & more · Building well-rounded athletes" },

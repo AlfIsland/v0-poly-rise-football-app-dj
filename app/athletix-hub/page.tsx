@@ -103,9 +103,8 @@ export default function AthletixHubPage() {
 
       {/* Hero strip */}
       <div className="bg-gradient-to-b from-yellow-950/30 to-transparent border-b border-yellow-900/20 py-8 px-4 text-center">
-        <p className="text-yellow-400 font-black text-xs uppercase tracking-[0.3em] mb-2">PolyRISE Football</p>
         <h1 className="text-3xl md:text-4xl font-black text-white leading-tight">
-          Athletix <span className="text-yellow-400">Hub</span>
+          PolyRISE <span className="text-yellow-400">Athletix Hub</span>
         </h1>
         <p className="text-gray-400 text-sm mt-2">Player & Parent Resource Center · Dripping Springs, TX</p>
       </div>

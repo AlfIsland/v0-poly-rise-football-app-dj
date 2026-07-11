@@ -12,7 +12,7 @@ const ANNOUNCEMENTS = [
     tagColor: "bg-yellow-900 text-yellow-300",
     date: "Dec 10",
     title: "Toys 4 Tots Drive",
-    body: "PolyRISE is collecting unwrapped toys for the annual Toys 4 Tots Drive. Please bring a toy to your next session. Deadline: December 20th. Every athlete who donates earns a character point on their passport.",
+    body: "PolyRISE Athletix will have Toys 4 Tots boxes at 133 Glosson Ranch Rd. Additional drop-off location pending — check back for updates.",
   },
   {
     id: 2,

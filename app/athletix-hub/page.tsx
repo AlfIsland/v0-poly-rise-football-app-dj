@@ -249,12 +249,7 @@ export default function AthletixHubPage() {
               <p className="text-xs font-black text-gray-400 uppercase tracking-widest mb-3">Reach the Coaches</p>
               <div className="space-y-2">
                 <div>
-                  <p className="text-white text-xs font-bold">Kevin Garrett · Former NFL</p>
-                  <p className="text-xs text-gray-500">Director of Player Development</p>
-                  <a href="mailto:KG@polyrisefootball.com" className="text-xs text-red-400 hover:text-red-300">KG@polyrisefootball.com</a>
-                </div>
-                <div className="border-t border-gray-800 pt-2">
-                  <p className="text-white text-xs font-bold">General Inquiries</p>
+                  <p className="text-white text-xs font-bold">PolyRISE Staff</p>
                   <a href="mailto:polyrise@polyrisefootball.com" className="text-xs text-red-400 hover:text-red-300">polyrise@polyrisefootball.com</a>
                   <p className="text-xs text-gray-500 mt-0.5">(817) 658-3300</p>
                 </div>

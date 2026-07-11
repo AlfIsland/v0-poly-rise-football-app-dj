@@ -17,6 +17,15 @@ const ANNOUNCEMENTS = [
   {
     id: 2,
     pinned: false,
+    tag: "Event",
+    tagColor: "bg-green-900 text-green-300",
+    date: "Jul 18",
+    title: "Leadership & Mental Resilience Hike",
+    body: "Join us at Jester King on July 18th at 9:30 AM for a Leadership & Mental Resilience Hike. This character-building event develops mental toughness, leadership, and team bonding beyond the field.",
+  },
+  {
+    id: 3,
+    pinned: false,
     tag: "Training",
     tagColor: "bg-red-900 text-red-300",
     date: "Dec 8",
@@ -24,7 +33,7 @@ const ANNOUNCEMENTS = [
     body: "The next PR-VERIFIED Combine Camp is scheduled. Lock in your spot early — limited to 20 athletes. Earn your PR-VERIFIED seal and update your recruiting profile.",
   },
   {
-    id: 3,
+    id: 4,
     pinned: false,
     tag: "Schedule",
     tagColor: "bg-blue-900 text-blue-300",
@@ -33,7 +42,7 @@ const ANNOUNCEMENTS = [
     body: "PolyRISE sessions will pause December 23rd through January 1st for the holiday break. Regular programming resumes January 2nd. Happy holidays from all the coaches!",
   },
   {
-    id: 4,
+    id: 5,
     pinned: false,
     tag: "Recruiting",
     tagColor: "bg-purple-900 text-purple-300",

@@ -49,6 +49,12 @@ export default function HomePage() {
                 Athlete Passport
               </Link>
               <Link
+                href="/athletix-hub"
+                className="text-sm font-medium text-yellow-400 hover:text-yellow-300 transition-colors hidden md:inline"
+              >
+                Athletix Hub
+              </Link>
+              <Link
                 href="/plans"
                 className="text-sm font-medium bg-red-600 text-white px-4 py-2 rounded hover:bg-red-600/80 transition-colors"
               >

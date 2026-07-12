@@ -2,6 +2,7 @@ import { ArrowRight, Trophy, Users, Target, MapPin, CheckCircle2 } from "lucide-
 import Link from "next/link"
 import Image from "next/image"
 import { ProtectedImage } from "@/components/protected-image"
+import { EliteRecruitWaitlist } from "@/components/elite-recruit-waitlist"
 
 
 export default function HomePage() {
@@ -382,13 +383,8 @@ export default function HomePage() {
                 </div>
               </div>
 
-              {/* Elite Recruit — Coming Soon */}
+              {/* Elite Recruit — Waitlist */}
               <div className="relative bg-gray-900 rounded-2xl border-2 border-yellow-500 flex flex-col overflow-hidden">
-                <div className="absolute inset-0 z-10 flex flex-col items-center justify-center rounded-2xl bg-black/70 backdrop-blur-sm">
-                  <span className="text-yellow-400 text-3xl mb-2">🏆</span>
-                  <p className="text-white font-black text-xl tracking-widest uppercase">Coming Soon</p>
-                  <p className="text-white text-xs mt-2 text-center px-6">We&apos;re finalizing this package.<br />Check back soon.</p>
-                </div>
                 <div className="p-6">
                   <span className="inline-block text-xs font-semibold px-3 py-1 rounded-full bg-yellow-900/50 text-yellow-300 border border-yellow-700/40 mb-4">High School Athletes — Grades 11–12</span>
                   <h3 className="text-2xl font-black text-yellow-400">Elite Recruit</h3>
@@ -409,7 +405,7 @@ export default function HomePage() {
                   ))}
                 </div>
                 <div className="px-6 pb-6 pt-4">
-                  <Link href="/parent/register" className="block w-full text-center font-bold rounded-xl py-3 text-sm bg-yellow-500 hover:bg-yellow-400 text-black transition-colors">Get Elite Recruit</Link>
+                  <EliteRecruitWaitlist />
                 </div>
               </div>
             </div>

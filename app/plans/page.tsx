@@ -1,5 +1,6 @@
 import Link from "next/link"
 import Image from "next/image"
+import { EliteRecruitWaitlist } from "@/components/elite-recruit-waitlist"
 
 const DESC = "Verified athlete metrics, recruiting profiles, and college coach visibility. Plans from $9.99/mo for middle school through $49.99/mo for upper HS recruits. PR-VERIFIED by NFL-experienced coaches in Dripping Springs, TX."
 
@@ -178,15 +179,8 @@ export default function PlansPage() {
           </div>
         </div>
 
-        {/* Elite Recruit — Coming Soon */}
+        {/* Elite Recruit — Waitlist */}
         <div className="relative bg-gray-900 rounded-2xl border-2 border-yellow-500 flex flex-col overflow-hidden">
-          {/* Coming Soon overlay */}
-          <div className="absolute inset-0 z-10 flex flex-col items-center justify-center rounded-2xl bg-black/75 backdrop-blur-sm">
-            <span className="text-5xl mb-3">🏆</span>
-            <p className="text-white font-black text-2xl tracking-widest uppercase mb-2">Coming Soon</p>
-            <p className="text-gray-400 text-sm text-center px-8 leading-relaxed">We&apos;re putting the finishing touches on our most powerful package. Check back soon.</p>
-            <div className="mt-4 px-6 py-2 rounded-full border border-yellow-500/50 text-yellow-400 text-xs font-bold tracking-widest">ELITE RECRUIT</div>
-          </div>
           <div className="p-7">
             <span className="inline-block text-xs font-bold px-3 py-1 rounded-full bg-yellow-900/50 text-yellow-300 border border-yellow-700/40 mb-5">High School Athletes — Grades 11–12</span>
             <h2 className="text-3xl font-black text-yellow-400 mb-1">Elite Recruit</h2>
@@ -215,9 +209,7 @@ export default function PlansPage() {
             ))}
           </div>
           <div className="px-7 pb-7 pt-5">
-            <button disabled className="block w-full text-center font-black rounded-xl py-4 text-sm bg-yellow-500/40 text-yellow-200/50 cursor-not-allowed tracking-wide">
-              Coming Soon
-            </button>
+            <EliteRecruitWaitlist />
           </div>
         </div>
 

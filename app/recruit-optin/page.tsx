@@ -320,7 +320,7 @@ export default function RecruitOptInPage() {
 
                   <div className="grid grid-cols-2 gap-4">
                     <Field label="Height" hint="Optional but encouraged">
-                      <input value={height} onChange={e => setHeight(e.target.value)} placeholder='e.g. 6\'2"' className={inputClass} />
+                      <input value={height} onChange={e => setHeight(e.target.value)} placeholder={`e.g. 6'2"`} className={inputClass} />
                     </Field>
                     <Field label="Weight" hint="Optional but encouraged">
                       <input value={weight} onChange={e => setWeight(e.target.value)} placeholder="e.g. 185 lbs" className={inputClass} />

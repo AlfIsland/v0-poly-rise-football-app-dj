@@ -1,6 +1,7 @@
 "use client"
 
 import { useState } from "react"
+import type { ReactNode } from "react"
 import Image from "next/image"
 import Link from "next/link"
 
@@ -14,7 +15,7 @@ function generateOptInId() {
   return `POLY-OPT-${date}-${rand}`
 }
 
-function Field({ label, required, hint, children }: { label: string; required?: boolean; hint?: string; children: React.ReactNode }) {
+function Field({ label, required, hint, children }: { label: string; required?: boolean; hint?: string; children: ReactNode }) {
   return (
     <div className="space-y-1.5">
       <label className="block text-sm font-semibold text-gray-200">

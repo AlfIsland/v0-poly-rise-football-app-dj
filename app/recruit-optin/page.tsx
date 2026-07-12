@@ -1,7 +1,7 @@
 "use client"
 
 import { useState } from "react"
-import type { ReactNode } from "react"
+import type { ReactNode, FormEvent } from "react"
 import Image from "next/image"
 import Link from "next/link"
 
@@ -51,7 +51,7 @@ export default function RecruitOptInPage() {
 
   const canSubmit = athleteName && highSchool && gradYear && sport && parentName && parentEmail && check1 && check2
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = (e: FormEvent) => {
     e.preventDefault()
     if (!canSubmit) { setError("Please complete all required fields and check both consent boxes."); return }
     setOptInId(generateOptInId())

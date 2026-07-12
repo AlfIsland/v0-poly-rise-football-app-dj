@@ -55,6 +55,12 @@ export default function HomePage() {
                 Athletix Hub
               </Link>
               <Link
+                href="/recruit-optin"
+                className="text-sm font-medium bg-[#B91C1C] text-white px-4 py-2 rounded hover:bg-[#991b1b] transition-colors hidden md:inline"
+              >
+                College Opt-In
+              </Link>
+              <Link
                 href="/plans"
                 className="text-sm font-medium bg-red-600 text-white px-4 py-2 rounded hover:bg-red-600/80 transition-colors"
               >

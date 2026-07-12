@@ -127,279 +127,185 @@ export default function HomePage() {
           </div>
 
           {/* Training Programs Grid */}
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3 max-w-6xl mx-auto">
 
               {/* Football Player Development */}
-              <div className="bg-card border-primary/50 border-2 overflow-hidden group hover:border-primary transition-colors">
-                <div className="aspect-video relative overflow-hidden">
-                  <img src="/athlete-training-drill.jpg" alt="Player Development Training" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
-                  <div className="absolute top-4 left-4 px-3 py-1 rounded-full bg-background/90 backdrop-blur text-sm font-medium">Most Popular</div>
+              <div className="bg-gray-900 border border-gray-800 rounded-xl p-4 flex flex-col gap-3 hover:border-gray-600 transition-colors">
+                <div>
+                  <span className="inline-block text-xs font-bold px-2 py-0.5 rounded-full bg-red-900/60 text-red-300 mb-2">Most Popular</span>
+                  <h4 className="text-sm font-bold text-white">Football Player Development</h4>
+                  <p className="text-xs text-gray-400 mt-1 leading-relaxed">Tue &amp; Thu · 6:30–7:30pm · SAQ, S&amp;C, drills, tournament entries, PR-Verified Camp &amp; Passport</p>
                 </div>
-                <div className="pt-6 px-6 pb-6 space-y-4">
-                  <div>
-                    <h4 className="text-xl font-display font-bold mb-2">Football Player Development</h4>
-                    <p className="text-white text-sm leading-relaxed mb-4">Tuesday &amp; Thursday (6:30–7:30pm) including SAQ, S&amp;C, football drills, tournament entries, military character building events, PR-Verified Camp and Free Athletic Training Passport (Tracker).</p>
-                    <div className="space-y-2 border-t border-dashed border-border pt-4">
-                      <div className="flex items-center justify-between">
-                        <span className="font-medium text-sm">Monthly</span>
-                        <span className="text-lg font-bold text-white">$325/mo</span>
-                      </div>
-                      <div className="flex items-center justify-between">
-                        <span className="font-medium text-sm">6-Month Commitment <span className="text-xs text-red-400 font-semibold">Save $45/mo</span></span>
-                        <span className="text-lg font-bold text-white">$280/mo</span>
-                      </div>
-                      <div className="flex items-center justify-between">
-                        <span className="font-medium text-sm">Annual Subscription <span className="text-xs text-red-400 font-semibold">12-mo commitment</span></span>
-                        <span className="text-lg font-bold text-white">$250/mo</span>
-                      </div>
-                      <div className="flex items-center justify-between">
-                        <span className="font-medium text-sm">Once a Week</span>
-                        <span className="text-lg font-bold text-white">$175/mo</span>
-                      </div>
-                    </div>
-                  </div>
-                  <Link href="/register?program=player-dev" className="block w-full text-center bg-red-600 text-white px-4 py-2 rounded hover:bg-red-600/80 transition-colors">Register</Link>
+                <div className="space-y-1.5 border-t border-gray-800 pt-2.5">
+                  <div className="flex justify-between text-xs"><span className="text-gray-300">Monthly</span><span className="font-bold text-white">$325/mo</span></div>
+                  <div className="flex justify-between text-xs"><span className="text-gray-300">6-Month <span className="text-red-400">· Save $45/mo</span></span><span className="font-bold text-white">$280/mo</span></div>
+                  <div className="flex justify-between text-xs"><span className="text-gray-300">Annual (12-mo)</span><span className="font-bold text-white">$250/mo</span></div>
+                  <div className="flex justify-between text-xs"><span className="text-gray-300">Once a Week</span><span className="font-bold text-white">$175/mo</span></div>
                 </div>
-              </div>
-
-              {/* Multi-Sport Development */}
-              <div className="bg-card border-primary/50 border-2 overflow-hidden group hover:border-primary transition-colors relative">
-                <div className="aspect-video relative overflow-hidden">
-                  <img src="/elite-360-training.jpg" alt="Multi-Sport Development Training" className="w-full h-full object-cover object-[50%_35%] group-hover:scale-105 transition-transform duration-300" />
-                </div>
-                <div className="pt-6 px-6 pb-6 space-y-4">
-                  <div>
-                    <h4 className="text-xl font-display font-bold mb-2">Multi-Sport Development</h4>
-                    <div className="text-lg font-bold text-white mb-3">$265/mo</div>
-                    <p className="text-white text-sm leading-relaxed">Youth sports development training covering wrestling, girls flag football, soccer, baseball, softball, and more — building well-rounded athletes across multiple sports.</p>
-                  </div>
-                  <Link href="/register?program=multi-sport-dev" className="block w-full text-center bg-red-600 text-white px-4 py-2 rounded hover:bg-red-600/80 transition-colors">Register</Link>
-                </div>
-              </div>
-
-              {/* HS Athlete Recruiting & Exposure */}
-              <div className="bg-card border-primary/50 border-2 overflow-hidden group hover:border-primary transition-colors">
-                <div className="pt-6 px-6 pb-6 space-y-4">
-                  <div>
-                    <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 mb-3">
-                      <span className="text-sm font-medium text-primary">High School</span>
-                    </div>
-                    <h4 className="text-xl font-display font-bold mb-1">HS Athlete Recruiting & Exposure</h4>
-                    <p className="text-white text-sm leading-relaxed mb-4">Professional recruiting exposure packages built to get your athlete seen by college coaches — social media blasts, personalized coach outreach, and profile optimization.</p>
-                    <div className="space-y-3">
-                      {/* Elite Exposure */}
-                      <div className="rounded-lg border border-primary/40 bg-primary/5 p-3">
-                        <div className="flex items-center justify-between mb-1">
-                          <span className="font-bold text-white text-sm">Elite Exposure</span>
-                          <span className="text-lg font-bold text-white">$150<span className="text-xs font-normal text-white">/mo</span></span>
-                        </div>
-                        <ul className="space-y-1">
-                          <li className="flex items-start gap-2 text-xs text-white"><CheckCircle2 className="w-3 h-3 text-primary flex-shrink-0 mt-0.5" />2× X + Instagram blast/mo</li>
-                          <li className="flex items-start gap-2 text-xs text-white"><CheckCircle2 className="w-3 h-3 text-primary flex-shrink-0 mt-0.5" />5 personalized coach emails/mo</li>
-                          <li className="flex items-start gap-2 text-xs text-white"><CheckCircle2 className="w-3 h-3 text-primary flex-shrink-0 mt-0.5" />Profile optimization</li>
-                          <li className="flex items-start gap-2 text-xs text-white"><CheckCircle2 className="w-3 h-3 text-primary flex-shrink-0 mt-0.5" />Weekly recruiting report</li>
-                          <li className="flex items-start gap-2 text-xs text-white"><CheckCircle2 className="w-3 h-3 text-primary flex-shrink-0 mt-0.5" />1-on-1 coach call</li>
-                        </ul>
-                        <p className="text-xs text-gray-400 mt-2 italic">Best for: Serious Recruits</p>
-                      </div>
-                      {/* Pro Exposure */}
-                      <div className="rounded-lg border border-border bg-card p-3">
-                        <div className="flex items-center justify-between mb-1">
-                          <span className="font-bold text-white text-sm">Pro Exposure</span>
-                          <span className="text-lg font-bold text-white">$125<span className="text-xs font-normal text-white">/mo</span></span>
-                        </div>
-                        <ul className="space-y-1">
-                          <li className="flex items-start gap-2 text-xs text-white"><CheckCircle2 className="w-3 h-3 text-primary flex-shrink-0 mt-0.5" />X + Instagram blast</li>
-                          <li className="flex items-start gap-2 text-xs text-white"><CheckCircle2 className="w-3 h-3 text-primary flex-shrink-0 mt-0.5" />3 personalized coach emails/mo</li>
-                          <li className="flex items-start gap-2 text-xs text-white"><CheckCircle2 className="w-3 h-3 text-primary flex-shrink-0 mt-0.5" />Profile optimization</li>
-                          <li className="flex items-start gap-2 text-xs text-white"><CheckCircle2 className="w-3 h-3 text-primary flex-shrink-0 mt-0.5" />Bi-weekly recruiting report</li>
-                        </ul>
-                        <p className="text-xs text-gray-400 mt-2 italic">Best for: Strong Exposure</p>
-                      </div>
-                      {/* Basic Exposure */}
-                      <div className="rounded-lg border border-border bg-card p-3">
-                        <div className="flex items-center justify-between mb-1">
-                          <span className="font-bold text-white text-sm">Basic Exposure</span>
-                          <span className="text-lg font-bold text-white">$85<span className="text-xs font-normal text-white">/mo</span></span>
-                        </div>
-                        <ul className="space-y-1">
-                          <li className="flex items-start gap-2 text-xs text-white"><CheckCircle2 className="w-3 h-3 text-primary flex-shrink-0 mt-0.5" />Pro profile image package</li>
-                          <li className="flex items-start gap-2 text-xs text-white"><CheckCircle2 className="w-3 h-3 text-primary flex-shrink-0 mt-0.5" />X blast (1–2× monthly)</li>
-                          <li className="flex items-start gap-2 text-xs text-white"><CheckCircle2 className="w-3 h-3 text-primary flex-shrink-0 mt-0.5" />Access to coach directory</li>
-                        </ul>
-                        <p className="text-xs text-gray-400 mt-2 italic">Best for: Initial Visibility</p>
-                      </div>
-                    </div>
-                  </div>
-                  <Link href="/register?program=hs-recruiting-elite" className="block w-full text-center bg-red-600 text-white px-4 py-2 rounded hover:bg-red-600/80 transition-colors">Get Started</Link>
-                </div>
-              </div>
-
-              {/* Girls Player Development */}
-              <div className="bg-card border-primary/50 border-2 overflow-hidden group hover:border-primary transition-colors">
-                <div className="pt-6 px-6 pb-6 space-y-4">
-                  <div>
-                    <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 mb-3">
-                      <span className="text-sm font-medium text-primary">Girls Program</span>
-                    </div>
-                    <h4 className="text-xl font-display font-bold mb-2">Girls Player Development</h4>
-                    <p className="text-white text-sm leading-relaxed mb-2">Monday &amp; Friday (5–6:30pm) in May · June &amp; July: Mon &amp; Fri (1–2:30pm). Add Wednesday for more reps and faster development.</p>
-                    <div className="space-y-2 border-t border-dashed border-border pt-4">
-                      <div className="flex items-center justify-between">
-                        <span className="font-medium text-sm">2 Days a Week · Mon &amp; Fri</span>
-                        <span className="text-lg font-bold text-white">$250/mo</span>
-                      </div>
-                      <div className="flex items-center justify-between">
-                        <span className="font-medium text-sm">3 Days a Week · Mon, Wed &amp; Fri</span>
-                        <span className="text-lg font-bold text-white">$315/mo</span>
-                      </div>
-                    </div>
-                  </div>
-                  <Link href="/register?program=girls-dev" className="block w-full text-center bg-red-600 text-white px-4 py-2 rounded hover:bg-red-600/80 transition-colors">Register</Link>
-                </div>
-              </div>
-
-              {/* Multi-Sport Athlete */}
-              <div className="bg-card border-primary/50 border-2 overflow-hidden group hover:border-primary transition-colors">
-                <div className="pt-6 px-6 pb-6 space-y-4">
-                  <div>
-                    <h4 className="text-xl font-display font-bold mb-2">Multi-Sport Athlete</h4>
-                    <div className="text-lg font-bold text-white mb-3">$175/mo</div>
-                    <p className="text-white text-sm leading-relaxed">One day a week (Tue or Thur) with camps/events included.</p>
-                  </div>
-                  <Link href="/register?program=multi-sport" className="block w-full text-center bg-red-600 text-white px-4 py-2 rounded hover:bg-red-600/80 transition-colors">Register</Link>
-                </div>
-              </div>
-
-              {/* Drop-In */}
-              <div className="bg-card border-primary/50 border-2 overflow-hidden group hover:border-primary transition-colors">
-                <div className="pt-6 px-6 pb-6 space-y-4">
-                  <div>
-                    <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 mb-3">
-                      <span className="text-sm font-medium text-primary">Drop-In</span>
-                    </div>
-                    <h4 className="text-xl font-display font-bold mb-2">Drop-In Training</h4>
-                    <p className="text-white text-sm leading-relaxed mb-2">Try a session before committing to a full program. Add a second day for just $35 more.</p>
-                    <div className="space-y-2 border-t border-dashed border-border pt-4">
-                      <div className="flex items-center justify-between">
-                        <span className="font-medium text-sm">1 Day</span>
-                        <span className="text-lg font-bold text-white">$45</span>
-                      </div>
-                      <div className="flex items-center justify-between">
-                        <span className="font-medium text-sm">2 Days</span>
-                        <span className="text-lg font-bold text-white">$80</span>
-                      </div>
-                    </div>
-                  </div>
-                  <Link href="/register?program=drop-in-1day" className="block w-full text-center bg-red-600 text-white px-4 py-2 rounded hover:bg-red-600/80 transition-colors">Register</Link>
-                </div>
-              </div>
-
-              {/* Leadership & Mentorship Hike */}
-              <div className="bg-card border-primary/50 border-2 overflow-hidden group hover:border-primary transition-colors">
-                <div className="pt-6 px-6 pb-6 space-y-4">
-                  <div>
-                    <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 mb-3">
-                      <span className="text-sm font-medium text-primary">Leadership</span>
-                    </div>
-                    <h4 className="text-xl font-display font-bold mb-2">Leadership &amp; Mentorship Hike</h4>
-                    <p className="text-white text-sm leading-relaxed mb-2">A character-building hike experience focused on developing leadership, mentorship, and mental toughness beyond the field.</p>
-                    <div className="flex items-center justify-between border-t border-dashed border-border pt-4">
-                      <span className="font-medium text-sm">Per Athlete</span>
-                      <span className="text-lg font-bold text-white">$25</span>
-                    </div>
-                  </div>
-                  <Link href="/register?program=hike" className="block w-full text-center bg-red-600 text-white px-4 py-2 rounded hover:bg-red-600/80 transition-colors">Register</Link>
-                </div>
-              </div>
-
-              {/* Tackling Camp */}
-              <div className="bg-card border-primary/50 border-2 overflow-hidden group hover:border-primary transition-colors">
-                <div className="pt-6 px-6 pb-6 space-y-4">
-                  <div>
-                    <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 mb-3">
-                      <span className="text-sm font-medium text-primary">Camp</span>
-                    </div>
-                    <h4 className="text-xl font-display font-bold mb-2">Tackling Camp</h4>
-                    <p className="text-white text-sm leading-relaxed mb-2">Proper tackling technique &amp; fundamentals coached by NFL-experienced staff.</p>
-                    <div className="flex items-center justify-between border-t border-dashed border-border pt-4">
-                      <span className="font-medium text-sm">July 25 · 9:00am · Dripping Springs</span>
-                      <span className="text-lg font-bold text-white">$25</span>
-                    </div>
-                  </div>
-                  <Link href="/register?program=tackling-camp" className="block w-full text-center bg-red-600 text-white px-4 py-2 rounded hover:bg-red-600/80 transition-colors">Register</Link>
-                </div>
-              </div>
-
-              {/* PR-VERIFIED Combine Camp */}
-              <div className="bg-card border-primary/50 border-2 overflow-hidden group hover:border-primary transition-colors">
-                <div className="pt-6 px-6 pb-6 space-y-4">
-                  <div>
-                    <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 mb-3">
-                      <span className="text-sm font-medium text-primary">Camp</span>
-                    </div>
-                    <h4 className="text-xl font-display font-bold mb-2">Combine Metrics Camp</h4>
-                    <p className="text-white text-sm leading-relaxed mb-2">Professional Combine Events. H.S Athletes record official metrics.</p>
-                    <div className="flex items-center justify-between border-t border-dashed border-border pt-4">
-                      <span className="font-medium">Camp Registration</span>
-                      <span className="text-lg font-bold text-white">$25</span>
-                    </div>
-                  </div>
-                  <Link href="/register?program=combine" className="block w-full text-center bg-red-600 text-white px-4 py-2 rounded hover:bg-red-600/80 transition-colors">Register</Link>
-                </div>
+                <Link href="/register?program=player-dev" className="mt-auto block text-center text-xs font-bold bg-red-600 hover:bg-red-700 text-white py-2 rounded-lg transition-colors">Register</Link>
               </div>
 
               {/* Afterschool Program */}
-              <div className="bg-card border-primary/50 border-2 overflow-hidden group hover:border-primary transition-colors">
-                <div className="pt-6 px-6 pb-6 space-y-4">
-                  <div>
-                    <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 mb-3">
-                      <span className="text-sm font-medium text-primary">Afterschool</span>
-                    </div>
-                    <h4 className="text-xl font-display font-bold mb-2">Afterschool Program</h4>
-                    <p className="text-white text-sm leading-relaxed mb-2">Monday &amp; Wednesday · 4:00–5:00pm · Open to Elementary &amp; Middle School athletes.</p>
-                    <div className="flex items-center justify-between border-t border-dashed border-border pt-4">
-                      <span className="font-medium text-sm">Monthly</span>
-                      <span className="text-lg font-bold text-white">$250/mo</span>
-                    </div>
-                  </div>
-                  <Link href="/register?program=afterschool" className="block w-full text-center bg-red-600 text-white px-4 py-2 rounded hover:bg-red-600/80 transition-colors">Register</Link>
+              <div className="bg-gray-900 border border-gray-800 rounded-xl p-4 flex flex-col gap-3 hover:border-gray-600 transition-colors">
+                <div>
+                  <span className="inline-block text-xs font-bold px-2 py-0.5 rounded-full bg-teal-900/60 text-teal-300 mb-2">Afterschool</span>
+                  <h4 className="text-sm font-bold text-white">Afterschool Program</h4>
+                  <p className="text-xs text-gray-400 mt-1 leading-relaxed">Monday &amp; Wednesday · 4:00–5:00pm · Elementary &amp; Middle School athletes</p>
                 </div>
+                <div className="border-t border-gray-800 pt-2.5">
+                  <div className="flex justify-between text-xs"><span className="text-gray-300">Monthly</span><span className="font-bold text-white">$250/mo</span></div>
+                </div>
+                <Link href="/register?program=afterschool" className="mt-auto block text-center text-xs font-bold bg-red-600 hover:bg-red-700 text-white py-2 rounded-lg transition-colors">Register</Link>
+              </div>
+
+              {/* Multi-Sport Development */}
+              <div className="bg-gray-900 border border-gray-800 rounded-xl p-4 flex flex-col gap-3 hover:border-gray-600 transition-colors">
+                <div>
+                  <span className="inline-block text-xs font-bold px-2 py-0.5 rounded-full bg-orange-900/60 text-orange-300 mb-2">Multi-Sport</span>
+                  <h4 className="text-sm font-bold text-white">Multi-Sport Development</h4>
+                  <p className="text-xs text-gray-400 mt-1 leading-relaxed">Wrestling, flag football, soccer, baseball, softball &amp; more — building well-rounded athletes</p>
+                </div>
+                <div className="border-t border-gray-800 pt-2.5">
+                  <div className="flex justify-between text-xs"><span className="text-gray-300">Monthly</span><span className="font-bold text-white">$265/mo</span></div>
+                </div>
+                <Link href="/register?program=multi-sport-dev" className="mt-auto block text-center text-xs font-bold bg-red-600 hover:bg-red-700 text-white py-2 rounded-lg transition-colors">Register</Link>
+              </div>
+
+              {/* Girls Player Development */}
+              <div className="bg-gray-900 border border-gray-800 rounded-xl p-4 flex flex-col gap-3 hover:border-gray-600 transition-colors">
+                <div>
+                  <span className="inline-block text-xs font-bold px-2 py-0.5 rounded-full bg-pink-900/60 text-pink-300 mb-2">Girls Program</span>
+                  <h4 className="text-sm font-bold text-white">Girls Player Development</h4>
+                  <p className="text-xs text-gray-400 mt-1 leading-relaxed">May: Mon &amp; Fri 5–6:30pm · Jun–Jul: Mon &amp; Fri 1–2:30pm · Add Wed for more reps</p>
+                </div>
+                <div className="space-y-1.5 border-t border-gray-800 pt-2.5">
+                  <div className="flex justify-between text-xs"><span className="text-gray-300">2 Days/Week · Mon &amp; Fri</span><span className="font-bold text-white">$250/mo</span></div>
+                  <div className="flex justify-between text-xs"><span className="text-gray-300">3 Days/Week · Mon, Wed &amp; Fri</span><span className="font-bold text-white">$315/mo</span></div>
+                </div>
+                <Link href="/register?program=girls-dev" className="mt-auto block text-center text-xs font-bold bg-red-600 hover:bg-red-700 text-white py-2 rounded-lg transition-colors">Register</Link>
+              </div>
+
+              {/* Multi-Sport Athlete */}
+              <div className="bg-gray-900 border border-gray-800 rounded-xl p-4 flex flex-col gap-3 hover:border-gray-600 transition-colors">
+                <div>
+                  <span className="inline-block text-xs font-bold px-2 py-0.5 rounded-full bg-blue-900/60 text-blue-300 mb-2">Multi-Sport</span>
+                  <h4 className="text-sm font-bold text-white">Multi-Sport Athlete</h4>
+                  <p className="text-xs text-gray-400 mt-1 leading-relaxed">1 day/week (Tue or Thu) · SAQ, S&amp;C &amp; multi-sport athleticism · Camps &amp; events included</p>
+                </div>
+                <div className="border-t border-gray-800 pt-2.5">
+                  <div className="flex justify-between text-xs"><span className="text-gray-300">Monthly</span><span className="font-bold text-white">$175/mo</span></div>
+                </div>
+                <Link href="/register?program=multi-sport" className="mt-auto block text-center text-xs font-bold bg-red-600 hover:bg-red-700 text-white py-2 rounded-lg transition-colors">Register</Link>
+              </div>
+
+              {/* Drop-In Training */}
+              <div className="bg-gray-900 border border-gray-800 rounded-xl p-4 flex flex-col gap-3 hover:border-gray-600 transition-colors">
+                <div>
+                  <span className="inline-block text-xs font-bold px-2 py-0.5 rounded-full bg-gray-700 text-gray-300 mb-2">Drop-In</span>
+                  <h4 className="text-sm font-bold text-white">Drop-In Training</h4>
+                  <p className="text-xs text-gray-400 mt-1 leading-relaxed">Try a session before committing. Add a second day for just $35 more.</p>
+                </div>
+                <div className="space-y-1.5 border-t border-gray-800 pt-2.5">
+                  <div className="flex justify-between text-xs"><span className="text-gray-300">1 Day</span><span className="font-bold text-white">$45</span></div>
+                  <div className="flex justify-between text-xs"><span className="text-gray-300">2 Days</span><span className="font-bold text-white">$80</span></div>
+                </div>
+                <Link href="/register?program=drop-in-1day" className="mt-auto block text-center text-xs font-bold bg-red-600 hover:bg-red-700 text-white py-2 rounded-lg transition-colors">Register</Link>
+              </div>
+
+              {/* HS Recruiting & Exposure */}
+              <div className="bg-gray-900 border border-gray-800 rounded-xl p-4 flex flex-col gap-3 hover:border-gray-600 transition-colors">
+                <div>
+                  <span className="inline-block text-xs font-bold px-2 py-0.5 rounded-full bg-yellow-900/60 text-yellow-300 mb-2">High School</span>
+                  <h4 className="text-sm font-bold text-white">HS Recruiting &amp; Exposure</h4>
+                  <p className="text-xs text-gray-400 mt-1 leading-relaxed">Social media blasts, coach outreach &amp; profile optimization for college visibility</p>
+                </div>
+                <div className="space-y-2 border-t border-gray-800 pt-2.5">
+                  <div className="bg-gray-800 rounded-lg p-2.5">
+                    <div className="flex justify-between text-xs mb-0.5"><span className="font-bold text-white">Elite Exposure</span><span className="font-bold text-white">$150/mo</span></div>
+                    <p className="text-[11px] text-gray-400">2× social blast · 5 coach emails/mo · weekly report · 1-on-1 call</p>
+                  </div>
+                  <div className="bg-gray-800 rounded-lg p-2.5">
+                    <div className="flex justify-between text-xs mb-0.5"><span className="font-bold text-white">Pro Exposure</span><span className="font-bold text-white">$125/mo</span></div>
+                    <p className="text-[11px] text-gray-400">1× social blast · 3 coach emails/mo · bi-weekly report</p>
+                  </div>
+                  <div className="bg-gray-800 rounded-lg p-2.5">
+                    <div className="flex justify-between text-xs mb-0.5"><span className="font-bold text-white">Basic Exposure</span><span className="font-bold text-white">$85/mo</span></div>
+                    <p className="text-[11px] text-gray-400">Pro profile images · X blast · coach directory access</p>
+                  </div>
+                </div>
+                <Link href="/register?program=hs-recruiting-elite" className="mt-auto block text-center text-xs font-bold bg-red-600 hover:bg-red-700 text-white py-2 rounded-lg transition-colors">Get Started</Link>
+              </div>
+
+              {/* Leadership & Mentorship Hike */}
+              <div className="bg-gray-900 border border-gray-800 rounded-xl p-4 flex flex-col gap-3 hover:border-gray-600 transition-colors">
+                <div>
+                  <span className="inline-block text-xs font-bold px-2 py-0.5 rounded-full bg-green-900/60 text-green-300 mb-2">Leadership</span>
+                  <h4 className="text-sm font-bold text-white">Leadership &amp; Mentorship Hike</h4>
+                  <p className="text-xs text-gray-400 mt-1 leading-relaxed">Character-building hike developing leadership, mentorship &amp; mental toughness beyond the field</p>
+                </div>
+                <div className="border-t border-gray-800 pt-2.5">
+                  <div className="flex justify-between text-xs"><span className="text-gray-300">Per Athlete</span><span className="font-bold text-white">$25</span></div>
+                </div>
+                <Link href="/register?program=hike" className="mt-auto block text-center text-xs font-bold bg-red-600 hover:bg-red-700 text-white py-2 rounded-lg transition-colors">Register</Link>
+              </div>
+
+              {/* Tackling Camp */}
+              <div className="bg-gray-900 border border-gray-800 rounded-xl p-4 flex flex-col gap-3 hover:border-gray-600 transition-colors">
+                <div>
+                  <span className="inline-block text-xs font-bold px-2 py-0.5 rounded-full bg-blue-900/60 text-blue-300 mb-2">Camp</span>
+                  <h4 className="text-sm font-bold text-white">Tackling Camp</h4>
+                  <p className="text-xs text-gray-400 mt-1 leading-relaxed">Proper tackling technique &amp; fundamentals coached by NFL-experienced staff</p>
+                </div>
+                <div className="border-t border-gray-800 pt-2.5">
+                  <div className="flex justify-between text-xs"><span className="text-gray-300">July 25 · 9:00am · Dripping Springs</span><span className="font-bold text-white">$25</span></div>
+                </div>
+                <Link href="/register?program=tackling-camp" className="mt-auto block text-center text-xs font-bold bg-red-600 hover:bg-red-700 text-white py-2 rounded-lg transition-colors">Register</Link>
+              </div>
+
+              {/* Combine Metrics Camp */}
+              <div className="bg-gray-900 border border-gray-800 rounded-xl p-4 flex flex-col gap-3 hover:border-gray-600 transition-colors">
+                <div>
+                  <span className="inline-block text-xs font-bold px-2 py-0.5 rounded-full bg-purple-900/60 text-purple-300 mb-2">Camp</span>
+                  <h4 className="text-sm font-bold text-white">Combine Metrics Camp</h4>
+                  <p className="text-xs text-gray-400 mt-1 leading-relaxed">Professional combine events · H.S. athletes record official metrics &amp; earn PR-VERIFIED seal</p>
+                </div>
+                <div className="border-t border-gray-800 pt-2.5">
+                  <div className="flex justify-between text-xs"><span className="text-gray-300">Camp Registration</span><span className="font-bold text-white">$25</span></div>
+                </div>
+                <Link href="/register?program=combine" className="mt-auto block text-center text-xs font-bold bg-red-600 hover:bg-red-700 text-white py-2 rounded-lg transition-colors">Register</Link>
               </div>
 
               {/* Summer Camp */}
-              <div className="bg-card border-primary/50 border-2 overflow-hidden group hover:border-primary transition-colors lg:col-span-3">
-                <div className="pt-6 px-6 pb-6 space-y-4">
+              <div className="bg-gray-900 border border-gray-800 rounded-xl p-4 sm:col-span-2 lg:col-span-3 hover:border-gray-600 transition-colors">
+                <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
                   <div>
-                    <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 mb-3">
-                      <span className="text-sm font-medium text-primary">Summer Camp</span>
-                    </div>
-                    <h4 className="text-xl font-display font-bold mb-2">Summer Camp</h4>
-                    <p className="text-white text-sm leading-relaxed mb-2">Athlete Development &amp; Leadership (June &amp; July) — <span className="text-white font-semibold">Limited to 20 spots ONLY</span></p>
-                    <div className="border-t border-dashed border-border pt-4">
-                      <div><div className="flex items-center justify-between"><span className="font-medium">Athletic Camp</span><span className="text-lg font-bold text-white">$265/mo</span></div><p className="text-xs text-white mt-1">Open to all Elementary &amp; Middle School athletes · Mon, Tue &amp; Thu · 10:00am – 12:00pm (noon)</p></div>
-                    </div>
+                    <span className="inline-block text-xs font-bold px-2 py-0.5 rounded-full bg-blue-900/60 text-blue-300 mb-2">Summer Camp</span>
+                    <h4 className="text-sm font-bold text-white">Summer Camp — Athlete Development &amp; Leadership</h4>
+                    <p className="text-xs text-gray-400 mt-1">June &amp; July · Mon, Tue &amp; Thu · 10:00am–12:00pm · Elementary &amp; Middle School · <span className="text-white font-semibold">Limited to 20 spots</span></p>
                   </div>
-                  <Link href="/register?program=summer-ms" className="block w-full text-center bg-red-600 text-white px-4 py-2 rounded hover:bg-red-600/80 transition-colors">Register Now</Link>
+                  <div className="flex items-center gap-3 shrink-0">
+                    <span className="text-base font-bold text-white">$265/mo</span>
+                    <Link href="/register?program=summer-ms" className="text-xs font-bold bg-red-600 hover:bg-red-700 text-white py-2 px-4 rounded-lg transition-colors whitespace-nowrap">Register Now</Link>
+                  </div>
                 </div>
               </div>
 
-              {/* Recruiting — Kevin Garrett */}
-              <div className="bg-card border-primary/50 border-2 overflow-hidden lg:col-span-3">
-                <div className="pt-6 px-6 pb-6 space-y-4">
-                  <div className="text-center">
-                    <h4 className="text-4xl lg:text-5xl font-display font-bold mb-4">Recruiting</h4>
-                    <h5 className="text-xl font-display font-bold mb-1 text-white">Kevin Garrett</h5>
-                    <p className="text-xs text-white font-semibold mb-3">Former NFL | COO / Director of PolyRISE Athletix Recruiting</p>
-                    <p className="text-white text-sm leading-relaxed max-w-3xl mx-auto">With extensive experience in football recruiting, Kevin leads all operations at PolyRISE Athletix Recruiting. He personally oversees player profiles, college outreach strategies, and ensures every athlete receives high-quality exposure to the right college programs. Kevin is passionate about helping student-athletes navigate the recruiting process and has helped dozens of players earn opportunities at the collegiate level.</p>
-                    <p className="text-sm text-white mt-3">Contact Kevin directly: <a href="mailto:KG@polyrisefootball.com" className="text-red-500 underline hover:text-red-400">KG@polyrisefootball.com</a> · <a href="mailto:polyrise@polyrisefootball.com" className="text-red-500 underline hover:text-red-400">polyrise@polyrisefootball.com</a></p>
+              {/* Recruiting */}
+              <div className="bg-gray-900 border border-gray-800 rounded-xl p-4 sm:col-span-2 lg:col-span-3 hover:border-gray-600 transition-colors">
+                <div className="flex flex-col md:flex-row md:items-start gap-5">
+                  <div className="flex-1">
+                    <span className="inline-block text-xs font-bold px-2 py-0.5 rounded-full bg-red-900/60 text-red-300 mb-2">Recruiting</span>
+                    <h4 className="text-base font-bold text-white mb-1">PolyRISE Athletix Recruiting</h4>
+                    <p className="text-xs text-gray-400 mb-2">PolyRISE Staff · Former NFL experience · COO / Director of Recruiting</p>
+                    <p className="text-xs text-gray-300 leading-relaxed">Overseeing player profiles, college outreach strategies, and ensuring every athlete receives high-quality exposure to the right college programs — helping student-athletes navigate recruiting and earn collegiate opportunities.</p>
+                    <p className="text-xs text-gray-400 mt-2">Contact: <a href="mailto:KG@polyrisefootball.com" className="text-red-400 hover:text-red-300">KG@polyrisefootball.com</a> · <a href="mailto:polyrise@polyrisefootball.com" className="text-red-400 hover:text-red-300">polyrise@polyrisefootball.com</a></p>
+                    <div className="mt-3">
+                      <Link href="#contact" className="inline-block bg-red-600 text-white px-5 py-1.5 rounded-lg hover:bg-red-700 transition-colors text-xs font-bold">Get Started with Recruiting</Link>
+                    </div>
                   </div>
-                  <div className="flex flex-wrap justify-center gap-4">
-                    <img src="/recruiting-athlete-1.jpeg" alt="Athlete Introduction Example - James Cabarrus III" className="w-48 h-auto rounded-lg border border-primary/20" />
-                    <img src="/recruiting-athlete-2.jpeg" alt="Athlete Introduction Example - Gevariah Kneubuhl" className="w-48 h-auto rounded-lg border border-primary/20" />
-                  </div>
-                  <div className="text-center">
-                    <Link href="#contact" className="inline-block bg-red-600 text-white px-8 py-3 rounded hover:bg-red-600/80 transition-colors font-semibold">Get Started with Recruiting</Link>
+                  <div className="flex gap-2 shrink-0">
+                    <img src="/recruiting-athlete-1.jpeg" alt="Athlete Introduction Example" className="w-24 h-auto rounded-lg border border-gray-700" />
+                    <img src="/recruiting-athlete-2.jpeg" alt="Athlete Introduction Example" className="w-24 h-auto rounded-lg border border-gray-700" />
                   </div>
                 </div>
               </div>

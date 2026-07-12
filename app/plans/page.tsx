@@ -1,6 +1,25 @@
 import Link from "next/link"
 import Image from "next/image"
 
+const DESC = "Verified athlete metrics, recruiting profiles, and college coach visibility. Plans from $9.99/mo for middle school through $49.99/mo for upper HS recruits. PR-VERIFIED by NFL-experienced coaches in Dripping Springs, TX."
+
+export const metadata = {
+  title: "Athlete Tracking & Recruiting Plans | Passport, Recruit & Elite Recruit | PolyRISE Athletix",
+  description: DESC,
+  alternates: {
+    canonical: "https://polyrisefootball.com/plans",
+  },
+  openGraph: {
+    title: "Athlete Tracking & Recruiting Plans | PolyRISE Athletix",
+    url: "https://polyrisefootball.com/plans",
+    description: DESC,
+  },
+  twitter: {
+    title: "Athlete Tracking & Recruiting Plans | PolyRISE Athletix",
+    description: DESC,
+  },
+}
+
 export default function PlansPage() {
   return (
     <div className="min-h-screen bg-[#0a0a0f] text-white">

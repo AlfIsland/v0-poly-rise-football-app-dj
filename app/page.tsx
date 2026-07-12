@@ -632,19 +632,16 @@ export default function HomePage() {
                 <div className="pt-6">
                   <h3 className="font-display font-bold text-lg mb-2">What is included in the Player Development program?</h3>
                   <p className="text-white leading-relaxed">
-                    Player Development ($300/month) includes 2 training sessions weekly, (PolyRISE tee after 3 months), SAQ, S&C training, football drills, monthly camp/tryout, leadership event, film study.
+                    Player Development ($325/month, or as low as $250/month on an annual commitment) includes 2 training sessions weekly (Tuesday &amp; Thursday, 6:30–7:30pm), SAQ, S&amp;C training, football drills, tournament entries, military character building events, PR-Verified Camp, and a free Athletic Training Passport. A once-a-week option is available for $175/month.
                   </p>
                 </div>
               </div>
 
               <div className="bg-card border-border">
                 <div className="pt-6">
-                  <h3 className="font-display font-bold text-lg mb-2">What makes 360 Elite different from Player Development?</h3>
+                  <h3 className="font-display font-bold text-lg mb-2">What recruiting options does PolyRISE Athletix offer?</h3>
                   <p className="text-white leading-relaxed">
-                    360 Elite ($500/month) includes everything in Player Development plus a recruiting profile, 7 email blasts a month, one-on-one coaching from NFL
-                    experience staff, weekly film study, unlimited free camps, monthly character building events,
-                    college visits, NIL & financial literacy classes, and discounts at affiliated sports medicine and
-                    nutrition shops.
+                    High school athletes can add Recruiting &amp; Exposure packages ($85–$150/month) for personalized coach outreach and social media spotlights, or subscribe to Recruit ($29.99/month) for PR-VERIFIED metrics, a shareable recruiting profile, and monthly recruiter spotlights.
                   </p>
                 </div>
               </div>
@@ -653,7 +650,7 @@ export default function HomePage() {
                 <div className="pt-6">
                   <h3 className="font-display font-bold text-lg mb-2">What is the training schedule?</h3>
                   <p className="text-white leading-relaxed">
-                    Tuesday 6:30-7:45pm and Thursday 6:30-7:45pm intense player development. Monthly camp/tryout and a monthly leadership event on Saturday or Sunday.
+                    Football Player Development runs Tuesday &amp; Thursday, 6:30–7:30pm. The Afterschool Program runs Monday &amp; Wednesday, 4:00–5:00pm. Monthly camps, tryouts, and leadership events are held on weekends.
                   </p>
                 </div>
               </div>
@@ -662,8 +659,7 @@ export default function HomePage() {
                 <div className="pt-6">
                   <h3 className="font-display font-bold text-lg mb-2">Does PolyRISE Athletix have coaches with NFL experience?</h3>
                   <p className="text-white leading-relaxed">
-                    Yes, PolyRISE Athletix has coaches with NFL experience on staff who provide one-on-one coaching,
-                    film study, and advanced training for athletes in the 360 Elite program.
+                    Yes, PolyRISE Athletix has coaches with NFL experience on staff who provide coaching, film study, and combine testing across all programs.
                   </p>
                 </div>
               </div>
@@ -858,9 +854,7 @@ export default function HomePage() {
               <ul className="space-y-2 text-sm text-white">
                 <li><Link href="/passport" className="hover:text-foreground transition-colors">Athlete Passport</Link></li>
                 <li><Link href="#programs" className="hover:text-foreground transition-colors">Player Development</Link></li>
-                <li><Link href="#programs" className="hover:text-foreground transition-colors">{"Player Dev & Recruiting"}</Link></li>
-                <li><Link href="#programs" className="hover:text-foreground transition-colors">360 Elite</Link></li>
-                <li><Link href="#programs" className="hover:text-foreground transition-colors">HS Recruiting & Exposure</Link></li>
+                <li><Link href="#programs" className="hover:text-foreground transition-colors">HS Recruiting &amp; Exposure</Link></li>
               </ul>
             </div>
 
@@ -899,7 +893,7 @@ export default function HomePage() {
           </div>
 
           <div className="pt-8 border-t border-border text-center text-sm text-white">
-            <p>Copyright © 2025 PolyRISE Athletix - All Rights Reserved.</p>
+            <p>Copyright © 2026 PolyRISE Athletix - All Rights Reserved.</p>
           </div>
         </div>
       </footer>

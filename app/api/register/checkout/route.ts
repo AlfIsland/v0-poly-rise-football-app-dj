@@ -25,6 +25,8 @@ export const PROGRAMS: Record<string, { name: string; price: number; billing: "o
   "hs-recruiting-basic":     { name: "HS Recruiting — Basic Exposure",                 price: 85,    billing: "monthly"  },
   // Summer / Athletic Camp
   "summer-ms":               { name: "Athletic Camp",                                  price: 265,   billing: "one_time" },
+  // Afterschool Program
+  "afterschool":             { name: "Afterschool Program",                            price: 250,   billing: "monthly"  },
   // Events
   "combine":                 { name: "Combine Metrics Camp",                           price: 25,    billing: "one_time" },
   "tackling-camp":           { name: "Tackling Camp",                                  price: 25,    billing: "one_time" },

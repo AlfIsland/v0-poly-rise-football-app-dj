@@ -24,6 +24,8 @@ const PROGRAMS_DATA: Record<string, { name: string; price: number; priceLabel: s
   "hs-recruiting-elite":     { name: "HS Recruiting — Elite Exposure",            price: 150,   priceLabel: "$150/mo",   billing: "monthly"   },
   "hs-recruiting-pro":       { name: "HS Recruiting — Pro Exposure",              price: 125,   priceLabel: "$125/mo",   billing: "monthly"   },
   "hs-recruiting-basic":     { name: "HS Recruiting — Basic Exposure",            price: 85,    priceLabel: "$85/mo",    billing: "monthly"   },
+  // Afterschool Program
+  "afterschool":             { name: "Afterschool Program",                       price: 250,   priceLabel: "$250/mo",   billing: "monthly"   },
   // Summer / Athletic Camp
   "summer-ms":               { name: "Athletic Camp",                             price: 265,   priceLabel: "$265",      billing: "one_time"  },
   // Events
@@ -57,6 +59,12 @@ const CATEGORIES = [
       { id: "hs-recruiting-elite", desc: "2× X + Instagram blast/mo · 5 personalized coach emails/mo · Profile optimization · Weekly recruiting report · 1-on-1 coach call", highlight: "ELITE" },
       { id: "hs-recruiting-pro",   desc: "X + Instagram blast · 3 personalized coach emails/mo · Profile optimization · Bi-weekly recruiting report" },
       { id: "hs-recruiting-basic", desc: "Pro profile image package · X blast (1–2× monthly) · Access to coach directory" },
+    ],
+  },
+  {
+    label: "Afterschool Program", badge: "bg-teal-900 text-teal-300", color: "border-teal-800 hover:border-teal-500",
+    programs: [
+      { id: "afterschool", desc: "Elementary & Middle School athletes · Mon & Wed · 4:00–5:00pm · $250/mo" },
     ],
   },
   {

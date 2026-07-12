@@ -349,6 +349,24 @@ export default function HomePage() {
                 </div>
               </div>
 
+              {/* Afterschool Program */}
+              <div className="bg-card border-primary/50 border-2 overflow-hidden group hover:border-primary transition-colors">
+                <div className="pt-6 px-6 pb-6 space-y-4">
+                  <div>
+                    <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 mb-3">
+                      <span className="text-sm font-medium text-primary">Afterschool</span>
+                    </div>
+                    <h4 className="text-xl font-display font-bold mb-2">Afterschool Program</h4>
+                    <p className="text-white text-sm leading-relaxed mb-2">Monday &amp; Wednesday · 4:00–5:00pm · Open to Elementary &amp; Middle School athletes.</p>
+                    <div className="flex items-center justify-between border-t border-dashed border-border pt-4">
+                      <span className="font-medium text-sm">Monthly</span>
+                      <span className="text-lg font-bold text-white">$250/mo</span>
+                    </div>
+                  </div>
+                  <Link href="/register?program=afterschool" className="block w-full text-center bg-red-600 text-white px-4 py-2 rounded hover:bg-red-600/80 transition-colors">Register</Link>
+                </div>
+              </div>
+
               {/* Summer Camp */}
               <div className="bg-card border-primary/50 border-2 overflow-hidden group hover:border-primary transition-colors lg:col-span-3">
                 <div className="pt-6 px-6 pb-6 space-y-4">

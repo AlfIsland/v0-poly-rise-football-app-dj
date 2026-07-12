@@ -85,7 +85,7 @@ export default function HomePage() {
               </h1>
 
               <p className="text-lg lg:text-xl text-white leading-relaxed text-pretty">
-                Rooted in football. Trained for every sport. PolyRISE Athletix delivers professional coaching and strength & conditioning across football, soccer, wrestling, baseball, softball, girls flag football and more — plus recruiting exposure and PR-VERIFIED combine testing for high school athletes.
+                Athlete development with a core focus on football. PolyRISE Athletix delivers professional coaching and strength &amp; conditioning that starts with football fundamentals and builds complete athletes — across soccer, wrestling, baseball, softball, girls flag football and more. Plus recruiting exposure and PR-VERIFIED combine testing for high school athletes.
               </p>
             </div>
 
@@ -133,8 +133,8 @@ export default function HomePage() {
               <div className="bg-gray-900 border border-gray-800 rounded-xl p-4 flex flex-col gap-3 hover:border-gray-600 transition-colors">
                 <div>
                   <span className="inline-block text-xs font-bold px-2 py-0.5 rounded-full bg-red-900/60 text-red-300 mb-2">Most Popular</span>
-                  <h4 className="text-sm font-bold text-white">Football Player Development</h4>
-                  <p className="text-xs text-gray-400 mt-1 leading-relaxed">Tue &amp; Thu · 6:30–7:30pm · SAQ, S&amp;C, drills, tournament entries, PR-Verified Camp &amp; Passport</p>
+                  <h4 className="text-sm font-bold text-white">Athlete Development</h4>
+                  <p className="text-xs text-gray-400 mt-1 leading-relaxed">Tuesday &amp; Thursday (6:30–7:30pm). Complete athlete development with a football core — SAQ, S&amp;C, sport-specific drills, tournament entries, military character building events, PR-Verified Camp and free Athletic Training Passport (Tracker). Built for football players and multisport athletes alike.</p>
                 </div>
                 <div className="space-y-1.5 border-t border-gray-800 pt-2.5">
                   <div className="flex justify-between text-xs"><span className="text-gray-300">Monthly</span><span className="font-bold text-white">$325/mo</span></div>
@@ -156,19 +156,6 @@ export default function HomePage() {
                   <div className="flex justify-between text-xs"><span className="text-gray-300">Monthly</span><span className="font-bold text-white">$250/mo</span></div>
                 </div>
                 <Link href="/register?program=afterschool" className="mt-auto block text-center text-xs font-bold bg-red-600 hover:bg-red-700 text-white py-2 rounded-lg transition-colors">Register</Link>
-              </div>
-
-              {/* Multi-Sport Development */}
-              <div className="bg-gray-900 border border-gray-800 rounded-xl p-4 flex flex-col gap-3 hover:border-gray-600 transition-colors">
-                <div>
-                  <span className="inline-block text-xs font-bold px-2 py-0.5 rounded-full bg-orange-900/60 text-orange-300 mb-2">Multi-Sport</span>
-                  <h4 className="text-sm font-bold text-white">Multi-Sport Development</h4>
-                  <p className="text-xs text-gray-400 mt-1 leading-relaxed">Wrestling, flag football, soccer, baseball, softball &amp; more — building well-rounded athletes</p>
-                </div>
-                <div className="border-t border-gray-800 pt-2.5">
-                  <div className="flex justify-between text-xs"><span className="text-gray-300">Monthly</span><span className="font-bold text-white">$265/mo</span></div>
-                </div>
-                <Link href="/register?program=multi-sport-dev" className="mt-auto block text-center text-xs font-bold bg-red-600 hover:bg-red-700 text-white py-2 rounded-lg transition-colors">Register</Link>
               </div>
 
               {/* Girls Player Development */}
@@ -612,9 +599,7 @@ export default function HomePage() {
                 <div className="pt-6">
                   <h3 className="font-display font-bold text-lg mb-2">What age groups does PolyRISE Athletix train?</h3>
                   <p className="text-white leading-relaxed">
-                    PolyRISE Athletix provides elite training for K-12 athletes, including youth, middle school, and
-                    high school players. Our programs are designed to develop athletes at every level, from beginners to
-                    those preparing for college recruitment.
+                    PolyRISE Athletix provides elite athlete development for K-12 athletes — youth, middle school, and high school. Our training is built on a football core and develops complete athletes across football, soccer, wrestling, baseball, softball, and girls flag football, from beginners to those preparing for college recruitment.
                   </p>
                 </div>
               </div>
@@ -814,7 +799,7 @@ export default function HomePage() {
               Ready to Start Your Journey?
             </h2>
             <p className="text-lg text-primary-foreground/90 leading-relaxed text-pretty">
-              Join our football program for expert coaching and football skills development. Registration is now open for all programs.
+              Join PolyRISE Athletix for expert coaching and complete athlete development — built on a football core. Registration is now open for all programs.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link href="/register" className="text-base bg-red-600 text-white px-4 py-2 rounded hover:bg-red-600/80 transition-colors inline-flex items-center">

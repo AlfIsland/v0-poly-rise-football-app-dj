@@ -179,17 +179,21 @@ export default function HomePage() {
                 <Link href="/register?program=girls-dev" className="mt-auto block text-center text-xs font-bold bg-red-600 hover:bg-red-700 text-white py-2 rounded-lg transition-colors">Register</Link>
               </div>
 
-              {/* Multi-Sport Athlete */}
+              {/* Group Training */}
               <div className="bg-gray-900 border border-gray-800 rounded-xl p-4 flex flex-col gap-3 hover:border-gray-600 transition-colors">
                 <div>
-                  <span className="inline-block text-xs font-bold px-2 py-0.5 rounded-full bg-blue-900/60 text-blue-300 mb-2">Multi-Sport</span>
-                  <h4 className="text-sm font-bold text-white">Multi-Sport Athlete</h4>
-                  <p className="text-xs text-gray-400 mt-1 leading-relaxed">1 day/week (Tue or Thu) · SAQ, S&amp;C &amp; multi-sport athleticism · Camps &amp; events included</p>
+                  <span className="inline-block text-xs font-bold px-2 py-0.5 rounded-full bg-blue-900/60 text-blue-300 mb-2">Group Training</span>
+                  <h4 className="text-sm font-bold text-white">Group Training</h4>
+                  <p className="text-xs text-gray-400 mt-1 leading-relaxed">
+                    DM Coach at{" "}
+                    <a href="tel:+18176583300" className="text-white hover:text-red-400 transition-colors">(817) 658-3300</a>
+                    {" "}for pricing and info.
+                  </p>
                 </div>
                 <div className="border-t border-gray-800 pt-2.5">
-                  <div className="flex justify-between text-xs"><span className="text-gray-300">Monthly</span><span className="font-bold text-white">$175/mo</span></div>
+                  <a href="https://wa.me/18176583300" target="_blank" rel="noopener noreferrer" className="text-xs text-green-400 hover:text-green-300 transition-colors">Message on WhatsApp →</a>
                 </div>
-                <Link href="/register?program=multi-sport" className="mt-auto block text-center text-xs font-bold bg-red-600 hover:bg-red-700 text-white py-2 rounded-lg transition-colors">Register</Link>
+                <a href="https://wa.me/18176583300" target="_blank" rel="noopener noreferrer" className="mt-auto block text-center text-xs font-bold bg-green-700 hover:bg-green-600 text-white py-2 rounded-lg transition-colors">Contact Coach</a>
               </div>
 
               {/* Drop-In Training */}

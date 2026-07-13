@@ -15,8 +15,6 @@ const PROGRAMS_DATA: Record<string, { name: string; price: number; priceLabel: s
   // Girls Player Development
   "girls-dev":               { name: "Girls Player Development — 2 Days/Week",    price: 250,   priceLabel: "$250/mo",   billing: "monthly"   },
   "girls-dev-3day":          { name: "Girls Player Development — 3 Days/Week",    price: 315,   priceLabel: "$315/mo",   billing: "monthly"   },
-  // Multi-Sport Athlete
-  "multi-sport":             { name: "Multi-Sport Athlete",                        price: 175,   priceLabel: "$175/mo",   billing: "monthly"   },
   // Drop-In
   "drop-in-1day":            { name: "Drop-In Training — 1 Day",                  price: 45,    priceLabel: "$45",       billing: "one_time"  },
   "drop-in-2day":            { name: "Drop-In Training — 2 Days",                 price: 80,    priceLabel: "$80",       billing: "one_time"  },
@@ -50,7 +48,6 @@ const CATEGORIES = [
       { id: "multi-sport-dev",   desc: "Youth sports development — wrestling, girls flag football, soccer, baseball, softball & more · Building well-rounded athletes" },
       { id: "girls-dev",         desc: "2 days/week · May: Mon & Fri 5–6:30pm · June–July: Mon & Fri 1–2:30pm" },
       { id: "girls-dev-3day",    desc: "3 days/week · Mon, Wed & Fri · More reps and faster development" },
-      { id: "multi-sport",       desc: "1 day/week (Tue or Thu) · SAQ, S&C, multi-sport athleticism with camps & events included" },
       { id: "drop-in-1day",      desc: "Single day training session · Try a session before committing to a full program" },
       { id: "drop-in-2day",      desc: "2 day training package · Add a second day for just $35 more" },
     ],

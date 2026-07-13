@@ -34,7 +34,7 @@ export const metadata: Metadata = {
     "speed agility training kids",
     "strength conditioning youth athletes",
     "character development sports",
-    "after school football program",
+    "after school athlete program",
     "weekend football training",
     "summer football camp Austin",
     "youth sports near me",

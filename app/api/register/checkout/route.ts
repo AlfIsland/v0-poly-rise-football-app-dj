@@ -25,8 +25,9 @@ export const PROGRAMS: Record<string, { name: string; price: number; billing: "o
   "hs-recruiting-basic":     { name: "HS Recruiting — Basic Exposure",                 price: 85,    billing: "monthly"  },
   // Summer / Athletic Camp
   "summer-ms":               { name: "Athletic Camp",                                  price: 265,   billing: "one_time" },
-  // Afterschool Program
-  "afterschool":             { name: "Afterschool Program",                            price: 250,   billing: "monthly"  },
+  // After School Athlete Program
+  "afterschool-monthly":     { name: "After School Athlete Program — Month-to-Month",        price: 280,   billing: "one_time" },
+  "afterschool-6mo":         { name: "After School Athlete Program — 6-Month Commitment",    price: 240,   billing: "monthly"  },
   // Events
   "combine":                 { name: "Combine Metrics Camp",                           price: 25,    billing: "one_time" },
   "tackling-camp":           { name: "Tackling Camp",                                  price: 25,    billing: "one_time" },
@@ -49,6 +50,7 @@ export async function POST(req: NextRequest) {
     const cancelMonths: number | null =
       ids.includes("player-dev-annual") ? 12
       : ids.includes("player-dev-6mo") ? 6
+      : ids.includes("afterschool-6mo") ? 6
       : recruitingMonths ? Number(recruitingMonths)
       : null
 

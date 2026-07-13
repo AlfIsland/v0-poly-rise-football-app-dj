@@ -146,15 +146,21 @@ export default function HomePage() {
                 <Link href="/register?program=player-dev" className="mt-auto block text-center text-xs font-bold bg-red-600 hover:bg-red-700 text-white py-2 rounded-lg transition-colors">Register</Link>
               </div>
 
-              {/* Afterschool Program */}
+              {/* After School Athlete Program */}
               <div className="bg-gray-900 border border-gray-800 rounded-xl p-4 flex flex-col gap-3 hover:border-gray-600 transition-colors">
                 <div>
                   <span className="inline-block text-xs font-bold px-2 py-0.5 rounded-full bg-teal-900/60 text-teal-300 mb-2">Afterschool</span>
-                  <h4 className="text-sm font-bold text-white">Afterschool Program</h4>
-                  <p className="text-xs text-gray-400 mt-1 leading-relaxed">Monday &amp; Wednesday · 4:00–5:00pm · Elementary &amp; Middle School athletes</p>
+                  <h4 className="text-sm font-bold text-white">After School Athlete Program</h4>
+                  <p className="text-xs text-gray-400 mt-1 leading-relaxed">Monday &amp; Wednesday · 5:00–6:00pm · Open to Elementary &amp; Middle School athletes</p>
                 </div>
-                <div className="border-t border-gray-800 pt-2.5">
-                  <div className="flex justify-between text-xs"><span className="text-gray-300">Monthly</span><span className="font-bold text-white">$250/mo</span></div>
+                <div className="space-y-1.5 border-t border-gray-800 pt-2.5">
+                  <div className="flex justify-between text-xs"><span className="text-gray-300">Month-to-Month</span><span className="font-bold text-white">$280/mo</span></div>
+                  <p className="text-[11px] text-gray-500">No subscription. Pay as you go.</p>
+                  <div className="flex justify-between items-center text-xs mt-0.5">
+                    <span className="text-gray-300 flex items-center gap-1.5">6-Month Commitment <span className="bg-teal-800 text-teal-200 text-[10px] font-bold px-1.5 py-0.5 rounded-full">Best Value</span></span>
+                    <span className="font-bold text-white">$240/mo</span>
+                  </div>
+                  <p className="text-[11px] text-gray-500">Save $40/mo</p>
                 </div>
                 <Link href="/register?program=afterschool" className="mt-auto block text-center text-xs font-bold bg-red-600 hover:bg-red-700 text-white py-2 rounded-lg transition-colors">Register</Link>
               </div>
@@ -631,7 +637,7 @@ export default function HomePage() {
                 <div className="pt-6">
                   <h3 className="font-display font-bold text-lg mb-2">What is the training schedule?</h3>
                   <p className="text-white leading-relaxed">
-                    Football Player Development runs Tuesday &amp; Thursday, 6:30–7:30pm. The Afterschool Program runs Monday &amp; Wednesday, 4:00–5:00pm. Monthly camps, tryouts, and leadership events are held on weekends.
+                    Football Player Development runs Tuesday &amp; Thursday, 6:30–7:30pm. The After School Athlete Program runs Monday &amp; Wednesday, 5:00–6:00pm. Monthly camps, tryouts, and leadership events are held on weekends.
                   </p>
                 </div>
               </div>

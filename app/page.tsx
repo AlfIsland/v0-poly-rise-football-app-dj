@@ -151,7 +151,7 @@ export default function HomePage() {
                 <div>
                   <span className="inline-block text-xs font-bold px-2 py-0.5 rounded-full bg-teal-900/60 text-teal-300 mb-2">Afterschool</span>
                   <h4 className="text-sm font-bold text-white">After School Athlete Program</h4>
-                  <p className="text-xs text-gray-400 mt-1 leading-relaxed">Monday &amp; Wednesday · 5:00–6:00pm · Open to Elementary &amp; Middle School athletes</p>
+                  <p className="text-xs text-gray-400 mt-1 leading-relaxed">Monday &amp; Wednesday · 6:00–7:00pm · 1034 Canyon Bend Dr · Open to Elementary &amp; Middle School athletes</p>
                 </div>
                 <div className="space-y-1.5 border-t border-gray-800 pt-2.5">
                   <div className="flex justify-between text-xs"><span className="text-gray-300">Month-to-Month</span><span className="font-bold text-white">$280/mo</span></div>
@@ -671,7 +671,7 @@ export default function HomePage() {
                   <span className="text-gray-500 ml-4 shrink-0 transition-transform duration-200 group-open:rotate-180 text-xs select-none">▼</span>
                 </summary>
                 <div className="px-5 pb-4 pt-3 text-sm text-gray-300 leading-relaxed border-t border-gray-800">
-                  <p>Athlete Development (Tue &amp; Thu, 6:30–7:30pm) starts at <strong className="text-white">$325/mo</strong>, or as low as $250/mo on an annual plan. After School Athlete Program (Mon &amp; Wed, 5–6pm) is <strong className="text-white">$280/mo</strong> month-to-month or $240/mo on a 6-month commitment. Girls Player Development runs $250–$315/mo. HS Recruiting &amp; Exposure packages are $85–$150/mo. Athlete Tracking plans start at <strong className="text-white">$9.99/mo</strong>.</p>
+                  <p>Athlete Development (Tue &amp; Thu, 6:30–7:30pm) starts at <strong className="text-white">$325/mo</strong>, or as low as $250/mo on an annual plan. After School Athlete Program (Mon &amp; Wed, 6–7pm, 1034 Canyon Bend Dr) is <strong className="text-white">$280/mo</strong> month-to-month or $240/mo on a 6-month commitment. Girls Player Development runs $250–$315/mo. HS Recruiting &amp; Exposure packages are $85–$150/mo. Athlete Tracking plans start at <strong className="text-white">$9.99/mo</strong>.</p>
                 </div>
               </details>
 
@@ -682,7 +682,7 @@ export default function HomePage() {
                 </summary>
                 <div className="px-5 pb-4 pt-3 text-sm text-gray-300 leading-relaxed border-t border-gray-800 space-y-1">
                   <p><strong className="text-white">Athlete Development:</strong> Tuesday &amp; Thursday, 6:30–7:30pm</p>
-                  <p><strong className="text-white">After School Athlete Program:</strong> Monday &amp; Wednesday, 5:00–6:00pm (Elementary &amp; Middle School)</p>
+                  <p><strong className="text-white">After School Athlete Program:</strong> Monday &amp; Wednesday, 6:00–7:00pm · 1034 Canyon Bend Dr (Elementary &amp; Middle School)</p>
                   <p><strong className="text-white">Girls Player Development:</strong> May: Mon &amp; Fri 5–6:30pm · Jun–Jul: Mon &amp; Fri 1–2:30pm</p>
                   <p className="text-gray-400 pt-1">Monthly camps, combine events, and leadership hikes held on weekends at Swift Sessions, Dripping Springs.</p>
                 </div>

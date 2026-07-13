@@ -427,6 +427,69 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* Parent & Supporter Testimonials */}
+      <section className="py-12 lg:py-20 bg-gray-950">
+        <div className="container mx-auto px-4 lg:px-8">
+          <div className="text-center mb-10">
+            <p className="text-red-500 font-bold text-xs uppercase tracking-widest mb-3">Community</p>
+            <h2 className="text-3xl lg:text-4xl font-display font-bold text-white">What Parents &amp; Supporters Are Saying</h2>
+            <p className="text-base text-gray-400 mt-2 max-w-xl mx-auto">Real stories from families and coaches in Central Texas</p>
+          </div>
+
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5 max-w-6xl mx-auto">
+
+            <div className="bg-[#0f1117] border border-gray-800 rounded-2xl p-6 flex flex-col gap-4 hover:border-red-900/60 transition-colors">
+              <p className="text-yellow-400 text-base tracking-widest">★★★★★</p>
+              <p className="text-gray-300 text-sm leading-relaxed italic flex-1">&ldquo;My son walked in as a quiet 7th grader who barely believed in himself. Eight months later he&apos;s faster, stronger, and leading drills. Coach Garrett and the staff didn&apos;t just train him — they built his character. This program is the real deal.&rdquo;</p>
+              <div className="flex items-center gap-3 pt-3 border-t border-gray-800 mt-auto">
+                <div className="w-10 h-10 rounded-full bg-red-900/60 border border-red-700/40 flex items-center justify-center text-white font-bold text-xs shrink-0">TM</div>
+                <div>
+                  <p className="text-white text-sm font-bold">Teresa M.</p>
+                  <p className="text-gray-500 text-xs">Parent of 7th Grader · Dripping Springs</p>
+                </div>
+              </div>
+            </div>
+
+            <div className="bg-[#0f1117] border border-gray-800 rounded-2xl p-6 flex flex-col gap-4 hover:border-blue-900/60 transition-colors">
+              <p className="text-yellow-400 text-base tracking-widest">★★★★★</p>
+              <p className="text-gray-300 text-sm leading-relaxed italic flex-1">&ldquo;Our son was invisible to college coaches until PolyRISE ran him through the PR-VERIFIED combine. Real, verified numbers changed everything — he now has three programs looking at his profile. Best investment we&apos;ve made in his future.&rdquo;</p>
+              <div className="flex items-center gap-3 pt-3 border-t border-gray-800 mt-auto">
+                <div className="w-10 h-10 rounded-full bg-blue-900/60 border border-blue-700/40 flex items-center justify-center text-white font-bold text-xs shrink-0">MJ</div>
+                <div>
+                  <p className="text-white text-sm font-bold">Marcus &amp; Alicia J.</p>
+                  <p className="text-gray-500 text-xs">Parents of 10th Grader · Austin</p>
+                </div>
+              </div>
+            </div>
+
+            <div className="bg-[#0f1117] border border-gray-800 rounded-2xl p-6 flex flex-col gap-4 hover:border-red-900/60 transition-colors">
+              <p className="text-yellow-400 text-base tracking-widest">★★★★★</p>
+              <p className="text-gray-300 text-sm leading-relaxed italic flex-1">&ldquo;The military character-building events are what set PolyRISE apart. My daughter came home from the leadership hike standing taller and talking about who she wants to become. Sport skills AND life skills — that&apos;s rare for a youth program.&rdquo;</p>
+              <div className="flex items-center gap-3 pt-3 border-t border-gray-800 mt-auto">
+                <div className="w-10 h-10 rounded-full bg-red-900/60 border border-red-700/40 flex items-center justify-center text-white font-bold text-xs shrink-0">JC</div>
+                <div>
+                  <p className="text-white text-sm font-bold">Jennifer C.</p>
+                  <p className="text-gray-500 text-xs">Parent of 8th Grader · Dripping Springs</p>
+                </div>
+              </div>
+            </div>
+
+            <div className="bg-[#0f1117] border border-gray-800 rounded-2xl p-6 flex flex-col gap-4 hover:border-green-900/60 transition-colors">
+              <p className="text-yellow-400 text-base tracking-widest">★★★★★</p>
+              <p className="text-gray-300 text-sm leading-relaxed italic flex-1">&ldquo;I refer every family to PolyRISE because I trust these coaches completely. NFL-level experience, real discipline, and they treat every kid like family. Central Texas has needed this program for a long time — proud to support it.&rdquo;</p>
+              <div className="flex items-center gap-3 pt-3 border-t border-gray-800 mt-auto">
+                <div className="w-10 h-10 rounded-full bg-green-900/60 border border-green-700/40 flex items-center justify-center text-white font-bold text-xs shrink-0">RS</div>
+                <div>
+                  <p className="text-white text-sm font-bold">Coach R. Santos</p>
+                  <p className="text-gray-500 text-xs">Youth League Director · Austin Metro</p>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
       {/* PolyRISE Athletix Coaches Board Section */}
       <section className="py-10 lg:py-16 bg-background">
         <div className="container mx-auto px-4 lg:px-8">
@@ -587,80 +650,76 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Frequently Asked Questions Section */}
-      <section className="py-12 lg:py-20">
+      {/* Frequently Asked Questions */}
+      <section className="py-10 lg:py-16">
         <div className="container mx-auto px-4 lg:px-8">
-          <div className="max-w-3xl mx-auto">
-            <div className="text-center mb-12">
-              <h2 className="text-4xl lg:text-5xl font-display font-bold mb-4">Frequently Asked Questions</h2>
-              <p className="text-lg text-white">Everything you need to know about PolyRISE Athletix</p>
+          <div className="max-w-2xl mx-auto">
+            <div className="text-center mb-8">
+              <h2 className="text-3xl lg:text-4xl font-display font-bold mb-2">Frequently Asked Questions</h2>
+              <p className="text-sm text-gray-400">Quick answers about PolyRISE Athletix</p>
             </div>
 
-            <div className="space-y-6">
-              <div className="bg-card border-border">
-                <div className="pt-6">
-                  <h3 className="font-display font-bold text-lg mb-2">What age groups does PolyRISE Athletix train?</h3>
-                  <p className="text-white leading-relaxed">
-                    PolyRISE Athletix provides elite athlete development for K-12 athletes — youth, middle school, and high school. Our training is built on a football core and develops complete athletes across football, soccer, wrestling, baseball, softball, and girls flag football, from beginners to those preparing for college recruitment.
-                  </p>
-                </div>
-              </div>
+            <div className="space-y-2">
 
-              <div className="bg-card border-border">
-                <div className="pt-6">
-                  <h3 className="font-display font-bold text-lg mb-2">Where is PolyRISE Athletix located?</h3>
-                  <p className="text-white leading-relaxed">
-                    PolyRISE Athletix is based in Dripping Springs, Texas (Austin area), with training sessions held at Swift Sessions and local fields. We are expanding to other cities nationwide. Contact us to find out when we&apos;re coming to your location.
-                  </p>
+              <details className="group bg-gray-900 border border-gray-800 rounded-xl overflow-hidden">
+                <summary className="flex items-center justify-between px-5 py-4 cursor-pointer text-white font-semibold text-sm hover:bg-gray-800 transition-colors [list-style:none] [&::-webkit-details-marker]:hidden">
+                  <span>What programs are available and how much do they cost?</span>
+                  <span className="text-gray-500 ml-4 shrink-0 transition-transform duration-200 group-open:rotate-180 text-xs select-none">▼</span>
+                </summary>
+                <div className="px-5 pb-4 pt-3 text-sm text-gray-300 leading-relaxed border-t border-gray-800">
+                  <p>Athlete Development (Tue &amp; Thu, 6:30–7:30pm) starts at <strong className="text-white">$325/mo</strong>, or as low as $250/mo on an annual plan. After School Athlete Program (Mon &amp; Wed, 5–6pm) is <strong className="text-white">$280/mo</strong> month-to-month or $240/mo on a 6-month commitment. Girls Player Development runs $250–$315/mo. HS Recruiting &amp; Exposure packages are $85–$150/mo. Athlete Tracking plans start at <strong className="text-white">$9.99/mo</strong>.</p>
                 </div>
-              </div>
+              </details>
 
-              <div className="bg-card border-border">
-                <div className="pt-6">
-                  <h3 className="font-display font-bold text-lg mb-2">What is included in the Player Development program?</h3>
-                  <p className="text-white leading-relaxed">
-                    Player Development ($325/month, or as low as $250/month on an annual commitment) includes 2 training sessions weekly (Tuesday &amp; Thursday, 6:30–7:30pm), SAQ, S&amp;C training, football drills, tournament entries, military character building events, PR-Verified Camp, and a free Athletic Training Passport. A once-a-week option is available for $175/month.
-                  </p>
+              <details className="group bg-gray-900 border border-gray-800 rounded-xl overflow-hidden">
+                <summary className="flex items-center justify-between px-5 py-4 cursor-pointer text-white font-semibold text-sm hover:bg-gray-800 transition-colors [list-style:none] [&::-webkit-details-marker]:hidden">
+                  <span>What is the training schedule?</span>
+                  <span className="text-gray-500 ml-4 shrink-0 transition-transform duration-200 group-open:rotate-180 text-xs select-none">▼</span>
+                </summary>
+                <div className="px-5 pb-4 pt-3 text-sm text-gray-300 leading-relaxed border-t border-gray-800 space-y-1">
+                  <p><strong className="text-white">Athlete Development:</strong> Tuesday &amp; Thursday, 6:30–7:30pm</p>
+                  <p><strong className="text-white">After School Athlete Program:</strong> Monday &amp; Wednesday, 5:00–6:00pm (Elementary &amp; Middle School)</p>
+                  <p><strong className="text-white">Girls Player Development:</strong> May: Mon &amp; Fri 5–6:30pm · Jun–Jul: Mon &amp; Fri 1–2:30pm</p>
+                  <p className="text-gray-400 pt-1">Monthly camps, combine events, and leadership hikes held on weekends at Swift Sessions, Dripping Springs.</p>
                 </div>
-              </div>
+              </details>
 
-              <div className="bg-card border-border">
-                <div className="pt-6">
-                  <h3 className="font-display font-bold text-lg mb-2">What recruiting options does PolyRISE Athletix offer?</h3>
-                  <p className="text-white leading-relaxed">
-                    High school athletes can add Recruiting &amp; Exposure packages ($85–$150/month) for personalized coach outreach and social media spotlights, or subscribe to Recruit ($29.99/month) for PR-VERIFIED metrics, a shareable recruiting profile, and monthly recruiter spotlights.
-                  </p>
+              <details className="group bg-gray-900 border border-gray-800 rounded-xl overflow-hidden">
+                <summary className="flex items-center justify-between px-5 py-4 cursor-pointer text-white font-semibold text-sm hover:bg-gray-800 transition-colors [list-style:none] [&::-webkit-details-marker]:hidden">
+                  <span>What is PR-VERIFIED and why does it matter for recruiting?</span>
+                  <span className="text-gray-500 ml-4 shrink-0 transition-transform duration-200 group-open:rotate-180 text-xs select-none">▼</span>
+                </summary>
+                <div className="px-5 pb-4 pt-3 text-sm text-gray-300 leading-relaxed border-t border-gray-800">
+                  <p>PR-VERIFIED is our seal of authenticity. Coaches with NFL and collegiate experience run standardized on-site combine testing: 40-yard dash, vertical jump, broad jump, 5-10-5 shuttle, 3-cone drill, and position evaluations. No self-reported times — just real, verifiable numbers athletes can put on any recruiting profile with confidence that college coaches and scouts will trust.</p>
                 </div>
-              </div>
+              </details>
 
-              <div className="bg-card border-border">
-                <div className="pt-6">
-                  <h3 className="font-display font-bold text-lg mb-2">What is the training schedule?</h3>
-                  <p className="text-white leading-relaxed">
-                    Football Player Development runs Tuesday &amp; Thursday, 6:30–7:30pm. The After School Athlete Program runs Monday &amp; Wednesday, 5:00–6:00pm. Monthly camps, tryouts, and leadership events are held on weekends.
-                  </p>
+              <details className="group bg-gray-900 border border-gray-800 rounded-xl overflow-hidden">
+                <summary className="flex items-center justify-between px-5 py-4 cursor-pointer text-white font-semibold text-sm hover:bg-gray-800 transition-colors [list-style:none] [&::-webkit-details-marker]:hidden">
+                  <span>How does PolyRISE help my high schooler get recruited?</span>
+                  <span className="text-gray-500 ml-4 shrink-0 transition-transform duration-200 group-open:rotate-180 text-xs select-none">▼</span>
+                </summary>
+                <div className="px-5 pb-4 pt-3 text-sm text-gray-300 leading-relaxed border-t border-gray-800">
+                  <p>The <strong className="text-white">Recruit plan ($29.99/mo)</strong> includes a PR-VERIFIED shareable profile, Hudl integration, and monthly X spotlights to college recruiters. <strong className="text-white">HS Recruiting &amp; Exposure packages ($85–$150/mo)</strong> add personalized coach outreach, social media blasts, and 1-on-1 calls with PolyRISE staff. The Elite Recruit tier (launching 2026 season) adds quarterly development reports and college program fit analysis — join the waitlist on the plans page.</p>
                 </div>
-              </div>
+              </details>
 
-              <div className="bg-card border-border">
-                <div className="pt-6">
-                  <h3 className="font-display font-bold text-lg mb-2">Does PolyRISE Athletix have coaches with NFL experience?</h3>
-                  <p className="text-white leading-relaxed">
-                    Yes, PolyRISE Athletix has coaches with NFL experience on staff who provide coaching, film study, and combine testing across all programs.
-                  </p>
+              <details className="group bg-gray-900 border border-gray-800 rounded-xl overflow-hidden">
+                <summary className="flex items-center justify-between px-5 py-4 cursor-pointer text-white font-semibold text-sm hover:bg-gray-800 transition-colors [list-style:none] [&::-webkit-details-marker]:hidden">
+                  <span>Who are the coaches?</span>
+                  <span className="text-gray-500 ml-4 shrink-0 transition-transform duration-200 group-open:rotate-180 text-xs select-none">▼</span>
+                </summary>
+                <div className="px-5 pb-4 pt-3 text-sm text-gray-300 leading-relaxed border-t border-gray-800">
+                  <ul className="space-y-1.5">
+                    <li><strong className="text-white">Coach Garrett</strong> — 7 NFL seasons (Rams, Texans), 3 CFL seasons, drafted 2003 from SMU</li>
+                    <li><strong className="text-white">Coach Jordan</strong> — XFL Draft 2022, 2× Omaha Beef Champion, HCU WR Coach</li>
+                    <li><strong className="text-white">Coach Traves</strong> — Navy Safety &amp; LB, All-East teams 2011–12</li>
+                    <li><strong className="text-white">Coach John</strong> — Navy Football QB, Naval Academy graduate &amp; officer</li>
+                    <li><strong className="text-white">Coach Brayden</strong> — Baylor 2018–21, NFL Draft 2023, IFL All-Pro &amp; League Champion 2025</li>
+                  </ul>
                 </div>
-              </div>
+              </details>
 
-              <div className="bg-card border-border">
-                <div className="pt-6">
-                  <h3 className="font-display font-bold text-lg mb-2">What is SAQ and S&C training?</h3>
-                  <p className="text-white leading-relaxed">
-                    SAQ stands for Speed, Agility, and Quickness training - focused on improving footwork, reaction
-                    time, and movement efficiency. S&C stands for Strength and Conditioning - building physical power,
-                    endurance, and injury prevention through targeted exercises.
-                  </p>
-                </div>
-              </div>
             </div>
           </div>
         </div>

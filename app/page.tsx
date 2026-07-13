@@ -444,7 +444,7 @@ export default function HomePage() {
 
             <div className="bg-[#0f1117] border border-gray-800 rounded-2xl p-6 flex flex-col gap-4 hover:border-red-900/60 transition-colors">
               <p className="text-yellow-400 text-base tracking-widest">★★★★★</p>
-              <p className="text-gray-300 text-sm leading-relaxed italic flex-1">&ldquo;My son walked in as a quiet 7th grader who barely believed in himself. Eight months later he&apos;s faster, stronger, and leading drills. Coach Garrett and the staff didn&apos;t just train him — they built his character. This program is the real deal.&rdquo;</p>
+              <p className="text-gray-300 text-sm leading-relaxed italic flex-1">&ldquo;My son walked in as a quiet 7th grader who barely believed in himself. Eight months later he&apos;s faster, stronger, and leading drills. The PolyRISE Athletix staff didn&apos;t just train him — they built his character. This program is the real deal.&rdquo;</p>
               <div className="flex items-center gap-3 pt-3 border-t border-gray-800 mt-auto">
                 <div className="w-10 h-10 rounded-full bg-red-900/60 border border-red-700/40 flex items-center justify-center text-white font-bold text-xs shrink-0">TM</div>
                 <div>

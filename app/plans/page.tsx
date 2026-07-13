@@ -151,7 +151,7 @@ export default function PlansPage() {
 
           <div className="bg-red-950/40 border-y border-red-900/40 px-7 py-4">
             <p className="text-red-200 text-sm leading-relaxed italic">&ldquo;College coaches don&apos;t have time to find athletes — they need athletes to come to them with verified numbers and a professional profile. That&apos;s exactly what Recruit gives your child.&rdquo;</p>
-            <p className="text-red-400 text-xs mt-2 font-semibold">— Coach Kevin Garrett, Former NFL</p>
+            <p className="text-red-400 text-xs mt-2 font-semibold">— PolyRISE Athletix Staff</p>
           </div>
 
           <div className="border-t border-gray-800 px-7 py-5 flex-1 space-y-3">

@@ -26,6 +26,9 @@ const PROGRAMS_DATA: Record<string, { name: string; price: number; priceLabel: s
   "afterschool":             { name: "After School Athlete Program",              price: 280,   priceLabel: "From $240/mo", billing: "one_time" },
   "afterschool-monthly":     { name: "After School Athlete Program — Month-to-Month",     price: 280, priceLabel: "$280",     billing: "one_time"  },
   "afterschool-6mo":         { name: "After School Athlete Program — 6-Month Commitment", price: 240, priceLabel: "$240/mo",  billing: "monthly"   },
+  // Tackle Sessions (Aug–Sep recurring)
+  "tackle-session-single":   { name: "Tackle Sessions — Per Session",             price: 40,    priceLabel: "$40",       billing: "one_time"  },
+  "tackle-session-monthly":  { name: "Tackle Sessions — Monthly",                 price: 125,   priceLabel: "$125/mo",   billing: "monthly"   },
   // Summer / Athletic Camp
   "summer-ms":               { name: "Athletic Camp",                             price: 265,   priceLabel: "$265",      billing: "one_time"  },
   // Events
@@ -64,6 +67,13 @@ const CATEGORIES = [
     label: "After School Athlete Program", badge: "bg-teal-900 text-teal-300", color: "border-teal-800 hover:border-teal-500",
     programs: [
       { id: "afterschool", desc: "Monday & Wednesday · 6:00–7:00pm · 1034 Canyon Bend Dr · Open to Elementary & Middle School athletes · Month-to-Month $280 or 6-Month $240/mo" },
+    ],
+  },
+  {
+    label: "Tackle Sessions", badge: "bg-orange-900 text-orange-300", color: "border-orange-800 hover:border-orange-500",
+    programs: [
+      { id: "tackle-session-single",  desc: "Pay per session · August – September · Once a week · Tackling fundamentals & live reps coached by NFL-experienced staff" },
+      { id: "tackle-session-monthly", desc: "Monthly subscription · August – September · Once a week · Best value — covers all sessions for the month", highlight: "BEST VALUE" },
     ],
   },
   {

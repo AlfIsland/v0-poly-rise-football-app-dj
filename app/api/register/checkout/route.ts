@@ -21,6 +21,9 @@ export const PROGRAMS: Record<string, { name: string; price: number; billing: "o
   "hs-recruiting-elite":     { name: "HS Recruiting — Elite Exposure",                 price: 150,   billing: "monthly"  },
   "hs-recruiting-pro":       { name: "HS Recruiting — Pro Exposure",                   price: 125,   billing: "monthly"  },
   "hs-recruiting-basic":     { name: "HS Recruiting — Basic Exposure",                 price: 85,    billing: "monthly"  },
+  // Tackle Sessions (Aug–Sep)
+  "tackle-session-single":   { name: "Tackle Sessions — Per Session",                  price: 40,    billing: "one_time" },
+  "tackle-session-monthly":  { name: "Tackle Sessions — Monthly",                      price: 125,   billing: "monthly"  },
   // Summer / Athletic Camp
   "summer-ms":               { name: "Athletic Camp",                                  price: 265,   billing: "one_time" },
   // After School Athlete Program

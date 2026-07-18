@@ -32,6 +32,7 @@ Player Development — $350/month (MOST POPULAR): 8 sessions/month, SAQ, S&C, fo
 360 Elite — $500/month (ELITE): Everything in Player Development PLUS one-on-one NFL-coach sessions, recruiting profile, 7 college coach email blasts/month, weekly film study, unlimited camps, college visits, NIL & financial literacy classes, sports medicine/nutrition discounts.
 Girls Player Development — $250/month: 2 days/week. May: Mon & Fri 5-6:30pm. June/July: Mon & Fri 1-2:30pm.
 Group Training — Pricing by inquiry: Contact Coach at (817) 658-3300 or https://wa.me/18176583300 for pricing and availability.
+Tackle Sessions — August–September, once a week: $40/session (pay per session) or $125/month (best value). Tackling fundamentals, technique, and live reps coached by NFL-experienced staff.
 Summer Camp — $265/month (June & July, max 20 spots): K-5 Mon-Thu 8-10am, Middle School Mon-Thu 10am-12pm, High School Mon-Thu 2-4pm.
 
 CAMPS & EVENTS:

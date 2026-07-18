@@ -28,7 +28,7 @@ const PROGRAMS_DATA: Record<string, { name: string; price: number; priceLabel: s
   "afterschool-6mo":         { name: "After School Athlete Program — 6-Month Commitment", price: 240, priceLabel: "$240/mo",  billing: "monthly"   },
   // Tackle Sessions (Aug–Sep recurring)
   "tackle-session-single":   { name: "Tackle Sessions — Per Session",             price: 40,    priceLabel: "$40",       billing: "one_time"  },
-  "tackle-session-monthly":  { name: "Tackle Sessions — Monthly",                 price: 125,   priceLabel: "$125/mo",   billing: "monthly"   },
+  "tackle-session-monthly":  { name: "Tackle Sessions — Monthly",                 price: 125,   priceLabel: "$125",      billing: "one_time"  },
   // Summer / Athletic Camp
   "summer-ms":               { name: "Athletic Camp",                             price: 265,   priceLabel: "$265",      billing: "one_time"  },
   // Events
@@ -73,7 +73,7 @@ const CATEGORIES = [
     label: "Tackle Sessions", badge: "bg-orange-900 text-orange-300", color: "border-orange-800 hover:border-orange-500",
     programs: [
       { id: "tackle-session-single",  desc: "Pay per session · August – September · Once a week · Tackling fundamentals & live reps coached by NFL-experienced staff" },
-      { id: "tackle-session-monthly", desc: "Monthly subscription · August – September · Once a week · Best value — covers all sessions for the month", highlight: "BEST VALUE" },
+      { id: "tackle-session-monthly", desc: "One-time monthly payment · No auto-draft · August – September · Once a week · Best value — covers all sessions for the month", highlight: "BEST VALUE" },
     ],
   },
   {

@@ -256,7 +256,7 @@ export default function HomePage() {
                 </div>
                 <div className="space-y-1.5 border-t border-gray-800 pt-2.5">
                   <div className="flex justify-between text-xs"><span className="text-gray-300">Per Session</span><span className="font-bold text-white">$40</span></div>
-                  <div className="flex justify-between text-xs"><span className="text-gray-300">Monthly <span className="text-orange-400">· Best Value</span></span><span className="font-bold text-white">$125/mo</span></div>
+                  <div className="flex justify-between text-xs"><span className="text-gray-300">Full Month <span className="text-orange-400">· Best Value · No auto-draft</span></span><span className="font-bold text-white">$125</span></div>
                 </div>
                 <Link href="/register?program=tackle-session-monthly" className="mt-auto block text-center text-xs font-bold bg-red-600 hover:bg-red-700 text-white py-2 rounded-lg transition-colors">Register</Link>
               </div>

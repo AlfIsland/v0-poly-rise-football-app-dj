@@ -157,13 +157,13 @@ export default function HomePage() {
                 <Link href="/register?program=afterschool" className="mt-auto block text-center text-xs font-bold bg-red-600 hover:bg-red-700 text-white py-2 rounded-lg transition-colors">Register</Link>
               </div>
 
-              {/* Group Training */}
+              {/* Group & Private Training */}
               <div className="bg-gray-900 border border-gray-800 rounded-xl p-4 flex flex-col gap-3 hover:border-gray-600 transition-colors">
                 <div>
-                  <span className="inline-block text-xs font-bold px-2 py-0.5 rounded-full bg-blue-900/60 text-blue-300 mb-2">Group Training</span>
-                  <h4 className="text-sm font-bold text-white">Group Training</h4>
+                  <span className="inline-block text-xs font-bold px-2 py-0.5 rounded-full bg-blue-900/60 text-blue-300 mb-2">Group &amp; Private</span>
+                  <h4 className="text-sm font-bold text-white">Group &amp; Private Training</h4>
                   <p className="text-xs text-gray-400 mt-1 leading-relaxed">
-                    DM Coach at{" "}
+                    Group sessions &amp; 1-on-1 private training available. DM Coach at{" "}
                     <a href="tel:+18176583300" className="text-white hover:text-red-400 transition-colors">(817) 658-3300</a>
                     {" "}for pricing and info.
                   </p>

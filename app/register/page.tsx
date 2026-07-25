@@ -6,7 +6,7 @@ import Image from "next/image"
 
 const PROGRAMS_DATA: Record<string, { name: string; price: number; priceLabel: string; billing: "one_time" | "monthly" }> = {
   // Football Player Development tiers
-  "player-dev":              { name: "Football Player Development — Monthly",           price: 200,  priceLabel: "$200/mo",          billing: "one_time" },
+  "player-dev":              { name: "Football Player Development — Monthly",           price: 250,  priceLabel: "$250/mo",          billing: "one_time" },
   "player-dev-6mo":          { name: "Football Player Development — 6-Month",          price: 280,  priceLabel: "$280/mo (6-mo)",   billing: "monthly"  },
   "player-dev-annual":       { name: "Football Player Development — Annual",           price: 250,  priceLabel: "$250/mo (annual)", billing: "monthly"  },
   "player-dev-1day":         { name: "Football Player Development — Once a Week",      price: 110,  priceLabel: "$110/mo",          billing: "monthly"  },
@@ -23,8 +23,8 @@ const PROGRAMS_DATA: Record<string, { name: string; price: number; priceLabel: s
   "hs-recruiting-pro":       { name: "HS Recruiting — Pro Exposure",              price: 125,   priceLabel: "$125/mo",   billing: "monthly"   },
   "hs-recruiting-basic":     { name: "HS Recruiting — Basic Exposure",            price: 85,    priceLabel: "$85/mo",    billing: "monthly"   },
   // After School & Girls Development
-  "afterschool":             { name: "After School & Girls Development",          price: 200,   priceLabel: "$200/mo",  billing: "one_time" },
-  "afterschool-monthly":     { name: "After School & Girls Development",          price: 200,   priceLabel: "$200/mo",  billing: "one_time" },
+  "afterschool":             { name: "After School & Girls Development",          price: 250,   priceLabel: "$250/mo",  billing: "one_time" },
+  "afterschool-monthly":     { name: "After School & Girls Development",          price: 250,   priceLabel: "$250/mo",  billing: "one_time" },
   // Tackle Sessions (Aug–Sep recurring)
   "tackle-session-single":   { name: "Tackle Sessions — Per Session",             price: 40,    priceLabel: "$40",       billing: "one_time"  },
   "tackle-session-monthly":  { name: "Tackle Sessions — Monthly",                 price: 125,   priceLabel: "$125",      billing: "one_time"  },
@@ -63,7 +63,7 @@ const CATEGORIES = [
   {
     label: "After School & Girls Development", badge: "bg-teal-900 text-teal-300", color: "border-teal-800 hover:border-teal-500",
     programs: [
-      { id: "afterschool", desc: "Tuesday & Thursday · 5:30–6:30pm · Open to Elementary, Middle School & Girl athletes · $200/mo" },
+      { id: "afterschool", desc: "Tuesday & Thursday · 5:30–6:30pm · Open to Elementary, Middle School & Girl athletes · $250/mo" },
     ],
   },
   {

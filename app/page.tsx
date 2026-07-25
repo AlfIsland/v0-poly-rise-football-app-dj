@@ -144,37 +144,17 @@ export default function HomePage() {
                 <Link href="/register?program=player-dev" className="mt-auto block text-center text-xs font-bold bg-red-600 hover:bg-red-700 text-white py-2 rounded-lg transition-colors">Register</Link>
               </div>
 
-              {/* After School Athlete Program */}
+              {/* After School & Girls Development */}
               <div className="bg-gray-900 border border-gray-800 rounded-xl p-4 flex flex-col gap-3 hover:border-gray-600 transition-colors">
                 <div>
-                  <span className="inline-block text-xs font-bold px-2 py-0.5 rounded-full bg-teal-900/60 text-teal-300 mb-2">Afterschool</span>
-                  <h4 className="text-sm font-bold text-white">After School Athlete Program</h4>
-                  <p className="text-xs text-gray-400 mt-1 leading-relaxed">Tuesday &amp; Thursday · 5:30–6:30pm · Open to Elementary &amp; Middle School athletes</p>
+                  <span className="inline-block text-xs font-bold px-2 py-0.5 rounded-full bg-teal-900/60 text-teal-300 mb-2">Afterschool &amp; Girls</span>
+                  <h4 className="text-sm font-bold text-white">After School &amp; Girls Development</h4>
+                  <p className="text-xs text-gray-400 mt-1 leading-relaxed">Tuesday &amp; Thursday · 5:30–6:30pm · Open to Elementary, Middle School &amp; Girl athletes</p>
                 </div>
                 <div className="space-y-1.5 border-t border-gray-800 pt-2.5">
-                  <div className="flex justify-between text-xs"><span className="text-gray-300">Month-to-Month</span><span className="font-bold text-white">$280/mo</span></div>
-                  <p className="text-[11px] text-gray-500">No subscription. Pay as you go.</p>
-                  <div className="flex justify-between items-center text-xs mt-0.5">
-                    <span className="text-gray-300 flex items-center gap-1.5">6-Month Commitment <span className="bg-teal-800 text-teal-200 text-[10px] font-bold px-1.5 py-0.5 rounded-full">Best Value</span></span>
-                    <span className="font-bold text-white">$240/mo</span>
-                  </div>
-                  <p className="text-[11px] text-gray-500">Save $40/mo</p>
+                  <div className="flex justify-between text-xs"><span className="text-gray-300">Monthly</span><span className="font-bold text-white">$200/mo</span></div>
                 </div>
                 <Link href="/register?program=afterschool" className="mt-auto block text-center text-xs font-bold bg-red-600 hover:bg-red-700 text-white py-2 rounded-lg transition-colors">Register</Link>
-              </div>
-
-              {/* Girls Player Development */}
-              <div className="bg-gray-900 border border-gray-800 rounded-xl p-4 flex flex-col gap-3 hover:border-gray-600 transition-colors">
-                <div>
-                  <span className="inline-block text-xs font-bold px-2 py-0.5 rounded-full bg-pink-900/60 text-pink-300 mb-2">Girls Program</span>
-                  <h4 className="text-sm font-bold text-white">Girls Player Development</h4>
-                  <p className="text-xs text-gray-400 mt-1 leading-relaxed">May: Mon &amp; Fri 5–6:30pm · Jun–Jul: Mon &amp; Fri 1–2:30pm · Add Wed for more reps</p>
-                </div>
-                <div className="space-y-1.5 border-t border-gray-800 pt-2.5">
-                  <div className="flex justify-between text-xs"><span className="text-gray-300">2 Days/Week · Mon &amp; Fri</span><span className="font-bold text-white">$250/mo</span></div>
-                  <div className="flex justify-between text-xs"><span className="text-gray-300">3 Days/Week · Mon, Wed &amp; Fri</span><span className="font-bold text-white">$315/mo</span></div>
-                </div>
-                <Link href="/register?program=girls-dev" className="mt-auto block text-center text-xs font-bold bg-red-600 hover:bg-red-700 text-white py-2 rounded-lg transition-colors">Register</Link>
               </div>
 
               {/* Group Training */}
@@ -683,7 +663,7 @@ export default function HomePage() {
                   <span className="text-gray-500 ml-4 shrink-0 transition-transform duration-200 group-open:rotate-180 text-xs select-none">▼</span>
                 </summary>
                 <div className="px-5 pb-4 pt-3 text-sm text-gray-300 leading-relaxed border-t border-gray-800">
-                  <p>Athlete Development (Tue &amp; Thu, 6:30–7:30pm) starts at <strong className="text-white">$200/mo</strong>, or as low as $250/mo on an annual plan. After School Athlete Program (Tue &amp; Thu, 5:30–6:30pm) is <strong className="text-white">$280/mo</strong> month-to-month or $240/mo on a 6-month commitment. Tackle Sessions (Aug–Sep, once/week) are <strong className="text-white">$40/session</strong> or $125/mo. Girls Player Development runs $250–$315/mo. HS Recruiting &amp; Exposure packages are $85–$150/mo. Athlete Tracking plans start at <strong className="text-white">$9.99/mo</strong>.</p>
+                  <p>Athlete Development (Tue &amp; Thu, 6:30–7:30pm) starts at <strong className="text-white">$200/mo</strong>, or as low as $250/mo on an annual plan. After School &amp; Girls Development (Tue &amp; Thu, 5:30–6:30pm) is <strong className="text-white">$200/mo</strong>. Tackle Sessions (Aug–Sep, once/week) are <strong className="text-white">$40/session</strong> or $125/mo. Girls Player Development runs $250–$315/mo. HS Recruiting &amp; Exposure packages are $85–$150/mo. Athlete Tracking plans start at <strong className="text-white">$9.99/mo</strong>.</p>
                 </div>
               </details>
 
@@ -694,9 +674,8 @@ export default function HomePage() {
                 </summary>
                 <div className="px-5 pb-4 pt-3 text-sm text-gray-300 leading-relaxed border-t border-gray-800 space-y-1">
                   <p><strong className="text-white">Athlete Development:</strong> Tuesday &amp; Thursday, 6:30–7:30pm</p>
-                  <p><strong className="text-white">After School Athlete Program:</strong> Tuesday &amp; Thursday, 5:30–6:30pm (Elementary &amp; Middle School)</p>
+                  <p><strong className="text-white">After School &amp; Girls Development:</strong> Tuesday &amp; Thursday, 5:30–6:30pm (Elementary, Middle School &amp; Girls)</p>
                   <p><strong className="text-white">Tackle Sessions:</strong> Once a week · August – September</p>
-                  <p><strong className="text-white">Girls Player Development:</strong> May: Mon &amp; Fri 5–6:30pm · Jun–Jul: Mon &amp; Fri 1–2:30pm</p>
                   <p className="text-gray-400 pt-1">Monthly camps, combine events, and leadership hikes held on weekends at Swift Sessions, Dripping Springs.</p>
                 </div>
               </details>

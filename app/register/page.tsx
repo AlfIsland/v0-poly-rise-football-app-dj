@@ -22,10 +22,9 @@ const PROGRAMS_DATA: Record<string, { name: string; price: number; priceLabel: s
   "hs-recruiting-elite":     { name: "HS Recruiting — Elite Exposure",            price: 150,   priceLabel: "$150/mo",   billing: "monthly"   },
   "hs-recruiting-pro":       { name: "HS Recruiting — Pro Exposure",              price: 125,   priceLabel: "$125/mo",   billing: "monthly"   },
   "hs-recruiting-basic":     { name: "HS Recruiting — Basic Exposure",            price: 85,    priceLabel: "$85/mo",    billing: "monthly"   },
-  // After School Athlete Program
-  "afterschool":             { name: "After School Athlete Program",              price: 280,   priceLabel: "From $240/mo", billing: "one_time" },
-  "afterschool-monthly":     { name: "After School Athlete Program — Month-to-Month",     price: 280, priceLabel: "$280",     billing: "one_time"  },
-  "afterschool-6mo":         { name: "After School Athlete Program — 6-Month Commitment", price: 240, priceLabel: "$240/mo",  billing: "monthly"   },
+  // After School & Girls Development
+  "afterschool":             { name: "After School & Girls Development",          price: 200,   priceLabel: "$200/mo",  billing: "one_time" },
+  "afterschool-monthly":     { name: "After School & Girls Development",          price: 200,   priceLabel: "$200/mo",  billing: "one_time" },
   // Tackle Sessions (Aug–Sep recurring)
   "tackle-session-single":   { name: "Tackle Sessions — Per Session",             price: 40,    priceLabel: "$40",       billing: "one_time"  },
   "tackle-session-monthly":  { name: "Tackle Sessions — Monthly",                 price: 125,   priceLabel: "$125",      billing: "one_time"  },
@@ -49,8 +48,6 @@ const CATEGORIES = [
       { id: "player-dev-annual", desc: "Annual commitment billed at $250/mo · Save $75/mo vs. month-to-month · Tue & Thu 6:30–7:30pm · 12-month subscription required" },
       { id: "player-dev-1day",   desc: "Once a week (Tue or Thu) · Ideal for athletes with limited availability" },
       { id: "multi-sport-dev",   desc: "Youth sports development — wrestling, girls flag football, soccer, baseball, softball & more · Building well-rounded athletes" },
-      { id: "girls-dev",         desc: "2 days/week · May: Mon & Fri 5–6:30pm · June–July: Mon & Fri 1–2:30pm" },
-      { id: "girls-dev-3day",    desc: "3 days/week · Mon, Wed & Fri · More reps and faster development" },
       { id: "drop-in-1day",      desc: "Single day training session · Try a session before committing to a full program" },
       { id: "drop-in-2day",      desc: "2 day training package · Add a second day for just $35 more" },
     ],
@@ -64,9 +61,9 @@ const CATEGORIES = [
     ],
   },
   {
-    label: "After School Athlete Program", badge: "bg-teal-900 text-teal-300", color: "border-teal-800 hover:border-teal-500",
+    label: "After School & Girls Development", badge: "bg-teal-900 text-teal-300", color: "border-teal-800 hover:border-teal-500",
     programs: [
-      { id: "afterschool", desc: "Tuesday & Thursday · 5:30–6:30pm · Open to Elementary & Middle School athletes · Month-to-Month $280 or 6-Month $240/mo" },
+      { id: "afterschool", desc: "Tuesday & Thursday · 5:30–6:30pm · Open to Elementary, Middle School & Girl athletes · $200/mo" },
     ],
   },
   {
@@ -127,8 +124,6 @@ function RegisterPage() {
   const [subscriptionAcknowledged, setSubscriptionAcknowledged] = useState(false)
   const [subscriptionExpanded, setSubscriptionExpanded] = useState(false)
   const [recruitingMonths, setRecruitingMonths] = useState<3 | 6 | 12>(3)
-  const [afterschoolPlan, setAfterschoolPlan] = useState<"monthly" | "6mo">("6mo")
-  const [afterschoolBillingAuthorized, setAfterschoolBillingAuthorized] = useState(false)
 
   const billingMonthOptions = (() => {
     const opts: string[] = []
@@ -161,12 +156,9 @@ function RegisterPage() {
   }
 
   const hasAfterschool = cart.includes("afterschool")
-  const cartTotal = cart.reduce((sum, id) => {
-    if (id === "afterschool") return sum + (afterschoolPlan === "6mo" ? 240 : 280)
-    return sum + (PROGRAMS_DATA[id]?.price ?? 0)
-  }, 0)
+  const cartTotal = cart.reduce((sum, id) => sum + (PROGRAMS_DATA[id]?.price ?? 0), 0)
   const hasOtherMonthly = cart.some(id => id !== "afterschool" && PROGRAMS_DATA[id]?.billing === "monthly")
-  const hasMonthly = hasOtherMonthly || (hasAfterschool && afterschoolPlan === "6mo")
+  const hasMonthly = hasOtherMonthly
   const hasRecruiting = cart.some(id => id.startsWith("hs-recruiting"))
 
   const validateCode = async () => {
@@ -184,16 +176,8 @@ function RegisterPage() {
 
   const handleCheckout = async () => {
     if (!cart.length || !playerName || !parentName || !email || !phone) return
-    if (hasAfterschool && afterschoolPlan === "6mo" && !afterschoolBillingAuthorized) {
-      setError("Please authorize the 6-month billing, or switch to the Month-to-Month option.")
-      return
-    }
     setLoading(true); setError("")
-    const actualCart = cart.map(id =>
-      id === "afterschool"
-        ? (afterschoolPlan === "6mo" ? "afterschool-6mo" : "afterschool-monthly")
-        : id
-    )
+    const actualCart = cart.map(id => id === "afterschool" ? "afterschool-monthly" : id)
     try {
       const res = await fetch("/api/register/checkout", {
         method: "POST",
@@ -310,9 +294,8 @@ function RegisterPage() {
             <div className="space-y-2">
               {cart.map(id => {
                 const prog = PROGRAMS_DATA[id]
-                const isAs = id === "afterschool"
-                const displayBilling = isAs ? (afterschoolPlan === "6mo" ? "monthly" : "one_time") : prog?.billing
-                const displayPrice = isAs ? (afterschoolPlan === "6mo" ? "$240/mo" : "$280") : prog?.priceLabel
+                const displayBilling = prog?.billing
+                const displayPrice = prog?.priceLabel
                 return (
                   <div key={id} className="flex items-center justify-between bg-gray-800 rounded-xl px-4 py-3">
                     <div>
@@ -333,11 +316,7 @@ function RegisterPage() {
                 <p className="text-white font-bold">${cartTotal}{hasMonthly ? "/mo" : ""}</p>
               </div>
               {(() => {
-                const actualBillings = cart.map(id =>
-                  id === "afterschool"
-                    ? (afterschoolPlan === "6mo" ? "monthly" : "one_time")
-                    : PROGRAMS_DATA[id]?.billing
-                )
+                const actualBillings = cart.map(id => PROGRAMS_DATA[id]?.billing)
                 return actualBillings.includes("monthly") && actualBillings.includes("one_time") && (
                   <div className="bg-blue-950 border border-blue-800 rounded-xl px-4 py-3 text-blue-300 text-xs">
                     Your cart has both monthly and one-time items. You will complete <strong>2 payments</strong> — first your monthly subscription, then your one-time charges.
@@ -345,55 +324,6 @@ function RegisterPage() {
                 )
               })()}
 
-              {/* After School Athlete Program — Payment Option Selector */}
-              {hasAfterschool && (
-                <div className="bg-teal-950/40 border border-teal-800 rounded-xl px-4 py-4 space-y-3">
-                  <p className="text-xs font-bold text-teal-400 uppercase tracking-widest">After School Athlete Program — Payment Option</p>
-
-                  {/* Option A: Month-to-Month */}
-                  <button
-                    type="button"
-                    onClick={() => { setAfterschoolPlan("monthly"); setAfterschoolBillingAuthorized(false) }}
-                    className={`w-full rounded-xl border-2 p-3.5 text-left transition-all ${afterschoolPlan === "monthly" ? "border-teal-500 bg-teal-950" : "border-gray-700 bg-gray-800 hover:border-gray-500"}`}
-                  >
-                    <div className="flex justify-between items-center">
-                      <p className={`text-sm font-bold ${afterschoolPlan === "monthly" ? "text-teal-300" : "text-white"}`}>Month-to-Month — $280/mo</p>
-                      {afterschoolPlan === "monthly" && <span className="text-xs text-teal-400 font-bold">✓ Selected</span>}
-                    </div>
-                    <p className="text-xs text-gray-400 mt-1">One-time payment. No subscription, no auto-draft. Covers one month of the After School Athlete Program. Re-register each month.</p>
-                  </button>
-
-                  {/* Option B: 6-Month Commitment (default) */}
-                  <button
-                    type="button"
-                    onClick={() => setAfterschoolPlan("6mo")}
-                    className={`w-full rounded-xl border-2 p-3.5 text-left transition-all ${afterschoolPlan === "6mo" ? "border-teal-500 bg-teal-950" : "border-gray-700 bg-gray-800 hover:border-gray-500"}`}
-                  >
-                    <div className="flex justify-between items-center gap-2">
-                      <p className={`text-sm font-bold ${afterschoolPlan === "6mo" ? "text-teal-300" : "text-white"}`}>6-Month Commitment — $240/mo</p>
-                      <span className="text-xs bg-teal-700 text-teal-100 px-2 py-0.5 rounded-full font-bold whitespace-nowrap shrink-0">Best Value — Save $40/mo</span>
-                    </div>
-                    <p className="text-xs text-gray-400 mt-1">$240/mo auto-pay for 6 months. Your spot is reserved for the full term.</p>
-                  </button>
-
-                  {afterschoolPlan === "monthly" ? (
-                    <p className="text-xs text-gray-400 bg-gray-800 rounded-lg px-3 py-2.5">One-time charge of $280. Your card will not be stored or billed again.</p>
-                  ) : (
-                    <label className="flex items-start gap-3 cursor-pointer group">
-                      <input
-                        type="checkbox"
-                        checked={afterschoolBillingAuthorized}
-                        onChange={e => setAfterschoolBillingAuthorized(e.target.checked)}
-                        className="mt-0.5 w-4 h-4 accent-teal-600 cursor-pointer shrink-0"
-                      />
-                      <span className="text-sm text-white leading-snug group-hover:text-gray-200 transition-colors">
-                        I authorize PolyRISE Athletix to bill my card $240 on the 1st of each month for a 6-month term. I have read and agree to the{" "}
-                        <button type="button" onClick={() => setSubscriptionExpanded(true)} className="text-teal-400 underline hover:text-teal-300">Subscription &amp; Billing Terms</button>.
-                      </span>
-                    </label>
-                  )}
-                </div>
-              )}
             </div>
 
             {/* Recruiting Subscription Length */}
@@ -627,7 +557,7 @@ function RegisterPage() {
             {error && <p className="text-red-400 text-sm bg-red-950 border border-red-900 rounded-lg px-3 py-2">{error}</p>}
 
             <button onClick={handleCheckout}
-              disabled={!cart.length || !playerName || !parentName || !email || !phone || !waiverAccepted || (hasOtherMonthly && !subscriptionAcknowledged) || (hasAfterschool && afterschoolPlan === "6mo" && !afterschoolBillingAuthorized) || loading}
+              disabled={!cart.length || !playerName || !parentName || !email || !phone || !waiverAccepted || (hasOtherMonthly && !subscriptionAcknowledged) || loading}
               className="w-full bg-red-600 hover:bg-red-700 disabled:bg-gray-700 disabled:cursor-not-allowed text-white font-bold rounded-xl py-3 transition-colors text-sm">
               {loading ? "Setting up..." : `Pay $${discountResult?.valid ? cartTotal - (discountResult.savings ?? 0) : cartTotal}${hasMonthly ? "/mo" : ""} →`}
             </button>

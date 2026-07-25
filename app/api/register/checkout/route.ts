@@ -26,9 +26,8 @@ export const PROGRAMS: Record<string, { name: string; price: number; billing: "o
   "tackle-session-monthly":  { name: "Tackle Sessions — Monthly",                      price: 125,   billing: "one_time" },
   // Summer / Athletic Camp
   "summer-ms":               { name: "Athletic Camp",                                  price: 265,   billing: "one_time" },
-  // After School Athlete Program
-  "afterschool-monthly":     { name: "After School Athlete Program — Month-to-Month",        price: 280,   billing: "one_time" },
-  "afterschool-6mo":         { name: "After School Athlete Program — 6-Month Commitment",    price: 240,   billing: "monthly"  },
+  // After School & Girls Development
+  "afterschool-monthly":     { name: "After School & Girls Development",                     price: 200,   billing: "one_time" },
   // Events
   "combine":                 { name: "Combine Metrics Camp",                           price: 25,    billing: "one_time" },
   "tackling-camp":           { name: "Tackling Camp",                                  price: 25,    billing: "one_time" },

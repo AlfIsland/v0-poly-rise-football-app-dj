@@ -66,7 +66,7 @@ const CATEGORIES = [
   {
     label: "After School Athlete Program", badge: "bg-teal-900 text-teal-300", color: "border-teal-800 hover:border-teal-500",
     programs: [
-      { id: "afterschool", desc: "Monday & Wednesday · 6:00–7:00pm · 1034 Canyon Bend Dr · Open to Elementary & Middle School athletes · Month-to-Month $280 or 6-Month $240/mo" },
+      { id: "afterschool", desc: "Tuesday & Thursday · 5:30–6:30pm · Open to Elementary & Middle School athletes · Month-to-Month $280 or 6-Month $240/mo" },
     ],
   },
   {

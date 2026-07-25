@@ -247,7 +247,7 @@ export default function HomePage() {
                   <p className="text-xs text-gray-400 mt-1 leading-relaxed">Proper tackling technique &amp; fundamentals coached by NFL-experienced staff</p>
                 </div>
                 <div className="border-t border-gray-800 pt-2.5">
-                  <div className="flex justify-between text-xs"><span className="text-gray-300">July 25 · 9:00am · Dripping Springs</span><span className="font-bold text-white">$25</span></div>
+                  <div className="flex justify-between text-xs"><span className="text-gray-300">Dripping Springs</span><span className="font-bold text-white">$25</span></div>
                 </div>
                 <Link href="/register?program=tackling-camp" className="mt-auto block text-center text-xs font-bold bg-red-600 hover:bg-red-700 text-white py-2 rounded-lg transition-colors">Register</Link>
               </div>

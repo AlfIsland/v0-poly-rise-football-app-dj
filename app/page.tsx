@@ -139,8 +139,6 @@ export default function HomePage() {
                 </div>
                 <div className="space-y-1.5 border-t border-gray-800 pt-2.5">
                   <div className="flex justify-between text-xs"><span className="text-gray-300">Monthly</span><span className="font-bold text-white">$200/mo</span></div>
-                  <div className="flex justify-between text-xs"><span className="text-gray-300">6-Month <span className="text-red-400">· Save $45/mo</span></span><span className="font-bold text-white">$280/mo</span></div>
-                  <div className="flex justify-between text-xs"><span className="text-gray-300">Annual (12-mo)</span><span className="font-bold text-white">$250/mo</span></div>
                   <div className="flex justify-between text-xs"><span className="text-gray-300">Once a Week</span><span className="font-bold text-white">$110/mo</span></div>
                 </div>
                 <Link href="/register?program=player-dev" className="mt-auto block text-center text-xs font-bold bg-red-600 hover:bg-red-700 text-white py-2 rounded-lg transition-colors">Register</Link>

@@ -29,7 +29,7 @@ export const PROGRAMS: Record<string, { name: string; price: number; billing: "o
   // After School & Girls Development
   "afterschool-monthly":     { name: "After School & Girls Development",                     price: 250,   billing: "one_time" },
   // Events
-  "combine":                 { name: "Combine Metrics Camp",                           price: 25,    billing: "one_time" },
+  "combine":                 { name: "Combine Metrics Camp",                           price: 40,    billing: "one_time" },
   "tackling-camp":           { name: "Tackling Camp",                                  price: 25,    billing: "one_time" },
   "hike":                    { name: "Leadership & Mentorship Hike",                   price: 25,    billing: "one_time" },
   // Athlete Tracking & Recruiting Profiles

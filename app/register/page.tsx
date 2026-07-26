@@ -31,7 +31,7 @@ const PROGRAMS_DATA: Record<string, { name: string; price: number; priceLabel: s
   // Summer / Athletic Camp
   "summer-ms":               { name: "Athletic Camp",                             price: 265,   priceLabel: "$265",      billing: "one_time"  },
   // Events
-  "combine":                 { name: "Combine Metrics Camp",                      price: 25,    priceLabel: "$25",       billing: "one_time"  },
+  "combine":                 { name: "Combine Metrics Camp",                      price: 40,    priceLabel: "$40",       billing: "one_time"  },
   "tackling-camp":           { name: "Tackling Camp",                             price: 25,    priceLabel: "$25",       billing: "one_time"  },
   "hike":                    { name: "Leadership & Mentorship Hike",              price: 25,    priceLabel: "$25",       billing: "one_time"  },
   // Athlete Tracking & Recruiting Profiles

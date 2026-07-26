@@ -260,7 +260,7 @@ export default function HomePage() {
                   <p className="text-xs text-gray-400 mt-1 leading-relaxed">Professional combine events · H.S. athletes record official metrics &amp; earn PR-VERIFIED seal</p>
                 </div>
                 <div className="border-t border-gray-800 pt-2.5">
-                  <div className="flex justify-between text-xs"><span className="text-gray-300">Camp Registration</span><span className="font-bold text-white">$25</span></div>
+                  <div className="flex justify-between text-xs"><span className="text-gray-300">Camp Registration</span><span className="font-bold text-white">$40</span></div>
                 </div>
                 <Link href="/register?program=combine" className="mt-auto block text-center text-xs font-bold bg-red-600 hover:bg-red-700 text-white py-2 rounded-lg transition-colors">Register</Link>
               </div>

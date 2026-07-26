@@ -9,7 +9,7 @@ const PROGRAMS_DATA: Record<string, { name: string; price: number; priceLabel: s
   "player-dev":              { name: "Football Player Development — Monthly",           price: 250,  priceLabel: "$250/mo",          billing: "one_time" },
   "player-dev-6mo":          { name: "Football Player Development — 6-Month",          price: 280,  priceLabel: "$280/mo (6-mo)",   billing: "monthly"  },
   "player-dev-annual":       { name: "Football Player Development — Annual",           price: 250,  priceLabel: "$250/mo (annual)", billing: "monthly"  },
-  "player-dev-1day":         { name: "Football Player Development — Once a Week",      price: 110,  priceLabel: "$110/mo",          billing: "monthly"  },
+  "player-dev-1day":         { name: "Football Player Development — Once a Week",      price: 125,  priceLabel: "$125/mo",          billing: "monthly"  },
   // Multi-Sport Development
   "multi-sport-dev":         { name: "Multi-Sport Development",                    price: 265,   priceLabel: "$265/mo",   billing: "monthly"   },
   // Girls Player Development

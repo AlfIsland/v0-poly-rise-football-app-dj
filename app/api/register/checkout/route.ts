@@ -8,7 +8,7 @@ export const PROGRAMS: Record<string, { name: string; price: number; billing: "o
   "player-dev":              { name: "Football Player Development — Monthly",           price: 250,  billing: "one_time" },
   "player-dev-6mo":          { name: "Football Player Development — 6-Month",          price: 280,  billing: "monthly"  },
   "player-dev-annual":       { name: "Football Player Development — Annual",           price: 250,  billing: "monthly"  },
-  "player-dev-1day":         { name: "Football Player Development — Once a Week",      price: 110,  billing: "monthly"  },
+  "player-dev-1day":         { name: "Football Player Development — Once a Week",      price: 125,  billing: "monthly"  },
   // Multi-Sport Development
   "multi-sport-dev":         { name: "Multi-Sport Development",                         price: 265,   billing: "monthly"  },
   // Girls Player Development

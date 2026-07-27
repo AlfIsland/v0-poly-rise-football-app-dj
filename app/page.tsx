@@ -181,8 +181,8 @@ export default function HomePage() {
                   <p className="text-xs text-gray-400 mt-1 leading-relaxed">Try a session before committing. Add a second day for just $35 more.</p>
                 </div>
                 <div className="space-y-1.5 border-t border-gray-800 pt-2.5">
-                  <div className="flex justify-between text-xs"><span className="text-gray-300">1 Day</span><span className="font-bold text-white">$45</span></div>
-                  <div className="flex justify-between text-xs"><span className="text-gray-300">2 Days</span><span className="font-bold text-white">$80</span></div>
+                  <div className="flex justify-between text-xs"><span className="text-gray-300">1 Day</span><span className="font-bold text-white">$30</span></div>
+                  <div className="flex justify-between text-xs"><span className="text-gray-300">2 Days</span><span className="font-bold text-white">$50</span></div>
                 </div>
                 <Link href="/register?program=drop-in-1day" className="mt-auto block text-center text-xs font-bold bg-red-600 hover:bg-red-700 text-white py-2 rounded-lg transition-colors">Register</Link>
               </div>

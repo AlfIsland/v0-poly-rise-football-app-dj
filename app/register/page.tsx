@@ -16,8 +16,8 @@ const PROGRAMS_DATA: Record<string, { name: string; price: number; priceLabel: s
   "girls-dev":               { name: "Girls Player Development — 2 Days/Week",    price: 250,   priceLabel: "$250/mo",   billing: "monthly"   },
   "girls-dev-3day":          { name: "Girls Player Development — 3 Days/Week",    price: 315,   priceLabel: "$315/mo",   billing: "monthly"   },
   // Drop-In
-  "drop-in-1day":            { name: "Drop-In Training — 1 Day",                  price: 45,    priceLabel: "$45",       billing: "one_time"  },
-  "drop-in-2day":            { name: "Drop-In Training — 2 Days",                 price: 80,    priceLabel: "$80",       billing: "one_time"  },
+  "drop-in-1day":            { name: "Drop-In Training — 1 Day",                  price: 30,    priceLabel: "$30",       billing: "one_time"  },
+  "drop-in-2day":            { name: "Drop-In Training — 2 Days",                 price: 50,    priceLabel: "$50",       billing: "one_time"  },
   // HS Recruiting & Exposure
   "hs-recruiting-elite":     { name: "HS Recruiting — Elite Exposure",            price: 150,   priceLabel: "$150/mo",   billing: "monthly"   },
   "hs-recruiting-pro":       { name: "HS Recruiting — Pro Exposure",              price: 125,   priceLabel: "$125/mo",   billing: "monthly"   },
@@ -46,7 +46,7 @@ const CATEGORIES = [
       { id: "player-dev-1day",   desc: "Tuesday · 6:30–7:30pm · SAQ, S&C, football drills, tournament entries, military character events, PR-Verified Camp & Free Athletic Training Passport", highlight: "POPULAR" },
       { id: "multi-sport-dev",   desc: "Youth sports development — wrestling, girls flag football, soccer, baseball, softball & more · Building well-rounded athletes" },
       { id: "drop-in-1day",      desc: "Single day training session · Try a session before committing to a full program" },
-      { id: "drop-in-2day",      desc: "2 day training package · Add a second day for just $35 more" },
+      { id: "drop-in-2day",      desc: "2 day training package · Add a second day for just $20 more" },
     ],
   },
   {

@@ -15,8 +15,8 @@ export const PROGRAMS: Record<string, { name: string; price: number; billing: "o
   "girls-dev":               { name: "Girls Player Development — 2 Days/Week",         price: 250,   billing: "monthly"  },
   "girls-dev-3day":          { name: "Girls Player Development — 3 Days/Week",         price: 315,   billing: "monthly"  },
   // Drop-In Training
-  "drop-in-1day":            { name: "Drop-In Training — 1 Day",                       price: 45,    billing: "one_time" },
-  "drop-in-2day":            { name: "Drop-In Training — 2 Days",                      price: 80,    billing: "one_time" },
+  "drop-in-1day":            { name: "Drop-In Training — 1 Day",                       price: 30,    billing: "one_time" },
+  "drop-in-2day":            { name: "Drop-In Training — 2 Days",                      price: 50,    billing: "one_time" },
   // HS Recruiting & Exposure
   "hs-recruiting-elite":     { name: "HS Recruiting — Elite Exposure",                 price: 150,   billing: "monthly"  },
   "hs-recruiting-pro":       { name: "HS Recruiting — Pro Exposure",                   price: 125,   billing: "monthly"  },

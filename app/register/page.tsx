@@ -46,7 +46,7 @@ const CATEGORIES = [
       { id: "player-dev-1day",   desc: "Tuesday · 6:30–7:30pm · SAQ, S&C, football drills, tournament entries, military character events, PR-Verified Camp & Free Athletic Training Passport", highlight: "POPULAR" },
       { id: "multi-sport-dev",   desc: "Youth sports development — wrestling, girls flag football, soccer, baseball, softball & more · Building well-rounded athletes" },
       { id: "drop-in-1day",      desc: "Single day training session · Try a session before committing to a full program" },
-      { id: "drop-in-2day",      desc: "2 day training package · Add a second day for just $20 more" },
+      { id: "drop-in-2day",      desc: "2 day training package" },
     ],
   },
   {

@@ -178,7 +178,7 @@ export default function HomePage() {
                 <div>
                   <span className="inline-block text-xs font-bold px-2 py-0.5 rounded-full bg-gray-700 text-gray-300 mb-2">Drop-In</span>
                   <h4 className="text-sm font-bold text-white">Drop-In Training</h4>
-                  <p className="text-xs text-gray-400 mt-1 leading-relaxed">Try a session before committing. Add a second day for just $35 more.</p>
+                  <p className="text-xs text-gray-400 mt-1 leading-relaxed">Try a session before committing.</p>
                 </div>
                 <div className="space-y-1.5 border-t border-gray-800 pt-2.5">
                   <div className="flex justify-between text-xs"><span className="text-gray-300">1 Day</span><span className="font-bold text-white">$30</span></div>

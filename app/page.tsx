@@ -135,7 +135,7 @@ export default function HomePage() {
                 <div>
                   <span className="inline-block text-xs font-bold px-2 py-0.5 rounded-full bg-red-900/60 text-red-300 mb-2">Most Popular</span>
                   <h4 className="text-sm font-bold text-white">Athlete Development</h4>
-                  <p className="text-xs text-gray-400 mt-1 leading-relaxed">Tuesday &amp; Thursday (6:30–7:30pm). Complete athlete development with a football core — SAQ, S&amp;C, sport-specific drills, tournament entries, military character building events, PR-Verified Camp and free Athletic Training Passport (Tracker). Built for football players and multisport athletes alike.</p>
+                  <p className="text-xs text-gray-400 mt-1 leading-relaxed">Tuesday · 6:30–7:30pm. Complete athlete development with a football core — SAQ, S&amp;C, sport-specific drills, tournament entries, military character building events, PR-Verified Camp and free Athletic Training Passport (Tracker). Built for football players and multisport athletes alike.</p>
                 </div>
                 <div className="space-y-1.5 border-t border-gray-800 pt-2.5">
                   <div className="flex justify-between text-xs"><span className="text-gray-300">Once a Week</span><span className="font-bold text-white">$150/mo</span></div>
@@ -148,7 +148,7 @@ export default function HomePage() {
                 <div>
                   <span className="inline-block text-xs font-bold px-2 py-0.5 rounded-full bg-teal-900/60 text-teal-300 mb-2">Afterschool &amp; Girls</span>
                   <h4 className="text-sm font-bold text-white">After School &amp; Girls Development</h4>
-                  <p className="text-xs text-gray-400 mt-1 leading-relaxed">Tuesday &amp; Thursday · 5:30–6:30pm · Open to Elementary, Middle School &amp; Girl athletes</p>
+                  <p className="text-xs text-gray-400 mt-1 leading-relaxed">Tuesday · 5:30–6:30pm · Open to Elementary, Middle School &amp; Girl athletes</p>
                 </div>
                 <div className="space-y-1.5 border-t border-gray-800 pt-2.5">
                   <div className="flex justify-between text-xs"><span className="text-gray-300">Once a Week</span><span className="font-bold text-white">$150/mo</span></div>
@@ -672,8 +672,8 @@ export default function HomePage() {
                   <span className="text-gray-500 ml-4 shrink-0 transition-transform duration-200 group-open:rotate-180 text-xs select-none">▼</span>
                 </summary>
                 <div className="px-5 pb-4 pt-3 text-sm text-gray-300 leading-relaxed border-t border-gray-800 space-y-1">
-                  <p><strong className="text-white">Athlete Development:</strong> Tuesday &amp; Thursday, 6:30–7:30pm</p>
-                  <p><strong className="text-white">After School &amp; Girls Development:</strong> Tuesday &amp; Thursday, 5:30–6:30pm (Elementary, Middle School &amp; Girls)</p>
+                  <p><strong className="text-white">Athlete Development:</strong> Tuesday · 6:30–7:30pm</p>
+                  <p><strong className="text-white">After School &amp; Girls Development:</strong> Tuesday · 5:30–6:30pm (Elementary, Middle School &amp; Girls)</p>
                   <p><strong className="text-white">Tackle Sessions:</strong> Once a week · August – September</p>
                   <p className="text-gray-400 pt-1">Monthly camps, combine events, and leadership hikes held on weekends at Swift Sessions, Dripping Springs.</p>
                 </div>

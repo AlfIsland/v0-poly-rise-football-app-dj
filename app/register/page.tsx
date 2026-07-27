@@ -43,7 +43,7 @@ const CATEGORIES = [
   {
     label: "Training Programs", badge: "bg-red-900 text-red-300", color: "border-red-800 hover:border-red-500",
     programs: [
-      { id: "player-dev-1day",   desc: "Once a week (Tue or Thu) · Tue & Thu 6:30–7:30pm · SAQ, S&C, football drills, tournament entries, military character events, PR-Verified Camp & Free Athletic Training Passport", highlight: "POPULAR" },
+      { id: "player-dev-1day",   desc: "Tuesday · 6:30–7:30pm · SAQ, S&C, football drills, tournament entries, military character events, PR-Verified Camp & Free Athletic Training Passport", highlight: "POPULAR" },
       { id: "multi-sport-dev",   desc: "Youth sports development — wrestling, girls flag football, soccer, baseball, softball & more · Building well-rounded athletes" },
       { id: "drop-in-1day",      desc: "Single day training session · Try a session before committing to a full program" },
       { id: "drop-in-2day",      desc: "2 day training package · Add a second day for just $35 more" },
@@ -60,7 +60,7 @@ const CATEGORIES = [
   {
     label: "After School & Girls Development", badge: "bg-teal-900 text-teal-300", color: "border-teal-800 hover:border-teal-500",
     programs: [
-      { id: "afterschool", desc: "Once a week · Tuesday & Thursday · 5:30–6:30pm · Open to Elementary, Middle School & Girl athletes · $150/mo" },
+      { id: "afterschool", desc: "Tuesday · 5:30–6:30pm · Open to Elementary, Middle School & Girl athletes · $150/mo" },
     ],
   },
   {

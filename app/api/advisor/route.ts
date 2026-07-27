@@ -30,7 +30,7 @@ Elite Recruit — $49.99/month (Grades 11-12): Everything in Recruit PLUS quarte
 IN-PERSON TRAINING PROGRAMS:
 Player Development — $350/month (MOST POPULAR): 8 sessions/month, SAQ, S&C, football drills, tournament entries, military character building events, PR-Verified Camp, free Passport tracker. Tue & Thu 6:30-7:45pm.
 360 Elite — $500/month (ELITE): Everything in Player Development PLUS one-on-one NFL-coach sessions, recruiting profile, 7 college coach email blasts/month, weekly film study, unlimited camps, college visits, NIL & financial literacy classes, sports medicine/nutrition discounts.
-After School & Girls Development — $150/month (once a week): Tue & Thu 5:30–6:30pm. Open to Elementary, Middle School & Girl athletes.
+After School & Girls Development — $150/month (once a week): Tuesday 5:30–6:30pm. Open to Elementary, Middle School & Girl athletes.
 Group & Private Training — Pricing by inquiry: Group sessions and 1-on-1 private training available. Contact Coach at (817) 658-3300 or https://wa.me/18176583300 for pricing and availability.
 Tackle Sessions — August–September, once a week: $40/session (pay per session) or $125/month (best value). Tackling fundamentals, technique, and live reps coached by NFL-experienced staff.
 Summer Camp — $265/month (June & July, max 20 spots): K-5 Mon-Thu 8-10am, Middle School Mon-Thu 10am-12pm, High School Mon-Thu 2-4pm.

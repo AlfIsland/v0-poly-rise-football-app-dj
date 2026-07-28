@@ -23,7 +23,7 @@ export const PROGRAMS: Record<string, { name: string; price: number; billing: "o
   "hs-recruiting-basic":     { name: "HS Recruiting — Basic Exposure",                 price: 85,    billing: "monthly"  },
   // Tackle Sessions (Aug–Sep)
   "tackle-session-single":   { name: "Tackle Sessions — Per Session",                  price: 40,    billing: "one_time" },
-  "tackle-session-monthly":  { name: "Tackle Sessions — Monthly",                      price: 125,   billing: "one_time" },
+  "tackle-session-monthly":  { name: "Tackle Sessions — 3 Sessions",                   price: 105,   billing: "one_time" },
   // Summer / Athletic Camp
   "summer-ms":               { name: "Athletic Camp",                                  price: 265,   billing: "one_time" },
   // After School & Girls Development

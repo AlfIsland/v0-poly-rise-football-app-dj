@@ -229,11 +229,11 @@ export default function HomePage() {
                 <div>
                   <span className="inline-block text-xs font-bold px-2 py-0.5 rounded-full bg-orange-900/60 text-orange-300 mb-2">Aug – Sep</span>
                   <h4 className="text-sm font-bold text-white">Tackle Sessions</h4>
-                  <p className="text-xs text-gray-400 mt-1 leading-relaxed">Once a week · August – September · Tackling fundamentals, technique, and live reps coached by NFL-experienced staff</p>
+                  <p className="text-xs text-gray-400 mt-1 leading-relaxed">Aug 8, 15 &amp; 22 · 9:30–11:00am · Tackling fundamentals, technique, and live reps coached by NFL-experienced staff</p>
                 </div>
                 <div className="space-y-1.5 border-t border-gray-800 pt-2.5">
                   <div className="flex justify-between text-xs"><span className="text-gray-300">Per Session</span><span className="font-bold text-white">$40</span></div>
-                  <div className="flex justify-between text-xs"><span className="text-gray-300">Full Month <span className="text-orange-400">· Best Value · No auto-draft</span></span><span className="font-bold text-white">$125</span></div>
+                  <div className="flex justify-between text-xs"><span className="text-gray-300">3 Sessions <span className="text-orange-400">· Best Value · No auto-draft</span></span><span className="font-bold text-white">$105</span></div>
                 </div>
                 <Link href="/register?program=tackle-session-monthly" className="mt-auto block text-center text-xs font-bold bg-red-600 hover:bg-red-700 text-white py-2 rounded-lg transition-colors">Register</Link>
               </div>
@@ -674,7 +674,7 @@ export default function HomePage() {
                 <div className="px-5 pb-4 pt-3 text-sm text-gray-300 leading-relaxed border-t border-gray-800 space-y-1">
                   <p><strong className="text-white">Athlete Development:</strong> Tuesday · 6:30–7:30pm</p>
                   <p><strong className="text-white">After School &amp; Girls Development:</strong> Tuesday · 5:30–6:30pm (Elementary, Middle School &amp; Girls)</p>
-                  <p><strong className="text-white">Tackle Sessions:</strong> Once a week · August – September</p>
+                  <p><strong className="text-white">Tackle Sessions:</strong> Aug 8, 15 &amp; 22 · 9:30–11:00am</p>
                   <p className="text-gray-400 pt-1">Monthly camps, combine events, and leadership hikes held on weekends at Swift Sessions, Dripping Springs.</p>
                 </div>
               </details>

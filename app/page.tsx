@@ -209,6 +209,13 @@ export default function HomePage() {
               <p className="text-xs text-muted-foreground">Former Navy Football QB, Naval Academy Graduate & Officer</p>
             </div>
             <div className="text-center p-4 bg-card rounded-lg border border-border">
+              <div className="w-24 h-24 mx-auto mb-3 rounded-full overflow-hidden border-2 border-primary">
+                <img 
+                  src="/coach-brayden.jpg" 
+                  alt="Coach Brayden - Baylor Bears #54"
+                  className="w-full h-full object-cover object-top"
+                />
+              </div>
               <h3 className="font-bold text-foreground mb-1">Coach Brayden</h3>
               <p className="text-xs text-primary font-semibold mb-2">LB/DL</p>
               <p className="text-xs text-muted-foreground">Baylor 18-21, NFL Draft 2023, IFL All-Pro & League Champion 2025</p>

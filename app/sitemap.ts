@@ -1,10 +1,13 @@
 import type { MetadataRoute } from "next"
+import { headers } from "next/headers"
 
-export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = "https://polyrisefootball.com"
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+  const headersList = await headers()
+  const host = headersList.get("host") || "localhost:3000"
+  const protocol = host.includes("localhost") ? "http" : "https"
+  const baseUrl = `${protocol}://${host}`
 
   return [
-    // Main pages
     {
       url: baseUrl,
       lastModified: new Date(),
@@ -12,51 +15,19 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 1,
     },
     {
-      url: `${baseUrl}/#programs`,
+      url: `${baseUrl}/programs`,
       lastModified: new Date(),
       changeFrequency: "weekly",
-      priority: 0.9,
+      priority: 0.8,
     },
     {
-      url: `${baseUrl}/#about`,
+      url: `${baseUrl}/api-docs`,
       lastModified: new Date(),
       changeFrequency: "monthly",
-      priority: 0.8,
+      priority: 0.7,
     },
     {
-      url: `${baseUrl}/#contact`,
-      lastModified: new Date(),
-      changeFrequency: "monthly",
-      priority: 0.8,
-    },
-    // API endpoints for AI agents
-    {
-      url: `${baseUrl}/api/programs`,
-      lastModified: new Date(),
-      changeFrequency: "weekly",
-      priority: 0.9,
-    },
-    {
-      url: `${baseUrl}/api/availability`,
-      lastModified: new Date(),
-      changeFrequency: "weekly",
-      priority: 0.8,
-    },
-    // AI agent discovery files
-    {
-      url: `${baseUrl}/llms.txt`,
-      lastModified: new Date(),
-      changeFrequency: "weekly",
-      priority: 0.9,
-    },
-    {
-      url: `${baseUrl}/.well-known/ai-plugin.json`,
-      lastModified: new Date(),
-      changeFrequency: "monthly",
-      priority: 0.8,
-    },
-    {
-      url: `${baseUrl}/api/openapi.json`,
+      url: `${baseUrl}/ai-guide`,
       lastModified: new Date(),
       changeFrequency: "monthly",
       priority: 0.7,

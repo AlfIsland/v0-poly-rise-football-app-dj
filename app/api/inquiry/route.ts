@@ -56,7 +56,7 @@ export async function POST(request: Request) {
       success: true,
       inquiryId: inquiry.id,
       message:
-        "Your inquiry has been logged. To complete registration, please contact PolyRISE Athletix directly or register via TeamLinkt.",
+        "Your inquiry has been logged. To complete registration, please contact Poly Rise Football directly or register via TeamLinkt.",
       note: "This is a demo endpoint. For guaranteed response, use the contact methods below.",
       nextSteps: [
         "Call or text: 817-658-3300",
@@ -88,7 +88,7 @@ export async function GET() {
   return NextResponse.json({
     endpoint: "/api/inquiry",
     method: "POST",
-    description: "Submit registration inquiry for PolyRISE Athletix programs",
+    description: "Submit registration inquiry for Poly Rise Football programs",
     requiredFields: ["parentName", "parentEmail", "athleteName"],
     optionalFields: [
       "parentPhone",

@@ -3,19 +3,19 @@ import { NextResponse } from "next/server"
 // GET /api - API documentation for AI agents
 export async function GET() {
   return NextResponse.json({
-    name: "PolyRISE Athletix API",
+    name: "Poly Rise Football API",
     version: "1.0.0",
     description:
-      "Public API for AI agents to discover programs, check availability, and submit registration inquiries for PolyRISE Athletix",
+      "Public API for AI agents to discover programs, check availability, and submit registration inquiries for Poly Rise Football",
     organization: {
-      name: "PolyRISE Athletix",
+      name: "Poly Rise Football",
       description: "Elite youth football training and skills development for K-12 athletes",
       location: "Austin, Texas",
       expanding: true,
       contact: {
-        phone: "817-658-3300",
-        email: "polyrise@polyrisefootball.com",
-        whatsapp: "817-658-3300",
+        phone: "512-593-3933",
+        email: "coachjonathan@polyrisefootball.com",
+        whatsapp: "512-593-3933",
       },
       social: {
         instagram: "https://instagram.com/polyrisefootball",

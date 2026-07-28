@@ -43,7 +43,7 @@ All endpoints are now live and publicly accessible:
 Rich schema markup embedded in every page:
 
 ### Organization Schema
-\`\`\`json
+```json
 {
   "@type": "SportsOrganization",
   "name": "Poly Rise Football",
@@ -51,7 +51,7 @@ Rich schema markup embedded in every page:
   "offers": [ ... ],
   "potentialAction": [ ... ]
 }
-\`\`\`
+```
 
 ### PotentialAction Schemas
 AI agents can discover:
@@ -71,14 +71,14 @@ Complete API documentation in machine-readable format
 **FIXED:** Removed /api/ from disallow list
 
 **Before:**
-\`\`\`
+```
 disallow: ["/api/", "/admin/"]
-\`\`\`
+```
 
 **After:**
-\`\`\`
+```
 disallow: ["/admin/"]
-\`\`\`
+```
 
 Now AI agents and crawlers can discover and index API endpoints.
 
@@ -122,7 +122,7 @@ Comprehensive documentation available:
 
 ## Test the APIs
 
-\`\`\`bash
+```bash
 # Get all programs
 curl https://polyrisefootball.com/api/programs
 
@@ -139,7 +139,7 @@ curl https://polyrisefootball.com/api/inquiry
 curl -X POST https://polyrisefootball.com/api/inquiry \
   -H "Content-Type: application/json" \
   -d '{"parentName":"Test","parentEmail":"test@example.com","athleteName":"Athlete"}'
-\`\`\`
+```
 
 ---
 

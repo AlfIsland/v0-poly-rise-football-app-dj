@@ -16,18 +16,18 @@ Poly Rise Football provides public APIs that enable AI agents (ChatGPT, Grok, Ge
 
 Returns complete API documentation and organization information.
 
-\`\`\`bash
+```bash
 curl https://polyrisefootball.com/api
-\`\`\`
+```
 
 ### 2. List All Programs
 **GET /api/programs**
 
 Returns all available training programs with pricing, schedules, and features.
 
-\`\`\`bash
+```bash
 curl https://polyrisefootball.com/api/programs
-\`\`\`
+```
 
 Response includes:
 - Program names and IDs
@@ -48,9 +48,9 @@ Program IDs:
 - `360-elite` - Premium with 1-on-1 coaching, $750/month
 - `winter-season` - Seasonal 7v7 program
 
-\`\`\`bash
+```bash
 curl https://polyrisefootball.com/api/programs/polyrise-select
-\`\`\`
+```
 
 ### 4. Check Availability
 **GET /api/availability**
@@ -61,10 +61,10 @@ Query parameters:
 - `city` (optional) - City name to check
 - `ageGroup` (optional) - Age or grade level
 
-\`\`\`bash
+```bash
 curl https://polyrisefootball.com/api/availability?city=Austin
 curl https://polyrisefootball.com/api/availability?city=Houston
-\`\`\`
+```
 
 Response indicates:
 - If programs are currently active in the city
@@ -78,12 +78,12 @@ Response indicates:
 Submit a registration inquiry or lead on behalf of a parent.
 
 **Get Schema:**
-\`\`\`bash
+```bash
 curl https://polyrisefootball.com/api/inquiry
-\`\`\`
+```
 
 **Submit Inquiry:**
-\`\`\`bash
+```bash
 curl -X POST https://polyrisefootball.com/api/inquiry \
   -H "Content-Type: application/json" \
   -d '{
@@ -99,7 +99,7 @@ curl -X POST https://polyrisefootball.com/api/inquiry \
     "message": "Interested in elite training",
     "source": "chatgpt"
   }'
-\`\`\`
+```
 
 Required fields:
 - `parentName` - Parent/guardian full name
@@ -128,10 +128,10 @@ Response includes:
 ### Scenario: Parent asks "What football training programs are available for my 13-year-old in Austin?"
 
 1. **Discovery:**
-   \`\`\`
+   ```
    GET /api/programs
    GET /api/availability?city=Austin
-   \`\`\`
+   ```
 
 2. **Agent Response:**
    "I found Poly Rise Football in Austin with 3 programs for your 13-year-old:
@@ -143,12 +143,12 @@ Response includes:
    Training is at Swift Sessions and local fields, 4 days per week."
 
 3. **Parent asks: "Tell me more about 360 Elite"**
-   \`\`\`
+   ```
    GET /api/programs/360-elite
-   \`\`\`
+   ```
 
 4. **Parent asks: "Can you register my son Mike?"**
-   \`\`\`
+   ```
    POST /api/inquiry
    {
      "parentName": "...",
@@ -158,7 +158,7 @@ Response includes:
      "programInterest": "360-elite",
      ...
    }
-   \`\`\`
+   ```
 
 5. **Agent Response:**
    "I've submitted your inquiry! Coach Jonathan will contact you within 24 hours. I've also sent the registration link to complete enrollment."
@@ -184,9 +184,9 @@ In addition to APIs, the website includes rich JSON-LD structured data that AI a
 
 ## Contact Information
 
-- **Phone:** (817) 658-3300
+- **Phone:** 512-593-3933
 - **Email:** coachjonathan@polyrisefootball.com
-- **WhatsApp:** (817) 658-3300
+- **WhatsApp:** 512-593-3933
 - **Website:** https://polyrisefootball.com
 - **Instagram:** @polyrisefootball
 - **Facebook:** /polyrisefootball

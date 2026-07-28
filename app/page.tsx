@@ -1,14 +1,34 @@
-import { ArrowRight, Trophy, Users, Target, MapPin, CheckCircle2 } from "lucide-react"
+import { ArrowRight, Trophy, Users, Target, Star, Calendar, MapPin, CheckCircle2 } from "lucide-react"
 import Link from "next/link"
 import Image from "next/image"
-import { ProtectedImage } from "@/components/protected-image"
-import { EliteRecruitWaitlist } from "@/components/elite-recruit-waitlist"
-
+import { Top25Players } from "@/components/top-25-players"
 
 export default function HomePage() {
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@type": "SportsOrganization",
+    name: "Poly Rise Football",
+    description: "Elite youth football training and development programs in Austin, Texas",
+    logo: "https://polyrisefootball.com/poly-rise-logo.png",
+    image: "https://polyrisefootball.com/combine-training-athletes.jpg",
+    address: {
+      "@type": "PostalAddress",
+      addressLocality: "Austin",
+      addressRegion: "TX",
+      addressCountry: "US",
+    },
+    url: "https://polyrisefootball.com",
+  }
+
   return (
-    <>
-      <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(structuredData),
+        }}
+      />
+
       {/* Navigation */}
       <header className="fixed top-0 left-0 right-0 z-50 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/80 border-b border-border">
         <div className="container mx-auto px-4 lg:px-8">
@@ -16,56 +36,38 @@ export default function HomePage() {
             <Link href="/" className="flex items-center gap-3">
               <Image
                 src="/poly-rise-logo.png"
-                alt="PolyRISE Athletix Logo"
+                alt="Poly Rise Football Logo"
                 width={48}
                 height={48}
                 className="h-12 w-auto"
               />
-              <span className="font-display font-bold text-xl hidden sm:inline">PolyRISE Athletix</span>
+              <span className="font-display font-bold text-xl hidden sm:inline">Poly Rise Football</span>
             </Link>
 
             <div className="flex items-center gap-6">
               <Link
-                href="#programs"
-                className="text-sm font-medium text-white hover:text-foreground transition-colors hidden md:inline"
+                href="/programs"
+                className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors hidden md:inline"
               >
                 Programs
               </Link>
               <Link
                 href="#about"
-                className="text-sm font-medium text-white hover:text-foreground transition-colors hidden md:inline"
+                className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors hidden md:inline"
               >
                 About
               </Link>
               <Link
                 href="#contact"
-                className="text-sm font-medium text-white hover:text-foreground transition-colors hidden md:inline"
+                className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors hidden md:inline"
               >
                 Contact
               </Link>
               <Link
-                href="/passport"
-                className="text-sm font-medium text-white hover:text-foreground transition-colors hidden md:inline"
+                href="#register"
+                className="text-sm font-medium bg-primary text-white px-4 py-2 rounded hover:bg-primary/80 transition-colors"
               >
-                Athlete Passport
-              </Link>
-              <Link
-                href="/athletix-hub"
-                className="text-sm font-medium text-yellow-400 hover:text-yellow-300 transition-colors hidden md:inline"
-              >
-                Athletix Hub
-              </Link>
-              <Link
-                href="/recruit-optin"
-                className="text-sm font-medium bg-[#B91C1C] text-white px-4 py-2 rounded hover:bg-[#991b1b] transition-colors hidden md:inline"
-              >
-                College Opt-In
-              </Link>
-              <Link
-                href="/plans"
-                className="text-sm font-medium bg-red-600 text-white px-4 py-2 rounded hover:bg-red-600/80 transition-colors"
-              >
-                View Plans
+                Register Now
               </Link>
             </div>
           </nav>
@@ -78,23 +80,48 @@ export default function HomePage() {
 
         <div className="container mx-auto px-4 lg:px-8 relative">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
-            <div className="space-y-6">
-              <h1 className="text-4xl lg:text-6xl font-display font-bold leading-tight text-balance">
-                Where{" "}
-                <span className="text-red-500">Central Texas</span>
-                {" "}Athletes Are Built.
+            <div className="space-y-8">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20">
+                <Star className="w-4 h-4 text-primary" />
+                <span className="text-sm font-medium text-primary">Elite Youth Football Training</span>
+              </div>
+
+              <h1 className="text-5xl lg:text-7xl font-display font-bold leading-tight text-balance">
+                Elite Football Training and Skills Development for{" "}
+                <span className="text-primary">Youth Athletes (4th - 12th)</span>
               </h1>
 
-              <p className="text-lg lg:text-xl text-white leading-relaxed text-pretty">
-                Athlete development with a core focus on football. PolyRISE Athletix delivers professional coaching and strength &amp; conditioning that starts with football fundamentals and builds complete athletes — across soccer, wrestling, baseball, softball, girls flag football and more. Plus recruiting exposure and PR-VERIFIED combine testing for high school athletes.
+              <p className="text-lg lg:text-xl text-muted-foreground leading-relaxed text-pretty">
+                Join Poly Rise Football for expert coaching and comprehensive football skills development. Professional
+                SAQ (Speed, Agility, Quickness) and S&C (Strength & Conditioning) training with NFL experience staff.
+                Building stronger, faster, and character-driven young athletes in Austin, Texas and expanding to cities
+                nationwide.
               </p>
+
+              <div className="flex flex-col sm:flex-row gap-4">
+                <Link
+                  href="https://app.teamlinkt.com/register/find/polyrisefootball"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-base bg-primary text-white px-4 py-2 rounded hover:bg-primary/80 transition-colors"
+                >
+                  Start Your Journey
+                  <ArrowRight className="w-4 h-4 ml-2" />
+                </Link>
+                <Link
+                  href="#about"
+                  className="text-base bg-transparent border border-primary px-4 py-2 rounded hover:bg-primary/10 transition-colors"
+                >
+                  Learn More
+                </Link>
+              </div>
             </div>
 
             <div className="relative">
               <div className="aspect-[4/5] rounded-2xl overflow-hidden border border-border bg-muted">
                 <Image
                   src="/combine-training-athletes.jpg"
-                  alt="Youth athlete training at PolyRISE Athletix"
+                  alt="Youth athlete training at Poly Rise Football"
                   width={800}
                   height={1000}
                   priority
@@ -109,7 +136,7 @@ export default function HomePage() {
                   </div>
                   <div>
                     <div className="font-display font-bold text-lg">Elite Training</div>
-                    <div className="text-sm text-white">Professional Coaching</div>
+                    <div className="text-sm text-muted-foreground">Professional Coaching</div>
                   </div>
                 </div>
               </div>
@@ -118,488 +145,91 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Programs & Pricing */}
-      <section id="programs" className="py-12 lg:py-20 bg-gray-950">
-        <div className="container mx-auto px-4 lg:px-8">
-          <div className="text-center mb-10">
-            <p className="text-red-500 font-bold text-xs uppercase tracking-widest mb-3">PolyRISE Athletix</p>
-            <h2 className="text-4xl lg:text-5xl font-display font-bold text-white">Programs & Pricing</h2>
-            <p className="text-lg text-white mt-3 max-w-xl mx-auto">In-person training packages designed for every level of commitment.</p>
-          </div>
-
-          {/* Training Programs Grid */}
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3 max-w-6xl mx-auto">
-
-              {/* Football Player Development */}
-              <div className="bg-gray-900 border border-gray-800 rounded-xl p-4 flex flex-col gap-3 hover:border-gray-600 transition-colors">
-                <div>
-                  <span className="inline-block text-xs font-bold px-2 py-0.5 rounded-full bg-red-900/60 text-red-300 mb-2">Most Popular</span>
-                  <h4 className="text-sm font-bold text-white">Athlete Development</h4>
-                  <p className="text-xs text-gray-400 mt-1 leading-relaxed">Tuesday · 6:30–7:30pm. Complete athlete development with a football core — SAQ, S&amp;C, sport-specific drills, tournament entries, military character building events, PR-Verified Camp and free Athletic Training Passport (Tracker). Built for football players and multisport athletes alike.</p>
-                </div>
-                <div className="space-y-1.5 border-t border-gray-800 pt-2.5">
-                  <div className="flex justify-between text-xs"><span className="text-gray-300">Once a Week</span><span className="font-bold text-white">$150/mo</span></div>
-                </div>
-                <Link href="/register?program=player-dev-1day" className="mt-auto block text-center text-xs font-bold bg-red-600 hover:bg-red-700 text-white py-2 rounded-lg transition-colors">Register</Link>
-              </div>
-
-              {/* After School & Girls Development */}
-              <div className="bg-gray-900 border border-gray-800 rounded-xl p-4 flex flex-col gap-3 hover:border-gray-600 transition-colors">
-                <div>
-                  <span className="inline-block text-xs font-bold px-2 py-0.5 rounded-full bg-teal-900/60 text-teal-300 mb-2">Afterschool &amp; Girls</span>
-                  <h4 className="text-sm font-bold text-white">After School &amp; Girls Development</h4>
-                  <p className="text-xs text-gray-400 mt-1 leading-relaxed">Tuesday · 5:30–6:30pm · Open to Elementary, Middle School &amp; Girl athletes</p>
-                </div>
-                <div className="space-y-1.5 border-t border-gray-800 pt-2.5">
-                  <div className="flex justify-between text-xs"><span className="text-gray-300">Once a Week</span><span className="font-bold text-white">$150/mo</span></div>
-                </div>
-                <Link href="/register?program=afterschool" className="mt-auto block text-center text-xs font-bold bg-red-600 hover:bg-red-700 text-white py-2 rounded-lg transition-colors">Register</Link>
-              </div>
-
-              {/* Group & Private Training */}
-              <div className="bg-gray-900 border border-gray-800 rounded-xl p-4 flex flex-col gap-3 hover:border-gray-600 transition-colors">
-                <div>
-                  <span className="inline-block text-xs font-bold px-2 py-0.5 rounded-full bg-blue-900/60 text-blue-300 mb-2">Group &amp; Private</span>
-                  <h4 className="text-sm font-bold text-white">Group &amp; Private Training</h4>
-                  <p className="text-xs text-gray-400 mt-1 leading-relaxed">
-                    Group sessions &amp; 1-on-1 private training available. DM Coach at{" "}
-                    <a href="tel:+18176583300" className="text-white hover:text-red-400 transition-colors">(817) 658-3300</a>
-                    {" "}for pricing and info.
-                  </p>
-                </div>
-                <div className="border-t border-gray-800 pt-2.5">
-                  <a href="https://wa.me/18176583300" target="_blank" rel="noopener noreferrer" className="text-xs text-green-400 hover:text-green-300 transition-colors">Message on WhatsApp →</a>
-                </div>
-                <a href="https://wa.me/18176583300" target="_blank" rel="noopener noreferrer" className="mt-auto block text-center text-xs font-bold bg-green-700 hover:bg-green-600 text-white py-2 rounded-lg transition-colors">Contact Coach</a>
-              </div>
-
-              {/* Drop-In Training */}
-              <div className="bg-gray-900 border border-gray-800 rounded-xl p-4 flex flex-col gap-3 hover:border-gray-600 transition-colors">
-                <div>
-                  <span className="inline-block text-xs font-bold px-2 py-0.5 rounded-full bg-gray-700 text-gray-300 mb-2">Drop-In</span>
-                  <h4 className="text-sm font-bold text-white">Drop-In Training</h4>
-                  <p className="text-xs text-gray-400 mt-1 leading-relaxed">Try a session before committing.</p>
-                </div>
-                <div className="space-y-1.5 border-t border-gray-800 pt-2.5">
-                  <div className="flex justify-between text-xs"><span className="text-gray-300">1 Day</span><span className="font-bold text-white">$30</span></div>
-                  <div className="flex justify-between text-xs"><span className="text-gray-300">2 Days</span><span className="font-bold text-white">$50</span></div>
-                </div>
-                <Link href="/register?program=drop-in-1day" className="mt-auto block text-center text-xs font-bold bg-red-600 hover:bg-red-700 text-white py-2 rounded-lg transition-colors">Register</Link>
-              </div>
-
-              {/* HS Recruiting & Exposure */}
-              <div className="bg-gray-900 border border-gray-800 rounded-xl p-4 flex flex-col gap-3 hover:border-gray-600 transition-colors">
-                <div>
-                  <span className="inline-block text-xs font-bold px-2 py-0.5 rounded-full bg-yellow-900/60 text-yellow-300 mb-2">High School</span>
-                  <h4 className="text-sm font-bold text-white">HS Recruiting &amp; Exposure</h4>
-                  <p className="text-xs text-gray-400 mt-1 leading-relaxed">Social media blasts, coach outreach &amp; profile optimization for college visibility</p>
-                </div>
-                <div className="space-y-2 border-t border-gray-800 pt-2.5">
-                  <div className="bg-gray-800 rounded-lg p-2.5">
-                    <div className="flex justify-between text-xs mb-0.5"><span className="font-bold text-white">Elite Exposure</span><span className="font-bold text-white">$150/mo</span></div>
-                    <p className="text-[11px] text-gray-400">2× social blast · 5 coach emails/mo · weekly report · 1-on-1 call</p>
-                  </div>
-                  <div className="bg-gray-800 rounded-lg p-2.5">
-                    <div className="flex justify-between text-xs mb-0.5"><span className="font-bold text-white">Pro Exposure</span><span className="font-bold text-white">$125/mo</span></div>
-                    <p className="text-[11px] text-gray-400">1× social blast · 3 coach emails/mo · bi-weekly report</p>
-                  </div>
-                  <div className="bg-gray-800 rounded-lg p-2.5">
-                    <div className="flex justify-between text-xs mb-0.5"><span className="font-bold text-white">Basic Exposure</span><span className="font-bold text-white">$85/mo</span></div>
-                    <p className="text-[11px] text-gray-400">Pro profile images · X blast · coach directory access</p>
-                  </div>
-                </div>
-                <Link href="/register?program=hs-recruiting-elite" className="mt-auto block text-center text-xs font-bold bg-red-600 hover:bg-red-700 text-white py-2 rounded-lg transition-colors">Get Started</Link>
-              </div>
-
-              {/* Leadership & Mentorship Hike */}
-              <div className="bg-gray-900 border border-gray-800 rounded-xl p-4 flex flex-col gap-3 hover:border-gray-600 transition-colors">
-                <div>
-                  <span className="inline-block text-xs font-bold px-2 py-0.5 rounded-full bg-green-900/60 text-green-300 mb-2">Leadership</span>
-                  <h4 className="text-sm font-bold text-white">Leadership &amp; Mentorship Hike</h4>
-                  <p className="text-xs text-gray-400 mt-1 leading-relaxed">Character-building hike developing leadership, mentorship &amp; mental toughness beyond the field</p>
-                </div>
-                <div className="border-t border-gray-800 pt-2.5">
-                  <div className="flex justify-between text-xs"><span className="text-gray-300">Per Athlete</span><span className="font-bold text-white">$25</span></div>
-                </div>
-                <Link href="/register?program=hike" className="mt-auto block text-center text-xs font-bold bg-red-600 hover:bg-red-700 text-white py-2 rounded-lg transition-colors">Register</Link>
-              </div>
-
-              {/* Tackle Sessions */}
-              <div className="bg-gray-900 border border-gray-800 rounded-xl p-4 flex flex-col gap-3 hover:border-orange-800/60 transition-colors">
-                <div>
-                  <span className="inline-block text-xs font-bold px-2 py-0.5 rounded-full bg-orange-900/60 text-orange-300 mb-2">Aug – Sep</span>
-                  <h4 className="text-sm font-bold text-white">Tackle Sessions</h4>
-                  <p className="text-xs text-gray-400 mt-1 leading-relaxed">Once a week · August – September · Tackling fundamentals, technique, and live reps coached by NFL-experienced staff</p>
-                </div>
-                <div className="space-y-1.5 border-t border-gray-800 pt-2.5">
-                  <div className="flex justify-between text-xs"><span className="text-gray-300">Per Session</span><span className="font-bold text-white">$40</span></div>
-                  <div className="flex justify-between text-xs"><span className="text-gray-300">Full Month <span className="text-orange-400">· Best Value · No auto-draft</span></span><span className="font-bold text-white">$125</span></div>
-                </div>
-                <Link href="/register?program=tackle-session-monthly" className="mt-auto block text-center text-xs font-bold bg-red-600 hover:bg-red-700 text-white py-2 rounded-lg transition-colors">Register</Link>
-              </div>
-
-              {/* Tackling Camp */}
-              <div className="bg-gray-900 border border-gray-800 rounded-xl p-4 flex flex-col gap-3 hover:border-gray-600 transition-colors">
-                <div>
-                  <span className="inline-block text-xs font-bold px-2 py-0.5 rounded-full bg-blue-900/60 text-blue-300 mb-2">Camp</span>
-                  <h4 className="text-sm font-bold text-white">Tackling Camp</h4>
-                  <p className="text-xs text-gray-400 mt-1 leading-relaxed">Proper tackling technique &amp; fundamentals coached by NFL-experienced staff</p>
-                </div>
-                <div className="border-t border-gray-800 pt-2.5">
-                  <div className="flex justify-between text-xs"><span className="text-gray-300">Dripping Springs</span><span className="font-bold text-white">$25</span></div>
-                </div>
-                <Link href="/register?program=tackling-camp" className="mt-auto block text-center text-xs font-bold bg-red-600 hover:bg-red-700 text-white py-2 rounded-lg transition-colors">Register</Link>
-              </div>
-
-              {/* Combine Metrics Camp */}
-              <div className="bg-gray-900 border border-gray-800 rounded-xl p-4 flex flex-col gap-3 hover:border-gray-600 transition-colors">
-                <div>
-                  <span className="inline-block text-xs font-bold px-2 py-0.5 rounded-full bg-purple-900/60 text-purple-300 mb-2">Camp</span>
-                  <h4 className="text-sm font-bold text-white">Combine Metrics Camp</h4>
-                  <p className="text-xs text-gray-400 mt-1 leading-relaxed">Professional combine events · H.S. athletes record official metrics &amp; earn PR-VERIFIED seal</p>
-                </div>
-                <div className="border-t border-gray-800 pt-2.5">
-                  <div className="flex justify-between text-xs"><span className="text-gray-300">Camp Registration</span><span className="font-bold text-white">$40</span></div>
-                </div>
-                <Link href="/register?program=combine" className="mt-auto block text-center text-xs font-bold bg-red-600 hover:bg-red-700 text-white py-2 rounded-lg transition-colors">Register</Link>
-              </div>
-
-              {/* Summer Camp */}
-              <div className="bg-gray-900 border border-gray-800 rounded-xl p-4 sm:col-span-2 lg:col-span-3 hover:border-gray-600 transition-colors">
-                <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
-                  <div>
-                    <span className="inline-block text-xs font-bold px-2 py-0.5 rounded-full bg-blue-900/60 text-blue-300 mb-2">Summer Camp</span>
-                    <h4 className="text-sm font-bold text-white">Summer Camp — Athlete Development &amp; Leadership</h4>
-                    <p className="text-xs text-gray-400 mt-1">June &amp; July · Mon, Tue &amp; Thu · 10:00am–12:00pm · Elementary &amp; Middle School · <span className="text-white font-semibold">Limited to 20 spots</span></p>
-                  </div>
-                  <div className="flex items-center gap-3 shrink-0">
-                    <span className="text-base font-bold text-white">$265/mo</span>
-                    <Link href="/register?program=summer-ms" className="text-xs font-bold bg-red-600 hover:bg-red-700 text-white py-2 px-4 rounded-lg transition-colors whitespace-nowrap">Register Now</Link>
-                  </div>
-                </div>
-              </div>
-
-              {/* Recruiting */}
-              <div className="bg-gray-900 border border-gray-800 rounded-xl p-4 sm:col-span-2 lg:col-span-3 hover:border-gray-600 transition-colors">
-                <div className="flex flex-col md:flex-row md:items-start gap-5">
-                  <div className="flex-1">
-                    <span className="inline-block text-xs font-bold px-2 py-0.5 rounded-full bg-red-900/60 text-red-300 mb-2">Recruiting</span>
-                    <h4 className="text-base font-bold text-white mb-1">PolyRISE Athletix Recruiting</h4>
-                    <p className="text-xs text-gray-400 mb-2">PolyRISE Staff · Former NFL experience · COO / Director of Recruiting</p>
-                    <p className="text-xs text-gray-300 leading-relaxed">Overseeing player profiles, college outreach strategies, and ensuring every athlete receives high-quality exposure to the right college programs — helping student-athletes navigate recruiting and earn collegiate opportunities.</p>
-                    <p className="text-xs text-gray-400 mt-2">Contact: <a href="mailto:KG@polyrisefootball.com" className="text-red-400 hover:text-red-300">KG@polyrisefootball.com</a> · <a href="mailto:polyrise@polyrisefootball.com" className="text-red-400 hover:text-red-300">polyrise@polyrisefootball.com</a></p>
-                    <div className="mt-3">
-                      <Link href="#contact" className="inline-block bg-red-600 text-white px-5 py-1.5 rounded-lg hover:bg-red-700 transition-colors text-xs font-bold">Get Started with Recruiting</Link>
-                    </div>
-                  </div>
-                  <div className="flex gap-2 shrink-0">
-                    <img src="/recruiting-athlete-1.jpeg" alt="Athlete Introduction Example" className="w-24 h-auto rounded-lg border border-gray-700" />
-                    <img src="/recruiting-athlete-2.jpeg" alt="Athlete Introduction Example" className="w-24 h-auto rounded-lg border border-gray-700" />
-                  </div>
-                </div>
-              </div>
-
-          </div>
-
-          {/* Athlete Tracking & Profile Plans */}
-          <div className="mt-16 pt-12 border-t border-gray-800 max-w-6xl mx-auto">
-            <div className="text-center mb-8">
-              <p className="text-red-500 font-bold text-xs uppercase tracking-widest mb-2">Add-On</p>
-              <h3 className="text-3xl lg:text-4xl font-display font-bold text-white">Athlete Tracking & Recruiting Profiles</h3>
-              <p className="text-lg text-white mt-2">Enhance your athlete&apos;s development with verified metrics, a shareable recruiting profile, and college coach visibility.</p>
-            </div>
-
-            {/* Grade Guide */}
-            <div className="max-w-2xl mx-auto mb-10">
-              <div className="bg-gray-900 border border-gray-700 rounded-2xl px-6 py-4 grid grid-cols-3 gap-3 text-center text-sm">
-                <div>
-                  <p className="text-white text-xs uppercase tracking-widest mb-1">Middle School</p>
-                  <p className="text-white font-semibold">Grades 6–8</p>
-                  <p className="text-white mt-1 text-xs">→ <span className="text-white font-semibold">Passport</span></p>
-                </div>
-                <div className="border-l border-r border-gray-700 px-2">
-                  <p className="text-white text-xs uppercase tracking-widest mb-1">High School</p>
-                  <p className="text-white font-semibold">Grades 9–12</p>
-                  <p className="text-white mt-1 text-xs">→ <span className="text-red-400 font-semibold">Recruit</span></p>
-                </div>
-                <div>
-                  <p className="text-white text-xs uppercase tracking-widest mb-1">Upper HS</p>
-                  <p className="text-white font-semibold">Grades 11–12</p>
-                  <p className="text-white mt-1 text-xs">→ <span className="text-yellow-400 font-semibold">Elite Recruit</span></p>
-                </div>
-              </div>
-            </div>
-
-            <div className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
-              {/* Passport */}
-              <div className="relative bg-gray-900 rounded-2xl border-2 border-gray-500 flex flex-col overflow-hidden">
-                <div className="p-6">
-                  <span className="inline-block text-xs font-semibold px-3 py-1 rounded-full bg-blue-900/50 text-blue-300 border border-blue-700/40 mb-4">All Athletes — Middle School &amp; Up</span>
-                  <h3 className="text-2xl font-black text-white">Passport</h3>
-                  <div className="flex items-end gap-1 mt-1 mb-2">
-                    <span className="text-4xl font-black text-white">$9.99</span>
-                    <span className="text-white text-sm mb-1">/month</span>
-                  </div>
-                  <p className="text-white text-sm">Track your athlete&apos;s progress from day one</p>
-                </div>
-                <div className="border-t border-gray-800 px-6 py-5 flex-1 space-y-3">
-                  {["Monthly progress reports & charts","Full session history","Baseline vs. current comparisons","Downloadable PDF reports"].map(f => (
-                    <div key={f} className="flex items-start gap-2.5 text-sm text-white">
-                      <span className="mt-0.5 w-4 h-4 rounded-full flex-shrink-0 flex items-center justify-center bg-gray-500">
-                        <svg className="w-2.5 h-2.5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}><path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" /></svg>
-                      </span>
-                      {f}
-                    </div>
-                  ))}
-                </div>
-                <div className="px-6 pb-6 pt-4">
-                  <Link href="/parent/register" className="block w-full text-center font-bold rounded-xl py-3 text-sm bg-gray-700 hover:bg-gray-600 text-white transition-colors">Get Passport</Link>
-                </div>
-              </div>
-
-              {/* Recruit — Most Popular */}
-              <div className="relative bg-gray-900 rounded-2xl border-2 border-red-500 flex flex-col overflow-hidden">
-                <div className="absolute top-0 left-0 right-0 text-center py-1.5 text-xs font-black tracking-widest bg-red-600 text-white">MOST POPULAR</div>
-                <div className="p-6 pt-10">
-                  <span className="inline-block text-xs font-semibold px-3 py-1 rounded-full bg-red-900/50 text-red-300 border border-red-700/40 mb-4">High School Athletes — Grades 9–12</span>
-                  <h3 className="text-2xl font-black text-red-400">Recruit</h3>
-                  <div className="flex items-end gap-1 mt-1 mb-2">
-                    <span className="text-4xl font-black text-white">$29.99</span>
-                    <span className="text-white text-sm mb-1">/month</span>
-                  </div>
-                  <p className="text-white text-sm">Verified metrics + recruiting profile + visibility</p>
-                </div>
-                <div className="border-t border-gray-800 px-6 py-5 flex-1 space-y-3">
-                  {["Full athlete metrics tracking","PR-VERIFIED seal on profile","Shareable recruiting profile page","Hudl film linked to profile","Monthly X spotlight to college recruiters","1 Free Combine Camp/Month"].map(f => (
-                    <div key={f} className="flex items-start gap-2.5 text-sm text-white">
-                      <span className="mt-0.5 w-4 h-4 rounded-full flex-shrink-0 flex items-center justify-center bg-red-500">
-                        <svg className="w-2.5 h-2.5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}><path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" /></svg>
-                      </span>
-                      {f}
-                    </div>
-                  ))}
-                </div>
-                <div className="px-6 pb-6 pt-4">
-                  <Link href="/parent/register" className="block w-full text-center font-bold rounded-xl py-3 text-sm bg-red-600 hover:bg-red-500 text-white transition-colors">Get Recruit</Link>
-                </div>
-              </div>
-
-              {/* Elite Recruit — Waitlist */}
-              <div className="relative bg-gray-900 rounded-2xl border-2 border-yellow-500 flex flex-col overflow-hidden">
-                <div className="p-6">
-                  <span className="inline-block text-xs font-semibold px-3 py-1 rounded-full bg-yellow-900/50 text-yellow-300 border border-yellow-700/40 mb-4">High School Athletes — Grades 11–12</span>
-                  <h3 className="text-2xl font-black text-yellow-400">Elite Recruit</h3>
-                  <div className="flex items-end gap-1 mt-1 mb-2">
-                    <span className="text-4xl font-black text-white">$49.99</span>
-                    <span className="text-white text-sm mb-1">/month</span>
-                  </div>
-                  <p className="text-white text-sm">Full recruiting exposure + player development</p>
-                </div>
-                <div className="border-t border-gray-800 px-6 py-5 flex-1 space-y-3">
-                  {["Everything in Recruit","Quarterly Kevin Garrett development report","College program fit suggestions","Prospect ranking by position & grade","1 Free Combine Camp/Month","Early access to all PolyRISE camps & events"].map(f => (
-                    <div key={f} className="flex items-start gap-2.5 text-sm text-white">
-                      <span className="mt-0.5 w-4 h-4 rounded-full flex-shrink-0 flex items-center justify-center bg-yellow-500">
-                        <svg className="w-2.5 h-2.5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}><path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" /></svg>
-                      </span>
-                      {f}
-                    </div>
-                  ))}
-                </div>
-                <div className="px-6 pb-6 pt-4">
-                  <EliteRecruitWaitlist />
-                </div>
-              </div>
-            </div>
-
-            <div className="text-center mt-10">
-              <Link href="/plans" className="inline-flex items-center gap-2 bg-white/10 hover:bg-white/20 text-white font-semibold px-6 py-3 rounded-xl border border-white/20 transition-colors text-sm">
-                View Full Plan Details
-                <ArrowRight className="w-4 h-4" />
-              </Link>
-            </div>
-          </div>
-
-        </div>
-      </section>
-
-      {/* Parent & Supporter Testimonials */}
-      <section className="py-12 lg:py-20 bg-gray-950">
-        <div className="container mx-auto px-4 lg:px-8">
-          <div className="text-center mb-10">
-            <p className="text-red-500 font-bold text-xs uppercase tracking-widest mb-3">Community</p>
-            <h2 className="text-3xl lg:text-4xl font-display font-bold text-white">What Parents &amp; Supporters Are Saying</h2>
-            <p className="text-base text-gray-400 mt-2 max-w-xl mx-auto">Real stories from families and coaches in Central Texas</p>
-          </div>
-
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5 max-w-6xl mx-auto">
-
-            <div className="bg-[#0f1117] border border-gray-800 rounded-2xl p-6 flex flex-col gap-4 hover:border-red-900/60 transition-colors">
-              <p className="text-yellow-400 text-base tracking-widest">★★★★★</p>
-              <p className="text-gray-300 text-sm leading-relaxed italic flex-1">&ldquo;My son walked in as a quiet 7th grader who barely believed in himself. Eight months later he&apos;s faster, stronger, and leading drills. The PolyRISE Athletix staff didn&apos;t just train him — they built his character. This program is the real deal.&rdquo;</p>
-              <div className="flex items-center gap-3 pt-3 border-t border-gray-800 mt-auto">
-                <div className="w-10 h-10 rounded-full bg-red-900/60 border border-red-700/40 flex items-center justify-center text-white font-bold text-xs shrink-0">TM</div>
-                <div>
-                  <p className="text-white text-sm font-bold">Teresa M.</p>
-                  <p className="text-gray-500 text-xs">Parent of 7th Grader · Dripping Springs</p>
-                </div>
-              </div>
-            </div>
-
-            <div className="bg-[#0f1117] border border-gray-800 rounded-2xl p-6 flex flex-col gap-4 hover:border-blue-900/60 transition-colors">
-              <p className="text-yellow-400 text-base tracking-widest">★★★★★</p>
-              <p className="text-gray-300 text-sm leading-relaxed italic flex-1">&ldquo;Our son was invisible to college coaches until PolyRISE ran him through the PR-VERIFIED combine. Real, verified numbers changed everything — he now has three programs looking at his profile. Best investment we&apos;ve made in his future.&rdquo;</p>
-              <div className="flex items-center gap-3 pt-3 border-t border-gray-800 mt-auto">
-                <div className="w-10 h-10 rounded-full bg-blue-900/60 border border-blue-700/40 flex items-center justify-center text-white font-bold text-xs shrink-0">MJ</div>
-                <div>
-                  <p className="text-white text-sm font-bold">Marcus &amp; Alicia J.</p>
-                  <p className="text-gray-500 text-xs">Parents of 10th Grader · Austin</p>
-                </div>
-              </div>
-            </div>
-
-            <div className="bg-[#0f1117] border border-gray-800 rounded-2xl p-6 flex flex-col gap-4 hover:border-red-900/60 transition-colors">
-              <p className="text-yellow-400 text-base tracking-widest">★★★★★</p>
-              <p className="text-gray-300 text-sm leading-relaxed italic flex-1">&ldquo;The military character-building events are what set PolyRISE apart. My daughter came home from the leadership hike standing taller and talking about who she wants to become. Sport skills AND life skills — that&apos;s rare for a youth program.&rdquo;</p>
-              <div className="flex items-center gap-3 pt-3 border-t border-gray-800 mt-auto">
-                <div className="w-10 h-10 rounded-full bg-red-900/60 border border-red-700/40 flex items-center justify-center text-white font-bold text-xs shrink-0">JC</div>
-                <div>
-                  <p className="text-white text-sm font-bold">Jennifer C.</p>
-                  <p className="text-gray-500 text-xs">Parent of 8th Grader · Dripping Springs</p>
-                </div>
-              </div>
-            </div>
-
-            <div className="bg-[#0f1117] border border-gray-800 rounded-2xl p-6 flex flex-col gap-4 hover:border-green-900/60 transition-colors">
-              <p className="text-yellow-400 text-base tracking-widest">★★★★★</p>
-              <p className="text-gray-300 text-sm leading-relaxed italic flex-1">&ldquo;I refer every family to PolyRISE because I trust these coaches completely. NFL-level experience, real discipline, and they treat every kid like family. Central Texas has needed this program for a long time — proud to support it.&rdquo;</p>
-              <div className="flex items-center gap-3 pt-3 border-t border-gray-800 mt-auto">
-                <div className="w-10 h-10 rounded-full bg-green-900/60 border border-green-700/40 flex items-center justify-center text-white font-bold text-xs shrink-0">RS</div>
-                <div>
-                  <p className="text-white text-sm font-bold">Coach R. Santos</p>
-                  <p className="text-gray-500 text-xs">Youth League Director · Austin Metro</p>
-                </div>
-              </div>
-            </div>
-
+      {/* PolyRISE 7v7 Tournament Section */}
+      <section className="py-12 lg:py-16 bg-primary text-primary-foreground">
+        <div className="container mx-auto px-4 lg:px-8 text-center">
+          <h2 className="text-3xl lg:text-5xl font-display font-bold mb-4 text-balance">
+            PolyRISE 7v7 Tournament
+          </h2>
+          <p className="text-xl lg:text-2xl font-semibold mb-2">
+            1st Annual PolyRISE Football 7v7 Showcase
+          </p>
+          <div className="flex items-center justify-center gap-3 text-lg lg:text-xl">
+            <Calendar className="w-6 h-6" />
+            <span className="font-medium">May 30, 2026</span>
           </div>
         </div>
       </section>
 
-      {/* PolyRISE Athletix Coaches Board Section */}
-      <section className="py-10 lg:py-16 bg-background">
+      {/* PolyRISE Football Coaches Board Section */}
+      <section className="py-16 lg:py-24 bg-background">
         <div className="container mx-auto px-4 lg:px-8">
           <div className="text-center mb-10">
             <h2 className="text-3xl lg:text-5xl font-display font-bold mb-4 text-balance">
-              PolyRISE Athletix Coaches Board
+              PolyRISE Football Coaches Board
             </h2>
-            <p className="text-lg text-white max-w-2xl mx-auto">
+            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
               Learn from coaches with professional playing experience at the highest levels
             </p>
           </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6 max-w-6xl mx-auto">
+          
+<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6 max-w-6xl mx-auto">
             <div className="text-center p-4 bg-card rounded-lg border border-border">
               <div className="w-24 h-24 mx-auto mb-3 rounded-full overflow-hidden border-2 border-primary">
-                <img src="/coach-garrett.jpg" alt="Head Coach Kevin Garrett - St. Louis Rams #21" className="w-full h-full object-cover object-top" />
+                <img 
+                  src="/coach-garrett.jpg" 
+                  alt="Head Coach Kevin Garrett - St. Louis Rams #21"
+                  className="w-full h-full object-cover object-top"
+                />
               </div>
               <h3 className="font-bold text-foreground mb-1">Head Coach Garrett</h3>
               <p className="text-xs text-primary font-semibold mb-2">DB Coach</p>
-              <p className="text-xs text-white">7 yrs NFL (Rams, Texans), 3 yrs CFL, Drafted 2003 from SMU</p>
+              <p className="text-xs text-muted-foreground">7 yrs NFL (Rams, Texans), 3 yrs CFL, Drafted 2003 from SMU</p>
             </div>
             <div className="text-center p-4 bg-card rounded-lg border border-border">
               <div className="w-24 h-24 mx-auto mb-3 rounded-full overflow-hidden border-2 border-primary">
-                <img src="/coach-jordan.jpg" alt="Coach Jordan - Omaha Beef #18" className="w-full h-full object-cover object-top" />
+                <img 
+                  src="/coach-jordan.jpg" 
+                  alt="Coach Jordan - Omaha Beef #18"
+                  className="w-full h-full object-cover object-top"
+                />
               </div>
               <h3 className="font-bold text-foreground mb-1">Coach Jordan</h3>
               <p className="text-xs text-primary font-semibold mb-2">WR/TE</p>
-              <p className="text-xs text-white">XFL Draft 2022, Omaha Beef 2X Champion, HCU Assistant WR Coach</p>
+              <p className="text-xs text-muted-foreground">XFL Draft 2022, Omaha Beef 2X Champion, HCU Assistant WR Coach</p>
             </div>
             <div className="text-center p-4 bg-card rounded-lg border border-border">
-              <div className="w-24 h-24 rounded-full overflow-hidden mx-auto mb-3 border-2 border-primary/20">
-                <img src="/coach-traves.jpg" alt="Coach Traves - Former Navy Safety and LB" className="w-full h-full object-cover" />
-              </div>
               <h3 className="font-bold text-foreground mb-1">Coach Traves</h3>
               <p className="text-xs text-primary font-semibold mb-2">RB/S</p>
-              <p className="text-xs text-white">Former Navy Safety & LB, All-East Teams 2011-12, Citadel Football</p>
+              <p className="text-xs text-muted-foreground">Former Navy Safety & LB, All-East Teams 2011-12, Citadel Football</p>
             </div>
             <div className="text-center p-4 bg-card rounded-lg border border-border">
-              <div className="w-24 h-24 rounded-full overflow-hidden mx-auto mb-3 border-2 border-primary/20">
-                <img src="/coach-john.jpg" alt="Coach John - Former Navy Football QB" className="w-full h-full object-cover" />
-              </div>
               <h3 className="font-bold text-foreground mb-1">Coach John</h3>
               <p className="text-xs text-primary font-semibold mb-2">QB</p>
-              <p className="text-xs text-white">Former Navy Football QB, Naval Academy Graduate & Officer</p>
+              <p className="text-xs text-muted-foreground">Former Navy Football QB, Naval Academy Graduate & Officer</p>
             </div>
             <div className="text-center p-4 bg-card rounded-lg border border-border">
-              <div className="w-24 h-24 rounded-full overflow-hidden mx-auto mb-3 border-2 border-primary/20">
-                <img src="/coach-brayden.jpg" alt="Coach Brayden - Baylor Football, NFL Draft, IFL All-Pro" className="w-full h-full object-cover" />
-              </div>
               <h3 className="font-bold text-foreground mb-1">Coach Brayden</h3>
               <p className="text-xs text-primary font-semibold mb-2">LB/DL</p>
-              <p className="text-xs text-white">Baylor 18-21, NFL Draft 2023, IFL All-Pro & League Champion 2025</p>
+              <p className="text-xs text-muted-foreground">Baylor 18-21, NFL Draft 2023, IFL All-Pro & League Champion 2025</p>
             </div>
           </div>
         </div>
       </section>
 
-      {/* PR-VERIFIED Section */}
-      <section className="py-8 lg:py-12 bg-black text-white">
-        <div className="container mx-auto px-4 lg:px-8">
-          <div className="flex flex-col md:flex-row items-center justify-center gap-8 md:gap-12">
-            <div className="text-center md:text-left max-w-3xl">
-              <h2 className="text-3xl lg:text-4xl font-display font-bold mb-4 text-balance">
-                PR-VERIFIED <span className="text-xl lg:text-2xl font-normal text-white">(Seal of Authenticity)</span>
-              </h2>
-              <p className="text-base lg:text-lg text-white mb-4 leading-relaxed">
-                The PR-VERIFIED seal is awarded exclusively to athletes who complete PolyRISE Athletix programs, camps, or tryouts. Overseen by a board of coaches with NFL and collegiate playing/coaching experience conducts standardized, pro-style combine testing using consistent protocols and multiple trials for maximum reliability. This seal certifies that the athlete&apos;s metrics were directly measured and verified by our team on-site. No self-reported times or inflated numbers. The data is accurate, unbiased, and built to stand up under recruiter scrutiny.
-              </p>
-              <div className="mb-4">
-                <p className="text-white font-semibold mb-2">Tested Events Include:</p>
-                <ul className="text-white text-sm lg:text-base space-y-1 list-disc list-inside">
-                  <li>40-Yard Dash</li>
-                  <li>Broad Jump</li>
-                  <li>Vertical Jump</li>
-                  <li>3-Cone Drill (L-Drill)</li>
-                  <li>5-10-5 Shuttle (Pro-Agility/Short Shuttle)</li>
-                  <li>Skill-specific evaluations: Catching, Throwing, Footwork, and position drills</li>
-                </ul>
-              </div>
-              <p className="text-base lg:text-lg text-white leading-relaxed">
-                Athletes earning the PR-VERIFIED seal receive official documentation and a digital badge they can display on recruiting profiles. This gives coaches and scouts immediate confidence that the numbers are real and PolyRISE-vetted.
-              </p>
-            </div>
-            <div className="flex flex-col items-center">
-              <div className="flex flex-col items-center mb-4 gap-3">
-                <Link
-                  href="/plans"
-                  className="text-base font-semibold bg-red-600 text-white px-6 py-3 rounded hover:bg-red-600/80 transition-colors text-center"
-                >
-                  Athlete Tracking Passport & Recruiting
-                </Link>
-                <Link
-                  href="/free-profile"
-                  className="text-base font-semibold bg-green-700 text-white px-6 py-3 rounded hover:bg-green-800 transition-colors text-center"
-                >
-                  Get Your FREE Athlete Profile
-                </Link>
-                <span className="text-sm text-white italic mt-1">Athlete&apos;s Performance Journey</span>
-              </div>
-              <ProtectedImage
-                src="/pr-verified-badge.png"
-                alt="PolyRISE PR-VERIFIED Badge - Copyright 2026 PolyRISE Athletix All Rights Reserved"
-                className="w-full h-full object-contain"
-                containerClassName="w-48 h-48 md:w-64 md:h-64 flex-shrink-0"
-              />
-            </div>
-          </div>
-        </div>
-      </section>
+      {/* Top 5 Players Section */}
+      <Top25Players />
 
-      {/* About Section */}
-      <section id="about" className="py-12 lg:py-20 bg-muted/30">
+      {/* Mission Section */}
+      <section id="about" className="py-20 lg:py-32 bg-muted/30">
         <div className="container mx-auto px-4 lg:px-8">
-          <div className="max-w-3xl mx-auto text-center mb-8">
-            <h2 className="text-4xl lg:text-5xl font-display font-bold text-balance">About PolyRISE Athletix</h2>
+          <div className="max-w-3xl mx-auto text-center space-y-6 mb-16">
+            <h2 className="text-4xl lg:text-5xl font-display font-bold text-balance">About Poly Rise Football</h2>
+            <p className="text-lg text-muted-foreground leading-relaxed text-pretty">
+              At Poly Rise Football, we are dedicated to building stronger, faster, and character-driven young athletes.
+              Our mission is to provide top-tier training and resources that enhance their football skills and elevate
+              them both on and off the field.
+            </p>
           </div>
 
           <div className="grid md:grid-cols-3 gap-8">
@@ -609,7 +239,7 @@ export default function HomePage() {
                   <Target className="w-6 h-6 text-primary" />
                 </div>
                 <h3 className="text-xl font-display font-bold">Athletic Excellence</h3>
-                <p className="text-white leading-relaxed">
+                <p className="text-muted-foreground leading-relaxed">
                   Top-tier training with NFL experience staff, including Speed, Agility, Quickness (SAQ) and Strength &
                   Conditioning (S&C) programs designed to maximize potential.
                 </p>
@@ -622,7 +252,7 @@ export default function HomePage() {
                   <Users className="w-6 h-6 text-accent" />
                 </div>
                 <h3 className="text-xl font-display font-bold">Character Development</h3>
-                <p className="text-white leading-relaxed">
+                <p className="text-muted-foreground leading-relaxed">
                   Building discipline, leadership, and integrity through military character building events and
                   structured programs that emphasize growth beyond the game.
                 </p>
@@ -635,7 +265,7 @@ export default function HomePage() {
                   <Trophy className="w-6 h-6 text-primary" />
                 </div>
                 <h3 className="text-xl font-display font-bold">Complete Development</h3>
-                <p className="text-white leading-relaxed">
+                <p className="text-muted-foreground leading-relaxed">
                   Film study, college visits, NIL & financial literacy classes, and tournament opportunities to prepare
                   athletes for the next level.
                 </p>
@@ -645,126 +275,353 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Frequently Asked Questions */}
-      <section className="py-10 lg:py-16">
+      {/* Programs Preview */}
+      <section className="py-20 lg:py-32">
         <div className="container mx-auto px-4 lg:px-8">
-          <div className="max-w-2xl mx-auto">
-            <div className="text-center mb-8">
-              <h2 className="text-3xl lg:text-4xl font-display font-bold mb-2">Frequently Asked Questions</h2>
-              <p className="text-sm text-gray-400">Quick answers about PolyRISE Athletix</p>
+          <div className="flex items-end justify-between mb-12">
+            <div className="space-y-4">
+              <h2 className="text-4xl lg:text-5xl font-display font-bold">Programs</h2>
+              <p className="text-lg text-muted-foreground">Training packages designed for every level of commitment</p>
+            </div>
+            <Link
+              href="/programs"
+              className="hidden md:inline-flex bg-transparent border border-primary px-4 py-2 rounded hover:bg-primary/10 transition-colors"
+            >
+              View All Programs
+              <ArrowRight className="w-4 h-4 ml-2" />
+            </Link>
+          </div>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="bg-card border-border overflow-hidden group hover:border-primary/50 transition-colors">
+              <div className="aspect-video relative overflow-hidden">
+                <img
+                  src="/athlete-training-drill.jpg"
+                  alt="PolyRISE Select Training"
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                />
+                <div className="absolute top-4 left-4 px-3 py-1 rounded-full bg-background/90 backdrop-blur text-sm font-medium">
+                  Most Popular
+                </div>
+              </div>
+              <div className="pt-6 space-y-4">
+                <div>
+                  <h3 className="text-xl font-display font-bold mb-2">PolyRISE Select</h3>
+                  <div className="text-2xl font-bold text-primary mb-3">$400/Monthly</div>
+                  <p className="text-muted-foreground text-sm leading-relaxed">
+                    16 sessions a month including SAQ, S&C, football drills, tournament entries, film study, and
+                    quarterly military character building events.
+                  </p>
+                </div>
+                <div className="space-y-2">
+                  <div className="flex items-start gap-2">
+                    <CheckCircle2 className="w-4 h-4 text-primary flex-shrink-0 mt-0.5" />
+                    <span className="text-sm text-muted-foreground">PolyRISE gear package included</span>
+                  </div>
+                  <div className="flex items-start gap-2">
+                    <CheckCircle2 className="w-4 h-4 text-primary flex-shrink-0 mt-0.5" />
+                    <span className="text-sm text-muted-foreground">Local & regional 7v7 tournaments</span>
+                  </div>
+                  <div className="flex items-start gap-2">
+                    <CheckCircle2 className="w-4 h-4 text-primary flex-shrink-0 mt-0.5" />
+                    <span className="text-sm text-muted-foreground">3 free PolyRISE camps annually</span>
+                  </div>
+                </div>
+                <Link
+                  href="https://app.teamlinkt.com/register/find/polyrisefootball"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-full bg-primary text-white px-4 py-2 rounded hover:bg-primary/80 transition-colors"
+                >
+                  Pay Now
+                </Link>
+              </div>
             </div>
 
-            <div className="space-y-2">
-
-              <details className="group bg-gray-900 border border-gray-800 rounded-xl overflow-hidden">
-                <summary className="flex items-center justify-between px-5 py-4 cursor-pointer text-white font-semibold text-sm hover:bg-gray-800 transition-colors [list-style:none] [&::-webkit-details-marker]:hidden">
-                  <span>What programs are available and how much do they cost?</span>
-                  <span className="text-gray-500 ml-4 shrink-0 transition-transform duration-200 group-open:rotate-180 text-xs select-none">▼</span>
-                </summary>
-                <div className="px-5 pb-4 pt-3 text-sm text-gray-300 leading-relaxed border-t border-gray-800">
-                  <p>Athlete Development (Tue &amp; Thu, 6:30–7:30pm) is <strong className="text-white">$150/mo</strong> (once a week). After School &amp; Girls Development (Tue &amp; Thu, 5:30–6:30pm) is <strong className="text-white">$150/mo</strong> (once a week). Tackle Sessions (Aug–Sep, once/week) are <strong className="text-white">$40/session</strong> or $125/mo. HS Recruiting &amp; Exposure packages are $85–$150/mo. Athlete Tracking plans start at <strong className="text-white">$9.99/mo</strong>.</p>
+            <div className="bg-card border-primary/50 border-2 overflow-hidden group hover:border-primary transition-colors relative">
+              <div className="absolute top-4 right-4 z-10 px-3 py-1 rounded-full bg-primary text-primary-foreground text-xs font-bold">
+                ELITE
+              </div>
+              <div className="aspect-video relative overflow-hidden">
+                <img
+                  src="/elite-360-training.jpg"
+                  alt="360 Elite Training"
+                  className="w-full h-full object-cover object-[50%_35%] group-hover:scale-105 transition-transform duration-300"
+                />
+              </div>
+              <div className="pt-6 space-y-4">
+                <div>
+                  <h3 className="text-xl font-display font-bold mb-2">360 Elite</h3>
+                  <div className="text-2xl font-bold text-primary mb-3">$750/Monthly</div>
+                  <p className="text-muted-foreground text-sm leading-relaxed">
+                    Everything in Select plus one-on-one coaching from NFL experience staff, weekly film study, and
+                    exclusive benefits.
+                  </p>
                 </div>
-              </details>
-
-              <details className="group bg-gray-900 border border-gray-800 rounded-xl overflow-hidden">
-                <summary className="flex items-center justify-between px-5 py-4 cursor-pointer text-white font-semibold text-sm hover:bg-gray-800 transition-colors [list-style:none] [&::-webkit-details-marker]:hidden">
-                  <span>What is the training schedule?</span>
-                  <span className="text-gray-500 ml-4 shrink-0 transition-transform duration-200 group-open:rotate-180 text-xs select-none">▼</span>
-                </summary>
-                <div className="px-5 pb-4 pt-3 text-sm text-gray-300 leading-relaxed border-t border-gray-800 space-y-1">
-                  <p><strong className="text-white">Athlete Development:</strong> Tuesday · 6:30–7:30pm</p>
-                  <p><strong className="text-white">After School &amp; Girls Development:</strong> Tuesday · 5:30–6:30pm (Elementary, Middle School &amp; Girls)</p>
-                  <p><strong className="text-white">Tackle Sessions:</strong> Once a week · August – September</p>
-                  <p className="text-gray-400 pt-1">Monthly camps, combine events, and leadership hikes held on weekends at Swift Sessions, Dripping Springs.</p>
+                <div className="space-y-2">
+                  <div className="flex items-start gap-2">
+                    <CheckCircle2 className="w-4 h-4 text-primary flex-shrink-0 mt-0.5" />
+                    <span className="text-sm text-muted-foreground">All PolyRISE camps free</span>
+                  </div>
+                  <div className="flex items-start gap-2">
+                    <CheckCircle2 className="w-4 h-4 text-primary flex-shrink-0 mt-0.5" />
+                    <span className="text-sm text-muted-foreground">One-on-one NFL experience coaching</span>
+                  </div>
+                  <div className="flex items-start gap-2">
+                    <CheckCircle2 className="w-4 h-4 text-primary flex-shrink-0 mt-0.5" />
+                    <span className="text-sm text-muted-foreground">Yearly college visits & NIL classes</span>
+                  </div>
                 </div>
-              </details>
+                <Link
+                  href="https://app.teamlinkt.com/register/find/polyrisefootball"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-full bg-primary text-white px-4 py-2 rounded hover:bg-primary/80 transition-colors"
+                >
+                  Pay Now
+                </Link>
+              </div>
+            </div>
 
-              <details className="group bg-gray-900 border border-gray-800 rounded-xl overflow-hidden">
-                <summary className="flex items-center justify-between px-5 py-4 cursor-pointer text-white font-semibold text-sm hover:bg-gray-800 transition-colors [list-style:none] [&::-webkit-details-marker]:hidden">
-                  <span>What is PR-VERIFIED and why does it matter for recruiting?</span>
-                  <span className="text-gray-500 ml-4 shrink-0 transition-transform duration-200 group-open:rotate-180 text-xs select-none">▼</span>
-                </summary>
-                <div className="px-5 pb-4 pt-3 text-sm text-gray-300 leading-relaxed border-t border-gray-800">
-                  <p>PR-VERIFIED is our seal of authenticity. Coaches with NFL and collegiate experience run standardized on-site combine testing: 40-yard dash, vertical jump, broad jump, 5-10-5 shuttle, 3-cone drill, and position evaluations. No self-reported times — just real, verifiable numbers athletes can put on any recruiting profile with confidence that college coaches and scouts will trust.</p>
+            <div className="bg-card border-border overflow-hidden group hover:border-primary/50 transition-colors">
+              <div className="aspect-video relative overflow-hidden">
+                <img
+                  src="/athlete-agility-drills.jpg"
+                  alt="Winter Season"
+                  className="w-full h-full object-top group-hover:scale-105 transition-transform duration-300"
+                />
+                <div className="absolute top-4 left-4 px-3 py-1 rounded-full bg-background/90 backdrop-blur text-sm font-medium">
+                  Seasonal
                 </div>
-              </details>
-
-              <details className="group bg-gray-900 border border-gray-800 rounded-xl overflow-hidden">
-                <summary className="flex items-center justify-between px-5 py-4 cursor-pointer text-white font-semibold text-sm hover:bg-gray-800 transition-colors [list-style:none] [&::-webkit-details-marker]:hidden">
-                  <span>How does PolyRISE help my high schooler get recruited?</span>
-                  <span className="text-gray-500 ml-4 shrink-0 transition-transform duration-200 group-open:rotate-180 text-xs select-none">▼</span>
-                </summary>
-                <div className="px-5 pb-4 pt-3 text-sm text-gray-300 leading-relaxed border-t border-gray-800">
-                  <p>The <strong className="text-white">Recruit plan ($29.99/mo)</strong> includes a PR-VERIFIED shareable profile, Hudl integration, and monthly X spotlights to college recruiters. <strong className="text-white">HS Recruiting &amp; Exposure packages ($85–$150/mo)</strong> add personalized coach outreach, social media blasts, and 1-on-1 calls with PolyRISE staff. The Elite Recruit tier (launching 2026 season) adds quarterly development reports and college program fit analysis — join the waitlist on the plans page.</p>
+              </div>
+              <div className="pt-6 space-y-4">
+                <div>
+                  <h3 className="text-xl font-display font-bold mb-2">Winter Season</h3>
+                  <p className="text-muted-foreground text-sm leading-relaxed mb-4">
+                    PolyRISE 7v7 winter season program. Competitive team play with tournament opportunities throughout
+                    the winter months.
+                  </p>
                 </div>
-              </details>
-
-              <details className="group bg-gray-900 border border-gray-800 rounded-xl overflow-hidden">
-                <summary className="flex items-center justify-between px-5 py-4 cursor-pointer text-white font-semibold text-sm hover:bg-gray-800 transition-colors [list-style:none] [&::-webkit-details-marker]:hidden">
-                  <span>Who are the coaches?</span>
-                  <span className="text-gray-500 ml-4 shrink-0 transition-transform duration-200 group-open:rotate-180 text-xs select-none">▼</span>
-                </summary>
-                <div className="px-5 pb-4 pt-3 text-sm text-gray-300 leading-relaxed border-t border-gray-800">
-                  <ul className="space-y-1.5">
-                    <li><strong className="text-white">Coach Garrett</strong> — 7 NFL seasons (Rams, Texans), 3 CFL seasons, drafted 2003 from SMU</li>
-                    <li><strong className="text-white">Coach Jordan</strong> — XFL Draft 2022, 2× Omaha Beef Champion, HCU WR Coach</li>
-                    <li><strong className="text-white">Coach Traves</strong> — Navy Safety &amp; LB, All-East teams 2011–12</li>
-                    <li><strong className="text-white">Coach John</strong> — Navy Football QB, Naval Academy graduate &amp; officer</li>
-                    <li><strong className="text-white">Coach Brayden</strong> — Baylor 2018–21, NFL Draft 2023, IFL All-Pro &amp; League Champion 2025</li>
-                  </ul>
+                <div className="space-y-2">
+                  <div className="flex items-start gap-2">
+                    <CheckCircle2 className="w-4 h-4 text-primary flex-shrink-0 mt-0.5" />
+                    <span className="text-sm text-muted-foreground">7v7 competitive play</span>
+                  </div>
+                  <div className="flex items-start gap-2">
+                    <CheckCircle2 className="w-4 h-4 text-primary flex-shrink-0 mt-0.5" />
+                    <span className="text-sm text-muted-foreground">Tournament entries</span>
+                  </div>
+                  <div className="flex items-start gap-2">
+                    <CheckCircle2 className="w-4 h-4 text-primary flex-shrink-0 mt-0.5" />
+                    <span className="text-sm text-muted-foreground">Team training sessions</span>
+                  </div>
                 </div>
-              </details>
+                <Link
+                  href="https://app.teamlinkt.com/register/find/polyrisefootball"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-full bg-primary text-white px-4 py-2 rounded hover:bg-primary/80 transition-colors"
+                >
+                  Pay Now
+                </Link>
+              </div>
+            </div>
+          </div>
 
+          <Link
+            href="/programs"
+            className="w-full mt-8 md:hidden bg-transparent border border-primary px-4 py-2 rounded hover:bg-primary/10 transition-colors"
+          >
+            View All Programs
+            <ArrowRight className="w-4 h-4 ml-2" />
+          </Link>
+        </div>
+      </section>
+
+      {/* Training Schedule Section */}
+      <section className="py-20 lg:py-32 bg-muted/30">
+        <div className="container mx-auto px-4 lg:px-8">
+          <div className="max-w-4xl mx-auto">
+            <div className="text-center mb-12">
+              <h2 className="text-4xl lg:text-5xl font-display font-bold mb-4">Football Training Schedule</h2>
+              <p className="text-lg text-muted-foreground">January - February 2026</p>
+              <p className="text-sm text-muted-foreground mt-2">Starting January 6, 2026</p>
+            </div>
+
+            <div className="bg-card border-border">
+              <div className="pt-6">
+                <div className="space-y-6">
+                  <div>
+                    <h3 className="font-display font-bold text-lg mb-4">Weekly Training Sessions</h3>
+                    <p className="text-muted-foreground mb-4">
+                      Exactly 4 sessions per week (Tue, Wed, Sat, Sun), totaling 16 per month.
+                    </p>
+                  </div>
+
+                  <div className="grid md:grid-cols-2 gap-6">
+                    <div className="space-y-4">
+                      <div className="flex items-start gap-4">
+                        <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
+                          <Calendar className="w-5 h-5 text-primary" />
+                        </div>
+                        <div>
+                          <div className="font-medium mb-1">Tuesday: S&C</div>
+                          <div className="text-sm text-muted-foreground">Strength & Conditioning</div>
+                          <div className="text-sm text-muted-foreground">6:00 PM at Swift Sessions</div>
+                        </div>
+                      </div>
+
+                      <div className="flex items-start gap-4">
+                        <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
+                          <Calendar className="w-5 h-5 text-primary" />
+                        </div>
+                        <div>
+                          <div className="font-medium mb-1">Wednesday: SAQ</div>
+                          <div className="text-sm text-muted-foreground">Speed, Agility & Quickness</div>
+                          <div className="text-sm text-muted-foreground">6:00 PM at Swift Sessions</div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="space-y-4">
+                      <div className="flex items-start gap-4">
+                        <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
+                          <Calendar className="w-5 h-5 text-primary" />
+                        </div>
+                        <div>
+                          <div className="font-medium mb-1">Saturday: Field Practice</div>
+                          <div className="text-sm text-muted-foreground">Football drills & scrimmage</div>
+                          <div className="text-sm text-muted-foreground">9:00 AM at TBD Field</div>
+                        </div>
+                      </div>
+
+                      <div className="flex items-start gap-4">
+                        <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
+                          <Calendar className="w-5 h-5 text-primary" />
+                        </div>
+                        <div>
+                          <div className="font-medium mb-1">Sunday: Field Practice</div>
+                          <div className="text-sm text-muted-foreground">Football drills & scrimmage</div>
+                          <div className="text-sm text-muted-foreground">3:00 PM at TBD Field</div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Sponsors Section */}
-      <section className="py-12 lg:py-20">
+      {/* Frequently Asked Questions Section */}
+      <section className="py-20 lg:py-32">
         <div className="container mx-auto px-4 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-4xl lg:text-5xl font-display font-bold mb-4">Our Sponsors</h2>
-            <p className="text-lg text-white max-w-2xl mx-auto leading-relaxed">
-              We are grateful for the support that help make our program possible.
-            </p>
-          </div>
+          <div className="max-w-3xl mx-auto">
+            <div className="text-center mb-12">
+              <h2 className="text-4xl lg:text-5xl font-display font-bold mb-4">Frequently Asked Questions</h2>
+              <p className="text-lg text-muted-foreground">Everything you need to know about Poly Rise Football</p>
+            </div>
 
-          <div className="flex flex-wrap justify-center items-center gap-8 lg:gap-16">
-            <div className="w-44 h-40 rounded-lg border-2 border-primary/20 bg-white flex items-center justify-center overflow-hidden hover:border-primary/50 transition-colors p-4">
-              <img src="/sponsor-sgm.png" alt="SGM Sponsor" className="w-full h-full object-contain" />
-            </div>
-            <div className="w-44 h-40 rounded-lg border-2 border-primary/20 bg-white flex items-center justify-center overflow-hidden hover:border-primary/50 transition-colors p-4">
-              <img src="/sponsor-grease-monkey.png" alt="Grease Monkey - Oil Changes & More" className="w-full h-full object-contain" />
-            </div>
-            <div className="w-44 h-40 rounded-lg border-2 border-primary/20 bg-white flex items-center justify-center overflow-hidden hover:border-primary/50 transition-colors p-4">
-              <img src="/sponsor-swift-sessions.png" alt="Swift Sessions" className="w-full h-full object-contain" />
-            </div>
-            <div className="w-44 h-40 rounded-lg border-2 border-primary/20 bg-white flex items-center justify-center overflow-hidden hover:border-primary/50 transition-colors p-4">
-              <img src="/sponsor-main-design.png" alt="Main Design Print Co." className="w-full h-full object-contain" />
-            </div>
-            <div className="w-44 h-40 rounded-lg border-2 border-primary/20 bg-white flex items-center justify-center overflow-hidden hover:border-primary/50 transition-colors p-4">
-              <img src="/sponsor-longhorn-mobile-detailing.jpg" alt="Longhorn Mobile Detailing" className="w-full h-full object-contain" />
-            </div>
-          </div>
+            <div className="space-y-6">
+              <div className="bg-card border-border">
+                <div className="pt-6">
+                  <h3 className="font-display font-bold text-lg mb-2">
+                    What age groups does Poly Rise Football train?
+                  </h3>
+                  <p className="text-muted-foreground leading-relaxed">
+                    Poly Rise Football provides elite training for K-12 athletes, including youth, middle school, and
+                    high school players. Our programs are designed to develop athletes at every level, from beginners to
+                    those preparing for college recruitment.
+                  </p>
+                </div>
+              </div>
 
-          <div className="text-center mt-12">
-            <p className="text-white mb-4">Interested in becoming a sponsor?</p>
-            <a href="#contact" className="inline-flex items-center justify-center px-6 py-3 rounded-lg bg-primary text-primary-foreground font-medium hover:bg-primary/90 transition-colors">
-              Contact Us
-            </a>
+              <div className="bg-card border-border">
+                <div className="pt-6">
+                  <h3 className="font-display font-bold text-lg mb-2">Where is Poly Rise Football located?</h3>
+                  <p className="text-muted-foreground leading-relaxed">
+                    Poly Rise Football is based in Austin, Texas, with training sessions at Swift Sessions and local
+                    fields. We are expanding to other cities nationwide. Contact us to find out when we're coming to
+                    your location.
+                  </p>
+                </div>
+              </div>
+
+              <div className="bg-card border-border">
+                <div className="pt-6">
+                  <h3 className="font-display font-bold text-lg mb-2">
+                    What is included in the PolyRISE Select program?
+                  </h3>
+                  <p className="text-muted-foreground leading-relaxed">
+                    PolyRISE Select ($400/month) includes 16 training sessions monthly, complete gear package (tee,
+                    shorts, gloves, headband, hoodie), SAQ and S&C training, football drills, local & regional 7v7
+                    tournament entries, film study, quarterly military character building events, and 3 free camps
+                    annually.
+                  </p>
+                </div>
+              </div>
+
+              <div className="bg-card border-border">
+                <div className="pt-6">
+                  <h3 className="font-display font-bold text-lg mb-2">
+                    What makes 360 Elite different from PolyRISE Select?
+                  </h3>
+                  <p className="text-muted-foreground leading-relaxed">
+                    360 Elite ($750/month) includes everything in PolyRISE Select plus one-on-one coaching from NFL
+                    experience staff, weekly film study, unlimited free camps, monthly character building events,
+                    college visits, NIL & financial literacy classes, and discounts at affiliated sports medicine and
+                    nutrition shops.
+                  </p>
+                </div>
+              </div>
+
+              <div className="bg-card border-border">
+                <div className="pt-6">
+                  <h3 className="font-display font-bold text-lg mb-2">What is the training schedule?</h3>
+                  <p className="text-muted-foreground leading-relaxed">
+                    Training includes 4 weekly sessions (16 per month): Tuesday 6pm S&C at Swift Sessions, Wednesday 6pm
+                    SAQ at Swift Sessions, Saturday 9am field practice, and Sunday 3pm field practice. The current
+                    schedule runs January-February 2026 starting January 6.
+                  </p>
+                </div>
+              </div>
+
+              <div className="bg-card border-border">
+                <div className="pt-6">
+                  <h3 className="font-display font-bold text-lg mb-2">
+                    Does Poly Rise Football have coaches with NFL experience?
+                  </h3>
+                  <p className="text-muted-foreground leading-relaxed">
+                    Yes, Poly Rise Football has coaches with NFL experience on staff who provide one-on-one coaching,
+                    film study, and advanced training for athletes in the 360 Elite program.
+                  </p>
+                </div>
+              </div>
+
+              <div className="bg-card border-border">
+                <div className="pt-6">
+                  <h3 className="font-display font-bold text-lg mb-2">What is SAQ and S&C training?</h3>
+                  <p className="text-muted-foreground leading-relaxed">
+                    SAQ stands for Speed, Agility, and Quickness training - focused on improving footwork, reaction
+                    time, and movement efficiency. S&C stands for Strength and Conditioning - building physical power,
+                    endurance, and injury prevention through targeted exercises.
+                  </p>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
 
       {/* Contact Section */}
-      <section id="contact" className="py-12 lg:py-20 bg-muted/30">
+      <section id="contact" className="py-20 lg:py-32 bg-muted/30">
         <div className="container mx-auto px-4 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-12">
             <div className="space-y-8">
               <div>
                 <h2 className="text-4xl font-display font-bold mb-4">Send Message</h2>
-                <p className="text-lg text-white leading-relaxed">
+                <p className="text-lg text-muted-foreground leading-relaxed">
                   Do you have questions or comments about our youth football program and improving your football skills?
                   Send me a message, and I will get back to you soon.
                 </p>
@@ -777,9 +634,9 @@ export default function HomePage() {
                   </div>
                   <div>
                     <div className="font-medium mb-1">Location</div>
-                    <div className="text-white">Dripping Springs, Texas (Austin area)</div>
-                    <div className="text-sm text-white">
-                      Training at Swift Sessions and local fields. Expanding to other cities nationwide.
+                    <div className="text-muted-foreground">Austin, Texas</div>
+                    <div className="text-sm text-muted-foreground">
+                      Expanding to other cities - Contact us to find out when we're coming to your location
                     </div>
                   </div>
                 </div>
@@ -791,33 +648,48 @@ export default function HomePage() {
                     </svg>
                   </div>
                   <div>
-                    <div className="font-medium mb-1 text-white">WhatsApp</div>
-                    <a href="https://wa.me/18176583300" className="text-white hover:underline">+1 (817) 658-3300</a>
+                    <div className="font-medium mb-1">WhatsApp</div>
+                    <a href="https://wa.me/18176583300" className="text-primary hover:underline">
+                      +1 (817) 658-3300
+                    </a>
                   </div>
                 </div>
 
                 <div className="flex items-start gap-4">
                   <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
                     <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+                      />
                     </svg>
                   </div>
                   <div>
-                    <div className="font-medium mb-1 text-white">Email</div>
-                    <a href="mailto:polyrise@polyrisefootball.com" className="text-white hover:underline block">polyrise@polyrisefootball.com</a>
-                    <a href="mailto:kg@polyrisefootball.com" className="text-white hover:underline block">kg@polyrisefootball.com</a>
+                    <div className="font-medium mb-1">Email</div>
+                    <a href="mailto:polyrise@polyrisefootball.com" className="text-primary hover:underline">
+                      polyrise@polyrisefootball.com
+                    </a>
                   </div>
                 </div>
 
                 <div className="flex items-start gap-4">
                   <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
                     <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
+                      />
                     </svg>
                   </div>
                   <div>
-                    <div className="font-medium mb-1 text-white">Phone</div>
-                    <a href="tel:+18176583300" className="text-white hover:underline">+1 (817) 658-3300</a>
+                    <div className="font-medium mb-1">Phone</div>
+                    <a href="tel:+18176583300" className="text-primary hover:underline">
+                      +1 (817) 658-3300
+                    </a>
                   </div>
                 </div>
               </div>
@@ -827,19 +699,48 @@ export default function HomePage() {
               <div className="pt-6">
                 <form className="space-y-6">
                   <div className="space-y-2">
-                    <label htmlFor="name" className="text-sm font-medium">Name</label>
-                    <input id="name" type="text" className="w-full px-4 py-2 rounded-lg bg-background border border-input focus:outline-none focus:ring-2 focus:ring-ring" placeholder="Your name" />
+                    <label htmlFor="name" className="text-sm font-medium">
+                      Name
+                    </label>
+                    <input
+                      id="name"
+                      type="text"
+                      className="w-full px-4 py-2 rounded-lg bg-background border border-input focus:outline-none focus:ring-2 focus:ring-ring"
+                      placeholder="Your name"
+                    />
                   </div>
                   <div className="space-y-2">
-                    <label htmlFor="email" className="text-sm font-medium">Email *</label>
-                    <input id="email" type="email" required className="w-full px-4 py-2 rounded-lg bg-background border border-input focus:outline-none focus:ring-2 focus:ring-ring" placeholder="your@email.com" />
+                    <label htmlFor="email" className="text-sm font-medium">
+                      Email *
+                    </label>
+                    <input
+                      id="email"
+                      type="email"
+                      required
+                      className="w-full px-4 py-2 rounded-lg bg-background border border-input focus:outline-none focus:ring-2 focus:ring-ring"
+                      placeholder="your@email.com"
+                    />
                   </div>
                   <div className="space-y-2">
-                    <label htmlFor="message" className="text-sm font-medium">Message</label>
-                    <textarea id="message" rows={6} className="w-full px-4 py-2 rounded-lg bg-background border border-input focus:outline-none focus:ring-2 focus:ring-ring resize-none" placeholder="Your message..." />
+                    <label htmlFor="message" className="text-sm font-medium">
+                      Message
+                    </label>
+                    <textarea
+                      id="message"
+                      rows={6}
+                      className="w-full px-4 py-2 rounded-lg bg-background border border-input focus:outline-none focus:ring-2 focus:ring-ring resize-none"
+                      placeholder="Your message..."
+                    />
                   </div>
-                  <button type="submit" className="w-full bg-red-600 text-white px-4 py-2 rounded hover:bg-red-600/80 transition-colors">Send Message</button>
-                  <p className="text-xs text-white text-center">This site is protected by reCAPTCHA and the Google Privacy Policy and Terms of Service apply.</p>
+                  <button
+                    type="submit"
+                    className="w-full bg-primary text-white px-4 py-2 rounded hover:bg-primary/80 transition-colors"
+                  >
+                    Send Message
+                  </button>
+                  <p className="text-xs text-muted-foreground text-center">
+                    This site is protected by reCAPTCHA and the Google Privacy Policy and Terms of Service apply.
+                  </p>
                 </form>
               </div>
             </div>
@@ -848,25 +749,30 @@ export default function HomePage() {
       </section>
 
       {/* Registration CTA */}
-      <section id="register" className="py-12 lg:py-20 bg-primary">
+      <section id="register" className="py-20 lg:py-32 bg-primary">
         <div className="container mx-auto px-4 lg:px-8">
           <div className="max-w-3xl mx-auto text-center space-y-8">
             <h2 className="text-4xl lg:text-5xl font-display font-bold text-primary-foreground text-balance">
               Ready to Start Your Journey?
             </h2>
             <p className="text-lg text-primary-foreground/90 leading-relaxed text-pretty">
-              Join PolyRISE Athletix for expert coaching and complete athlete development — built on a football core. Registration is now open for all programs.
+              Join our football program for expert coaching and football skills development. Registration is now open
+              for all programs.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link href="/register" className="text-base bg-red-600 text-white px-4 py-2 rounded hover:bg-red-600/80 transition-colors inline-flex items-center">
+              <Link
+                href="https://app.teamlinkt.com/register/find/polyrisefootball"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-base bg-primary text-white px-4 py-2 rounded hover:bg-primary/80 transition-colors"
+              >
                 Register for Training
                 <ArrowRight className="w-4 h-4 ml-2" />
               </Link>
-              <Link href="/free-profile" className="text-base bg-green-700 text-white px-4 py-2 rounded hover:bg-green-800 transition-colors inline-flex items-center">
-                Free Athlete Profile
-                <ArrowRight className="w-4 h-4 ml-2" />
-              </Link>
-              <Link href="#contact" className="text-base bg-transparent border border-primary px-4 py-2 rounded hover:bg-primary/10 transition-colors">
+              <Link
+                href="#contact"
+                className="text-base bg-transparent border border-primary px-4 py-2 rounded hover:bg-primary/10 transition-colors"
+              >
                 Contact Us
               </Link>
             </div>
@@ -883,62 +789,92 @@ export default function HomePage() {
                 <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
                   <span className="text-primary-foreground font-display font-bold">PR</span>
                 </div>
-                <span className="font-display font-bold">PolyRISE Athletix</span>
+                <span className="font-display font-bold">Poly Rise Football</span>
               </div>
-              <p className="text-sm text-white leading-relaxed">
-                Building stronger, faster, and character-driven young athletes in Dripping Springs, Texas (Austin area) and beyond.
+              <p className="text-sm text-muted-foreground leading-relaxed">
+                Building stronger, faster, and character-driven young athletes in Austin, Texas and beyond.
               </p>
             </div>
 
             <div>
               <h4 className="font-display font-bold mb-4">Programs</h4>
-              <ul className="space-y-2 text-sm text-white">
-                <li><Link href="/passport" className="hover:text-foreground transition-colors">Athlete Passport</Link></li>
-                <li><Link href="#programs" className="hover:text-foreground transition-colors">Player Development</Link></li>
-                <li><Link href="#programs" className="hover:text-foreground transition-colors">HS Recruiting &amp; Exposure</Link></li>
+              <ul className="space-y-2 text-sm text-muted-foreground">
+                <li>
+                  <Link href="/programs" className="hover:text-foreground transition-colors">
+                    PolyRISE Select
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/programs" className="hover:text-foreground transition-colors">
+                    360 Elite
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/programs" className="hover:text-foreground transition-colors">
+                    Winter Season
+                  </Link>
+                </li>
               </ul>
             </div>
 
             <div>
               <h4 className="font-display font-bold mb-4">Company</h4>
-              <ul className="space-y-2 text-sm text-white">
-                <li><Link href="/#about" className="hover:text-foreground transition-colors">About Us</Link></li>
-                <li><Link href="/#contact" className="hover:text-foreground transition-colors">Contact</Link></li>
-                <li><Link href="/register" className="hover:text-foreground transition-colors">Register</Link></li>
+              <ul className="space-y-2 text-sm text-muted-foreground">
+                <li>
+                  <Link href="/#about" className="hover:text-foreground transition-colors">
+                    About Us
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/#contact" className="hover:text-foreground transition-colors">
+                    Contact
+                  </Link>
+                </li>
+                <li>
+                  <a
+                    href="https://app.teamlinkt.com/register/find/polyrisefootball"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="hover:text-foreground transition-colors"
+                  >
+                    Register
+                  </a>
+                </li>
               </ul>
             </div>
 
             <div>
               <h4 className="font-display font-bold mb-4">Connect</h4>
               <div className="flex gap-4">
-                <a href="https://www.facebook.com/profile.php?id=61573903568901" target="_blank" rel="noopener noreferrer"
-                  className="w-10 h-10 rounded-full bg-muted hover:bg-primary hover:text-primary-foreground transition-colors flex items-center justify-center">
+                <a
+                  href="https://www.facebook.com/profile.php?id=61573903568901"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-10 h-10 rounded-full bg-muted hover:bg-primary hover:text-primary-foreground transition-colors flex items-center justify-center"
+                >
                   <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
+                    <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.057-1.644-.07-4.849-.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.281-.073-1.689-.073-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.69-.073 4.949-.073zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.057-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4z" />
                   </svg>
                 </a>
-                <a href="https://www.x.com/PolyRise7v7" target="_blank" rel="noopener noreferrer"
-                  className="w-10 h-10 rounded-full bg-muted hover:bg-primary hover:text-primary-foreground transition-colors flex items-center justify-center">
+                <a
+                  href="https://www.x.com/PolyRise7v7"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-10 h-10 rounded-full bg-muted hover:bg-primary hover:text-primary-foreground transition-colors flex items-center justify-center"
+                >
                   <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
                     <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
-                  </svg>
-                </a>
-                <a href="https://www.instagram.com/polyrise_football/" target="_blank" rel="noopener noreferrer"
-                  className="w-10 h-10 rounded-full bg-muted hover:bg-primary hover:text-primary-foreground transition-colors flex items-center justify-center">
-                  <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.012-3.584.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
                   </svg>
                 </a>
               </div>
             </div>
           </div>
 
-          <div className="pt-8 border-t border-border text-center text-sm text-white">
-            <p>Copyright © 2026 PolyRISE Athletix - All Rights Reserved.</p>
+          <div className="pt-8 border-t border-border text-center text-sm text-muted-foreground">
+            <p>Copyright © 2025 poly rise football - All Rights Reserved.</p>
           </div>
         </div>
       </footer>
-      </div>
-    </>
+    </div>
   )
 }

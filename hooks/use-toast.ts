@@ -53,22 +53,22 @@ interface State {
   toasts: ToasterToast[]
 }
 
-const toastTimeouts: Record<string, ReturnType<typeof setTimeout>> = {}
+const toastTimeouts = new Map<string, ReturnType<typeof setTimeout>>()
 
 const addToRemoveQueue = (toastId: string) => {
-  if (toastId in toastTimeouts) {
+  if (toastTimeouts.has(toastId)) {
     return
   }
 
   const timeout = setTimeout(() => {
-    delete toastTimeouts[toastId]
+    toastTimeouts.delete(toastId)
     dispatch({
       type: 'REMOVE_TOAST',
       toastId: toastId,
     })
   }, TOAST_REMOVE_DELAY)
 
-  toastTimeouts[toastId] = timeout
+  toastTimeouts.set(toastId, timeout)
 }
 
 export const reducer = (state: State, action: Action): State => {

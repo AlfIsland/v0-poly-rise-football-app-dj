@@ -32,7 +32,8 @@ const PROGRAMS_DATA: Record<string, { name: string; price: number; priceLabel: s
   "summer-ms":               { name: "Athletic Camp",                             price: 265,   priceLabel: "$265",      billing: "one_time"  },
   // Events
   "combine":                 { name: "Combine Metrics Camp",                      price: 40,    priceLabel: "$40",       billing: "one_time"  },
-  "tackling-camp":           { name: "Tackling Camp",                             price: 25,    priceLabel: "$25",       billing: "one_time"  },
+  "pr-verified-single":      { name: "PR-VERIFIED — 1 Event",                     price: 40,    priceLabel: "$40",       billing: "one_time"  },
+  "pr-verified-annual":      { name: "PR-VERIFIED — Annual (6 Events)",           price: 130,   priceLabel: "$130/yr",   billing: "one_time"  },
   "hike":                    { name: "Leadership & Mentorship Hike",              price: 25,    priceLabel: "$25",       billing: "one_time"  },
   // Athlete Tracking & Recruiting Profiles
   "passport":                { name: "Passport",                                  price: 9.99,  priceLabel: "$9.99/mo",  billing: "monthly"   },
@@ -79,8 +80,9 @@ const CATEGORIES = [
   {
     label: "Events", badge: "bg-green-900 text-green-300", color: "border-green-800 hover:border-green-500",
     programs: [
-      { id: "combine",       desc: "Professional Combine Events · H.S. athletes record official metrics · Earn your PR-VERIFIED seal" },
-      { id: "tackling-camp", desc: "Dripping Springs · Proper tackling technique & fundamentals coached by NFL-experienced staff" },
+      { id: "combine",            desc: "Professional Combine Events · H.S. athletes record official metrics · Earn your PR-VERIFIED seal" },
+      { id: "pr-verified-single", desc: "1 combine event · Get officially PR-VERIFIED · Standardized pro-style testing on-site" },
+      { id: "pr-verified-annual", desc: "6 combine events throughout the year · Keep your verified data current all season long", highlight: "BEST VALUE" },
       { id: "hike",          desc: "Leadership & Mentorship Hike · Character-building experience developing leadership, mentorship & mental toughness" },
     ],
   },

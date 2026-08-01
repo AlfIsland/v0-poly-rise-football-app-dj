@@ -26,7 +26,7 @@ const CATEGORY_LABELS: Record<string, string> = {
   "girls-dev": "Training", "girls-dev-3day": "Training",
   "drop-in-1day": "Training", "drop-in-2day": "Training",
   "summer-ms": "Camp",
-  "combine": "Event", "hike": "Event", "tackling-camp": "Event",
+  "combine": "Event", "hike": "Event", "pr-verified-single": "Event", "pr-verified-annual": "Event",
   "hs-recruiting-elite": "Recruiting", "hs-recruiting-pro": "Recruiting", "hs-recruiting-basic": "Recruiting",
   "passport": "Membership", "recruit": "Membership", "elite-recruit": "Membership",
 }

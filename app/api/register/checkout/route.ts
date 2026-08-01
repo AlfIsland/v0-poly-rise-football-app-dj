@@ -30,7 +30,8 @@ export const PROGRAMS: Record<string, { name: string; price: number; billing: "o
   "afterschool-monthly":     { name: "After School & Girls Development",                     price: 150,   billing: "one_time" },
   // Events
   "combine":                 { name: "Combine Metrics Camp",                           price: 40,    billing: "one_time" },
-  "tackling-camp":           { name: "Tackling Camp",                                  price: 25,    billing: "one_time" },
+  "pr-verified-single":      { name: "PR-VERIFIED — 1 Event",                          price: 40,    billing: "one_time" },
+  "pr-verified-annual":      { name: "PR-VERIFIED — Annual (6 Events)",               price: 130,   billing: "one_time" },
   "hike":                    { name: "Leadership & Mentorship Hike",                   price: 25,    billing: "one_time" },
   // Athlete Tracking & Recruiting Profiles
   "passport":                { name: "Passport",                                        price: 9.99,  billing: "monthly"  },

@@ -238,17 +238,18 @@ export default function HomePage() {
                 <Link href="/register?program=tackle-session-monthly" className="mt-auto block text-center text-xs font-bold bg-red-600 hover:bg-red-700 text-white py-2 rounded-lg transition-colors">Register</Link>
               </div>
 
-              {/* Tackling Camp */}
+              {/* PR-VERIFIED */}
               <div className="bg-gray-900 border border-gray-800 rounded-xl p-4 flex flex-col gap-3 hover:border-gray-600 transition-colors">
                 <div>
-                  <span className="inline-block text-xs font-bold px-2 py-0.5 rounded-full bg-blue-900/60 text-blue-300 mb-2">Camp</span>
-                  <h4 className="text-sm font-bold text-white">Tackling Camp</h4>
-                  <p className="text-xs text-gray-400 mt-1 leading-relaxed">Proper tackling technique &amp; fundamentals coached by NFL-experienced staff</p>
+                  <span className="inline-block text-xs font-bold px-2 py-0.5 rounded-full bg-yellow-900/60 text-yellow-300 mb-2">PR-VERIFIED</span>
+                  <h4 className="text-sm font-bold text-white">PR-VERIFIED</h4>
+                  <p className="text-xs text-gray-400 mt-1 leading-relaxed">Sign up for 1 combine event and get officially verified — or go annual and get 6 events throughout the year to keep your data current</p>
                 </div>
-                <div className="border-t border-gray-800 pt-2.5">
-                  <div className="flex justify-between text-xs"><span className="text-gray-300">Dripping Springs</span><span className="font-bold text-white">$25</span></div>
+                <div className="border-t border-gray-800 pt-2.5 flex flex-col gap-1.5">
+                  <div className="flex justify-between text-xs"><span className="text-gray-300">1 Event</span><span className="font-bold text-white">$40</span></div>
+                  <div className="flex justify-between text-xs"><span className="text-gray-300">Annual · 6 Events</span><span className="font-bold text-white">$130/yr</span></div>
                 </div>
-                <Link href="/register?program=tackling-camp" className="mt-auto block text-center text-xs font-bold bg-red-600 hover:bg-red-700 text-white py-2 rounded-lg transition-colors">Register</Link>
+                <Link href="/register?program=pr-verified-single" className="mt-auto block text-center text-xs font-bold bg-red-600 hover:bg-red-700 text-white py-2 rounded-lg transition-colors">Register</Link>
               </div>
 
               {/* Combine Metrics Camp */}

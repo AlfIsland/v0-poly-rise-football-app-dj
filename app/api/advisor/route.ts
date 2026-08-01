@@ -36,7 +36,7 @@ Tackle Sessions — Aug 8, 15 & 22 · 9:30–11:00am: $40/session (pay per sessi
 Summer Camp — $265/month (June & July, max 20 spots): K-5 Mon-Thu 8-10am, Middle School Mon-Thu 10am-12pm, High School Mon-Thu 2-4pm.
 
 CAMPS & EVENTS:
-PR-VERIFIED Combine Camp: $50/athlete. Professional combine events. HS athletes record official metrics.
+PR-VERIFIED: Get officially verified with standardized pro-style combine testing. 1 Event: $40 (one-time). Annual (6 Events): $130/year — 6 combine events throughout the year to keep your data current and verified. No self-reported times; everything measured on-site.
 Rise of Warriors Tournament: Middle School (10 teams, May 29, $400) and High School (8 teams, May 30, $425). Min 3 games, single elimination.
 
 REGISTRATION: https://polyrisefootball.com/register

@@ -3,9 +3,13 @@ import Link from "next/link"
 import Image from "next/image"
 import { ProtectedImage } from "@/components/protected-image"
 import { EliteRecruitWaitlist } from "@/components/elite-recruit-waitlist"
-
+import { getLeaderboard, formatScore } from "@/lib/pr-verified-data"
 
 export default function HomePage() {
+  const top40Over = getLeaderboard("40yd", "over200")[0]
+  const top40Under = getLeaderboard("40yd", "under200")[0]
+  const topAthlete = top40Over ?? top40Under
+
   return (
     <>
       <div className="min-h-screen bg-background">
@@ -239,7 +243,7 @@ export default function HomePage() {
               </div>
 
               {/* PR-VERIFIED */}
-              <div className="bg-gray-900 border border-gray-800 rounded-xl p-4 flex flex-col gap-3 hover:border-gray-600 transition-colors">
+              <div className="bg-gray-900 border border-gray-800 rounded-xl p-4 flex flex-col gap-3 hover:border-yellow-900/40 transition-colors">
                 <div>
                   <span className="inline-block text-xs font-bold px-2 py-0.5 rounded-full bg-yellow-900/60 text-yellow-300 mb-2">PR-VERIFIED</span>
                   <h4 className="text-sm font-bold text-white">PR-VERIFIED</h4>
@@ -249,7 +253,23 @@ export default function HomePage() {
                   <div className="flex justify-between text-xs"><span className="text-gray-300">1 Event</span><span className="font-bold text-white">$40</span></div>
                   <div className="flex justify-between text-xs"><span className="text-gray-300">Annual · 6 Events</span><span className="font-bold text-white">$130/yr</span></div>
                 </div>
-                <Link href="/register?program=pr-verified-single" className="mt-auto block text-center text-xs font-bold bg-red-600 hover:bg-red-700 text-white py-2 rounded-lg transition-colors">Register</Link>
+                {topAthlete && (
+                  <div className="border-t border-yellow-900/40 pt-2.5 flex flex-col gap-1.5">
+                    <p className="text-[9px] font-bold tracking-[0.15em] text-yellow-500/70 uppercase">Top Performer · 40 Yard Dash</p>
+                    <div className="flex items-center justify-between bg-yellow-950/50 border border-yellow-900/40 rounded-lg px-3 py-2">
+                      <div className="flex items-center gap-1.5 min-w-0">
+                        <span className="text-[10px] font-black text-yellow-400 flex-shrink-0">#1</span>
+                        <span className="text-xs font-bold text-white truncate">{topAthlete.name}</span>
+                        {topAthlete.school && <span className="text-[10px] text-gray-500 truncate">{topAthlete.school}</span>}
+                      </div>
+                      <span className="text-sm font-black text-yellow-300 tabular-nums flex-shrink-0 ml-2">{formatScore(topAthlete.score, "40yd")}</span>
+                    </div>
+                  </div>
+                )}
+                <div className="flex flex-col gap-1.5 mt-auto">
+                  <Link href="/register?program=pr-verified-single" className="block text-center text-xs font-bold bg-red-600 hover:bg-red-700 text-white py-2 rounded-lg transition-colors">Register</Link>
+                  <Link href="/pr-verified" className="block text-center text-xs font-bold border border-yellow-700/50 text-yellow-400 hover:bg-yellow-900/30 py-2 rounded-lg transition-colors">View Leaderboard →</Link>
+                </div>
               </div>
 
               {/* Combine Metrics Camp */}

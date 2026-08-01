@@ -3,13 +3,7 @@ import Link from "next/link"
 import Image from "next/image"
 import { ProtectedImage } from "@/components/protected-image"
 import { EliteRecruitWaitlist } from "@/components/elite-recruit-waitlist"
-import { getLeaderboard, formatScore } from "@/lib/pr-verified-data"
-
 export default function HomePage() {
-  const top40Over = getLeaderboard("40yd", "over200")[0]
-  const top40Under = getLeaderboard("40yd", "under200")[0]
-  const topAthlete = top40Over ?? top40Under
-
   return (
     <>
       <div className="min-h-screen bg-background">
@@ -121,6 +115,33 @@ export default function HomePage() {
           </div>
         </div>
       </section>
+
+      {/* PR-VERIFIED Leader Board Banner */}
+      <Link
+        href="/pr-verified"
+        className="group block bg-[#0c0c0c] border-y border-gray-800/70 hover:bg-[#110000] transition-colors duration-200"
+      >
+        <div className="container mx-auto px-4 lg:px-8 max-w-6xl py-5 flex items-center justify-between gap-6">
+          <div className="flex items-center gap-4">
+            <div className="w-[3px] h-14 rounded-full bg-[#DC143C] flex-shrink-0" />
+            <div>
+              <p className="text-[9px] font-bold tracking-[0.2em] uppercase text-[#DC143C]/60 mb-0.5">PolyRISE Athletix · Official</p>
+              <h2 className="text-2xl lg:text-3xl font-black text-white tracking-tight leading-none">
+                PR-VERIFIED <span className="text-[#DC143C]">LEADER BOARD</span>
+              </h2>
+              <p className="text-xs text-gray-500 mt-1">Verified combine rankings — no self-reported numbers</p>
+            </div>
+          </div>
+          <div className="flex items-center gap-3 flex-shrink-0">
+            <span className="hidden sm:block text-sm font-bold text-[#DC143C] group-hover:underline">View Rankings</span>
+            <div className="w-10 h-10 rounded-full bg-[#DC143C] group-hover:bg-[#B01030] transition-colors flex items-center justify-center flex-shrink-0">
+              <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden>
+                <path d="M3.5 9h11M9 3.5L14.5 9 9 14.5" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+              </svg>
+            </div>
+          </div>
+        </div>
+      </Link>
 
       {/* Programs & Pricing */}
       <section id="programs" className="py-12 lg:py-20 bg-gray-950">
@@ -243,9 +264,9 @@ export default function HomePage() {
               </div>
 
               {/* PR-VERIFIED */}
-              <div className="bg-gray-900 border border-gray-800 rounded-xl p-4 flex flex-col gap-3 hover:border-yellow-900/40 transition-colors">
+              <div className="bg-gray-900 border border-gray-800 rounded-xl p-4 flex flex-col gap-3 hover:border-[#DC143C]/40 transition-colors">
                 <div>
-                  <span className="inline-block text-xs font-bold px-2 py-0.5 rounded-full bg-yellow-900/60 text-yellow-300 mb-2">PR-VERIFIED</span>
+                  <span className="inline-block text-xs font-bold px-2 py-0.5 rounded-full bg-[#DC143C]/15 text-[#DC143C] mb-2">PR-VERIFIED</span>
                   <h4 className="text-sm font-bold text-white">PR-VERIFIED</h4>
                   <p className="text-xs text-gray-400 mt-1 leading-relaxed">Sign up for 1 combine event and get officially verified — or go annual and get 6 events throughout the year to keep your data current</p>
                 </div>
@@ -253,23 +274,7 @@ export default function HomePage() {
                   <div className="flex justify-between text-xs"><span className="text-gray-300">1 Event</span><span className="font-bold text-white">$40</span></div>
                   <div className="flex justify-between text-xs"><span className="text-gray-300">Annual · 6 Events</span><span className="font-bold text-white">$130/yr</span></div>
                 </div>
-                {topAthlete && (
-                  <div className="border-t border-yellow-900/40 pt-2.5 flex flex-col gap-1.5">
-                    <p className="text-[9px] font-bold tracking-[0.15em] text-yellow-500/70 uppercase">Top Performer · 40 Yard Dash</p>
-                    <div className="flex items-center justify-between bg-yellow-950/50 border border-yellow-900/40 rounded-lg px-3 py-2">
-                      <div className="flex items-center gap-1.5 min-w-0">
-                        <span className="text-[10px] font-black text-yellow-400 flex-shrink-0">#1</span>
-                        <span className="text-xs font-bold text-white truncate">{topAthlete.name}</span>
-                        {topAthlete.school && <span className="text-[10px] text-gray-500 truncate">{topAthlete.school}</span>}
-                      </div>
-                      <span className="text-sm font-black text-yellow-300 tabular-nums flex-shrink-0 ml-2">{formatScore(topAthlete.score, "40yd")}</span>
-                    </div>
-                  </div>
-                )}
-                <div className="flex flex-col gap-1.5 mt-auto">
-                  <Link href="/register?program=pr-verified-single" className="block text-center text-xs font-bold bg-red-600 hover:bg-red-700 text-white py-2 rounded-lg transition-colors">Register</Link>
-                  <Link href="/pr-verified" className="block text-center text-xs font-bold border border-yellow-700/50 text-yellow-400 hover:bg-yellow-900/30 py-2 rounded-lg transition-colors">View Leaderboard →</Link>
-                </div>
+                <Link href="/register?program=pr-verified-single" className="mt-auto block text-center text-xs font-bold bg-[#DC143C] hover:bg-[#B01030] text-white py-2 rounded-lg transition-colors">Register</Link>
               </div>
 
               {/* Combine Metrics Camp */}

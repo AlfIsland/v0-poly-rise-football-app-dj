@@ -9,8 +9,8 @@ import {
   getLeaderboard, formatScore,
 } from "@/lib/pr-verified-data"
 
-const LIME = "#d7ff3b"
-const DARK = "#060706"
+const SCARLET = "#DC143C"
+const BG      = "#060706"
 
 export default function PRVerifiedLeaderboard() {
   const [activeMetric, setActiveMetric]           = useState<Metric>("40yd")
@@ -19,14 +19,14 @@ export default function PRVerifiedLeaderboard() {
   const results = getLeaderboard(activeMetric, activeWeightClass)
 
   return (
-    <div className="min-h-screen text-white relative overflow-x-hidden" style={{ background: DARK }}>
+    <div className="min-h-screen text-white relative overflow-x-hidden" style={{ background: BG }}>
 
-      {/* Radial lime glow — top center */}
+      {/* Scarlet radial glow — top center */}
       <div
         aria-hidden
         className="pointer-events-none absolute inset-x-0 top-0 h-80"
         style={{
-          background: `radial-gradient(ellipse 75% 55% at 50% 0%, rgba(215,255,59,0.13) 0%, transparent 70%)`,
+          background: `radial-gradient(ellipse 75% 55% at 50% 0%, rgba(220,20,60,0.14) 0%, transparent 70%)`,
         }}
       />
 
@@ -50,17 +50,17 @@ export default function PRVerifiedLeaderboard() {
             <div className="flex items-center gap-1.5 justify-center">
               <span
                 className="text-xs font-black tracking-[0.2em] uppercase"
-                style={{ color: LIME, fontFamily: 'var(--font-archivo-black, "Arial Black", Impact, sans-serif)' }}
+                style={{ color: SCARLET, fontFamily: 'var(--font-archivo-black, "Arial Black", Impact, sans-serif)' }}
               >
                 PR-VERIFIED
               </span>
               {/* Check-badge icon */}
               <span
                 className="w-[18px] h-[18px] rounded flex items-center justify-center flex-shrink-0"
-                style={{ background: LIME }}
+                style={{ background: SCARLET }}
               >
                 <svg width="10" height="10" viewBox="0 0 10 10" fill="none" aria-hidden>
-                  <path d="M2 5.2L4 7.2L8 3" stroke={DARK} strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"/>
+                  <path d="M2 5.2L4 7.2L8 3" stroke="white" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"/>
                 </svg>
               </span>
             </div>
@@ -87,7 +87,7 @@ export default function PRVerifiedLeaderboard() {
           <div className="flex items-start justify-between gap-4">
             {/* Left accent bar + name */}
             <div className="flex gap-3 items-stretch flex-1 min-w-0">
-              <div className="w-[3px] rounded-full flex-shrink-0" style={{ background: LIME }} />
+              <div className="w-[3px] rounded-full flex-shrink-0" style={{ background: SCARLET }} />
               <div className="min-w-0">
                 <h1
                   className="font-black text-[15px] leading-snug tracking-wide text-white truncate"
@@ -104,16 +104,16 @@ export default function PRVerifiedLeaderboard() {
             {/* TOP PERFORMERS badge */}
             <span
               className="flex-shrink-0 text-[9px] font-bold tracking-[0.12em] uppercase px-2.5 py-1 rounded-full border"
-              style={{ color: LIME, borderColor: `${LIME}55` }}
+              style={{ color: SCARLET, borderColor: `${SCARLET}55` }}
             >
               TOP PERFORMERS
             </span>
           </div>
 
-          {/* Lime → transparent divider */}
+          {/* Scarlet → transparent divider */}
           <div
             className="mt-4 h-px"
-            style={{ background: `linear-gradient(to right, ${LIME}88, transparent)` }}
+            style={{ background: `linear-gradient(to right, ${SCARLET}99, transparent)` }}
           />
         </div>
 
@@ -129,7 +129,7 @@ export default function PRVerifiedLeaderboard() {
                 className="flex-1 py-2 px-3 rounded-full text-[10px] font-bold tracking-[0.1em] uppercase transition-all duration-150"
                 style={
                   active
-                    ? { background: LIME, color: DARK }
+                    ? { background: SCARLET, color: "white" }
                     : { border: "1px solid rgba(255,255,255,0.18)", color: "rgba(255,255,255,0.45)" }
                 }
               >
@@ -156,7 +156,7 @@ export default function PRVerifiedLeaderboard() {
                 className="flex-shrink-0 py-1.5 px-4 rounded-full text-[11px] font-bold tracking-wide whitespace-nowrap transition-all duration-150"
                 style={
                   active
-                    ? { background: LIME, color: DARK }
+                    ? { background: SCARLET, color: "white" }
                     : { border: "1px solid rgba(255,255,255,0.18)", color: "rgba(255,255,255,0.45)" }
                 }
               >
@@ -204,7 +204,7 @@ export default function PRVerifiedLeaderboard() {
                     className="flex items-center gap-4 rounded-xl px-4 py-3.5"
                     style={
                       isTop
-                        ? { background: LIME }
+                        ? { background: SCARLET }
                         : { background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.09)" }
                     }
                   >
@@ -213,7 +213,7 @@ export default function PRVerifiedLeaderboard() {
                       className="text-xl font-black leading-none w-7 flex-shrink-0"
                       style={{
                         fontFamily: 'var(--font-archivo-black, "Arial Black", Impact, sans-serif)',
-                        color: isTop ? DARK : "rgba(255,255,255,0.22)",
+                        color: isTop ? "rgba(255,255,255,0.65)" : "rgba(255,255,255,0.22)",
                       }}
                     >
                       #{i + 1}
@@ -223,14 +223,14 @@ export default function PRVerifiedLeaderboard() {
                     <div className="flex-1 min-w-0">
                       <p
                         className="font-bold text-[13px] leading-tight truncate"
-                        style={{ color: isTop ? DARK : "rgba(255,255,255,0.92)" }}
+                        style={{ color: "rgba(255,255,255,0.95)" }}
                       >
                         {athlete.name}
                       </p>
                       {athlete.school && (
                         <p
                           className="text-[11px] mt-0.5 truncate"
-                          style={{ color: isTop ? `${DARK}88` : "rgba(255,255,255,0.38)" }}
+                          style={{ color: isTop ? "rgba(255,255,255,0.55)" : "rgba(255,255,255,0.38)" }}
                         >
                           {athlete.school}
                         </p>
@@ -239,11 +239,8 @@ export default function PRVerifiedLeaderboard() {
 
                     {/* Score */}
                     <span
-                      className="text-[22px] font-black leading-none flex-shrink-0 tabular-nums"
-                      style={{
-                        fontFamily: 'var(--font-archivo-black, "Arial Black", Impact, sans-serif)',
-                        color: isTop ? DARK : "white",
-                      }}
+                      className="text-[22px] font-black leading-none flex-shrink-0 tabular-nums text-white"
+                      style={{ fontFamily: 'var(--font-archivo-black, "Arial Black", Impact, sans-serif)' }}
                     >
                       {formatScore(athlete.score, activeMetric)}
                     </span>
@@ -264,7 +261,7 @@ export default function PRVerifiedLeaderboard() {
           </p>
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-1.5">
-              <div className="w-1.5 h-1.5 rounded-full" style={{ background: LIME }} />
+              <div className="w-1.5 h-1.5 rounded-full" style={{ background: SCARLET }} />
               <span
                 className="text-[11px] font-bold tracking-wider"
                 style={{ color: "rgba(255,255,255,0.45)" }}

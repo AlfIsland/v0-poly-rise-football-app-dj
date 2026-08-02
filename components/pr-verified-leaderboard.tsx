@@ -1,281 +1,239 @@
 "use client"
 
-import { useState } from "react"
-import Link from "next/link"
-import {
-  type Metric, type WeightClass,
-  COMBINE_INFO, METRICS, WEIGHT_CLASSES,
-  METRIC_LABELS, WEIGHT_CLASS_LABELS,
-  getLeaderboard, formatScore,
-} from "@/lib/pr-verified-data"
+import { useState, useRef } from "react"
+import { BOARDS, TOTAL_BOARDS, TOTAL_EVENTS, uniqueSchoolCount } from "@/lib/the-board-data"
 
-const SCARLET = "#DC143C"
-const BG      = "#060706"
+const SCARLET  = "#e0342b"
+const GOLD     = "#966b27"
+const GOLD_LT  = "#c9973c"
+const BG       = "#000"
+const PANEL    = "#0d1014"
+const LINE     = "rgba(255,255,255,0.10)"
+const LINE2    = "rgba(255,255,255,0.18)"
+const DIM      = "#8a919c"
+const DIM2     = "#565e69"
+const FONT     = `var(--font-archivo-black, 'Archivo', 'Helvetica Neue', Arial, sans-serif)`
+
+const SCHOOL_COUNT = uniqueSchoolCount(BOARDS)
 
 export default function PRVerifiedLeaderboard() {
-  const [activeMetric, setActiveMetric]           = useState<Metric>("40yd")
-  const [activeWeightClass, setActiveWeightClass] = useState<WeightClass>("over200")
+  const [query, setQuery]           = useState("")
+  const [showNotice, setShowNotice] = useState(false)
+  const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null)
 
-  const results = getLeaderboard(activeMetric, activeWeightClass)
+  function handleLockedClick() {
+    setShowNotice(true)
+    if (timerRef.current) clearTimeout(timerRef.current)
+    timerRef.current = setTimeout(() => setShowNotice(false), 4000)
+  }
+
+  const q = query.toLowerCase()
+  const filteredBoards = query
+    ? BOARDS
+        .map(b => ({
+          ...b,
+          rows: b.rows.filter(([n, s]) =>
+            n.toLowerCase().includes(q) || s.toLowerCase().includes(q)
+          ),
+        }))
+        .filter(b => b.rows.length > 0)
+    : BOARDS
 
   return (
-    <div className="min-h-screen text-white relative overflow-x-hidden" style={{ background: BG }}>
+    <div style={{ background: BG, minHeight: "100vh", color: "#fff", fontFamily: FONT, WebkitFontSmoothing: "antialiased" }}>
+      <div style={{ maxWidth: 1180, margin: "0 auto", padding: "0 20px 80px" }}>
 
-      {/* Scarlet radial glow — top center */}
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-x-0 top-0 h-80"
-        style={{
-          background: `radial-gradient(ellipse 75% 55% at 50% 0%, rgba(220,20,60,0.14) 0%, transparent 70%)`,
-        }}
-      />
-
-      <div className="relative z-10 max-w-lg mx-auto px-5 pb-12">
-
-        {/* ── Header ─────────────────────────────────────────────────────── */}
-        <header className="flex items-center justify-between py-5">
-          <Link
-            href="/"
-            aria-label="Back"
-            className="w-8 h-8 flex items-center justify-center rounded-full"
-            style={{ background: "rgba(255,255,255,0.06)" }}
-          >
-            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden>
-              <path d="M10 12L6 8L10 4" stroke="white" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round"/>
-            </svg>
-          </Link>
-
-          {/* Wordmark */}
-          <div className="text-center select-none">
-            <div className="flex items-center gap-1.5 justify-center">
-              <span
-                className="text-xs font-black tracking-[0.2em] uppercase"
-                style={{ color: SCARLET, fontFamily: 'var(--font-archivo-black, "Arial Black", Impact, sans-serif)' }}
-              >
-                PR-VERIFIED
+        {/* ── Header ── */}
+        <header style={{ borderBottom: `1px solid ${LINE}`, padding: "26px 0 20px", marginBottom: 24 }}>
+          <div style={{ display: "flex", alignItems: "center", gap: 18, flexWrap: "wrap" }}>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/the-board-logo.png"
+              alt="THE BOARD — where coaches look."
+              style={{ height: 66, width: "auto", display: "block" }}
+            />
+            <div style={{ borderLeft: `1px solid ${LINE2}`, paddingLeft: 18 }}>
+              <span style={{
+                display: "inline-flex", alignItems: "center", gap: 8,
+                background: SCARLET, color: "#fff", fontSize: 11, fontWeight: 900,
+                letterSpacing: "0.16em", textTransform: "uppercase", padding: "6px 12px", borderRadius: 5,
+              }}>
+                PR-Verified
               </span>
-              {/* Check-badge icon */}
-              <span
-                className="w-[18px] h-[18px] rounded flex items-center justify-center flex-shrink-0"
-                style={{ background: SCARLET }}
-              >
-                <svg width="10" height="10" viewBox="0 0 10 10" fill="none" aria-hidden>
-                  <path d="M2 5.2L4 7.2L8 3" stroke="white" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"/>
-                </svg>
-              </span>
+              <p style={{ color: DIM, fontSize: 11, letterSpacing: "0.2em", textTransform: "uppercase", marginTop: 9, fontWeight: 700, margin: "9px 0 0" }}>
+                PolyRISE Athletix · Summer 2026
+              </p>
             </div>
-            <p className="text-[9px] tracking-[0.22em] uppercase mt-0.5" style={{ color: "rgba(255,255,255,0.35)" }}>
-              POLYRISE ATHLETIX
-            </p>
           </div>
-
-          {/* Search (placeholder) */}
-          <button
-            aria-label="Search"
-            className="w-8 h-8 flex items-center justify-center rounded-full"
-            style={{ background: "rgba(255,255,255,0.06)" }}
-          >
-            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden>
-              <circle cx="7" cy="7" r="4.5" stroke="rgba(255,255,255,0.6)" strokeWidth="1.5"/>
-              <path d="M11 11L14 14" stroke="rgba(255,255,255,0.6)" strokeWidth="1.5" strokeLinecap="round"/>
-            </svg>
-          </button>
         </header>
 
-        {/* ── Combine title block ─────────────────────────────────────────── */}
-        <div className="mt-1 mb-5">
-          <div className="flex items-start justify-between gap-4">
-            {/* Left accent bar + name */}
-            <div className="flex gap-3 items-stretch flex-1 min-w-0">
-              <div className="w-[3px] rounded-full flex-shrink-0" style={{ background: SCARLET }} />
-              <div className="min-w-0">
-                <h1
-                  className="font-black text-[15px] leading-snug tracking-wide text-white truncate"
-                  style={{ fontFamily: 'var(--font-archivo-black, "Arial Black", Impact, sans-serif)' }}
-                >
-                  {COMBINE_INFO.name}
-                </h1>
-                <p className="text-[10px] tracking-[0.22em] uppercase mt-0.5" style={{ color: "rgba(255,255,255,0.35)" }}>
-                  {COMBINE_INFO.season}
-                </p>
-              </div>
-            </div>
-
-            {/* TOP PERFORMERS badge */}
-            <span
-              className="flex-shrink-0 text-[9px] font-bold tracking-[0.12em] uppercase px-2.5 py-1 rounded-full border"
-              style={{ color: SCARLET, borderColor: `${SCARLET}55` }}
-            >
-              TOP PERFORMERS
-            </span>
-          </div>
-
-          {/* Scarlet → transparent divider */}
-          <div
-            className="mt-4 h-px"
-            style={{ background: `linear-gradient(to right, ${SCARLET}99, transparent)` }}
-          />
-        </div>
-
-        {/* ── Weight class toggle ─────────────────────────────────────────── */}
-        <div className="flex gap-2 mb-4" role="group" aria-label="Weight class">
-          {WEIGHT_CLASSES.map(wc => {
-            const active = activeWeightClass === wc
-            return (
-              <button
-                key={wc}
-                onClick={() => setActiveWeightClass(wc)}
-                aria-pressed={active}
-                className="flex-1 py-2 px-3 rounded-full text-[10px] font-bold tracking-[0.1em] uppercase transition-all duration-150"
-                style={
-                  active
-                    ? { background: SCARLET, color: "white" }
-                    : { border: "1px solid rgba(255,255,255,0.18)", color: "rgba(255,255,255,0.45)" }
-                }
-              >
-                {WEIGHT_CLASS_LABELS[wc]}
-              </button>
-            )
-          })}
-        </div>
-
-        {/* ── Metric pills (horizontal scroll, no scrollbar) ──────────────── */}
-        <div
-          className="flex gap-2 mb-7 overflow-x-auto pb-0.5"
-          style={{ scrollbarWidth: "none" } as React.CSSProperties}
-          role="group"
-          aria-label="Metric"
-        >
-          {METRICS.map(m => {
-            const active = activeMetric === m
-            return (
-              <button
-                key={m}
-                onClick={() => setActiveMetric(m)}
-                aria-pressed={active}
-                className="flex-shrink-0 py-1.5 px-4 rounded-full text-[11px] font-bold tracking-wide whitespace-nowrap transition-all duration-150"
-                style={
-                  active
-                    ? { background: SCARLET, color: "white" }
-                    : { border: "1px solid rgba(255,255,255,0.18)", color: "rgba(255,255,255,0.45)" }
-                }
-              >
-                {METRIC_LABELS[m]}
-              </button>
-            )
-          })}
-        </div>
-
-        {/* ── Leaderboard ─────────────────────────────────────────────────── */}
-        <section>
-          <p className="text-[9px] font-bold tracking-[0.25em] uppercase mb-1.5" style={{ color: "rgba(255,255,255,0.35)" }}>
-            TOP 3 ATHLETES
-          </p>
-          <h2
-            className="text-[32px] font-black leading-none mb-1 text-white"
-            style={{ fontFamily: 'var(--font-archivo-black, "Arial Black", Impact, sans-serif)' }}
-          >
-            {METRIC_LABELS[activeMetric].toUpperCase()}
-          </h2>
-          <p className="text-[10px] tracking-[0.2em] uppercase mb-5" style={{ color: "rgba(255,255,255,0.35)" }}>
-            {WEIGHT_CLASS_LABELS[activeWeightClass]}
-          </p>
-
-          {results.length === 0 ? (
-            /* Empty state */
-            <div
-              className="rounded-xl px-6 py-8 text-center"
-              style={{ border: "1.5px dashed rgba(255,255,255,0.15)" }}
-            >
-              <p className="text-xs font-bold tracking-wide uppercase" style={{ color: "rgba(255,255,255,0.3)" }}>
-                No Verified Results Yet
-              </p>
-              <p className="text-[11px] mt-1.5 leading-relaxed" style={{ color: "rgba(255,255,255,0.2)" }}>
-                Add athletes to populate this leaderboard.
-              </p>
-            </div>
-          ) : (
-            <div className="flex flex-col gap-2.5">
-              {results.map((athlete, i) => {
-                const isTop = i === 0
-                return (
-                  <div
-                    key={`${athlete.name}-${i}`}
-                    className="flex items-center gap-4 rounded-xl px-4 py-3.5"
-                    style={
-                      isTop
-                        ? { background: SCARLET }
-                        : { background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.09)" }
-                    }
-                  >
-                    {/* Rank */}
-                    <span
-                      className="text-xl font-black leading-none w-7 flex-shrink-0"
-                      style={{
-                        fontFamily: 'var(--font-archivo-black, "Arial Black", Impact, sans-serif)',
-                        color: isTop ? "rgba(255,255,255,0.65)" : "rgba(255,255,255,0.22)",
-                      }}
-                    >
-                      #{i + 1}
-                    </span>
-
-                    {/* Name + school */}
-                    <div className="flex-1 min-w-0">
-                      <p
-                        className="font-bold text-[13px] leading-tight truncate"
-                        style={{ color: "rgba(255,255,255,0.95)" }}
-                      >
-                        {athlete.name}
-                      </p>
-                      {athlete.school && (
-                        <p
-                          className="text-[11px] mt-0.5 truncate"
-                          style={{ color: isTop ? "rgba(255,255,255,0.55)" : "rgba(255,255,255,0.38)" }}
-                        >
-                          {athlete.school}
-                        </p>
-                      )}
-                    </div>
-
-                    {/* Score */}
-                    <span
-                      className="text-[22px] font-black leading-none flex-shrink-0 tabular-nums text-white"
-                      style={{ fontFamily: 'var(--font-archivo-black, "Arial Black", Impact, sans-serif)' }}
-                    >
-                      {formatScore(athlete.score, activeMetric)}
-                    </span>
-                  </div>
-                )
-              })}
-            </div>
-          )}
-        </section>
-
-        {/* ── Footer ─────────────────────────────────────────────────────── */}
-        <footer className="mt-10 pt-5" style={{ borderTop: "1px solid rgba(255,255,255,0.1)" }}>
-          <p
-            className="text-center text-[9px] tracking-[0.28em] uppercase mb-5"
-            style={{ color: "rgba(255,255,255,0.2)" }}
-          >
-            PRVERIFIED.COM
-          </p>
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-1.5">
-              <div className="w-1.5 h-1.5 rounded-full" style={{ background: SCARLET }} />
-              <span
-                className="text-[11px] font-bold tracking-wider"
-                style={{ color: "rgba(255,255,255,0.45)" }}
-              >
-                PR-VERIFIED
+        {/* ── Stat strip ── */}
+        <div style={{
+          display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 1,
+          background: LINE, border: `1px solid ${LINE}`, borderRadius: 12,
+          overflow: "hidden", marginBottom: 28,
+        }}>
+          {([
+            [TOTAL_BOARDS, "Leaderboards"],
+            [TOTAL_EVENTS, "Events"],
+            [SCHOOL_COUNT, "Schools"],
+          ] as [number, string][]).map(([n, l]) => (
+            <div key={l} style={{ background: PANEL, padding: "18px 16px", textAlign: "center" }}>
+              <b style={{ display: "block", fontSize: 30, fontWeight: 900, lineHeight: 1 }}>{n}</b>
+              <span style={{ display: "block", color: DIM, fontSize: 10, letterSpacing: "0.16em", textTransform: "uppercase", marginTop: 7, fontWeight: 700 }}>
+                {l}
               </span>
             </div>
-            <span
-              className="text-[11px] font-bold tracking-wider"
-              style={{ color: "rgba(255,255,255,0.25)" }}
-            >
-              #POLYRISEATHLETIX
-            </span>
+          ))}
+        </div>
+
+        {/* ── Controls ── */}
+        <div style={{ display: "flex", gap: 10, flexWrap: "wrap", alignItems: "center", marginBottom: 24 }}>
+          {/* Search */}
+          <div style={{ flex: 1, minWidth: 220 }}>
+            <input
+              type="text"
+              placeholder="Search athlete or school..."
+              value={query}
+              onChange={e => setQuery(e.target.value)}
+              style={{
+                width: "100%", background: PANEL, border: `1px solid ${LINE}`, borderRadius: 10,
+                color: "#fff", padding: "13px 15px", fontSize: 15, fontFamily: "inherit",
+                fontWeight: 600, outline: "none", boxSizing: "border-box",
+              }}
+            />
           </div>
+
+          {/* Division toggle — all locked */}
+          <div style={{ display: "flex", background: PANEL, border: `1px solid ${LINE}`, borderRadius: 10, overflow: "hidden" }}>
+            {["All", "High School", "Middle School"].map(label => (
+              <button
+                key={label}
+                onClick={handleLockedClick}
+                style={{
+                  background: "none", border: "none", color: DIM2,
+                  padding: "13px 18px", fontSize: 12, fontWeight: 800,
+                  letterSpacing: "0.12em", textTransform: "uppercase",
+                  cursor: "pointer", fontFamily: "inherit", whiteSpace: "nowrap", opacity: 0.75,
+                }}
+              >
+                🔒 {label}
+              </button>
+            ))}
+          </div>
+
+          {/* View toggle */}
+          <div style={{ display: "flex", background: PANEL, border: `1px solid ${LINE}`, borderRadius: 10, overflow: "hidden" }}>
+            <button
+              onClick={handleLockedClick}
+              style={{
+                background: "none", border: "none", color: DIM2,
+                padding: "13px 18px", fontSize: 12, fontWeight: 800,
+                letterSpacing: "0.12em", textTransform: "uppercase",
+                cursor: "pointer", fontFamily: "inherit", opacity: 0.75,
+              }}
+            >
+              🔒 Athletes
+            </button>
+            <button
+              style={{
+                background: SCARLET, border: "none", color: "#fff",
+                padding: "13px 18px", fontSize: 12, fontWeight: 800,
+                letterSpacing: "0.12em", textTransform: "uppercase",
+                cursor: "pointer", fontFamily: "inherit",
+              }}
+            >
+              Boards
+            </button>
+          </div>
+        </div>
+
+        {/* ── Lock notice ── */}
+        {showNotice && (
+          <div style={{
+            marginBottom: 18, background: PANEL,
+            border: `1px solid rgba(224,52,43,0.4)`, borderLeft: `4px solid ${SCARLET}`,
+            borderRadius: 9, padding: "13px 16px", color: "#c7ccd2", fontSize: 13, fontWeight: 600, lineHeight: 1.5,
+          }}>
+            <b style={{ color: SCARLET, letterSpacing: "0.08em", textTransform: "uppercase", fontSize: 11, display: "block", marginBottom: 4 }}>
+              Members Only
+            </b>
+            Athlete profiles and division filters are part of the PolyRISE Athlete Profile — coming soon.
+          </div>
+        )}
+
+        {/* ── Boards ── */}
+        <div style={{ display: "flex", flexDirection: "column", gap: 14 }}>
+          {filteredBoards.length === 0 ? (
+            <div style={{ textAlign: "center", color: DIM, padding: "60px 20px", fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase", fontSize: 13 }}>
+              No results on any board
+            </div>
+          ) : filteredBoards.map((board, i) => (
+            <div key={i} style={{ background: PANEL, border: `1px solid ${LINE}`, borderRadius: 12, overflow: "hidden" }}>
+              {/* Board header */}
+              <div style={{
+                padding: "16px 18px", borderBottom: `1px solid ${LINE}`,
+                display: "flex", justifyContent: "space-between", alignItems: "center", gap: 12,
+                borderLeft: `3px solid ${GOLD}`,
+              }}>
+                <h3 style={{ fontSize: 17, fontWeight: 900, letterSpacing: "0.05em", textTransform: "uppercase", color: GOLD_LT, margin: 0 }}>
+                  {board.event}
+                </h3>
+                <span style={{
+                  fontSize: 10, fontWeight: 800, letterSpacing: "0.12em", textTransform: "uppercase",
+                  color: DIM, border: `1px solid ${LINE}`, padding: "4px 9px", borderRadius: 5, whiteSpace: "nowrap",
+                }}>
+                  {board.div === "HS" ? "High School" : "Middle School"}
+                </span>
+              </div>
+
+              {/* Board rows */}
+              {board.rows.map(([name, school, val, rank], j) => (
+                <div
+                  key={j}
+                  style={{
+                    display: "flex", alignItems: "center", gap: 12, padding: "12px 18px",
+                    borderBottom: j < board.rows.length - 1 ? "1px solid rgba(255,255,255,0.05)" : "none",
+                    background: rank === 1 ? SCARLET : "transparent",
+                  }}
+                >
+                  <div style={{ width: 38, flexShrink: 0, fontSize: 15, fontWeight: 900, color: rank === 1 ? "#fff" : DIM2 }}>
+                    #{rank}
+                  </div>
+                  <div style={{ flex: 1, minWidth: 0 }}>
+                    <div style={{ fontSize: 15, fontWeight: 800, letterSpacing: "0.02em", textTransform: "uppercase", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>
+                      {name}
+                    </div>
+                    {school && (
+                      <div style={{ fontSize: 11, color: rank === 1 ? "rgba(255,255,255,0.75)" : DIM, letterSpacing: "0.1em", textTransform: "uppercase", marginTop: 3, fontWeight: 700 }}>
+                        {school}
+                      </div>
+                    )}
+                  </div>
+                  <div style={{ fontSize: 20, fontWeight: 900, color: rank === 1 ? "#fff" : SCARLET, whiteSpace: "nowrap" }}>
+                    {val}
+                  </div>
+                </div>
+              ))}
+            </div>
+          ))}
+        </div>
+
+        {/* ── Footer ── */}
+        <footer style={{
+          borderTop: `1px solid ${LINE}`, marginTop: 40, paddingTop: 20,
+          display: "flex", justifyContent: "space-between", alignItems: "center", gap: 12, flexWrap: "wrap",
+        }}>
+          <span style={{ color: DIM2, fontSize: 11, fontWeight: 800, letterSpacing: "0.18em", textTransform: "uppercase" }}>
+            <span style={{ display: "inline-block", width: 8, height: 8, borderRadius: "50%", background: SCARLET, marginRight: 8 }} />
+            PR Verified
+          </span>
+          <span style={{ color: GOLD_LT, fontSize: 11, fontWeight: 800, letterSpacing: "0.18em", textTransform: "uppercase" }}>
+            The Board · Where Coaches Look
+          </span>
+          <span style={{ color: DIM2, fontSize: 11, fontWeight: 800, letterSpacing: "0.18em", textTransform: "uppercase" }}>
+            polyriseathletix.com
+          </span>
         </footer>
 
       </div>

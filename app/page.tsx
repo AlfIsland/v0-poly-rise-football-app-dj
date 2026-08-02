@@ -140,12 +140,6 @@ export default function HomePage() {
                 {/* Header row */}
                 <div className="flex items-start justify-between gap-6 mb-8 flex-wrap">
                   <div className="flex items-center gap-4">
-                    {/* Logo — place /the-board-logo.png in public/ */}
-                    <img
-                      src="/the-board-logo.png"
-                      alt="THE BOARD"
-                      style={{ height: 44, width: "auto", objectFit: "contain" }}
-                    />
                     <div>
                       <p className="text-xs font-bold tracking-[0.05em]" style={{ color: "#c9973c" }}>
                         where coaches look.

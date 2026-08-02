@@ -145,7 +145,6 @@ export default function HomePage() {
                       src="/the-board-logo.png"
                       alt="THE BOARD"
                       style={{ height: 44, width: "auto", objectFit: "contain" }}
-                      onError={(e) => { (e.target as HTMLImageElement).style.display = "none" }}
                     />
                     <div>
                       <p className="text-xs font-bold tracking-[0.05em]" style={{ color: "#c9973c" }}>

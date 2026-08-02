@@ -3,6 +3,7 @@ import Link from "next/link"
 import Image from "next/image"
 import { ProtectedImage } from "@/components/protected-image"
 import { EliteRecruitWaitlist } from "@/components/elite-recruit-waitlist"
+import { BOARDS, TOTAL_EVENTS, TOTAL_BOARDS, uniqueSchoolCount } from "@/lib/the-board-data"
 export default function HomePage() {
   return (
     <>
@@ -46,6 +47,12 @@ export default function HomePage() {
                 className="text-sm font-medium text-white hover:text-foreground transition-colors hidden md:inline"
               >
                 Athlete Passport
+              </Link>
+              <Link
+                href="/the-board"
+                className="text-sm font-black text-[#c9973c] hover:text-[#966b27] transition-colors hidden md:inline tracking-wider uppercase"
+              >
+                The Board
               </Link>
               <Link
                 href="/athletix-hub"
@@ -116,32 +123,131 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* PR-VERIFIED Leader Board Banner */}
-      <Link
-        href="/pr-verified"
-        className="group block bg-[#0c0c0c] border-y border-gray-800/70 hover:bg-[#110000] transition-colors duration-200"
-      >
-        <div className="container mx-auto px-4 lg:px-8 max-w-6xl py-5 flex items-center justify-between gap-6">
-          <div className="flex items-center gap-4">
-            <div className="w-[3px] h-14 rounded-full bg-[#DC143C] flex-shrink-0" />
-            <div>
-              <p className="text-[9px] font-bold tracking-[0.2em] uppercase text-[#DC143C]/60 mb-0.5">PolyRISE Athletix · Official</p>
-              <h2 className="text-2xl lg:text-3xl font-black text-white tracking-tight leading-none">
-                PR-VERIFIED <span className="text-[#DC143C]">LEADER BOARD</span>
-              </h2>
-              <p className="text-xs text-gray-500 mt-1">Verified combine rankings — no self-reported numbers</p>
+      {/* THE BOARD Teaser */}
+      {(() => {
+        const previewBoard = BOARDS.find(b => b.rows.length > 0)
+        const schoolCount  = uniqueSchoolCount(BOARDS)
+        const statCells    = [
+          { value: TOTAL_BOARDS, label: "LEADERBOARDS" },
+          { value: TOTAL_EVENTS, label: "EVENTS" },
+          { value: schoolCount,  label: "SCHOOLS" },
+        ]
+        return (
+          <section style={{ background: "#000", borderTop: "1px solid rgba(255,255,255,0.07)", borderBottom: "1px solid rgba(255,255,255,0.07)" }}>
+            <div className="container mx-auto px-4 lg:px-8 py-10 lg:py-14">
+              <div style={{ maxWidth: 1024, margin: "0 auto" }}>
+
+                {/* Header row */}
+                <div className="flex items-start justify-between gap-6 mb-8 flex-wrap">
+                  <div className="flex items-center gap-4">
+                    {/* Logo — place /the-board-logo.png in public/ */}
+                    <img
+                      src="/the-board-logo.png"
+                      alt="THE BOARD"
+                      style={{ height: 44, width: "auto", objectFit: "contain" }}
+                      onError={(e) => { (e.target as HTMLImageElement).style.display = "none" }}
+                    />
+                    <div>
+                      <p className="text-xs font-bold tracking-[0.05em]" style={{ color: "#c9973c" }}>
+                        where coaches look.
+                      </p>
+                      <p className="text-sm text-white/70 mt-0.5">
+                        Verified combine results. Updated every event.
+                      </p>
+                    </div>
+                  </div>
+                  <Link
+                    href="/the-board"
+                    className="hidden sm:inline-flex items-center gap-2 font-black text-sm tracking-widest uppercase px-5 py-2.5 rounded transition-colors"
+                    style={{ background: "#966b27", color: "#fff" }}
+                  >
+                    VIEW THE BOARD
+                    <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden>
+                      <path d="M2 7h10M7 2l5 5-5 5" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
+                    </svg>
+                  </Link>
+                </div>
+
+                {/* Stat strip */}
+                <div style={{
+                  display: "grid", gridTemplateColumns: "repeat(3,1fr)",
+                  border: "1px solid rgba(255,255,255,0.10)", borderRadius: 12,
+                  overflow: "hidden", marginBottom: 24,
+                }}>
+                  {statCells.map(({ value, label }, i) => (
+                    <div key={label} style={{
+                      background: "#0d1014", padding: "16px 12px",
+                      borderRight: i < 2 ? "1px solid rgba(255,255,255,0.10)" : undefined,
+                      textAlign: "center",
+                    }}>
+                      <div style={{ fontSize: 32, fontWeight: 900, color: "#fff", lineHeight: 1 }}>{value}</div>
+                      <div style={{ fontSize: 9, color: "#8a919c", letterSpacing: "0.18em", textTransform: "uppercase", marginTop: 6, fontWeight: 700 }}>{label}</div>
+                    </div>
+                  ))}
+                </div>
+
+                {/* Preview board */}
+                {previewBoard && (
+                  <div style={{
+                    background: "#0d1014", border: "1px solid rgba(255,255,255,0.10)",
+                    borderRadius: 12, overflow: "hidden", marginBottom: 24,
+                  }}>
+                    {/* Board header */}
+                    <div style={{
+                      borderLeft: "3px solid #966b27",
+                      padding: "12px 16px 12px 14px",
+                      borderBottom: "1px solid rgba(255,255,255,0.10)",
+                      display: "flex", alignItems: "center", justifyContent: "space-between",
+                    }}>
+                      <span style={{ color: "#c9973c", fontWeight: 900, fontSize: 13, letterSpacing: "0.1em", textTransform: "uppercase" }}>
+                        {previewBoard.event}
+                      </span>
+                      <span style={{
+                        color: "#8a919c", fontSize: 9, fontWeight: 700,
+                        letterSpacing: "0.12em", textTransform: "uppercase",
+                        border: "1px solid rgba(255,255,255,0.10)", borderRadius: 100, padding: "3px 9px",
+                      }}>
+                        {previewBoard.div === "HS" ? "HIGH SCHOOL" : "MIDDLE SCHOOL"}
+                      </span>
+                    </div>
+                    {/* Top 3 rows */}
+                    {previewBoard.rows.slice(0, 3).map(([name, school, value, rank], j) => {
+                      const isTop = rank === 1
+                      return (
+                        <div key={j} style={{
+                          display: "flex", alignItems: "center", gap: 12,
+                          padding: "12px 16px",
+                          background: isTop ? "#e0342b" : "transparent",
+                          borderTop: j > 0 ? "1px solid rgba(255,255,255,0.06)" : undefined,
+                        }}>
+                          <span style={{ fontSize: 15, fontWeight: 900, width: 28, flexShrink: 0, color: isTop ? "rgba(255,255,255,0.6)" : "#c9973c" }}>#{rank}</span>
+                          <div style={{ flex: 1, minWidth: 0 }}>
+                            <p style={{ margin: 0, fontWeight: 800, fontSize: 13, color: "#fff", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{name}</p>
+                            {school && <p style={{ margin: "2px 0 0", fontSize: 9, fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase", color: isTop ? "rgba(255,255,255,0.5)" : "#8a919c" }}>{school}</p>}
+                          </div>
+                          <span style={{ fontSize: 20, fontWeight: 900, flexShrink: 0, color: isTop ? "#fff" : "#e0342b", fontVariantNumeric: "tabular-nums" }}>{value}</span>
+                        </div>
+                      )
+                    })}
+                  </div>
+                )}
+
+                {/* Mobile CTA */}
+                <div className="sm:hidden">
+                  <Link
+                    href="/the-board"
+                    className="block text-center font-black text-sm tracking-widest uppercase py-3 rounded"
+                    style={{ background: "#966b27", color: "#fff" }}
+                  >
+                    VIEW THE BOARD →
+                  </Link>
+                </div>
+
+              </div>
             </div>
-          </div>
-          <div className="flex items-center gap-3 flex-shrink-0">
-            <span className="hidden sm:block text-sm font-bold text-[#DC143C] group-hover:underline">View Rankings</span>
-            <div className="w-10 h-10 rounded-full bg-[#DC143C] group-hover:bg-[#B01030] transition-colors flex items-center justify-center flex-shrink-0">
-              <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden>
-                <path d="M3.5 9h11M9 3.5L14.5 9 9 14.5" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-              </svg>
-            </div>
-          </div>
-        </div>
-      </Link>
+          </section>
+        )
+      })()}
 
       {/* Programs & Pricing */}
       <section id="programs" className="py-12 lg:py-20 bg-gray-950">

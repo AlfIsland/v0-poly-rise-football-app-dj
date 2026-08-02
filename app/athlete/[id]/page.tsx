@@ -8,6 +8,7 @@ import LockedProfilePage from "@/components/locked-profile-page"
 import { calculateRatings } from "@/lib/athlete-ratings"
 import { gradeToClassYear } from "@/lib/grade-to-class-year"
 import { ATHLETE_COOKIE, getAthleteIdFromSession } from "@/lib/athlete-auth"
+import type { MetricKey, VideoTestRecord } from "@/app/api/training/route"
 import { accoladeColors, accoladeEmoji } from "@/lib/accolades"
 import { getSport } from "@/lib/sports"
 import CopyLinkButton from "@/components/copy-link-button"
@@ -69,6 +70,7 @@ export default async function AthleteProfilePage({
   const isAdmin = !!adminToken && !!process.env.ADMIN_SESSION_TOKEN && adminToken === process.env.ADMIN_SESSION_TOKEN
   const loggedInAthleteId = sessionToken ? await getAthleteIdFromSession(sessionToken) : null
   const isOwner = !!loggedInAthleteId && loggedInAthleteId.toUpperCase() === params.id.toUpperCase()
+  const pendingCount = (athlete.pendingVideoTests ?? []).filter((t: { status: string }) => t.status === "pending").length
 
   // Private profile gate — undefined/missing defaults to public for existing athletes
   const isPublic = athlete.profilePublic !== false
@@ -549,6 +551,19 @@ ${athlete.name}${athlete.phone ? `\n${athlete.phone}` : ""}${athlete.email ? `\n
                 )}
               </div>
             </div>
+            {(isOwner || isAdmin) && (
+              <div className="px-5 pt-4 flex items-center justify-between gap-3 flex-wrap">
+                <Link href={`/athlete/${athlete.id}/upload-test`}
+                  className="inline-flex items-center gap-1.5 text-xs font-bold bg-red-600 hover:bg-red-500 text-white px-3 py-1.5 rounded-lg transition-colors">
+                  🎥 Upload Test Video
+                </Link>
+                {pendingCount > 0 && (
+                  <span className="text-xs text-yellow-400">
+                    {pendingCount} test{pendingCount !== 1 ? "s" : ""} awaiting staff review
+                  </span>
+                )}
+              </div>
+            )}
             <div className="px-5 py-1">
               <p className="text-xs text-gray-600 py-3">Compared to {sportLabel} athletes age {age}</p>
               {METRICS.map(m => {
@@ -562,6 +577,9 @@ ${athlete.name}${athlete.phone ? `\n${athlete.phone}` : ""}${athlete.email ? `\n
                   ? ((m.lower ? baseVal - cVal : cVal - baseVal) / baseVal * 100)
                   : null
                 const improved = change !== null ? change > 0 : null
+                const videoTest = current?.verifiedMetrics?.includes(m.key as MetricKey)
+                  ? current?.videoTests?.find((v: VideoTestRecord) => v.metric === m.key)
+                  : undefined
 
                 return (
                   <div key={m.key} className="flex items-center justify-between py-3 border-b border-white/5 last:border-0 gap-3">
@@ -571,6 +589,13 @@ ${athlete.name}${athlete.phone ? `\n${athlete.phone}` : ""}${athlete.email ? `\n
                         <span className={`shrink-0 text-xs font-bold px-2 py-0.5 rounded-lg ${tierStyle(tier)}`}>
                           {tier === "Above Average" ? "Above Avg" : tier}
                         </span>
+                      )}
+                      {videoTest && (
+                        <a href={videoTest.videoUrl} target="_blank" rel="noreferrer"
+                          className="shrink-0 inline-flex items-center gap-1 text-xs font-bold px-2 py-0.5 rounded-lg bg-blue-900/50 text-blue-300 border border-blue-700/40 hover:bg-blue-800/60"
+                          title="Watch the verification video">
+                          🎥 Video-Verified
+                        </a>
                       )}
                     </div>
                     <div className="flex items-center gap-3 shrink-0">
@@ -642,18 +667,15 @@ ${athlete.name}${athlete.phone ? `\n${athlete.phone}` : ""}${athlete.email ? `\n
             <div>
               <p className="text-yellow-300 font-bold text-sm">Kevin Garrett · Former NFL</p>
               <p className="text-gray-400 text-xs">Director of Player Development · PolyRISE Athletix</p>
-              <a href="mailto:kg@polyrisefootball.com" className="text-red-400 hover:text-red-300 text-xs font-bold mt-1 block">
-                kg@polyrisefootball.com
-              </a>
               <a href="mailto:polyrise@polyrisefootball.com" className="text-red-400 hover:text-red-300 text-xs font-bold mt-0.5 block">
                 polyrise@polyrisefootball.com
               </a>
             </div>
           </div>
           <div className="flex flex-wrap gap-2">
-            <a href="mailto:kg@polyrisefootball.com"
+            <a href="mailto:polyrise@polyrisefootball.com"
               className="text-xs bg-red-600 hover:bg-red-700 text-white font-bold px-4 py-2 rounded-xl transition-colors">
-              Email Kevin Garrett
+              Email PolyRISE Staff
             </a>
             <a href="mailto:polyrise@polyrisefootball.com"
               className="text-xs bg-white/10 hover:bg-white/20 text-gray-300 font-semibold px-4 py-2 rounded-xl border border-white/10 transition-colors">

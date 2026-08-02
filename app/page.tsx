@@ -418,7 +418,7 @@ export default function HomePage() {
                     <h4 className="text-base font-bold text-white mb-1">PolyRISE Athletix Recruiting</h4>
                     <p className="text-xs text-gray-400 mb-2">PolyRISE Staff · Former NFL experience · COO / Director of Recruiting</p>
                     <p className="text-xs text-gray-300 leading-relaxed">Overseeing player profiles, college outreach strategies, and ensuring every athlete receives high-quality exposure to the right college programs — helping student-athletes navigate recruiting and earn collegiate opportunities.</p>
-                    <p className="text-xs text-gray-400 mt-2">Contact: <a href="mailto:KG@polyrisefootball.com" className="text-red-400 hover:text-red-300">KG@polyrisefootball.com</a> · <a href="mailto:polyrise@polyrisefootball.com" className="text-red-400 hover:text-red-300">polyrise@polyrisefootball.com</a></p>
+                    <p className="text-xs text-gray-400 mt-2">Contact: <a href="mailto:polyrise@polyrisefootball.com" className="text-red-400 hover:text-red-300">polyrise@polyrisefootball.com</a></p>
                     <div className="mt-3">
                       <Link href="#contact" className="inline-block bg-red-600 text-white px-5 py-1.5 rounded-lg hover:bg-red-700 transition-colors text-xs font-bold">Get Started with Recruiting</Link>
                     </div>
@@ -936,7 +936,6 @@ export default function HomePage() {
                   <div>
                     <div className="font-medium mb-1 text-white">Email</div>
                     <a href="mailto:polyrise@polyrisefootball.com" className="text-white hover:underline block">polyrise@polyrisefootball.com</a>
-                    <a href="mailto:kg@polyrisefootball.com" className="text-white hover:underline block">kg@polyrisefootball.com</a>
                   </div>
                 </div>
 

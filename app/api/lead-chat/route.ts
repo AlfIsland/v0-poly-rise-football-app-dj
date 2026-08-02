@@ -57,7 +57,7 @@ CONTACT & REGISTRATION:
 - Register: https://polyrisefootball.com/register
 - Phone/WhatsApp: (817) 658-3300
 - Email: polyrise7v7@gmail.com
-- Recruiting: KG@polyrisefootball.com
+
 
 TONE: Warm, genuine, enthusiastic about youth development. Never pushy. Ask one question at a time. Keep responses to 3-4 sentences max. Always move the conversation forward toward a next step.`
 

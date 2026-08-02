@@ -57,8 +57,8 @@ export default function LockedProfilePage({ athleteId }: { athleteId: string }) 
 
           <p className="text-xs text-gray-600">
             Are you a recruiter or coach? Email{" "}
-            <a href="mailto:kg@polyrisefootball.com" className="text-red-500 hover:text-red-400 transition-colors">
-              kg@polyrisefootball.com
+            <a href="mailto:polyrise@polyrisefootball.com" className="text-red-500 hover:text-red-400 transition-colors">
+              polyrise@polyrisefootball.com
             </a>{" "}
             for access.
           </p>

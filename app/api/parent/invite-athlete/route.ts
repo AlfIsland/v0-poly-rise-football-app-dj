@@ -140,7 +140,7 @@ export async function POST(req: NextRequest) {
             <div style="background:#0d0d14;padding:20px 32px;border-top:1px solid #1f2937">
               <p style="color:#4b5563;font-size:12px;margin:0 0 4px 0">Questions? We've got you.</p>
               <p style="color:#4b5563;font-size:12px;margin:0">
-                <strong style="color:#6b7280">Kevin Garrett</strong> · kg@polyrisefootball.com · (817) 658-3300
+                PolyRISE Athletix · (817) 658-3300
               </p>
               <p style="color:#374151;font-size:11px;margin:12px 0 0 0">PolyRISE Athletix · Austin, Texas · polyrisefootball.com</p>
             </div>

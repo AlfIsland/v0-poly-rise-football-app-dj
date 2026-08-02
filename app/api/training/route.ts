@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server"
 import Redis from "ioredis"
 import { getAllParents } from "@/lib/parent-store"
+import { TIMED_METRICS } from "@/lib/test-metrics"
 
 async function notifyParentOfNewSession(athleteId: string, athleteName: string, sessionNumber: number) {
   try {
@@ -43,7 +44,7 @@ async function notifyParentOfNewSession(athleteId: string, athleteName: string, 
               </a>
 
               <div style="margin-top:32px;padding-top:24px;border-top:1px solid #222">
-                <p style="color:#555;font-size:12px;margin:0">Questions? Contact us at <a href="mailto:polyrise@polyrisefootball.com" style="color:#b40a0a">polyrise@polyrisefootball.com</a> or <a href="mailto:kg@polyrisefootball.com" style="color:#b40a0a">kg@polyrisefootball.com</a></p>
+                <p style="color:#555;font-size:12px;margin:0">Questions? Contact us at <a href="mailto:polyrise@polyrisefootball.com" style="color:#b40a0a">polyrise@polyrisefootball.com</a></p>
                 <p style="color:#444;font-size:11px;margin:6px 0 0">PolyRISE Athletix · Dripping Springs, TX · polyrisefootball.com</p>
               </div>
             </div>
@@ -83,6 +84,41 @@ async function kvGet(key: string): Promise<unknown> {
   const raw = devStore.get(key); return raw ? JSON.parse(raw) : null
 }
 
+// Metrics that can be attached to a video test. Timed drills are verified by marking
+// the start/finish line-cross frames; measured drills are verified by staff reading
+// the value off the video (tape marker, Vertec board, rep count) and confirming the attempt.
+export type MetricKey =
+  | "fortyYard"
+  | "twentyYard"
+  | "shuttle"
+  | "threeCone"
+  | "verticalJump"
+  | "broadJump"
+  | "benchPress"
+
+export interface VideoTestRecord {
+  id: string
+  metric: MetricKey
+  videoUrl: string
+  // Timed metrics: line-cross timestamps (seconds into the video) used to derive the result.
+  startTime?: number
+  endTime?: number
+  distanceConfirmed: boolean
+  verifiedBy: "PolyRISE Staff"
+  verifiedAt: string
+  notes?: string
+}
+
+export interface PendingVideoTest {
+  id: string
+  metric: MetricKey
+  videoUrl: string
+  uploadedAt: string
+  uploadedBy: "athlete" | "admin"
+  status: "pending" | "verified" | "rejected"
+  rejectionReason?: string
+}
+
 export interface TrainingSession {
   date: string
   height?: string
@@ -98,6 +134,9 @@ export interface TrainingSession {
   pushups?: number
   weight?: number
   notes?: string
+  // Which metric fields on this session were verified from an uploaded video, plus the evidence.
+  verifiedMetrics?: MetricKey[]
+  videoTests?: VideoTestRecord[]
 }
 
 export interface TrainingAthlete {
@@ -124,6 +163,7 @@ export interface TrainingAthlete {
   featured?: boolean
   profilePublic?: boolean
   hasSubscription?: boolean
+  pendingVideoTests?: PendingVideoTest[]
 }
 
 // ─── POST /api/training — create athlete ──────────────────────────────────────
@@ -288,6 +328,73 @@ export async function PUT(req: NextRequest) {
       }
       // Re-sort by date
       existing.sessions.sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime())
+      await kvSet(`training:athlete:${id.toUpperCase()}`, existing)
+      return NextResponse.json({ success: true })
+    }
+
+    // Staff confirms a pending video test → derive/attach the verified metric to a session
+    if (action === "verify-video-test") {
+      const { testId, distanceConfirmed } = body
+      const pending = existing.pendingVideoTests?.find(t => t.id === testId)
+      if (!pending || pending.status !== "pending") {
+        return NextResponse.json({ success: false, error: "Pending test not found" }, { status: 404 })
+      }
+      if (!distanceConfirmed) {
+        return NextResponse.json({ success: false, error: "Distance/attempt must be confirmed before saving" }, { status: 400 })
+      }
+
+      let value: number
+      const record: VideoTestRecord = {
+        id: pending.id,
+        metric: pending.metric,
+        videoUrl: pending.videoUrl,
+        distanceConfirmed: true,
+        verifiedBy: "PolyRISE Staff",
+        verifiedAt: new Date().toISOString(),
+        ...(body.notes ? { notes: body.notes } : {}),
+      }
+
+      if (TIMED_METRICS.includes(pending.metric)) {
+        const startTime = parseFloat(body.startTime)
+        const endTime = parseFloat(body.endTime)
+        if (!Number.isFinite(startTime) || !Number.isFinite(endTime) || endTime <= startTime) {
+          return NextResponse.json({ success: false, error: "Invalid start/finish times" }, { status: 400 })
+        }
+        value = Math.round((endTime - startTime) * 100) / 100
+        record.startTime = startTime
+        record.endTime = endTime
+      } else {
+        value = parseFloat(body.value)
+        if (!Number.isFinite(value)) {
+          return NextResponse.json({ success: false, error: "Invalid measured value" }, { status: 400 })
+        }
+      }
+
+      const date = body.date || pending.uploadedAt.split("T")[0]
+      let session = existing.sessions.find(s => s.date === date)
+      if (!session) {
+        session = { date }
+        existing.sessions.push(session)
+      }
+      ;(session as unknown as Record<MetricKey, number>)[pending.metric] = value
+      session.verifiedMetrics = [...(session.verifiedMetrics || []).filter(m => m !== pending.metric), pending.metric]
+      session.videoTests = [...(session.videoTests || []).filter(v => v.id !== record.id), record]
+
+      pending.status = "verified"
+      existing.sessions.sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime())
+      await kvSet(`training:athlete:${id.toUpperCase()}`, existing)
+      return NextResponse.json({ success: true, value })
+    }
+
+    // Staff rejects a pending video test (bad footage, distance not confirmable, etc.)
+    if (action === "reject-video-test") {
+      const { testId, reason } = body
+      const pending = existing.pendingVideoTests?.find(t => t.id === testId)
+      if (!pending || pending.status !== "pending") {
+        return NextResponse.json({ success: false, error: "Pending test not found" }, { status: 404 })
+      }
+      pending.status = "rejected"
+      pending.rejectionReason = reason || undefined
       await kvSet(`training:athlete:${id.toUpperCase()}`, existing)
       return NextResponse.json({ success: true })
     }

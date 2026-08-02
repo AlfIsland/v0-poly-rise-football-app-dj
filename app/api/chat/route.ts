@@ -19,7 +19,7 @@ PROGRAMS & PRICING:
 - Leadership Hike: $25 at Barton Springs Rd, Austin
 - Rise of Warriors Tournament: MS May 29 $400/team | HS May 30 $425/team (min 3 games, single elim)
 
-RECRUITING (Coach Kevin Garrett — KG@polyrisefootball.com):
+RECRUITING:
 - Basic: profile + 5 college emails/mo → 3mo $165 | 6mo $330 | 12mo $660
 - Enhanced: profile + 10 college emails/mo → 3mo $225 | 6mo $450 | 12mo $900
 
@@ -39,9 +39,9 @@ CONTACT:
 - Email: polyrise7v7@gmail.com
 - Website: polyrisefootball.com
 - Register: https://polyrisefootball.com/register
-- Recruiting: KG@polyrisefootball.com
 
-ESCALATION: Recruiting questions → KG@polyrisefootball.com. Anything complex → (817) 658-3300.`
+
+ESCALATION: Recruiting questions and anything complex → (817) 658-3300.`
 
 export async function POST(req: NextRequest) {
   try {

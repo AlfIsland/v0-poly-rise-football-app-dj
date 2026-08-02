@@ -11,6 +11,7 @@ const NAV = [
     items: [
       { label: "Training Roster",     href: "/training",              icon: "🏈" },
       { label: "Add Athlete",         href: "/training/new",          icon: "➕" },
+      { label: "Test Videos",         href: "/admin/tests",           icon: "🎥" },
       { label: "PR-V Athletes",       href: "/admin/athletes",        icon: "✅" },
       { label: "Add PR-V Seal",       href: "/admin/athletes/new",    icon: "🔖" },
       { label: "Seal Generator",      href: "/admin/seal-generator",  icon: "🛡️" },

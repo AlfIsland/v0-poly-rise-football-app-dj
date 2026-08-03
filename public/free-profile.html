@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Free Athlete Profile — PolyRISE Football</title>
-<meta name="description" content="Get your athlete's FREE college recruiting profile — built by AI, powered by NFL-experienced coaches. PolyRISE Football, Austin TX."/>
+<title>Free Athlete Profile — PolyRISE Athletix</title>
+<meta name="description" content="Get your athlete's FREE college recruiting profile — built by AI, powered by NFL-experienced coaches. PolyRISE Athletix, Austin TX."/>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Lato:wght@300;400;700&display=swap" rel="stylesheet"/>
@@ -497,7 +497,7 @@ body {
 
 <!-- HERO -->
 <div class="hero">
-  <div class="hero-logo">PolyRISE Football</div>
+  <div class="hero-logo">PolyRISE Athletix</div>
   <h1>Get Your Athlete's<br><span>FREE Profile</span></h1>
   <p class="hero-sub">Built by AI. Powered by NFL-experienced coaches. See exactly what college scouts will see — and what it takes to stand out.</p>
   <div class="hero-badges">
@@ -636,7 +636,7 @@ body {
           </select>
         </div>
       </div>
-      <div class="privacy-note">Your info is never sold or shared. PolyRISE Football may contact you about programs. <a href="https://polyrisefootball.com" target="_blank">polyrisefootball.com</a></div>
+      <div class="privacy-note">Your info is never sold or shared. PolyRISE Athletix may contact you about programs. <a href="https://polyrisefootball.com" target="_blank">polyrisefootball.com</a></div>
     </div>
 
     <div id="err3" class="err">Please fill in required fields including your name and email.</div>
@@ -666,7 +666,7 @@ body {
     <!-- Profile Header -->
     <div class="profile-top">
       <div class="pr-badge-row">
-        <span class="pr-badge" id="out-badge">PolyRISE Football</span>
+        <span class="pr-badge" id="out-badge">PolyRISE Athletix</span>
       </div>
       <div class="profile-name" id="out-name"></div>
       <div class="profile-pos" id="out-pos"></div>
@@ -699,7 +699,7 @@ body {
 
     <!-- PolyRISE Info Strip -->
     <div class="pr-info-strip">
-      <div class="pr-info-title">Why PolyRISE Football changes everything</div>
+      <div class="pr-info-title">Why PolyRISE Athletix changes everything</div>
       <div class="pr-coaches">
         <span class="coach-pill">Head Coach — 7 yrs NFL (Rams, Texans)</span>
         <span class="coach-pill">Coach Brayden — NFL Draft 2023</span>
@@ -707,7 +707,7 @@ body {
         <span class="coach-pill">Coach Traves — Navy Football</span>
         <span class="coach-pill">Coach John — Naval Academy</span>
       </div>
-      <div class="pr-info-body">PolyRISE Football is the only youth program in Austin and Central Texas with NFL-experienced coaches running standardized, pro-style combine testing. When your athlete earns a PR-VERIFIED seal, every metric is certified on-site — no self-reported numbers, no inflated times. College scouts trust PR-VERIFIED data instantly because the people behind it have played and coached at the highest levels.</div>
+      <div class="pr-info-body">PolyRISE Athletix is the only youth program in Austin and Central Texas with NFL-experienced coaches running standardized, pro-style combine testing. When your athlete earns a PR-VERIFIED seal, every metric is certified on-site — no self-reported numbers, no inflated times. College scouts trust PR-VERIFIED data instantly because the people behind it have played and coached at the highest levels.</div>
     </div>
 
     <!-- CTA Section -->
@@ -744,7 +744,7 @@ body {
     </div>
 
     <div class="profile-footer">
-      <p>PolyRISE Football · polyrisefootball.com · Dripping Springs, TX (Austin area) · Expanding nationwide</p>
+      <p>PolyRISE Athletix · polyrisefootball.com · Dripping Springs, TX (Austin area) · Expanding nationwide</p>
     </div>
 
   </div><!-- /profile-wrap -->
@@ -878,10 +878,10 @@ async function generate() {
   }
 
   // Generate AI profile
-  const prompt = `You are writing a college football recruiting profile for a high school athlete at PolyRISE Football. Write a compelling, professional 3-paragraph athlete bio that a college coach would find impressive and credible. Be specific, vivid, and highlight the athlete's unique value. Do not use generic filler. Make every sentence count.
+  const prompt = `You are writing a college football recruiting profile for a high school athlete at PolyRISE Athletix. Write a compelling, professional 3-paragraph athlete bio that a college coach would find impressive and credible. Be specific, vivid, and highlight the athlete's unique value. Do not use generic filler. Make every sentence count.
 
 After the bio, output ONLY this JSON (nothing else after):
-{"strengths":["s1","s2","s3","s4","s5"],"prv_title":"[short headline about their PR-VERIFIED readiness or opportunity]","prv_body":"[2 sentences about how PolyRISE Football and PR-VERIFIED certification can specifically help THIS athlete get more college exposure — mention their position, target division, and what verified metrics mean for scouts at that level]"}
+{"strengths":["s1","s2","s3","s4","s5"],"prv_title":"[short headline about their PR-VERIFIED readiness or opportunity]","prv_body":"[2 sentences about how PolyRISE Athletix and PR-VERIFIED certification can specifically help THIS athlete get more college exposure — mention their position, target division, and what verified metrics mean for scouts at that level]"}
 
 ATHLETE DATA:
 Name: ${v('fname')} ${v('lname')}
@@ -932,7 +932,7 @@ Write the bio now, then the JSON block.`;
   } catch(e) {
     clearInterval(lintv);
     // Fallback profile
-    const fallbackBio = `${v('fname')} ${v('lname')} is a ${v('gradyr')} ${v('position')} from ${v('school')||'Central Texas'} with the drive and dedication that college programs at the ${v('division')} level are actively looking for. ${v('achievements')}. A competitor in every sense of the word, ${v('fname')} brings both athleticism and character to the field — qualities that PolyRISE Football coaches have helped develop in athletes now playing at every level of college football.`;
+    const fallbackBio = `${v('fname')} ${v('lname')} is a ${v('gradyr')} ${v('position')} from ${v('school')||'Central Texas'} with the drive and dedication that college programs at the ${v('division')} level are actively looking for. ${v('achievements')}. A competitor in every sense of the word, ${v('fname')} brings both athleticism and character to the field — qualities that PolyRISE Athletix coaches have helped develop in athletes now playing at every level of college football.`;
     renderProfile(fallbackBio, ['Speed','Leadership','Football IQ','Coachability','Work ethic'], 'Get officially PR-VERIFIED', `A ${v('position')} targeting ${v('division')} programs needs verifiable metrics. The PolyRISE PR-VERIFIED Combine Camp gives ${v('fname')} certified numbers that scouts trust — tested by coaches who've played and coached at the NFL level.`, hasCombine);
   }
 }
@@ -947,7 +947,7 @@ function renderProfile(bio, strengths, prvTitle, prvBody, hasCombine) {
   document.getElementById('out-name').textContent = v('fname')+' '+v('lname');
   document.getElementById('out-pos').textContent =
     v('position') + (v('gradyr') ? ' · Class of '+v('gradyr') : '') + (v('school') ? ' · '+v('school') : '');
-  document.getElementById('out-badge').textContent = hasCombine ? 'PolyRISE Football — Combine Metrics on File' : 'PolyRISE Football — Free Profile';
+  document.getElementById('out-badge').textContent = hasCombine ? 'PolyRISE Athletix — Combine Metrics on File' : 'PolyRISE Athletix — Free Profile';
 
   // Bio
   document.getElementById('out-bio').textContent = bio;

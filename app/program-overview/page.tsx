@@ -44,7 +44,7 @@ export default function ProgramOverviewPage() {
           </div>
         </div>
 
-        {/* Multi-sport + Kevin Garrett banner */}
+        {/* Multi-sport + Staff banner */}
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6 mt-4">
           <div className="bg-gray-950 rounded-xl px-4 py-3 flex items-center gap-3">
             <span className="text-2xl">🏅</span>
@@ -53,11 +53,11 @@ export default function ProgramOverviewPage() {
               <p className="text-gray-400 text-xs">Football · Soccer · Track & Field · Basketball · Baseball · and more</p>
             </div>
           </div>
-          <div className="bg-yellow-950 border border-yellow-700/40 rounded-xl px-4 py-3 flex items-center gap-3">
-            <div className="w-9 h-9 rounded-full bg-yellow-700 flex items-center justify-center text-white font-black text-sm shrink-0">KG</div>
+          <div className="bg-red-950 border border-red-700/40 rounded-xl px-4 py-3 flex items-center gap-3">
+            <div className="w-9 h-9 rounded-full bg-red-700 flex items-center justify-center text-white font-black text-sm shrink-0">PA</div>
             <div>
-              <p className="text-yellow-300 font-black text-sm">Kevin Garrett · Former NFL</p>
-              <p className="text-yellow-600 text-xs">Director of Player Development @ PolyRISE</p>
+              <p className="text-white font-black text-sm">PolyRISE Athletix Staff</p>
+              <p className="text-red-400 text-xs">Player Development · PolyRISE Athletix</p>
             </div>
           </div>
         </div>
@@ -171,7 +171,7 @@ export default function ProgramOverviewPage() {
                 tagColor: "bg-yellow-500 text-black",
                 color: "border-yellow-500",
                 tcolor: "text-yellow-300",
-                features: "Full metrics + PR-V seal + recruiting profile + X spotlight + Kevin Garrett quarterly report + college fit list + 1 free combine camp/month + early access to all PolyRISE camps",
+                features: "Full metrics + PR-V seal + recruiting profile + X spotlight + PolyRISE Staff quarterly report + college fit list + 1 free combine camp/month + early access to all PolyRISE camps",
               },
               {
                 label: "Recruit",
@@ -220,7 +220,7 @@ export default function ProgramOverviewPage() {
               { q: "Accountability", a: "Athletes perform better when they know their numbers are being tracked and compared over time." },
               { q: "Visibility", a: "You see exactly what your athlete is working on — not just \"practice was good today.\"" },
               { q: "Recruiting", a: "Verified metrics and a PR-VERIFIED seal give coaches and college programs real data to evaluate your athlete." },
-              { q: "Player Development", a: "Kevin Garrett (Former NFL) oversees athlete development — your athlete has a professional eye on their progress." },
+              { q: "Player Development", a: "PolyRISE Athletix staff oversees athlete development — your athlete has a professional eye on their progress." },
               { q: "Motivation", a: "Seeing a 15% speed improvement in three months is a powerful motivator for any young athlete." },
             ].map(item => (
               <div key={item.q} className="flex items-start gap-2">

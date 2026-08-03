@@ -21,7 +21,7 @@ const PLANS = [
     name: "Elite Recruit",
     price: "$49.99/mo",
     color: "bg-yellow-600",
-    features: ["Everything in Recruit", "Quarterly Kevin Garrett development report", "Prospect ranking by position & grade", "Early access to all PolyRISE camps & events"],
+    features: ["Everything in Recruit", "Quarterly PolyRISE Staff development report", "Prospect ranking by position & grade", "Early access to all PolyRISE camps & events"],
   },
 ]
 
@@ -209,13 +209,13 @@ export default function ParentGuidePage() {
           </div>
         </div>
 
-        {/* Kevin Garrett */}
-        <div className="border border-yellow-200 bg-yellow-50 rounded-xl p-5 mb-8">
+        {/* Staff banner */}
+        <div className="border border-red-200 bg-red-50 rounded-xl p-5 mb-8">
           <div className="flex items-center gap-3 mb-2">
-            <div className="w-10 h-10 rounded-full bg-yellow-700 flex items-center justify-center text-white font-black text-sm shrink-0">KG</div>
+            <div className="w-10 h-10 rounded-full bg-red-700 flex items-center justify-center text-white font-black text-sm shrink-0">PA</div>
             <div>
-              <p className="font-black text-gray-900 text-sm">Kevin Garrett · Former NFL · Director of Player Development</p>
-              <p className="text-gray-500 text-xs">Elite Recruit subscribers receive a quarterly personal development report from Coach Garrett</p>
+              <p className="font-black text-gray-900 text-sm">PolyRISE Athletix Staff · Player Development</p>
+              <p className="text-gray-500 text-xs">Elite Recruit subscribers receive a quarterly personal development report from PolyRISE Staff</p>
             </div>
           </div>
           <p className="text-xs text-gray-600">Questions about recruiting? Contact us: <strong>polyrise@polyrisefootball.com</strong></p>

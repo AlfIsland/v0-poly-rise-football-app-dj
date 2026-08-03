@@ -609,7 +609,7 @@ export default function PassportLandingPage() {
           <h2 className="text-3xl font-black text-white mb-4">Metrics measured by coaches who played at the highest level</h2>
           <p className="text-gray-400 mb-8 max-w-2xl mx-auto">Your athlete's passport is verified by a board of coaches with NFL, CFL, and collegiate experience — the same people who know what combine numbers colleges are actually looking for.</p>
           <div className="flex flex-wrap justify-center items-center gap-3 mb-8">
-            {["Kevin Garrett — 7 yrs NFL (Rams, Texans)", "Coach Jordan — XFL Draft, HCU Asst Coach", "Coach Traves — Former Navy Safety & LB", "Coach John — Former Navy QB", "Coach Brayden — Baylor, NFL Draft 2023"].map(c => (
+            {["Head Coach — 7 yrs NFL (Rams, Texans)", "Coach Jordan — XFL Draft, HCU Asst Coach", "Coach Traves — Former Navy Safety & LB", "Coach John — Former Navy QB", "Coach Brayden — Baylor, NFL Draft 2023"].map(c => (
               <span key={c} className="text-sm bg-gray-900 border border-gray-700 text-gray-300 px-4 py-2 rounded-full">{c}</span>
             ))}
           </div>

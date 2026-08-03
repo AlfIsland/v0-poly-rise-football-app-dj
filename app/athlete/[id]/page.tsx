@@ -663,10 +663,10 @@ ${athlete.name}${athlete.phone ? `\n${athlete.phone}` : ""}${athlete.email ? `\n
             <h2 className="text-sm font-black text-white uppercase tracking-widest">Recruiting Inquiries</h2>
           </div>
           <div className="flex items-start gap-3 mb-4">
-            <div className="w-10 h-10 rounded-full bg-yellow-700 flex items-center justify-center text-white font-black text-sm shrink-0">KG</div>
+            <div className="w-10 h-10 rounded-full bg-red-700 flex items-center justify-center text-white font-black text-sm shrink-0">PA</div>
             <div>
-              <p className="text-yellow-300 font-bold text-sm">Kevin Garrett · Former NFL</p>
-              <p className="text-gray-400 text-xs">Director of Player Development · PolyRISE Athletix</p>
+              <p className="text-white font-bold text-sm">PolyRISE Athletix Staff</p>
+              <p className="text-gray-400 text-xs">Player Development · PolyRISE Athletix</p>
               <a href="mailto:polyrise@polyrisefootball.com" className="text-red-400 hover:text-red-300 text-xs font-bold mt-0.5 block">
                 polyrise@polyrisefootball.com
               </a>

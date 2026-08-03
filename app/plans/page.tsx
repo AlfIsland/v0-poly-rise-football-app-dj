@@ -193,12 +193,12 @@ export default function PlansPage() {
           <div className="border-t border-gray-800 px-7 py-5 flex-1 space-y-3">
             {[
               "Everything in Recruit",
-              "Quarterly 1-on-1 Kevin Garrett development report",
+              "Quarterly PolyRISE Staff development report",
               "College program fit analysis by position & grade",
               "Prospect ranking among PolyRISE Athletix athletes",
               "1 Free Combine Camp per month",
               "Early access to all PolyRISE Athletix camps & events",
-              "Direct line to Kevin Garrett — Former NFL",
+              "Direct line to PolyRISE Athletix Staff",
             ].map(f => (
               <div key={f} className="flex items-start gap-3 text-sm text-gray-300">
                 <span className="mt-0.5 w-4 h-4 rounded-full flex-shrink-0 flex items-center justify-center bg-yellow-500">

@@ -80,7 +80,7 @@ export default function TermsPage() {
             <ul className="list-disc pl-6 mt-3 space-y-2">
               <li><strong>Passport — $9.99/month:</strong> Access to athlete metrics tracking, progress charts, and session history.</li>
               <li><strong>Recruit — $29.99/month:</strong> Full recruiting suite including PR-VERIFIED seal, recruiting profile, School Fit Finder, Coach Outreach Templates, and Camp Suggestions.</li>
-              <li><strong>Elite Recruit — $49.99/month:</strong> Everything in Recruit plus quarterly Kevin Garrett development reports, prospect rankings, and early camp access.</li>
+              <li><strong>Elite Recruit — $49.99/month:</strong> Everything in Recruit plus quarterly PolyRISE Staff development reports, prospect rankings, and early camp access.</li>
             </ul>
             <p className="mt-3">
               <strong>Cancellations:</strong> You may cancel your subscription at any time through your portal under &quot;Manage Billing.&quot;

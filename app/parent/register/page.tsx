@@ -42,12 +42,12 @@ const PLANS: PlanOption[] = [
     tagline: "Full recruiting exposure + player development",
     features: [
       "Everything in Recruit",
-      "Quarterly Kevin Garrett development report",
+      "Quarterly PolyRISE Staff development report",
       "College program fit suggestions",
       "Prospect ranking by position & grade",
       "1 Free Combine Camp/Month",
       "Early access to all PolyRISE camps & events",
-      "Kevin Garrett (Former NFL) — Dir. of Player Dev",
+      "PolyRISE Athletix Staff · Player Development",
     ],
   },
   {
@@ -206,12 +206,12 @@ export default function ParentRegisterPage() {
         {step === "plan" && (
           <div className="space-y-3">
 
-            {/* Kevin Garrett banner */}
-            <div className="bg-gradient-to-r from-gray-900 to-gray-800 border border-yellow-600/30 rounded-2xl px-4 py-3 flex items-center gap-3">
-              <div className="w-9 h-9 rounded-full bg-yellow-700 flex items-center justify-center text-white font-black text-sm shrink-0">KG</div>
+            {/* Staff banner */}
+            <div className="bg-gradient-to-r from-gray-900 to-gray-800 border border-red-600/30 rounded-2xl px-4 py-3 flex items-center gap-3">
+              <div className="w-9 h-9 rounded-full bg-red-700 flex items-center justify-center text-white font-black text-sm shrink-0">PA</div>
               <div>
-                <p className="text-yellow-400 text-xs font-bold uppercase tracking-wider">Player Development</p>
-                <p className="text-white text-sm font-semibold">Kevin Garrett · Former NFL · Director of Player Development</p>
+                <p className="text-red-400 text-xs font-bold uppercase tracking-wider">Player Development</p>
+                <p className="text-white text-sm font-semibold">PolyRISE Athletix Staff · Player Development</p>
               </div>
             </div>
 

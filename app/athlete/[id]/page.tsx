@@ -677,10 +677,6 @@ ${athlete.name}${athlete.phone ? `\n${athlete.phone}` : ""}${athlete.email ? `\n
               className="text-xs bg-red-600 hover:bg-red-700 text-white font-bold px-4 py-2 rounded-xl transition-colors">
               Email PolyRISE Staff
             </a>
-            <a href="mailto:polyrise@polyrisefootball.com"
-              className="text-xs bg-white/10 hover:bg-white/20 text-gray-300 font-semibold px-4 py-2 rounded-xl border border-white/10 transition-colors">
-              Email PolyRISE
-            </a>
             <a href="tel:+18176583300"
               className="text-xs bg-white/10 hover:bg-white/20 text-gray-300 font-semibold px-4 py-2 rounded-xl border border-white/10 transition-colors">
               (817) 658-3300

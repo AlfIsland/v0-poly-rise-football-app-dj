@@ -582,7 +582,7 @@ export default function PassportLandingPage() {
                 </div>
                 <p className="text-gray-400 text-sm mb-5">Full recruiting exposure + personal development</p>
                 <div className="space-y-2.5">
-                  {["Everything in Recruit", "Quarterly Coach Garrett development report", "College program fit suggestions", "Prospect ranking by position & class", "1 Free Combine Camp/Month"].map(f => (
+                  {["Everything in Recruit", "Quarterly PolyRISE Staff development report", "College program fit suggestions", "Prospect ranking by position & class", "1 Free Combine Camp/Month"].map(f => (
                     <div key={f} className="flex items-start gap-2.5 text-sm text-gray-300">
                       <span className="mt-0.5 w-4 h-4 rounded-full flex-shrink-0 flex items-center justify-center bg-yellow-500">
                         <svg className="w-2.5 h-2.5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}><path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" /></svg>

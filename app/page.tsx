@@ -830,7 +830,7 @@ export default function HomePage() {
                 </summary>
                 <div className="px-5 pb-4 pt-3 text-sm text-gray-300 leading-relaxed border-t border-gray-800">
                   <ul className="space-y-1.5">
-                    <li><strong className="text-white">Coach Garrett</strong> — 7 NFL seasons (Rams, Texans), 3 CFL seasons, drafted 2003 from SMU</li>
+                    <li><strong className="text-white">Head Coach</strong> — 7 NFL seasons (Rams, Texans), 3 CFL seasons, drafted 2003 from SMU</li>
                     <li><strong className="text-white">Coach Jordan</strong> — XFL Draft 2022, 2× Omaha Beef Champion, HCU WR Coach</li>
                     <li><strong className="text-white">Coach Traves</strong> — Navy Safety &amp; LB, All-East teams 2011–12</li>
                     <li><strong className="text-white">Coach John</strong> — Navy Football QB, Naval Academy graduate &amp; officer</li>

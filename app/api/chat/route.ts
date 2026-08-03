@@ -24,7 +24,7 @@ RECRUITING:
 - Enhanced: profile + 10 college emails/mo → 3mo $225 | 6mo $450 | 12mo $900
 
 COACHES:
-- Head Coach Garrett (DB): 7 yrs NFL (Rams, Texans), drafted 2003 from SMU
+- Head Coach (DB): 7 yrs NFL (Rams, Texans)
 - Coach Jordan (WR/TE): XFL Draft 2022, 2x Omaha Beef Champion, HCU Asst WR Coach
 - Coach Traves (RB/S): Former Navy Safety & LB, Citadel Football
 - Coach John (QB): Former Navy QB, Naval Academy Graduate & Officer

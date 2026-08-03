@@ -434,6 +434,37 @@ function Portal() {
                         })}
                       </div>
 
+                      {/* Upsell — passport tier, right after metrics at peak emotional moment */}
+                      {parent?.tier === "passport" && (() => {
+                        const strongCount = METRICS.filter(m => {
+                          if (m.key === "weight") return false
+                          const val = (current?.[m.key as keyof typeof current] ?? baseline?.[m.key as keyof typeof baseline]) as number | undefined
+                          if (val == null) return false
+                          const t = getAgeTier(m.key, val, athlete.age, athlete.gender ?? "M")
+                          return t === "Elite" || t === "Above Average"
+                        }).length
+                        if (strongCount === 0) return null
+                        return (
+                          <div className="rounded-xl border border-red-800/50 bg-gradient-to-r from-red-950/40 to-gray-900 p-4">
+                            <div className="flex items-start gap-3">
+                              <span className="text-xl shrink-0 mt-0.5">📊</span>
+                              <div className="flex-1 min-w-0">
+                                <p className="text-white font-bold text-sm leading-tight">
+                                  {athlete.name.split(" ")[0]} ranked <span className="text-red-400">Elite or Above Average</span> on {strongCount} metric{strongCount !== 1 ? "s" : ""}
+                                </p>
+                                <p className="text-gray-400 text-xs mt-1 mb-3">
+                                  College coaches can&apos;t see this yet. Upgrade to Recruit to get a shareable profile — send the link directly to any coach.
+                                </p>
+                                <a href="/parent/register"
+                                  className="inline-block bg-red-600 hover:bg-red-700 text-white text-xs font-bold px-4 py-2 rounded-xl transition-colors">
+                                  Share With Coaches — Upgrade to Recruit →
+                                </a>
+                              </div>
+                            </div>
+                          </div>
+                        )
+                      })()}
+
                       {/* L/R Shuttle Analysis */}
                       {hasLR && (
                         <div className="mt-4 bg-gray-800 rounded-xl p-4 border border-gray-700">
@@ -621,25 +652,6 @@ function Portal() {
             <p className="text-xs text-gray-600">
               Tip: Copy the link above and text it directly to a college coach or recruiting coordinator.
             </p>
-          </div>
-        )}
-
-        {/* Upgrade prompt — Passport subscribers */}
-        {hasAccess && parent?.tier === "passport" && athletes.length > 0 && (
-          <div className="bg-gray-900 border border-gray-700 rounded-2xl p-5">
-            <div className="flex items-start gap-4">
-              <div className="text-3xl shrink-0">🔒</div>
-              <div className="flex-1">
-                <p className="text-white font-bold text-sm">Unlock Your Recruiting Profile</p>
-                <p className="text-gray-400 text-xs mt-1 mb-3">
-                  Upgrade to <strong className="text-red-400">Recruit ($29.99/mo)</strong> to get a shareable public profile page with verified metrics, film, and direct coach contact info — the link you send to college coaches.
-                </p>
-                <a href="/parent/register"
-                  className="inline-block bg-red-600 hover:bg-red-700 text-white text-xs font-bold px-5 py-2.5 rounded-xl transition-colors">
-                  Upgrade to Recruit →
-                </a>
-              </div>
-            </div>
           </div>
         )}
 

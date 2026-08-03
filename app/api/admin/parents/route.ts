@@ -79,9 +79,10 @@ export async function PATCH(req: NextRequest) {
 
     if (action === "link") {
       if (!athleteId) return NextResponse.json({ success: false, error: "Missing athleteId" }, { status: 400 })
-      if (!parent.athleteIds.includes(athleteId)) parent.athleteIds.push(athleteId)
+      const isNewLink = !parent.athleteIds.includes(athleteId)
+      if (isNewLink) parent.athleteIds.push(athleteId)
       await saveParent(parent)
-      await sendAthleteLinkedEmail(parent.email, parent.name, athleteId)
+      if (isNewLink) await sendAthleteLinkedEmail(parent.email, parent.name, athleteId)
 
     } else if (action === "unlink") {
       if (!athleteId) return NextResponse.json({ success: false, error: "Missing athleteId" }, { status: 400 })

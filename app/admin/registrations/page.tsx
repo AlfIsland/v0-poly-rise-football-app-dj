@@ -56,11 +56,13 @@ export default function RegistrationsPage() {
     return true
   })
 
+  const paidRegs = regs.filter(r => r.status === "paid")
   const stats = {
     total: regs.length,
-    paid: regs.filter(r => r.status === "paid").length,
+    paid: paidRegs.length,
     pending: regs.filter(r => r.status === "pending").length,
-    revenue: regs.filter(r => r.status === "paid").reduce((s, r) => s + r.amount, 0),
+    mrr: paidRegs.filter(r => r.billing === "monthly").reduce((s, r) => s + r.amount, 0),
+    oneTime: paidRegs.filter(r => r.billing !== "monthly").reduce((s, r) => s + r.amount, 0),
   }
 
   return (
@@ -85,16 +87,18 @@ export default function RegistrationsPage() {
         </div>
 
         {/* Stats */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
+        <div className="grid grid-cols-2 md:grid-cols-5 gap-4 mb-6">
           {[
             { label: "Total Registrations", value: stats.total, color: "text-white" },
             { label: "Paid", value: stats.paid, color: "text-green-400" },
             { label: "Pending", value: stats.pending, color: "text-yellow-400" },
-            { label: "Total Revenue", value: `$${stats.revenue.toLocaleString()}`, color: "text-red-400" },
+            { label: "MRR", value: `$${stats.mrr.toLocaleString()}`, color: "text-blue-400", sub: "monthly recurring" },
+            { label: "One-Time", value: `$${stats.oneTime.toLocaleString()}`, color: "text-red-400", sub: "collected" },
           ].map(s => (
             <div key={s.label} className="bg-gray-900 rounded-xl px-4 py-3 border border-gray-800">
               <p className="text-xs text-gray-500 uppercase tracking-wider mb-1">{s.label}</p>
               <p className={`text-2xl font-bold ${s.color}`}>{s.value}</p>
+              {"sub" in s && s.sub && <p className="text-xs text-gray-600 mt-0.5">{s.sub}</p>}
             </div>
           ))}
         </div>

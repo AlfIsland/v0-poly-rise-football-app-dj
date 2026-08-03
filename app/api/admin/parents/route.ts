@@ -35,15 +35,20 @@ async function sendAthleteLinkedEmail(parentEmail: string, parentName: string, a
       to: [parentEmail],
       subject: `Athlete linked: ${resolvedName} — PolyRISE`,
       html: `
-        <div style="font-family:sans-serif;max-width:520px;margin:0 auto;padding:24px;background:#0a0a0f;color:#fff">
-          <h2 style="color:#dc2626">Athlete Profile Linked</h2>
-          <p>Hi ${parentName},</p>
-          <p>Your PolyRISE account has been linked to <strong>${resolvedName}</strong>'s training profile (ID: ${resolvedId}). You can now log in to view their stats, test results, progress charts, and more.</p>
-          <p style="margin-top:20px">
-            <a href="https://polyrisefootball.com/parent/login" style="background:#dc2626;color:#fff;padding:12px 24px;border-radius:8px;text-decoration:none;font-weight:bold;font-size:14px">Log In to View Athlete Profile →</a>
-          </p>
-          <p style="color:#999;font-size:13px;margin-top:24px">Questions? Call us at <strong>(817) 658-3300</strong> or email <strong>polyrise@polyrisefootball.com</strong></p>
-          <p style="color:#555;font-size:12px;margin-top:8px">PolyRISE Athletix · Dripping Springs, TX · polyrisefootball.com</p>
+        <div style="font-family:Arial,Helvetica,sans-serif;max-width:520px;margin:0 auto;background:#ffffff;border:1px solid #e5e7eb;border-radius:8px;overflow:hidden">
+          <div style="background:#dc2626;padding:20px 24px">
+            <span style="color:#ffffff;font-weight:bold;font-size:16px;letter-spacing:0.5px">PolyRISE Athletix</span>
+          </div>
+          <div style="padding:28px 24px;color:#111111">
+            <h2 style="margin:0 0 16px;font-size:20px;color:#111111">Athlete Profile Linked</h2>
+            <p style="margin:0 0 12px;line-height:1.6">Hi ${parentName},</p>
+            <p style="margin:0 0 24px;line-height:1.6">Your PolyRISE account has been linked to <strong>${resolvedName}</strong>'s training profile (ID: ${resolvedId}). You can now log in to view their stats, test results, progress charts, and more.</p>
+            <a href="https://polyrisefootball.com/parent/login" style="display:inline-block;background:#dc2626;color:#ffffff;padding:12px 24px;border-radius:8px;text-decoration:none;font-weight:bold;font-size:14px">Log In to View Athlete Profile →</a>
+            <p style="color:#6b7280;font-size:13px;margin-top:28px;margin-bottom:4px">Questions? Call us at <strong style="color:#374151">(817) 658-3300</strong> or email <strong style="color:#374151">polyrise@polyrisefootball.com</strong></p>
+          </div>
+          <div style="background:#f9fafb;padding:14px 24px;border-top:1px solid #e5e7eb">
+            <p style="color:#9ca3af;font-size:12px;margin:0">PolyRISE Athletix · Dripping Springs, TX · polyrisefootball.com</p>
+          </div>
         </div>
       `,
     }),
@@ -116,12 +121,19 @@ export async function PATCH(req: NextRequest) {
               to: [parent.email],
               subject: "Your PolyRISE Program Access is Approved",
               html: `
-                <div style="font-family:sans-serif;max-width:520px;margin:0 auto;padding:24px;background:#0a0a0f;color:#fff">
-                  <h2 style="color:#16a34a">You're Approved!</h2>
-                  <p>Hi ${parent.name},</p>
-                  <p>Your PolyRISE Program Member access has been approved. Your athlete's profile will be linked shortly — you'll receive another email once it's ready.</p>
-                  <p style="color:#999;font-size:13px;margin-top:24px">Questions? Call <strong>(817) 658-3300</strong></p>
-                  <p style="color:#555;font-size:12px;margin-top:8px">PolyRISE Athletix · polyrisefootball.com</p>
+                <div style="font-family:Arial,Helvetica,sans-serif;max-width:520px;margin:0 auto;background:#ffffff;border:1px solid #e5e7eb;border-radius:8px;overflow:hidden">
+                  <div style="background:#dc2626;padding:20px 24px">
+                    <span style="color:#ffffff;font-weight:bold;font-size:16px;letter-spacing:0.5px">PolyRISE Athletix</span>
+                  </div>
+                  <div style="padding:28px 24px;color:#111111">
+                    <h2 style="margin:0 0 16px;font-size:20px;color:#16a34a">You're Approved!</h2>
+                    <p style="margin:0 0 12px;line-height:1.6">Hi ${parent.name},</p>
+                    <p style="margin:0 0 0;line-height:1.6">Your PolyRISE Program Member access has been approved. Your athlete's profile will be linked shortly — you'll receive another email once it's ready.</p>
+                    <p style="color:#6b7280;font-size:13px;margin-top:28px;margin-bottom:4px">Questions? Call <strong style="color:#374151">(817) 658-3300</strong></p>
+                  </div>
+                  <div style="background:#f9fafb;padding:14px 24px;border-top:1px solid #e5e7eb">
+                    <p style="color:#9ca3af;font-size:12px;margin:0">PolyRISE Athletix · polyrisefootball.com</p>
+                  </div>
                 </div>
               `,
             }),
@@ -146,22 +158,27 @@ export async function PATCH(req: NextRequest) {
             to: [parent.email],
             subject: "Your PolyRISE Portal Access",
             html: `
-              <div style="font-family:sans-serif;max-width:520px;margin:0 auto;padding:24px;background:#0a0a0f;color:#fff">
-                <h2 style="color:#dc2626">Action Required — Subscription Needed</h2>
-                <p>Hi ${parent.name},</p>
-                <p>We were unable to verify your athlete's enrollment in a PolyRISE program. To access your athlete's training metrics and progress reports, a subscription is required.</p>
-                <p style="margin-top:16px"><strong>Subscribe starting at $9.99/month</strong> to unlock:</p>
-                <ul style="color:#ccc;font-size:14px;margin-top:8px;padding-left:20px">
-                  <li>Monthly progress reports</li>
-                  <li>Full session history & charts</li>
-                  <li>Baseline vs. current comparisons</li>
-                  <li>Downloadable PDF reports</li>
-                </ul>
-                <p style="margin-top:24px">
-                  <a href="https://polyrisefootball.com/parent/register" style="background:#dc2626;color:#fff;padding:12px 24px;border-radius:8px;text-decoration:none;font-weight:bold;font-size:14px">Subscribe Now →</a>
-                </p>
-                <p style="color:#999;font-size:13px;margin-top:24px">Questions? Call <strong>(817) 658-3300</strong> or email <strong>polyrise@polyrisefootball.com</strong></p>
-                <p style="color:#555;font-size:12px;margin-top:8px">PolyRISE Athletix · Dripping Springs, TX · polyrisefootball.com</p>
+              <div style="font-family:Arial,Helvetica,sans-serif;max-width:520px;margin:0 auto;background:#ffffff;border:1px solid #e5e7eb;border-radius:8px;overflow:hidden">
+                <div style="background:#dc2626;padding:20px 24px">
+                  <span style="color:#ffffff;font-weight:bold;font-size:16px;letter-spacing:0.5px">PolyRISE Athletix</span>
+                </div>
+                <div style="padding:28px 24px;color:#111111">
+                  <h2 style="margin:0 0 16px;font-size:20px;color:#111111">Action Required — Subscription Needed</h2>
+                  <p style="margin:0 0 12px;line-height:1.6">Hi ${parent.name},</p>
+                  <p style="margin:0 0 16px;line-height:1.6">We were unable to verify your athlete's enrollment in a PolyRISE program. To access your athlete's training metrics and progress reports, a subscription is required.</p>
+                  <p style="margin:0 0 8px;line-height:1.6"><strong>Subscribe starting at $9.99/month</strong> to unlock:</p>
+                  <ul style="color:#374151;font-size:14px;margin:0 0 24px;padding-left:20px;line-height:1.8">
+                    <li>Monthly progress reports</li>
+                    <li>Full session history &amp; charts</li>
+                    <li>Baseline vs. current comparisons</li>
+                    <li>Downloadable PDF reports</li>
+                  </ul>
+                  <a href="https://polyrisefootball.com/parent/register" style="display:inline-block;background:#dc2626;color:#ffffff;padding:12px 24px;border-radius:8px;text-decoration:none;font-weight:bold;font-size:14px">Subscribe Now →</a>
+                  <p style="color:#6b7280;font-size:13px;margin-top:28px;margin-bottom:4px">Questions? Call <strong style="color:#374151">(817) 658-3300</strong> or email <strong style="color:#374151">polyrise@polyrisefootball.com</strong></p>
+                </div>
+                <div style="background:#f9fafb;padding:14px 24px;border-top:1px solid #e5e7eb">
+                  <p style="color:#9ca3af;font-size:12px;margin:0">PolyRISE Athletix · Dripping Springs, TX · polyrisefootball.com</p>
+                </div>
               </div>
             `,
           }),
@@ -190,15 +207,20 @@ export async function PATCH(req: NextRequest) {
             to: [parent.email],
             subject: `Your PolyRISE athlete profile — ${athleteList}`,
             html: `
-              <div style="font-family:sans-serif;max-width:520px;margin:0 auto;padding:24px;background:#0a0a0f;color:#fff">
-                <h2 style="color:#dc2626">Access Your Athlete Profile</h2>
-                <p>Hi ${parent.name},</p>
-                <p>Your PolyRISE account is linked to <strong>${athleteList}</strong>. Log in anytime to view stats, test results, progress charts, and more.</p>
-                <p style="margin-top:20px">
-                  <a href="https://polyrisefootball.com/parent/login" style="background:#dc2626;color:#fff;padding:12px 24px;border-radius:8px;text-decoration:none;font-weight:bold;font-size:14px">Log In to View Athlete Profile →</a>
-                </p>
-                <p style="color:#999;font-size:13px;margin-top:24px">Questions? Call us at <strong>(817) 658-3300</strong> or email <strong>polyrise@polyrisefootball.com</strong></p>
-                <p style="color:#555;font-size:12px;margin-top:8px">PolyRISE Athletix · Dripping Springs, TX · polyrisefootball.com</p>
+              <div style="font-family:Arial,Helvetica,sans-serif;max-width:520px;margin:0 auto;background:#ffffff;border:1px solid #e5e7eb;border-radius:8px;overflow:hidden">
+                <div style="background:#dc2626;padding:20px 24px">
+                  <span style="color:#ffffff;font-weight:bold;font-size:16px;letter-spacing:0.5px">PolyRISE Athletix</span>
+                </div>
+                <div style="padding:28px 24px;color:#111111">
+                  <h2 style="margin:0 0 16px;font-size:20px;color:#111111">Access Your Athlete Profile</h2>
+                  <p style="margin:0 0 12px;line-height:1.6">Hi ${parent.name},</p>
+                  <p style="margin:0 0 24px;line-height:1.6">Your PolyRISE account is linked to <strong>${athleteList}</strong>. Log in anytime to view stats, test results, progress charts, and more.</p>
+                  <a href="https://polyrisefootball.com/parent/login" style="display:inline-block;background:#dc2626;color:#ffffff;padding:12px 24px;border-radius:8px;text-decoration:none;font-weight:bold;font-size:14px">Log In to View Athlete Profile →</a>
+                  <p style="color:#6b7280;font-size:13px;margin-top:28px;margin-bottom:4px">Questions? Call us at <strong style="color:#374151">(817) 658-3300</strong> or email <strong style="color:#374151">polyrise@polyrisefootball.com</strong></p>
+                </div>
+                <div style="background:#f9fafb;padding:14px 24px;border-top:1px solid #e5e7eb">
+                  <p style="color:#9ca3af;font-size:12px;margin:0">PolyRISE Athletix · Dripping Springs, TX · polyrisefootball.com</p>
+                </div>
               </div>
             `,
           }),

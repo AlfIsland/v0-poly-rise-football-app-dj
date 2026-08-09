@@ -791,7 +791,7 @@ export default function HomePage() {
                   <p><strong className="text-white">Athlete Development:</strong> Tuesday · 6:30–7:30pm</p>
                   <p><strong className="text-white">After School &amp; Girls Development:</strong> Tuesday · 5:30–6:30pm (Elementary, Middle School &amp; Girls)</p>
                   <p><strong className="text-white">Tackle Sessions:</strong> Aug 8, 15 &amp; 22 · 9:30–11:00am</p>
-                  <p className="text-gray-400 pt-1">Monthly camps, combine events, and leadership hikes held on weekends at Swift Sessions, Dripping Springs.</p>
+                  <p className="text-gray-400 pt-1">Monthly camps, combine events, and leadership hikes held on weekends in Dripping Springs.</p>
                 </div>
               </details>
 
@@ -853,9 +853,6 @@ export default function HomePage() {
               <img src="/sponsor-grease-monkey.png" alt="Grease Monkey - Oil Changes & More" className="w-full h-full object-contain" />
             </div>
             <div className="w-44 h-40 rounded-lg border-2 border-primary/20 bg-white flex items-center justify-center overflow-hidden hover:border-primary/50 transition-colors p-4">
-              <img src="/sponsor-swift-sessions.png" alt="Swift Sessions" className="w-full h-full object-contain" />
-            </div>
-            <div className="w-44 h-40 rounded-lg border-2 border-primary/20 bg-white flex items-center justify-center overflow-hidden hover:border-primary/50 transition-colors p-4">
               <img src="/sponsor-main-design.png" alt="Main Design Print Co." className="w-full h-full object-contain" />
             </div>
             <div className="w-44 h-40 rounded-lg border-2 border-primary/20 bg-white flex items-center justify-center overflow-hidden hover:border-primary/50 transition-colors p-4">
@@ -894,7 +891,7 @@ export default function HomePage() {
                     <div className="font-medium mb-1">Location</div>
                     <div className="text-white">Dripping Springs, Texas (Austin area)</div>
                     <div className="text-sm text-white">
-                      Training at Swift Sessions and local fields. Expanding to other cities nationwide.
+                      Training at local fields in Dripping Springs. Expanding to other cities nationwide.
                     </div>
                   </div>
                 </div>

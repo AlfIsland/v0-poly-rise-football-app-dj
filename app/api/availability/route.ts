@@ -15,8 +15,8 @@ export async function GET(request: Request) {
         programs: ["polyrise-select", "360-elite", "winter-season"],
         trainingFacilities: [
           {
-            name: "Swift Sessions",
-            address: "Austin, TX",
+            name: "PolyRISE Training Facility",
+            address: "Dripping Springs, TX",
             sessionsOffered: ["SAQ", "S&C"],
           },
           {

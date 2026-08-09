@@ -30,8 +30,8 @@ export async function GET(request: Request, { params }: { params: { id: string }
       schedule: {
         frequency: "4 sessions per week",
         sessions: [
-          { day: "Tuesday", time: "6:00 PM", type: "S&C", location: "Swift Sessions" },
-          { day: "Wednesday", time: "6:00 PM", type: "SAQ", location: "Swift Sessions" },
+          { day: "Tuesday", time: "6:00 PM", type: "S&C", location: "PolyRISE Training Facility" },
+          { day: "Wednesday", time: "6:00 PM", type: "SAQ", location: "PolyRISE Training Facility" },
           { day: "Saturday", time: "9:00 AM", type: "Field Practice", location: "Local Field" },
           { day: "Sunday", time: "3:00 PM", type: "Field Practice", location: "Local Field" },
         ],
@@ -68,8 +68,8 @@ export async function GET(request: Request, { params }: { params: { id: string }
       schedule: {
         frequency: "4 sessions per week plus individual coaching",
         sessions: [
-          { day: "Tuesday", time: "6:00 PM", type: "S&C", location: "Swift Sessions" },
-          { day: "Wednesday", time: "6:00 PM", type: "SAQ", location: "Swift Sessions" },
+          { day: "Tuesday", time: "6:00 PM", type: "S&C", location: "PolyRISE Training Facility" },
+          { day: "Wednesday", time: "6:00 PM", type: "SAQ", location: "PolyRISE Training Facility" },
           { day: "Saturday", time: "9:00 AM", type: "Field Practice", location: "Local Field" },
           { day: "Sunday", time: "3:00 PM", type: "Field Practice", location: "Local Field" },
           { day: "Flexible", time: "By appointment", type: "1-on-1 Coaching", location: "Various" },

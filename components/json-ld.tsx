@@ -93,7 +93,7 @@ export const faqSchema = {
       name: "Where is PolyRISE Athletix located?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "We are based in Austin, Texas with training facilities at Swift Sessions. We also offer camps in Marble Falls, TX and are expanding to cities nationwide.",
+        text: "We are based in Dripping Springs, Texas (Austin area). We also offer camps in Marble Falls, TX and are expanding to cities nationwide.",
       },
     },
   ],

@@ -621,15 +621,7 @@ export default function HomePage() {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6 max-w-6xl mx-auto">
-            <div className="text-center p-4 bg-card rounded-lg border border-border">
-              <div className="w-24 h-24 mx-auto mb-3 rounded-full overflow-hidden border-2 border-primary">
-                <img src="/coach-garrett.jpg" alt="PolyRISE Athletix Head Coach" className="w-full h-full object-cover object-top" />
-              </div>
-              <h3 className="font-bold text-foreground mb-1">Head Coach</h3>
-              <p className="text-xs text-primary font-semibold mb-2">DB Coach</p>
-              <p className="text-xs text-white">7 yrs NFL (Rams, Texans), 3 yrs CFL, Drafted 2003 from SMU</p>
-            </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
             <div className="text-center p-4 bg-card rounded-lg border border-border">
               <div className="w-24 h-24 mx-auto mb-3 rounded-full overflow-hidden border-2 border-primary">
                 <img src="/coach-jordan.jpg" alt="Coach Jordan - Omaha Beef #18" className="w-full h-full object-cover object-top" />
@@ -830,7 +822,6 @@ export default function HomePage() {
                 </summary>
                 <div className="px-5 pb-4 pt-3 text-sm text-gray-300 leading-relaxed border-t border-gray-800">
                   <ul className="space-y-1.5">
-                    <li><strong className="text-white">Head Coach</strong> — 7 NFL seasons (Rams, Texans), 3 CFL seasons, drafted 2003 from SMU</li>
                     <li><strong className="text-white">Coach Jordan</strong> — XFL Draft 2022, 2× Omaha Beef Champion, HCU WR Coach</li>
                     <li><strong className="text-white">Coach Traves</strong> — Navy Safety &amp; LB, All-East teams 2011–12</li>
                     <li><strong className="text-white">Coach John</strong> — Navy Football QB, Naval Academy graduate &amp; officer</li>

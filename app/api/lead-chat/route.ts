@@ -47,7 +47,6 @@ RECRUITING PACKAGES:
 - Enhanced: 10 college emails/mo — 3mo $225 | 6mo $450 | 12mo $900
 
 COACHES:
-- Head Coach (DB): 7 yrs NFL (Rams, Texans)
 - Coach Jordan (WR/TE): XFL Draft 2022, 2x Omaha Beef Champion
 - Coach Traves (RB/S): Former Navy Safety & LB
 - Coach John (QB): Former Navy QB, Naval Academy Graduate

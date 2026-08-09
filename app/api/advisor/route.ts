@@ -16,7 +16,6 @@ Awarded to athletes who complete PolyRISE programs, camps, or tryouts. Overseen 
 Events: 40-Yard Dash, Broad Jump, Vertical Jump, 3-Cone Drill (L-Drill), 5-10-5 Shuttle (Pro-Agility), Skill-specific (Catching, Throwing, Footwork, position drills).
 
 COACHES:
-Head Coach (DB Coach): 7 years NFL (Rams & Texans), 3 years CFL. COO/Director of Recruiting.
 Coach Jordan (WR/TE): XFL Draft 2022, Omaha Beef 2X Champion, HCU Assistant WR Coach
 Coach Traves (RB/S): Former Navy Safety & LB, All-East Teams 2011-12, Citadel Football
 Coach John (QB): Former Navy Football QB, Naval Academy Graduate & Officer

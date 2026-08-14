@@ -10,8 +10,6 @@ const PROGRAMS_DATA: Record<string, { name: string; price: number; priceLabel: s
   "player-dev-6mo":          { name: "Football Player Development — 6-Month",          price: 280,  priceLabel: "$280/mo (6-mo)",   billing: "monthly"  },
   "player-dev-annual":       { name: "Football Player Development — Annual",           price: 250,  priceLabel: "$250/mo (annual)", billing: "monthly"  },
   "player-dev-1day":         { name: "Football Player Development — Once a Week",      price: 150,  priceLabel: "$150/mo",          billing: "monthly"  },
-  // Multi-Sport Development
-  "multi-sport-dev":         { name: "Multi-Sport Development",                    price: 265,   priceLabel: "$265/mo",   billing: "monthly"   },
   // Girls Player Development
   "girls-dev":               { name: "Girls Player Development — 2 Days/Week",    price: 250,   priceLabel: "$250/mo",   billing: "monthly"   },
   "girls-dev-3day":          { name: "Girls Player Development — 3 Days/Week",    price: 315,   priceLabel: "$315/mo",   billing: "monthly"   },
@@ -28,8 +26,6 @@ const PROGRAMS_DATA: Record<string, { name: string; price: number; priceLabel: s
   // Tackle Sessions (Aug–Sep recurring)
   "tackle-session-single":   { name: "Tackle Sessions — Per Session",             price: 40,    priceLabel: "$40",       billing: "one_time"  },
   "tackle-session-monthly":  { name: "Tackle Sessions — 3 Sessions",              price: 105,   priceLabel: "$105",      billing: "one_time"  },
-  // Summer / Athletic Camp
-  "summer-ms":               { name: "Athletic Camp",                             price: 265,   priceLabel: "$265",      billing: "one_time"  },
   // Events
   "combine":                 { name: "Combine Metrics Camp",                      price: 40,    priceLabel: "$40",       billing: "one_time"  },
   "pr-verified-single":      { name: "PR-VERIFIED — 1 Event",                     price: 40,    priceLabel: "$40",       billing: "one_time"  },
@@ -45,7 +41,6 @@ const CATEGORIES = [
     label: "Training Programs", badge: "bg-red-900 text-red-300", color: "border-red-800 hover:border-red-500",
     programs: [
       { id: "player-dev-1day",   desc: "Tuesday · 6:30–7:30pm · SAQ, S&C, football drills, tournament entries, military character events, PR-Verified Camp & Free Athletic Training Passport", highlight: "POPULAR" },
-      { id: "multi-sport-dev",   desc: "Youth sports development — wrestling, girls flag football, soccer, baseball, softball & more · Building well-rounded athletes" },
       { id: "drop-in-1day",      desc: "Single day training session · Try a session before committing to a full program" },
       { id: "drop-in-2day",      desc: "2 day training package" },
     ],
@@ -69,12 +64,6 @@ const CATEGORIES = [
     programs: [
       { id: "tackle-session-single",  desc: "Pay per session · Aug 8, 15 & 22 · 9:30–11:00am · Tackling fundamentals & live reps coached by NFL-experienced staff" },
       { id: "tackle-session-monthly", desc: "All 3 sessions · Aug 8, 15 & 22 · 9:30–11:00am · No auto-draft · Best value", highlight: "BEST VALUE" },
-    ],
-  },
-  {
-    label: "Summer Camp", badge: "bg-blue-900 text-blue-300", color: "border-blue-800 hover:border-blue-500",
-    programs: [
-      { id: "summer-ms", desc: "Athletic Camp · Open to all Elementary & Middle School athletes · Mon, Tue & Thu · 10:00am–12:00pm · Limited to 20 spots" },
     ],
   },
   {

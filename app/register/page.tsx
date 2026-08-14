@@ -5,6 +5,9 @@ import { useSearchParams } from "next/navigation"
 import Image from "next/image"
 
 const PROGRAMS_DATA: Record<string, { name: string; price: number; priceLabel: string; billing: "one_time" | "monthly" }> = {
+  // Training Memberships
+  "membership-annual":       { name: "Year-Round Membership — 12-Month Commitment",     price: 189,  priceLabel: "$189/mo",          billing: "monthly"  },
+  "membership-monthly":      { name: "Monthly Membership — No Contract",                price: 235,  priceLabel: "$235/mo",          billing: "monthly"  },
   // Football Player Development tiers
   "player-dev":              { name: "Football Player Development — Monthly",           price: 250,  priceLabel: "$250/mo",          billing: "one_time" },
   "player-dev-6mo":          { name: "Football Player Development — 6-Month",          price: 280,  priceLabel: "$280/mo (6-mo)",   billing: "monthly"  },
@@ -37,6 +40,13 @@ const PROGRAMS_DATA: Record<string, { name: string; price: number; priceLabel: s
 }
 
 const CATEGORIES = [
+  {
+    label: "Training Memberships", badge: "bg-red-900 text-red-300", color: "border-red-800 hover:border-red-500",
+    programs: [
+      { id: "membership-annual",  desc: "4 gym sessions/mo (SAQ, S&C & Hill Sprints) · 2 field sessions/mo (position training + recruiting & leadership talk) · 6 sessions total · 12-month commitment", highlight: "BEST VALUE" },
+      { id: "membership-monthly", desc: "4 gym sessions/mo (SAQ, S&C & Hill Sprints) · 2 field sessions/mo (position training + recruiting & leadership talk) · 6 sessions total · No contract required" },
+    ],
+  },
   {
     label: "Training Programs", badge: "bg-red-900 text-red-300", color: "border-red-800 hover:border-red-500",
     programs: [

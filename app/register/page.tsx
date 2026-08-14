@@ -155,7 +155,7 @@ function RegisterPage() {
 
   const hasAfterschool = cart.includes("afterschool")
   const cartTotal = cart.reduce((sum, id) => sum + (PROGRAMS_DATA[id]?.price ?? 0), 0)
-  const hasOtherMonthly = cart.some(id => id !== "afterschool" && PROGRAMS_DATA[id]?.billing === "monthly")
+  const hasOtherMonthly = cart.some(id => id !== "afterschool" && id !== "membership-monthly" && PROGRAMS_DATA[id]?.billing === "monthly")
   const hasMonthly = hasOtherMonthly
   const hasRecruiting = cart.some(id => id.startsWith("hs-recruiting"))
 
@@ -493,7 +493,8 @@ function RegisterPage() {
             {hasOtherMonthly && (() => {
               const monthlyItems = cart.filter(id => id !== "afterschool" && PROGRAMS_DATA[id]?.billing === "monthly")
               const commitmentMonths =
-                cart.includes("player-dev-annual") ? 12
+                cart.includes("membership-annual") ? 12
+                : cart.includes("player-dev-annual") ? 12
                 : cart.includes("player-dev-6mo") ? 6
                 : hasRecruiting ? recruitingMonths
                 : null

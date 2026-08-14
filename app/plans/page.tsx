@@ -215,6 +215,89 @@ export default function PlansPage() {
 
       </div>
 
+      {/* Training Memberships */}
+      <div className="max-w-4xl mx-auto px-6 py-16">
+        <p className="text-center text-red-500 font-black text-xs uppercase tracking-widest mb-4">In-Person Training</p>
+        <h2 className="text-center text-3xl md:text-4xl font-black text-white mb-4 leading-tight">Training Memberships</h2>
+        <p className="text-center text-gray-400 text-base max-w-2xl mx-auto mb-12">
+          Train with PolyRISE Athletix year-round or month to month — same elite sessions, same coaching staff. Choose the commitment that works for your athlete.
+        </p>
+
+        <div className="grid md:grid-cols-2 gap-6">
+
+          {/* Year-Round */}
+          <div className="bg-gray-900 rounded-2xl border-2 border-red-500 flex flex-col overflow-hidden shadow-2xl shadow-red-900/20">
+            <div className="bg-red-600 text-white text-center py-2 text-xs font-black tracking-[0.2em] uppercase">Best Value — 12-Month Commitment</div>
+            <div className="p-7 flex-1">
+              <h3 className="text-2xl font-black text-white mb-1">Year-Round Membership</h3>
+              <p className="text-gray-400 text-sm mb-5">Lock in the lowest rate and build real, measurable progress without an off-season.</p>
+              <div className="flex items-end gap-1 mb-1">
+                <span className="text-5xl font-black text-white">$189</span>
+                <span className="text-gray-500 text-sm mb-2">/month</span>
+              </div>
+              <p className="text-gray-500 text-xs mb-7">Save $552 vs. monthly over a full year</p>
+              <div className="space-y-3">
+                {[
+                  "4 gym sessions/month — SAQ, Strength & Conditioning, and Hill Sprints",
+                  "2 field sessions/month — Position-specific skill development plus open communication about recruiting, football, and leadership",
+                  "6 total sessions every month",
+                  "12-month commitment",
+                ].map(f => (
+                  <div key={f} className="flex items-start gap-3 text-sm text-gray-300">
+                    <span className="mt-0.5 w-4 h-4 rounded-full flex-shrink-0 flex items-center justify-center bg-red-500">
+                      <svg className="w-2.5 h-2.5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}><path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" /></svg>
+                    </span>
+                    {f}
+                  </div>
+                ))}
+              </div>
+            </div>
+            <div className="px-7 pb-7 pt-4">
+              <Link href="/register" className="block w-full text-center font-black rounded-xl py-4 text-sm bg-red-600 hover:bg-red-500 text-white transition-colors tracking-wide">
+                Get Started — $189/mo
+              </Link>
+            </div>
+          </div>
+
+          {/* Monthly */}
+          <div className="bg-gray-900 rounded-2xl border-2 border-gray-600 flex flex-col overflow-hidden">
+            <div className="p-7 flex-1">
+              <h3 className="text-2xl font-black text-white mb-1">Monthly Membership</h3>
+              <p className="text-gray-400 text-sm mb-5">All the same training, with full flexibility to start, pause, or stop anytime.</p>
+              <div className="flex items-end gap-1 mb-1">
+                <span className="text-5xl font-black text-white">$235</span>
+                <span className="text-gray-500 text-sm mb-2">/month</span>
+              </div>
+              <p className="text-gray-500 text-xs mb-7">No long-term commitment required</p>
+              <div className="space-y-3">
+                {[
+                  "4 gym sessions/month — SAQ, Strength & Conditioning, and Hill Sprints",
+                  "2 field sessions/month — Position-specific skill development plus open communication about recruiting, football, and leadership",
+                  "6 total sessions every month",
+                  "No annual contract required",
+                ].map(f => (
+                  <div key={f} className="flex items-start gap-3 text-sm text-gray-300">
+                    <span className="mt-0.5 w-4 h-4 rounded-full flex-shrink-0 flex items-center justify-center bg-gray-500">
+                      <svg className="w-2.5 h-2.5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}><path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" /></svg>
+                    </span>
+                    {f}
+                  </div>
+                ))}
+              </div>
+            </div>
+            <div className="px-7 pb-7 pt-4">
+              <Link href="/register" className="block w-full text-center font-black rounded-xl py-4 text-sm bg-gray-700 hover:bg-gray-600 text-white transition-colors tracking-wide">
+                Get Started — $235/mo
+              </Link>
+            </div>
+          </div>
+
+        </div>
+        <p className="text-center text-gray-600 text-xs mt-6">
+          Questions? Call or text <a href="tel:8176583300" className="text-red-500 hover:text-red-400">(817) 658-3300</a>
+        </p>
+      </div>
+
       {/* Why It Works */}
       <div className="max-w-3xl mx-auto px-6 py-16">
         <p className="text-center text-red-500 font-black text-xs uppercase tracking-widest mb-4">Why It Works</p>

@@ -4,6 +4,9 @@ import { saveRegistration, Registration } from "@/lib/registration-store"
 import { getDiscount, validateDiscount, incrementUsage } from "@/lib/discount-store"
 
 export const PROGRAMS: Record<string, { name: string; price: number; billing: "one_time" | "monthly" }> = {
+  // Training Memberships
+  "membership-annual":       { name: "Year-Round Membership — 12-Month Commitment",  price: 189,  billing: "monthly"  },
+  "membership-monthly":      { name: "Monthly Membership — No Contract",              price: 235,  billing: "monthly"  },
   // Football Player Development tiers
   "player-dev":              { name: "Football Player Development — Monthly",           price: 250,  billing: "one_time" },
   "player-dev-6mo":          { name: "Football Player Development — 6-Month",          price: 280,  billing: "monthly"  },
@@ -49,7 +52,8 @@ export async function POST(req: NextRequest) {
 
     // Determine fixed commitment months from program IDs or recruiting picker
     const cancelMonths: number | null =
-      ids.includes("player-dev-annual") ? 12
+      ids.includes("membership-annual") ? 12
+      : ids.includes("player-dev-annual") ? 12
       : ids.includes("player-dev-6mo") ? 6
       : ids.includes("afterschool-6mo") ? 6
       : recruitingMonths ? Number(recruitingMonths)

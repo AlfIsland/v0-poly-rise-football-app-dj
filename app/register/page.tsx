@@ -50,7 +50,7 @@ const CATEGORIES = [
   {
     label: "Training Programs", badge: "bg-red-900 text-red-300", color: "border-red-800 hover:border-red-500",
     programs: [
-      { id: "player-dev-1day",   desc: "Tuesday · 6:30–7:30pm · SAQ, S&C, football drills, tournament entries, military character events, PR-Verified Camp & Free Athletic Training Passport", highlight: "POPULAR" },
+      { id: "player-dev-1day",   desc: "Thursday · 5:30–6:30pm · SAQ, S&C, football drills, tournament entries, military character events, PR-Verified Camp & Free Athletic Training Passport", highlight: "POPULAR" },
       { id: "drop-in-1day",      desc: "Single day training session · Try a session before committing to a full program" },
       { id: "drop-in-2day",      desc: "2 day training package" },
     ],

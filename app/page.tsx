@@ -259,7 +259,7 @@ export default function HomePage() {
                 <div>
                   <span className="inline-block text-xs font-bold px-2 py-0.5 rounded-full bg-red-900/60 text-red-300 mb-2">Most Popular</span>
                   <h4 className="text-sm font-bold text-white">Athlete Development</h4>
-                  <p className="text-xs text-gray-400 mt-1 leading-relaxed">Tuesday · 6:30–7:30pm. Complete athlete development with a football core — SAQ, S&amp;C, sport-specific drills, tournament entries, military character building events, PR-Verified Camp and free Athletic Training Passport (Tracker). Built for football players and multisport athletes alike.</p>
+                  <p className="text-xs text-gray-400 mt-1 leading-relaxed">Thursday · 5:30–6:30pm. Complete athlete development with a football core — SAQ, S&amp;C, sport-specific drills, tournament entries, military character building events, PR-Verified Camp and free Athletic Training Passport (Tracker). Built for football players and multisport athletes alike.</p>
                 </div>
                 <div className="space-y-1.5 border-t border-gray-800 pt-2.5">
                   <div className="flex justify-between text-xs"><span className="text-gray-300">Once a Week</span><span className="font-bold text-white">$150/mo</span></div>
@@ -809,7 +809,7 @@ export default function HomePage() {
                   <span className="text-gray-500 ml-4 shrink-0 transition-transform duration-200 group-open:rotate-180 text-xs select-none">▼</span>
                 </summary>
                 <div className="px-5 pb-4 pt-3 text-sm text-gray-300 leading-relaxed border-t border-gray-800">
-                  <p>Athlete Development (Tue &amp; Thu, 6:30–7:30pm) is <strong className="text-white">$150/mo</strong> (once a week). After School &amp; Girls Development (Tue &amp; Thu, 5:30–6:30pm) is <strong className="text-white">$150/mo</strong> (once a week). Tackle Sessions (Aug–Sep, once/week) are <strong className="text-white">$40/session</strong> or $125/mo. HS Recruiting &amp; Exposure packages are $85–$150/mo. Athlete Tracking plans start at <strong className="text-white">$9.99/mo</strong>.</p>
+                  <p>Athlete Development (Thursday, 5:30–6:30pm) is <strong className="text-white">$150/mo</strong> (once a week). After School &amp; Girls Development (Tue &amp; Thu, 5:30–6:30pm) is <strong className="text-white">$150/mo</strong> (once a week). Tackle Sessions (Aug–Sep, once/week) are <strong className="text-white">$40/session</strong> or $125/mo. HS Recruiting &amp; Exposure packages are $85–$150/mo. Athlete Tracking plans start at <strong className="text-white">$9.99/mo</strong>.</p>
                 </div>
               </details>
 
@@ -819,7 +819,7 @@ export default function HomePage() {
                   <span className="text-gray-500 ml-4 shrink-0 transition-transform duration-200 group-open:rotate-180 text-xs select-none">▼</span>
                 </summary>
                 <div className="px-5 pb-4 pt-3 text-sm text-gray-300 leading-relaxed border-t border-gray-800 space-y-1">
-                  <p><strong className="text-white">Athlete Development:</strong> Tuesday · 6:30–7:30pm</p>
+                  <p><strong className="text-white">Athlete Development:</strong> Thursday · 5:30–6:30pm</p>
                   <p><strong className="text-white">After School &amp; Girls Development:</strong> Tuesday · 5:30–6:30pm (Elementary, Middle School &amp; Girls)</p>
                   <p><strong className="text-white">Tackle Sessions:</strong> Aug 8, 15 &amp; 22 · 9:30–11:00am</p>
                   <p className="text-gray-400 pt-1">Monthly camps, combine events, and leadership hikes held on weekends in Dripping Springs.</p>

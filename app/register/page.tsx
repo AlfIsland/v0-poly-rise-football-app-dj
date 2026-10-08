@@ -26,14 +26,8 @@ const PROGRAMS_DATA: Record<string, { name: string; price: number; priceLabel: s
   // After School & Girls Development
   "afterschool":             { name: "After School & Girls Development",          price: 150,   priceLabel: "$150/mo",  billing: "one_time" },
   "afterschool-monthly":     { name: "After School & Girls Development",          price: 150,   priceLabel: "$150/mo",  billing: "one_time" },
-  // Tackle Sessions (Aug–Sep recurring)
-  "tackle-session-single":   { name: "Tackle Sessions — Per Session",             price: 40,    priceLabel: "$40",       billing: "one_time"  },
-  "tackle-session-monthly":  { name: "Tackle Sessions — 3 Sessions",              price: 105,   priceLabel: "$105",      billing: "one_time"  },
   // Events
   "combine":                 { name: "Combine Metrics Camp",                      price: 40,    priceLabel: "$40",       billing: "one_time"  },
-  "pr-verified-single":      { name: "PR-VERIFIED — 1 Event",                     price: 40,    priceLabel: "$40",       billing: "one_time"  },
-  "pr-verified-annual":      { name: "PR-VERIFIED — Annual (6 Events)",           price: 130,   priceLabel: "$130/yr",   billing: "one_time"  },
-  "hike":                    { name: "Leadership & Mentorship Hike",              price: 25,    priceLabel: "$25",       billing: "one_time"  },
   // Athlete Tracking & Recruiting Profiles
   "passport":                { name: "Passport",                                  price: 9.99,  priceLabel: "$9.99/mo",  billing: "monthly"   },
   "recruit":                 { name: "Recruit",                                   price: 29.99, priceLabel: "$29.99/mo", billing: "monthly"   },
@@ -70,19 +64,9 @@ const CATEGORIES = [
     ],
   },
   {
-    label: "Tackle Sessions", badge: "bg-orange-900 text-orange-300", color: "border-orange-800 hover:border-orange-500",
-    programs: [
-      { id: "tackle-session-single",  desc: "Pay per session · Aug 8, 15 & 22 · 9:30–11:00am · Tackling fundamentals & live reps coached by NFL-experienced staff" },
-      { id: "tackle-session-monthly", desc: "All 3 sessions · Aug 8, 15 & 22 · 9:30–11:00am · No auto-draft · Best value", highlight: "BEST VALUE" },
-    ],
-  },
-  {
     label: "Events", badge: "bg-green-900 text-green-300", color: "border-green-800 hover:border-green-500",
     programs: [
       { id: "combine",            desc: "Professional Combine Events · H.S. athletes record official metrics · Earn your PR-VERIFIED seal" },
-      { id: "pr-verified-single", desc: "1 combine event · Get officially PR-VERIFIED · Standardized pro-style testing on-site" },
-      { id: "pr-verified-annual", desc: "6 combine events throughout the year · Keep your verified data current all season long", highlight: "BEST VALUE" },
-      { id: "hike",          desc: "Leadership & Mentorship Hike · Character-building experience developing leadership, mentorship & mental toughness" },
     ],
   },
   {

@@ -24,18 +24,10 @@ export const PROGRAMS: Record<string, { name: string; price: number; billing: "o
   "hs-recruiting-elite":     { name: "HS Recruiting — Elite Exposure",                 price: 150,   billing: "monthly"  },
   "hs-recruiting-pro":       { name: "HS Recruiting — Pro Exposure",                   price: 125,   billing: "monthly"  },
   "hs-recruiting-basic":     { name: "HS Recruiting — Basic Exposure",                 price: 85,    billing: "monthly"  },
-  // Tackle Sessions (Aug–Sep)
-  "tackle-session-single":   { name: "Tackle Sessions — Per Session",                  price: 40,    billing: "one_time" },
-  "tackle-session-monthly":  { name: "Tackle Sessions — 3 Sessions",                   price: 105,   billing: "one_time" },
-  // Summer / Athletic Camp
-  "summer-ms":               { name: "Athletic Camp",                                  price: 265,   billing: "one_time" },
   // After School & Girls Development
   "afterschool-monthly":     { name: "After School & Girls Development",                     price: 150,   billing: "one_time" },
   // Events
   "combine":                 { name: "Combine Metrics Camp",                           price: 40,    billing: "one_time" },
-  "pr-verified-single":      { name: "PR-VERIFIED — 1 Event",                          price: 40,    billing: "one_time" },
-  "pr-verified-annual":      { name: "PR-VERIFIED — Annual (6 Events)",               price: 130,   billing: "one_time" },
-  "hike":                    { name: "Leadership & Mentorship Hike",                   price: 25,    billing: "one_time" },
   // Athlete Tracking & Recruiting Profiles
   "passport":                { name: "Passport",                                        price: 9.99,  billing: "monthly"  },
   "recruit":                 { name: "Recruit",                                         price: 29.99, billing: "monthly"  },

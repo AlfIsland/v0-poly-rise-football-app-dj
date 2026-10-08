@@ -46,7 +46,6 @@ export default function RecruitPage() {
     if (nameMatch && !newLead.name) newLead.name = nameMatch[1]
 
     if (lower.includes("360 elite") && !newLead.program) newLead.program = "360 Elite"
-    else if (lower.includes("summer camp") && !newLead.program) newLead.program = "Summer Camp"
     else if (lower.includes("girls") && !newLead.program) newLead.program = "Girls Program"
     else if (lower.includes("player development") && !newLead.program) newLead.program = "Player Development"
     else if (lower.includes("recruiting") && !newLead.program) newLead.program = "Recruiting Package"
@@ -223,10 +222,6 @@ export default function RecruitPage() {
           <div className="bg-red-950/40 border border-red-900/50 rounded-2xl p-5">
             <p className="text-xs font-bold text-red-400 uppercase tracking-widest mb-3">Filling Fast</p>
             <div className="space-y-2.5 text-xs text-red-300">
-              <div className="flex items-start gap-2">
-                <span className="w-1.5 h-1.5 rounded-full bg-red-500 mt-1 flex-shrink-0" />
-                Summer Camp — max 20 spots
-              </div>
               <div className="flex items-start gap-2">
                 <span className="w-1.5 h-1.5 rounded-full bg-red-500 mt-1 flex-shrink-0" />
                 Rise of Warriors — MS May 29

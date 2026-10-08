@@ -31,18 +31,15 @@ Player Development — $350/month (MOST POPULAR): 8 sessions/month, SAQ, S&C, fo
 360 Elite — $500/month (ELITE): Everything in Player Development PLUS one-on-one NFL-coach sessions, recruiting profile, 7 college coach email blasts/month, weekly film study, unlimited camps, college visits, NIL & financial literacy classes, sports medicine/nutrition discounts.
 After School & Girls Development — $150/month (once a week): Tuesday 5:30–6:30pm. Open to Elementary, Middle School & Girl athletes.
 Group & Private Training — Pricing by inquiry: Group sessions and 1-on-1 private training available. Contact Coach at (817) 658-3300 or https://wa.me/18176583300 for pricing and availability.
-Tackle Sessions — Aug 8, 15 & 22 · 9:30–11:00am: $40/session (pay per session) or $105 for all 3 sessions (best value, no auto-draft). Tackling fundamentals, technique, and live reps coached by NFL-experienced staff.
-Summer Camp — $265/month (June & July, max 20 spots): K-5 Mon-Thu 8-10am, Middle School Mon-Thu 10am-12pm, High School Mon-Thu 2-4pm.
 
 CAMPS & EVENTS:
-PR-VERIFIED: Get officially verified with standardized pro-style combine testing. 1 Event: $40 (one-time). Annual (6 Events): $130/year — 6 combine events throughout the year to keep your data current and verified. No self-reported times; everything measured on-site.
 Rise of Warriors Tournament: Middle School (10 teams, May 29, $400) and High School (8 teams, May 30, $425). Min 3 games, single elimination.
 
 REGISTRATION: https://polyrisefootball.com/register
 PLANS PAGE: https://polyrisefootball.com/plans
 
 PLAN RECOMMENDATIONS:
-K-5 → Summer Camp ($265/mo), then Player Development
+K-5 → After School & Girls Development ($150/mo), then Player Development
 Middle school 6-8 → Player Development ($350/mo) + Passport ($9.99/mo)
 High school 9-10 → Player Development + Recruit plan ($29.99/mo)
 High school 11-12 serious about college → 360 Elite ($500/mo) + Elite Recruit ($49.99/mo)

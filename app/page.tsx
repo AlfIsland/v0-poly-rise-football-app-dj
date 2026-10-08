@@ -379,20 +379,6 @@ export default function HomePage() {
                 <Link href="/register?program=combine" className="mt-auto block text-center text-xs font-bold bg-red-600 hover:bg-red-700 text-white py-2 rounded-lg transition-colors">Register</Link>
               </div>
 
-              {/* Summer Camp */}
-              <div className="bg-gray-900 border border-gray-800 rounded-xl p-4 sm:col-span-2 lg:col-span-3 hover:border-gray-600 transition-colors">
-                <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
-                  <div>
-                    <span className="inline-block text-xs font-bold px-2 py-0.5 rounded-full bg-blue-900/60 text-blue-300 mb-2">Summer Camp</span>
-                    <h4 className="text-sm font-bold text-white">Summer Athletix &amp; Leadership Camp 2027</h4>
-                    <p className="text-xs text-gray-400 mt-1">June &amp; July · Mon, Tue &amp; Thu · 10:00am–12:00pm · Elementary &amp; Middle School · <span className="text-white font-semibold">Limited to 20 spots</span></p>
-                  </div>
-                  <div className="flex items-center gap-3 shrink-0">
-                    <Link href="/register?program=summer-ms" className="text-xs font-bold bg-red-600 hover:bg-red-700 text-white py-2 px-4 rounded-lg transition-colors whitespace-nowrap">Register Now</Link>
-                  </div>
-                </div>
-              </div>
-
               {/* Recruiting */}
               <div className="bg-gray-900 border border-gray-800 rounded-xl p-4 sm:col-span-2 lg:col-span-3 hover:border-gray-600 transition-colors">
                 <div className="flex flex-col md:flex-row md:items-start gap-5">

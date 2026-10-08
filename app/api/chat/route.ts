@@ -14,7 +14,6 @@ PROGRAMS & PRICING:
 - Player Development: $350/mo — Tue & Thu 6:30–7:45pm, 16 sessions/month, SAQ, S&C, football drills, film study, quarterly military character events, tournament entries
 - 360 Elite: $500/mo — Everything in Player Dev PLUS 1-on-1 NFL coaching, recruiting profile, 7 college email blasts/month, weekly film study, unlimited free camps, college visits, NIL & financial literacy classes
 - Girls Player Development: $250/mo — Mon & Fri 5–6:30pm (May); Mon & Fri 1–2:30pm (June & July)
-- Summer Camp: $265/mo — K-5 / Middle / High School tracks, Mon–Thu, June & July, LIMITED to 20 spots per group
 - PR-VERIFIED Combine Camp: $50/athlete
 - Rise of Warriors Tournament: MS May 29 $400/team | HS May 30 $425/team (min 3 games, single elim)
 

@@ -366,47 +366,6 @@ export default function HomePage() {
                 <Link href="/register?program=hs-recruiting-elite" className="mt-auto block text-center text-xs font-bold bg-red-600 hover:bg-red-700 text-white py-2 rounded-lg transition-colors">Get Started</Link>
               </div>
 
-              {/* Leadership & Mentorship Hike */}
-              <div className="bg-gray-900 border border-gray-800 rounded-xl p-4 flex flex-col gap-3 hover:border-gray-600 transition-colors">
-                <div>
-                  <span className="inline-block text-xs font-bold px-2 py-0.5 rounded-full bg-green-900/60 text-green-300 mb-2">Leadership</span>
-                  <h4 className="text-sm font-bold text-white">Leadership &amp; Mentorship Hike</h4>
-                  <p className="text-xs text-gray-400 mt-1 leading-relaxed">Character-building hike developing leadership, mentorship &amp; mental toughness beyond the field</p>
-                </div>
-                <div className="border-t border-gray-800 pt-2.5">
-                  <div className="flex justify-between text-xs"><span className="text-gray-300">Per Athlete</span><span className="font-bold text-white">$25</span></div>
-                </div>
-                <Link href="/register?program=hike" className="mt-auto block text-center text-xs font-bold bg-red-600 hover:bg-red-700 text-white py-2 rounded-lg transition-colors">Register</Link>
-              </div>
-
-              {/* Tackle Sessions */}
-              <div className="bg-gray-900 border border-gray-800 rounded-xl p-4 flex flex-col gap-3 hover:border-orange-800/60 transition-colors">
-                <div>
-                  <span className="inline-block text-xs font-bold px-2 py-0.5 rounded-full bg-orange-900/60 text-orange-300 mb-2">Aug – Sep</span>
-                  <h4 className="text-sm font-bold text-white">Tackle Sessions</h4>
-                  <p className="text-xs text-gray-400 mt-1 leading-relaxed">Aug 8, 15 &amp; 22 · 9:30–11:00am · Tackling fundamentals, technique, and live reps coached by NFL-experienced staff</p>
-                </div>
-                <div className="space-y-1.5 border-t border-gray-800 pt-2.5">
-                  <div className="flex justify-between text-xs"><span className="text-gray-300">Per Session</span><span className="font-bold text-white">$40</span></div>
-                  <div className="flex justify-between text-xs"><span className="text-gray-300">3 Sessions <span className="text-orange-400">· Best Value · No auto-draft</span></span><span className="font-bold text-white">$105</span></div>
-                </div>
-                <Link href="/register?program=tackle-session-monthly" className="mt-auto block text-center text-xs font-bold bg-red-600 hover:bg-red-700 text-white py-2 rounded-lg transition-colors">Register</Link>
-              </div>
-
-              {/* PR-VERIFIED */}
-              <div className="bg-gray-900 border border-gray-800 rounded-xl p-4 flex flex-col gap-3 hover:border-[#DC143C]/40 transition-colors">
-                <div>
-                  <span className="inline-block text-xs font-bold px-2 py-0.5 rounded-full bg-[#DC143C]/15 text-[#DC143C] mb-2">PR-VERIFIED</span>
-                  <h4 className="text-sm font-bold text-white">PR-VERIFIED</h4>
-                  <p className="text-xs text-gray-400 mt-1 leading-relaxed">Sign up for 1 combine event and get officially verified — or go annual and get 6 events throughout the year to keep your data current</p>
-                </div>
-                <div className="border-t border-gray-800 pt-2.5 flex flex-col gap-1.5">
-                  <div className="flex justify-between text-xs"><span className="text-gray-300">1 Event</span><span className="font-bold text-white">$40</span></div>
-                  <div className="flex justify-between text-xs"><span className="text-gray-300">Annual · 6 Events</span><span className="font-bold text-white">$130/yr</span></div>
-                </div>
-                <Link href="/register?program=pr-verified-single" className="mt-auto block text-center text-xs font-bold bg-[#DC143C] hover:bg-[#B01030] text-white py-2 rounded-lg transition-colors">Register</Link>
-              </div>
-
               {/* Combine Metrics Camp */}
               <div className="bg-gray-900 border border-gray-800 rounded-xl p-4 flex flex-col gap-3 hover:border-gray-600 transition-colors">
                 <div>
@@ -809,7 +768,7 @@ export default function HomePage() {
                   <span className="text-gray-500 ml-4 shrink-0 transition-transform duration-200 group-open:rotate-180 text-xs select-none">▼</span>
                 </summary>
                 <div className="px-5 pb-4 pt-3 text-sm text-gray-300 leading-relaxed border-t border-gray-800">
-                  <p>Athlete Development (Thursday, 5:30–6:30pm) is <strong className="text-white">$150/mo</strong> (once a week). After School &amp; Girls Development (Tue &amp; Thu, 5:30–6:30pm) is <strong className="text-white">$150/mo</strong> (once a week). Tackle Sessions (Aug–Sep, once/week) are <strong className="text-white">$40/session</strong> or $125/mo. HS Recruiting &amp; Exposure packages are $85–$150/mo. Athlete Tracking plans start at <strong className="text-white">$9.99/mo</strong>.</p>
+                  <p>Athlete Development (Thursday, 5:30–6:30pm) is <strong className="text-white">$150/mo</strong> (once a week). After School &amp; Girls Development (Tue &amp; Thu, 5:30–6:30pm) is <strong className="text-white">$150/mo</strong> (once a week). HS Recruiting &amp; Exposure packages are $85–$150/mo. Athlete Tracking plans start at <strong className="text-white">$9.99/mo</strong>.</p>
                 </div>
               </details>
 
@@ -821,8 +780,7 @@ export default function HomePage() {
                 <div className="px-5 pb-4 pt-3 text-sm text-gray-300 leading-relaxed border-t border-gray-800 space-y-1">
                   <p><strong className="text-white">Athlete Development:</strong> Thursday · 5:30–6:30pm</p>
                   <p><strong className="text-white">After School &amp; Girls Development:</strong> Tuesday · 5:30–6:30pm (Elementary, Middle School &amp; Girls)</p>
-                  <p><strong className="text-white">Tackle Sessions:</strong> Aug 8, 15 &amp; 22 · 9:30–11:00am</p>
-                  <p className="text-gray-400 pt-1">Monthly camps, combine events, and leadership hikes held on weekends in Dripping Springs.</p>
+                  <p className="text-gray-400 pt-1">Monthly camps and combine events held on weekends in Dripping Springs.</p>
                 </div>
               </details>
 

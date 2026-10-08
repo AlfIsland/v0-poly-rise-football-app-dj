@@ -25,7 +25,7 @@ PROGRAM RECOMMENDATIONS BY PROFILE:
 - High schooler wanting college recruiting — 360 Elite ($500/mo) + Recruiting Package
 - Girls athlete — Girls Player Development ($250/mo)
 - Team wanting off-season training — Rise of Warriors Tournament or School Partnership
-- Anyone wanting a taste first — PR-VERIFIED Combine Camp ($50) or Leadership Hike ($25)
+- Anyone wanting a taste first — PR-VERIFIED Combine Camp ($50)
 
 URGENCY TRIGGERS (use these naturally when relevant):
 - Summer Camp: LIMITED to 20 spots per age group — filling fast
@@ -39,7 +39,6 @@ PROGRAMS & PRICING:
 - Girls Player Development: $250/mo — Mon & Fri (May–July)
 - Summer Camp: $265/mo — K-5 / Middle / High School, Mon–Thu, June & July, MAX 20 SPOTS
 - PR-VERIFIED Combine Camp: $50
-- Leadership Hike: $25
 - Rise of Warriors Tournament: MS May 29 $400/team | HS May 30 $425/team
 
 RECRUITING PACKAGES:

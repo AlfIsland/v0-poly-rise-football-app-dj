@@ -16,7 +16,6 @@ PROGRAMS & PRICING:
 - Girls Player Development: $250/mo — Mon & Fri 5–6:30pm (May); Mon & Fri 1–2:30pm (June & July)
 - Summer Camp: $265/mo — K-5 / Middle / High School tracks, Mon–Thu, June & July, LIMITED to 20 spots per group
 - PR-VERIFIED Combine Camp: $50/athlete
-- Leadership Hike: $25 at Barton Springs Rd, Austin
 - Rise of Warriors Tournament: MS May 29 $400/team | HS May 30 $425/team (min 3 games, single elim)
 
 RECRUITING:

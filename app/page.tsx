@@ -258,11 +258,11 @@ export default function HomePage() {
               <div className="bg-gray-900 border border-gray-800 rounded-xl p-4 flex flex-col gap-3 hover:border-gray-600 transition-colors">
                 <div>
                   <span className="inline-block text-xs font-bold px-2 py-0.5 rounded-full bg-red-900/60 text-red-300 mb-2">Most Popular</span>
-                  <h4 className="text-sm font-bold text-white">Athlete Development</h4>
-                  <p className="text-xs text-gray-400 mt-1 leading-relaxed">Thursday · 5:30–6:30pm. Complete athlete development with a football core — SAQ, S&amp;C, sport-specific drills, tournament entries, military character building events, PR-Verified Camp and free Athletic Training Passport (Tracker). Built for football players and multisport athletes alike.</p>
+                  <h4 className="text-sm font-bold text-white">High School Program</h4>
+                  <p className="text-xs text-gray-400 mt-1 leading-relaxed">Monday &amp; Wednesday · 7–8pm with Coach Jordan. Complete athlete development with a football core — SAQ, S&amp;C, sport-specific drills, tournament entries, military character building events, PR-Verified Camp and free Athletic Training Passport (Tracker). Built for football players and multisport athletes alike.</p>
                 </div>
                 <div className="space-y-1.5 border-t border-gray-800 pt-2.5">
-                  <div className="flex justify-between text-xs"><span className="text-gray-300">Once a Week</span><span className="font-bold text-white">$150/mo</span></div>
+                  <div className="flex justify-between text-xs"><span className="text-gray-300">Mon &amp; Wed</span><span className="font-bold text-white">$150/mo</span></div>
                 </div>
                 <Link href="/register?program=player-dev-1day" className="mt-auto block text-center text-xs font-bold bg-red-600 hover:bg-red-700 text-white py-2 rounded-lg transition-colors">Register</Link>
               </div>
@@ -738,7 +738,7 @@ export default function HomePage() {
                   <span className="text-gray-500 ml-4 shrink-0 transition-transform duration-200 group-open:rotate-180 text-xs select-none">▼</span>
                 </summary>
                 <div className="px-5 pb-4 pt-3 text-sm text-gray-300 leading-relaxed border-t border-gray-800">
-                  <p>Athlete Development (Thursday, 5:30–6:30pm) is <strong className="text-white">$150/mo</strong> (once a week). After School &amp; Girls Development (Tue &amp; Thu, 5:30–6:30pm) is <strong className="text-white">$150/mo</strong> (once a week). HS Recruiting &amp; Exposure packages are $85–$150/mo. Athlete Tracking plans start at <strong className="text-white">$9.99/mo</strong>.</p>
+                  <p>High School Program with Coach Jordan (Mon &amp; Wed, 7–8pm) is <strong className="text-white">$150/mo</strong>. After School &amp; Girls Development (Tue &amp; Thu, 5:30–6:30pm) is <strong className="text-white">$150/mo</strong> (once a week). HS Recruiting &amp; Exposure packages are $85–$150/mo. Athlete Tracking plans start at <strong className="text-white">$9.99/mo</strong>.</p>
                 </div>
               </details>
 
@@ -748,7 +748,7 @@ export default function HomePage() {
                   <span className="text-gray-500 ml-4 shrink-0 transition-transform duration-200 group-open:rotate-180 text-xs select-none">▼</span>
                 </summary>
                 <div className="px-5 pb-4 pt-3 text-sm text-gray-300 leading-relaxed border-t border-gray-800 space-y-1">
-                  <p><strong className="text-white">Athlete Development:</strong> Thursday · 5:30–6:30pm</p>
+                  <p><strong className="text-white">High School Program:</strong> Monday &amp; Wednesday · 7–8pm (Coach Jordan)</p>
                   <p><strong className="text-white">After School &amp; Girls Development:</strong> Tuesday · 5:30–6:30pm (Elementary, Middle School &amp; Girls)</p>
                   <p className="text-gray-400 pt-1">Monthly camps and combine events held on weekends in Dripping Springs.</p>
                 </div>

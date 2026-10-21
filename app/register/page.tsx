@@ -11,7 +11,7 @@ const PROGRAMS_DATA: Record<string, { name: string; price: number; priceLabel: s
   "player-dev":              { name: "Football Player Development — Monthly",           price: 250,  priceLabel: "$250/mo",          billing: "one_time" },
   "player-dev-6mo":          { name: "Football Player Development — 6-Month",          price: 280,  priceLabel: "$280/mo (6-mo)",   billing: "monthly"  },
   "player-dev-annual":       { name: "Football Player Development — Annual",           price: 250,  priceLabel: "$250/mo (annual)", billing: "monthly"  },
-  "player-dev-1day":         { name: "Football Player Development — Once a Week",      price: 150,  priceLabel: "$150/mo",          billing: "monthly"  },
+  "player-dev-1day":         { name: "High School Program — Mon & Wed",                price: 150,  priceLabel: "$150/mo",          billing: "monthly"  },
   // Girls Player Development
   "girls-dev":               { name: "Girls Player Development — 2 Days/Week",    price: 250,   priceLabel: "$250/mo",   billing: "monthly"   },
   "girls-dev-3day":          { name: "Girls Player Development — 3 Days/Week",    price: 315,   priceLabel: "$315/mo",   billing: "monthly"   },
@@ -42,7 +42,7 @@ const CATEGORIES = [
   {
     label: "Training Programs", badge: "bg-red-900 text-red-300", color: "border-red-800 hover:border-red-500",
     programs: [
-      { id: "player-dev-1day",   desc: "Thursday · 5:30–6:30pm · SAQ, S&C, football drills, tournament entries, military character events, PR-Verified Camp & Free Athletic Training Passport", highlight: "POPULAR" },
+      { id: "player-dev-1day",   desc: "Monday & Wednesday · 7–8pm · Coach Jordan · SAQ, S&C, football drills, tournament entries, military character events, PR-Verified Camp & Free Athletic Training Passport", highlight: "POPULAR" },
       { id: "drop-in-1day",      desc: "Single day training session · Try a session before committing to a full program" },
       { id: "drop-in-2day",      desc: "2 day training package" },
     ],

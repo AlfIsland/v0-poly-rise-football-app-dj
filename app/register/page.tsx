@@ -11,7 +11,7 @@ const PROGRAMS_DATA: Record<string, { name: string; price: number; priceLabel: s
   "player-dev":              { name: "Football Player Development — Monthly",           price: 250,  priceLabel: "$250/mo",          billing: "one_time" },
   "player-dev-6mo":          { name: "Football Player Development — 6-Month",          price: 280,  priceLabel: "$280/mo (6-mo)",   billing: "monthly"  },
   "player-dev-annual":       { name: "Football Player Development — Annual",           price: 250,  priceLabel: "$250/mo (annual)", billing: "monthly"  },
-  "player-dev-1day":         { name: "High School Program — Mon & Wed",                price: 150,  priceLabel: "$150/mo",          billing: "monthly"  },
+  "player-dev-1day":         { name: "High School Program — Mon & Wed",                price: 250,  priceLabel: "$250/mo",          billing: "monthly"  },
   // Girls Player Development
   "girls-dev":               { name: "Girls Player Development — 2 Days/Week",    price: 250,   priceLabel: "$250/mo",   billing: "monthly"   },
   "girls-dev-3day":          { name: "Girls Player Development — 3 Days/Week",    price: 315,   priceLabel: "$315/mo",   billing: "monthly"   },
@@ -490,7 +490,7 @@ function RegisterPage() {
                       className="w-full flex items-center justify-between px-4 py-3 text-sm text-white font-semibold hover:bg-gray-750 transition-colors"
                     >
                       <span>Read Billing Terms</span>
-                      <span className="text-gray-400 text-xs">{subscriptionExpanded ? "▲ Collapse" : "▼ Expand"}</span>
+                      <span className="text-gray-400 text-xs">{subscriptionExpanded ? "��� Collapse" : "▼ Expand"}</span>
                     </button>
                     {subscriptionExpanded && (
                       <div className="px-4 pb-4 text-xs text-gray-300 leading-relaxed space-y-3 border-t border-gray-700 pt-3 max-h-64 overflow-y-auto">

@@ -262,7 +262,7 @@ export default function HomePage() {
                   <p className="text-xs text-gray-400 mt-1 leading-relaxed">Monday &amp; Wednesday · 7–8pm with Coach Jordan. Complete athlete development with a football core — SAQ, S&amp;C, sport-specific drills, tournament entries, military character building events, PR-Verified Camp and free Athletic Training Passport (Tracker). Built for football players and multisport athletes alike.</p>
                 </div>
                 <div className="space-y-1.5 border-t border-gray-800 pt-2.5">
-                  <div className="flex justify-between text-xs"><span className="text-gray-300">Mon &amp; Wed</span><span className="font-bold text-white">$150/mo</span></div>
+                  <div className="flex justify-between text-xs"><span className="text-gray-300">Mon &amp; Wed</span><span className="font-bold text-white">$250/mo</span></div>
                 </div>
                 <Link href="/register?program=player-dev-1day" className="mt-auto block text-center text-xs font-bold bg-red-600 hover:bg-red-700 text-white py-2 rounded-lg transition-colors">Register</Link>
               </div>
@@ -738,7 +738,7 @@ export default function HomePage() {
                   <span className="text-gray-500 ml-4 shrink-0 transition-transform duration-200 group-open:rotate-180 text-xs select-none">▼</span>
                 </summary>
                 <div className="px-5 pb-4 pt-3 text-sm text-gray-300 leading-relaxed border-t border-gray-800">
-                  <p>High School Program with Coach Jordan (Mon &amp; Wed, 7–8pm) is <strong className="text-white">$150/mo</strong>. After School &amp; Girls Development (Tue &amp; Thu, 5:30–6:30pm) is <strong className="text-white">$150/mo</strong> (once a week). HS Recruiting &amp; Exposure packages are $85–$150/mo. Athlete Tracking plans start at <strong className="text-white">$9.99/mo</strong>.</p>
+                  <p>High School Program with Coach Jordan (Mon &amp; Wed, 7–8pm) is <strong className="text-white">$250/mo</strong>. After School &amp; Girls Development (Tue &amp; Thu, 5:30–6:30pm) is <strong className="text-white">$150/mo</strong> (once a week). HS Recruiting &amp; Exposure packages are $85–$150/mo. Athlete Tracking plans start at <strong className="text-white">$9.99/mo</strong>.</p>
                 </div>
               </details>
 

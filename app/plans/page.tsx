@@ -228,19 +228,17 @@ export default function PlansPage() {
           {/* Monthly */}
           <div className="bg-gray-900 rounded-2xl border-2 border-gray-600 flex flex-col overflow-hidden">
             <div className="p-7 flex-1">
-              <h3 className="text-2xl font-black text-white mb-1">Monthly Membership</h3>
-              <p className="text-gray-400 text-sm mb-5">All the same training, with full flexibility to start, pause, or stop anytime.</p>
+              <h3 className="text-2xl font-black text-white mb-1">Middle School Program</h3>
+              <p className="text-gray-400 text-sm mb-5">Middle School Program (Tuesday &amp; Thursday 7–8pm) @ Link Fitness 1034 Canyon Bend Dr. Dripping Springs TX.</p>
               <div className="flex items-end gap-1 mb-1">
                 <span className="text-5xl font-black text-white">$235</span>
                 <span className="text-gray-500 text-sm mb-2">/month</span>
               </div>
-              <p className="text-gray-500 text-xs mb-7">No long-term commitment required</p>
+              <p className="text-gray-500 text-xs mb-7">Tuesday &amp; Thursday · 7–8pm</p>
               <div className="space-y-3">
                 {[
-                  "4 gym sessions/month — SAQ, Strength & Conditioning, and Hill Sprints",
-                  "2 field sessions/month — Position-specific skill development plus open communication about recruiting, football, and leadership",
-                  "6 total sessions every month",
-                  "No annual contract required",
+                  "Tuesday & Thursday, 7–8pm",
+                  "Link Fitness, 1034 Canyon Bend Dr., Dripping Springs, TX",
                 ].map(f => (
                   <div key={f} className="flex items-start gap-3 text-sm text-gray-300">
                     <span className="mt-0.5 w-4 h-4 rounded-full flex-shrink-0 flex items-center justify-center bg-gray-500">
@@ -252,8 +250,8 @@ export default function PlansPage() {
               </div>
             </div>
             <div className="px-7 pb-7 pt-4">
-              <Link href="/register" className="block w-full text-center font-black rounded-xl py-4 text-sm bg-gray-700 hover:bg-gray-600 text-white transition-colors tracking-wide">
-                Get Started — $235/mo
+              <Link href="/register?program=membership-monthly" className="block w-full text-center font-black rounded-xl py-4 text-sm bg-gray-700 hover:bg-gray-600 text-white transition-colors tracking-wide">
+                Register — $235/mo
               </Link>
             </div>
           </div>

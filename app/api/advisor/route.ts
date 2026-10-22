@@ -29,7 +29,7 @@ Elite Recruit — $49.99/month (Grades 11-12): Everything in Recruit PLUS quarte
 IN-PERSON TRAINING PROGRAMS:
 Player Development — $350/month (MOST POPULAR): 8 sessions/month, SAQ, S&C, football drills, tournament entries, military character building events, PR-Verified Camp, free Passport tracker. Tue & Thu 6:30-7:45pm.
 360 Elite — $500/month (ELITE): Everything in Player Development PLUS one-on-one NFL-coach sessions, recruiting profile, 7 college coach email blasts/month, weekly film study, unlimited camps, college visits, NIL & financial literacy classes, sports medicine/nutrition discounts.
-After School & Girls Development — $150/month (once a week): Tuesday 5:30–6:30pm. Open to Elementary, Middle School & Girl athletes.
+12U Athlete Program — $150/month: Tuesday & Thursday 6–7pm @ Link Fitness 1034 Canyon Bend Dr. Dripping Springs TX.
 Group & Private Training — Pricing by inquiry: Group sessions and 1-on-1 private training available. Contact Coach at (817) 658-3300 or https://wa.me/18176583300 for pricing and availability.
 
 CAMPS & EVENTS:
@@ -39,13 +39,12 @@ REGISTRATION: https://polyrisefootball.com/register
 PLANS PAGE: https://polyrisefootball.com/plans
 
 PLAN RECOMMENDATIONS:
-K-5 → After School & Girls Development ($150/mo), then Player Development
+12U / K-5 → 12U Athlete Program ($150/mo)
 Middle school 6-8 → Player Development ($350/mo) + Passport ($9.99/mo)
 High school 9-10 → Player Development + Recruit plan ($29.99/mo)
 High school 11-12 serious about college → 360 Elite ($500/mo) + Elite Recruit ($49.99/mo)
 Just want combine metrics verified → PR-VERIFIED Combine Camp ($50 one-time)
 Group or private training → Contact Coach directly at (817) 658-3300 or WhatsApp https://wa.me/18176583300 for Group & Private Training pricing
-Girl athlete → After School & Girls Development ($250/mo)
 
 IMPORTANT: Be helpful, warm, and always guide toward the right next step. If someone seems ready to register, give them the registration link. For recruiting questions, direct them to call or text (817) 658-3300 or email polyrise@polyrisefootball.com.
 `

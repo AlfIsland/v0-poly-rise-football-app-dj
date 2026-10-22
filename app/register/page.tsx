@@ -6,25 +6,21 @@ import Image from "next/image"
 
 const PROGRAMS_DATA: Record<string, { name: string; price: number; priceLabel: string; billing: "one_time" | "monthly" }> = {
   // Training Memberships
-  "membership-monthly":      { name: "Monthly Membership — No Contract",                price: 235,  priceLabel: "$235/mo",          billing: "monthly"  },
+  "membership-monthly":      { name: "Middle School Program",                           price: 235,  priceLabel: "$235/mo",          billing: "monthly"  },
   // Football Player Development tiers
   "player-dev":              { name: "Football Player Development — Monthly",           price: 250,  priceLabel: "$250/mo",          billing: "one_time" },
   "player-dev-6mo":          { name: "Football Player Development — 6-Month",          price: 280,  priceLabel: "$280/mo (6-mo)",   billing: "monthly"  },
   "player-dev-annual":       { name: "Football Player Development — Annual",           price: 250,  priceLabel: "$250/mo (annual)", billing: "monthly"  },
-  "player-dev-1day":         { name: "Football Player Development — Once a Week",      price: 150,  priceLabel: "$150/mo",          billing: "monthly"  },
+  "player-dev-1day":         { name: "High School Program — Mon & Wed",                price: 250,  priceLabel: "$250/mo",          billing: "monthly"  },
   // Girls Player Development
   "girls-dev":               { name: "Girls Player Development — 2 Days/Week",    price: 250,   priceLabel: "$250/mo",   billing: "monthly"   },
   "girls-dev-3day":          { name: "Girls Player Development — 3 Days/Week",    price: 315,   priceLabel: "$315/mo",   billing: "monthly"   },
   // Drop-In
   "drop-in-1day":            { name: "Drop-In Training — 1 Day",                  price: 30,    priceLabel: "$30",       billing: "one_time"  },
   "drop-in-2day":            { name: "Drop-In Training — 2 Days",                 price: 50,    priceLabel: "$50",       billing: "one_time"  },
-  // HS Recruiting & Exposure
-  "hs-recruiting-elite":     { name: "HS Recruiting — Elite Exposure",            price: 150,   priceLabel: "$150/mo",   billing: "monthly"   },
-  "hs-recruiting-pro":       { name: "HS Recruiting — Pro Exposure",              price: 125,   priceLabel: "$125/mo",   billing: "monthly"   },
-  "hs-recruiting-basic":     { name: "HS Recruiting — Basic Exposure",            price: 85,    priceLabel: "$85/mo",    billing: "monthly"   },
-  // After School & Girls Development
-  "afterschool":             { name: "After School & Girls Development",          price: 150,   priceLabel: "$150/mo",  billing: "one_time" },
-  "afterschool-monthly":     { name: "After School & Girls Development",          price: 150,   priceLabel: "$150/mo",  billing: "one_time" },
+  // 12U Athlete Program
+  "afterschool":             { name: "12U Athlete Program",                       price: 150,   priceLabel: "$150/mo",  billing: "one_time" },
+  "afterschool-monthly":     { name: "12U Athlete Program",                       price: 150,   priceLabel: "$150/mo",  billing: "one_time" },
   // Events
   "combine":                 { name: "Combine Metrics Camp",                      price: 40,    priceLabel: "$40",       billing: "one_time"  },
   // Athlete Tracking & Recruiting Profiles
@@ -42,23 +38,15 @@ const CATEGORIES = [
   {
     label: "Training Programs", badge: "bg-red-900 text-red-300", color: "border-red-800 hover:border-red-500",
     programs: [
-      { id: "player-dev-1day",   desc: "Thursday · 5:30–6:30pm · SAQ, S&C, football drills, tournament entries, military character events, PR-Verified Camp & Free Athletic Training Passport", highlight: "POPULAR" },
+      { id: "player-dev-1day",   desc: "High School Program with Coach Jordan (Monday & Wednesday 7–8pm) @ Link Fitness 1034 Canyon Bend Dr. Dripping Springs TX.", highlight: "POPULAR" },
       { id: "drop-in-1day",      desc: "Single day training session · Try a session before committing to a full program" },
       { id: "drop-in-2day",      desc: "2 day training package" },
     ],
   },
   {
-    label: "HS Recruiting & Exposure", badge: "bg-orange-900 text-orange-300", color: "border-orange-800 hover:border-orange-500",
+    label: "12U Athlete Program", badge: "bg-teal-900 text-teal-300", color: "border-teal-800 hover:border-teal-500",
     programs: [
-      { id: "hs-recruiting-elite", desc: "2× X + Instagram blast/mo · 5 personalized coach emails/mo · Profile optimization · Weekly recruiting report · 1-on-1 coach call", highlight: "ELITE" },
-      { id: "hs-recruiting-pro",   desc: "X + Instagram blast · 3 personalized coach emails/mo · Profile optimization · Bi-weekly recruiting report" },
-      { id: "hs-recruiting-basic", desc: "Pro profile image package · X blast (1–2× monthly) · Access to coach directory" },
-    ],
-  },
-  {
-    label: "After School & Girls Development", badge: "bg-teal-900 text-teal-300", color: "border-teal-800 hover:border-teal-500",
-    programs: [
-      { id: "afterschool", desc: "Tuesday · 5:30–6:30pm · Open to Elementary, Middle School & Girl athletes · $150/mo" },
+      { id: "afterschool", desc: "12U Athlete Program (Tuesday & Thursday 6–7pm) @ Link Fitness 1034 Canyon Bend Dr. Dripping Springs TX. · $150/mo" },
     ],
   },
   {
@@ -490,7 +478,7 @@ function RegisterPage() {
                       className="w-full flex items-center justify-between px-4 py-3 text-sm text-white font-semibold hover:bg-gray-750 transition-colors"
                     >
                       <span>Read Billing Terms</span>
-                      <span className="text-gray-400 text-xs">{subscriptionExpanded ? "▲ Collapse" : "▼ Expand"}</span>
+                      <span className="text-gray-400 text-xs">{subscriptionExpanded ? "����� Collapse" : "▼ Expand"}</span>
                     </button>
                     {subscriptionExpanded && (
                       <div className="px-4 pb-4 text-xs text-gray-300 leading-relaxed space-y-3 border-t border-gray-700 pt-3 max-h-64 overflow-y-auto">

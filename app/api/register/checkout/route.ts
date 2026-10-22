@@ -5,12 +5,12 @@ import { getDiscount, validateDiscount, incrementUsage } from "@/lib/discount-st
 
 export const PROGRAMS: Record<string, { name: string; price: number; billing: "one_time" | "monthly" }> = {
   // Training Memberships
-  "membership-monthly":      { name: "Monthly Membership — No Contract",              price: 235,  billing: "monthly"  },
+  "membership-monthly":      { name: "Middle School Program",                         price: 235,  billing: "monthly"  },
   // Football Player Development tiers
   "player-dev":              { name: "Football Player Development — Monthly",           price: 250,  billing: "one_time" },
   "player-dev-6mo":          { name: "Football Player Development — 6-Month",          price: 280,  billing: "monthly"  },
   "player-dev-annual":       { name: "Football Player Development — Annual",           price: 250,  billing: "monthly"  },
-  "player-dev-1day":         { name: "Football Player Development — Once a Week",      price: 150,  billing: "monthly"  },
+  "player-dev-1day":         { name: "High School Program — Mon & Wed",                price: 250,  billing: "monthly"  },
   // Multi-Sport Development
   "multi-sport-dev":         { name: "Multi-Sport Development",                         price: 265,   billing: "monthly"  },
   // Girls Player Development
@@ -19,12 +19,8 @@ export const PROGRAMS: Record<string, { name: string; price: number; billing: "o
   // Drop-In Training
   "drop-in-1day":            { name: "Drop-In Training — 1 Day",                       price: 30,    billing: "one_time" },
   "drop-in-2day":            { name: "Drop-In Training — 2 Days",                      price: 50,    billing: "one_time" },
-  // HS Recruiting & Exposure
-  "hs-recruiting-elite":     { name: "HS Recruiting — Elite Exposure",                 price: 150,   billing: "monthly"  },
-  "hs-recruiting-pro":       { name: "HS Recruiting — Pro Exposure",                   price: 125,   billing: "monthly"  },
-  "hs-recruiting-basic":     { name: "HS Recruiting — Basic Exposure",                 price: 85,    billing: "monthly"  },
-  // After School & Girls Development
-  "afterschool-monthly":     { name: "After School & Girls Development",                     price: 150,   billing: "one_time" },
+  // 12U Athlete Program
+  "afterschool-monthly":     { name: "12U Athlete Program",                                  price: 150,   billing: "one_time" },
   // Events
   "combine":                 { name: "Combine Metrics Camp",                           price: 40,    billing: "one_time" },
   // Athlete Tracking & Recruiting Profiles

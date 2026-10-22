@@ -18,10 +18,6 @@ const PROGRAMS_DATA: Record<string, { name: string; price: number; priceLabel: s
   // Drop-In
   "drop-in-1day":            { name: "Drop-In Training — 1 Day",                  price: 30,    priceLabel: "$30",       billing: "one_time"  },
   "drop-in-2day":            { name: "Drop-In Training — 2 Days",                 price: 50,    priceLabel: "$50",       billing: "one_time"  },
-  // HS Recruiting & Exposure
-  "hs-recruiting-elite":     { name: "HS Recruiting — Elite Exposure",            price: 150,   priceLabel: "$150/mo",   billing: "monthly"   },
-  "hs-recruiting-pro":       { name: "HS Recruiting — Pro Exposure",              price: 125,   priceLabel: "$125/mo",   billing: "monthly"   },
-  "hs-recruiting-basic":     { name: "HS Recruiting — Basic Exposure",            price: 85,    priceLabel: "$85/mo",    billing: "monthly"   },
   // After School & Girls Development
   "afterschool":             { name: "After School & Girls Development",          price: 150,   priceLabel: "$150/mo",  billing: "one_time" },
   "afterschool-monthly":     { name: "After School & Girls Development",          price: 150,   priceLabel: "$150/mo",  billing: "one_time" },
@@ -45,14 +41,6 @@ const CATEGORIES = [
       { id: "player-dev-1day",   desc: "High School Program with Coach Jordan (Monday & Wednesday 7–8pm) @ Link Fitness 1034 Canyon Bend Dr. Dripping Springs TX.", highlight: "POPULAR" },
       { id: "drop-in-1day",      desc: "Single day training session · Try a session before committing to a full program" },
       { id: "drop-in-2day",      desc: "2 day training package" },
-    ],
-  },
-  {
-    label: "HS Recruiting & Exposure", badge: "bg-orange-900 text-orange-300", color: "border-orange-800 hover:border-orange-500",
-    programs: [
-      { id: "hs-recruiting-elite", desc: "2× X + Instagram blast/mo · 5 personalized coach emails/mo · Profile optimization · Weekly recruiting report · 1-on-1 coach call", highlight: "ELITE" },
-      { id: "hs-recruiting-pro",   desc: "X + Instagram blast · 3 personalized coach emails/mo · Profile optimization · Bi-weekly recruiting report" },
-      { id: "hs-recruiting-basic", desc: "Pro profile image package · X blast (1–2× monthly) · Access to coach directory" },
     ],
   },
   {

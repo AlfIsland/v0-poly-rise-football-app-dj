@@ -324,30 +324,6 @@ export default function HomePage() {
                 <Link href="/register?program=drop-in-1day" className="mt-auto block text-center text-xs font-bold bg-red-600 hover:bg-red-700 text-white py-2 rounded-lg transition-colors">Register</Link>
               </div>
 
-              {/* HS Recruiting & Exposure */}
-              <div className="bg-gray-900 border border-gray-800 rounded-xl p-4 flex flex-col gap-3 hover:border-gray-600 transition-colors">
-                <div>
-                  <span className="inline-block text-xs font-bold px-2 py-0.5 rounded-full bg-yellow-900/60 text-yellow-300 mb-2">High School</span>
-                  <h4 className="text-sm font-bold text-white">HS Recruiting &amp; Exposure</h4>
-                  <p className="text-xs text-gray-400 mt-1 leading-relaxed">Social media blasts, coach outreach &amp; profile optimization for college visibility</p>
-                </div>
-                <div className="space-y-2 border-t border-gray-800 pt-2.5">
-                  <div className="bg-gray-800 rounded-lg p-2.5">
-                    <div className="flex justify-between text-xs mb-0.5"><span className="font-bold text-white">Elite Exposure</span><span className="font-bold text-white">$150/mo</span></div>
-                    <p className="text-[11px] text-gray-400">2× social blast · 5 coach emails/mo · weekly report · 1-on-1 call</p>
-                  </div>
-                  <div className="bg-gray-800 rounded-lg p-2.5">
-                    <div className="flex justify-between text-xs mb-0.5"><span className="font-bold text-white">Pro Exposure</span><span className="font-bold text-white">$125/mo</span></div>
-                    <p className="text-[11px] text-gray-400">1× social blast · 3 coach emails/mo · bi-weekly report</p>
-                  </div>
-                  <div className="bg-gray-800 rounded-lg p-2.5">
-                    <div className="flex justify-between text-xs mb-0.5"><span className="font-bold text-white">Basic Exposure</span><span className="font-bold text-white">$85/mo</span></div>
-                    <p className="text-[11px] text-gray-400">Pro profile images · X blast · coach directory access</p>
-                  </div>
-                </div>
-                <Link href="/register?program=hs-recruiting-elite" className="mt-auto block text-center text-xs font-bold bg-red-600 hover:bg-red-700 text-white py-2 rounded-lg transition-colors">Get Started</Link>
-              </div>
-
               {/* Combine Metrics Camp */}
               <div className="bg-gray-900 border border-gray-800 rounded-xl p-4 flex flex-col gap-3 hover:border-gray-600 transition-colors">
                 <div>
@@ -736,7 +712,7 @@ export default function HomePage() {
                   <span className="text-gray-500 ml-4 shrink-0 transition-transform duration-200 group-open:rotate-180 text-xs select-none">▼</span>
                 </summary>
                 <div className="px-5 pb-4 pt-3 text-sm text-gray-300 leading-relaxed border-t border-gray-800">
-                  <p>High School Program with Coach Jordan (Mon &amp; Wed, 7–8pm) is <strong className="text-white">$250/mo</strong>. After School &amp; Girls Development (Tue &amp; Thu, 5:30–6:30pm) is <strong className="text-white">$150/mo</strong> (once a week). HS Recruiting &amp; Exposure packages are $85–$150/mo. Athlete Tracking plans start at <strong className="text-white">$9.99/mo</strong>.</p>
+                  <p>High School Program with Coach Jordan (Mon &amp; Wed, 7–8pm) is <strong className="text-white">$250/mo</strong>. After School &amp; Girls Development (Tue &amp; Thu, 5:30–6:30pm) is <strong className="text-white">$150/mo</strong> (once a week). Athlete Tracking plans start at <strong className="text-white">$9.99/mo</strong>.</p>
                 </div>
               </details>
 
@@ -768,7 +744,7 @@ export default function HomePage() {
                   <span className="text-gray-500 ml-4 shrink-0 transition-transform duration-200 group-open:rotate-180 text-xs select-none">▼</span>
                 </summary>
                 <div className="px-5 pb-4 pt-3 text-sm text-gray-300 leading-relaxed border-t border-gray-800">
-                  <p>The <strong className="text-white">Recruit plan ($29.99/mo)</strong> includes a PR-VERIFIED shareable profile, Hudl integration, and monthly X spotlights to college recruiters. <strong className="text-white">HS Recruiting &amp; Exposure packages ($85–$150/mo)</strong> add personalized coach outreach, social media blasts, and 1-on-1 calls with PolyRISE staff. The Elite Recruit tier (launching 2026 season) adds quarterly development reports and college program fit analysis — join the waitlist on the plans page.</p>
+                  <p>The <strong className="text-white">Recruit plan ($29.99/mo)</strong> includes a PR-VERIFIED shareable profile, Hudl integration, and monthly X spotlights to college recruiters. The Elite Recruit tier (launching 2026 season) adds quarterly development reports and college program fit analysis — join the waitlist on the plans page.</p>
                 </div>
               </details>
 
@@ -963,7 +939,6 @@ export default function HomePage() {
               <ul className="space-y-2 text-sm text-white">
                 <li><Link href="/passport" className="hover:text-foreground transition-colors">Athlete Passport</Link></li>
                 <li><Link href="#programs" className="hover:text-foreground transition-colors">Player Development</Link></li>
-                <li><Link href="#programs" className="hover:text-foreground transition-colors">HS Recruiting &amp; Exposure</Link></li>
               </ul>
             </div>
 

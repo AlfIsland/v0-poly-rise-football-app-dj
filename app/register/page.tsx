@@ -6,7 +6,7 @@ import Image from "next/image"
 
 const PROGRAMS_DATA: Record<string, { name: string; price: number; priceLabel: string; billing: "one_time" | "monthly" }> = {
   // Training Memberships
-  "membership-monthly":      { name: "Monthly Membership — No Contract",                price: 235,  priceLabel: "$235/mo",          billing: "monthly"  },
+  "membership-monthly":      { name: "Middle School Program",                           price: 235,  priceLabel: "$235/mo",          billing: "monthly"  },
   // Football Player Development tiers
   "player-dev":              { name: "Football Player Development — Monthly",           price: 250,  priceLabel: "$250/mo",          billing: "one_time" },
   "player-dev-6mo":          { name: "Football Player Development — 6-Month",          price: 280,  priceLabel: "$280/mo (6-mo)",   billing: "monthly"  },

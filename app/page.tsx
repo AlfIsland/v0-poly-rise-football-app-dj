@@ -267,19 +267,17 @@ export default function HomePage() {
                 <Link href="/register?program=player-dev-1day" className="mt-auto block text-center text-xs font-bold bg-red-600 hover:bg-red-700 text-white py-2 rounded-lg transition-colors">Register</Link>
               </div>
 
-              {/* Monthly Membership */}
+              {/* Middle School Program */}
               <div className="bg-gray-900 border border-gray-800 rounded-xl p-4 flex flex-col gap-3 hover:border-gray-600 transition-colors">
                 <div>
-                  <span className="inline-block text-xs font-bold px-2 py-0.5 rounded-full bg-gray-700 text-gray-300 mb-2">No Contract</span>
-                  <h4 className="text-sm font-bold text-white">Monthly Membership</h4>
-                  <p className="text-xs text-gray-400 mt-1 leading-relaxed">Same elite training, full flexibility. Start, pause, or stop anytime.</p>
+                  <span className="inline-block text-xs font-bold px-2 py-0.5 rounded-full bg-gray-700 text-gray-300 mb-2">Middle School</span>
+                  <h4 className="text-sm font-bold text-white">Middle School Program</h4>
+                  <p className="text-xs text-gray-400 mt-1 leading-relaxed">Middle School Program (Tuesday &amp; Thursday 7–8pm) @ Link Fitness 1034 Canyon Bend Dr. Dripping Springs TX.</p>
                 </div>
                 <div className="space-y-1.5 border-t border-gray-800 pt-2.5">
-                  <div className="flex justify-between text-xs"><span className="text-gray-300">4 gym sessions/mo</span><span className="text-gray-400 text-[11px]">SAQ, S&amp;C &amp; Hill Sprints</span></div>
-                  <div className="flex justify-between text-xs"><span className="text-gray-300">2 field sessions/mo</span><span className="text-gray-400 text-[11px]">Position + Recruiting talk</span></div>
-                  <div className="flex justify-between text-xs border-t border-gray-800 pt-1.5 mt-1"><span className="font-bold text-white">6 sessions/mo total</span><span className="font-bold text-white">$235/mo</span></div>
+                  <div className="flex justify-between text-xs"><span className="text-gray-300">Tue &amp; Thu</span><span className="font-bold text-white">$235/mo</span></div>
                 </div>
-                <Link href="/register?program=membership-monthly" className="mt-auto block text-center text-xs font-bold bg-red-600 hover:bg-red-700 text-white py-2 rounded-lg transition-colors">Get Started — $235/mo</Link>
+                <Link href="/register?program=membership-monthly" className="mt-auto block text-center text-xs font-bold bg-red-600 hover:bg-red-700 text-white py-2 rounded-lg transition-colors">Register</Link>
               </div>
 
               {/* After School & Girls Development */}

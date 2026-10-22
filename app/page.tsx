@@ -280,15 +280,15 @@ export default function HomePage() {
                 <Link href="/register?program=membership-monthly" className="mt-auto block text-center text-xs font-bold bg-red-600 hover:bg-red-700 text-white py-2 rounded-lg transition-colors">Register</Link>
               </div>
 
-              {/* After School & Girls Development */}
+              {/* 12U Athlete Program */}
               <div className="bg-gray-900 border border-gray-800 rounded-xl p-4 flex flex-col gap-3 hover:border-gray-600 transition-colors">
                 <div>
-                  <span className="inline-block text-xs font-bold px-2 py-0.5 rounded-full bg-teal-900/60 text-teal-300 mb-2">Afterschool &amp; Girls</span>
-                  <h4 className="text-sm font-bold text-white">After School &amp; Girls Development</h4>
-                  <p className="text-xs text-gray-400 mt-1 leading-relaxed">Tuesday · 5:30–6:30pm · Open to Elementary, Middle School &amp; Girl athletes</p>
+                  <span className="inline-block text-xs font-bold px-2 py-0.5 rounded-full bg-teal-900/60 text-teal-300 mb-2">12U</span>
+                  <h4 className="text-sm font-bold text-white">12U Athlete Program</h4>
+                  <p className="text-xs text-gray-400 mt-1 leading-relaxed">12U Athlete Program (Tuesday &amp; Thursday 6–7pm) @ Link Fitness 1034 Canyon Bend Dr. Dripping Springs TX.</p>
                 </div>
                 <div className="space-y-1.5 border-t border-gray-800 pt-2.5">
-                  <div className="flex justify-between text-xs"><span className="text-gray-300">Once a Week</span><span className="font-bold text-white">$150/mo</span></div>
+                  <div className="flex justify-between text-xs"><span className="text-gray-300">Tue &amp; Thu</span><span className="font-bold text-white">$150/mo</span></div>
                 </div>
                 <Link href="/register?program=afterschool" className="mt-auto block text-center text-xs font-bold bg-red-600 hover:bg-red-700 text-white py-2 rounded-lg transition-colors">Register</Link>
               </div>
@@ -712,7 +712,7 @@ export default function HomePage() {
                   <span className="text-gray-500 ml-4 shrink-0 transition-transform duration-200 group-open:rotate-180 text-xs select-none">▼</span>
                 </summary>
                 <div className="px-5 pb-4 pt-3 text-sm text-gray-300 leading-relaxed border-t border-gray-800">
-                  <p>High School Program with Coach Jordan (Mon &amp; Wed, 7–8pm) is <strong className="text-white">$250/mo</strong>. After School &amp; Girls Development (Tue &amp; Thu, 5:30–6:30pm) is <strong className="text-white">$150/mo</strong> (once a week). Athlete Tracking plans start at <strong className="text-white">$9.99/mo</strong>.</p>
+                  <p>High School Program with Coach Jordan (Mon &amp; Wed, 7–8pm) is <strong className="text-white">$250/mo</strong>. 12U Athlete Program (Tue &amp; Thu, 6–7pm) is <strong className="text-white">$150/mo</strong>. Athlete Tracking plans start at <strong className="text-white">$9.99/mo</strong>.</p>
                 </div>
               </details>
 
@@ -723,7 +723,7 @@ export default function HomePage() {
                 </summary>
                 <div className="px-5 pb-4 pt-3 text-sm text-gray-300 leading-relaxed border-t border-gray-800 space-y-1">
                   <p><strong className="text-white">High School Program:</strong> Monday &amp; Wednesday · 7–8pm (Coach Jordan)</p>
-                  <p><strong className="text-white">After School &amp; Girls Development:</strong> Tuesday · 5:30–6:30pm (Elementary, Middle School &amp; Girls)</p>
+                  <p><strong className="text-white">12U Athlete Program:</strong> Tuesday &amp; Thursday · 6–7pm @ Link Fitness, Dripping Springs</p>
                   <p className="text-gray-400 pt-1">Monthly camps and combine events held on weekends in Dripping Springs.</p>
                 </div>
               </details>

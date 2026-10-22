@@ -19,8 +19,8 @@ export const PROGRAMS: Record<string, { name: string; price: number; billing: "o
   // Drop-In Training
   "drop-in-1day":            { name: "Drop-In Training — 1 Day",                       price: 30,    billing: "one_time" },
   "drop-in-2day":            { name: "Drop-In Training — 2 Days",                      price: 50,    billing: "one_time" },
-  // After School & Girls Development
-  "afterschool-monthly":     { name: "After School & Girls Development",                     price: 150,   billing: "one_time" },
+  // 12U Athlete Program
+  "afterschool-monthly":     { name: "12U Athlete Program",                                  price: 150,   billing: "one_time" },
   // Events
   "combine":                 { name: "Combine Metrics Camp",                           price: 40,    billing: "one_time" },
   // Athlete Tracking & Recruiting Profiles

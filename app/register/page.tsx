@@ -18,9 +18,9 @@ const PROGRAMS_DATA: Record<string, { name: string; price: number; priceLabel: s
   // Drop-In
   "drop-in-1day":            { name: "Drop-In Training — 1 Day",                  price: 30,    priceLabel: "$30",       billing: "one_time"  },
   "drop-in-2day":            { name: "Drop-In Training — 2 Days",                 price: 50,    priceLabel: "$50",       billing: "one_time"  },
-  // After School & Girls Development
-  "afterschool":             { name: "After School & Girls Development",          price: 150,   priceLabel: "$150/mo",  billing: "one_time" },
-  "afterschool-monthly":     { name: "After School & Girls Development",          price: 150,   priceLabel: "$150/mo",  billing: "one_time" },
+  // 12U Athlete Program
+  "afterschool":             { name: "12U Athlete Program",                       price: 150,   priceLabel: "$150/mo",  billing: "one_time" },
+  "afterschool-monthly":     { name: "12U Athlete Program",                       price: 150,   priceLabel: "$150/mo",  billing: "one_time" },
   // Events
   "combine":                 { name: "Combine Metrics Camp",                      price: 40,    priceLabel: "$40",       billing: "one_time"  },
   // Athlete Tracking & Recruiting Profiles
@@ -44,9 +44,9 @@ const CATEGORIES = [
     ],
   },
   {
-    label: "After School & Girls Development", badge: "bg-teal-900 text-teal-300", color: "border-teal-800 hover:border-teal-500",
+    label: "12U Athlete Program", badge: "bg-teal-900 text-teal-300", color: "border-teal-800 hover:border-teal-500",
     programs: [
-      { id: "afterschool", desc: "Tuesday · 5:30–6:30pm · Open to Elementary, Middle School & Girl athletes · $150/mo" },
+      { id: "afterschool", desc: "12U Athlete Program (Tuesday & Thursday 6–7pm) @ Link Fitness 1034 Canyon Bend Dr. Dripping Springs TX. · $150/mo" },
     ],
   },
   {

@@ -259,7 +259,7 @@ export default function HomePage() {
                 <div>
                   <span className="inline-block text-xs font-bold px-2 py-0.5 rounded-full bg-red-900/60 text-red-300 mb-2">Most Popular</span>
                   <h4 className="text-sm font-bold text-white">High School Program</h4>
-                  <p className="text-xs text-gray-400 mt-1 leading-relaxed">Monday &amp; Wednesday · 7–8pm with Coach Jordan. Complete athlete development with a football core — SAQ, S&amp;C, sport-specific drills, tournament entries, military character building events, PR-Verified Camp and free Athletic Training Passport (Tracker). Built for football players and multisport athletes alike.</p>
+                  <p className="text-xs text-gray-400 mt-1 leading-relaxed">High School Program with Coach Jordan (Monday &amp; Wednesday 7–8pm) @ Link Fitness 1034 Canyon Bend Dr. Dripping Springs TX.</p>
                 </div>
                 <div className="space-y-1.5 border-t border-gray-800 pt-2.5">
                   <div className="flex justify-between text-xs"><span className="text-gray-300">Mon &amp; Wed</span><span className="font-bold text-white">$250/mo</span></div>

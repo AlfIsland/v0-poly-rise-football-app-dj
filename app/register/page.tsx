@@ -42,7 +42,7 @@ const CATEGORIES = [
   {
     label: "Training Programs", badge: "bg-red-900 text-red-300", color: "border-red-800 hover:border-red-500",
     programs: [
-      { id: "player-dev-1day",   desc: "Monday & Wednesday · 7–8pm · Coach Jordan · SAQ, S&C, football drills, tournament entries, military character events, PR-Verified Camp & Free Athletic Training Passport", highlight: "POPULAR" },
+      { id: "player-dev-1day",   desc: "High School Program with Coach Jordan (Monday & Wednesday 7–8pm) @ Link Fitness 1034 Canyon Bend Dr. Dripping Springs TX.", highlight: "POPULAR" },
       { id: "drop-in-1day",      desc: "Single day training session · Try a session before committing to a full program" },
       { id: "drop-in-2day",      desc: "2 day training package" },
     ],
@@ -490,7 +490,7 @@ function RegisterPage() {
                       className="w-full flex items-center justify-between px-4 py-3 text-sm text-white font-semibold hover:bg-gray-750 transition-colors"
                     >
                       <span>Read Billing Terms</span>
-                      <span className="text-gray-400 text-xs">{subscriptionExpanded ? "��� Collapse" : "▼ Expand"}</span>
+                      <span className="text-gray-400 text-xs">{subscriptionExpanded ? "����� Collapse" : "▼ Expand"}</span>
                     </button>
                     {subscriptionExpanded && (
                       <div className="px-4 pb-4 text-xs text-gray-300 leading-relaxed space-y-3 border-t border-gray-700 pt-3 max-h-64 overflow-y-auto">

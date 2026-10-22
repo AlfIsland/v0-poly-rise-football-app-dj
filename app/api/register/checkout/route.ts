@@ -5,7 +5,7 @@ import { getDiscount, validateDiscount, incrementUsage } from "@/lib/discount-st
 
 export const PROGRAMS: Record<string, { name: string; price: number; billing: "one_time" | "monthly" }> = {
   // Training Memberships
-  "membership-monthly":      { name: "Middle School Program",                         price: 235,  billing: "monthly"  },
+  "membership-monthly":      { name: "Middle School Program",                         price: 250,  billing: "monthly"  },
   // Football Player Development tiers
   "player-dev":              { name: "Football Player Development — Monthly",           price: 250,  billing: "one_time" },
   "player-dev-6mo":          { name: "Football Player Development — 6-Month",          price: 280,  billing: "monthly"  },
@@ -20,7 +20,7 @@ export const PROGRAMS: Record<string, { name: string; price: number; billing: "o
   "drop-in-1day":            { name: "Drop-In Training — 1 Day",                       price: 30,    billing: "one_time" },
   "drop-in-2day":            { name: "Drop-In Training — 2 Days",                      price: 50,    billing: "one_time" },
   // 12U Athlete Program
-  "afterschool-monthly":     { name: "12U Athlete Program",                                  price: 150,   billing: "one_time" },
+  "afterschool-monthly":     { name: "12U Athlete Program",                                  price: 250,   billing: "one_time" },
   // Events
   "combine":                 { name: "Combine Metrics Camp",                           price: 40,    billing: "one_time" },
   // Athlete Tracking & Recruiting Profiles

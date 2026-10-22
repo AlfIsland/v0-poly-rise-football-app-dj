@@ -231,7 +231,7 @@ export default function PlansPage() {
               <h3 className="text-2xl font-black text-white mb-1">Middle School Program</h3>
               <p className="text-gray-400 text-sm mb-5">Middle School Program (Tuesday &amp; Thursday 7–8pm) @ Link Fitness 1034 Canyon Bend Dr. Dripping Springs TX.</p>
               <div className="flex items-end gap-1 mb-1">
-                <span className="text-5xl font-black text-white">$235</span>
+                <span className="text-5xl font-black text-white">$250</span>
                 <span className="text-gray-500 text-sm mb-2">/month</span>
               </div>
               <p className="text-gray-500 text-xs mb-7">Tuesday &amp; Thursday · 7–8pm</p>
@@ -251,7 +251,7 @@ export default function PlansPage() {
             </div>
             <div className="px-7 pb-7 pt-4">
               <Link href="/register?program=membership-monthly" className="block w-full text-center font-black rounded-xl py-4 text-sm bg-gray-700 hover:bg-gray-600 text-white transition-colors tracking-wide">
-                Register — $235/mo
+                Register — $250/mo
               </Link>
             </div>
           </div>

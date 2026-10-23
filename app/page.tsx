@@ -288,7 +288,7 @@ export default function HomePage() {
                   <p className="text-xs text-gray-400 mt-1 leading-relaxed">12U Athlete Program (Tuesday &amp; Thursday 6–7pm) @ Link Fitness 1034 Canyon Bend Dr. Dripping Springs TX.</p>
                 </div>
                 <div className="space-y-1.5 border-t border-gray-800 pt-2.5">
-                  <div className="flex justify-between text-xs"><span className="text-gray-300">Tue &amp; Thu</span><span className="font-bold text-white">$250/mo</span></div>
+                  <div className="flex justify-between text-xs"><span className="text-gray-300">Tue &amp; Thu</span><span className="font-bold text-white">$200/mo</span></div>
                 </div>
                 <Link href="/register?program=afterschool" className="mt-auto block text-center text-xs font-bold bg-red-600 hover:bg-red-700 text-white py-2 rounded-lg transition-colors">Register</Link>
               </div>
@@ -712,7 +712,7 @@ export default function HomePage() {
                   <span className="text-gray-500 ml-4 shrink-0 transition-transform duration-200 group-open:rotate-180 text-xs select-none">▼</span>
                 </summary>
                 <div className="px-5 pb-4 pt-3 text-sm text-gray-300 leading-relaxed border-t border-gray-800">
-                  <p>High School Program with Coach Jordan (Mon &amp; Wed, 7–8pm) is <strong className="text-white">$250/mo</strong>. Middle School Program (Tue &amp; Thu, 7–8pm) is <strong className="text-white">$250/mo</strong>. 12U Athlete Program (Tue &amp; Thu, 6–7pm) is <strong className="text-white">$250/mo</strong>. Athlete Tracking plans start at <strong className="text-white">$9.99/mo</strong>.</p>
+                  <p>High School Program with Coach Jordan (Mon &amp; Wed, 7–8pm) is <strong className="text-white">$250/mo</strong>. Middle School Program (Tue &amp; Thu, 7–8pm) is <strong className="text-white">$250/mo</strong>. 12U Athlete Program (Tue &amp; Thu, 6–7pm) is <strong className="text-white">$200/mo</strong>. Athlete Tracking plans start at <strong className="text-white">$9.99/mo</strong>.</p>
                 </div>
               </details>
 

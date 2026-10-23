@@ -19,8 +19,8 @@ const PROGRAMS_DATA: Record<string, { name: string; price: number; priceLabel: s
   "drop-in-1day":            { name: "Drop-In Training — 1 Day",                  price: 30,    priceLabel: "$30",       billing: "one_time"  },
   "drop-in-2day":            { name: "Drop-In Training — 2 Days",                 price: 50,    priceLabel: "$50",       billing: "one_time"  },
   // 12U Athlete Program
-  "afterschool":             { name: "12U Athlete Program",                       price: 250,   priceLabel: "$250/mo",  billing: "one_time" },
-  "afterschool-monthly":     { name: "12U Athlete Program",                       price: 250,   priceLabel: "$250/mo",  billing: "one_time" },
+  "afterschool":             { name: "12U Athlete Program",                       price: 200,   priceLabel: "$200/mo",  billing: "one_time" },
+  "afterschool-monthly":     { name: "12U Athlete Program",                       price: 200,   priceLabel: "$200/mo",  billing: "one_time" },
   // Events
   "combine":                 { name: "Combine Metrics Camp",                      price: 40,    priceLabel: "$40",       billing: "one_time"  },
   // Athlete Tracking & Recruiting Profiles
@@ -46,7 +46,7 @@ const CATEGORIES = [
   {
     label: "12U Athlete Program", badge: "bg-teal-900 text-teal-300", color: "border-teal-800 hover:border-teal-500",
     programs: [
-      { id: "afterschool", desc: "12U Athlete Program (Tuesday & Thursday 6–7pm) @ Link Fitness 1034 Canyon Bend Dr. Dripping Springs TX. · $250/mo" },
+      { id: "afterschool", desc: "12U Athlete Program (Tuesday & Thursday 6–7pm) @ Link Fitness 1034 Canyon Bend Dr. Dripping Springs TX. · $200/mo" },
     ],
   },
   {

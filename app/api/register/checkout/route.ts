@@ -28,6 +28,22 @@ export const PROGRAMS: Record<string, { name: string; price: number; billing: "o
   "recruit":                 { name: "Recruit",                                         price: 29.99, billing: "monthly"  },
 }
 
+// Storage (Redis) must never block a parent from paying. Any storage call that
+// fails or hangs is logged and skipped; Stripe metadata keeps the key details.
+async function bestEffort<T>(label: string, fn: () => Promise<T>, timeoutMs = 3000): Promise<T | null> {
+  try {
+    return await Promise.race([
+      fn(),
+      new Promise<never>((_, reject) => setTimeout(() => reject(new Error("timeout")), timeoutMs)),
+    ])
+  } catch (err) {
+    console.error(`[register checkout] ${label} failed:`, err instanceof Error ? err.message : err)
+    return null
+  }
+}
+
+const meta = (v: unknown) => String(v ?? "").slice(0, 450)
+
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json()
@@ -56,7 +72,7 @@ export async function POST(req: NextRequest) {
     let discountFixed = 0
     let appliedCode: string | undefined
     if (discountCode) {
-      const discount = await getDiscount(discountCode)
+      const discount = await bestEffort("getDiscount", () => getDiscount(discountCode))
       if (discount) {
         const { valid } = validateDiscount(discount)
         if (valid) {
@@ -92,7 +108,20 @@ export async function POST(req: NextRequest) {
       status: "pending",
       createdAt: new Date().toISOString(),
     }
-    await saveRegistration(reg)
+    await bestEffort("saveRegistration (pending)", () => saveRegistration(reg))
+
+    const regMeta = {
+      registrationId: regId,
+      programs: meta(reg.programName),
+      playerName: meta(playerName),
+      playerAge: meta(playerAge),
+      playerGrade: meta(playerGrade),
+      playerSchool: meta(playerSchool),
+      playerPosition: meta(playerPosition),
+      parentName: meta(parentName),
+      phone: meta(phone),
+      ...(appliedCode ? { discountCode: appliedCode } : {}),
+    }
 
     let session: Stripe.Checkout.Session
 
@@ -124,7 +153,7 @@ export async function POST(req: NextRequest) {
         success_url: `${origin}/register/success?id=${regId}`,
         cancel_url: `${origin}/register?canceled=1`,
         customer_email: email,
-        metadata: { registrationId: regId, requiresMonthlySetup: "true", monthlyItems: monthlyItems.map(p => `${p.name} $${p.price}/mo`).join(", "), ...(billingMonth ? { billingMonth } : {}) },
+        metadata: { ...regMeta, requiresMonthlySetup: "true", monthlyItems: monthlyItems.map(p => `${p.name} $${p.price}/mo`).join(", "), ...(billingMonth ? { billingMonth } : {}) },
       })
     } else if (monthlyItems.length > 0) {
       // Only monthly items — use subscription mode for automatic recurring billing
@@ -148,7 +177,7 @@ export async function POST(req: NextRequest) {
         success_url: `${origin}/register/success?id=${regId}`,
         cancel_url: `${origin}/register?canceled=1`,
         customer_email: email,
-        metadata: { registrationId: regId, ...(billingMonth ? { billingMonth } : {}), ...(cancelMonths ? { cancelMonths: String(cancelMonths) } : {}) },
+        metadata: { ...regMeta, ...(billingMonth ? { billingMonth } : {}), ...(cancelMonths ? { cancelMonths: String(cancelMonths) } : {}) },
       })
     } else {
       // Only one-time items
@@ -166,13 +195,13 @@ export async function POST(req: NextRequest) {
         success_url: `${origin}/register/success?id=${regId}`,
         cancel_url: `${origin}/register?canceled=1`,
         customer_email: email,
-        metadata: { registrationId: regId },
+        metadata: regMeta,
       })
     }
 
     reg.stripeSessionId = session.id
-    if (appliedCode) await incrementUsage(appliedCode)
-    await saveRegistration(reg)
+    if (appliedCode) await bestEffort("incrementUsage", () => incrementUsage(appliedCode!))
+    await bestEffort("saveRegistration (session)", () => saveRegistration(reg))
 
     return NextResponse.json({ success: true, url: session.url })
   } catch (err) {
